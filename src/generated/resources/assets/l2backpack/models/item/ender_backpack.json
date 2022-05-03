@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "l2backpack:item/ender_backpack"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "minecraft:open": 1.0
+      },
+      "model": "l2backpack:item/ender_backpack_open"
+    }
+  ]
+}

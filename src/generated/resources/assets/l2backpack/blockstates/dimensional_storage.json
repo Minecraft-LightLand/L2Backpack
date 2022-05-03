@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "color=white": {
+      "model": "l2backpack:block/dimensional_storage_white"
+    },
+    "color=orange": {
+      "model": "l2backpack:block/dimensional_storage_orange"
+    },
+    "color=magenta": {
+      "model": "l2backpack:block/dimensional_storage_magenta"
+    },
+    "color=light_blue": {
+      "model": "l2backpack:block/dimensional_storage_light_blue"
+    },
+    "color=yellow": {
+      "model": "l2backpack:block/dimensional_storage_yellow"
+    },
+    "color=lime": {
+      "model": "l2backpack:block/dimensional_storage_lime"
+    },
+    "color=pink": {
+      "model": "l2backpack:block/dimensional_storage_pink"
+    },
+    "color=gray": {
+      "model": "l2backpack:block/dimensional_storage_gray"
+    },
+    "color=light_gray": {
+      "model": "l2backpack:block/dimensional_storage_light_gray"
+    },
+    "color=cyan": {
+      "model": "l2backpack:block/dimensional_storage_cyan"
+    },
+    "color=purple": {
+      "model": "l2backpack:block/dimensional_storage_purple"
+    },
+    "color=blue": {
+      "model": "l2backpack:block/dimensional_storage_blue"
+    },
+    "color=brown": {
+      "model": "l2backpack:block/dimensional_storage_brown"
+    },
+    "color=green": {
+      "model": "l2backpack:block/dimensional_storage_green"
+    },
+    "color=red": {
+      "model": "l2backpack:block/dimensional_storage_red"
+    },
+    "color=black": {
+      "model": "l2backpack:block/dimensional_storage_black"
+    }
+  }
+}

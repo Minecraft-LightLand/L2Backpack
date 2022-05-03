@@ -1,12 +1,12 @@
 package dev.xkmc.l2backpack.init.registrate;
 
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2backpack.content.block.WorldChestBlock;
 import dev.xkmc.l2backpack.content.block.WorldChestBlockEntity;
-import dev.xkmc.l2backpack.init.LightLand;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.DyeColor;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 
-import static dev.xkmc.l2backpack.init.LightLand.REGISTRATE;
+import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
 /**
  * handles blocks and block entities
@@ -36,11 +36,11 @@ public class LightlandBlocks {
 						CHEST, WorldChestBlock.INSTANCE, WorldChestBlock.TILE_ENTITY_SUPPLIER_BUILDER
 				)).blockstate((ctx, pvd) -> {
 					for (DyeColor color : DyeColor.values()) {
-						pvd.models().cubeAll("dimensional_storage_" + color.getName(), new ResourceLocation(LightLand.MODID,
+						pvd.models().cubeAll("dimensional_storage_" + color.getName(), new ResourceLocation(L2Backpack.MODID,
 								"block/dimensional_storage_" + color.getName()));
 					}
 					pvd.getVariantBuilder(ctx.getEntry()).forAllStates(state ->
-							ConfiguredModel.builder().modelFile(new ModelFile.UncheckedModelFile(new ResourceLocation(LightLand.MODID,
+							ConfiguredModel.builder().modelFile(new ModelFile.UncheckedModelFile(new ResourceLocation(L2Backpack.MODID,
 											"block/dimensional_storage_" + state.getValue(WorldChestBlock.COLOR).getName())))
 									.build());
 				}).loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))

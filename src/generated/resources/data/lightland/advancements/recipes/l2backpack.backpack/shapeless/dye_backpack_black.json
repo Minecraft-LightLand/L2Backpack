@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:shapeless/dye_backpack_black"
+    ]
+  },
+  "criteria": {
+    "has_backpack_black": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2backpack:backpack_black"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:shapeless/dye_backpack_black"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_backpack_black",
+      "has_the_recipe"
+    ]
+  ]
+}

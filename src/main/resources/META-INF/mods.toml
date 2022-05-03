@@ -2,44 +2,28 @@ modLoader="javafml"
 loaderVersion="[40,)"
 license="All rights reserved"
 [[mods]]
-modId="lightland"
-version="6.4.7" #mandatory
-displayName="LightLand RPG" #mandatory
-logoFile="examplemod.png" #optional
+modId="l2backpack"
+version="0.0.1" #mandatory
+displayName="L2 Backpack" #mandatory
+logoFile="l2backpack.png" #optional
 credits="Thanks for this example mod goes to Java" #optional
 authors="Love, Cheese and small house plants" #optional
 description='''
 '''
-[[dependencies.lightland]]
+[[dependencies.l2backpack]]
     modId="forge"
     mandatory=true
     versionRange="[40,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.lightland]]
+[[dependencies.l2backpack]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.lightland]]
-    modId="geckolib3"
+[[dependencies.l2backpack]]
+    modId="l2library"
     mandatory=true
-    versionRange="[3.0.0,)"
+    versionRange="[0.0.2,)"
     ordering="AFTER"
-[[dependencies.lightland]]
-    modId="appleskin"
-    mandatory=false
-    versionRange="[2.3.0,)"
-    ordering="AFTER"
-    side="BOTH"
-[[dependencies.lightland]]
-    modId="create"
-    mandatory=true
-    versionRange="[0.4.1,)"
-    ordering="AFTER"
-[[dependencies.lightland]]
-    modId="jei"
-    mandatory=true
-    versionRange="[9.7,)"
-    side="CLIENT"

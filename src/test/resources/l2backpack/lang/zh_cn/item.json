@@ -2,6 +2,10 @@
   "block.l2backpack": {
 	"dimensional_storage": "空间箱子"
   },
+  "item.l2backpack":{
+	"ender_backpack": "末影背包",
+	"ender_pocket": "空间升级组件"
+  },
   "-cartesian": {
 	"backpack": {
 	  "path": "item.l2backpack",
@@ -9,7 +13,7 @@
 	  "list": [
 		{
 		  "backpack": "背包",
-		  "dimensional_storage": "空间钥匙"
+		  "dimensional_storage": "共享末影背包"
 		},
 		{
 		  "black": "黑色",

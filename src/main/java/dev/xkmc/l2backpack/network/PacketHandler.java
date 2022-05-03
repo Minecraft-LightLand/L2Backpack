@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.network;
 
-import dev.xkmc.l2backpack.init.LightLand;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +20,7 @@ import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 public enum PacketHandler {
 	SLOT_CLICK_TO_SERVER(SlotClickToServer.class, PLAY_TO_SERVER);
 
-	public static final ResourceLocation CHANNEL_NAME = new ResourceLocation(LightLand.MODID, "main");
+	public static final ResourceLocation CHANNEL_NAME = new ResourceLocation(L2Backpack.MODID, "main");
 	public static final int NETWORK_VERSION = 1;
 	public static final String NETWORK_VERSION_STR = String.valueOf(NETWORK_VERSION);
 	public static SimpleChannel channel;

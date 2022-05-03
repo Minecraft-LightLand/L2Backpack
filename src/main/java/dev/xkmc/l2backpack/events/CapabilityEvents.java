@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.content.capability.WorldStorageCapability;
-import dev.xkmc.l2backpack.init.LightLand;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
@@ -14,7 +14,7 @@ public class CapabilityEvents {
 	public static void onAttachLevelCapabilities(AttachCapabilitiesEvent<Level> event) {
 		if (event.getObject() instanceof ServerLevel level) {
 			if (level.dimension() == Level.OVERWORLD) {
-				event.addCapability(new ResourceLocation(LightLand.MODID, "world_storage"),
+				event.addCapability(new ResourceLocation(L2Backpack.MODID, "world_storage"),
 						new WorldStorageCapability(level));
 			}
 		}

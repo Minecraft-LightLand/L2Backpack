@@ -99,7 +99,8 @@ public class BackpackItem extends Item {
 			if (!tag.getBoolean("init")) {
 				tag.putBoolean("init", true);
 				tag.putUUID("container_id", UUID.randomUUID());
-				tag.putInt("rows", 1);
+				if (!tag.contains("rows"))
+					tag.putInt("rows", 1);
 			}
 			NetworkHooks.openGui(player, this, this::writeBuffer);
 		}

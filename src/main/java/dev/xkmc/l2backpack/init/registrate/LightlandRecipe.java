@@ -8,7 +8,7 @@ import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 
-import static dev.xkmc.l2backpack.init.LightLand.REGISTRATE;
+import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
 public class LightlandRecipe {
 

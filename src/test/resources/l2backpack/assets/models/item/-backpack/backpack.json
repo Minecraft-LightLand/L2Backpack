@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "lightland:item/backpack",
-    "layer1": "lightland:item/backpack_overlay"
+    "layer0": "l2backpack:item/backpack",
+    "layer1": "l2backpack:item/backpack_overlay"
   }
 }

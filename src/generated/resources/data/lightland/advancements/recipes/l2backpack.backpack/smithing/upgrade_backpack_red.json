@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:smithing/upgrade_backpack_red"
+    ]
+  },
+  "criteria": {
+    "has_backpack_red": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2backpack:backpack_red"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:smithing/upgrade_backpack_red"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_backpack_red",
+      "has_the_recipe"
+    ]
+  ]
+}

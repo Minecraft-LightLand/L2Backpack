@@ -1,0 +1,11 @@
+{
+  "parent": "l2backpack:item/backpack",
+  "overrides": [
+    {
+      "predicate": {
+        "minecraft:open": 1.0
+      },
+      "model": "l2backpack:item/backpack_open"
+    }
+  ]
+}

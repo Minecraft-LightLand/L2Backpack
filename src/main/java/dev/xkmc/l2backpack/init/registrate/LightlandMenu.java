@@ -8,7 +8,7 @@ import dev.xkmc.l2backpack.content.item.WorldChestScreen;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.inventory.MenuType;
 
-import static dev.xkmc.l2backpack.init.LightLand.REGISTRATE;
+import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
 /**
  * handles container menu

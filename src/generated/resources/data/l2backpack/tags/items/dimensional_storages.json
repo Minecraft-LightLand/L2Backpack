@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "l2backpack:dimensional_storage_white",
+    "l2backpack:dimensional_storage_orange",
+    "l2backpack:dimensional_storage_magenta",
+    "l2backpack:dimensional_storage_light_blue",
+    "l2backpack:dimensional_storage_yellow",
+    "l2backpack:dimensional_storage_lime",
+    "l2backpack:dimensional_storage_pink",
+    "l2backpack:dimensional_storage_gray",
+    "l2backpack:dimensional_storage_light_gray",
+    "l2backpack:dimensional_storage_cyan",
+    "l2backpack:dimensional_storage_purple",
+    "l2backpack:dimensional_storage_blue",
+    "l2backpack:dimensional_storage_brown",
+    "l2backpack:dimensional_storage_green",
+    "l2backpack:dimensional_storage_red",
+    "l2backpack:dimensional_storage_black"
+  ]
+}

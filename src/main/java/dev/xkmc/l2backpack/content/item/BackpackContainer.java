@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.item;
 
-import dev.xkmc.l2backpack.init.LightLand;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.LightlandMenu;
 import dev.xkmc.l2library.menu.BaseContainerMenu;
 import dev.xkmc.l2library.menu.SpriteManager;
@@ -21,7 +21,7 @@ public class BackpackContainer extends BaseContainerMenu<BackpackContainer> {
 
 	static {
 		for (int i = 0; i < 6; i++) {
-			MANAGERS[i] = new SpriteManager(LightLand.MODID, "backpack_" + (i + 1));
+			MANAGERS[i] = new SpriteManager(L2Backpack.MODID, "backpack_" + (i + 1));
 		}
 	}
 

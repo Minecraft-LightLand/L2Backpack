@@ -1,13 +1,13 @@
 package dev.xkmc.l2backpack.init.data;
 
-import dev.xkmc.l2backpack.init.LightLand;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import static dev.xkmc.l2backpack.init.LightLand.REGISTRATE;
+import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
 public enum ItemTags {
 	BACKPACKS,
@@ -16,7 +16,7 @@ public enum ItemTags {
 	public final TagKey<Item> tag;
 
 	ItemTags() {
-		ResourceLocation id = new ResourceLocation(LightLand.MODID, LangData.asId(name()));
+		ResourceLocation id = new ResourceLocation(L2Backpack.MODID, LangData.asId(name()));
 		tag = net.minecraft.tags.ItemTags.create(id);
 		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag));
 	}

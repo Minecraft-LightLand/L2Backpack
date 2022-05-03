@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:shaped/craft_backpack_gray"
+    ]
+  },
+  "criteria": {
+    "has_backpack_gray": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2backpack:backpack_gray"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:shaped/craft_backpack_gray"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_backpack_gray",
+      "has_the_recipe"
+    ]
+  ]
+}

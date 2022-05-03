@@ -7,7 +7,7 @@ import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.xkmc.l2backpack.content.item.BackpackItem;
 import dev.xkmc.l2backpack.content.item.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.item.WorldChestItem;
-import dev.xkmc.l2backpack.init.LightLand;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -19,7 +19,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.function.Supplier;
 
-import static dev.xkmc.l2backpack.init.LightLand.REGISTRATE;
+import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
 @SuppressWarnings({"rawtypes", "unchecked", "unsafe"})
 @MethodsReturnNonnullByDefault
@@ -30,7 +30,7 @@ public class LightlandItems {
 		private final Supplier<ItemEntry> icon;
 
 		public Tab(String id, Supplier<ItemEntry> icon) {
-			super(LightLand.MODID + "." + id);
+			super(L2Backpack.MODID + "." + id);
 			this.icon = icon;
 		}
 
@@ -78,13 +78,13 @@ public class LightlandItems {
 	}
 
 	private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {
-		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "lightland:backpack");
+		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "l2backpack:backpack");
 		builder.override().predicate(new ResourceLocation("open"), 1).model(
-				new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/backpack_open"));
+				new ModelFile.UncheckedModelFile(L2Backpack.MODID + ":item/backpack_open"));
 	}
 
 	private static void createWorldChestModel(DataGenContext<Item, WorldChestItem> ctx, RegistrateItemModelProvider pvd) {
-		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "lightland:dimensional_storage");
+		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "l2backpack:dimensional_storage");
 	}
 
 	private static void createEnderBackpackModel(DataGenContext<Item, EnderBackpackItem> ctx, RegistrateItemModelProvider pvd) {
@@ -93,7 +93,7 @@ public class LightlandItems {
 		ItemModelBuilder builder = pvd.withExistingParent("ender_backpack", "generated");
 		builder.texture("layer0", "item/ender_backpack");
 		builder.override().predicate(new ResourceLocation("open"), 1).model(
-				new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/ender_backpack_open"));
+				new ModelFile.UncheckedModelFile(L2Backpack.MODID + ":item/ender_backpack_open"));
 	}
 
 	public static void register() {

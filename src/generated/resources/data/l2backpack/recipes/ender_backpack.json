@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ADA",
+    "BCB",
+    "ADA"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:leather"
+    },
+    "B": {
+      "item": "minecraft:ender_pearl"
+    },
+    "C": {
+      "item": "minecraft:ender_chest"
+    },
+    "D": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "l2backpack:ender_backpack"
+  }
+}

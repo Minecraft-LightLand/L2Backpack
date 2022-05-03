@@ -1,0 +1,15 @@
+{
+  "type": "l2backpack:backpack_dye",
+  "group": "backpack_dye",
+  "ingredients": [
+    {
+      "tag": "l2backpack:backpacks"
+    },
+    {
+      "item": "minecraft:white_dye"
+    }
+  ],
+  "result": {
+    "item": "l2backpack:backpack_white"
+  }
+}

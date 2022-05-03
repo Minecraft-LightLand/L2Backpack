@@ -29,7 +29,7 @@ import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("l2backpack")
-public class LightLand {
+public class L2Backpack {
 
 	public static final String MODID = "l2backpack";
 	public static final Logger LOGGER = LogManager.getLogger();
@@ -52,13 +52,13 @@ public class LightLand {
 	}
 
 	private static void registerModBusEvents(IEventBus bus) {
-		bus.addListener(LightLand::setup);
+		bus.addListener(L2Backpack::setup);
 		bus.addListener(LightLandClient::clientSetup);
-		bus.addListener(EventPriority.LOWEST, LightLand::gatherData);
-		bus.addListener(LightLand::registerCaps);
+		bus.addListener(EventPriority.LOWEST, L2Backpack::gatherData);
+		bus.addListener(L2Backpack::registerCaps);
 	}
 
-	public LightLand() {
+	public L2Backpack() {
 		FMLJavaModLoadingContext ctx = FMLJavaModLoadingContext.get();
 		IEventBus bus = ctx.getModEventBus();
 		registerModBusEvents(bus);

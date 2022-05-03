@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.init.data;
 
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
-import dev.xkmc.l2backpack.init.LightLand;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.Locale;
@@ -24,7 +24,7 @@ public class LangData {
 		public TranslatableComponent get(Object... objs) {
 			if (objs.length != count)
 				throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
-			return new TranslatableComponent(LightLand.MODID + "." + id, objs);
+			return new TranslatableComponent(L2Backpack.MODID + "." + id, objs);
 		}
 
 	}
@@ -33,7 +33,7 @@ public class LangData {
 		for (IDS id : IDS.values()) {
 			String[] strs = id.id.split("\\.");
 			String str = strs[strs.length - 1];
-			pvd.accept(LightLand.MODID + "." + id.id,
+			pvd.accept(L2Backpack.MODID + "." + id.id,
 					RegistrateLangProvider.toEnglishName(str) + getParams(id.count));
 		}
 		pvd.accept("itemGroup.l2backpack.backpack", "L2 Backpack");

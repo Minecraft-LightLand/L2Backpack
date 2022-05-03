@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "lightland:item/dimensional_storage",
-    "layer1": "lightland:item/dimensional_storage_overlay"
+    "layer0": "l2backpack:item/dimensional_storage",
+    "layer1": "l2backpack:item/dimensional_storage_overlay"
   }
 }

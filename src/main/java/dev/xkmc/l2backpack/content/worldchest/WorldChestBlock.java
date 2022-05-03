@@ -1,7 +1,6 @@
-package dev.xkmc.l2backpack.content.block;
+package dev.xkmc.l2backpack.content.worldchest;
 
 import dev.xkmc.l2library.block.mult.*;
-import dev.xkmc.l2backpack.content.item.WorldChestItem;
 import dev.xkmc.l2backpack.init.registrate.LightlandBlocks;
 import dev.xkmc.l2backpack.init.registrate.LightlandItems;
 import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;

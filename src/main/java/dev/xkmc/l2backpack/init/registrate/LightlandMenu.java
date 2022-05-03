@@ -1,10 +1,10 @@
 package dev.xkmc.l2backpack.init.registrate;
 
 import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
-import dev.xkmc.l2backpack.content.item.BackpackContainer;
-import dev.xkmc.l2backpack.content.item.BackpackScreen;
-import dev.xkmc.l2backpack.content.item.WorldChestContainer;
-import dev.xkmc.l2backpack.content.item.WorldChestScreen;
+import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
+import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
+import dev.xkmc.l2backpack.content.worldchest.WorldChestContainer;
+import dev.xkmc.l2backpack.content.worldchest.WorldChestScreen;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.inventory.MenuType;
 

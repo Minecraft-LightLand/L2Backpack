@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.item;
+package dev.xkmc.l2backpack.content.backpack;
 
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2library.util.Proxy;

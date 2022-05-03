@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.item;
+package dev.xkmc.l2backpack.content.worldchest;
 
 import dev.xkmc.l2backpack.content.capability.StorageContainer;
 import dev.xkmc.l2backpack.content.capability.WorldStorage;

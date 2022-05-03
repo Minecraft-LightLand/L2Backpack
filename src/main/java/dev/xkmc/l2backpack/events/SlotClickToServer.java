@@ -1,11 +1,12 @@
-package dev.xkmc.l2backpack.network;
+package dev.xkmc.l2backpack.events;
 
-import dev.xkmc.l2backpack.content.item.BackpackItem;
-import dev.xkmc.l2backpack.content.item.EnderBackpackItem;
-import dev.xkmc.l2backpack.content.item.WorldChestItem;
+import dev.xkmc.l2backpack.content.backpack.BackpackItem;
+import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
+import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
 import dev.xkmc.l2library.network.SerialPacketBase;
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
@@ -38,12 +39,14 @@ public class SlotClickToServer extends SerialPacketBase {
 		ServerPlayer player = ctx.getSender();
 		if (player == null) return;
 		ItemStack stack;
+		Container container = null;
 		if (slot >= 0) {
 			stack = ctx.getSender().getInventory().getItem(slot);
 		} else {
 			AbstractContainerMenu menu = ctx.getSender().containerMenu;
 			if (wid == 0 || menu.containerId == 0 || wid != menu.containerId) return;
-			stack = ctx.getSender().containerMenu.getSlot(index).getItem();
+			stack = menu.getSlot(index).getItem();
+			container = menu.getSlot(index).container;
 		}
 		if (slot >= 0 && stack.getItem() instanceof BackpackItem) {
 			new BackpackItem.MenuPvd(player, slot, stack).open();
@@ -52,6 +55,9 @@ public class SlotClickToServer extends SerialPacketBase {
 					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getDisplayName()));
 		} else if (stack.getItem() instanceof WorldChestItem chest) {
 			new WorldChestItem.MenuPvd(player, stack, chest).open();
+			if (container != null){
+				container.setChanged();
+			}
 		}
 	}
 }

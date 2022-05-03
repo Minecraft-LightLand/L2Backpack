@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.item;
+package dev.xkmc.l2backpack.content.backpack;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.menu.BaseContainerScreen;

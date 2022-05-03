@@ -1,8 +1,8 @@
-package dev.xkmc.l2backpack.content.block;
+package dev.xkmc.l2backpack.content.worldchest;
 
 import dev.xkmc.l2backpack.content.capability.StorageContainer;
 import dev.xkmc.l2backpack.content.capability.WorldStorage;
-import dev.xkmc.l2backpack.content.item.WorldChestContainer;
+import dev.xkmc.l2backpack.content.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2library.base.BaseBlockEntity;
 import dev.xkmc.l2library.block.NameSetable;

@@ -5,8 +5,8 @@ import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
-import dev.xkmc.l2backpack.content.block.WorldChestBlock;
-import dev.xkmc.l2backpack.content.block.WorldChestBlockEntity;
+import dev.xkmc.l2backpack.content.worldchest.WorldChestBlock;
+import dev.xkmc.l2backpack.content.worldchest.WorldChestBlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.DyeColor;
@@ -26,7 +26,6 @@ public class LightlandBlocks {
 	}
 
 	public static final BlockEntry<DelegateBlock> WORLD_CHEST;
-
 	public static final BlockEntityEntry<WorldChestBlockEntity> TE_WORLD_CHEST;
 
 	static {

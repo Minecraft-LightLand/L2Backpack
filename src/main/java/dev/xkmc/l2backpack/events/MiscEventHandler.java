@@ -1,10 +1,10 @@
 package dev.xkmc.l2backpack.events;
 
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2backpack.content.item.BackpackItem;
-import dev.xkmc.l2backpack.content.item.EnderBackpackItem;
-import dev.xkmc.l2backpack.content.item.WorldChestItem;
-import dev.xkmc.l2backpack.network.SlotClickToServer;
+import dev.xkmc.l2backpack.content.backpack.BackpackItem;
+import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
+import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.Slot;
@@ -32,7 +32,7 @@ public class MiscEventHandler {
 				if ((inv >= 0 || ind >= 0) && (slot.getItem().getItem() instanceof EnderBackpackItem ||
 						slot.getItem().getItem() instanceof WorldChestItem ||
 						inv >= 0 && slot.getItem().getItem() instanceof BackpackItem)) {
-					new SlotClickToServer(ind, inv, wid).toServer();
+					L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
 					event.setCanceled(true);
 				}
 			}

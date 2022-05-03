@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.network;
 import dev.xkmc.l2backpack.content.item.BackpackItem;
 import dev.xkmc.l2backpack.content.item.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.item.WorldChestItem;
-import dev.xkmc.l2backpack.network.SerialPacketBase;
+import dev.xkmc.l2library.network.SerialPacketBase;
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;

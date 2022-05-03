@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lightland:item/dimensional_storage",
+    "layer1": "lightland:item/dimensional_storage_overlay"
+  }
+}

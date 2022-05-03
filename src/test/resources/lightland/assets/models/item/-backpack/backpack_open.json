@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lightland:item/backpack_open",
+    "layer1": "lightland:item/backpack_open_overlay"
+  }
+}

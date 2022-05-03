@@ -1,0 +1,9 @@
+{
+  "container.l2backpack": {
+	"backpack": "背包",
+	"dimensional_storage": "空间钥匙"
+  },
+  "itemGroup.l2backpack": {
+	"backpack": "L2背包"
+  }
+}

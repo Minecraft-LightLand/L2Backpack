@@ -2,6 +2,7 @@
   "block.l2backpack.dimensional_storage": "Dimensional Storage",
   "container.l2backpack.backpack": "Backpack",
   "container.l2backpack.dimensional_storage": "Dimensional Storage",
+  "item.l2backpack.armor_bag": "Armor Bag",
   "item.l2backpack.backpack_black": "Backpack Black",
   "item.l2backpack.backpack_blue": "Backpack Blue",
   "item.l2backpack.backpack_brown": "Backpack Brown",
@@ -18,6 +19,7 @@
   "item.l2backpack.backpack_red": "Backpack Red",
   "item.l2backpack.backpack_white": "Backpack White",
   "item.l2backpack.backpack_yellow": "Backpack Yellow",
+  "item.l2backpack.book_bag": "Book Bag",
   "item.l2backpack.dimensional_storage_black": "Dimensional Storage Black",
   "item.l2backpack.dimensional_storage_blue": "Dimensional Storage Blue",
   "item.l2backpack.dimensional_storage_brown": "Dimensional Storage Brown",
@@ -37,6 +39,8 @@
   "item.l2backpack.ender_backpack": "Ender Backpack",
   "item.l2backpack.ender_pocket": "Ender Pocket",
   "itemGroup.l2backpack.backpack": "L2 Backpack",
-  "l2backpack.tooltip.backpack_slot": "Backpack Slot: %s/%s",
+  "l2backpack.tooltip.backpack_slot": "Upgrade: %s/%s",
+  "l2backpack.tooltip.bag.info": "Right click to store, shift right click to dump",
+  "l2backpack.tooltip.bag.size": "Content: %s/%s",
   "l2backpack.tooltip.owner": "Owner: %s"
 }

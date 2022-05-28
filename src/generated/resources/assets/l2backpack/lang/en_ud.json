@@ -2,6 +2,7 @@
   "block.l2backpack.dimensional_storage": "\u01DDb\u0250\u0279o\u0287S \u05DF\u0250uo\u0131su\u01DD\u026F\u0131\u15E1",
   "container.l2backpack.backpack": "\u029E\u0254\u0250d\u029E\u0254\u0250\u15FA",
   "container.l2backpack.dimensional_storage": "\u01DDb\u0250\u0279o\u0287S \u05DF\u0250uo\u0131su\u01DD\u026F\u0131\u15E1",
+  "item.l2backpack.armor_bag": "b\u0250\u15FA \u0279o\u026F\u0279\u2C6F",
   "item.l2backpack.backpack_black": "\u029E\u0254\u0250\u05DF\u15FA \u029E\u0254\u0250d\u029E\u0254\u0250\u15FA",
   "item.l2backpack.backpack_blue": "\u01DDn\u05DF\u15FA \u029E\u0254\u0250d\u029E\u0254\u0250\u15FA",
   "item.l2backpack.backpack_brown": "u\u028Do\u0279\u15FA \u029E\u0254\u0250d\u029E\u0254\u0250\u15FA",
@@ -18,6 +19,7 @@
   "item.l2backpack.backpack_red": "p\u01DD\u1D1A \u029E\u0254\u0250d\u029E\u0254\u0250\u15FA",
   "item.l2backpack.backpack_white": "\u01DD\u0287\u0131\u0265M \u029E\u0254\u0250d\u029E\u0254\u0250\u15FA",
   "item.l2backpack.backpack_yellow": "\u028Do\u05DF\u05DF\u01DD\u028E \u029E\u0254\u0250d\u029E\u0254\u0250\u15FA",
+  "item.l2backpack.book_bag": "b\u0250\u15FA \u029Eoo\u15FA",
   "item.l2backpack.dimensional_storage_black": "\u029E\u0254\u0250\u05DF\u15FA \u01DDb\u0250\u0279o\u0287S \u05DF\u0250uo\u0131su\u01DD\u026F\u0131\u15E1",
   "item.l2backpack.dimensional_storage_blue": "\u01DDn\u05DF\u15FA \u01DDb\u0250\u0279o\u0287S \u05DF\u0250uo\u0131su\u01DD\u026F\u0131\u15E1",
   "item.l2backpack.dimensional_storage_brown": "u\u028Do\u0279\u15FA \u01DDb\u0250\u0279o\u0287S \u05DF\u0250uo\u0131su\u01DD\u026F\u0131\u15E1",
@@ -37,6 +39,8 @@
   "item.l2backpack.ender_backpack": "\u029E\u0254\u0250d\u029E\u0254\u0250\u15FA \u0279\u01DDpu\u018E",
   "item.l2backpack.ender_pocket": "\u0287\u01DD\u029E\u0254o\u0500 \u0279\u01DDpu\u018E",
   "itemGroup.l2backpack.backpack": "\u029E\u0254\u0250d\u029E\u0254\u0250\u15FA \u1105\uA780",
-  "l2backpack.tooltip.backpack_slot": "%s/%s :\u0287o\u05DFS \u029E\u0254\u0250d\u029E\u0254\u0250\u15FA",
+  "l2backpack.tooltip.backpack_slot": "%s/%s :\u01DDp\u0250\u0279bd\u2229",
+  "l2backpack.tooltip.bag.info": "d\u026Fnp o\u0287 \u029E\u0254\u0131\u05DF\u0254 \u0287\u0265b\u0131\u0279 \u0287\u025F\u0131\u0265s '\u01DD\u0279o\u0287s o\u0287 \u029E\u0254\u0131\u05DF\u0254 \u0287\u0265b\u0131\u1D1A",
+  "l2backpack.tooltip.bag.size": "%s/%s :\u0287u\u01DD\u0287uo\u0186",
   "l2backpack.tooltip.owner": "%s :\u0279\u01DDu\u028DO"
 }

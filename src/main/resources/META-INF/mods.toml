@@ -3,7 +3,7 @@ loaderVersion="[40,)"
 license="All rights reserved"
 [[mods]]
 modId="l2backpack"
-version="0.0.2" #mandatory
+version="${file.jarVersion}" #mandatory
 displayName="L2 Backpack" #mandatory
 logoFile="l2backpack.png" #optional
 credits="Thanks for this example mod goes to Java" #optional

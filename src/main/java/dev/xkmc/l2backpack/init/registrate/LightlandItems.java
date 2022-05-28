@@ -1,13 +1,15 @@
 package dev.xkmc.l2backpack.init.registrate;
 
+import dev.xkmc.l2backpack.content.backpack.BackpackItem;
+import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
+import dev.xkmc.l2backpack.content.bag.ArmorBag;
+import dev.xkmc.l2backpack.content.bag.BookBag;
+import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.ItemTags;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateItemModelProvider;
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
-import dev.xkmc.l2backpack.content.backpack.BackpackItem;
-import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
-import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
-import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -52,6 +54,9 @@ public class LightlandItems {
 	public static final ItemEntry<EnderBackpackItem> ENDER_BACKPACK;
 	public static final ItemEntry<Item> ENDER_POCKET;
 
+	public static final ItemEntry<ArmorBag> ARMOR_BAG;
+	public static final ItemEntry<BookBag> BOOK_BAG;
+
 
 	static {
 		// Backpacks
@@ -74,6 +79,9 @@ public class LightlandItems {
 			}
 			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(LightlandItems::createEnderBackpackModel).defaultLang().register();
 			ENDER_POCKET = simpleItem("ender_pocket");
+
+			ARMOR_BAG = REGISTRATE.item("armor_bag", ArmorBag::new).defaultLang().register();
+			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultLang().register();
 		}
 	}
 

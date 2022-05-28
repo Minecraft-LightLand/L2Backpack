@@ -1,6 +1,5 @@
 package dev.xkmc.l2backpack.init.data;
 
-import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.network.chat.TranslatableComponent;
 
@@ -10,14 +9,17 @@ import java.util.function.BiConsumer;
 public class LangData {
 
 	public enum IDS {
-		BACKPACK_SLOT("tooltip.backpack_slot", 2),
-		STORAGE_OWNER("tooltip.owner", 1);
+		BACKPACK_SLOT("tooltip.backpack_slot", 2, "Upgrade: %s/%s"),
+		STORAGE_OWNER("tooltip.owner", 1, "Owner: %s"),
+		BAG_SIZE("tooltip.bag.size", 2, "Content: %s/%s"),
+		BAG_INFO("tooltip.bag.info", 0, "Right click to store, shift right click to dump");
 
-		final String id;
+		final String id, def;
 		final int count;
 
-		IDS(String id, int count) {
+		IDS(String id, int count, String def) {
 			this.id = id;
+			this.def = def;
 			this.count = count;
 		}
 
@@ -33,21 +35,9 @@ public class LangData {
 		for (IDS id : IDS.values()) {
 			String[] strs = id.id.split("\\.");
 			String str = strs[strs.length - 1];
-			pvd.accept(L2Backpack.MODID + "." + id.id,
-					RegistrateLangProvider.toEnglishName(str) + getParams(id.count));
+			pvd.accept(L2Backpack.MODID + "." + id.id, id.def);
 		}
 		pvd.accept("itemGroup.l2backpack.backpack", "L2 Backpack");
-	}
-
-	private static String getParams(int count) {
-		if (count <= 0)
-			return "";
-		StringBuilder pad = new StringBuilder();
-		for (int i = 0; i < count; i++) {
-			pad.append(pad.length() == 0 ? ": " : "/");
-			pad.append("%s");
-		}
-		return pad.toString();
 	}
 
 	public static String asId(String name) {

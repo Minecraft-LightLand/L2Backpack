@@ -1,10 +1,10 @@
 package dev.xkmc.l2backpack.init.data;
 
+import dev.xkmc.l2backpack.init.registrate.LightlandItems;
+import dev.xkmc.l2backpack.init.registrate.LightlandRecipe;
 import dev.xkmc.l2library.recipe.CustomShapelessBuilder;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateRecipeProvider;
 import dev.xkmc.l2library.repack.registrate.util.DataIngredient;
-import dev.xkmc.l2backpack.init.registrate.LightlandItems;
-import dev.xkmc.l2backpack.init.registrate.LightlandRecipe;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.UpgradeRecipeBuilder;
@@ -61,6 +61,21 @@ public class RecipeGen {
 					.pattern("ADA").pattern("BCB").pattern("ADA")
 					.define('C', Tags.Items.LEATHER).define('B', Items.GOLD_INGOT)
 					.define('A', Items.ENDER_PEARL).define('D', Items.LAPIS_LAZULI)
+					.save(pvd);
+		}
+		{
+			Item ender = LightlandItems.ENDER_POCKET.get();
+			Item bag = LightlandItems.ARMOR_BAG.get();
+			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
+					.pattern("DCD").pattern("ABA").pattern("AAA")
+					.define('A', Tags.Items.LEATHER).define('B', ender)
+					.define('D', Items.STRING).define('C', Items.IRON_CHESTPLATE)
+					.save(pvd);
+			bag = LightlandItems.BOOK_BAG.get();
+			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
+					.pattern("DCD").pattern("ABA").pattern("AAA")
+					.define('A', Tags.Items.LEATHER).define('B', ender)
+					.define('D', Items.STRING).define('C', Items.BOOK)
 					.save(pvd);
 		}
 	}

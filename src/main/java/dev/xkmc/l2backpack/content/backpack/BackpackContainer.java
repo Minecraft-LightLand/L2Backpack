@@ -8,6 +8,7 @@ import dev.xkmc.l2library.util.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
@@ -53,36 +54,53 @@ public class BackpackContainer extends BaseContainerMenu<BackpackContainer> {
 		}
 	}
 
+	@Override
+	public void slotsChanged(Container cont) {
+		save();
+	}
+
+	@Override
+	public void removed(Player player) {
+		if (!player.level.isClientSide) {
+			save();
+		}
+		super.removed(player);
+	}
+
+	private void save() {
+		ItemStack stack = getStack();
+		if (!stack.isEmpty()) {
+			ListTag list = new ListTag();
+			for (int i = 0; i < this.container.getContainerSize(); i++) {
+				list.add(i, this.container.getItem(i).save(new CompoundTag()));
+			}
+			BackpackItem.setListTag(stack, list);
+		}
+	}
+
+	private ItemStack stack_cache = ItemStack.EMPTY;
+
 	@ServerOnly
 	@Override
 	public boolean stillValid(Player player) {
-		return !getStack().isEmpty();
+		return !getStackRaw().isEmpty();
 	}
 
-	@ServerOnly
 	public ItemStack getStack() {
+		ItemStack stack = getStackRaw();
+		if (stack.isEmpty()) return stack_cache;
+		return stack;
+	}
+
+	private ItemStack getStackRaw() {
 		ItemStack stack = player.getInventory().getItem(item_slot);
 		CompoundTag tag = stack.getTag();
 		if (tag == null) return ItemStack.EMPTY;
 		if (!tag.contains("container_id")) return ItemStack.EMPTY;
 		if (!tag.getUUID("container_id").equals(uuid)) return ItemStack.EMPTY;
+		stack_cache = stack;
 		return stack;
 	}
 
-
-	@Override
-	public void removed(Player player) {
-		if (!player.level.isClientSide) {
-			ItemStack stack = getStack();
-			if (!stack.isEmpty()) {
-				ListTag list = new ListTag();
-				for (int i = 0; i < this.container.getContainerSize(); i++) {
-					list.add(i, this.container.getItem(i).save(new CompoundTag()));
-				}
-				BackpackItem.setListTag(stack, list);
-			}
-		}
-		super.removed(player);
-	}
 
 }

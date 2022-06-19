@@ -10,17 +10,20 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-public class LightLandClient {
+public class L2BackpackClient {
 
 	public static void onCtorClient(IEventBus bus, IEventBus eventBus) {
+		bus.addListener(L2BackpackClient::clientSetup);
 	}
 
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
-		for (ItemEntry<BackpackItem> entry : LightlandItems.BACKPACKS) {
-			ItemProperties.register(entry.get(), new ResourceLocation("open"), BackpackItem::isOpened);
-		}
-		ItemProperties.register(LightlandItems.ENDER_BACKPACK.get(), new ResourceLocation("open"), EnderBackpackItem::isOpened);
+		event.enqueueWork(()->{
+			for (ItemEntry<BackpackItem> entry : LightlandItems.BACKPACKS) {
+				ItemProperties.register(entry.get(), new ResourceLocation("open"), BackpackItem::isOpened);
+			}
+			ItemProperties.register(LightlandItems.ENDER_BACKPACK.get(), new ResourceLocation("open"), EnderBackpackItem::isOpened);
+		});
 	}
 
 }

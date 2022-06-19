@@ -60,7 +60,6 @@ public class L2Backpack {
 	}
 
 	private static void registerModBusEvents(IEventBus bus) {
-		bus.addListener(LightLandClient::clientSetup);
 		bus.addListener(EventPriority.LOWEST, L2Backpack::gatherData);
 		bus.addListener(L2Backpack::registerCaps);
 	}
@@ -69,7 +68,7 @@ public class L2Backpack {
 		FMLJavaModLoadingContext ctx = FMLJavaModLoadingContext.get();
 		IEventBus bus = ctx.getModEventBus();
 		registerModBusEvents(bus);
-		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> LightLandClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> L2BackpackClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
 		registerRegistrates(bus);
 		registerForgeEvents();
 	}

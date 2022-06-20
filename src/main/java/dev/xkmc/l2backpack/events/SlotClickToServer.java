@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.events;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
-import dev.xkmc.l2library.network.SerialPacketBase;
+import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;

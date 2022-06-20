@@ -4,7 +4,7 @@ import dev.xkmc.l2backpack.content.capability.StorageContainer;
 import dev.xkmc.l2backpack.content.capability.WorldStorage;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
-import dev.xkmc.l2library.util.ServerOnly;
+import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -78,7 +78,7 @@ public class WorldChestItem extends BlockItem {
 	}
 
 	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> list) {
-		if (this.allowdedIn(tab)) {
+		if (super.allowedIn(tab)) {
 			list.add(new ItemStack(this));
 		}
 	}

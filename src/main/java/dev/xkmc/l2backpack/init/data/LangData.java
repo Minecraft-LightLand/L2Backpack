@@ -1,7 +1,9 @@
 package dev.xkmc.l2backpack.init.data;
 
 import dev.xkmc.l2backpack.init.L2Backpack;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 
 import java.util.Locale;
 import java.util.function.BiConsumer;
@@ -23,10 +25,10 @@ public class LangData {
 			this.count = count;
 		}
 
-		public TranslatableComponent get(Object... objs) {
+		public Component get(Object... objs) {
 			if (objs.length != count)
 				throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
-			return new TranslatableComponent(L2Backpack.MODID + "." + id, objs);
+			return MutableComponent.create(new TranslatableContents(L2Backpack.MODID + "." + id, objs));
 		}
 
 	}

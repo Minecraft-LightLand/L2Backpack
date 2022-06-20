@@ -1,12 +1,14 @@
 package dev.xkmc.l2backpack.init.registrate;
 
-import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
 import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
 import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
 import dev.xkmc.l2backpack.content.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.content.worldchest.WorldChestScreen;
+import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
@@ -26,7 +28,8 @@ public class BackpackMenu {
 	}
 
 	public static String getLangKey(MenuType<?> menu) {
-		return "container." + menu.getRegistryName().getNamespace() + "." + menu.getRegistryName().getPath();
+		ResourceLocation rl = ForgeRegistries.CONTAINERS.getKey(menu);
+		return "container." + rl.getNamespace() + "." + rl.getPath();
 	}
 
 }

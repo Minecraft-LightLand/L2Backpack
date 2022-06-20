@@ -1,8 +1,8 @@
 package dev.xkmc.l2backpack.content.capability;
 
-import dev.xkmc.l2library.serial.ExceptionHandler;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.codec.TagCodec;
+import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -43,7 +43,7 @@ public class WorldStorageCapability implements ICapabilitySerializable<CompoundT
 
 	@Override
 	public void deserializeNBT(CompoundTag tag) {
-		ExceptionHandler.get(() -> TagCodec.fromTag(tag, WorldStorage.class, handler, f -> true));
+		Wrappers.get(() -> TagCodec.fromTag(tag, WorldStorage.class, handler, f -> true));
 		handler.init();
 	}
 

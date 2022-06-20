@@ -11,7 +11,7 @@ import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
 import dev.xkmc.l2backpack.events.SlotClickToServer;
 import dev.xkmc.l2library.base.L2Registrate;
-import dev.xkmc.l2library.network.PacketHandler;
+import dev.xkmc.l2library.serial.network.PacketHandler;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.serial.handler.Handlers;
 import net.minecraft.resources.ResourceLocation;

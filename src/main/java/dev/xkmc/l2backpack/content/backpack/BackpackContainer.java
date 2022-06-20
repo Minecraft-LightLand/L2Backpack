@@ -2,9 +2,9 @@ package dev.xkmc.l2backpack.content.backpack;
 
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
-import dev.xkmc.l2library.menu.BaseContainerMenu;
-import dev.xkmc.l2library.menu.SpriteManager;
-import dev.xkmc.l2library.util.ServerOnly;
+import dev.xkmc.l2library.base.menu.BaseContainerMenu;
+import dev.xkmc.l2library.base.menu.SpriteManager;
+import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;

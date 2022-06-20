@@ -25,7 +25,7 @@ import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
 @SuppressWarnings({"rawtypes", "unchecked", "unsafe"})
 @MethodsReturnNonnullByDefault
-public class LightlandItems {
+public class BackpackItems {
 
 	public static class Tab extends CreativeModeTab {
 
@@ -42,7 +42,7 @@ public class LightlandItems {
 		}
 	}
 
-	public static final Tab TAB_MAIN = new Tab("backpack", () -> LightlandItems.ENDER_BACKPACK);
+	public static final Tab TAB_MAIN = new Tab("backpack", () -> BackpackItems.ENDER_BACKPACK);
 
 	static {
 		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
@@ -65,7 +65,7 @@ public class LightlandItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
-						.tag(ItemTags.BACKPACKS.tag).model(LightlandItems::createBackpackModel)
+						.tag(ItemTags.BACKPACKS.tag).model(BackpackItems::createBackpackModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
 						.defaultLang().register();
 			}
@@ -73,11 +73,11 @@ public class LightlandItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p.stacksTo(1)))
-						.tag(ItemTags.DIMENSIONAL_STORAGES.tag).model(LightlandItems::createWorldChestModel)
+						.tag(ItemTags.DIMENSIONAL_STORAGES.tag).model(BackpackItems::createWorldChestModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMaterialColor().col)
 						.defaultLang().register();
 			}
-			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(LightlandItems::createEnderBackpackModel).defaultLang().register();
+			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(BackpackItems::createEnderBackpackModel).defaultLang().register();
 			ENDER_POCKET = simpleItem("ender_pocket");
 
 			ARMOR_BAG = REGISTRATE.item("armor_bag", ArmorBag::new).defaultLang().register();

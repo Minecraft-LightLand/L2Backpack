@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.backpack;
 
 import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2backpack.init.registrate.LightlandMenu;
+import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2library.menu.BaseContainerMenu;
 import dev.xkmc.l2library.menu.SpriteManager;
 import dev.xkmc.l2library.util.ServerOnly;
@@ -38,7 +38,7 @@ public class BackpackContainer extends BaseContainerMenu<BackpackContainer> {
 	protected final UUID uuid;
 
 	public BackpackContainer(int windowId, Inventory inventory, int hand, UUID uuid, int row) {
-		super(LightlandMenu.MT_BACKPACK.get(), windowId, inventory, MANAGERS[row - 1], menu -> new BaseContainer<>(row * 9, menu), false);
+		super(BackpackMenu.MT_BACKPACK.get(), windowId, inventory, MANAGERS[row - 1], menu -> new BaseContainer<>(row * 9, menu), false);
 		this.player = inventory.player;
 		this.item_slot = hand;
 		this.uuid = uuid;

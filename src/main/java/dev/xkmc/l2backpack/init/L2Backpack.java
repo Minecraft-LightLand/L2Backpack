@@ -5,12 +5,12 @@ import dev.xkmc.l2backpack.events.CapabilityEvents;
 import dev.xkmc.l2backpack.events.MiscEventHandler;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
-import dev.xkmc.l2backpack.init.registrate.LightlandBlocks;
-import dev.xkmc.l2backpack.init.registrate.LightlandItems;
-import dev.xkmc.l2backpack.init.registrate.LightlandMenu;
-import dev.xkmc.l2backpack.init.registrate.LightlandRecipe;
+import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
+import dev.xkmc.l2backpack.init.registrate.BackpackItems;
+import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
+import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
 import dev.xkmc.l2backpack.events.SlotClickToServer;
-import dev.xkmc.l2library.base.LcyRegistrate;
+import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.network.PacketHandler;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.serial.handler.Handlers;
@@ -36,7 +36,7 @@ public class L2Backpack {
 
 	public static final String MODID = "l2backpack";
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static final LcyRegistrate REGISTRATE = new LcyRegistrate(MODID);
+	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
 
 	public static final PacketHandler HANDLER = new PacketHandler(
 			new ResourceLocation(MODID, "main"), 1,
@@ -45,10 +45,10 @@ public class L2Backpack {
 
 	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();
-		LightlandBlocks.register();
-		LightlandItems.register();
-		LightlandMenu.register();
-		LightlandRecipe.register(bus);
+		BackpackBlocks.register();
+		BackpackItems.register();
+		BackpackMenu.register();
+		BackpackRecipe.register(bus);
 		Handlers.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 	}

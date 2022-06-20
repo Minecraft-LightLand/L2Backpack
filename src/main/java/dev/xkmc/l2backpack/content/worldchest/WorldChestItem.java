@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.worldchest;
 import dev.xkmc.l2backpack.content.capability.StorageContainer;
 import dev.xkmc.l2backpack.content.capability.WorldStorage;
 import dev.xkmc.l2backpack.init.data.LangData;
-import dev.xkmc.l2backpack.init.registrate.LightlandBlocks;
+import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2library.util.ServerOnly;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -65,7 +65,7 @@ public class WorldChestItem extends BlockItem {
 	public final DyeColor color;
 
 	public WorldChestItem(DyeColor color, Properties props) {
-		super(LightlandBlocks.WORLD_CHEST.get(), props);
+		super(BackpackBlocks.WORLD_CHEST.get(), props);
 		this.color = color;
 	}
 

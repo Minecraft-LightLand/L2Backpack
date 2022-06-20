@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 
 import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
-public class LightlandRecipe {
+public class BackpackRecipe {
 
 	public static final RegistryEntry<AbstractShapelessRecipe.Serializer<BackpackDyeRecipe>> RSC_BAG_DYE =
 			REGISTRATE.simple("backpack_dye", RecipeSerializer.class, () -> new AbstractShapelessRecipe.Serializer<>(BackpackDyeRecipe::new));

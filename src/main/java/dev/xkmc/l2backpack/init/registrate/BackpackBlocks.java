@@ -19,10 +19,10 @@ import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 /**
  * handles blocks and block entities
  */
-public class LightlandBlocks {
+public class BackpackBlocks {
 
 	static {
-		REGISTRATE.creativeModeTab(() -> LightlandItems.TAB_MAIN);
+		REGISTRATE.creativeModeTab(() -> BackpackItems.TAB_MAIN);
 	}
 
 	public static final BlockEntry<DelegateBlock> WORLD_CHEST;

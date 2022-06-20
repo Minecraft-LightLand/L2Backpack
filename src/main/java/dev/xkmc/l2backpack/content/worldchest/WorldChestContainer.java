@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.worldchest;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
 import dev.xkmc.l2backpack.content.capability.StorageContainer;
-import dev.xkmc.l2backpack.init.registrate.LightlandMenu;
+import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2library.menu.BaseContainerMenu;
 import dev.xkmc.l2library.util.ServerOnly;
 import net.minecraft.world.SimpleContainer;
@@ -22,7 +22,7 @@ public class WorldChestContainer extends BaseContainerMenu<WorldChestContainer> 
 	protected final StorageContainer storage;
 
 	public WorldChestContainer(int windowId, Inventory inventory, SimpleContainer cont, @Nullable StorageContainer storage) {
-		super(LightlandMenu.MT_WORLD_CHEST.get(), windowId, inventory, BackpackContainer.MANAGERS[2], menu -> cont, false);
+		super(BackpackMenu.MT_WORLD_CHEST.get(), windowId, inventory, BackpackContainer.MANAGERS[2], menu -> cont, false);
 		this.player = inventory.player;
 		this.addSlot("grid", stack -> true);
 		this.storage = storage;

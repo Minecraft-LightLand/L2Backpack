@@ -1,8 +1,8 @@
 package dev.xkmc.l2backpack.content.worldchest;
 
 import dev.xkmc.l2library.block.mult.*;
-import dev.xkmc.l2backpack.init.registrate.LightlandBlocks;
-import dev.xkmc.l2backpack.init.registrate.LightlandItems;
+import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
+import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
 import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
 import dev.xkmc.l2library.block.one.GetBlockItemBlockMethod;
@@ -36,7 +36,7 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 	public static final WorldChestBlock INSTANCE = new WorldChestBlock();
 
 	public static final BlockEntityBlockMethod<WorldChestBlockEntity> TILE_ENTITY_SUPPLIER_BUILDER =
-			new BlockEntityBlockMethodImpl<>(LightlandBlocks.TE_WORLD_CHEST, WorldChestBlockEntity.class);
+			new BlockEntityBlockMethodImpl<>(BackpackBlocks.TE_WORLD_CHEST, WorldChestBlockEntity.class);
 
 	public static final EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);
 
@@ -70,7 +70,7 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 		if (be instanceof WorldChestBlockEntity chest) {
 			return buildStack(state, chest);
 		}
-		return LightlandItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
+		return BackpackItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
 	}
 
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
@@ -78,11 +78,11 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 		if (blockentity instanceof WorldChestBlockEntity chest) {
 			return List.of(buildStack(state, chest));
 		}
-		return List.of(LightlandItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack());
+		return List.of(BackpackItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack());
 	}
 
 	private ItemStack buildStack(BlockState state, WorldChestBlockEntity chest) {
-		ItemStack stack = LightlandItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
+		ItemStack stack = BackpackItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
 		stack.getOrCreateTag().putUUID("owner_id", chest.owner_id);
 		stack.getOrCreateTag().putString("owner_name", chest.owner_name);
 		stack.getOrCreateTag().putLong("password", chest.password);

@@ -14,12 +14,12 @@ import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
  * handles container menu
  */
 @MethodsReturnNonnullByDefault
-public class LightlandMenu {
+public class BackpackMenu {
 
 	public static final MenuEntry<BackpackContainer> MT_BACKPACK = REGISTRATE.menu("backpack",
-			BackpackContainer::fromNetwork, () -> BackpackScreen::new).lang(LightlandMenu::getLangKey).register();
+			BackpackContainer::fromNetwork, () -> BackpackScreen::new).lang(BackpackMenu::getLangKey).register();
 	public static final MenuEntry<WorldChestContainer> MT_WORLD_CHEST = REGISTRATE.menu("dimensional_storage",
-			WorldChestContainer::fromNetwork, () -> WorldChestScreen::new).lang(LightlandMenu::getLangKey).register();
+			WorldChestContainer::fromNetwork, () -> WorldChestScreen::new).lang(BackpackMenu::getLangKey).register();
 
 	public static void register() {
 

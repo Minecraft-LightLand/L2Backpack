@@ -102,7 +102,7 @@ public class BackpackItem extends Item {
 				if (!tag.contains("rows"))
 					tag.putInt("rows", 1);
 			}
-			NetworkHooks.openGui(player, this, this::writeBuffer);
+			NetworkHooks.openScreen(player, this, this::writeBuffer);
 		}
 
 	}

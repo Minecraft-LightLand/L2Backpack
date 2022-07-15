@@ -57,7 +57,7 @@ public class WorldChestItem extends BlockItem {
 			item.refresh(stack, player);
 			if (player.level.isClientSide() || getContainer((ServerLevel) player.level).isEmpty())
 				return;
-			NetworkHooks.openGui(player, this);
+			NetworkHooks.openScreen(player, this);
 		}
 
 	}

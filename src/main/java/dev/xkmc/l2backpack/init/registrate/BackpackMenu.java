@@ -28,7 +28,7 @@ public class BackpackMenu {
 	}
 
 	public static String getLangKey(MenuType<?> menu) {
-		ResourceLocation rl = ForgeRegistries.CONTAINERS.getKey(menu);
+		ResourceLocation rl = ForgeRegistries.MENU_TYPES.getKey(menu);
 		return "container." + rl.getNamespace() + "." + rl.getPath();
 	}
 

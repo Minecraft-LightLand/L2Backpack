@@ -17,7 +17,7 @@ public class MiscEventHandler {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
-	public static void onScreenClick(ScreenEvent.MouseClickedEvent event) {
+	public static void onScreenClick(ScreenEvent.MouseButtonPressed.Pre event) {
 		Screen screen = event.getScreen();
 		if (event.getButton() == 1 &&
 				screen instanceof AbstractContainerScreen cont) {

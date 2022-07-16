@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.arrowbag.ArrowBagEvents;
 import dev.xkmc.l2backpack.content.worldchest.WorldStorage;
 import dev.xkmc.l2backpack.events.CapabilityEvents;
 import dev.xkmc.l2backpack.events.MiscEventHandler;
+import dev.xkmc.l2backpack.events.SetArrowToServer;
 import dev.xkmc.l2backpack.events.SlotClickToServer;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
@@ -41,7 +42,8 @@ public class L2Backpack {
 
 	public static final PacketHandler HANDLER = new PacketHandler(
 			new ResourceLocation(MODID, "main"), 1,
-			e -> e.create(SlotClickToServer.class, PLAY_TO_SERVER)
+			e -> e.create(SlotClickToServer.class, PLAY_TO_SERVER),
+			e -> e.create(SetArrowToServer.class, PLAY_TO_SERVER)
 	);
 
 	private static void registerRegistrates(IEventBus bus) {

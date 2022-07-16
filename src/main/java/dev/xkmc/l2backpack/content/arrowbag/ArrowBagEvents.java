@@ -1,9 +1,15 @@
 package dev.xkmc.l2backpack.content.arrowbag;
 
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2backpack.mixin.ItemStackMixin;
+import dev.xkmc.l2backpack.events.SetArrowToServer;
+import dev.xkmc.l2backpack.init.L2Backpack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.entity.living.LivingGetProjectileEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -16,17 +22,28 @@ public class ArrowBagEvents {
 
 	@SubscribeEvent
 	public static void onProjectileSearch(LivingGetProjectileEvent event) {
-		ItemStack offhand = event.getEntity().getOffhandItem();
-		if (!(offhand.getItem() instanceof ArrowBag)) return;
+		if (!(event.getEntity() instanceof Player player)) return;
 		if (!(event.getProjectileWeaponItemStack().getItem() instanceof ProjectileWeaponItem weapon)) return;
-		List<ItemStack> arrows = ArrowBag.getItems(offhand);
+		ItemStack bag = ArrowBagManager.getArrowBag(player);
+		if (bag.isEmpty()) return;
+		List<ItemStack> arrows = ArrowBag.getItems(bag);
 		var pred = weapon.getAllSupportedProjectiles();
-		for (int i = 0; i < arrows.size(); i++) {
-			ItemStack stack = arrows.get(i);
-			if (pred.test(stack)) {
-				int finalI = i;
-				TEMP.set(Pair.of(stack, c -> shrinkStack(offhand, finalI, c)));
-				event.setProjectileItemStack(stack);
+		int selected = ArrowBag.getSelected(bag);
+		ItemStack stack = arrows.get(selected);
+		if (pred.test(stack)) {
+			TEMP.set(Pair.of(stack, c -> shrinkStack(bag, selected, c)));
+			event.setProjectileItemStack(stack);
+		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void keyEvent(InputEvent.Key event) {
+		if (ArrowBagOverlay.isScreenOn() && Minecraft.getInstance().options.keyShift.isDown()) {
+			for (int i = 0; i < 9; i++) {
+				if (Minecraft.getInstance().options.keyHotbarSlots[i].consumeClick()) {
+					L2Backpack.HANDLER.toServer(new SetArrowToServer(i));
+				}
 			}
 		}
 	}
@@ -37,8 +54,8 @@ public class ArrowBagEvents {
 		ArrowBag.setItems(offhand, list);
 	}
 
-	public static void shrink(ItemStack stack,int count) {
-		if (TEMP.get()!=null && TEMP.get().getFirst() == stack){
+	public static void shrink(ItemStack stack, int count) {
+		if (TEMP.get() != null && TEMP.get().getFirst() == stack) {
 			TEMP.get().getSecond().accept(count);
 		}
 	}

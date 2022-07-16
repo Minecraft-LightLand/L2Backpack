@@ -11,6 +11,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
@@ -68,6 +69,14 @@ public class ArrowBag extends Item {
 			return gui.getMenu().getStack() == stack ? 1 : 0;
 		}
 		return 0;
+	}
+
+	public static void setSelected(ItemStack stack, int i) {
+		stack.getOrCreateTag().putInt("selected", Mth.clamp(i, 0, 8));
+	}
+
+	public static int getSelected(ItemStack stack) {
+		return Mth.clamp(stack.getOrCreateTag().getInt("selected"), 0, 8);
 	}
 
 	public static final class MenuPvd implements MenuProvider {

@@ -1,11 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "backpack_craft",
-  "pattern": [
-    "ADA",
-    "BCB",
-    "ADA"
-  ],
   "key": {
     "A": {
       "tag": "forge:leather"
@@ -20,6 +15,11 @@
       "item": "minecraft:iron_ingot"
     }
   },
+  "pattern": [
+    "ADA",
+    "BCB",
+    "ADA"
+  ],
   "result": {
     "item": "l2backpack:backpack_light_blue"
   }

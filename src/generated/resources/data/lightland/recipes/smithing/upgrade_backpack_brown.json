@@ -1,10 +1,10 @@
 {
   "type": "l2backpack:backpack_upgrade",
-  "base": {
-    "item": "l2backpack:backpack_brown"
-  },
   "addition": {
     "item": "l2backpack:ender_pocket"
+  },
+  "base": {
+    "item": "l2backpack:backpack_brown"
   },
   "result": {
     "item": "l2backpack:backpack_brown"

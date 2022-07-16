@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2backpack.content.capability;
+package dev.xkmc.l2backpack.content.arrowbag;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

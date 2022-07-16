@@ -1,5 +1,7 @@
 package dev.xkmc.l2backpack.init.registrate;
 
+import dev.xkmc.l2backpack.content.arrowbag.ArrowBagContainer;
+import dev.xkmc.l2backpack.content.arrowbag.ArrowBagScreen;
 import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
 import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
 import dev.xkmc.l2backpack.content.worldchest.WorldChestContainer;
@@ -22,6 +24,8 @@ public class BackpackMenu {
 			BackpackContainer::fromNetwork, () -> BackpackScreen::new).lang(BackpackMenu::getLangKey).register();
 	public static final MenuEntry<WorldChestContainer> MT_WORLD_CHEST = REGISTRATE.menu("dimensional_storage",
 			WorldChestContainer::fromNetwork, () -> WorldChestScreen::new).lang(BackpackMenu::getLangKey).register();
+	public static final MenuEntry<ArrowBagContainer> MT_ARROW = REGISTRATE.menu("arrow_bag",
+			ArrowBagContainer::fromNetwork, () -> ArrowBagScreen::new).lang(BackpackMenu::getLangKey).register();
 
 	public static void register() {
 

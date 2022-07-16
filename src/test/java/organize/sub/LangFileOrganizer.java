@@ -63,7 +63,7 @@ public class LangFileOrganizer extends ResourceOrganizer {
 				}
 			}
 			FileWriter w = new FileWriter(target);
-			w.write(dst_json.toString());
+			w.write(GSON.toJson(dst_json));
 			w.close();
 		}
 	}

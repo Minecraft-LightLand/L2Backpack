@@ -6,7 +6,8 @@
 	"ender_backpack": "末影背包",
 	"ender_pocket": "空间升级组件",
 	"armor_bag": "装备袋",
-	"book_bag": "附魔书袋"
+	"book_bag": "附魔书袋",
+	"arrow_bag": "箭袋"
   },
   "-cartesian": {
 	"backpack": {

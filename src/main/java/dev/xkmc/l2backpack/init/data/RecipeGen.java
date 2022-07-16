@@ -77,6 +77,13 @@ public class RecipeGen {
 					.define('A', Tags.Items.LEATHER).define('B', ender)
 					.define('D', Items.STRING).define('C', Items.BOOK)
 					.save(pvd);
+
+			bag = BackpackItems.ARROW_BAG.get();
+			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, Items.ARROW)
+					.pattern("DCD").pattern("ABA").pattern("AAA")
+					.define('A', Tags.Items.LEATHER).define('B', Items.ARROW)
+					.define('D', Items.STRING).define('C', Items.BOW)
+					.save(pvd);
 		}
 	}
 

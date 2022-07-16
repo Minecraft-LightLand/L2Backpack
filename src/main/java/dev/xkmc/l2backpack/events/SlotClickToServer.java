@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.events;
 
+import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
@@ -50,6 +51,8 @@ public class SlotClickToServer extends SerialPacketBase {
 		}
 		if (slot >= 0 && stack.getItem() instanceof BackpackItem) {
 			new BackpackItem.MenuPvd(player, slot, stack).open();
+		} else if (slot >= 0 && stack.getItem() instanceof ArrowBag) {
+			new ArrowBag.MenuPvd(player, slot, stack).open();
 		} else if (stack.getItem() instanceof EnderBackpackItem) {
 			NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
 					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getDisplayName()));

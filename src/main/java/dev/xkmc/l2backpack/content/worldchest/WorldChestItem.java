@@ -1,7 +1,5 @@
 package dev.xkmc.l2backpack.content.worldchest;
 
-import dev.xkmc.l2backpack.content.capability.StorageContainer;
-import dev.xkmc.l2backpack.content.capability.WorldStorage;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2library.util.annotation.ServerOnly;

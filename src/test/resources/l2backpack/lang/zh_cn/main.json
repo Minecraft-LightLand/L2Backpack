@@ -1,6 +1,7 @@
 {
   "container.l2backpack": {
 	"backpack": "背包",
+	"arrow_bag": "箭袋",
 	"dimensional_storage": "空间钥匙"
   },
   "itemGroup.l2backpack": {

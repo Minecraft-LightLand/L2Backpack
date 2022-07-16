@@ -1,7 +1,6 @@
 package dev.xkmc.l2backpack.content.worldchest;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
-import dev.xkmc.l2backpack.content.capability.StorageContainer;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2library.base.menu.BaseContainerMenu;
 import dev.xkmc.l2library.util.annotation.ServerOnly;

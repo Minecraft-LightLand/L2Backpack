@@ -1,19 +1,20 @@
 package dev.xkmc.l2backpack.init;
 
-import dev.xkmc.l2backpack.content.capability.WorldStorage;
+import dev.xkmc.l2backpack.content.arrowbag.ArrowBagEvents;
+import dev.xkmc.l2backpack.content.worldchest.WorldStorage;
 import dev.xkmc.l2backpack.events.CapabilityEvents;
 import dev.xkmc.l2backpack.events.MiscEventHandler;
+import dev.xkmc.l2backpack.events.SlotClickToServer;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
-import dev.xkmc.l2backpack.events.SlotClickToServer;
 import dev.xkmc.l2library.base.L2Registrate;
-import dev.xkmc.l2library.serial.network.PacketHandler;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.serial.handler.Handlers;
+import dev.xkmc.l2library.serial.network.PacketHandler;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeMod;
@@ -40,7 +41,7 @@ public class L2Backpack {
 
 	public static final PacketHandler HANDLER = new PacketHandler(
 			new ResourceLocation(MODID, "main"), 1,
-			e->e.create(SlotClickToServer.class, PLAY_TO_SERVER)
+			e -> e.create(SlotClickToServer.class, PLAY_TO_SERVER)
 	);
 
 	private static void registerRegistrates(IEventBus bus) {
@@ -56,6 +57,7 @@ public class L2Backpack {
 	private static void registerForgeEvents() {
 		MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
+		MinecraftForge.EVENT_BUS.register(ArrowBagEvents.class);
 
 	}
 

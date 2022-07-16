@@ -1,6 +1,8 @@
 package organize;
 
 import com.google.common.io.Files;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import organize.sub.*;
 
 import java.io.File;
@@ -11,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class ResourceOrganizer {
+
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().setLenient().create();
 
     public static final Map<String, ResourceOrganizer> MAP = new LinkedHashMap<>();
     public static String MODID;

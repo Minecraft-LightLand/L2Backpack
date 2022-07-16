@@ -1,8 +1,10 @@
 {
   "block.l2backpack.dimensional_storage": "Dimensional Storage",
+  "container.l2backpack.arrow_bag": "Arrow Bag",
   "container.l2backpack.backpack": "Backpack",
   "container.l2backpack.dimensional_storage": "Dimensional Storage",
   "item.l2backpack.armor_bag": "Armor Bag",
+  "item.l2backpack.arrow_bag": "Arrow Bag",
   "item.l2backpack.backpack_black": "Backpack Black",
   "item.l2backpack.backpack_blue": "Backpack Blue",
   "item.l2backpack.backpack_brown": "Backpack Brown",

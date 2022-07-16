@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.init.registrate;
 
+import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.bag.ArmorBag;
@@ -56,6 +57,7 @@ public class BackpackItems {
 
 	public static final ItemEntry<ArmorBag> ARMOR_BAG;
 	public static final ItemEntry<BookBag> BOOK_BAG;
+	public static final ItemEntry<ArrowBag> ARROW_BAG;
 
 
 	static {
@@ -82,6 +84,7 @@ public class BackpackItems {
 
 			ARMOR_BAG = REGISTRATE.item("armor_bag", ArmorBag::new).defaultLang().register();
 			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultLang().register();
+			ARROW_BAG = REGISTRATE.item("arrow_bag", ArrowBag::new).defaultLang().register();
 		}
 	}
 

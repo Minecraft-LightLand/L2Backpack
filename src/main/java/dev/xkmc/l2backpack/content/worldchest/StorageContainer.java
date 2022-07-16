@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.capability;
+package dev.xkmc.l2backpack.content.worldchest;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

@@ -43,12 +43,15 @@ public class ArrowBagOverlay implements IGuiOverlay {
 		ItemRenderer renderer = gui.getMinecraft().getItemRenderer();
 		Font font = gui.getMinecraft().font;
 		int selected = ArrowBag.getSelected(bag);
+		ItemStack used = player.getProjectile(player.getMainHandItem());
 		for (int i = 0; i < list.size(); i++) {
 			ItemStack stack = list.get(i);
 			int x = width / 2 + 18 * 3 + 1;
 			int y = height / 2 - 81 + 18 * i + 1;
 			if (selected == i) {
-				renderCooldown(x, y, Minecraft.getInstance().options.keyShift.isDown() ? 127 : 64);
+				boolean shift = Minecraft.getInstance().options.keyShift.isDown();
+				boolean match = !used.isEmpty() && ItemStack.isSameItemSameTags(stack, used) && stack.getCount() == used.getCount();
+				renderCooldown(x, y, shift ? 127 : 64, match);
 			}
 			if (!stack.isEmpty()) {
 				renderer.renderAndDecorateItem(stack, x, y);
@@ -57,7 +60,7 @@ public class ArrowBagOverlay implements IGuiOverlay {
 		}
 	}
 
-	private static void renderCooldown(int x, int y, int a) {
+	private static void renderCooldown(int x, int y, int a, boolean selected) {
 		RenderSystem.disableDepthTest();
 		RenderSystem.disableTexture();
 		RenderSystem.enableBlend();
@@ -65,8 +68,17 @@ public class ArrowBagOverlay implements IGuiOverlay {
 		Tesselator tex = Tesselator.getInstance();
 		BufferBuilder builder = tex.getBuilder();
 		fillRect(builder, x, y, 16, 16, 255, 255, 255, a);
+		if (selected)
+			drawRect(builder, x, y, 16, 16, 0xff, 0xaa, 0, 255);
 		RenderSystem.enableTexture();
 		RenderSystem.enableDepthTest();
+	}
+
+	private static void drawRect(BufferBuilder builder, int x, int y, int w, int h, int r, int g, int b, int a) {
+		fillRect(builder, x - 1, y - 1, w + 2, 1, r, g, b, a);
+		fillRect(builder, x - 1, y - 1, 1, h + 2, r, g, b, a);
+		fillRect(builder, x - 1, y + h, w + 2, 1, r, g, b, a);
+		fillRect(builder, x + w, y - 1, 1, h + 2, r, g, b, a);
 	}
 
 	private static void fillRect(BufferBuilder builder, int x, int y, int w, int h, int r, int g, int b, int a) {

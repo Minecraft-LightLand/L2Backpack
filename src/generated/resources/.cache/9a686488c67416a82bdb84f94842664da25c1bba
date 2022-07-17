@@ -1,7 +1,7 @@
-// 1.19	2022-07-16T13:32:16.999753	Registrate Provider for l2backpack [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19	2022-07-17T09:18:24.837069	Registrate Provider for l2backpack [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 ab0f6db8b82e079ee8f2372afb7bb21e8d1df787 assets/l2backpack/blockstates/dimensional_storage.json
-79b6232114a6cc4d37f4e0e27c6e89e7d83abbe7 assets/l2backpack/lang/en_ud.json
-b9b25467d946f07971f72cfb6e5e47161eab1ee1 assets/l2backpack/lang/en_us.json
+a3401695f62a8cd45b00dd9946216d2421bb2262 assets/l2backpack/lang/en_ud.json
+2fee5ed4129bcc18d7fd622303a79999b91ffc71 assets/l2backpack/lang/en_us.json
 e7394fe87b114dd45f3de5b32dbf09e74f6d35fb assets/l2backpack/models/block/dimensional_storage_black.json
 c7963b08f4cc1681c5d54745723530433bf9e7e6 assets/l2backpack/models/block/dimensional_storage_blue.json
 1b0830399ea7f73b7540285d89df120cdb06582d assets/l2backpack/models/block/dimensional_storage_brown.json
@@ -57,11 +57,13 @@ c7949585bdbea84bcd74acff64356383b1e89c49 assets/l2backpack/models/item/ender_bac
 8cc1a585fa6251b8ea26696cec881cc0be8fbba9 assets/l2backpack/models/item/ender_backpack_open.json
 2e7d769568e35709ed56dc0e295da8fa82ff0fca assets/l2backpack/models/item/ender_pocket.json
 09e978b6b085154d3662b468c6d5dedc1109b599 data/l2backpack/advancements/recipes/l2backpack.backpack/armor_bag.json
+218272ccf61d4f619fdf9b2e9ad7839e02528f6f data/l2backpack/advancements/recipes/l2backpack.backpack/arrow_bag.json
 ef12e15e0f7b2b4a20cb695ddd12587eb07602d5 data/l2backpack/advancements/recipes/l2backpack.backpack/book_bag.json
 09b54d4789e86c074361275c57d57c0de557aed1 data/l2backpack/advancements/recipes/l2backpack.backpack/ender_backpack.json
 23a79148f5d062fb08c66efd43ce953feaf8c519 data/l2backpack/advancements/recipes/l2backpack.backpack/ender_pocket.json
 34d4163aed01fc354b4ae7f07e5f8afba51cefc5 data/l2backpack/loot_tables/blocks/dimensional_storage.json
 d7a9b74a964885e3c5a245a3eb448d865ec59dd0 data/l2backpack/recipes/armor_bag.json
+e369969a74d9218aa0fbf62da9f56a9f41951cb9 data/l2backpack/recipes/arrow_bag.json
 6af33cdf1d113370eacfaa8c11098eda9d320ebb data/l2backpack/recipes/book_bag.json
 9d87434b6bf4a6cb8499a857782c3a0dc7a5bd8c data/l2backpack/recipes/ender_backpack.json
 fff3c67ecb9af5a7d1698f8d03343936629fb6cc data/l2backpack/recipes/ender_pocket.json

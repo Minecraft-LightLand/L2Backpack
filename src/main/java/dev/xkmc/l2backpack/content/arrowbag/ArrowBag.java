@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.arrowbag;
 
+import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -21,10 +22,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +75,14 @@ public class ArrowBag extends Item {
 	}
 
 	public static void setSelected(ItemStack stack, int i) {
-		stack.getOrCreateTag().putInt("selected", Mth.clamp(i, 0, 8));
+		int slot = i;
+		if (i < 0) {
+			slot = getSelected(stack);
+			if (i == -1) slot--;
+			else slot++;
+			slot = (slot + 9) % 9;
+		}
+		stack.getOrCreateTag().putInt("selected", slot);
 	}
 
 	public static int getSelected(ItemStack stack) {
@@ -128,7 +138,7 @@ public class ArrowBag extends Item {
 	}
 
 	public ArrowBag(Properties props) {
-		super(props);
+		super(props.stacksTo(1));
 	}
 
 	@Override
@@ -145,5 +155,10 @@ public class ArrowBag extends Item {
 	@Override
 	public boolean canFitInsideContainerItems() {
 		return false;
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+		list.add(LangData.IDS.ARROW_INFO.get());
 	}
 }

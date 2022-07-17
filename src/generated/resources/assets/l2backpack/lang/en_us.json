@@ -41,6 +41,7 @@
   "item.l2backpack.ender_backpack": "Ender Backpack",
   "item.l2backpack.ender_pocket": "Ender Pocket",
   "itemGroup.l2backpack.backpack": "L2 Backpack",
+  "l2backpack.tooltip.arrow_bag": "Put in off hand, hold bow in main hand, press shift + number of up/down to switch arrows",
   "l2backpack.tooltip.backpack_slot": "Upgrade: %s/%s",
   "l2backpack.tooltip.bag.info": "Right click to store, shift right click to dump",
   "l2backpack.tooltip.bag.size": "Content: %s/%s",

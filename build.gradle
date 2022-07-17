@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.1.1'
+version = '1.1.2'
 group = 'dev.xkmc.l2backpack' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'l2backpack'
 

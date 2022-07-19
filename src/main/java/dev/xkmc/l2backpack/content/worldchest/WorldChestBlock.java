@@ -1,9 +1,9 @@
 package dev.xkmc.l2backpack.content.worldchest;
 
-import dev.xkmc.l2library.block.mult.*;
 import dev.xkmc.l2backpack.init.registrate.LightlandBlocks;
 import dev.xkmc.l2backpack.init.registrate.LightlandItems;
 import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
+import dev.xkmc.l2library.block.mult.*;
 import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
 import dev.xkmc.l2library.block.one.GetBlockItemBlockMethod;
 import dev.xkmc.l2library.block.one.SpecialDropBlockMethod;
@@ -83,9 +83,11 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 
 	private ItemStack buildStack(BlockState state, WorldChestBlockEntity chest) {
 		ItemStack stack = LightlandItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
-		stack.getOrCreateTag().putUUID("owner_id", chest.owner_id);
-		stack.getOrCreateTag().putString("owner_name", chest.owner_name);
-		stack.getOrCreateTag().putLong("password", chest.password);
+		if (chest.owner_id != null) {
+			stack.getOrCreateTag().putUUID("owner_id", chest.owner_id);
+			stack.getOrCreateTag().putString("owner_name", chest.owner_name);
+			stack.getOrCreateTag().putLong("password", chest.password);
+		}
 		return stack;
 	}
 

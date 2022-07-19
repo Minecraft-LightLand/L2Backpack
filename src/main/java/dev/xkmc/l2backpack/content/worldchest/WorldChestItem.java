@@ -69,7 +69,7 @@ public class WorldChestItem extends BlockItem {
 		this.color = color;
 	}
 
-	void refresh(ItemStack stack, Player player) {
+	public void refresh(ItemStack stack, Player player) {
 		if (!stack.getOrCreateTag().contains("owner_id")) {
 			stack.getOrCreateTag().putUUID("owner_id", player.getUUID());
 			stack.getOrCreateTag().putString("owner_name", player.getName().getString());

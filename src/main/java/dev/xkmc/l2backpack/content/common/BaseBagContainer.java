@@ -1,6 +1,5 @@
 package dev.xkmc.l2backpack.content.common;
 
-import dev.xkmc.l2library.base.menu.BaseContainerMenu;
 import dev.xkmc.l2library.base.menu.SpriteManager;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
@@ -14,16 +13,14 @@ import net.minecraft.world.item.ItemStack;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseContainerMenu<T> {
+public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenableContainer<T> {
 
-	protected final Player player;
-	protected final int item_slot;
+	protected final PlayerSlot item_slot;
 	protected final UUID uuid;
 
 	public BaseBagContainer(MenuType<T> type, int windowId, Inventory inventory, SpriteManager manager,
-							int hand, UUID uuid, int row, Predicate<ItemStack> pred) {
-		super(type, windowId, inventory, manager, menu -> new BaseContainer<>(row * 9, menu), false);
-		this.player = inventory.player;
+							PlayerSlot hand, UUID uuid, int row, Predicate<ItemStack> pred) {
+		super(type, windowId, inventory, manager, menu -> new BaseContainer<>(row * 9, menu));
 		this.item_slot = hand;
 		this.uuid = uuid;
 		this.addSlot("grid", pred);
@@ -52,6 +49,7 @@ public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseContain
 	}
 
 	private void save() {
+		if (player.getLevel().isClientSide()) return;
 		ItemStack stack = getStack();
 		if (!stack.isEmpty()) {
 			ListTag list = new ListTag();
@@ -77,7 +75,7 @@ public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseContain
 	}
 
 	private ItemStack getStackRaw() {
-		ItemStack stack = player.getInventory().getItem(item_slot);
+		ItemStack stack = item_slot.getItem(player);
 		CompoundTag tag = stack.getTag();
 		if (tag == null) return ItemStack.EMPTY;
 		if (!tag.contains("container_id")) return ItemStack.EMPTY;

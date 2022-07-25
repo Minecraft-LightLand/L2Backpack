@@ -1,10 +1,10 @@
 package dev.xkmc.l2backpack.content.backpack;
 
+import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -17,16 +17,10 @@ import java.util.UUID;
 public final class BackpackMenuPvd implements MenuProvider {
 
 	private final ServerPlayer player;
-	private final int slot;
+	private final PlayerSlot slot;
 	private final ItemStack stack;
 
-	public BackpackMenuPvd(ServerPlayer player, InteractionHand hand, ItemStack stack) {
-		this.player = player;
-		slot = hand == InteractionHand.MAIN_HAND ? player.getInventory().selected : 40;
-		this.stack = stack;
-	}
-
-	public BackpackMenuPvd(ServerPlayer player, int slot, ItemStack stack) {
+	public BackpackMenuPvd(ServerPlayer player, PlayerSlot slot, ItemStack stack) {
 		this.player = player;
 		this.slot = slot;
 		this.stack = stack;
@@ -47,7 +41,7 @@ public final class BackpackMenuPvd implements MenuProvider {
 	public void writeBuffer(FriendlyByteBuf buf) {
 		CompoundTag tag = stack.getOrCreateTag();
 		UUID id = tag.getUUID("container_id");
-		buf.writeInt(slot);
+		slot.write(buf);
 		buf.writeUUID(id);
 		buf.writeInt(tag.getInt("rows"));
 	}

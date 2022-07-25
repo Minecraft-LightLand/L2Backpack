@@ -13,6 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.lwjgl.glfw.GLFW;
 
 public class MiscEventHandler {
 
@@ -20,7 +21,7 @@ public class MiscEventHandler {
 	@SubscribeEvent
 	public static void onScreenClick(ScreenEvent.MouseButtonPressed.Pre event) {
 		Screen screen = event.getScreen();
-		if (event.getButton() == 1 &&
+		if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT &&
 				screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.findSlot(event.getMouseX(), event.getMouseY());
 			boolean b0 = slot != null;
@@ -32,8 +33,8 @@ public class MiscEventHandler {
 				int wid = cont.getMenu().containerId;
 				if ((inv >= 0 || ind >= 0) && (slot.getItem().getItem() instanceof EnderBackpackItem ||
 						slot.getItem().getItem() instanceof WorldChestItem ||
-						inv >= 0 && slot.getItem().getItem() instanceof BackpackItem ||
-						inv >= 0 && slot.getItem().getItem() instanceof ArrowBag)) {
+						slot.getItem().getItem() instanceof BackpackItem ||
+						slot.getItem().getItem() instanceof ArrowBag)) {
 					L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
 					event.setCanceled(true);
 				}

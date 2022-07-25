@@ -18,10 +18,12 @@ public class StorageContainer implements ContainerListener {
 
 	public final UUID id;
 	public final SimpleContainer container;
+	public final int color;
 
-	StorageContainer(UUID id, CompoundTag tag) {
+	StorageContainer(UUID id, int color, CompoundTag tag) {
 		this.tag = tag;
 		this.id = id;
+		this.color = color;
 		this.password = tag.getLong("password");
 		this.container = new SimpleContainer(27);
 		if (tag.contains("container")) {

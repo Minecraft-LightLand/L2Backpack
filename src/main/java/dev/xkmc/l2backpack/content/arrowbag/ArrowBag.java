@@ -1,17 +1,14 @@
 package dev.xkmc.l2backpack.content.arrowbag;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -59,14 +56,8 @@ public class ArrowBag extends BaseBagItem {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-		ItemStack stack = player.getItemInHand(hand);
-		if (!level.isClientSide()) {
-			new ArrowBagMenuPvd((ServerPlayer) player, hand, stack).open();
-		} else {
-			player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1, 1);
-		}
-		return InteractionResultHolder.success(stack);
+	public void open(ServerPlayer player, PlayerSlot slot, ItemStack stack) {
+		new ArrowBagMenuPvd(player, slot, stack).open();
 	}
 
 	@Override

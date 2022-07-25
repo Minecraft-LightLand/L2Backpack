@@ -42,19 +42,35 @@ public class WorldStorage {
 				return Optional.empty();
 			}
 		}
-		CompoundTag col = getCol(id, color, password);
+		CompoundTag col = getColor(id, color, password);
 		if (col.getLong("password") != password)
 			return Optional.empty();
-		StorageContainer storage = new StorageContainer(id, col);
+		StorageContainer storage = new StorageContainer(id, color, col);
+		putStorage(id, color, storage);
+		return Optional.of(storage);
+	}
+
+	public Optional<StorageContainer> getStorageWithoutPassword(UUID id, int color) {
+		if (cache.containsKey(id)) {
+			StorageContainer storage = cache.get(id)[color];
+			if (storage != null) {
+				return Optional.of(storage);
+			}
+		}
+		Optional<CompoundTag> colOptional = getColorWithoutPassword(id, color);
+		if (colOptional.isEmpty()) {
+			return Optional.empty();
+		}
+		StorageContainer storage = new StorageContainer(id, color, colOptional.get());
 		putStorage(id, color, storage);
 		return Optional.of(storage);
 	}
 
 	public StorageContainer changePassword(UUID id, int color, long password) {
 		cache.remove(id);
-		CompoundTag col = getCol(id, color, password);
+		CompoundTag col = getColor(id, color, password);
 		col.putLong("password", password);
-		StorageContainer storage = new StorageContainer(id, col);
+		StorageContainer storage = new StorageContainer(id, color, col);
 		putStorage(id, color, storage);
 		return storage;
 	}
@@ -67,7 +83,7 @@ public class WorldStorage {
 		arr[color] = storage;
 	}
 
-	private CompoundTag getCol(UUID id, int color, long password) {
+	private CompoundTag getColor(UUID id, int color, long password) {
 		CompoundTag ans;
 		String sid = id.toString();
 		if (!storage.containsKey(sid)) {
@@ -83,6 +99,21 @@ public class WorldStorage {
 			ans.put("color_" + color, col);
 		}
 		return col;
+	}
+
+	private Optional<CompoundTag> getColorWithoutPassword(UUID id, int color) {
+		CompoundTag ans;
+		String sid = id.toString();
+		if (!storage.containsKey(sid)) {
+			return Optional.empty();
+		} else ans = storage.get(sid);
+		CompoundTag col;
+		if (ans.contains("color_" + color)) {
+			col = ans.getCompound("color_" + color);
+		} else {
+			return Optional.empty();
+		}
+		return Optional.of(col);
 	}
 
 	public void init() {

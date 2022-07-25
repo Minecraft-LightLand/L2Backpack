@@ -1,11 +1,10 @@
 package dev.xkmc.l2backpack.events;
 
-import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
-import dev.xkmc.l2backpack.content.arrowbag.ArrowBagMenuPvd;
-import dev.xkmc.l2backpack.content.backpack.BackpackItem;
-import dev.xkmc.l2backpack.content.backpack.BackpackMenuPvd;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
+import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
+import dev.xkmc.l2backpack.content.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,23 +42,24 @@ public class SlotClickToServer extends SerialPacketBase {
 		if (player == null) return;
 		ItemStack stack;
 		Container container = null;
+		PlayerSlot playerSlot;
 		if (slot >= 0) {
-			stack = ctx.getSender().getInventory().getItem(slot);
+			stack = player.getInventory().getItem(slot);
+			playerSlot = PlayerSlot.ofInventory(slot);
 		} else {
-			AbstractContainerMenu menu = ctx.getSender().containerMenu;
+			AbstractContainerMenu menu = player.containerMenu;
 			if (wid == 0 || menu.containerId == 0 || wid != menu.containerId) return;
+			playerSlot = PlayerSlot.ofOtherInventory(slot, index, wid, menu);
 			stack = menu.getSlot(index).getItem();
 			container = menu.getSlot(index).container;
 		}
-		if (slot >= 0 && stack.getItem() instanceof BackpackItem) {
-			new BackpackMenuPvd(player, slot, stack).open();
-		} else if (slot >= 0 && stack.getItem() instanceof ArrowBag) {
-			new ArrowBagMenuPvd(player, slot, stack).open();
+		if (playerSlot != null && stack.getItem() instanceof BaseBagItem bag) {
+			bag.open(player, playerSlot, stack);
 		} else if (stack.getItem() instanceof EnderBackpackItem) {
 			NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
 					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getDisplayName()));
 		} else if (stack.getItem() instanceof WorldChestItem chest) {
-			new WorldChestItem.MenuPvd(player, stack, chest).open();
+			new WorldChestMenuPvd(player, stack, chest).open();
 			if (container != null) {
 				container.setChanged();
 			}

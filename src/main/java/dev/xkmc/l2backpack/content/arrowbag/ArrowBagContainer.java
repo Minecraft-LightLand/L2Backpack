@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.arrowbag;
 
 import dev.xkmc.l2backpack.content.common.BaseBagContainer;
+import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2library.base.menu.SpriteManager;
@@ -16,12 +17,12 @@ public class ArrowBagContainer extends BaseBagContainer<ArrowBagContainer> {
 	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "backpack_1");
 
 	public static ArrowBagContainer fromNetwork(MenuType<ArrowBagContainer> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
-		int slot = buf.readInt();
+		PlayerSlot slot = PlayerSlot.read(buf);
 		UUID id = buf.readUUID();
 		return new ArrowBagContainer(windowId, inv, slot, id);
 	}
 
-	public ArrowBagContainer(int windowId, Inventory inventory, int hand, UUID uuid) {
+	public ArrowBagContainer(int windowId, Inventory inventory, PlayerSlot hand, UUID uuid) {
 		super(BackpackMenu.MT_ARROW.get(), windowId, inventory, MANAGERS, hand, uuid, 1, stack -> stack.getItem() instanceof ArrowItem);
 	}
 

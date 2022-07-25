@@ -26,9 +26,9 @@ public class SetArrowToServer extends SerialPacketBase {
 	@Override
 	public void handle(NetworkEvent.Context ctx) {
 		Player sender = ctx.getSender();
-		if (sender==null)return;
+		if (sender == null) return;
 		ItemStack bag = ArrowBagManager.getArrowBag(sender);
-		if (bag.isEmpty())return;
+		if (bag.isEmpty()) return;
 		ArrowBag.setSelected(bag, slot);
 	}
 }

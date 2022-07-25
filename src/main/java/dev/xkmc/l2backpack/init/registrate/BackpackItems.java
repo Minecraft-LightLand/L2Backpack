@@ -13,13 +13,17 @@ import dev.xkmc.l2library.repack.registrate.providers.RegistrateItemModelProvide
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.ITagManager;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
@@ -61,13 +65,15 @@ public class BackpackItems {
 
 
 	static {
+		ITagManager<Item> manager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
+		TagKey<Item> curios_tag = manager.createTagKey(new ResourceLocation("curios", "back"));
 		// Backpacks
 		{
 			BACKPACKS = new ItemEntry[16];
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
-						.tag(ItemTags.BACKPACKS.tag).model(BackpackItems::createBackpackModel)
+						.tag(ItemTags.BACKPACKS.tag, curios_tag).model(BackpackItems::createBackpackModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
 						.defaultLang().register();
 			}
@@ -75,16 +81,19 @@ public class BackpackItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p.stacksTo(1)))
-						.tag(ItemTags.DIMENSIONAL_STORAGES.tag).model(BackpackItems::createWorldChestModel)
+						.tag(ItemTags.DIMENSIONAL_STORAGES.tag, curios_tag).model(BackpackItems::createWorldChestModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMaterialColor().col)
 						.defaultLang().register();
 			}
-			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(BackpackItems::createEnderBackpackModel).defaultLang().register();
+			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(BackpackItems::createEnderBackpackModel)
+					.tag(curios_tag).defaultLang().register();
+
 			ENDER_POCKET = simpleItem("ender_pocket");
 
 			ARMOR_BAG = REGISTRATE.item("armor_bag", ArmorBag::new).defaultLang().register();
 			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultLang().register();
-			ARROW_BAG = REGISTRATE.item("arrow_bag", ArrowBag::new).defaultLang().register();
+			ARROW_BAG = REGISTRATE.item("arrow_bag", ArrowBag::new)
+					.tag(curios_tag).defaultLang().register();
 		}
 	}
 

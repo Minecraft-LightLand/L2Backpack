@@ -15,7 +15,7 @@ public class LangData {
 		STORAGE_OWNER("tooltip.owner", 1, "Owner: %s"),
 		BAG_SIZE("tooltip.bag.size", 2, "Content: %s/%s"),
 		BAG_INFO("tooltip.bag.info", 0, "Right click to store, shift right click to dump"),
-		ARROW_INFO("tooltip.arrow_bag",0,"Put in off hand, hold bow in main hand, press shift + number of up/down to switch arrows");
+		ARROW_INFO("tooltip.arrow_bag",0,"Put in off hand (or Curios slot), hold bow in main hand, press shift + number of up/down to switch arrows");
 
 		final String id, def;
 		final int count;

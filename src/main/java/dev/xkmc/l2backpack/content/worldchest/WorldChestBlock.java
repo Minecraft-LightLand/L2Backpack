@@ -27,6 +27,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
@@ -83,9 +84,11 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 
 	private ItemStack buildStack(BlockState state, WorldChestBlockEntity chest) {
 		ItemStack stack = BackpackItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
-		stack.getOrCreateTag().putUUID("owner_id", chest.owner_id);
-		stack.getOrCreateTag().putString("owner_name", chest.owner_name);
-		stack.getOrCreateTag().putLong("password", chest.password);
+		if (chest.owner_id != null) {
+			stack.getOrCreateTag().putUUID("owner_id", chest.owner_id);
+			stack.getOrCreateTag().putString("owner_name", chest.owner_name);
+			stack.getOrCreateTag().putLong("password", chest.password);
+		}
 		return stack;
 	}
 
@@ -95,7 +98,7 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 	}
 
 	@Override
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
 		BlockEntity blockentity = level.getBlockEntity(pos);
 		UUID id = stack.getOrCreateTag().getUUID("owner_id");
 		String name = stack.getOrCreateTag().getString("owner_name");

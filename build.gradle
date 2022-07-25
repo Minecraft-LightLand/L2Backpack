@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.1.2'
+version = "${ll_version}"
 group = 'dev.xkmc.l2backpack' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'l2backpack'
 
@@ -119,16 +119,20 @@ repositories {
     flatDir{
         dirs 'libs'
     }
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
-    implementation fg.deobf('dev.xkmc.l2library:l2library:1.5.0')
+    implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}")
     runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:0.1.1')
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 
 }
 

@@ -1,7 +1,7 @@
-// 1.19	2022-07-17T09:18:24.837069	Registrate Provider for l2backpack [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19	2022-07-25T12:49:22.631737	Registrate Provider for l2backpack [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 ab0f6db8b82e079ee8f2372afb7bb21e8d1df787 assets/l2backpack/blockstates/dimensional_storage.json
-a3401695f62a8cd45b00dd9946216d2421bb2262 assets/l2backpack/lang/en_ud.json
-2fee5ed4129bcc18d7fd622303a79999b91ffc71 assets/l2backpack/lang/en_us.json
+1be25a60d92424a1ebb5352721d3ff684a44d1db assets/l2backpack/lang/en_ud.json
+b07a1258670bd81d713ea0e554e9606e1bfda241 assets/l2backpack/lang/en_us.json
 e7394fe87b114dd45f3de5b32dbf09e74f6d35fb assets/l2backpack/models/block/dimensional_storage_black.json
 c7963b08f4cc1681c5d54745723530433bf9e7e6 assets/l2backpack/models/block/dimensional_storage_blue.json
 1b0830399ea7f73b7540285d89df120cdb06582d assets/l2backpack/models/block/dimensional_storage_brown.json
@@ -56,6 +56,7 @@ ad8df1a8f057c882f4cbbec6e7e4c748c598a7d7 assets/l2backpack/models/block/dimensio
 c7949585bdbea84bcd74acff64356383b1e89c49 assets/l2backpack/models/item/ender_backpack.json
 8cc1a585fa6251b8ea26696cec881cc0be8fbba9 assets/l2backpack/models/item/ender_backpack_open.json
 2e7d769568e35709ed56dc0e295da8fa82ff0fca assets/l2backpack/models/item/ender_pocket.json
+a34522854eff0bfcdd0bd135afe44301fca19d7b data/curios/tags/items/back.json
 09e978b6b085154d3662b468c6d5dedc1109b599 data/l2backpack/advancements/recipes/l2backpack.backpack/armor_bag.json
 218272ccf61d4f619fdf9b2e9ad7839e02528f6f data/l2backpack/advancements/recipes/l2backpack.backpack/arrow_bag.json
 ef12e15e0f7b2b4a20cb695ddd12587eb07602d5 data/l2backpack/advancements/recipes/l2backpack.backpack/book_bag.json

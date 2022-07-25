@@ -25,10 +25,14 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
 
 import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 
@@ -66,6 +70,7 @@ public class L2Backpack {
 	private static void registerModBusEvents(IEventBus bus) {
 		bus.addListener(EventPriority.LOWEST, L2Backpack::gatherData);
 		bus.addListener(L2Backpack::registerCaps);
+		bus.addListener(L2Backpack::sendMessage);
 	}
 
 	public L2Backpack() {
@@ -83,6 +88,10 @@ public class L2Backpack {
 
 	public static void registerCaps(RegisterCapabilitiesEvent event) {
 		event.register(WorldStorage.class);
+	}
+
+	private static void sendMessage(final InterModEnqueueEvent event) {
+		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BACK.getMessageBuilder().build());
 	}
 
 }

@@ -67,9 +67,13 @@ public class ArrowBagOverlay implements IGuiOverlay {
 		RenderSystem.defaultBlendFunc();
 		Tesselator tex = Tesselator.getInstance();
 		BufferBuilder builder = tex.getBuilder();
-		fillRect(builder, x, y, 16, 16, 255, 255, 255, a);
-		if (selected)
+
+		if (selected) {
+			fillRect(builder, x, y, 16, 16, 255, 255, 255, a);
 			drawRect(builder, x, y, 16, 16, 0xff, 0xaa, 0, 255);
+		} else {
+			fillRect(builder, x, y, 16, 16, 255, 0, 0, a);
+		}
 		RenderSystem.enableTexture();
 		RenderSystem.enableDepthTest();
 	}

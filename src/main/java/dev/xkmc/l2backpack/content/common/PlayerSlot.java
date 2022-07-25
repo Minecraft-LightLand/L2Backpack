@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.worldchest.WorldChestContainer;
+import dev.xkmc.l2backpack.events.MiscEventHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -34,6 +35,12 @@ public record PlayerSlot(ContainerType type, int slot) {
 		ContainerType type = ContainerType.values()[buf.readInt()];
 		int slot = buf.readInt();
 		return new PlayerSlot(type, slot);
+	}
+
+	@Nullable
+	public static PlayerSlot ofCurio(Player player) {
+		return CuriosCompat.getSearchBag(player, MiscEventHandler::canOpen)
+				.map(e -> new PlayerSlot(ContainerType.CURIO, e)).orElse(null);
 	}
 
 	public void write(FriendlyByteBuf buf) {

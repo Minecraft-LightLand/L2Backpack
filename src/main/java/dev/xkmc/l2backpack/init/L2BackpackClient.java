@@ -4,11 +4,15 @@ import dev.xkmc.l2backpack.content.arrowbag.ArrowBagOverlay;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.init.data.Keys;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,6 +23,7 @@ public class L2BackpackClient {
 	public static void onCtorClient(IEventBus bus, IEventBus eventBus) {
 		bus.addListener(L2BackpackClient::clientSetup);
 		bus.addListener(L2BackpackClient::registerOverlay);
+		bus.addListener(L2BackpackClient::registerKeys);
 	}
 
 	@SubscribeEvent
@@ -31,8 +36,16 @@ public class L2BackpackClient {
 		});
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	public static void registerOverlay(RegisterGuiOverlaysEvent event) {
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "arrow_bag", new ArrowBagOverlay());
 	}
+
+	@OnlyIn(Dist.CLIENT)
+	public static void registerKeys(RegisterKeyMappingsEvent event) {
+		for (Keys k : Keys.values())
+			event.register(k.map);
+	}
+
 
 }

@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.init;
 
-import dev.xkmc.l2backpack.content.arrowbag.ArrowBagEvents;
+import dev.xkmc.l2backpack.events.ArrowBagEvents;
 import dev.xkmc.l2backpack.content.worldchest.WorldStorage;
 import dev.xkmc.l2backpack.events.CapabilityEvents;
 import dev.xkmc.l2backpack.events.MiscEventHandler;

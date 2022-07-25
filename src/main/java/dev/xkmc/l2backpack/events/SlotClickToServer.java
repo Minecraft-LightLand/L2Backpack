@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.events;
 
+import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
@@ -43,7 +44,10 @@ public class SlotClickToServer extends SerialPacketBase {
 		ItemStack stack;
 		Container container = null;
 		PlayerSlot playerSlot;
-		if (slot >= 0) {
+		if (wid == -1) {
+			stack = CuriosCompat.getSlot(player, MiscEventHandler::canOpen);
+			playerSlot = PlayerSlot.ofCurio(player);
+		} else if (slot >= 0) {
 			stack = player.getInventory().getItem(slot);
 			playerSlot = PlayerSlot.ofInventory(slot);
 		} else {
@@ -53,6 +57,7 @@ public class SlotClickToServer extends SerialPacketBase {
 			stack = menu.getSlot(index).getItem();
 			container = menu.getSlot(index).container;
 		}
+
 		if (playerSlot != null && stack.getItem() instanceof BaseBagItem bag) {
 			bag.open(player, playerSlot, stack);
 		} else if (stack.getItem() instanceof EnderBackpackItem) {

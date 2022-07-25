@@ -41,6 +41,10 @@ public class LangData {
 			pvd.accept(L2Backpack.MODID + "." + id.id, id.def);
 		}
 		pvd.accept("itemGroup.l2backpack.backpack", "L2 Backpack");
+		pvd.accept("key.categories.l2backpack", "L2Backpack Keys");
+		pvd.accept(Keys.OPEN.id, "Open backpack on back");
+		pvd.accept(Keys.UP.id, "Arrow Select Up");
+		pvd.accept(Keys.DOWN.id, "Arrow Select Down");
 	}
 
 	public static String asId(String name) {

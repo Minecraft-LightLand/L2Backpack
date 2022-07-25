@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.mixin;
 
-import dev.xkmc.l2backpack.content.arrowbag.ArrowBagEvents;
+import dev.xkmc.l2backpack.events.ArrowBagEvents;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

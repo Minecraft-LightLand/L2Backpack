@@ -6,5 +6,11 @@
   },
   "itemGroup.l2backpack": {
 	"backpack": "L2背包"
+  },
+  "key": {
+	"categories.l2backpack": "背包按键",
+	"l2backpack.open": "打开背部饰品栏的容器",
+	"l2backpack.up": "箭矢选择-向上",
+	"l2backpack.down": "箭矢选择-向下"
   }
 }

@@ -37,6 +37,13 @@ public class CuriosCompat {
 		return ItemStack.EMPTY;
 	}
 
+	public static Optional<Integer> getSearchBag(Player player, Predicate<ItemStack> pred) {
+		if (ModList.get().isLoaded("curios")) {
+			return getSearchBagImpl(player, pred);
+		}
+		return Optional.empty();
+	}
+
 	private static ItemStack getSlotImpl(Player player, Predicate<ItemStack> pred) {
 		var curio = CuriosApi.getCuriosHelper().getEquippedCurios(player);
 		if (curio.isPresent() && curio.resolve().isPresent()) {
@@ -90,6 +97,20 @@ public class CuriosCompat {
 			index += stacksHandler.getSlots();
 		}
 		return -1;
+	}
+
+	private static Optional<Integer> getSearchBagImpl(Player player, Predicate<ItemStack> pred) {
+		var curio = CuriosApi.getCuriosHelper().getEquippedCurios(player);
+		if (curio.isPresent() && curio.resolve().isPresent()) {
+			var e = curio.resolve().get();
+			for (int i = 0; i < e.getSlots(); i++) {
+				ItemStack stack = e.getStackInSlot(i);
+				if (pred.test(stack)) {
+					return Optional.of(i);
+				}
+			}
+		}
+		return Optional.empty();
 	}
 
 }

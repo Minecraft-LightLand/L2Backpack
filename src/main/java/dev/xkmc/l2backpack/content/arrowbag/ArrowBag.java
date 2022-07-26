@@ -55,6 +55,16 @@ public class ArrowBag extends BaseBagItem {
 		super(props.stacksTo(1));
 	}
 
+	public static float displayArrow(ItemStack stack) {
+		int disp = 0;
+		for (ItemStack arrow : getItems(stack)) {
+			if (!arrow.isEmpty()) {
+				disp++;
+			}
+		}
+		return disp == 0 ? 0 : (float) (Math.ceil(disp / 3f) + 0.5f);
+	}
+
 	@Override
 	public void open(ServerPlayer player, PlayerSlot slot, ItemStack stack) {
 		new ArrowBagMenuPvd(player, slot, stack).open();

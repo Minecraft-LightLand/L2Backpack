@@ -4,8 +4,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import top.theillusivec4.curios.common.inventory.CurioSlot;
 import top.theillusivec4.curios.common.inventory.container.CuriosContainer;
@@ -15,6 +18,11 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class CuriosCompat {
+
+	public static void init() {
+		if (ModList.get().isLoaded("curios"))
+			initImpl();
+	}
 
 	public static ItemStack getSlot(Player player, Predicate<ItemStack> pred) {
 		if (ModList.get().isLoaded("curios")) {
@@ -42,6 +50,10 @@ public class CuriosCompat {
 			return getSearchBagImpl(player, pred);
 		}
 		return Optional.empty();
+	}
+
+	private static void initImpl() {
+		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BACK.getMessageBuilder().build());
 	}
 
 	private static ItemStack getSlotImpl(Player player, Predicate<ItemStack> pred) {

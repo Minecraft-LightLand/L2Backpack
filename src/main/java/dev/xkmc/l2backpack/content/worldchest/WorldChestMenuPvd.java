@@ -26,7 +26,7 @@ public record WorldChestMenuPvd(ServerPlayer player, ItemStack stack, WorldChest
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
 		StorageContainer container = getContainer((ServerLevel) player.level).get();
-		return new WorldChestContainer(id, inventory, container.container, container, getDisplayName());
+		return new WorldChestContainer(id, inventory, container.container, container, getDisplayName(), null);
 	}
 
 	@ServerOnly

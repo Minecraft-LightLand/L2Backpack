@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.init;
 
+import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.events.ArrowBagEvents;
 import dev.xkmc.l2backpack.content.worldchest.WorldStorage;
 import dev.xkmc.l2backpack.events.CapabilityEvents;
@@ -91,7 +92,7 @@ public class L2Backpack {
 	}
 
 	private static void sendMessage(final InterModEnqueueEvent event) {
-		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BACK.getMessageBuilder().build());
+		CuriosCompat.init();
 	}
 
 }

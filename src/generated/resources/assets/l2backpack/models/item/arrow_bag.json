@@ -1,6 +1,26 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "l2backpack:item/arrow_bag_1",
+      "predicate": {
+        "l2backpack:arrow": 1.0
+      }
+    },
+    {
+      "model": "l2backpack:item/arrow_bag_2",
+      "predicate": {
+        "l2backpack:arrow": 2.0
+      }
+    },
+    {
+      "model": "l2backpack:item/arrow_bag_3",
+      "predicate": {
+        "l2backpack:arrow": 3.0
+      }
+    }
+  ],
   "textures": {
-    "layer0": "l2backpack:item/arrow_bag"
+    "layer0": "l2backpack:item/arrow_bag_0"
   }
 }

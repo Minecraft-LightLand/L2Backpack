@@ -92,7 +92,7 @@ public class BackpackItems {
 
 			ARMOR_BAG = REGISTRATE.item("armor_bag", ArmorBag::new).defaultLang().register();
 			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultLang().register();
-			ARROW_BAG = REGISTRATE.item("arrow_bag", ArrowBag::new)
+			ARROW_BAG = REGISTRATE.item("arrow_bag", ArrowBag::new).model(BackpackItems::createArrowBagModel)
 					.tag(curios_tag).defaultLang().register();
 		}
 	}
@@ -114,6 +114,20 @@ public class BackpackItems {
 		builder.texture("layer0", "item/ender_backpack");
 		builder.override().predicate(new ResourceLocation("open"), 1).model(
 				new ModelFile.UncheckedModelFile(L2Backpack.MODID + ":item/ender_backpack_open"));
+	}
+
+
+	public static <T extends ArrowBag> void createArrowBagModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider pvd) {
+		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "generated");
+		builder.texture("layer0", "item/" + ctx.getName() + "_0");
+		for (int i = 1; i < 4; i++) {
+			String name = ctx.getName() + "_" + i;
+			ItemModelBuilder ret = pvd.withExistingParent(name, "generated");
+			ret.texture("layer0", "item/" + name);
+			ItemModelBuilder.OverrideBuilder override = builder.override();
+			override.predicate(new ResourceLocation(L2Backpack.MODID, "arrow"), i);
+			override.model(new ModelFile.UncheckedModelFile(L2Backpack.MODID + ":item/" + name));
+		}
 	}
 
 	public static void register() {

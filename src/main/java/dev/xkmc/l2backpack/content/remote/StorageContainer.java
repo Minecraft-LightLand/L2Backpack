@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.worldchest;
+package dev.xkmc.l2backpack.content.remote;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

@@ -1,8 +1,9 @@
-package dev.xkmc.l2backpack.content.worldchest;
+package dev.xkmc.l2backpack.content.remote;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -26,6 +27,9 @@ public class WorldStorage {
 
 	@SerialClass.SerialField
 	private final HashMap<String, CompoundTag> storage = new HashMap<>();
+
+	@SerialClass.SerialField
+	private final HashMap<String, HashMap<Item, Integer>> drawer = new HashMap<>();
 
 	private final HashMap<UUID, StorageContainer[]> cache = new HashMap<>();
 

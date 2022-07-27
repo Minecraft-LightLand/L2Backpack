@@ -5,7 +5,7 @@ import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.bag.ArmorBag;
 import dev.xkmc.l2backpack.content.bag.BookBag;
-import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
+import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.ItemTags;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;

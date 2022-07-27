@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.arrowbag;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -24,7 +25,7 @@ public class ArrowBagOverlay implements IGuiOverlay {
 		if (!(player.getMainHandItem().getItem() instanceof ProjectileWeaponItem weapon)) return false;
 		ItemStack bag = ArrowBagManager.getArrowBag(player);
 		if (bag.isEmpty()) return false;
-		List<ItemStack> list = ArrowBag.getItems(bag);
+		List<ItemStack> list = BaseBagItem.getItems(bag);
 		if (list.isEmpty()) return false;
 		for (ItemStack stack : list) {
 			if (!stack.isEmpty() && weapon.getAllSupportedProjectiles().test(stack)) return true;
@@ -39,7 +40,7 @@ public class ArrowBagOverlay implements IGuiOverlay {
 		LocalPlayer player = Proxy.getClientPlayer();
 		ProjectileWeaponItem weapon = (ProjectileWeaponItem) player.getMainHandItem().getItem();
 		ItemStack bag = ArrowBagManager.getArrowBag(player);
-		List<ItemStack> list = ArrowBag.getItems(bag);
+		List<ItemStack> list = BaseBagItem.getItems(bag);
 		ItemRenderer renderer = gui.getMinecraft().getItemRenderer();
 		Font font = gui.getMinecraft().font;
 		int selected = ArrowBag.getSelected(bag);

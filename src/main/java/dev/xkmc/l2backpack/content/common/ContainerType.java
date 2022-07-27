@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
-import dev.xkmc.l2backpack.content.worldchest.WorldStorage;
+import dev.xkmc.l2backpack.content.remote.WorldStorage;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.events;
+package dev.xkmc.l2backpack.network;
 
 import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
 import dev.xkmc.l2backpack.content.arrowbag.ArrowBagManager;

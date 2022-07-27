@@ -1,8 +1,8 @@
 package dev.xkmc.l2backpack.init.registrate;
 
-import dev.xkmc.l2backpack.content.worldchest.WorldChestBlock;
-import dev.xkmc.l2backpack.content.worldchest.WorldChestBlockEntity;
-import dev.xkmc.l2backpack.content.worldchest.WorldChestRenderer;
+import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestBlock;
+import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestBlockEntity;
+import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestRenderer;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import net.minecraft.resources.ResourceLocation;

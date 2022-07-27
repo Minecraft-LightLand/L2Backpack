@@ -1,11 +1,12 @@
-package dev.xkmc.l2backpack.events;
+package dev.xkmc.l2backpack.network;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
-import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
-import dev.xkmc.l2backpack.content.worldchest.WorldChestMenuPvd;
+import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
+import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
+import dev.xkmc.l2backpack.events.MiscEventHandler;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.server.level.ServerPlayer;

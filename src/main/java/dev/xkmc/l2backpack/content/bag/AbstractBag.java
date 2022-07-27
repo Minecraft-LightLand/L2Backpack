@@ -1,18 +1,23 @@
 package dev.xkmc.l2backpack.content.bag;
 
+import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 import javax.annotation.Nullable;
@@ -30,6 +35,34 @@ public abstract class AbstractBag extends Item {
 
 	public AbstractBag(Properties props) {
 		super(props.stacksTo(1));
+	}
+
+	@Override
+	public InteractionResult useOn(UseOnContext context) {
+		Player player = context.getPlayer();
+		if (player != null && player.isShiftKeyDown()) {
+			BlockPos pos = context.getClickedPos();
+			BlockEntity target = context.getLevel().getBlockEntity(pos);
+			if (target != null) {
+				var capLazy = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+				if (capLazy.resolve().isPresent()) {
+					var cap = capLazy.resolve().get();
+					if (!context.getLevel().isClientSide()) {
+						ItemStack stack = context.getItemInHand();
+						NonNullList<ItemStack> list = NonNullList.withSize(SIZE, ItemStack.EMPTY);
+						CompoundTag tag = stack.getOrCreateTagElement("BlockEntityTag");
+						if (tag.contains("Items")) {
+							ContainerHelper.loadAllItems(tag, list);
+						}
+						ContentTransfer.transfer(list, cap);
+						ContainerHelper.saveAllItems(tag, list);
+					}
+					return InteractionResult.SUCCESS;
+				}
+				return InteractionResult.FAIL;
+			}
+		}
+		return super.useOn(context);
 	}
 
 	@Override

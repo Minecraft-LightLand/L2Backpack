@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
-import dev.xkmc.l2backpack.content.worldchest.WorldChestContainer;
+import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.events.MiscEventHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;

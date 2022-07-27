@@ -1,5 +1,7 @@
-package dev.xkmc.l2backpack.content.worldchest;
+package dev.xkmc.l2backpack.content.remote.worldchest;
 
+import dev.xkmc.l2backpack.content.remote.StorageContainer;
+import dev.xkmc.l2backpack.content.remote.WorldStorage;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

@@ -5,9 +5,11 @@ import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
-import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
+import dev.xkmc.l2backpack.content.remote.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
+import dev.xkmc.l2backpack.network.SlotClickToServer;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -20,6 +22,8 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
+
+import javax.annotation.Nullable;
 
 public class MiscEventHandler {
 
@@ -40,22 +44,66 @@ public class MiscEventHandler {
 	@SubscribeEvent
 	public static void onScreenClick(ScreenEvent.MouseButtonPressed.Pre event) {
 		Screen screen = event.getScreen();
-		if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && screen instanceof AbstractContainerScreen cont) {
-			Slot slot = cont.findSlot(event.getMouseX(), event.getMouseY());
-			boolean b0 = slot != null;
-			boolean b1 = b0 && slot.container == Proxy.getClientPlayer().getInventory();
-			boolean b2 = b0 && cont.getMenu().containerId > 0;
-			if (b1 || b2) {
-				int inv = b1 ? slot.getSlotIndex() : -1;
-				int ind = inv == -1 ? slot.index : -1;
-				int wid = cont.getMenu().containerId;
-				if ((inv >= 0 || ind >= 0) && (slot.getItem().getItem() instanceof EnderBackpackItem || slot.getItem().getItem() instanceof WorldChestItem || slot.getItem().getItem() instanceof BackpackItem || slot.getItem().getItem() instanceof ArrowBag)) {
-					L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
-					event.setCanceled(true);
-				}
+		if (screen instanceof AbstractContainerScreen cont) {
+			Slot slot = cont.getSlotUnderMouse();
+			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+				if (insertItem(event, cont, slot)) return;
+			}
+			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+				if (openBackpack(event, cont, slot)) return;
+				if (extractItem(event, cont, slot)) return;
 			}
 		}
+	}
 
+	private static boolean openBackpack(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
+		if (slot == null) {
+			return false;
+		}
+		boolean b1 = slot.container == Proxy.getClientPlayer().getInventory();
+		boolean b2 = cont.getMenu().containerId > 0;
+		if (b1 || b2) {
+			int inv = b1 ? slot.getSlotIndex() : -1;
+			int ind = inv == -1 ? slot.index : -1;
+			int wid = cont.getMenu().containerId;
+			if ((inv >= 0 || ind >= 0) && (slot.getItem().getItem() instanceof EnderBackpackItem ||
+					slot.getItem().getItem() instanceof WorldChestItem ||
+					slot.getItem().getItem() instanceof BackpackItem ||
+					slot.getItem().getItem() instanceof ArrowBag)) {
+				L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
+				event.setCanceled(true);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static boolean insertItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
+		if (slot == null) {
+			return false;
+		}
+		ItemStack drawerStack = slot.getItem();
+		ItemStack stack = cont.getMenu().getCarried();
+		if (drawerStack.getItem() instanceof BaseDrawerItem drawer && drawer.canAccept(drawerStack, stack)) {
+			//TODO
+			event.setCanceled(true);
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean extractItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
+		if (slot == null) {
+			return false;
+		}
+		ItemStack stack = cont.getMenu().getCarried();
+		ItemStack drawerStack = slot.getItem();
+		if (drawerStack.getItem() instanceof BaseDrawerItem drawer && stack.isEmpty()) {
+			//TODO
+			event.setCanceled(true);
+			return true;
+		}
+		return false;
 	}
 
 }

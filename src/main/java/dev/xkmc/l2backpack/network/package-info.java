@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2backpack.content.worldchest;
+package dev.xkmc.l2backpack.network;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

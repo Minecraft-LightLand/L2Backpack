@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.worldchest;
+package dev.xkmc.l2backpack.content.remote.worldchest;
 
 import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;

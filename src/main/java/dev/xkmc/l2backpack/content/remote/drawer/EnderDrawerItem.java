@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.remote.drawer;
 import dev.xkmc.l2backpack.content.common.BaseItemRenderer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
+import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -67,7 +68,8 @@ public class EnderDrawerItem extends BaseDrawerItem {
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		Item item = getItem(stack);
 		if (item != Items.AIR) {
-			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), "???"));
+			int count = TooltipUpdateEvents.getCount(item);
+			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count < 0 ? "???" : count));
 		}
 		list.add(LangData.IDS.DRAWER_INFO.get());
 	}

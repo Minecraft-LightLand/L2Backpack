@@ -6,7 +6,7 @@ import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
-import dev.xkmc.l2backpack.events.MiscEventHandler;
+import dev.xkmc.l2backpack.events.ClientEventHandler;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.server.level.ServerPlayer;
@@ -46,7 +46,7 @@ public class SlotClickToServer extends SerialPacketBase {
 		Container container = null;
 		PlayerSlot playerSlot;
 		if (wid == -1) {
-			stack = CuriosCompat.getSlot(player, MiscEventHandler::canOpen);
+			stack = CuriosCompat.getSlot(player, ClientEventHandler::canOpen);
 			playerSlot = PlayerSlot.ofCurio(player);
 		} else if (slot >= 0) {
 			stack = player.getInventory().getItem(slot);

@@ -26,7 +26,7 @@ import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
 
-public class MiscEventHandler {
+public class ClientEventHandler {
 
 	public static boolean canOpen(ItemStack stack) {
 		return stack.getItem() instanceof BaseBagItem || stack.getItem() instanceof EnderBackpackItem;
@@ -36,7 +36,7 @@ public class MiscEventHandler {
 	@SubscribeEvent
 	public static void keyEvent(InputEvent.Key event) {
 		if (Minecraft.getInstance().screen == null && Proxy.getClientPlayer() != null && Keys.OPEN.map.isDown()) {
-			if (!CuriosCompat.getSlot(Proxy.getClientPlayer(), MiscEventHandler::canOpen).isEmpty())
+			if (!CuriosCompat.getSlot(Proxy.getClientPlayer(), ClientEventHandler::canOpen).isEmpty())
 				L2Backpack.HANDLER.toServer(new SlotClickToServer(-1, -1, -1));
 		}
 	}
@@ -58,7 +58,6 @@ public class MiscEventHandler {
 			}
 		}
 	}
-
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent

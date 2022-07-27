@@ -4,17 +4,15 @@ import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.remote.WorldStorage;
 import dev.xkmc.l2backpack.events.ArrowBagEvents;
 import dev.xkmc.l2backpack.events.CapabilityEvents;
-import dev.xkmc.l2backpack.events.MiscEventHandler;
+import dev.xkmc.l2backpack.events.ClientEventHandler;
+import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
-import dev.xkmc.l2backpack.network.CreativeSetCarryToClient;
-import dev.xkmc.l2backpack.network.DrawerInteractToServer;
-import dev.xkmc.l2backpack.network.SetArrowToServer;
-import dev.xkmc.l2backpack.network.SlotClickToServer;
+import dev.xkmc.l2backpack.network.*;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.serial.handler.Handlers;
@@ -50,7 +48,9 @@ public class L2Backpack {
 			e -> e.create(SlotClickToServer.class, PLAY_TO_SERVER),
 			e -> e.create(SetArrowToServer.class, PLAY_TO_SERVER),
 			e -> e.create(DrawerInteractToServer.class, PLAY_TO_SERVER),
-			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT)
+			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
+			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),
+			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT)
 	);
 
 	private static void registerRegistrates(IEventBus bus) {
@@ -65,8 +65,9 @@ public class L2Backpack {
 
 	private static void registerForgeEvents() {
 		MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
-		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
+		MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(ArrowBagEvents.class);
+		MinecraftForge.EVENT_BUS.register(TooltipUpdateEvents.class);
 
 	}
 

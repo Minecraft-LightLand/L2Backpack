@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lightland:shapeless/dye_backpack_magenta"
+        "recipe": "l2backpack:shapeless/dye_backpack_magenta"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "lightland:shapeless/dye_backpack_magenta"
+      "l2backpack:shapeless/dye_backpack_magenta"
     ]
   }
 }

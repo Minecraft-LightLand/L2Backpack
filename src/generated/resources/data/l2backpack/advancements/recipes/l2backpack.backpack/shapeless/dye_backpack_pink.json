@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_backpack_blue": {
+    "has_backpack_pink": {
       "conditions": {
         "items": [
           {
             "items": [
-              "l2backpack:backpack_blue"
+              "l2backpack:backpack_pink"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lightland:shapeless/dye_backpack_blue"
+        "recipe": "l2backpack:shapeless/dye_backpack_pink"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_backpack_blue",
+      "has_backpack_pink",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lightland:shapeless/dye_backpack_blue"
+      "l2backpack:shapeless/dye_backpack_pink"
     ]
   }
 }

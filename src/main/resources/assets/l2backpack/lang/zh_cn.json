@@ -5,6 +5,7 @@
   "item.l2backpack.armor_bag": "装备袋",
   "item.l2backpack.book_bag": "附魔书袋",
   "item.l2backpack.arrow_bag": "箭袋",
+  "item.l2backpack.drawer": "抽屉",
   "item.l2backpack.backpack_black": "黑色背包",
   "item.l2backpack.backpack_blue": "蓝色背包",
   "item.l2backpack.backpack_brown": "棕色背包",
@@ -49,5 +50,7 @@
   "l2backpack.tooltip.owner": "所有者: %s",
   "l2backpack.tooltip.bag.size": "容量:%s/%s",
   "l2backpack.tooltip.bag.info": "右键收起背包中的装备，蹲下右键倒出",
-  "l2backpack.tooltip.arrow_bag": "放在副手(或饰品栏)，主手持弓，按shift+数字键或者上下选择箭"
+  "l2backpack.tooltip.arrow_bag": "放在副手(或饰品栏)，主手持弓，按shift+数字键或者上下选择箭",
+  "l2backpack.tooltip.drawer.content": "内容物：%s x%s",
+  "l2backpack.tooltip.drawer.info": "用物品左键抽屉来存入物品，右键抽屉取出物品。只能存放一种没有NBT的物品，但是能储存64组。"
 }

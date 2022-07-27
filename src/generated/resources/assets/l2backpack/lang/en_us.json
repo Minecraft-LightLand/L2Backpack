@@ -50,5 +50,7 @@
   "l2backpack.tooltip.backpack_slot": "Upgrade: %s/%s",
   "l2backpack.tooltip.bag.info": "Right click to store, shift right click to dump",
   "l2backpack.tooltip.bag.size": "Content: %s/%s",
+  "l2backpack.tooltip.drawer.content": "Content: %s x%s",
+  "l2backpack.tooltip.drawer.info": "Left click drawer with a stack to store item. Right click drawer to take item out. Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks.",
   "l2backpack.tooltip.owner": "Owner: %s"
 }

@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.drawer.DrawerItem;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -68,7 +69,9 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 		}
 
 		Item item = BaseDrawerItem.getItem(stack);
-		renderItemInside(item.getDefaultInstance(), 0.5, poseStack, type, bufferSource, light, overlay);
+		int count = stack.getItem() instanceof DrawerItem ? DrawerItem.getCount(stack) : 1;
+		ItemStack inv = new ItemStack(item, count);
+		renderItemInside(inv, 0.5, poseStack, type, bufferSource, light, overlay);
 
 		poseStack.popPose();
 	}

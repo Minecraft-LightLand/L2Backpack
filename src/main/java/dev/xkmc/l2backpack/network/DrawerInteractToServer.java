@@ -1,10 +1,12 @@
 package dev.xkmc.l2backpack.network;
 
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.network.NetworkEvent;
@@ -22,43 +24,58 @@ public class DrawerInteractToServer extends SerialPacketBase {
 	@SerialClass.SerialField
 	public int wid, slot;
 
+	@SerialClass.SerialField
+	public Item item;
+
+	@SerialClass.SerialField
+	public int count;
+
 
 	@Deprecated
 	public DrawerInteractToServer() {
 
 	}
 
-	public DrawerInteractToServer(Type type, int wid, int slot) {
+	public DrawerInteractToServer(Type type, int wid, int slot, ItemStack carried) {
 		this.type = type;
 		this.wid = wid;
 		this.slot = slot;
+		this.item = carried.getItem();
+		this.count = carried.getCount();
 	}
 
 	@Override
 	public void handle(NetworkEvent.Context context) {
-		Player player = context.getSender();
+		ServerPlayer player = context.getSender();
 		if (player == null) return;
 		AbstractContainerMenu menu = player.containerMenu;
-		ItemStack drawer = menu.containerId == 0 ? player.getInventory().getItem(slot) : menu.getSlot(slot).getItem();
+		if (menu.containerId != wid) return;
+		ItemStack drawer = wid == 0 ? player.getInventory().getItem(slot) : menu.getSlot(slot).getItem();
 		if (!(drawer.getItem() instanceof BaseDrawerItem drawerItem)) return;
-
+		ItemStack carried = menu.getCarried();
+		if (player.isCreative() && wid == 0) {
+			carried = new ItemStack(item, count);
+		}
 		if (type == Type.TAKE) {
 			ItemStack stack = drawerItem.takeItem(drawer);
-			menu.setCarried(stack);
+			if (player.isCreative() && wid == 0) {
+				carried = stack;
+			} else {
+				menu.setCarried(stack);
+			}
 		} else if (type == Type.INSERT) {
-			ItemStack carried = menu.getCarried();
 			if (BaseDrawerItem.canAccept(drawer, carried) && carried.getItem() != Items.AIR && !carried.hasTag()) {
-				drawerItem.insert(drawer, menu.getCarried());
+				drawerItem.insert(drawer, carried);
 			}
 		} else if (type == Type.SET) {
-			ItemStack carried = menu.getCarried();
 			if (drawerItem.canSetNewItem(drawer) && carried.getItem() != Items.AIR && !carried.hasTag()) {
-				BaseDrawerItem.setItem(drawer, menu.getCarried().getItem());
-				drawerItem.insert(drawer, menu.getCarried());
+				BaseDrawerItem.setItem(drawer, carried.getItem());
+				drawerItem.insert(drawer, carried);
 			}
 		}
-
-
+		if (player.isCreative() && wid == 0) {
+			L2Backpack.HANDLER.toClientPlayer(new CreativeSetCarryToClient(carried), player);
+		}
 	}
 
 }

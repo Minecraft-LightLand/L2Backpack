@@ -50,6 +50,12 @@ public class MiscEventHandler {
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
 				if (insertItem(event, cont, slot)) return;
 			}
+			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && slot != null) {
+				if (slot.getItem().getItem() instanceof BaseDrawerItem &&
+						!cont.getMenu().getCarried().isEmpty()) {
+					event.setCanceled(true);
+				}
+			}
 		}
 	}
 
@@ -60,9 +66,18 @@ public class MiscEventHandler {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.getSlotUnderMouse();
+			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+				if (insertItem(event, cont, slot)) return;
+			}
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
 				if (openBackpack(event, cont, slot)) return;
 				if (extractItem(event, cont, slot)) return;
+				if (slot != null) {
+					if (slot.getItem().getItem() instanceof BaseDrawerItem &&
+							!cont.getMenu().getCarried().isEmpty()) {
+						event.setCanceled(true);
+					}
+				}
 			}
 		}
 	}
@@ -110,6 +125,25 @@ public class MiscEventHandler {
 		return false;
 	}
 
+	private static boolean insertItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
+		if (slot == null) {
+			return false;
+		}
+		ItemStack drawerStack = slot.getItem();
+		ItemStack stack = cont.getMenu().getCarried();
+		if (drawerStack.getItem() instanceof BaseDrawerItem drawer) {
+			if (!stack.isEmpty() && drawer.canSetNewItem(drawerStack)) {
+				event.setCanceled(true);
+				return true;
+			}
+			if (BaseDrawerItem.canAccept(drawerStack, stack)) {
+				event.setCanceled(true);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private static boolean extractItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
 		if (slot == null) {
 			return false;
@@ -126,7 +160,7 @@ public class MiscEventHandler {
 
 	private static void sendDrawerPacket(DrawerInteractToServer.Type type, AbstractContainerScreen<?> cont, Slot slot) {
 		int index = cont.getMenu().containerId == 0 ? slot.getSlotIndex() : slot.index;
-		L2Backpack.HANDLER.toServer(new DrawerInteractToServer(type, cont.getMenu().containerId, index));
+		L2Backpack.HANDLER.toServer(new DrawerInteractToServer(type, cont.getMenu().containerId, index, cont.getMenu().getCarried()));
 	}
 
 }

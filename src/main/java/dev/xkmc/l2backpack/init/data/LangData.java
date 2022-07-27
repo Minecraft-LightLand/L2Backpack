@@ -15,7 +15,9 @@ public class LangData {
 		STORAGE_OWNER("tooltip.owner", 1, "Owner: %s"),
 		BAG_SIZE("tooltip.bag.size", 2, "Content: %s/%s"),
 		BAG_INFO("tooltip.bag.info", 0, "Right click to store, shift right click to dump"),
-		ARROW_INFO("tooltip.arrow_bag", 0, "Put in off hand (or Curios slot), hold bow in main hand, press shift + number of up/down to switch arrows");
+		ARROW_INFO("tooltip.arrow_bag", 0, "Put in off hand (or Curios slot), hold bow in main hand, press shift + number of up/down to switch arrows"),
+		DRAWER_CONTENT("tooltip.drawer.content", 2, "Content: %s x%s"),
+		DRAWER_INFO("tooltip.drawer.info", 0, "Left click drawer with a stack to store item. Right click drawer to take item out. Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks.");
 
 		final String id, def;
 		final int count;

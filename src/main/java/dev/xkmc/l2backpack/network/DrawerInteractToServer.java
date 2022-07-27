@@ -57,7 +57,7 @@ public class DrawerInteractToServer extends SerialPacketBase {
 			carried = new ItemStack(item, count);
 		}
 		if (type == Type.TAKE) {
-			ItemStack stack = drawerItem.takeItem(drawer);
+			ItemStack stack = drawerItem.takeItem(drawer, player);
 			if (player.isCreative() && wid == 0) {
 				carried = stack;
 			} else {
@@ -65,12 +65,12 @@ public class DrawerInteractToServer extends SerialPacketBase {
 			}
 		} else if (type == Type.INSERT) {
 			if (BaseDrawerItem.canAccept(drawer, carried) && carried.getItem() != Items.AIR && !carried.hasTag()) {
-				drawerItem.insert(drawer, carried);
+				drawerItem.insert(drawer, carried, player);
 			}
 		} else if (type == Type.SET) {
 			if (drawerItem.canSetNewItem(drawer) && carried.getItem() != Items.AIR && !carried.hasTag()) {
-				BaseDrawerItem.setItem(drawer, carried.getItem());
-				drawerItem.insert(drawer, carried);
+				drawerItem.setItem(drawer, carried.getItem(), player);
+				drawerItem.insert(drawer, carried, player);
 			}
 		}
 		if (player.isCreative() && wid == 0) {

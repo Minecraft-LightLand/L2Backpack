@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.drawer;
 
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,15 +31,15 @@ public class DrawerItem extends BaseDrawerItem {
 	}
 
 	@Override
-	public void insert(ItemStack drawer, ItemStack stack) {
+	public void insert(ItemStack drawer, ItemStack stack, Player player) {
 		int count = getCount(drawer);
-		int allow = MAX * stack.getMaxStackSize() - count;
-		setCount(drawer, count + Math.min(allow, stack.getCount()));
+		int allow = Math.min(MAX * stack.getMaxStackSize() - count, stack.getCount());
+		setCount(drawer, count + allow);
 		stack.shrink(allow);
 	}
 
 	@Override
-	public ItemStack takeItem(ItemStack drawer) {
+	public ItemStack takeItem(ItemStack drawer, Player player) {
 		Item item = getItem(drawer);
 		if (item == Items.AIR) return ItemStack.EMPTY;
 		int count = getCount(drawer);
@@ -61,4 +62,5 @@ public class DrawerItem extends BaseDrawerItem {
 		}
 		list.add(LangData.IDS.DRAWER_INFO.get());
 	}
+
 }

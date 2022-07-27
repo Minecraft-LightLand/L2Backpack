@@ -29,7 +29,7 @@ public class WorldStorage {
 	private final HashMap<String, CompoundTag> storage = new HashMap<>();
 
 	@SerialClass.SerialField
-	private final HashMap<String, HashMap<Item, Integer>> drawer = new HashMap<>();
+	final HashMap<String, HashMap<Item, Integer>> drawer = new HashMap<>();
 
 	private final HashMap<UUID, StorageContainer[]> cache = new HashMap<>();
 

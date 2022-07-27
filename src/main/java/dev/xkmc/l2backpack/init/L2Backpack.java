@@ -2,7 +2,9 @@ package dev.xkmc.l2backpack.init;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.remote.WorldStorage;
-import dev.xkmc.l2backpack.events.*;
+import dev.xkmc.l2backpack.events.ArrowBagEvents;
+import dev.xkmc.l2backpack.events.CapabilityEvents;
+import dev.xkmc.l2backpack.events.MiscEventHandler;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;

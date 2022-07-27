@@ -6,6 +6,7 @@ import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.bag.ArmorBag;
 import dev.xkmc.l2backpack.content.bag.BookBag;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
+import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.ItemTags;
@@ -65,6 +66,7 @@ public class BackpackItems {
 	public static final ItemEntry<ArrowBag> ARROW_BAG;
 
 	public static final ItemEntry<DrawerItem> DRAWER;
+	public static final ItemEntry<EnderDrawerItem> ENDER_DRAWER;
 
 
 	static {
@@ -99,6 +101,11 @@ public class BackpackItems {
 					.tag(curios_tag).defaultLang().register();
 
 			DRAWER = REGISTRATE.item("drawer", DrawerItem::new)
+					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
+							new ModelFile.UncheckedModelFile("builtin/entity")))
+					.defaultLang().register();
+
+			ENDER_DRAWER = REGISTRATE.item("ender_drawer", EnderDrawerItem::new)
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 							new ModelFile.UncheckedModelFile("builtin/entity")))
 					.defaultLang().register();

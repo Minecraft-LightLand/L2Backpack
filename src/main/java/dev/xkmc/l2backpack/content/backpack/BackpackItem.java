@@ -18,7 +18,7 @@ public class BackpackItem extends BaseBagItem {
 	public final DyeColor color;
 
 	public BackpackItem(DyeColor color, Properties props) {
-		super(props);
+		super(props.stacksTo(1).fireResistant());
 		this.color = color;
 	}
 

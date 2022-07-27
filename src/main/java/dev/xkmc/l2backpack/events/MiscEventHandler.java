@@ -5,10 +5,11 @@ import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
-import dev.xkmc.l2backpack.content.remote.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
+import dev.xkmc.l2backpack.network.DrawerInteractToServer;
 import dev.xkmc.l2backpack.network.SlotClickToServer;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
@@ -42,13 +43,23 @@ public class MiscEventHandler {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
-	public static void onScreenClick(ScreenEvent.MouseButtonPressed.Pre event) {
+	public static void onScreenLeftClick(ScreenEvent.MouseButtonReleased.Pre event) {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.getSlotUnderMouse();
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
 				if (insertItem(event, cont, slot)) return;
 			}
+		}
+	}
+
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onScreenRightClick(ScreenEvent.MouseButtonPressed.Pre event) {
+		Screen screen = event.getScreen();
+		if (screen instanceof AbstractContainerScreen cont) {
+			Slot slot = cont.getSlotUnderMouse();
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
 				if (openBackpack(event, cont, slot)) return;
 				if (extractItem(event, cont, slot)) return;
@@ -78,16 +89,23 @@ public class MiscEventHandler {
 		return false;
 	}
 
-	private static boolean insertItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
+	private static boolean insertItem(ScreenEvent.MouseButtonReleased.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
 		if (slot == null) {
 			return false;
 		}
 		ItemStack drawerStack = slot.getItem();
 		ItemStack stack = cont.getMenu().getCarried();
-		if (drawerStack.getItem() instanceof BaseDrawerItem drawer && drawer.canAccept(drawerStack, stack)) {
-			//TODO
-			event.setCanceled(true);
-			return true;
+		if (drawerStack.getItem() instanceof BaseDrawerItem drawer) {
+			if (!stack.isEmpty() && drawer.canSetNewItem(drawerStack)) {
+				sendDrawerPacket(DrawerInteractToServer.Type.SET, cont, slot);
+				event.setCanceled(true);
+				return true;
+			}
+			if (BaseDrawerItem.canAccept(drawerStack, stack)) {
+				sendDrawerPacket(DrawerInteractToServer.Type.INSERT, cont, slot);
+				event.setCanceled(true);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -99,11 +117,16 @@ public class MiscEventHandler {
 		ItemStack stack = cont.getMenu().getCarried();
 		ItemStack drawerStack = slot.getItem();
 		if (drawerStack.getItem() instanceof BaseDrawerItem drawer && stack.isEmpty()) {
-			//TODO
+			sendDrawerPacket(DrawerInteractToServer.Type.TAKE, cont, slot);
 			event.setCanceled(true);
 			return true;
 		}
 		return false;
+	}
+
+	private static void sendDrawerPacket(DrawerInteractToServer.Type type, AbstractContainerScreen<?> cont, Slot slot) {
+		int index = cont.getMenu().containerId == 0 ? slot.getSlotIndex() : slot.index;
+		L2Backpack.HANDLER.toServer(new DrawerInteractToServer(type, cont.getMenu().containerId, index));
 	}
 
 }

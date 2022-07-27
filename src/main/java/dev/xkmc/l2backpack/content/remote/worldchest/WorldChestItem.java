@@ -23,7 +23,7 @@ public class WorldChestItem extends BlockItem {
 	public final DyeColor color;
 
 	public WorldChestItem(DyeColor color, Properties props) {
-		super(BackpackBlocks.WORLD_CHEST.get(), props);
+		super(BackpackBlocks.WORLD_CHEST.get(), props.stacksTo(1).fireResistant());
 		this.color = color;
 	}
 

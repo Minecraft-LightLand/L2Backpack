@@ -31,7 +31,7 @@ public class ArrowBag extends BaseBagItem {
 	}
 
 	public ArrowBag(Properties props) {
-		super(props.stacksTo(1));
+		super(props.stacksTo(1).fireResistant());
 	}
 
 	public static float displayArrow(ItemStack stack) {

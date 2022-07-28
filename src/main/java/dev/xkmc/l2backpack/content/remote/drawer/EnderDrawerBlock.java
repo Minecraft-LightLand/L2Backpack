@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.remote.DrawerAccess;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
@@ -46,6 +47,14 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 					stack = new EnderDawerItemHandler(chest.getAccess()).insertItem(0, stack, false);
 					player.setItemInHand(hand, stack);
 				}
+				return InteractionResult.SUCCESS;
+			} else if (stack.isEmpty()) {
+				if (!level.isClientSide()) {
+					DrawerAccess access = chest.getAccess();
+					stack = new EnderDawerItemHandler(access).extractItem(0, access.item().getMaxStackSize(), false);
+					player.setItemInHand(hand, stack);
+				}
+				return InteractionResult.SUCCESS;
 			}
 			return InteractionResult.FAIL;
 		}

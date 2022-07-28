@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
+@SerialClass
 public class EnderDrawerBlockEntity extends BaseBlockEntity {
 
 	@SerialClass.SerialField

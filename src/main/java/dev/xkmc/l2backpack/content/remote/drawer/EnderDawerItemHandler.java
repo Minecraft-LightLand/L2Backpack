@@ -2,23 +2,21 @@ package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
-public record EnderDawerItemHandler(DrawerAccess access) implements IItemHandlerModifiable {
-
-	@Override
-	public void setStackInSlot(int slot, @NotNull ItemStack stack) {
-		access.setCount(stack.getCount());
-	}
+public record EnderDawerItemHandler(DrawerAccess access) implements IItemHandler {
 
 	@Override
 	public int getSlots() {
-		return 1;
+		return 2;
 	}
 
 	@Override
 	public @NotNull ItemStack getStackInSlot(int slot) {
+		if (slot == 1) {
+			return ItemStack.EMPTY;
+		}
 		return new ItemStack(access.item(), access.getCount());
 	}
 
@@ -26,7 +24,7 @@ public record EnderDawerItemHandler(DrawerAccess access) implements IItemHandler
 	public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
 		if (stack.hasTag() || stack.getItem() != access.item()) return stack;
 		int count = access.getCount();
-		int max = access.item().getMaxStackSize();
+		int max = access.item().getMaxStackSize() * EnderDrawerItem.MAX;
 		int insert = Math.min(max - count, stack.getCount());
 		if (!simulate) {
 			access.setCount(count + insert);

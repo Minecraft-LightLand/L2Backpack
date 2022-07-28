@@ -58,13 +58,14 @@ public class LangData {
 		EXTRACT_BAG("tooltip.extract.bag", "Shift + right click to throw out all stored items"),
 		EXTRACT_DRAWER("tooltip.extract.drawer", "Shift + right click to take one stack item out"),
 		DUMP("tooltip.dump", "Shift + right click chests or other storage blocks to dump all items into the block"),
+		LOAD("tooltip.load", "Shift + left click chests or other storage blocks to load items from the block"),
 		PLACE("tooltip.place", "Shift + right click to place it as a block"),
 		KEYBIND("tooltip.keybind", "When Curios is installed, this can be put on back slot of Curios, and can be opened via key bind."),
 		QUICK_INV_ACCESS("tooltip.info.quick_inv", "Right click to open. Or right click in inventory / ender chest / dimensional storage GUI to open directly."),
 		QUICK_ANY_ACCESS("tooltip.info.quick_any", "Right click to open. Or right click in any GUI to open directly."),
 		ARROW_INFO("tooltip.info.arrow_bag", "Put in off hand (or Curios slot) and hold bow in main hand to preview, choose, and shoot arrows from quiver. Press shift + number of up/down to switch arrows"),
-		DRAWER_INFO("tooltip.info.drawer", "In inventory, left click drawer with a stack to store item. Right click drawer to take item out. Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks."),
-		;
+		DRAWER_USE("tooltip.info.drawer", "In inventory, left click drawer with a stack to store item. Right click drawer to take item out. Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks."),
+		ENDER_DRAWER_USE("tooltip.info.ender_drawer","For ender drawer block, right click it with item to store, and right click it with empty hand to retrieve a stack. For bulk transport, use drawer item to interact with it.");
 
 		final String id, def;
 

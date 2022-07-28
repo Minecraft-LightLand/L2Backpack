@@ -94,7 +94,11 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.IDS.BAG_SIZE.get(getSize(stack), SIZE));
-		LangData.addInfo(list, LangData.Info.COLLECT_BAG, LangData.Info.DUMP, LangData.Info.EXTRACT_BAG);
+		LangData.addInfo(list,
+				LangData.Info.COLLECT_BAG,
+				LangData.Info.DUMP,
+				LangData.Info.LOAD,
+				LangData.Info.EXTRACT_BAG);
 	}
 
 	public boolean isBarVisible(ItemStack stack) {

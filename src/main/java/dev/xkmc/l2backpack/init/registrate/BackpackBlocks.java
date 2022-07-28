@@ -10,6 +10,7 @@ import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
@@ -43,10 +44,12 @@ public class BackpackBlocks {
 				.validBlock(WORLD_CHEST).renderer(() -> WorldChestRenderer::new).register();
 
 		ENDER_DRAWER = REGISTRATE.block("ender_drawer", p -> DelegateBlock.newBaseBlock(
-						DelegateBlockProperties.copy(Blocks.ENDER_CHEST), EnderDrawerBlock.INSTANCE, EnderDrawerBlock.TILE_ENTITY_SUPPLIER_BUILDER))
+						DelegateBlockProperties.copy(Blocks.ENDER_CHEST).make(e -> e.noOcclusion()),
+						EnderDrawerBlock.INSTANCE, EnderDrawerBlock.TILE_ENTITY_SUPPLIER_BUILDER))
 				.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().withExistingParent(ctx.getName(), "block/glass")))
 				.loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
 				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
+				.addLayer(() -> RenderType::cutout)
 				.defaultLang().register();
 
 		TE_ENDER_DRAWER = REGISTRATE.blockEntity("ender_drawer", EnderDrawerBlockEntity::new)

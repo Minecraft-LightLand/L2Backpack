@@ -125,7 +125,12 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 		if (item != Items.AIR && count > 0) {
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count));
 		}
-		LangData.addInfo(list, LangData.Info.COLLECT_DRAWER, LangData.Info.DUMP, LangData.Info.EXTRACT_DRAWER, LangData.Info.DRAWER_INFO);
+		LangData.addInfo(list,
+				LangData.Info.COLLECT_DRAWER,
+				LangData.Info.DUMP,
+				LangData.Info.LOAD,
+				LangData.Info.EXTRACT_DRAWER,
+				LangData.Info.DRAWER_USE);
 	}
 
 }

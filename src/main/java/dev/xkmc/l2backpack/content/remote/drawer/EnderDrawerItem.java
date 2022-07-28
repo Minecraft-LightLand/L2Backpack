@@ -88,7 +88,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			int count = TooltipUpdateEvents.getCount(item);
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count < 0 ? "???" : count));
 		}
-		LangData.addInfo(list, LangData.Info.DRAWER_INFO, LangData.Info.PLACE);
+		LangData.addInfo(list, LangData.Info.DRAWER_USE, LangData.Info.PLACE, LangData.Info.ENDER_DRAWER_USE);
 	}
 
 	public String getDescriptionId() {

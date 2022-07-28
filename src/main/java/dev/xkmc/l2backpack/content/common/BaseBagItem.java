@@ -102,6 +102,13 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 			setItems(stack, list);
 			ContentTransfer.onDump(player, moved);
 		}
+
+		if (!client && shift && !right && target != null) {
+			var list = getItems(stack);
+			int moved = ContentTransfer.loadFrom(list, target, player, e -> e.getItem().canFitInsideContainerItems());
+			setItems(stack, list);
+			ContentTransfer.onLoad(player, moved);
+		}
 	}
 
 	public abstract void open(ServerPlayer player, PlayerSlot slot, ItemStack stack);

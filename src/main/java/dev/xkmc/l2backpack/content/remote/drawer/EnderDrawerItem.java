@@ -1,12 +1,16 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.common.BaseItemRenderer;
+import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
@@ -37,9 +41,35 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 	void refresh(ItemStack drawer, Player player) {
 		if (!drawer.getOrCreateTag().contains(KEY_OWNER_ID)) {
 			drawer.getOrCreateTag().putUUID(KEY_OWNER_ID, player.getUUID());
-			drawer.getOrCreateTag().putString(KEY_OWNER_NAME, player.getName().toString());
+			drawer.getOrCreateTag().putString(KEY_OWNER_NAME, player.getName().getString());
 		}
 	}
+
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (BaseDrawerItem.getItem(stack) == Items.AIR)
+			return InteractionResultHolder.fail(stack);
+		if (world.isClientSide())
+			return InteractionResultHolder.success(stack);
+		else refresh(stack, player);
+		if (!player.isShiftKeyDown()) {
+			ItemStack take = takeItem(stack, player);
+			int c = take.getCount();
+			player.getInventory().placeItemBackInInventory(take);
+			ContentTransfer.onExtract(player, c);
+		} else {
+			DrawerAccess access = DrawerAccess.of(world, stack);
+			int count = access.getCount();
+			int max = MAX * access.item().getMaxStackSize();
+			int ext = BaseDrawerItem.loadFromInventory(max, count, access.item(), player);
+			count += ext;
+			access.setCount(count);
+			ContentTransfer.onCollect(player, ext);
+		}
+		return InteractionResultHolder.success(stack);
+	}
+
 
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
@@ -49,12 +79,18 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			return InteractionResult.FAIL;
 		if (BaseDrawerItem.getItem(context.getItemInHand()) == Items.AIR)
 			return InteractionResult.FAIL;
-		return super.useOn(context);
+		if (context.getPlayer() != null && !context.getPlayer().isShiftKeyDown()) {
+			return InteractionResult.PASS;
+		}
+		InteractionResult result = super.useOn(context);
+		if (result == InteractionResult.FAIL) return InteractionResult.PASS;
+		return result;
 	}
 
 	@Override
 	public void insert(ItemStack drawer, ItemStack stack, Player player) {
-		DrawerAccess access = DrawerAccess.of(player, BaseDrawerItem.getItem(drawer));
+		refresh(drawer, player);
+		DrawerAccess access = DrawerAccess.of(player.getLevel(), drawer);
 		int count = access.getCount();
 		int take = Math.min(MAX * stack.getMaxStackSize() - count, stack.getCount());
 		access.setCount(access.getCount() + take);
@@ -63,7 +99,8 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 
 	@Override
 	public ItemStack takeItem(ItemStack drawer, Player player) {
-		DrawerAccess access = DrawerAccess.of(player, BaseDrawerItem.getItem(drawer));
+		refresh(drawer, player);
+		DrawerAccess access = DrawerAccess.of(player.getLevel(), drawer);
 		Item item = BaseDrawerItem.getItem(drawer);
 		int take = Math.min(access.getCount(), item.getMaxStackSize());
 		access.setCount(access.getCount() - take);
@@ -77,18 +114,30 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 
 	@Override
 	public void setItem(ItemStack drawer, Item item, Player player) {
-		BaseDrawerItem.super.setItem(drawer, item, player);
 		refresh(drawer, player);
+		BaseDrawerItem.super.setItem(drawer, item, player);
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		Item item = BaseDrawerItem.getItem(stack);
 		if (item != Items.AIR) {
-			int count = TooltipUpdateEvents.getCount(item);
+			int count = TooltipUpdateEvents.getCount(stack.getOrCreateTag().getUUID(KEY_OWNER_ID), item);
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count < 0 ? "???" : count));
 		}
-		LangData.addInfo(list, LangData.Info.DRAWER_USE, LangData.Info.PLACE, LangData.Info.ENDER_DRAWER_USE);
+		CompoundTag tag = stack.getTag();
+		if (tag != null) {
+			if (tag.contains(KEY_OWNER_NAME)) {
+				String name = tag.getString(KEY_OWNER_NAME);
+				list.add(LangData.IDS.STORAGE_OWNER.get(name));
+			}
+		}
+		LangData.addInfo(list,
+				LangData.Info.EXTRACT_DRAWER,
+				LangData.Info.PLACE,
+				LangData.Info.COLLECT_DRAWER,
+				LangData.Info.DRAWER_USE,
+				LangData.Info.ENDER_DRAWER_USE);
 	}
 
 	public String getDescriptionId() {

@@ -2,10 +2,7 @@ package dev.xkmc.l2backpack.init;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.remote.WorldStorage;
-import dev.xkmc.l2backpack.events.ArrowBagEvents;
-import dev.xkmc.l2backpack.events.CapabilityEvents;
-import dev.xkmc.l2backpack.events.ClientEventHandler;
-import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
+import dev.xkmc.l2backpack.events.*;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
@@ -68,6 +65,7 @@ public class L2Backpack {
 		MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(ArrowBagEvents.class);
 		MinecraftForge.EVENT_BUS.register(TooltipUpdateEvents.class);
+		MinecraftForge.EVENT_BUS.register(LoadContainerEvents.class);
 
 	}
 

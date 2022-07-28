@@ -16,6 +16,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 		ItemStack stack = player.getItemInHand(hand);
 		if (world.isClientSide())
 			return InteractionResultHolder.success(stack);
-		if (player.isShiftKeyDown()) {
+		if (!player.isShiftKeyDown()) {
 			Item item = BaseDrawerItem.getItem(stack);
 			int count = getCount(stack);
 			int max = Math.min(item.getMaxStackSize(), count);
@@ -60,18 +61,17 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 			Item item = BaseDrawerItem.getItem(stack);
 			int count = getCount(stack);
 			int max = item.getMaxStackSize() * MAX;
-			if (item != Items.AIR) {
-				int ext = 0;
-				for (int i = 0; i < 36; i++) {
-					ItemStack inv_stack = player.getInventory().items.get(i);
-					if (inv_stack.getItem() == item && !inv_stack.hasTag()) {
-						int take = Math.min(max - count, inv_stack.getCount());
-						count += take;
-						ext += take;
-						inv_stack.shrink(take);
-						if (count == max) break;
-					}
+			boolean perform = !canSetNewItem(stack);
+			if (!perform) {
+				item = ContentTransfer.filterMaxItem(new InvWrapper(player.getInventory()));
+				if (item != Items.AIR) {
+					perform = true;
+					setItem(stack, item, player);
 				}
+			}
+			if (perform) {
+				int ext = BaseDrawerItem.loadFromInventory(max, count, item, player);
+				count += ext;
 				setCount(stack, count);
 				ContentTransfer.onCollect(player, ext);
 			}
@@ -93,6 +93,24 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 			ContentTransfer.onDump(player, count - remain);
 			setCount(stack, remain);
 		}
+		if (!client && shift && !right && target != null) {
+			Item item = BaseDrawerItem.getItem(stack);
+			boolean perform = canSetNewItem(stack);
+			if (!perform) {
+				item = ContentTransfer.filterMaxItem(target);
+				if (item != Items.AIR) {
+					setItem(stack, item, player);
+					perform = true;
+				}
+			}
+			if (perform) {
+				int count = getCount(stack);
+				int max = MAX * item.getMaxStackSize();
+				int remain = ContentTransfer.loadFrom(item, max - count, target);
+				ContentTransfer.onLoad(player, count + remain);
+				setCount(stack, remain);
+			}
+		}
 	}
 
 	@Override
@@ -105,8 +123,8 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 
 	@Override
 	public ItemStack takeItem(ItemStack drawer, Player player) {
+		if (canSetNewItem(drawer)) return ItemStack.EMPTY;
 		Item item = BaseDrawerItem.getItem(drawer);
-		if (item == Items.AIR) return ItemStack.EMPTY;
 		int count = getCount(drawer);
 		int take = Math.min(count, item.getMaxStackSize());
 		setCount(drawer, count - take);
@@ -122,14 +140,14 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		Item item = BaseDrawerItem.getItem(stack);
 		int count = getCount(stack);
-		if (item != Items.AIR && count > 0) {
+		if (!canSetNewItem(stack)) {
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count));
 		}
 		LangData.addInfo(list,
-				LangData.Info.COLLECT_DRAWER,
 				LangData.Info.DUMP,
 				LangData.Info.LOAD,
 				LangData.Info.EXTRACT_DRAWER,
+				LangData.Info.COLLECT_DRAWER,
 				LangData.Info.DRAWER_USE);
 	}
 

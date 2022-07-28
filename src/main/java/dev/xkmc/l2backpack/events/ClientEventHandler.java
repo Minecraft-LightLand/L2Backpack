@@ -104,7 +104,7 @@ public class ClientEventHandler {
 	}
 
 	private static boolean insertItem(ScreenEvent.MouseButtonReleased.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
-		if (slot == null) {
+		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
 		}
 		ItemStack drawerStack = slot.getItem();
@@ -125,7 +125,7 @@ public class ClientEventHandler {
 	}
 
 	private static boolean insertItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
-		if (slot == null) {
+		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
 		}
 		ItemStack drawerStack = slot.getItem();
@@ -144,7 +144,7 @@ public class ClientEventHandler {
 	}
 
 	private static boolean extractItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
-		if (slot == null) {
+		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
 		}
 		ItemStack stack = cont.getMenu().getCarried();

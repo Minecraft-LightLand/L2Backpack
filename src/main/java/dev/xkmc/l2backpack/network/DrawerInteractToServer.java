@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.network.NetworkEvent;
 
 @SerialClass
@@ -50,6 +49,7 @@ public class DrawerInteractToServer extends SerialPacketBase {
 		if (player == null) return;
 		AbstractContainerMenu menu = player.containerMenu;
 		if (menu.containerId != wid) return;
+		if (wid != 0 && !menu.getSlot(slot).allowModification(player)) return;
 		ItemStack drawer = wid == 0 ? player.getInventory().getItem(slot) : menu.getSlot(slot).getItem();
 		if (!(drawer.getItem() instanceof BaseDrawerItem drawerItem)) return;
 		ItemStack carried = menu.getCarried();
@@ -64,11 +64,11 @@ public class DrawerInteractToServer extends SerialPacketBase {
 				menu.setCarried(stack);
 			}
 		} else if (type == Type.INSERT) {
-			if (BaseDrawerItem.canAccept(drawer, carried) && carried.getItem() != Items.AIR && !carried.hasTag()) {
+			if (BaseDrawerItem.canAccept(drawer, carried) && !carried.isEmpty() && !carried.hasTag()) {
 				drawerItem.insert(drawer, carried, player);
 			}
 		} else if (type == Type.SET) {
-			if (drawerItem.canSetNewItem(drawer) && carried.getItem() != Items.AIR && !carried.hasTag()) {
+			if (drawerItem.canSetNewItem(drawer) && !carried.isEmpty() && !carried.hasTag()) {
 				drawerItem.setItem(drawer, carried.getItem(), player);
 				drawerItem.insert(drawer, carried, player);
 			}

@@ -105,7 +105,7 @@ public class BackpackItems {
 							new ModelFile.UncheckedModelFile("builtin/entity")))
 					.defaultLang().register();
 
-			ENDER_DRAWER = REGISTRATE.item("ender_drawer", EnderDrawerItem::new)
+			ENDER_DRAWER = REGISTRATE.item("ender_drawer", p -> new EnderDrawerItem(BackpackBlocks.ENDER_DRAWER.get(), p))
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 							new ModelFile.UncheckedModelFile("builtin/entity")))
 					.defaultLang().register();

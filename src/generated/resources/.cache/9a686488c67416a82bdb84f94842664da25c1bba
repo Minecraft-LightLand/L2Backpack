@@ -1,7 +1,9 @@
-// 1.19	2022-07-28T12:11:51.792584	Registrate Provider for l2backpack [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19	2022-07-28T13:38:20.547871	Registrate Provider for l2backpack [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 1071a8a7b546d656adb3f663eef368723e8f9f14 assets/l2backpack/blockstates/dimensional_storage.json
-4411a9f93d44b9f14fa863644a21689f8bbfe055 assets/l2backpack/lang/en_ud.json
-aabbacc48aba6ca14458eb891f149a4db61c3faa assets/l2backpack/lang/en_us.json
+a2951a8afb3e176d881abca30710cd67f7bb73a0 assets/l2backpack/blockstates/ender_drawer.json
+7c35f3df6266d875161f2f48acc2daa53beebf75 assets/l2backpack/lang/en_ud.json
+767df8e802dbe46f0846aff60a15b7c1b5ff08fd assets/l2backpack/lang/en_us.json
+e6b1a73e2228a3216085e31392b29703b4c7cda9 assets/l2backpack/models/block/ender_drawer.json
 39301caee32e24a47d44c9b729ba435bcd96055f assets/l2backpack/models/item/armor_bag.json
 6bf64f7d39b00f12dd54f4ac18150c59f0e0723f assets/l2backpack/models/item/arrow_bag.json
 048ffd2116e80de2b9d9ce48313c70a25d4bb290 assets/l2backpack/models/item/arrow_bag_1.json
@@ -116,6 +118,7 @@ cfe39c8e1332a67cf422c31f8070bc2db13e78af data/l2backpack/advancements/recipes/l2
 c31ed35d73fe4f43fc034746b863e230f4e4fd19 data/l2backpack/advancements/recipes/l2backpack.backpack/smithing/upgrade_backpack_white.json
 5ef788886e3316ef761b220f865a1ff9b9b68cec data/l2backpack/advancements/recipes/l2backpack.backpack/smithing/upgrade_backpack_yellow.json
 34d4163aed01fc354b4ae7f07e5f8afba51cefc5 data/l2backpack/loot_tables/blocks/dimensional_storage.json
+34d4163aed01fc354b4ae7f07e5f8afba51cefc5 data/l2backpack/loot_tables/blocks/ender_drawer.json
 d7a9b74a964885e3c5a245a3eb448d865ec59dd0 data/l2backpack/recipes/armor_bag.json
 e369969a74d9218aa0fbf62da9f56a9f41951cb9 data/l2backpack/recipes/arrow_bag.json
 6af33cdf1d113370eacfaa8c11098eda9d320ebb data/l2backpack/recipes/book_bag.json
@@ -187,5 +190,5 @@ f77ee449b1102f729601a6fcc82aa38f8d11c5a2 data/l2backpack/recipes/smithing/upgrad
 d6bbf12f5d253b84db800a45d3ab1f2f90936f2d data/l2backpack/recipes/smithing/upgrade_backpack_yellow.json
 d073f52e56888ad66ca6d37fb92fa6f83d45ba87 data/l2backpack/tags/items/backpacks.json
 18b21298f3a3681bb8a5d5b00cf70da4830d66eb data/l2backpack/tags/items/dimensional_storages.json
-2abd774925161fbade02d959f3298e9133efd092 data/minecraft/tags/blocks/mineable/pickaxe.json
-2abd774925161fbade02d959f3298e9133efd092 data/minecraft/tags/blocks/needs_diamond_tool.json
+5df7448d10cb15bab9a7e5140d40a4e4aaf3ea86 data/minecraft/tags/blocks/mineable/pickaxe.json
+5df7448d10cb15bab9a7e5140d40a4e4aaf3ea86 data/minecraft/tags/blocks/needs_diamond_tool.json

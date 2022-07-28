@@ -1,7 +1,9 @@
 package dev.xkmc.l2backpack.events;
 
+import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.network.RequestTooltipUpdateEvent;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
@@ -53,7 +55,7 @@ public class TooltipUpdateEvents {
 
 	private static void startSession(ItemStack stack) {
 		if (step == Step.NONE) {
-			focus = EnderDrawerItem.getItem(stack);
+			focus = BaseDrawerItem.getItem(stack);
 			step = Step.SENT;
 			L2Backpack.HANDLER.toServer(new RequestTooltipUpdateEvent(focus, Proxy.getClientPlayer().getUUID()));
 		} else if (step == Step.COOLDOWN) {

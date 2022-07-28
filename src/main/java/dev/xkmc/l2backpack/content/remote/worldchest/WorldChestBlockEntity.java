@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -81,8 +82,11 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 	@NotNull
 	@Override
 	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-		if (level != null && !level.isClientSide() && !this.remove &&
+		if (level != null && !this.remove &&
 				cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+			if (level.isClientSide()) {
+				return LazyOptional.of(() -> new InvWrapper(new SimpleContainer(27))).cast();
+			}
 			if (handler == null) {
 				Optional<StorageContainer> storage = WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password);
 				handler = storage.isEmpty() ? LazyOptional.empty() : LazyOptional.of(() -> new InvWrapper(storage.get().container));

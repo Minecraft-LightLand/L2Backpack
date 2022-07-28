@@ -25,6 +25,7 @@ public class BackpackItem extends BaseBagItem {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, stack.getOrCreateTag().getInt("rows")), 6));
+		LangData.addInfo(list, LangData.Info.DUMP, LangData.Info.QUICK_INV_ACCESS, LangData.Info.KEYBIND);
 	}
 
 	@Override

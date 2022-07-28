@@ -38,7 +38,7 @@ public class TooltipUpdateEvents {
 		NONE, SENT, COOLDOWN
 	}
 
-	private static final int MAX_COOLDOWN = 20;
+	private static final int MAX_COOLDOWN = 5;
 
 	private static Step step = Step.NONE;
 	private static Item focus = null;
@@ -53,7 +53,7 @@ public class TooltipUpdateEvents {
 
 	private static void startSession(ItemStack stack) {
 		if (step == Step.NONE) {
-			focus = stack.getItem();
+			focus = EnderDrawerItem.getItem(stack);
 			step = Step.SENT;
 			L2Backpack.HANDLER.toServer(new RequestTooltipUpdateEvent(focus, Proxy.getClientPlayer().getUUID()));
 		} else if (step == Step.COOLDOWN) {

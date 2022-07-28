@@ -5,7 +5,6 @@ import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -20,15 +19,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseBagItem extends Item {
+public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 
 	public static ListTag getListTag(ItemStack stack) {
 		if (stack.getOrCreateTag().contains("Items")) {
@@ -92,25 +91,17 @@ public abstract class BaseBagItem extends Item {
 
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
-		Player player = context.getPlayer();
-		if (player != null && player.isShiftKeyDown()) {
-			BlockPos pos = context.getClickedPos();
-			BlockEntity target = context.getLevel().getBlockEntity(pos);
-			if (target != null) {
-				var capLazy = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
-				if (capLazy.resolve().isPresent()) {
-					var cap = capLazy.resolve().get();
-					if (!context.getLevel().isClientSide()) {
-						var list = getItems(context.getItemInHand());
-						ContentTransfer.transfer(list, cap);
-						setItems(context.getItemInHand(), list);
-					}
-					return InteractionResult.SUCCESS;
-				}
-			}
-			return InteractionResult.FAIL;
+		return ContentTransfer.blockInteract(context, this);
+	}
+
+	@Override
+	public void click(Player player, ItemStack stack, boolean client, boolean shift, boolean right, @Nullable IItemHandler target) {
+		if (!client && shift && right && target != null) {
+			var list = getItems(stack);
+			int moved = ContentTransfer.transfer(list, target);
+			setItems(stack, list);
+			ContentTransfer.onDump(player, moved);
 		}
-		return super.useOn(context);
 	}
 
 	public abstract void open(ServerPlayer player, PlayerSlot slot, ItemStack stack);

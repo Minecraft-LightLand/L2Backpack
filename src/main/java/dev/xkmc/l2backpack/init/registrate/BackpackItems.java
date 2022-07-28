@@ -98,7 +98,7 @@ public class BackpackItems {
 			ARMOR_BAG = REGISTRATE.item("armor_bag", ArmorBag::new).defaultLang().register();
 			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultLang().register();
 			ARROW_BAG = REGISTRATE.item("arrow_bag", ArrowBag::new).model(BackpackItems::createArrowBagModel)
-					.tag(curios_tag).defaultLang().register();
+					.tag(curios_tag).lang("Quiver").register();
 
 			DRAWER = REGISTRATE.item("drawer", DrawerItem::new)
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(

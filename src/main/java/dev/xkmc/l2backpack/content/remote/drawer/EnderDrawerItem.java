@@ -71,6 +71,6 @@ public class EnderDrawerItem extends BaseDrawerItem {
 			int count = TooltipUpdateEvents.getCount(item);
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count < 0 ? "???" : count));
 		}
-		list.add(LangData.IDS.DRAWER_INFO.get());
+		LangData.addInfo(list, LangData.Info.DRAWER_INFO, LangData.Info.PLACE);
 	}
 }

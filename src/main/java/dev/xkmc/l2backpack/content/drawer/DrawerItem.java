@@ -1,19 +1,25 @@
 package dev.xkmc.l2backpack.content.drawer;
 
+import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 
-public class DrawerItem extends BaseDrawerItem {
+public class DrawerItem extends BaseDrawerItem implements ContentTransfer.Quad {
 
 	private static final String COUNT = "drawerCount";
 	private static final int MAX = 64;
@@ -28,6 +34,57 @@ public class DrawerItem extends BaseDrawerItem {
 
 	public DrawerItem(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (world.isClientSide())
+			return InteractionResultHolder.success(stack);
+		if (player.isShiftKeyDown()) {
+			Item item = getItem(stack);
+			int count = getCount(stack);
+			int max = Math.min(item.getMaxStackSize(), count);
+			player.getInventory().placeItemBackInInventory(new ItemStack(item, max));
+			setCount(stack, count - max);
+			ContentTransfer.onExtract(player, max);
+		} else {
+			Item item = getItem(stack);
+			int count = getCount(stack);
+			int max = item.getMaxStackSize() * MAX;
+			if (item != Items.AIR) {
+				int ext = 0;
+				for (int i = 0; i < 36; i++) {
+					ItemStack inv_stack = player.getInventory().items.get(i);
+					if (inv_stack.getItem() == item && !inv_stack.hasTag()) {
+						int take = Math.min(max - count, inv_stack.getCount());
+						count += take;
+						ext += take;
+						inv_stack.shrink(take);
+						if (count == max) break;
+					}
+				}
+				setCount(stack, count);
+				ContentTransfer.onCollect(player, ext);
+			}
+		}
+		return InteractionResultHolder.success(stack);
+	}
+
+	@Override
+	public InteractionResult useOn(UseOnContext context) {
+		return ContentTransfer.blockInteract(context, this);
+	}
+
+	@Override
+	public void click(Player player, ItemStack stack, boolean client, boolean shift, boolean right, @Nullable IItemHandler target) {
+		if (!client && shift && right && target != null) {
+			Item item = getItem(stack);
+			int count = getCount(stack);
+			int remain = ContentTransfer.transfer(item, count, target);
+			ContentTransfer.onDump(player, count - remain);
+			setCount(stack, remain);
+		}
 	}
 
 	@Override
@@ -60,7 +117,7 @@ public class DrawerItem extends BaseDrawerItem {
 		if (item != Items.AIR && count > 0) {
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count));
 		}
-		list.add(LangData.IDS.DRAWER_INFO.get());
+		LangData.addInfo(list, LangData.Info.COLLECT_DRAWER, LangData.Info.DUMP, LangData.Info.EXTRACT_DRAWER, LangData.Info.DRAWER_INFO);
 	}
 
 }

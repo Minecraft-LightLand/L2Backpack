@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.arrowbag;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.init.data.LangData;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -51,6 +52,6 @@ public class ArrowBag extends BaseBagItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.IDS.ARROW_INFO.get());
+		LangData.addInfo(list, LangData.Info.DUMP, LangData.Info.QUICK_INV_ACCESS, LangData.Info.ARROW_INFO, LangData.Info.KEYBIND);
 	}
 }

@@ -3,7 +3,6 @@ package dev.xkmc.l2backpack.content.bag;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -17,8 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -29,7 +28,7 @@ import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public abstract class AbstractBag extends Item {
+public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 
 	public static final int SIZE = 64;
 
@@ -39,30 +38,23 @@ public abstract class AbstractBag extends Item {
 
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
-		Player player = context.getPlayer();
-		if (player != null && player.isShiftKeyDown()) {
-			BlockPos pos = context.getClickedPos();
-			BlockEntity target = context.getLevel().getBlockEntity(pos);
-			if (target != null) {
-				var capLazy = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
-				if (capLazy.resolve().isPresent()) {
-					var cap = capLazy.resolve().get();
-					if (!context.getLevel().isClientSide()) {
-						ItemStack stack = context.getItemInHand();
-						NonNullList<ItemStack> list = NonNullList.withSize(SIZE, ItemStack.EMPTY);
-						CompoundTag tag = stack.getOrCreateTagElement("BlockEntityTag");
-						if (tag.contains("Items")) {
-							ContainerHelper.loadAllItems(tag, list);
-						}
-						ContentTransfer.transfer(list, cap);
-						ContainerHelper.saveAllItems(tag, list);
-					}
-					return InteractionResult.SUCCESS;
-				}
-				return InteractionResult.FAIL;
-			}
+		return ContentTransfer.blockInteract(context, this);
+	}
+
+	@Override
+	public void click(Player player, ItemStack stack, boolean client, boolean shift, boolean right, @org.jetbrains.annotations.Nullable IItemHandler target) {
+		if (!client && shift && right && target != null) {
+			NonNullList<ItemStack> list = NonNullList.withSize(SIZE, ItemStack.EMPTY);
+			CompoundTag tag = stack.getOrCreateTagElement("BlockEntityTag");
+			if (tag.contains("Items")) ContainerHelper.loadAllItems(tag, list);
+			int pre = 0;
+			for (ItemStack inv : list) pre += inv.getCount();
+			ContentTransfer.transfer(list, target);
+			int post = 0;
+			for (ItemStack inv : list) post += inv.getCount();
+			ContainerHelper.saveAllItems(tag, list);
+			ContentTransfer.onDump(player, pre - post);
 		}
-		return super.useOn(context);
 	}
 
 	@Override
@@ -91,7 +83,8 @@ public abstract class AbstractBag extends Item {
 							}
 						}
 					});
-			add(list, queue);
+			int moved = add(list, queue);
+			ContentTransfer.onCollect(player, moved);
 		}
 		ContainerHelper.saveAllItems(tag, list);
 		return InteractionResultHolder.success(stack);
@@ -101,7 +94,7 @@ public abstract class AbstractBag extends Item {
 
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.IDS.BAG_SIZE.get(getSize(stack), SIZE));
-		list.add(LangData.IDS.BAG_INFO.get());
+		LangData.addInfo(list, LangData.Info.COLLECT_BAG, LangData.Info.DUMP, LangData.Info.EXTRACT_BAG);
 	}
 
 	public boolean isBarVisible(ItemStack stack) {
@@ -137,23 +130,29 @@ public abstract class AbstractBag extends Item {
 	}
 
 	private void throwOut(NonNullList<ItemStack> list, Player player) {
+		int count = 0;
 		for (ItemStack stack : list) {
 			if (!stack.isEmpty()) {
+				count += stack.getCount();
 				player.getInventory().placeItemBackInInventory(stack.copy());
 			}
 		}
+		ContentTransfer.onExtract(player, count);
 		list.clear();
 	}
 
-	private static void add(NonNullList<ItemStack> list, Queue<Holder<ItemStack>> toAdd) {
+	private static int add(NonNullList<ItemStack> list, Queue<Holder<ItemStack>> toAdd) {
+		int count = 0;
 		for (int i = 0; i < SIZE; i++) {
 			if (list.get(i).isEmpty()) {
-				if (toAdd.isEmpty()) return;
+				if (toAdd.isEmpty()) return count;
 				Holder<ItemStack> item = toAdd.poll();
 				list.set(i, item.getter.get().copy());
 				item.remove.run();
+				count++;
 			}
 		}
+		return count;
 	}
 
 	private record Holder<T>(Supplier<T> getter, Runnable remove) {

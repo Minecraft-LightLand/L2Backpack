@@ -73,11 +73,13 @@ public class WorldChestItem extends BlockItem {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		CompoundTag tag = stack.getTag();
-		if (tag == null) return;
-		if (tag.contains("owner_name")) {
-			String name = tag.getString("owner_name");
-			list.add(LangData.IDS.STORAGE_OWNER.get(name));
+		if (tag != null) {
+			if (tag.contains("owner_name")) {
+				String name = tag.getString("owner_name");
+				list.add(LangData.IDS.STORAGE_OWNER.get(name));
+			}
 		}
+		LangData.addInfo(list, LangData.Info.QUICK_ANY_ACCESS, LangData.Info.PLACE, LangData.Info.KEYBIND);
 	}
 
 	public String getDescriptionId() {

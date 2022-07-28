@@ -24,7 +24,7 @@ public interface BaseDrawerItem {
 				.orElse(Items.AIR);
 	}
 
-	static int loadFromInventory(int max, int count, Item item, Player player){
+	static int loadFromInventory(int max, int count, Item item, Player player) {
 		int ext = 0;
 		for (int i = 0; i < 36; i++) {
 			ItemStack inv_stack = player.getInventory().items.get(i);

@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.network;
 
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
+import dev.xkmc.l2backpack.content.remote.WorldStorage;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
@@ -31,8 +32,8 @@ public class RequestTooltipUpdateEvent extends SerialPacketBase {
 	@Override
 	public void handle(NetworkEvent.Context context) {
 		if (context.getSender() == null) return;
-		int count = DrawerAccess.of(context.getSender(), item).getCount();
-		L2Backpack.HANDLER.toClientPlayer(new RespondTooltipUpdateEvent(item, count), context.getSender());
+		int count = new DrawerAccess(WorldStorage.get(context.getSender().getLevel()), id, item).getCount();
+		L2Backpack.HANDLER.toClientPlayer(new RespondTooltipUpdateEvent(item, id, count), context.getSender());
 	}
 
 

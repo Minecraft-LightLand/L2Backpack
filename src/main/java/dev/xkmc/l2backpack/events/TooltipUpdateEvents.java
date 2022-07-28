@@ -11,8 +11,11 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.UUID;
 
 public class TooltipUpdateEvents {
 
@@ -31,6 +34,7 @@ public class TooltipUpdateEvents {
 		if (slot == null) return false;
 		ItemStack stack = slot.getItem();
 		if (!(stack.getItem() instanceof EnderDrawerItem)) return false;
+		if (BaseDrawerItem.getItem(stack) == Items.AIR) return false;
 		startSession(stack);
 		return true;
 	}
@@ -42,6 +46,7 @@ public class TooltipUpdateEvents {
 	private static final int MAX_COOLDOWN = 5;
 
 	private static Step step = Step.NONE;
+	private static UUID id = null;
 	private static Item focus = null;
 	private static int count = 0;
 	private static int cooldown = 0;
@@ -50,11 +55,13 @@ public class TooltipUpdateEvents {
 		step = Step.NONE;
 		focus = null;
 		count = 0;
+		id = null;
 	}
 
 	private static void startSession(ItemStack stack) {
 		if (step == Step.NONE) {
 			focus = BaseDrawerItem.getItem(stack);
+			id = stack.getOrCreateTag().getUUID(EnderDrawerItem.KEY_OWNER_ID);
 			step = Step.SENT;
 			L2Backpack.HANDLER.toServer(new RequestTooltipUpdateEvent(focus, Proxy.getClientPlayer().getUUID()));
 		} else if (step == Step.COOLDOWN) {
@@ -68,16 +75,17 @@ public class TooltipUpdateEvents {
 		}
 	}
 
-	public static void updateInfo(Item item, int val) {
+	public static void updateInfo(Item item, UUID uuid, int val) {
 		if (focus != item) return;
 		if (step != Step.SENT) return;
 		count = val;
+		id = uuid;
 		step = Step.COOLDOWN;
 		cooldown = MAX_COOLDOWN;
 	}
 
-	public static int getCount(Item item) {
-		if (item == focus) {
+	public static int getCount(UUID uuid, Item item) {
+		if (id != null && focus != null && id.equals(uuid) && item == focus) {
 			return count;
 		}
 		return -1;

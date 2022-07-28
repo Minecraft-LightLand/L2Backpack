@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.content.arrowbag.ArrowBagOverlay;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.render.RenderEvents;
 import dev.xkmc.l2backpack.init.data.Keys;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
@@ -14,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -29,6 +31,7 @@ public class L2BackpackClient {
 		bus.addListener(L2BackpackClient::registerOverlay);
 		bus.addListener(L2BackpackClient::registerKeys);
 		bus.addListener(L2BackpackClient::registerChestTextures);
+		RenderEvents.register(bus);
 	}
 
 	@SubscribeEvent
@@ -62,6 +65,5 @@ public class L2BackpackClient {
 			}
 		}
 	}
-
 
 }

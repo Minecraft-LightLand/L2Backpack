@@ -81,6 +81,7 @@ public class ClientEventHandler {
 		}
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static boolean openBackpack(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
 		if (slot == null) {
 			return false;
@@ -103,6 +104,7 @@ public class ClientEventHandler {
 		return false;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static boolean insertItem(ScreenEvent.MouseButtonReleased.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
 		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
@@ -124,6 +126,7 @@ public class ClientEventHandler {
 		return false;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static boolean insertItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
 		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
@@ -143,6 +146,7 @@ public class ClientEventHandler {
 		return false;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static boolean extractItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
 		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
@@ -157,6 +161,7 @@ public class ClientEventHandler {
 		return false;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static void sendDrawerPacket(DrawerInteractToServer.Type type, AbstractContainerScreen<?> cont, Slot slot) {
 		int index = cont.getMenu().containerId == 0 ? slot.getSlotIndex() : slot.index;
 		L2Backpack.HANDLER.toServer(new DrawerInteractToServer(type, cont.getMenu().containerId, index, cont.getMenu().getCarried()));

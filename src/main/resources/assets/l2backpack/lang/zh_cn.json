@@ -67,6 +67,7 @@
   "l2backpack.tooltip.shift": "按[shift]显示使用方法",
   "l2backpack.tooltip.keybind": "如果有Curios，可以放到背部饰品栏，然后绑定按键快捷打开",
   "l2backpack.chat.feedback.dump": "已将%s物品放入目标方块",
+  "l2backpack.chat.feedback.load": "已从目标方块取出%s物品",
   "l2backpack.chat.feedback.extract": "已取出%s物品",
   "l2backpack.chat.feedback.collect": "已收集%s物品"
 }

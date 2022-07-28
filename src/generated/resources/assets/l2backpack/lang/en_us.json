@@ -51,6 +51,7 @@
   "l2backpack.chat.feedback.collect": "Collected %s items",
   "l2backpack.chat.feedback.dump": "Dumped %s items into target block",
   "l2backpack.chat.feedback.extract": "Extracted %s items",
+  "l2backpack.chat.feedback.load": "Loaded %s items from target block",
   "l2backpack.tooltip.backpack_slot": "Upgrade: %s/%s",
   "l2backpack.tooltip.bag.size": "Content: %s/%s",
   "l2backpack.tooltip.collect.bag": "Right click to store matching items on inventory, other than hotbar",

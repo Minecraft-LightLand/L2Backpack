@@ -32,6 +32,7 @@
 	},
 	"chat.feedback": {
 	  "dump": "已将%s物品放入目标方块",
+	  "load": "已从目标方块取出%s物品",
 	  "extract": "已取出%s物品",
 	  "collect": "已收集%s物品"
 	}

@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -66,6 +68,12 @@ public class ContentTransfer {
 	public static void onDump(Player player, int count) {
 		if (player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.sendSystemMessage(LangData.IDS.DUMP_FEEDBACK.get(count), ChatType.GAME_INFO);
+		}
+	}
+
+	public static void onLoad(Player player, int count) {
+		if (player instanceof ServerPlayer serverPlayer) {
+			serverPlayer.sendSystemMessage(LangData.IDS.LOAD_FEEDBACK.get(count), ChatType.GAME_INFO);
 		}
 	}
 

@@ -31,6 +31,7 @@ public class LangData {
 		BAG_SIZE("tooltip.bag.size", 2, "Content: %s/%s"),
 		DRAWER_CONTENT("tooltip.drawer.content", 2, "Content: %s x%s"),
 		DUMP_FEEDBACK("chat.feedback.dump", 1, "Dumped %s items into target block"),
+		LOAD_FEEDBACK("chat.feedback.load", 1, "Loaded %s items from target block"),
 		EXTRACT_FEEDBACK("chat.feedback.extract", 1, "Extracted %s items"),
 		COLLECT_FEEDBACK("chat.feedback.collect", 1, "Collected %s items");
 

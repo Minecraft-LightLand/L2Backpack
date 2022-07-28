@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dimensional_storage_red": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2backpack:dimensional_storage_red"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "l2backpack:shaped/craft_storage_red"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_dimensional_storage_red",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "l2backpack:shaped/craft_storage_red"
+    ]
+  }
+}

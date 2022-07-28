@@ -1,18 +1,18 @@
 package dev.xkmc.l2backpack.init;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
+import dev.xkmc.l2backpack.content.remote.WorldStorage;
 import dev.xkmc.l2backpack.events.ArrowBagEvents;
-import dev.xkmc.l2backpack.content.worldchest.WorldStorage;
 import dev.xkmc.l2backpack.events.CapabilityEvents;
-import dev.xkmc.l2backpack.events.MiscEventHandler;
-import dev.xkmc.l2backpack.events.SetArrowToServer;
-import dev.xkmc.l2backpack.events.SlotClickToServer;
+import dev.xkmc.l2backpack.events.ClientEventHandler;
+import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
+import dev.xkmc.l2backpack.network.*;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.serial.handler.Handlers;
@@ -26,15 +26,13 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import top.theillusivec4.curios.api.SlotTypeMessage;
-import top.theillusivec4.curios.api.SlotTypePreset;
 
+import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
 import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -48,7 +46,11 @@ public class L2Backpack {
 	public static final PacketHandler HANDLER = new PacketHandler(
 			new ResourceLocation(MODID, "main"), 1,
 			e -> e.create(SlotClickToServer.class, PLAY_TO_SERVER),
-			e -> e.create(SetArrowToServer.class, PLAY_TO_SERVER)
+			e -> e.create(SetArrowToServer.class, PLAY_TO_SERVER),
+			e -> e.create(DrawerInteractToServer.class, PLAY_TO_SERVER),
+			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
+			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),
+			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT)
 	);
 
 	private static void registerRegistrates(IEventBus bus) {
@@ -63,8 +65,9 @@ public class L2Backpack {
 
 	private static void registerForgeEvents() {
 		MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
-		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
+		MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(ArrowBagEvents.class);
+		MinecraftForge.EVENT_BUS.register(TooltipUpdateEvents.class);
 
 	}
 

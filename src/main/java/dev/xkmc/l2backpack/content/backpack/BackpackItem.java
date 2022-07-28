@@ -18,13 +18,18 @@ public class BackpackItem extends BaseBagItem {
 	public final DyeColor color;
 
 	public BackpackItem(DyeColor color, Properties props) {
-		super(props);
+		super(props.stacksTo(1).fireResistant());
 		this.color = color;
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, stack.getOrCreateTag().getInt("rows")), 6));
+		LangData.addInfo(list,
+				LangData.Info.DUMP,
+				LangData.Info.LOAD,
+				LangData.Info.QUICK_INV_ACCESS,
+				LangData.Info.KEYBIND);
 	}
 
 	@Override

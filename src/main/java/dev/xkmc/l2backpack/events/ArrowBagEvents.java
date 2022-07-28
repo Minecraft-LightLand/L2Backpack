@@ -5,8 +5,10 @@ import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
 import dev.xkmc.l2backpack.content.arrowbag.ArrowBagManager;
 import dev.xkmc.l2backpack.content.arrowbag.ArrowBagOverlay;
+import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
+import dev.xkmc.l2backpack.network.SetArrowToServer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,7 +32,7 @@ public class ArrowBagEvents {
 		if (!(event.getProjectileWeaponItemStack().getItem() instanceof ProjectileWeaponItem weapon)) return;
 		ItemStack bag = ArrowBagManager.getArrowBag(player);
 		if (bag.isEmpty()) return;
-		List<ItemStack> arrows = ArrowBag.getItems(bag);
+		List<ItemStack> arrows = BaseBagItem.getItems(bag);
 		var pred = weapon.getAllSupportedProjectiles();
 		int selected = ArrowBag.getSelected(bag);
 		ItemStack stack = arrows.get(selected);
@@ -59,9 +61,9 @@ public class ArrowBagEvents {
 	}
 
 	private static void shrinkStack(ItemStack offhand, int index, int count) {
-		List<ItemStack> list = ArrowBag.getItems(offhand);
+		List<ItemStack> list = BaseBagItem.getItems(offhand);
 		list.get(index).shrink(count);
-		ArrowBag.setItems(offhand, list);
+		BaseBagItem.setItems(offhand, list);
 	}
 
 	public static void shrink(ItemStack stack, int count) {

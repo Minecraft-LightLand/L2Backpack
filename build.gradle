@@ -135,6 +135,10 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 
+    runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:3872152')
+    runtimeOnly fg.deobf('curse.maven:badpackets-615134:3773642')
+    runtimeOnly fg.deobf('curse.maven:storage-drawers-223852:3884263')
+
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

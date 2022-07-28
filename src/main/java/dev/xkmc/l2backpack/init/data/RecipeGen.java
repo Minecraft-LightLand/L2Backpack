@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.init.data;
 
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
 import dev.xkmc.l2library.base.recipe.CustomShapelessBuilder;
@@ -32,15 +33,15 @@ public class RecipeGen {
 						.group("backpack_craft").pattern("ADA").pattern("BCB").pattern("ADA")
 						.define('A', Tags.Items.LEATHER).define('B', wool)
 						.define('C', Items.CHEST).define('D', Items.IRON_INGOT)
-						.save(pvd, "lightland:shaped/craft_backpack_" + color.getName());
+						.save(pvd, L2Backpack.MODID + ":shaped/craft_backpack_" + color.getName());
 
 				unlock(pvd, new CustomShapelessBuilder<>(BackpackRecipe.RSC_BAG_DYE, backpack, 1)::unlockedBy, backpack)
 						.group("backpack_dye").requires(Ingredient.of(ItemTags.BACKPACKS.tag))
-						.requires(Ingredient.of(dye)).save(pvd, "lightland:shapeless/dye_backpack_" + color.getName());
+						.requires(Ingredient.of(dye)).save(pvd, L2Backpack.MODID + ":shapeless/dye_backpack_" + color.getName());
 
 				unlock(pvd, new UpgradeRecipeBuilder(BackpackRecipe.RSC_BAG_UPGRADE.get(), Ingredient.of(backpack),
 						Ingredient.of(BackpackItems.ENDER_POCKET.get()), backpack)::unlocks, backpack)
-						.save(pvd, "lightland:smithing/upgrade_backpack_" + color.getName());
+						.save(pvd, L2Backpack.MODID + ":smithing/upgrade_backpack_" + color.getName());
 
 				Item storage = BackpackItems.DIMENSIONAL_STORAGE[i].get();
 
@@ -48,7 +49,7 @@ public class RecipeGen {
 						.group("dimensional_storage_craft").pattern("DAD").pattern("ACA").pattern("BAB")
 						.define('A', BackpackItems.ENDER_POCKET.get()).define('B', wool)
 						.define('C', Items.ENDER_CHEST).define('D', Items.POPPED_CHORUS_FRUIT)
-						.save(pvd, "lightland:shaped/craft_storage_" + color.getName());
+						.save(pvd, L2Backpack.MODID + ":shaped/craft_storage_" + color.getName());
 			}
 			Item ender = BackpackItems.ENDER_BACKPACK.get();
 			unlock(pvd, new ShapedRecipeBuilder(ender, 1)::unlockedBy, ender)

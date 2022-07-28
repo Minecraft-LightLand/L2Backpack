@@ -5,7 +5,9 @@ import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.bag.ArmorBag;
 import dev.xkmc.l2backpack.content.bag.BookBag;
-import dev.xkmc.l2backpack.content.worldchest.WorldChestItem;
+import dev.xkmc.l2backpack.content.drawer.DrawerItem;
+import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
+import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.ItemTags;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
@@ -63,6 +65,9 @@ public class BackpackItems {
 	public static final ItemEntry<BookBag> BOOK_BAG;
 	public static final ItemEntry<ArrowBag> ARROW_BAG;
 
+	public static final ItemEntry<DrawerItem> DRAWER;
+	public static final ItemEntry<EnderDrawerItem> ENDER_DRAWER;
+
 
 	static {
 		ITagManager<Item> manager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
@@ -72,7 +77,7 @@ public class BackpackItems {
 			BACKPACKS = new ItemEntry[16];
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
-				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
+				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p))
 						.tag(ItemTags.BACKPACKS.tag, curios_tag).model(BackpackItems::createBackpackModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
 						.defaultLang().register();
@@ -80,7 +85,7 @@ public class BackpackItems {
 			DIMENSIONAL_STORAGE = new ItemEntry[16];
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
-				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p.stacksTo(1)))
+				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p))
 						.tag(ItemTags.DIMENSIONAL_STORAGES.tag, curios_tag).model(BackpackItems::createWorldChestModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMaterialColor().col)
 						.defaultLang().register();
@@ -93,7 +98,17 @@ public class BackpackItems {
 			ARMOR_BAG = REGISTRATE.item("armor_bag", ArmorBag::new).defaultLang().register();
 			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultLang().register();
 			ARROW_BAG = REGISTRATE.item("arrow_bag", ArrowBag::new).model(BackpackItems::createArrowBagModel)
-					.tag(curios_tag).defaultLang().register();
+					.tag(curios_tag).lang("Quiver").register();
+
+			DRAWER = REGISTRATE.item("drawer", DrawerItem::new)
+					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
+							new ModelFile.UncheckedModelFile("builtin/entity")))
+					.defaultLang().register();
+
+			ENDER_DRAWER = REGISTRATE.item("ender_drawer", p -> new EnderDrawerItem(BackpackBlocks.ENDER_DRAWER.get(), p))
+					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
+							new ModelFile.UncheckedModelFile("builtin/entity")))
+					.defaultLang().register();
 		}
 	}
 

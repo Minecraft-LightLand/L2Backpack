@@ -9,7 +9,9 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -17,7 +19,10 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class ContentTransfer {
 
@@ -48,6 +53,72 @@ public class ContentTransfer {
 		return 0;
 	}
 
+	public static int loadFrom(List<ItemStack> list, IItemHandler cap, Player player, Predicate<ItemStack> pred) {
+		SimpleContainer cont = new SimpleContainer(list.toArray(new ItemStack[0]));
+		IItemHandler handler = new InvWrapper(cont);
+		int n = cap.getSlots();
+		int count = 0;
+		for (int i = 0; i < n; i++) {
+			while (true) {
+				ItemStack stack = cap.getStackInSlot(i);
+				if (stack.isEmpty()) break; // slot empty
+				if (!pred.test(stack)) break; // invalid
+				if (!stack.isStackable()) {
+					boolean hasSpace = false;
+					for (int j = 0; j < list.size(); i++) {
+						if (cont.getItem(i).isEmpty()) {
+							hasSpace = true;
+							break;
+						}
+					}
+					if (!hasSpace) break;
+					ItemStack removal = cap.extractItem(i, 1, false);
+					ItemStack error = ItemHandlerHelper.insertItemStacked(handler, removal, false);
+					if (!error.isEmpty()) {
+						player.drop(error, true);
+					} else count++;
+					break;
+				} else {
+					int maxAttempt = Math.min(stack.getCount(), stack.getMaxStackSize());
+					ItemStack removalSim = cap.extractItem(i, maxAttempt, true);
+					ItemStack remain = ItemHandlerHelper.insertItemStacked(handler, removalSim, true);
+					if (removalSim.getCount() == remain.getCount()) break; // no room to insert
+					ItemStack removalReal = cap.extractItem(i, removalSim.getCount() - remain.getCount(), false);
+					ItemStack error = ItemHandlerHelper.insertItemStacked(handler, removalReal, false);
+					count += removalReal.getCount() - error.getCount();
+					if (!error.isEmpty()) {
+						player.drop(error, true);
+					}
+					if (!error.isEmpty() || removalReal.getCount() != maxAttempt) break; // error
+				}
+			}
+		}
+		for (int i = 0; i < list.size(); i++) {
+			list.set(i, cont.getItem(i));
+		}
+		return count;
+	}
+
+	public static int loadFrom(Item item, int space, IItemHandler cap) {
+		int n = cap.getSlots();
+		int count = 0;
+		for (int i = 0; i < n; i++) {
+			if (space <= 0) return count; // no room
+			while (true) {
+				ItemStack stack = cap.getStackInSlot(i);
+				if (stack.isEmpty()) break; // slot empty
+				if (stack.hasTag() || stack.getItem() != item) break; // invalid
+				int allow = Math.min(space, Math.min(stack.getMaxStackSize(), stack.getCount()));
+				ItemStack removal = cap.extractItem(i, allow, false);
+				int toRemove = removal.getCount();
+				space -= toRemove;
+				count += toRemove;
+				if (space <= 0) return count; // no room
+			}
+		}
+		return count;
+	}
+
 	public static InteractionResult blockInteract(UseOnContext context, Quad item) {
 		Player player = context.getPlayer();
 		if (player != null) {
@@ -63,6 +134,19 @@ public class ContentTransfer {
 			}
 		}
 		return InteractionResult.PASS;
+	}
+
+	public static void leftClick(Quad load, Level level, BlockPos pos, ItemStack stack, @Nullable Player player) {
+		if (player != null) {
+			BlockEntity target = level.getBlockEntity(pos);
+			if (target != null) {
+				var capLazy = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+				if (capLazy.resolve().isPresent()) {
+					var cap = capLazy.resolve().get();
+					load.click(player, stack, level.isClientSide(), player.isShiftKeyDown(), false, cap);
+				}
+			}
+		}
 	}
 
 	public static void onDump(Player player, int count) {
@@ -87,6 +171,24 @@ public class ContentTransfer {
 		if (player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.sendSystemMessage(LangData.IDS.COLLECT_FEEDBACK.get(count), ChatType.GAME_INFO);
 		}
+	}
+
+	public static Item filterMaxItem(IItemHandler target) {
+		Map<Item, Integer> map = new HashMap<>();
+		for (int i = 0; i < target.getSlots(); i++) {
+			ItemStack stack = target.getStackInSlot(i);
+			if (stack.hasTag()) continue;
+			map.compute(stack.getItem(), (k, v) -> (v == null ? 0 : v) + stack.getCount());
+		}
+		Item max = Items.AIR;
+		int count = 0;
+		for (Map.Entry<Item, Integer> ent : map.entrySet()) {
+			if (ent.getValue() > count) {
+				max = ent.getKey();
+				count = ent.getValue();
+			}
+		}
+		return max;
 	}
 
 	public interface Quad {

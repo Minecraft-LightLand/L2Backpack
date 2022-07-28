@@ -55,6 +55,14 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 			ContainerHelper.saveAllItems(tag, list);
 			ContentTransfer.onDump(player, pre - post);
 		}
+		if (!client && shift && !right && target != null) {
+			NonNullList<ItemStack> list = NonNullList.withSize(SIZE, ItemStack.EMPTY);
+			CompoundTag tag = stack.getOrCreateTagElement("BlockEntityTag");
+			if (tag.contains("Items")) ContainerHelper.loadAllItems(tag, list);
+			int count = ContentTransfer.loadFrom(list, target, player, e -> matches(stack, e));
+			ContainerHelper.saveAllItems(tag, list);
+			ContentTransfer.onLoad(player, count);
+		}
 	}
 
 	@Override

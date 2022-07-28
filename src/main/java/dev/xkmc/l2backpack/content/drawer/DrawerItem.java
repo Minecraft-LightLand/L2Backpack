@@ -50,7 +50,7 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 		ItemStack stack = player.getItemInHand(hand);
 		if (world.isClientSide())
 			return InteractionResultHolder.success(stack);
-		if (player.isShiftKeyDown()) {
+		if (!player.isShiftKeyDown()) {
 			Item item = BaseDrawerItem.getItem(stack);
 			int count = getCount(stack);
 			int max = Math.min(item.getMaxStackSize(), count);
@@ -70,17 +70,8 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 				}
 			}
 			if (perform) {
-				int ext = 0;
-				for (int i = 0; i < 36; i++) {
-					ItemStack inv_stack = player.getInventory().items.get(i);
-					if (inv_stack.getItem() == item && !inv_stack.hasTag()) {
-						int take = Math.min(max - count, inv_stack.getCount());
-						count += take;
-						ext += take;
-						inv_stack.shrink(take);
-						if (count == max) break;
-					}
-				}
+				int ext = BaseDrawerItem.loadFromInventory(max, count, item, player);
+				count += ext;
 				setCount(stack, count);
 				ContentTransfer.onCollect(player, ext);
 			}
@@ -153,10 +144,10 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count));
 		}
 		LangData.addInfo(list,
-				LangData.Info.COLLECT_DRAWER,
 				LangData.Info.DUMP,
 				LangData.Info.LOAD,
 				LangData.Info.EXTRACT_DRAWER,
+				LangData.Info.COLLECT_DRAWER,
 				LangData.Info.DRAWER_USE);
 	}
 

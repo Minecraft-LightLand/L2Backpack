@@ -1,12 +1,15 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.common.BaseItemRenderer;
+import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
@@ -42,6 +45,32 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 	}
 
 	@Override
+	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (BaseDrawerItem.getItem(stack) == Items.AIR)
+			return InteractionResultHolder.fail(stack);
+		if (world.isClientSide())
+			return InteractionResultHolder.success(stack);
+		else refresh(stack, player);
+		if (!player.isShiftKeyDown()) {
+			ItemStack take = takeItem(stack, player);
+			int c = take.getCount();
+			player.getInventory().placeItemBackInInventory(take);
+			ContentTransfer.onExtract(player, c);
+		} else {
+			DrawerAccess access = DrawerAccess.of(player, BaseDrawerItem.getItem(stack));
+			int count = access.getCount();
+			int max = MAX * access.item().getMaxStackSize();
+			int ext = BaseDrawerItem.loadFromInventory(max, count, access.item(), player);
+			count += ext;
+			access.setCount(count);
+			ContentTransfer.onCollect(player, ext);
+		}
+		return InteractionResultHolder.success(stack);
+	}
+
+
+	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		if (!context.getLevel().isClientSide() && context.getPlayer() != null)
 			refresh(context.getItemInHand(), context.getPlayer());
@@ -49,7 +78,12 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			return InteractionResult.FAIL;
 		if (BaseDrawerItem.getItem(context.getItemInHand()) == Items.AIR)
 			return InteractionResult.FAIL;
-		return super.useOn(context);
+		if (context.getPlayer() != null && !context.getPlayer().isShiftKeyDown()) {
+			return InteractionResult.PASS;
+		}
+		InteractionResult result = super.useOn(context);
+		if (result == InteractionResult.FAIL) return InteractionResult.PASS;
+		return result;
 	}
 
 	@Override
@@ -88,7 +122,12 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			int count = TooltipUpdateEvents.getCount(item);
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count < 0 ? "???" : count));
 		}
-		LangData.addInfo(list, LangData.Info.DRAWER_USE, LangData.Info.PLACE, LangData.Info.ENDER_DRAWER_USE);
+		LangData.addInfo(list,
+				LangData.Info.EXTRACT_DRAWER,
+				LangData.Info.PLACE,
+				LangData.Info.COLLECT_DRAWER,
+				LangData.Info.DRAWER_USE,
+				LangData.Info.ENDER_DRAWER_USE);
 	}
 
 	public String getDescriptionId() {

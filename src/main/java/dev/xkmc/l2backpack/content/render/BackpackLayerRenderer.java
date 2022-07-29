@@ -19,13 +19,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-public class BackpackLayerRenderer<T extends LivingEntity> extends RenderLayer<T, HumanoidModel<T>> {
+public class BackpackLayerRenderer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
 
 	private static final ModelLayerLocation MLL = new ModelLayerLocation(new ResourceLocation(L2Backpack.MODID, "backpack"), "main");
 
 	private final BackpackModel<T> model;
 
-	public BackpackLayerRenderer(RenderLayerParent<T, HumanoidModel<T>> parent, EntityModelSet set) {
+	public BackpackLayerRenderer(RenderLayerParent<T, M> parent, EntityModelSet set) {
 		super(parent);
 		model = new BackpackModel<>(set.bakeLayer(MLL));
 	}

@@ -11,6 +11,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
@@ -58,5 +60,9 @@ public class EnderBackpackItem extends Item {
 		LangData.addInfo(list, LangData.Info.QUICK_ANY_ACCESS, LangData.Info.KEYBIND);
 	}
 
+	@Override
+	public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
+		return armorType == EquipmentSlot.CHEST;
+	}
 
 }

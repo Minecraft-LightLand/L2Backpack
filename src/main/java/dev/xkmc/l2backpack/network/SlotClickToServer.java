@@ -12,6 +12,7 @@ import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
@@ -46,8 +47,12 @@ public class SlotClickToServer extends SerialPacketBase {
 		Container container = null;
 		PlayerSlot playerSlot;
 		if (wid == -1) {
-			stack = CuriosCompat.getSlot(player, ClientEventHandler::canOpen);
-			playerSlot = PlayerSlot.ofCurio(player);
+			stack = player.getItemBySlot(EquipmentSlot.CHEST);
+			playerSlot = PlayerSlot.ofInventory(36 + EquipmentSlot.CHEST.getIndex());
+			if (!ClientEventHandler.canOpen(stack)) {
+				stack = CuriosCompat.getSlot(player, ClientEventHandler::canOpen);
+				playerSlot = PlayerSlot.ofCurio(player);
+			}
 		} else if (slot >= 0) {
 			stack = player.getInventory().getItem(slot);
 			playerSlot = PlayerSlot.ofInventory(slot);

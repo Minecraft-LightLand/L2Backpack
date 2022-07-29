@@ -15,6 +15,7 @@ import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -29,14 +30,17 @@ import javax.annotation.Nullable;
 public class ClientEventHandler {
 
 	public static boolean canOpen(ItemStack stack) {
-		return stack.getItem() instanceof BaseBagItem || stack.getItem() instanceof EnderBackpackItem;
+		return stack.getItem() instanceof BaseBagItem ||
+				stack.getItem() instanceof EnderBackpackItem ||
+				stack.getItem() instanceof WorldChestItem;
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void keyEvent(InputEvent.Key event) {
 		if (Minecraft.getInstance().screen == null && Proxy.getClientPlayer() != null && Keys.OPEN.map.isDown()) {
-			if (!CuriosCompat.getSlot(Proxy.getClientPlayer(), ClientEventHandler::canOpen).isEmpty())
+			if (canOpen(Proxy.getClientPlayer().getItemBySlot(EquipmentSlot.CHEST)) ||
+					!CuriosCompat.getSlot(Proxy.getClientPlayer(), ClientEventHandler::canOpen).isEmpty())
 				L2Backpack.HANDLER.toServer(new SlotClickToServer(-1, -1, -1));
 		}
 	}

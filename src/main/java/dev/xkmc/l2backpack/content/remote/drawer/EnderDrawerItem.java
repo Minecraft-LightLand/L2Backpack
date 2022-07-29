@@ -50,8 +50,10 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		ItemStack stack = player.getItemInHand(hand);
 		if (BaseDrawerItem.getItem(stack) == Items.AIR)
 			return InteractionResultHolder.fail(stack);
-		if (world.isClientSide())
+		if (world.isClientSide()) {
+			ContentTransfer.playDrawerSound(player);
 			return InteractionResultHolder.success(stack);
+		}
 		else refresh(stack, player);
 		if (!player.isShiftKeyDown()) {
 			ItemStack take = takeItem(stack, player);

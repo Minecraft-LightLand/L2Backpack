@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
+import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
@@ -46,6 +47,8 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 				if (!level.isClientSide()) {
 					stack = new EnderDawerItemHandler(chest.getAccess()).insertItem(0, stack, false);
 					player.setItemInHand(hand, stack);
+				} else {
+					ContentTransfer.playDrawerSound(player);
 				}
 				return InteractionResult.SUCCESS;
 			} else if (stack.isEmpty()) {
@@ -53,6 +56,8 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 					DrawerAccess access = chest.getAccess();
 					stack = new EnderDawerItemHandler(access).extractItem(0, access.item().getMaxStackSize(), false);
 					player.setItemInHand(hand, stack);
+				} else {
+					ContentTransfer.playDrawerSound(player);
 				}
 				return InteractionResult.SUCCESS;
 			}

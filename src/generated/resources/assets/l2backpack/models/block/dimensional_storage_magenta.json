@@ -1,0 +1,6 @@
+{
+  "parent": "l2backpack:block/backpack",
+  "textures": {
+    "0": "l2backpack:backpack/magenta"
+  }
+}

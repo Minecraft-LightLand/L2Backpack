@@ -1,5 +1,9 @@
 {
+  "parent": "block/block",
   "credit": "Made with Blockbench",
+  "textures": {
+	"particle": "#0"
+  },
   "texture_size": [
 	64,
 	64

@@ -35,32 +35,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @SerialClass
-public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvider, NameSetable, LidBlockEntity {
-
-	private class Counter extends ContainerOpenersCounter {
-		protected void onOpen(Level level, BlockPos pos, BlockState state) {
-			level.playSound(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.ENDER_CHEST_OPEN, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
-		}
-
-		protected void onClose(Level level, BlockPos pos, BlockState state) {
-			level.playSound(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.ENDER_CHEST_CLOSE, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
-		}
-
-		protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int i, int j) {
-			level.blockEvent(WorldChestBlockEntity.this.worldPosition, state.getBlock(), 1, j);
-		}
-
-		protected boolean isOwnContainer(Player player) {
-			if (player.containerMenu instanceof WorldChestContainer cont) {
-				return cont.isActiveChest(WorldChestBlockEntity.this);
-			} else {
-				return false;
-			}
-		}
-	}
-
-	private final ChestLidController chestLidController = new ChestLidController();
-	private final ContainerOpenersCounter openersCounter = new Counter();
+public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvider, NameSetable {
 
 	@SerialClass.SerialField
 	public UUID owner_id;
@@ -127,46 +102,6 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 	@Override
 	public void setCustomName(Component component) {
 		name = component;
-	}
-
-	// ender chest tile entity
-
-	public static void lidAnimateTick(Level level, BlockPos pos, BlockState state, WorldChestBlockEntity entity) {
-		entity.chestLidController.tickLid();
-	}
-
-	public boolean triggerEvent(int i, int j) {
-		if (i == 1) {
-			this.chestLidController.shouldBeOpen(j > 0);
-			return true;
-		} else {
-			return super.triggerEvent(i, j);
-		}
-	}
-
-	public void startOpen(Player player) {
-		if (!this.remove && !player.isSpectator()) {
-			assert level != null;
-			this.openersCounter.incrementOpeners(player, level, this.getBlockPos(), this.getBlockState());
-		}
-	}
-
-	public void stopOpen(Player player) {
-		if (!this.remove && !player.isSpectator()) {
-			assert level != null;
-			this.openersCounter.decrementOpeners(player, level, this.getBlockPos(), this.getBlockState());
-		}
-	}
-
-	public void recheckOpen() {
-		if (!this.remove) {
-			assert level != null;
-			this.openersCounter.recheckOpeners(level, this.getBlockPos(), this.getBlockState());
-		}
-	}
-
-	public float getOpenNess(float p_59281_) {
-		return this.chestLidController.getOpenness(p_59281_);
 	}
 
 	public boolean stillValid(Player player) {

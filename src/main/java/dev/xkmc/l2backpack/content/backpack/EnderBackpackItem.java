@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.backpack;
 
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
+import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2library.util.Proxy;
@@ -54,7 +55,7 @@ public class EnderBackpackItem extends Item implements BackpackModelItem {
 		if (!level.isClientSide()) {
 			player.openMenu(new SimpleMenuProvider((id, inv, pl) -> ChestMenu.threeRows(id, inv, player.getEnderChestInventory()), stack.getDisplayName()));
 		} else {
-			player.playSound(SoundEvents.ENDER_CHEST_OPEN, 1, 1);
+			ContentTransfer.playSound(player);
 		}
 		return InteractionResultHolder.success(stack);
 	}

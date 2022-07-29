@@ -33,8 +33,6 @@ public class WorldChestContainer extends BaseOpenableContainer<WorldChestContain
 		this.storage = storage;
 		this.title = title;
 		this.activeChest = entity;
-		if (activeChest != null)
-			this.activeChest.startOpen(player);
 	}
 
 	public int getColor() {
@@ -54,17 +52,6 @@ public class WorldChestContainer extends BaseOpenableContainer<WorldChestContain
 
 	public boolean isOpenedByOwner() {
 		return player.getUUID().equals(storage.id);
-	}
-
-	public boolean isActiveChest(WorldChestBlockEntity entity) {
-		return this.activeChest == entity;
-	}
-
-	@Override
-	public void removed(Player player) {
-		if (this.activeChest != null) {
-			this.activeChest.stopOpen(player);
-		}
 	}
 
 }

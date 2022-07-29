@@ -9,7 +9,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -86,7 +85,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 			int slot = hand == InteractionHand.MAIN_HAND ? player.getInventory().selected : 40;
 			open((ServerPlayer) player, PlayerSlot.ofInventory(slot), stack);
 		} else {
-			player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1, 1);
+			ContentTransfer.playSound(player);
 		}
 		return InteractionResultHolder.success(stack);
 	}
@@ -103,14 +102,16 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 			int moved = ContentTransfer.transfer(list, target);
 			setItems(stack, list);
 			ContentTransfer.onDump(player, moved);
-		}
+		} else if (client && shift && right && target != null)
+			ContentTransfer.playSound(player);
 
 		if (!client && shift && !right && target != null) {
 			var list = getItems(stack);
 			int moved = ContentTransfer.loadFrom(list, target, player, e -> e.getItem().canFitInsideContainerItems());
 			setItems(stack, list);
 			ContentTransfer.onLoad(player, moved);
-		}
+		} else if (client && shift && !right && target != null)
+			ContentTransfer.playSound(player);
 	}
 
 	public abstract void open(ServerPlayer player, PlayerSlot slot, ItemStack stack);

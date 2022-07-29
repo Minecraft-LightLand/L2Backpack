@@ -54,7 +54,8 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 			for (ItemStack inv : list) post += inv.getCount();
 			ContainerHelper.saveAllItems(tag, list);
 			ContentTransfer.onDump(player, pre - post);
-		}
+		} else if (client && shift && right && target != null)
+			ContentTransfer.playSound(player);
 		if (!client && shift && !right && target != null) {
 			NonNullList<ItemStack> list = NonNullList.withSize(SIZE, ItemStack.EMPTY);
 			CompoundTag tag = stack.getOrCreateTagElement("BlockEntityTag");
@@ -62,14 +63,17 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 			int count = ContentTransfer.loadFrom(list, target, player, e -> matches(stack, e));
 			ContainerHelper.saveAllItems(tag, list);
 			ContentTransfer.onLoad(player, count);
-		}
+		} else if (client && shift && !right && target != null)
+			ContentTransfer.playSound(player);
 	}
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (world.isClientSide())
+		if (world.isClientSide()) {
+			ContentTransfer.playSound(player);
 			return InteractionResultHolder.success(stack);
+		}
 		NonNullList<ItemStack> list = NonNullList.withSize(SIZE, ItemStack.EMPTY);
 		CompoundTag tag = stack.getOrCreateTagElement("BlockEntityTag");
 		if (tag.contains("Items")) {

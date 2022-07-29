@@ -48,8 +48,10 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (world.isClientSide())
+		if (world.isClientSide()) {
+			ContentTransfer.playDrawerSound(player);
 			return InteractionResultHolder.success(stack);
+		}
 		if (!player.isShiftKeyDown()) {
 			Item item = BaseDrawerItem.getItem(stack);
 			int count = getCount(stack);
@@ -92,7 +94,8 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 			int remain = ContentTransfer.transfer(item, count, target);
 			ContentTransfer.onDump(player, count - remain);
 			setCount(stack, remain);
-		}
+		} else if (client && shift && right && target != null)
+			ContentTransfer.playDrawerSound(player);
 		if (!client && shift && !right && target != null) {
 			Item item = BaseDrawerItem.getItem(stack);
 			boolean perform = canSetNewItem(stack);
@@ -110,7 +113,8 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 				ContentTransfer.onLoad(player, count + remain);
 				setCount(stack, remain);
 			}
-		}
+		} else if (client && shift && !right && target != null)
+			ContentTransfer.playDrawerSound(player);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
+import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
@@ -52,7 +53,7 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 		if (!level.isClientSide()) {
 			new WorldChestMenuPvd((ServerPlayer) player, stack, this).open();
 		} else {
-			player.playSound(SoundEvents.ENDER_CHEST_OPEN, 1, 1);
+			ContentTransfer.playSound(player);
 		}
 		return InteractionResultHolder.consume(stack);
 	}
@@ -66,7 +67,7 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 			if (!context.getLevel().isClientSide()) {
 				new WorldChestMenuPvd((ServerPlayer) context.getPlayer(), stack, this).open();
 			} else {
-				context.getPlayer().playSound(SoundEvents.ENDER_CHEST_OPEN, 1, 1);
+				ContentTransfer.playSound(context.getPlayer());
 			}
 			return InteractionResult.SUCCESS;
 		}

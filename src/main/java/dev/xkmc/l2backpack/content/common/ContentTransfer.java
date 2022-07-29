@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -171,6 +172,14 @@ public class ContentTransfer {
 		if (player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.sendSystemMessage(LangData.IDS.COLLECT_FEEDBACK.get(count), ChatType.GAME_INFO);
 		}
+	}
+
+	public static void playSound(Player player){
+		player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1, 1);
+	}
+
+	public static void playDrawerSound(Player player){
+		player.playSound(SoundEvents.AMETHYST_BLOCK_PLACE, 1, 1);
 	}
 
 	public static Item filterMaxItem(IItemHandler target) {

@@ -1,10 +1,13 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
+import dev.xkmc.l2backpack.content.common.BackpackModelItem;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -20,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class WorldChestItem extends BlockItem {
+public class WorldChestItem extends BlockItem implements BackpackModelItem {
 
 	public final DyeColor color;
 
@@ -91,6 +94,11 @@ public class WorldChestItem extends BlockItem {
 	@Override
 	public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
 		return armorType == EquipmentSlot.CHEST;
+	}
+
+	@Override
+	public ResourceLocation getModelTexture(ItemStack stack) {//TODO
+		return new ResourceLocation(L2Backpack.MODID, "textures/backpack/" + color.getName() + ".png");
 	}
 
 }

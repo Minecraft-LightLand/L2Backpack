@@ -6,8 +6,11 @@ import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -53,8 +56,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		if (world.isClientSide()) {
 			ContentTransfer.playDrawerSound(player);
 			return InteractionResultHolder.success(stack);
-		}
-		else refresh(stack, player);
+		} else refresh(stack, player);
 		if (!player.isShiftKeyDown()) {
 			ItemStack take = takeItem(stack, player);
 			int c = take.getCount();
@@ -79,8 +81,14 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			refresh(context.getItemInHand(), context.getPlayer());
 		if (!context.getItemInHand().getOrCreateTag().contains(KEY_OWNER_ID))
 			return InteractionResult.FAIL;
-		if (BaseDrawerItem.getItem(context.getItemInHand()) == Items.AIR)
+		if (BaseDrawerItem.getItem(context.getItemInHand()) == Items.AIR) {
+			if (!context.getLevel().isClientSide()) {
+				if (context.getPlayer() instanceof ServerPlayer serverPlayer) {
+					serverPlayer.sendSystemMessage(LangData.IDS.NO_ITEM.get().withStyle(ChatFormatting.RED), ChatType.GAME_INFO);
+				}
+			}
 			return InteractionResult.FAIL;
+		}
 		if (context.getPlayer() != null && !context.getPlayer().isShiftKeyDown()) {
 			return InteractionResult.PASS;
 		}
@@ -139,6 +147,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 				LangData.Info.PLACE,
 				LangData.Info.COLLECT_DRAWER,
 				LangData.Info.DRAWER_USE,
+				LangData.Info.ENDER_DRAWER,
 				LangData.Info.ENDER_DRAWER_USE);
 	}
 

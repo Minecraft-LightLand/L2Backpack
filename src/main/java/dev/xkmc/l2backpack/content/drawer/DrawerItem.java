@@ -98,7 +98,7 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 			ContentTransfer.playDrawerSound(player);
 		if (!client && shift && !right && target != null) {
 			Item item = BaseDrawerItem.getItem(stack);
-			boolean perform = canSetNewItem(stack);
+			boolean perform = !canSetNewItem(stack);
 			if (!perform) {
 				item = ContentTransfer.filterMaxItem(target);
 				if (item != Items.AIR) {
@@ -110,8 +110,8 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 				int count = getCount(stack);
 				int max = MAX * item.getMaxStackSize();
 				int remain = ContentTransfer.loadFrom(item, max - count, target);
-				ContentTransfer.onLoad(player, count + remain);
-				setCount(stack, remain);
+				ContentTransfer.onLoad(player, remain);
+				setCount(stack, count + remain);
 			}
 		} else if (client && shift && !right && target != null)
 			ContentTransfer.playDrawerSound(player);

@@ -85,7 +85,10 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 				list.add(LangData.IDS.STORAGE_OWNER.get(name));
 			}
 		}
-		LangData.addInfo(list, LangData.Info.QUICK_ANY_ACCESS, LangData.Info.PLACE, LangData.Info.KEYBIND);
+		LangData.addInfo(list, LangData.Info.QUICK_ANY_ACCESS,
+				LangData.Info.PLACE,
+				LangData.Info.DIMENSIONAL,
+				LangData.Info.KEYBIND);
 	}
 
 	public String getDescriptionId() {

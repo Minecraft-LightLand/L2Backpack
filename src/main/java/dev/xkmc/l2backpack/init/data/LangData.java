@@ -33,7 +33,8 @@ public class LangData {
 		DUMP_FEEDBACK("chat.feedback.dump", 1, "Dumped %s items into target block"),
 		LOAD_FEEDBACK("chat.feedback.load", 1, "Loaded %s items from target block"),
 		EXTRACT_FEEDBACK("chat.feedback.extract", 1, "Extracted %s items"),
-		COLLECT_FEEDBACK("chat.feedback.collect", 1, "Collected %s items");
+		COLLECT_FEEDBACK("chat.feedback.collect", 1, "Collected %s items"),
+		NO_ITEM("chat.feedback.no_item", 0, "No item set for ender drawer. Cannot be placed.");
 
 		final String id, def;
 		final int count;
@@ -44,7 +45,7 @@ public class LangData {
 			this.count = count;
 		}
 
-		public Component get(Object... objs) {
+		public MutableComponent get(Object... objs) {
 			if (objs.length != count)
 				throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
 			return MutableComponent.create(new TranslatableContents(L2Backpack.MODID + "." + id, objs));
@@ -66,7 +67,9 @@ public class LangData {
 		QUICK_ANY_ACCESS("tooltip.info.quick_any", "Right click to open. Or right click in any GUI to open directly."),
 		ARROW_INFO("tooltip.info.arrow_bag", "Put in off hand or chest slot (or back slot of Curios) and hold bow in main hand to preview, choose, and shoot arrows from quiver. Press shift + number of up/down to switch arrows"),
 		DRAWER_USE("tooltip.info.drawer", "In inventory, left click drawer with a stack to store item. Right click drawer to take item out. Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks."),
-		ENDER_DRAWER_USE("tooltip.info.ender_drawer", "For ender drawer block, right click it with item to store, and right click it with empty hand to retrieve a stack. For bulk transport, use drawer item to interact with it.");
+		ENDER_DRAWER_USE("tooltip.info.ender_drawer_block", "For ender drawer block, right click it with item to store, and right click it with empty hand to retrieve a stack. For bulk transport, use drawer item to interact with it."),
+		DIMENSIONAL("tooltip.info.dimensional","All dimensional storage with the same color and owned by the same player shares the same inventory space, for both item and block form."),
+		ENDER_DRAWER("tooltip.info.ender_drawer","All ender drawer set to the same item and owned by the same player shares the same inventory space, for both item and block form.");
 
 		final String id, def;
 

@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.render;
 
 import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -56,8 +57,8 @@ public class RenderEvents {
 			}
 		}
 		renderManager.renderers.forEach((e, r) -> {
-			if (r instanceof LivingEntityRenderer livingEntityRenderer) {
-				livingEntityRenderer.addLayer(new BackpackLayerRenderer(livingEntityRenderer, Minecraft.getInstance().getEntityModels()));
+			if (r instanceof LivingEntityRenderer ler && ler.getModel() instanceof HumanoidModel<?>) {
+				ler.addLayer(new BackpackLayerRenderer(ler, Minecraft.getInstance().getEntityModels()));
 			}
 		});
 	}

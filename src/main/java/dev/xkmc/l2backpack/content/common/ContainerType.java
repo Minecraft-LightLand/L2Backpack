@@ -11,9 +11,10 @@ import java.util.function.BiFunction;
 public enum ContainerType {
 	INVENTORY((player, slot) -> player.getInventory().getItem(slot)),
 	ENDER((player, slot) -> player.getEnderChestInventory().getItem(slot)),
-	DIMENSION((player, slot) -> WorldStorage.get((ServerLevel) player.getLevel())
-			.getStorageWithoutPassword(player.getUUID(), slot / 27)
-			.map(e -> e.container.getItem(slot % 27)).orElse(ItemStack.EMPTY)),
+	DIMENSION((player, slot) -> player.getLevel().isClientSide() ? ItemStack.EMPTY :
+			WorldStorage.get((ServerLevel) player.getLevel())
+					.getStorageWithoutPassword(player.getUUID(), slot / 27)
+					.map(e -> e.container.getItem(slot % 27)).orElse(ItemStack.EMPTY)),
 	CURIO(CuriosCompat::getItemFromSlot);
 
 	private final BiFunction<Player, Integer, ItemStack> getter;

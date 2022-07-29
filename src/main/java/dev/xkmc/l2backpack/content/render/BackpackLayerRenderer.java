@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -18,6 +19,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.Vector;
 
 public class BackpackLayerRenderer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
 
@@ -47,7 +50,12 @@ public class BackpackLayerRenderer<T extends LivingEntity, M extends HumanoidMod
 		model.setupAnim(entity, f0, f1, f3, f4, f5);
 		ResourceLocation texture = item.getModelTexture(stack);
 		VertexConsumer vc = buffer.getBuffer(RenderType.armorCutoutNoCull(texture));
+		pose.pushPose();
+		this.getParentModel().body.translateAndRotate(pose);
+		pose.mulPose(Vector3f.YP.rotationDegrees(180));
+		pose.scale(0.6F,0.6F,0.6F);
 		this.model.body.getChild("main_body").render(pose, vc, i, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		pose.popPose();
 	}
 
 }

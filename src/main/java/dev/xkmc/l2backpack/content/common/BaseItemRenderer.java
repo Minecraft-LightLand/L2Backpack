@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
 import com.google.common.base.Suppliers;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
@@ -18,6 +19,7 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -75,7 +77,7 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 		Item item = BaseDrawerItem.getItem(stack);
 		int count = stack.getItem() instanceof DrawerItem ? DrawerItem.getCount(stack) : 1;
 		ItemStack inv = new ItemStack(item, count);
-		renderItemInside(inv, 0.5, poseStack, type, bufferSource, light, overlay);
+		renderItemInside(inv, item instanceof BlockItem ? 0.5D : 0.625D, poseStack, type, bufferSource, light, overlay);
 
 		poseStack.popPose();
 	}
@@ -90,6 +92,7 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 			matrix.scale(2f, 2f, 2f);
 			matrix.translate(0, -0.2f, 0);
 			matrix.mulPose(Vector3f.YP.rotationDegrees(time * 4.5F));
+			Lighting.setupForFlatItems();
 			Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, matrix, buffer, 0);
 			matrix.popPose();
 		}

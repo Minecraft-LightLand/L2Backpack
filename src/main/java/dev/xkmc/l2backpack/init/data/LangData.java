@@ -68,9 +68,9 @@ public class LangData {
 		ARROW_INFO("tooltip.info.arrow_bag", "Put in off hand or chest slot (or back slot of Curios) and hold bow in main hand to preview, choose, and shoot arrows from quiver. Press shift + number of up/down to switch arrows"),
 		DRAWER_USE("tooltip.info.drawer", "In inventory, left click drawer with a stack to store item. Right click drawer to take item out. Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks."),
 		ENDER_DRAWER_USE("tooltip.info.ender_drawer_block", "For ender drawer block, right click it with item to store, and right click it with empty hand to retrieve a stack. For bulk transport, use drawer item to interact with it."),
-		DIMENSIONAL("tooltip.info.dimensional","All dimensional storage with the same color and owned by the same player shares the same inventory space, for both item and block form."),
-		ENDER_DRAWER("tooltip.info.ender_drawer","All ender drawer set to the same item and owned by the same player shares the same inventory space, for both item and block form."),
-		UPGRADE("tooltip.info.upgrade","Upgrade by applying an Ender Pocket in Smithing Table. Content and name will be preserved.");
+		DIMENSIONAL("tooltip.info.dimensional", "All dimensional storage with the same color and owned by the same player shares the same inventory space, for both item and block form."),
+		ENDER_DRAWER("tooltip.info.ender_drawer", "All ender drawer set to the same item and owned by the same player shares the same inventory space, for both item and block form."),
+		UPGRADE("tooltip.info.upgrade", "Upgrade by applying an Ender Pocket in Smithing Table. Content and name will be preserved.");
 
 		final String id, def;
 

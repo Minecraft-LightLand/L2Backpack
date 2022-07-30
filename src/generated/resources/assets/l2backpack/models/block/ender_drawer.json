@@ -1,7 +1,0 @@
-{
-  "parent": "l2backpack:block/drawer",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "0": "l2backpack:block/drawer/ender_drawer"
-  }
-}

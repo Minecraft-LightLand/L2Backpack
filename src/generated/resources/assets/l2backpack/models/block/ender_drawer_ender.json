@@ -1,0 +1,10 @@
+{
+  "parent": "l2backpack:block/drawer",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "0": "l2backpack:block/drawer/ender_bottom",
+    "1": "l2backpack:block/drawer/ender_front",
+    "2": "l2backpack:block/drawer/ender_side",
+    "3": "l2backpack:block/drawer/ender_top"
+  }
+}

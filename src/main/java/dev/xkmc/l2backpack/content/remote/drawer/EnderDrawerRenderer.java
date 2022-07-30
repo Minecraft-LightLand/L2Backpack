@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 
 public class EnderDrawerRenderer implements BlockEntityRenderer<EnderDrawerBlockEntity> {
@@ -23,7 +24,7 @@ public class EnderDrawerRenderer implements BlockEntityRenderer<EnderDrawerBlock
 		ItemStack stack = new ItemStack(entity.item, 1);
 		if (!stack.isEmpty()) {
 			pose.pushPose();
-			pose.translate(0.5D, 0.5D, 0.5D);
+			pose.translate(0.5D, entity.item instanceof BlockItem ? 0.5D : 0.625D, 0.5D);
 			pose.scale(2f, 2f, 2f);
 			pose.translate(0, -0.2f, 0);
 			pose.mulPose(Vector3f.YP.rotationDegrees(time * 4.5F));

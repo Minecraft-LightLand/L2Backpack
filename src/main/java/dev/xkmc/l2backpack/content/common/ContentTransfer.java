@@ -174,11 +174,11 @@ public class ContentTransfer {
 		}
 	}
 
-	public static void playSound(Player player){
+	public static void playSound(Player player) {
 		player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1, 1);
 	}
 
-	public static void playDrawerSound(Player player){
+	public static void playDrawerSound(Player player) {
 		player.playSound(SoundEvents.AMETHYST_BLOCK_PLACE, 1, 1);
 	}
 

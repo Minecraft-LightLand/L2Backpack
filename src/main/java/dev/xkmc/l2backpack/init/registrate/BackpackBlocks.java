@@ -49,13 +49,19 @@ public class BackpackBlocks {
 				.validBlock(WORLD_CHEST).register();
 
 		ENDER_DRAWER = REGISTRATE.block("ender_drawer", p -> DelegateBlock.newBaseBlock(
-						DelegateBlockProperties.copy(Blocks.ENDER_CHEST).make(e -> e.noOcclusion()),
+						DelegateBlockProperties.copy(Blocks.GLASS).make(e -> e.requiresCorrectToolForDrops()
+								.strength(22.5F, 600.0F).lightLevel(state -> 15)),
 						BlockProxy.HORIZONTAL, EnderDrawerBlock.INSTANCE, EnderParticleBlock.INSTANCE,
 						EnderDrawerBlock.TILE_ENTITY_SUPPLIER_BUILDER, AlternateBlockForm.INSTANCE))
-				.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), state ->
-						pvd.models().withExistingParent(ctx.getName(), new ResourceLocation(L2Backpack.MODID, "block/drawer"))
-								.texture("0", "block/drawer/" + (state.getValue(AlternateBlockForm.ALT) ? "drawer" : "ender_drawer"))
-								.renderType("cutout")))
+				.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), state -> {
+					String alt = state.getValue(AlternateBlockForm.ALT) ? "drawer" : "ender";
+					return pvd.models().withExistingParent(ctx.getName() + "_" + alt, new ResourceLocation(L2Backpack.MODID, "block/drawer"))
+							.texture("0", "block/drawer/" + alt + "_bottom")
+							.texture("1", "block/drawer/" + alt + "_front")
+							.texture("2", "block/drawer/" + alt + "_side")
+							.texture("3", "block/drawer/" + alt + "_top")
+							.renderType("cutout");
+				}))
 				.loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
 				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
 				.defaultLang().register();

@@ -70,10 +70,8 @@ public class ClientEventHandler {
 				if (insertItem(event, cont, slot, true)) return true;
 			}
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && slot != null) {
-				if (slot.getItem().getItem() instanceof BaseDrawerItem &&
-						!cont.getMenu().getCarried().isEmpty()) {
-					return true;
-				}
+				return slot.getItem().getItem() instanceof BaseDrawerItem &&
+						!cont.getMenu().getCarried().isEmpty();
 			}
 		}
 		return false;
@@ -90,10 +88,8 @@ public class ClientEventHandler {
 				if (openBackpack(event, cont, slot)) return true;
 				if (extractItem(event, cont, slot)) return true;
 				if (slot != null) {
-					if (slot.getItem().getItem() instanceof BaseDrawerItem &&
-							!cont.getMenu().getCarried().isEmpty()) {
-						return true;
-					}
+					return slot.getItem().getItem() instanceof BaseDrawerItem &&
+							!cont.getMenu().getCarried().isEmpty();
 				}
 			}
 		}

@@ -62,8 +62,8 @@ public class L2Backpack {
 
 	private static void registerForgeEvents() {
 		MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
-		MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(ArrowBagEvents.class);
+		MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(TooltipUpdateEvents.class);
 		MinecraftForge.EVENT_BUS.register(LoadContainerEvents.class);
 

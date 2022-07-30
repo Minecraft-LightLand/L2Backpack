@@ -61,8 +61,8 @@ public class ClientEventHandler {
 		}
 	}
 
-
-	public static boolean onRelease(ScreenEvent.MouseButtonReleased.Pre event) {
+	@OnlyIn(Dist.CLIENT)
+	private static boolean onRelease(ScreenEvent.MouseButtonReleased.Pre event) {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.getSlotUnderMouse();
@@ -77,6 +77,7 @@ public class ClientEventHandler {
 		return false;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static boolean onPress(ScreenEvent.MouseButtonPressed.Pre event) {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {

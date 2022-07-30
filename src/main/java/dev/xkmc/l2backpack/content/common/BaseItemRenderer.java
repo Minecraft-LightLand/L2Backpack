@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
+import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -54,7 +55,7 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 		poseStack.pushPose();
 
 		poseStack.pushPose();
-		BlockState state = Blocks.GLASS.defaultBlockState();
+		BlockState state = BackpackBlocks.ENDER_DRAWER.getDefaultState();
 		BakedModel model = Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(state);
 		model = model.applyTransform(type, poseStack, false);
 		poseStack.translate(-.5F, -.5F, -.5F);

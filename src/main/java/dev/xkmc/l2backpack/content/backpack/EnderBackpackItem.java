@@ -72,7 +72,7 @@ public class EnderBackpackItem extends Item implements BackpackModelItem {
 
 	@Override
 	public ResourceLocation getModelTexture(ItemStack stack) {
-		return new ResourceLocation(L2Backpack.MODID, "textures/backpack/" + DyeColor.PURPLE.getName() + ".png");//TODO
+		return new ResourceLocation(L2Backpack.MODID, "textures/block/ender_backpack.png");
 	}
 
 }

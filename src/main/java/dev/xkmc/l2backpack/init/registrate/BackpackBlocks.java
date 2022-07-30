@@ -40,7 +40,7 @@ public class BackpackBlocks {
 				.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), state -> pvd.models()
 						.withExistingParent(ctx.getName() + "_" + state.getValue(WorldChestBlock.COLOR).getName(),
 								new ResourceLocation(L2Backpack.MODID, "backpack"))
-						.texture("0", "backpack/" + state.getValue(WorldChestBlock.COLOR).getName())))
+						.texture("0", "block/dimensional_storage/" + state.getValue(WorldChestBlock.COLOR).getName())))
 				.loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
 				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
 				.defaultLang().register();
@@ -50,7 +50,9 @@ public class BackpackBlocks {
 		ENDER_DRAWER = REGISTRATE.block("ender_drawer", p -> DelegateBlock.newBaseBlock(
 						DelegateBlockProperties.copy(Blocks.ENDER_CHEST).make(e -> e.noOcclusion()),
 						EnderDrawerBlock.INSTANCE, EnderParticleBlock.INSTANCE, EnderDrawerBlock.TILE_ENTITY_SUPPLIER_BUILDER))
-				.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().withExistingParent(ctx.getName(), "block/glass")))
+				.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().withExistingParent(ctx.getName(),
+						new ResourceLocation(L2Backpack.MODID,"block/drawer"))
+						.texture("0","block/drawer/ender_drawer")))
 				.loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
 				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
 				.addLayer(() -> RenderType::cutout)

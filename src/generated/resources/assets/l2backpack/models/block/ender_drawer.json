@@ -1,3 +1,6 @@
 {
-  "parent": "minecraft:block/glass"
+  "parent": "l2backpack:block/drawer",
+  "textures": {
+    "0": "l2backpack:block/drawer/ender_drawer"
+  }
 }

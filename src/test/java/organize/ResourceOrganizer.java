@@ -31,15 +31,15 @@ public abstract class ResourceOrganizer {
 
     public static void main(String[] args) throws Exception {
         new LangFileOrganizer();
-        new ItemFileOrganizer();
-        new BlockFileOrganizer();
+        //new ItemFileOrganizer();
+        //new BlockFileOrganizer();
         new AssetMisc();
         new DataMisc();
         File f = new File("./src/test/resources");
         for (File fi : f.listFiles()) {
             MODID = fi.getName();
-            delete(new File("./src/main/resources/assets/l2backpack/"));
-            delete(new File("./src/main/resources/data/l2backpack/recipes"));
+            //delete(new File("./src/main/resources/assets/l2backpack/"));
+            //delete(new File("./src/main/resources/data/l2backpack/recipes"));
             if (!fi.isDirectory())
                 continue;
             for (ResourceOrganizer obj : MAP.values()) {

@@ -42,7 +42,7 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 
 	@Override
 	public ResourceLocation getModelTexture(ItemStack stack) {
-		return new ResourceLocation(L2Backpack.MODID, "textures/backpack/" + color.getName() + ".png");
+		return new ResourceLocation(L2Backpack.MODID, "textures/block/backpack/" + color.getName() + ".png");
 	}
 
 }

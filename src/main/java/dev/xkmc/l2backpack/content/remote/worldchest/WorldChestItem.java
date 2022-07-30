@@ -10,7 +10,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -101,8 +100,8 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 	}
 
 	@Override
-	public ResourceLocation getModelTexture(ItemStack stack) {//TODO
-		return new ResourceLocation(L2Backpack.MODID, "textures/backpack/" + color.getName() + ".png");
+	public ResourceLocation getModelTexture(ItemStack stack) {
+		return new ResourceLocation(L2Backpack.MODID, "textures/block/dimensional_storage/" + color.getName() + ".png");
 	}
 
 }

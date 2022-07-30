@@ -8,6 +8,7 @@ import dev.xkmc.l2library.repack.registrate.providers.RegistrateRecipeProvider;
 import dev.xkmc.l2library.repack.registrate.util.DataIngredient;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.UpgradeRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
@@ -85,6 +86,25 @@ public class RecipeGen {
 					.define('A', Tags.Items.LEATHER).define('B', Items.ARROW)
 					.define('D', Items.STRING).define('C', Items.BOW)
 					.save(pvd);
+
+			bag = BackpackItems.DRAWER.get();
+			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
+					.pattern("DAD").pattern("ABA").pattern("DAD")
+					.define('A', Items.AMETHYST_SHARD).define('B', ender)
+					.define('D', Items.GOLD_INGOT)
+					.save(pvd);
+
+
+			bag = BackpackItems.ENDER_DRAWER.get();
+			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
+					.pattern("DAD").pattern("CBC").pattern("DED")
+					.define('A', ender).define('B', Items.END_CRYSTAL)
+					.define('C', Items.ENDER_PEARL).define('D', Items.OBSIDIAN)
+					.define('E', Items.ENDER_CHEST)
+					.save(pvd);
+
+			unlock(pvd, new ShapelessRecipeBuilder(bag, 1)::unlockedBy, bag)
+					.requires(bag).save(pvd, new ResourceLocation(L2Backpack.MODID, "shapeless/clear_ender_drawer"));
 		}
 	}
 

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "l2backpack:ender_pocket"
+    },
+    "B": {
+      "item": "minecraft:end_crystal"
+    },
+    "C": {
+      "item": "minecraft:ender_pearl"
+    },
+    "D": {
+      "item": "minecraft:obsidian"
+    },
+    "E": {
+      "item": "minecraft:ender_chest"
+    }
+  },
+  "pattern": [
+    "DAD",
+    "CBC",
+    "DED"
+  ],
+  "result": {
+    "item": "l2backpack:ender_drawer"
+  }
+}

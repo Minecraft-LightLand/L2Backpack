@@ -48,41 +48,56 @@ public class ClientEventHandler {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onScreenLeftClick(ScreenEvent.MouseButtonReleased.Pre event) {
-		Screen screen = event.getScreen();
-		if (screen instanceof AbstractContainerScreen cont) {
-			Slot slot = cont.getSlotUnderMouse();
-			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-				if (insertItem(event, cont, slot)) return;
-			}
-			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && slot != null) {
-				if (slot.getItem().getItem() instanceof BaseDrawerItem &&
-						!cont.getMenu().getCarried().isEmpty()) {
-					event.setCanceled(true);
-				}
-			}
+		if (onRelease(event)) {
+			event.setCanceled(true);
 		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onScreenRightClick(ScreenEvent.MouseButtonPressed.Pre event) {
+		if (onPress(event)) {
+			event.setCanceled(true);
+		}
+	}
+
+
+	public static boolean onRelease(ScreenEvent.MouseButtonReleased.Pre event) {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.getSlotUnderMouse();
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-				if (insertItem(event, cont, slot)) return;
+				if (insertItem(event, cont, slot, true)) return true;
+			}
+			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && slot != null) {
+				if (slot.getItem().getItem() instanceof BaseDrawerItem &&
+						!cont.getMenu().getCarried().isEmpty()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private static boolean onPress(ScreenEvent.MouseButtonPressed.Pre event) {
+		Screen screen = event.getScreen();
+		if (screen instanceof AbstractContainerScreen cont) {
+			Slot slot = cont.getSlotUnderMouse();
+			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+				if (insertItem(event, cont, slot, false)) return true;
 			}
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-				if (openBackpack(event, cont, slot)) return;
-				if (extractItem(event, cont, slot)) return;
+				if (openBackpack(event, cont, slot)) return true;
+				if (extractItem(event, cont, slot)) return true;
 				if (slot != null) {
 					if (slot.getItem().getItem() instanceof BaseDrawerItem &&
 							!cont.getMenu().getCarried().isEmpty()) {
-						event.setCanceled(true);
+						return true;
 					}
 				}
 			}
 		}
+		return false;
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -101,7 +116,6 @@ public class ClientEventHandler {
 					slot.getItem().getItem() instanceof BackpackItem ||
 					slot.getItem().getItem() instanceof ArrowBag)) {
 				L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
-				event.setCanceled(true);
 				return true;
 			}
 		}
@@ -109,41 +123,23 @@ public class ClientEventHandler {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	private static boolean insertItem(ScreenEvent.MouseButtonReleased.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
+	private static boolean insertItem(ScreenEvent event, AbstractContainerScreen<?> cont, @Nullable Slot slot, boolean perform) {
 		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
 		}
 		ItemStack drawerStack = slot.getItem();
 		ItemStack stack = cont.getMenu().getCarried();
 		if (drawerStack.getItem() instanceof BaseDrawerItem drawer) {
-			if (!stack.isEmpty() && drawer.canSetNewItem(drawerStack)) {
-				sendDrawerPacket(DrawerInteractToServer.Type.SET, cont, slot);
-				event.setCanceled(true);
+			if (stack.isEmpty()) return false;
+			if (stack.hasTag()) return true;
+			if (drawer.canSetNewItem(drawerStack)) {
+				if (perform)
+					sendDrawerPacket(DrawerInteractToServer.Type.SET, cont, slot);
 				return true;
 			}
 			if (BaseDrawerItem.canAccept(drawerStack, stack)) {
-				sendDrawerPacket(DrawerInteractToServer.Type.INSERT, cont, slot);
-				event.setCanceled(true);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	private static boolean insertItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
-		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
-			return false;
-		}
-		ItemStack drawerStack = slot.getItem();
-		ItemStack stack = cont.getMenu().getCarried();
-		if (drawerStack.getItem() instanceof BaseDrawerItem drawer) {
-			if (!stack.isEmpty() && drawer.canSetNewItem(drawerStack)) {
-				event.setCanceled(true);
-				return true;
-			}
-			if (BaseDrawerItem.canAccept(drawerStack, stack)) {
-				event.setCanceled(true);
+				if (perform)
+					sendDrawerPacket(DrawerInteractToServer.Type.INSERT, cont, slot);
 				return true;
 			}
 		}
@@ -159,7 +155,6 @@ public class ClientEventHandler {
 		ItemStack drawerStack = slot.getItem();
 		if (drawerStack.getItem() instanceof BaseDrawerItem drawer && stack.isEmpty()) {
 			sendDrawerPacket(DrawerInteractToServer.Type.TAKE, cont, slot);
-			event.setCanceled(true);
 			return true;
 		}
 		return false;

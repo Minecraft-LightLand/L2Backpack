@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
+import dev.xkmc.l2backpack.content.remote.drawer.AlternateBlockForm;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
@@ -19,7 +20,6 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -56,6 +56,9 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 
 		poseStack.pushPose();
 		BlockState state = BackpackBlocks.ENDER_DRAWER.getDefaultState();
+		if (stack.getItem() instanceof DrawerItem) {
+			state = state.setValue(AlternateBlockForm.ALT, true);
+		}
 		BakedModel model = Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(state);
 		model = model.applyTransform(type, poseStack, false);
 		poseStack.translate(-.5F, -.5F, -.5F);

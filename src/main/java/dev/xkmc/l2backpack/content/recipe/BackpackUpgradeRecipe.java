@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.recipe;
 
+import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
 import dev.xkmc.l2library.base.recipe.AbstractSmithingRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.Level;
 public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgradeRecipe> {
 
 	public BackpackUpgradeRecipe(ResourceLocation rl, Ingredient left, Ingredient right, ItemStack result) {
-		super(rl, left, right, result);
+		super(rl, left, right, BackpackItem.setRow(result,2));
 	}
 
 	@Override

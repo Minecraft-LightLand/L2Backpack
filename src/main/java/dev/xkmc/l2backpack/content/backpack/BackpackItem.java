@@ -25,6 +25,11 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 		this.color = color;
 	}
 
+	public static ItemStack setRow(ItemStack result, int i) {
+		result.getOrCreateTag().putInt("rows", i);
+		return result;
+	}
+
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, stack.getOrCreateTag().getInt("rows")), 6));
@@ -32,7 +37,9 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 				LangData.Info.DUMP,
 				LangData.Info.LOAD,
 				LangData.Info.QUICK_INV_ACCESS,
-				LangData.Info.KEYBIND);
+				LangData.Info.KEYBIND,
+				LangData.Info.UPGRADE
+		);
 	}
 
 	@Override

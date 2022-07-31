@@ -1,12 +1,10 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
-import dev.xkmc.l2backpack.content.remote.WorldStorage;
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -48,7 +46,7 @@ public class EnderDrawerBlockEntity extends BaseBlockEntity {
 				return LazyOptional.of(() -> new InvWrapper(new SimpleContainer(64))).cast();
 			}
 			if (handler == null) {
-				handler = LazyOptional.of(() -> new EnderDawerItemHandler(getAccess()));
+				handler = owner_id == null ? LazyOptional.empty() : LazyOptional.of(() -> new EnderDawerItemHandler(getAccess()));
 			}
 			return this.handler.cast();
 		}
@@ -56,8 +54,41 @@ public class EnderDrawerBlockEntity extends BaseBlockEntity {
 	}
 
 	public DrawerAccess getAccess() {
-		return new DrawerAccess(WorldStorage.get((ServerLevel) level), owner_id, item);
+		return DrawerAccess.of(level, owner_id, item);
 	}
 
+	private boolean added = false;
+
+	@Override
+	public void onChunkUnloaded() {
+		removeFromListener();
+		super.onChunkUnloaded();
+	}
+
+	@Override
+	public void setRemoved() {
+		removeFromListener();
+		super.setRemoved();
+	}
+
+	@Override
+	public void onLoad() {
+		super.onLoad();
+		addToListener();
+	}
+
+	public void addToListener() {
+		if (!added && level != null && !level.isClientSide() && owner_id != null) {
+			added = true;
+			getAccess().listener.add(this);
+		}
+	}
+
+	public void removeFromListener() {
+		if (added && level != null && !level.isClientSide() && owner_id != null) {
+			added = false;
+			getAccess().listener.remove(this);
+		}
+	}
 
 }

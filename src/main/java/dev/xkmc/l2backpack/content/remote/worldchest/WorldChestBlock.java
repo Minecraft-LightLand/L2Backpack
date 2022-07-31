@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
+import dev.xkmc.l2backpack.content.remote.drawer.CustomAnalogBlockEntity;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
@@ -42,8 +43,7 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 	public static final WorldChestBlock INSTANCE = new WorldChestBlock();
 
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
-
-
+	
 	public static final BlockEntityBlockMethod<WorldChestBlockEntity> TILE_ENTITY_SUPPLIER_BUILDER =
 			new BlockEntityBlockMethodImpl<>(BackpackBlocks.TE_WORLD_CHEST, WorldChestBlockEntity.class);
 
@@ -132,6 +132,7 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 			chest.owner_name = name;
 			chest.password = pwd;
 			chest.setColor(state.getValue(COLOR).getId());
+			chest.addToListener();
 		}
 	}
 

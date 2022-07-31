@@ -84,7 +84,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		if (BaseDrawerItem.getItem(context.getItemInHand()) == Items.AIR) {
 			if (!context.getLevel().isClientSide()) {
 				if (context.getPlayer() instanceof ServerPlayer serverPlayer) {
-					serverPlayer.sendSystemMessage(LangData.IDS.NO_ITEM.get().withStyle(ChatFormatting.RED), ChatType.GAME_INFO);
+					serverPlayer.sendSystemMessage(LangData.IDS.NO_ITEM.get().withStyle(ChatFormatting.RED), true);
 				}
 			}
 			return InteractionResult.FAIL;

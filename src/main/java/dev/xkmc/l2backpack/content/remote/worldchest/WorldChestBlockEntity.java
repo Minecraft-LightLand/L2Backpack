@@ -10,6 +10,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerListener;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,7 +31,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @SerialClass
-public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvider, NameSetable {
+public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvider, NameSetable, ContainerListener {
 
 	@SerialClass.SerialField
 	public UUID owner_id;
@@ -88,7 +90,7 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 	@Override
 	public AbstractContainerMenu createMenu(int wid, Inventory inventory, Player player) {
 		if (level == null || owner_id == null) return null;
-		Optional<StorageContainer> storage = WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password);
+		Optional<StorageContainer> storage = getAccess();
 		if (storage.isEmpty()) return null;
 		return new WorldChestContainer(wid, inventory, storage.get().container, storage.get(), getName(), this);
 	}
@@ -107,4 +109,46 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 		}
 	}
 
+	private Optional<StorageContainer> getAccess() {
+		return WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password);
+	}
+
+	private boolean added = false;
+
+	@Override
+	public void onChunkUnloaded() {
+		removeFromListener();
+		super.onChunkUnloaded();
+	}
+
+	@Override
+	public void setRemoved() {
+		removeFromListener();
+		super.setRemoved();
+	}
+
+	@Override
+	public void onLoad() {
+		super.onLoad();
+		addToListener();
+	}
+
+	public void addToListener() {
+		if (!added && level != null && !level.isClientSide() && owner_id != null) {
+			added = true;
+			getAccess().ifPresent(e -> e.container.addListener(this));
+		}
+	}
+
+	public void removeFromListener() {
+		if (added && level != null && !level.isClientSide() && owner_id != null) {
+			added = false;
+			getAccess().ifPresent(e -> e.container.removeListener(this));
+		}
+	}
+
+	@Override
+	public void containerChanged(Container p_18983_) {
+		setChanged();
+	}
 }

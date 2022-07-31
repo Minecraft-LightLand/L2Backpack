@@ -5,7 +5,6 @@ import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
-import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
 import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
 import dev.xkmc.l2library.block.mult.SetPlacedByBlockMethod;
 import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
@@ -36,7 +35,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 	public static final EnderDrawerBlock INSTANCE = new EnderDrawerBlock();
 
 	public static final BlockEntityBlockMethod<EnderDrawerBlockEntity> TILE_ENTITY_SUPPLIER_BUILDER =
-			new BlockEntityBlockMethodImpl<>(BackpackBlocks.TE_ENDER_DRAWER, EnderDrawerBlockEntity.class);
+			new CustomAnalogBlockEntity<>(BackpackBlocks.TE_ENDER_DRAWER, EnderDrawerBlockEntity.class);
 
 	@Override
 	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
@@ -75,6 +74,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 			chest.owner_id = id;
 			chest.owner_name = name;
 			chest.item = BaseDrawerItem.getItem(stack);
+			chest.addToListener();
 		}
 	}
 

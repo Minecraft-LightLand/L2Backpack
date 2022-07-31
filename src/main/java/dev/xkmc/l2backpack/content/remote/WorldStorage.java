@@ -28,9 +28,6 @@ public class WorldStorage {
 	@SerialClass.SerialField
 	private final HashMap<String, CompoundTag> storage = new HashMap<>();
 
-	@SerialClass.SerialField
-	final HashMap<String, HashMap<Item, Integer>> drawer = new HashMap<>();
-
 	private final HashMap<UUID, StorageContainer[]> cache = new HashMap<>();
 
 	public WorldStorage(ServerLevel level) {
@@ -124,4 +121,13 @@ public class WorldStorage {
 
 	}
 
+	@SerialClass.SerialField
+	final HashMap<String, HashMap<Item, Integer>> drawer = new HashMap<>();
+
+	private final HashMap<String, HashMap<Item, DrawerAccess>> drawer_cache = new HashMap<>();
+
+	public DrawerAccess getOrCreateDrawer(UUID id, Item item) {
+		return drawer_cache.computeIfAbsent(id.toString(), e -> new HashMap<>())
+				.computeIfAbsent(item, i -> new DrawerAccess(this, id, item));
+	}
 }

@@ -152,25 +152,25 @@ public class ContentTransfer {
 
 	public static void onDump(Player player, int count) {
 		if (player instanceof ServerPlayer serverPlayer) {
-			serverPlayer.sendSystemMessage(LangData.IDS.DUMP_FEEDBACK.get(count), ChatType.GAME_INFO);
+			serverPlayer.sendSystemMessage(LangData.IDS.DUMP_FEEDBACK.get(count), true);
 		}
 	}
 
 	public static void onLoad(Player player, int count) {
 		if (player instanceof ServerPlayer serverPlayer) {
-			serverPlayer.sendSystemMessage(LangData.IDS.LOAD_FEEDBACK.get(count), ChatType.GAME_INFO);
+			serverPlayer.sendSystemMessage(LangData.IDS.LOAD_FEEDBACK.get(count), true);
 		}
 	}
 
 	public static void onExtract(Player player, int count) {
 		if (player instanceof ServerPlayer serverPlayer) {
-			serverPlayer.sendSystemMessage(LangData.IDS.EXTRACT_FEEDBACK.get(count), ChatType.GAME_INFO);
+			serverPlayer.sendSystemMessage(LangData.IDS.EXTRACT_FEEDBACK.get(count), true);
 		}
 	}
 
 	public static void onCollect(Player player, int count) {
 		if (player instanceof ServerPlayer serverPlayer) {
-			serverPlayer.sendSystemMessage(LangData.IDS.COLLECT_FEEDBACK.get(count), ChatType.GAME_INFO);
+			serverPlayer.sendSystemMessage(LangData.IDS.COLLECT_FEEDBACK.get(count), true);
 		}
 	}
 

@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.events;
 
-import dev.xkmc.l2backpack.content.capability.WorldStorageCapability;
+import dev.xkmc.l2backpack.content.remote.WorldStorageCapability;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;

@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "l2backpack:block/backpack",
   "textures": {
-    "all": "l2backpack:block/dimensional_storage_yellow"
+    "0": "l2backpack:block/dimensional_storage/yellow"
   }
 }

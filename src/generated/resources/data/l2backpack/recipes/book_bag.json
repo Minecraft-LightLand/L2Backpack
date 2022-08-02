@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "DCD",
-    "ABA",
-    "AAA"
-  ],
   "key": {
     "A": {
       "tag": "forge:leather"
@@ -12,13 +7,18 @@
     "B": {
       "item": "l2backpack:ender_pocket"
     },
-    "D": {
-      "item": "minecraft:string"
-    },
     "C": {
       "item": "minecraft:book"
+    },
+    "D": {
+      "item": "minecraft:string"
     }
   },
+  "pattern": [
+    "DCD",
+    "ABA",
+    "AAA"
+  ],
   "result": {
     "item": "l2backpack:book_bag"
   }

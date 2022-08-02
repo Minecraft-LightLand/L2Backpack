@@ -1,12 +1,16 @@
 {
   "block.l2backpack": {
-	"dimensional_storage": "空间箱子"
+	"dimensional_storage": "空间箱子",
+	"ender_drawer": "末影匣子"
   },
   "item.l2backpack":{
 	"ender_backpack": "末影背包",
 	"ender_pocket": "空间升级组件",
 	"armor_bag": "装备袋",
-	"book_bag": "附魔书袋"
+	"book_bag": "附魔书袋",
+	"arrow_bag": "箭袋",
+	"drawer": "水晶匣子",
+	"ender_drawer": "末影匣子"
   },
   "-cartesian": {
 	"backpack": {
@@ -15,7 +19,7 @@
 	  "list": [
 		{
 		  "backpack": "背包",
-		  "dimensional_storage": "共享末影背包"
+		  "dimensional_storage": "空间背包"
 		},
 		{
 		  "black": "黑色",

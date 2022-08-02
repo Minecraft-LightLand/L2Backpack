@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "B": {
+      "item": "l2backpack:ender_pocket"
+    },
+    "D": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "DAD",
+    "ABA",
+    "DAD"
+  ],
+  "result": {
+    "item": "l2backpack:drawer"
+  }
+}

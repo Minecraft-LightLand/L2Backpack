@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "dimensional_storage_craft",
+  "key": {
+    "A": {
+      "item": "l2backpack:ender_pocket"
+    },
+    "B": {
+      "item": "minecraft:black_wool"
+    },
+    "C": {
+      "item": "minecraft:ender_chest"
+    },
+    "D": {
+      "item": "minecraft:popped_chorus_fruit"
+    }
+  },
+  "pattern": [
+    "DAD",
+    "ACA",
+    "BAB"
+  ],
+  "result": {
+    "item": "l2backpack:dimensional_storage_black"
+  }
+}

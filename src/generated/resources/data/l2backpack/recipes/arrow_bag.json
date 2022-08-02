@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "tag": "forge:leather"
+    },
+    "B": {
+      "item": "minecraft:arrow"
+    },
+    "C": {
+      "item": "minecraft:bow"
+    },
+    "D": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "DCD",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "item": "l2backpack:arrow_bag"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "l2backpack:ender_drawer"
+    }
+  ],
+  "result": {
+    "item": "l2backpack:ender_drawer"
+  }
+}

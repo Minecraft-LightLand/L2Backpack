@@ -1,6 +1,8 @@
 package organize;
 
 import com.google.common.io.Files;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import organize.sub.*;
 
 import java.io.File;
@@ -11,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class ResourceOrganizer {
+
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().setLenient().create();
 
     public static final Map<String, ResourceOrganizer> MAP = new LinkedHashMap<>();
     public static String MODID;
@@ -27,15 +31,15 @@ public abstract class ResourceOrganizer {
 
     public static void main(String[] args) throws Exception {
         new LangFileOrganizer();
-        new ItemFileOrganizer();
-        new BlockFileOrganizer();
+        //new ItemFileOrganizer();
+        //new BlockFileOrganizer();
         new AssetMisc();
         new DataMisc();
         File f = new File("./src/test/resources");
         for (File fi : f.listFiles()) {
             MODID = fi.getName();
-            delete(new File("./src/main/resources/assets/l2backpack/"));
-            delete(new File("./src/main/resources/data/l2backpack/recipes"));
+            //delete(new File("./src/main/resources/assets/l2backpack/"));
+            //delete(new File("./src/main/resources/data/l2backpack/recipes"));
             if (!fi.isDirectory())
                 continue;
             for (ResourceOrganizer obj : MAP.values()) {

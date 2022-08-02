@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "l2backpack:item/arrow_bag_1"
+  }
+}

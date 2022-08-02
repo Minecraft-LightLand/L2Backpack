@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "l2backpack:item/dimensional_storage",
-    "layer1": "l2backpack:item/dimensional_storage_overlay"
-  }
-}

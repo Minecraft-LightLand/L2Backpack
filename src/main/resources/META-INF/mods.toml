@@ -1,29 +1,31 @@
 modLoader="javafml"
-loaderVersion="[40,)"
-license="All rights reserved"
+loaderVersion="[42,)"
+license="LGPL v2.1"
 [[mods]]
 modId="l2backpack"
 version="${file.jarVersion}" #mandatory
 displayName="L2 Backpack" #mandatory
 logoFile="l2backpack.png" #optional
-credits="Thanks for this example mod goes to Java" #optional
-authors="Love, Cheese and small house plants" #optional
+credits="Thanks to ImprovedBackpack for QoL feature ideas" #optional
+authors="lcy0x1 and LightLand team" #optional
 description='''
+Simple backpack mod that allows you to open backpack in player GUI or enderchest.
+Also have some specialized bag for equipments, enchant books, and arrows.
 '''
 [[dependencies.l2backpack]]
     modId="forge"
     mandatory=true
-    versionRange="[40,)"
+    versionRange="[42.0.0,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.l2backpack]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,1.19)"
+    versionRange="[1.19.1,1.20)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.l2backpack]]
     modId="l2library"
     mandatory=true
-    versionRange="[0.0.3,)"
+    versionRange="[1.7.0,)"
     ordering="AFTER"

@@ -1,8 +1,8 @@
 package dev.xkmc.l2backpack.content.recipe;
 
 import dev.xkmc.l2backpack.init.data.ItemTags;
-import dev.xkmc.l2backpack.init.registrate.LightlandRecipe;
-import dev.xkmc.l2library.recipe.AbstractShapelessRecipe;
+import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
+import dev.xkmc.l2library.base.recipe.AbstractShapelessRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -31,6 +31,6 @@ public class BackpackDyeRecipe extends AbstractShapelessRecipe<BackpackDyeRecipe
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return LightlandRecipe.RSC_BAG_DYE.get();
+		return BackpackRecipe.RSC_BAG_DYE.get();
 	}
 }

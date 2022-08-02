@@ -71,7 +71,7 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 		VertexConsumer vc = bufferSource.getBuffer(Sheets.cutoutBlockSheet());
 		RANDOM.setSeed(42L);
 		for (BakedQuad rt : model.getQuads(state, null, RANDOM, EmptyModelData.INSTANCE)) {
-			vc.putBulkData(pose, rt, 255, 255, 255, light, overlay, true);
+			vc.putBulkData(pose, rt, 1, 1, 1, light, overlay, true);
 		}
 
 		Item item = BaseDrawerItem.getItem(stack);

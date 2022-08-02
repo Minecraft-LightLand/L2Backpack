@@ -54,7 +54,7 @@ public final class BackpackMenuPvd implements MenuProvider {
 			if (!tag.contains("rows"))
 				tag.putInt("rows", 1);
 		}
-		NetworkHooks.openScreen(player, this, this::writeBuffer);
+		NetworkHooks.openGui(player, this, this::writeBuffer);
 	}
 
 }

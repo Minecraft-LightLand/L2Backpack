@@ -4,7 +4,7 @@ import dev.xkmc.l2backpack.content.common.BaseBagContainer;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
-import dev.xkmc.l2library.base.menu.SpriteManager;
+import dev.xkmc.l2library.menu.SpriteManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;

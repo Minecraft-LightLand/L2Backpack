@@ -89,33 +89,11 @@ repositories {
         url 'https://dvs1.progwml6.com/files/maven'
     }
     maven {
-        // Location of the maven for vazkii's mods
-        name 'blamejared'
-        url 'https://maven.blamejared.com'
-    }
-    maven {
-        // Location of the maven for mixed mappings, Registrate, and Flywheel
-        name 'tterrag maven'
-        url 'https://maven.tterrag.com/'
-    }
-    maven {
         url 'https://www.cursemaven.com'
         content {
             includeGroup "curse.maven"
         }
     }
-    maven {
-        url "https://maven.architectury.dev/"
-    }
-    maven { url "https://maven.bai.lol" }
-    maven {
-        url "https://maven.saps.dev/minecraft"
-        content {
-            includeGroup "dev.latvian.mods"
-            includeGroup "dev.ftb.mods"
-        }
-    }
-    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     flatDir{
         dirs 'libs'
     }
@@ -137,7 +115,7 @@ dependencies {
 
     runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:3791304')
     runtimeOnly fg.deobf('curse.maven:badpackets-615134:3773642')
-    runtimeOnly fg.deobf('curse.maven:storage-drawers-223852:3884263')
+    runtimeOnly fg.deobf('curse.maven:storage-drawers-223852:3807626')
 
 }
 

@@ -2,8 +2,8 @@ package dev.xkmc.l2backpack.network;
 
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2library.network.SerialPacketBase;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.network.NetworkEvent;
 

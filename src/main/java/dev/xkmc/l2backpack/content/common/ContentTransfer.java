@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.init.data.LangData;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.server.level.ServerPlayer;
@@ -152,25 +153,25 @@ public class ContentTransfer {
 
 	public static void onDump(Player player, int count) {
 		if (player instanceof ServerPlayer serverPlayer) {
-			serverPlayer.sendSystemMessage(LangData.IDS.DUMP_FEEDBACK.get(count), true);
+			serverPlayer.sendMessage(LangData.IDS.DUMP_FEEDBACK.get(count), ChatType.GAME_INFO, Util.NIL_UUID);
 		}
 	}
 
 	public static void onLoad(Player player, int count) {
 		if (player instanceof ServerPlayer serverPlayer) {
-			serverPlayer.sendSystemMessage(LangData.IDS.LOAD_FEEDBACK.get(count), true);
+			serverPlayer.sendMessage(LangData.IDS.LOAD_FEEDBACK.get(count), ChatType.GAME_INFO, Util.NIL_UUID);
 		}
 	}
 
 	public static void onExtract(Player player, int count) {
 		if (player instanceof ServerPlayer serverPlayer) {
-			serverPlayer.sendSystemMessage(LangData.IDS.EXTRACT_FEEDBACK.get(count), true);
+			serverPlayer.sendMessage(LangData.IDS.EXTRACT_FEEDBACK.get(count), ChatType.GAME_INFO, Util.NIL_UUID);
 		}
 	}
 
 	public static void onCollect(Player player, int count) {
 		if (player instanceof ServerPlayer serverPlayer) {
-			serverPlayer.sendSystemMessage(LangData.IDS.COLLECT_FEEDBACK.get(count), true);
+			serverPlayer.sendMessage(LangData.IDS.COLLECT_FEEDBACK.get(count), ChatType.GAME_INFO, Util.NIL_UUID);
 		}
 	}
 

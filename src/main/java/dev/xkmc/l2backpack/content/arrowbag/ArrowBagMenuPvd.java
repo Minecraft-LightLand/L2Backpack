@@ -51,7 +51,7 @@ public final class ArrowBagMenuPvd implements MenuProvider {
 			tag.putBoolean("init", true);
 			tag.putUUID("container_id", UUID.randomUUID());
 		}
-		NetworkHooks.openScreen(player, this, this::writeBuffer);
+		NetworkHooks.openGui(player, this, this::writeBuffer);
 	}
 
 }

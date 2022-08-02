@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.remote.worldchest;
 
 import dev.xkmc.l2backpack.content.remote.StorageContainer;
 import dev.xkmc.l2backpack.content.remote.WorldStorage;
-import dev.xkmc.l2library.util.annotation.ServerOnly;
+import dev.xkmc.l2library.util.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -44,7 +44,7 @@ public record WorldChestMenuPvd(ServerPlayer player, ItemStack stack, WorldChest
 		item.refresh(stack, player);
 		if (player.level.isClientSide() || getContainer((ServerLevel) player.level).isEmpty())
 			return;
-		NetworkHooks.openScreen(player, this);
+		NetworkHooks.openGui(player, this);
 	}
 
 }

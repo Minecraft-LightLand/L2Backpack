@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
-import dev.xkmc.l2library.base.menu.SpriteManager;
-import dev.xkmc.l2library.util.annotation.ServerOnly;
+import dev.xkmc.l2library.menu.SpriteManager;
+import dev.xkmc.l2library.util.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.Container;

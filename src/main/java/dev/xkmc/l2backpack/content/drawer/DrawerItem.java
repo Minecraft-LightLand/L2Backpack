@@ -14,7 +14,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.client.IItemRenderProperties;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +41,7 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 	}
 
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 		consumer.accept(BaseItemRenderer.EXTENSIONS);
 	}
 

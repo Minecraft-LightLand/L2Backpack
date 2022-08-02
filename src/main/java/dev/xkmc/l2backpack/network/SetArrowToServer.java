@@ -2,8 +2,8 @@ package dev.xkmc.l2backpack.network;
 
 import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
 import dev.xkmc.l2backpack.content.arrowbag.ArrowBagManager;
+import dev.xkmc.l2library.network.SerialPacketBase;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;

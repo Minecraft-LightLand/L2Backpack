@@ -7,8 +7,8 @@ import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2backpack.events.ClientEventHandler;
+import dev.xkmc.l2library.network.SerialPacketBase;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleMenuProvider;
@@ -67,7 +67,7 @@ public class SlotClickToServer extends SerialPacketBase {
 		if (playerSlot != null && stack.getItem() instanceof BaseBagItem bag) {
 			bag.open(player, playerSlot, stack);
 		} else if (stack.getItem() instanceof EnderBackpackItem) {
-			NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
+			NetworkHooks.openGui(player, new SimpleMenuProvider((id, inv, pl) ->
 					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getDisplayName()));
 		} else if (stack.getItem() instanceof WorldChestItem chest) {
 			new WorldChestMenuPvd(player, stack, chest).open();

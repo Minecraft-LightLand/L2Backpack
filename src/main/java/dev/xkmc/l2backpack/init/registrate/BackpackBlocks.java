@@ -13,6 +13,7 @@ import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
@@ -59,11 +60,11 @@ public class BackpackBlocks {
 							.texture("0", "block/drawer/" + alt + "_bottom")
 							.texture("1", "block/drawer/" + alt + "_front")
 							.texture("2", "block/drawer/" + alt + "_side")
-							.texture("3", "block/drawer/" + alt + "_top")
-							.renderType("cutout");
+							.texture("3", "block/drawer/" + alt + "_top");
 				}))
 				.loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
 				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
+				.addLayer(() -> RenderType::cutout)
 				.defaultLang().register();
 
 		TE_ENDER_DRAWER = REGISTRATE.blockEntity("ender_drawer", EnderDrawerBlockEntity::new)

@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.remote.worldchest;
 import dev.xkmc.l2backpack.content.remote.StorageContainer;
 import dev.xkmc.l2backpack.content.remote.WorldStorage;
 import dev.xkmc.l2backpack.init.data.LangData;
-import dev.xkmc.l2library.base.tile.BaseBlockEntity;
+import dev.xkmc.l2library.base.BaseBlockEntity;
 import dev.xkmc.l2library.block.NameSetable;
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.core.BlockPos;

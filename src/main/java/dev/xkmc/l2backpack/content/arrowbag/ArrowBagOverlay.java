@@ -11,16 +11,16 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import net.minecraftforge.client.gui.ForgeIngameGui;
+import net.minecraftforge.client.gui.IIngameOverlay;
 
 import java.util.List;
 
-public class ArrowBagOverlay implements IGuiOverlay {
+public class ArrowBagOverlay implements IIngameOverlay {
 
 	public static boolean isScreenOn() {
 		if (Minecraft.getInstance().screen != null) return false;
-		LocalPlayer player = Proxy.getClientPlayer();
+		LocalPlayer player = (LocalPlayer) Proxy.getClientPlayer();
 		if (player == null) return false;
 		if (!(player.getMainHandItem().getItem() instanceof ProjectileWeaponItem weapon)) return false;
 		ItemStack bag = ArrowBagManager.getArrowBag(player);
@@ -34,15 +34,15 @@ public class ArrowBagOverlay implements IGuiOverlay {
 	}
 
 	@Override
-	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
+	public void render(ForgeIngameGui gui, PoseStack poseStack, float partialTick, int width, int height) {
 		if (!isScreenOn()) return;
 		gui.setupOverlayRenderState(true, false);
-		LocalPlayer player = Proxy.getClientPlayer();
+		LocalPlayer player = (LocalPlayer) Proxy.getClientPlayer();
 		ProjectileWeaponItem weapon = (ProjectileWeaponItem) player.getMainHandItem().getItem();
 		ItemStack bag = ArrowBagManager.getArrowBag(player);
 		List<ItemStack> list = BaseBagItem.getItems(bag);
-		ItemRenderer renderer = gui.getMinecraft().getItemRenderer();
-		Font font = gui.getMinecraft().font;
+		ItemRenderer renderer = Minecraft.getInstance().getItemRenderer();
+		Font font = Minecraft.getInstance().font;
 		int selected = ArrowBag.getSelected(bag);
 		ItemStack used = player.getProjectile(player.getMainHandItem());
 		for (int i = 0; i < list.size(); i++) {
@@ -93,7 +93,8 @@ public class ArrowBagOverlay implements IGuiOverlay {
 		builder.vertex(x, y + h, 0.0D).color(r, g, b, a).endVertex();
 		builder.vertex(x + w, y + h, 0.0D).color(r, g, b, a).endVertex();
 		builder.vertex(x + w, y, 0.0D).color(r, g, b, a).endVertex();
-		BufferUploader.drawWithShader(builder.end());
+		builder.end();
+		BufferUploader.end(builder);
 	}
 
 }

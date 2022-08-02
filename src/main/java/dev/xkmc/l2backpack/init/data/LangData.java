@@ -5,7 +5,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.List;
 import java.util.Locale;
@@ -48,7 +48,7 @@ public class LangData {
 		public MutableComponent get(Object... objs) {
 			if (objs.length != count)
 				throw new IllegalArgumentException("for " + name() + ": expect " + count + " parameters, got " + objs.length);
-			return MutableComponent.create(new TranslatableContents(L2Backpack.MODID + "." + id, objs));
+			return new TranslatableComponent(L2Backpack.MODID + "." + id, objs);
 		}
 
 	}
@@ -80,7 +80,7 @@ public class LangData {
 		}
 
 		private MutableComponent get() {
-			return MutableComponent.create(new TranslatableContents(L2Backpack.MODID + "." + id));
+			return new TranslatableComponent(L2Backpack.MODID + "." + id);
 		}
 
 	}

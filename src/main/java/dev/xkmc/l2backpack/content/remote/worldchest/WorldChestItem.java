@@ -41,7 +41,7 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 	}
 
 	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> list) {
-		if (super.allowedIn(tab)) {
+		if (super.allowdedIn(tab)) {
 			list.add(new ItemStack(this));
 		}
 	}

@@ -37,7 +37,7 @@ public class ClientEventHandler {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
-	public static void keyEvent(InputEvent.Key event) {
+	public static void keyEvent(InputEvent.KeyInputEvent event) {
 		if (Minecraft.getInstance().screen == null && Proxy.getClientPlayer() != null && Keys.OPEN.map.isDown()) {
 			if (canOpen(Proxy.getClientPlayer().getItemBySlot(EquipmentSlot.CHEST)) ||
 					!CuriosCompat.getSlot(Proxy.getClientPlayer(), ClientEventHandler::canOpen).isEmpty())
@@ -47,7 +47,7 @@ public class ClientEventHandler {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
-	public static void onScreenLeftClick(ScreenEvent.MouseButtonReleased.Pre event) {
+	public static void onScreenLeftClick(ScreenEvent.MouseReleasedEvent.Pre event) {
 		if (onRelease(event)) {
 			event.setCanceled(true);
 		}
@@ -55,14 +55,14 @@ public class ClientEventHandler {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
-	public static void onScreenRightClick(ScreenEvent.MouseButtonPressed.Pre event) {
+	public static void onScreenRightClick(ScreenEvent.MouseClickedEvent.Pre event) {
 		if (onPress(event)) {
 			event.setCanceled(true);
 		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	private static boolean onRelease(ScreenEvent.MouseButtonReleased.Pre event) {
+	private static boolean onRelease(ScreenEvent.MouseReleasedEvent.Pre event) {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.getSlotUnderMouse();
@@ -78,7 +78,7 @@ public class ClientEventHandler {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	private static boolean onPress(ScreenEvent.MouseButtonPressed.Pre event) {
+	private static boolean onPress(ScreenEvent.MouseClickedEvent.Pre event) {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.getSlotUnderMouse();
@@ -98,7 +98,7 @@ public class ClientEventHandler {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	private static boolean openBackpack(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
+	private static boolean openBackpack(ScreenEvent.MouseClickedEvent.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
 		if (slot == null) {
 			return false;
 		}
@@ -144,7 +144,7 @@ public class ClientEventHandler {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	private static boolean extractItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
+	private static boolean extractItem(ScreenEvent.MouseClickedEvent.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
 		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
 		}

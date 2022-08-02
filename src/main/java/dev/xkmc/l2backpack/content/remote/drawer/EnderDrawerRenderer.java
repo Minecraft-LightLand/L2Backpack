@@ -19,8 +19,7 @@ public class EnderDrawerRenderer implements BlockEntityRenderer<EnderDrawerBlock
 
 	@Override
 	public void render(EnderDrawerBlockEntity entity, float pTick, PoseStack pose, MultiBufferSource buffer, int light, int overlay) {
-		var mc = Minecraft.getInstance();
-		float time = (mc.getPartialTick() + Proxy.getPlayer().tickCount) % 80;
+		float time = (pTick + Proxy.getPlayer().tickCount) % 80;
 		ItemStack stack = new ItemStack(entity.item, 1);
 		if (!stack.isEmpty()) {
 			pose.pushPose();

@@ -7,6 +7,7 @@ import dev.xkmc.l2backpack.content.remote.DrawerAccess;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
@@ -19,7 +20,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.client.IItemRenderProperties;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 	}
 
 	@Override
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 		consumer.accept(BaseItemRenderer.EXTENSIONS);
 	}
 
@@ -84,7 +85,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		if (BaseDrawerItem.getItem(context.getItemInHand()) == Items.AIR) {
 			if (!context.getLevel().isClientSide()) {
 				if (context.getPlayer() instanceof ServerPlayer serverPlayer) {
-					serverPlayer.sendSystemMessage(LangData.IDS.NO_ITEM.get().withStyle(ChatFormatting.RED), true);
+					serverPlayer.sendMessage(LangData.IDS.NO_ITEM.get().withStyle(ChatFormatting.RED), ChatType.GAME_INFO, Util.NIL_UUID);
 				}
 			}
 			return InteractionResult.FAIL;

@@ -56,6 +56,7 @@ public class ArrowBag extends BaseBagItem {
 				LangData.Info.LOAD,
 				LangData.Info.QUICK_INV_ACCESS,
 				LangData.Info.ARROW_INFO,
-				LangData.Info.KEYBIND);
+				LangData.Info.KEYBIND,
+				LangData.Info.EXIT);
 	}
 }

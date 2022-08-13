@@ -38,7 +38,8 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 				LangData.Info.LOAD,
 				LangData.Info.QUICK_INV_ACCESS,
 				LangData.Info.KEYBIND,
-				LangData.Info.UPGRADE
+				LangData.Info.UPGRADE,
+				LangData.Info.EXIT
 		);
 	}
 

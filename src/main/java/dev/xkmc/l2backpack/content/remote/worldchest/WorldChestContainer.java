@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class WorldChestContainer extends BaseOpenableContainer<WorldChestContainer> {
 
@@ -19,24 +20,32 @@ public class WorldChestContainer extends BaseOpenableContainer<WorldChestContain
 		return new WorldChestContainer(windowId, inv, new SimpleContainer(27), null, null, null);
 	}
 
+	@Nullable
 	protected final StorageContainer storage;
-	protected final Component title;
 
 	@Nullable
 	private final WorldChestBlockEntity activeChest;
 
 	public WorldChestContainer(int windowId, Inventory inventory, SimpleContainer cont,
-							   @Nullable StorageContainer storage, @Nullable Component title,
-							   @Nullable WorldChestBlockEntity entity) {
-		super(BackpackMenu.MT_WORLD_CHEST.get(), windowId, inventory, BackpackContainer.MANAGERS[2], menu -> cont);
+							   @Nullable StorageContainer storage,
+							   @Nullable WorldChestBlockEntity entity,
+							   @Nullable Component title) {
+		super(BackpackMenu.MT_WORLD_CHEST.get(), windowId, inventory, BackpackContainer.MANAGERS[2], menu -> cont, title);
 		this.addSlot("grid", stack -> true);
 		this.storage = storage;
-		this.title = title;
 		this.activeChest = entity;
 	}
 
+	@ServerOnly
 	public int getColor() {
+		assert storage != null;
 		return storage.color;
+	}
+
+	@ServerOnly
+	public UUID getOwner() {
+		assert storage != null;
+		return storage.id;
 	}
 
 	@ServerOnly
@@ -48,10 +57,6 @@ public class WorldChestContainer extends BaseOpenableContainer<WorldChestContain
 			}
 		}
 		return storage == null || storage.isValid();
-	}
-
-	public boolean isOpenedByOwner() {
-		return player.getUUID().equals(storage.id);
 	}
 
 }

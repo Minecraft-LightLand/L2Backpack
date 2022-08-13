@@ -8,7 +8,6 @@ import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;

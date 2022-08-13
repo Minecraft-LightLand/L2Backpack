@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.events;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2backpack.network.RequestTooltipUpdateEvent;
+import dev.xkmc.l2backpack.network.drawer.RequestTooltipUpdateEvent;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;

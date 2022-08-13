@@ -92,7 +92,7 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 		if (level == null || owner_id == null) return null;
 		Optional<StorageContainer> storage = getAccess();
 		if (storage.isEmpty()) return null;
-		return new WorldChestContainer(wid, inventory, storage.get().container, storage.get(), getName(), this);
+		return new WorldChestContainer(wid, inventory, storage.get().container, storage.get(), this, getDisplayName());
 	}
 
 	@Override
@@ -110,6 +110,7 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 	}
 
 	private Optional<StorageContainer> getAccess() {
+		assert level != null;
 		return WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password);
 	}
 

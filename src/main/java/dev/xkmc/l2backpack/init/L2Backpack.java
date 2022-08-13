@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.init;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.remote.WorldStorage;
+import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
@@ -9,7 +10,16 @@ import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
-import dev.xkmc.l2backpack.network.*;
+import dev.xkmc.l2backpack.network.SetArrowToServer;
+import dev.xkmc.l2backpack.network.SlotClickToServer;
+import dev.xkmc.l2backpack.network.drawer.CreativeSetCarryToClient;
+import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
+import dev.xkmc.l2backpack.network.drawer.RequestTooltipUpdateEvent;
+import dev.xkmc.l2backpack.network.drawer.RespondTooltipUpdateEvent;
+import dev.xkmc.l2backpack.network.restore.AddTrackedToClient;
+import dev.xkmc.l2backpack.network.restore.PopLayerToClient;
+import dev.xkmc.l2backpack.network.restore.RestoreMenuToServer;
+import dev.xkmc.l2backpack.network.restore.SetScreenToClient;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.serial.handler.Handlers;
@@ -47,7 +57,11 @@ public class L2Backpack {
 			e -> e.create(DrawerInteractToServer.class, PLAY_TO_SERVER),
 			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
 			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),
-			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT)
+			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT),
+			e -> e.create(RestoreMenuToServer.class, PLAY_TO_SERVER),
+			e -> e.create(AddTrackedToClient.class, PLAY_TO_CLIENT),
+			e -> e.create(SetScreenToClient.class, PLAY_TO_CLIENT),
+			e -> e.create(PopLayerToClient.class, PLAY_TO_CLIENT)
 	);
 
 	private static void registerRegistrates(IEventBus bus) {
@@ -57,6 +71,7 @@ public class L2Backpack {
 		BackpackMenu.register();
 		BackpackRecipe.register(bus);
 		Handlers.register();
+		ScreenTracker.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 	}
 

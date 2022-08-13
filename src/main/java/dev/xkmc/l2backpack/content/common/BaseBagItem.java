@@ -46,8 +46,8 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 	public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
 		if (entity != Proxy.getClientPlayer()) return 0;
 		Screen screen = Minecraft.getInstance().screen;
-		if (screen instanceof BaseBagScreen<?> gui) {
-			return gui.getMenu().getStack() == stack ? 1 : 0;
+		if ((screen instanceof BaseOpenableScreen<?> gui) && (gui.getMenu() instanceof BaseBagContainer<?> cont)) {
+			return cont.getStack() == stack ? 1 : 0;
 		}
 		return 0;
 	}

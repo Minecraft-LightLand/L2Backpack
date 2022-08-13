@@ -1,15 +1,18 @@
 package dev.xkmc.l2backpack.content.common;
 
+import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2library.base.menu.SpriteManager;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -19,8 +22,8 @@ public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenabl
 	protected final UUID uuid;
 
 	public BaseBagContainer(MenuType<T> type, int windowId, Inventory inventory, SpriteManager manager,
-							PlayerSlot hand, UUID uuid, int row, Predicate<ItemStack> pred) {
-		super(type, windowId, inventory, manager, menu -> new BaseContainer<>(row * 9, menu));
+							PlayerSlot hand, UUID uuid, int row, Predicate<ItemStack> pred, @Nullable Component title) {
+		super(type, windowId, inventory, manager, menu -> new BaseContainer<>(row * 9, menu), title);
 		this.item_slot = hand;
 		this.uuid = uuid;
 		this.addSlot("grid", pred);
@@ -44,6 +47,7 @@ public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenabl
 	public void removed(Player player) {
 		if (!player.level.isClientSide) {
 			save();
+			ScreenTracker.onServerClose(player, containerId);
 		}
 		super.removed(player);
 	}

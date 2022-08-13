@@ -29,7 +29,6 @@ public class L2BackpackClient {
 		bus.addListener(L2BackpackClient::clientSetup);
 		bus.addListener(L2BackpackClient::registerOverlay);
 		bus.addListener(L2BackpackClient::registerKeys);
-		bus.addListener(L2BackpackClient::registerChestTextures);
 		RenderEvents.register(bus);
 	}
 
@@ -54,15 +53,6 @@ public class L2BackpackClient {
 	public static void registerKeys(RegisterKeyMappingsEvent event) {
 		for (Keys k : Keys.values())
 			event.register(k.map);
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public static void registerChestTextures(TextureStitchEvent.Pre event) {
-		if (event.getAtlas().location().equals(Sheets.CHEST_SHEET)) {
-			for (DyeColor color : DyeColor.values()) {
-				event.addSprite(new ResourceLocation(L2Backpack.MODID, "entity/" + color.getName()));
-			}
-		}
 	}
 
 }

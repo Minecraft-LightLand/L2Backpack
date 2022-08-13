@@ -2,7 +2,6 @@ package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.ChatType;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;

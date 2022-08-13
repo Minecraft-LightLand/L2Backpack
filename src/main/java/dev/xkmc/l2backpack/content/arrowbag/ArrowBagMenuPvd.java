@@ -35,7 +35,7 @@ public final class ArrowBagMenuPvd implements MenuProvider {
 	public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
 		CompoundTag tag = stack.getOrCreateTag();
 		UUID uuid = tag.getUUID("container_id");
-		return new ArrowBagContainer(id, inventory, slot, uuid);
+		return new ArrowBagContainer(id, inventory, slot, uuid, getDisplayName());
 	}
 
 	public void writeBuffer(FriendlyByteBuf buf) {

@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.network;
+package dev.xkmc.l2backpack.network.drawer;
 
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.init.L2Backpack;

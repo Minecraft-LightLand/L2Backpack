@@ -35,7 +35,7 @@ public final class BackpackMenuPvd implements MenuProvider {
 	public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
 		CompoundTag tag = stack.getOrCreateTag();
 		UUID uuid = tag.getUUID("container_id");
-		return new BackpackContainer(id, inventory, slot, uuid, tag.getInt("rows"));
+		return new BackpackContainer(id, inventory, slot, uuid, tag.getInt("rows"), getDisplayName());
 	}
 
 	public void writeBuffer(FriendlyByteBuf buf) {

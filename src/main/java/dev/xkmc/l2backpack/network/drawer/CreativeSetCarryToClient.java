@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.network;
+package dev.xkmc.l2backpack.network.drawer;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;

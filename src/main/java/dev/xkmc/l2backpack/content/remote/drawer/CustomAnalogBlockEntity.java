@@ -1,7 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.remote.DrawerAccess;
-import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import net.minecraft.core.BlockPos;

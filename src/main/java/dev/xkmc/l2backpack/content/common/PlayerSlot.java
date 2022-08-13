@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.common;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.events.ClientEventHandler;
+import net.minecraft.Util;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -11,44 +12,48 @@ import net.minecraft.world.inventory.PlayerEnderChestContainer;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
-public record PlayerSlot(ContainerType type, int slot) {
+public record PlayerSlot(ContainerType type, int slot, UUID uuid) {
 
 	public static PlayerSlot ofInventory(int slot) {
-		return new PlayerSlot(ContainerType.INVENTORY, slot);
+		return new PlayerSlot(ContainerType.INVENTORY, slot, Util.NIL_UUID);
 	}
 
 	@Nullable
 	public static PlayerSlot ofOtherInventory(int slot, int index, int wid, AbstractContainerMenu menu) {
 		if (menu instanceof ChestMenu chest && chest.getContainer() instanceof PlayerEnderChestContainer) {
-			return new PlayerSlot(ContainerType.ENDER, index);
+			return new PlayerSlot(ContainerType.ENDER, index, Util.NIL_UUID);
 		}
-		if (menu instanceof WorldChestContainer cont && cont.isOpenedByOwner()) {
-			return new PlayerSlot(ContainerType.DIMENSION, cont.getColor() * 27 + index - 36);
+		if (menu instanceof WorldChestContainer cont) {
+			return new PlayerSlot(ContainerType.DIMENSION, cont.getColor() * 27 + index - 36, cont.getOwner());
 		}
 		return CuriosCompat.getPlayerSlot(slot, index, wid, menu)
-				.map(e -> new PlayerSlot(ContainerType.CURIO, e))
+				.map(e -> new PlayerSlot(ContainerType.CURIO, e, Util.NIL_UUID))
 				.orElse(null);
 	}
 
 	public static PlayerSlot read(FriendlyByteBuf buf) {
 		ContainerType type = ContainerType.values()[buf.readInt()];
 		int slot = buf.readInt();
-		return new PlayerSlot(type, slot);
+		UUID id = buf.readUUID();
+		return new PlayerSlot(type, slot, id);
 	}
 
 	@Nullable
 	public static PlayerSlot ofCurio(Player player) {
 		return CuriosCompat.getSearchBag(player, ClientEventHandler::canOpen)
-				.map(e -> new PlayerSlot(ContainerType.CURIO, e)).orElse(null);
+				.map(e -> new PlayerSlot(ContainerType.CURIO, e, Util.NIL_UUID)).orElse(null);
 	}
 
 	public void write(FriendlyByteBuf buf) {
 		buf.writeInt(type.ordinal());
 		buf.writeInt(slot);
+		buf.writeUUID(uuid);
 	}
 
 	public ItemStack getItem(Player player) {
-		return type.getItem(player, slot);
+		return type.getItem(player, this);
 	}
+
 }

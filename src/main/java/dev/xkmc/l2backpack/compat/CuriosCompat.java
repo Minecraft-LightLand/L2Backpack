@@ -1,17 +1,21 @@
 package dev.xkmc.l2backpack.compat;
 
+import dev.xkmc.l2backpack.content.common.PlayerSlot;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.network.NetworkHooks;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import top.theillusivec4.curios.common.inventory.CurioSlot;
 import top.theillusivec4.curios.common.inventory.container.CuriosContainer;
+import top.theillusivec4.curios.common.inventory.container.CuriosContainerProvider;
 
 import java.util.Map;
 import java.util.Optional;
@@ -38,9 +42,9 @@ public class CuriosCompat {
 		return Optional.empty();
 	}
 
-	public static ItemStack getItemFromSlot(Player player, int slot) {
+	public static ItemStack getItemFromSlot(Player player, PlayerSlot slot) {
 		if (ModList.get().isLoaded("curios")) {
-			return getItemFromSlotImpl(player, slot);
+			return getItemFromSlotImpl(player, slot.slot());
 		}
 		return ItemStack.EMPTY;
 	}
@@ -50,6 +54,14 @@ public class CuriosCompat {
 			return getSearchBagImpl(player, pred);
 		}
 		return Optional.empty();
+	}
+
+	public static boolean openCurio(ServerPlayer player) {
+		if (ModList.get().isLoaded("curios")) {
+			openCurioImpl(player);
+			return true;
+		}
+		return false;
 	}
 
 	private static void initImpl() {
@@ -123,6 +135,10 @@ public class CuriosCompat {
 			}
 		}
 		return Optional.empty();
+	}
+
+	private static void openCurioImpl(ServerPlayer player) {
+		NetworkHooks.openScreen(player, new CuriosContainerProvider());
 	}
 
 }

@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.content.arrowbag.ArrowBagOverlay;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.remote.drawer.EnderPreviewOverlay;
 import dev.xkmc.l2backpack.content.render.RenderEvents;
 import dev.xkmc.l2backpack.init.data.Keys;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
@@ -47,6 +48,7 @@ public class L2BackpackClient {
 	@OnlyIn(Dist.CLIENT)
 	public static void registerOverlay(RegisterGuiOverlaysEvent event) {
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "arrow_bag", new ArrowBagOverlay());
+		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "ender_drawer", new EnderPreviewOverlay());
 	}
 
 	@OnlyIn(Dist.CLIENT)

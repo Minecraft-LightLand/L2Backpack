@@ -22,10 +22,10 @@ import java.util.UUID;
 @SerialClass
 public class EnderDrawerBlockEntity extends BaseBlockEntity {
 
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
 	public UUID owner_id;
 
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
 	public String owner_name;
 
 	@SerialClass.SerialField(toClient = true)

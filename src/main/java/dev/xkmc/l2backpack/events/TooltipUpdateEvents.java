@@ -1,17 +1,23 @@
 package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.network.drawer.RequestTooltipUpdateEvent;
 import dev.xkmc.l2library.util.Proxy;
+import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -29,14 +35,35 @@ public class TooltipUpdateEvents {
 
 	private static boolean continueSession() {
 		Screen screen = Minecraft.getInstance().screen;
-		if (!(screen instanceof AbstractContainerScreen<?> cont)) return false;
+		if (screen instanceof AbstractContainerScreen<?> cont)
+			return screenSession(cont);
+		else if (screen == null)
+			return blockSession();
+		else return false;
+	}
+
+	private static boolean screenSession(AbstractContainerScreen<?> cont) {
 		Slot slot = cont.getSlotUnderMouse();
 		if (slot == null) return false;
 		ItemStack stack = slot.getItem();
 		if (!(stack.getItem() instanceof EnderDrawerItem)) return false;
 		if (BaseDrawerItem.getItem(stack) == Items.AIR) return false;
-		startSession(stack);
+		startSession(BaseDrawerItem.getItem(stack), stack.getOrCreateTag().getUUID(EnderDrawerItem.KEY_OWNER_ID));
 		return true;
+	}
+
+	private static boolean blockSession() {
+		LocalPlayer player = Proxy.getClientPlayer();
+		var ray = RayTraceUtil.rayTraceBlock(player.level, player, player.getReachDistance());
+		if (ray.getType() == HitResult.Type.BLOCK) {
+			BlockPos pos = ray.getBlockPos();
+			BlockEntity entity = player.level.getBlockEntity(pos);
+			if (entity instanceof EnderDrawerBlockEntity drawer) {
+				startSession(drawer.item, drawer.owner_id);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private enum Step {
@@ -58,10 +85,10 @@ public class TooltipUpdateEvents {
 		id = null;
 	}
 
-	private static void startSession(ItemStack stack) {
+	private static void startSession(Item content, UUID owner) {
 		if (step == Step.NONE) {
-			focus = BaseDrawerItem.getItem(stack);
-			id = stack.getOrCreateTag().getUUID(EnderDrawerItem.KEY_OWNER_ID);
+			focus = content;
+			id = owner;
 			step = Step.SENT;
 			L2Backpack.HANDLER.toServer(new RequestTooltipUpdateEvent(focus, Proxy.getClientPlayer().getUUID()));
 		} else if (step == Step.COOLDOWN) {

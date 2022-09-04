@@ -13,11 +13,14 @@
     },
     "D": {
       "item": "minecraft:popped_chorus_fruit"
+    },
+    "E": {
+      "item": "minecraft:gold_nugget"
     }
   },
   "pattern": [
-    "DAD",
-    "ACA",
+    "EAE",
+    "DCD",
     "BAB"
   ],
   "result": {

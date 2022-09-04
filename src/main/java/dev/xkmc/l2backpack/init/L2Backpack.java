@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.remote.WorldStorage;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
+import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
@@ -76,6 +77,7 @@ public class L2Backpack {
 	}
 
 	private static void registerForgeEvents() {
+		BackpackConfig.init();
 		MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
 		MinecraftForge.EVENT_BUS.register(ArrowBagEvents.class);
 		MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);

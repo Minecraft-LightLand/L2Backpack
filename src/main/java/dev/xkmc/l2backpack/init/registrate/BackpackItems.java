@@ -12,6 +12,7 @@ import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.ItemTags;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateItemModelProvider;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -80,7 +81,7 @@ public class BackpackItems {
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p))
 						.tag(ItemTags.BACKPACKS.tag, curios_tag).model(BackpackItems::createBackpackModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
-						.defaultLang().register();
+						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_backpack")).register();
 			}
 			DIMENSIONAL_STORAGE = new ItemEntry[16];
 			for (int i = 0; i < 16; i++) {
@@ -88,7 +89,7 @@ public class BackpackItems {
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p))
 						.tag(ItemTags.DIMENSIONAL_STORAGES.tag, curios_tag).model(BackpackItems::createWorldChestModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMaterialColor().col)
-						.defaultLang().register();
+						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_dimensional_backpack")).register();
 			}
 			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(BackpackItems::createEnderBackpackModel)
 					.tag(curios_tag).defaultLang().register();

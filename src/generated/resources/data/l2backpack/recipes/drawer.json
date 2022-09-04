@@ -2,17 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "A": {
-      "item": "minecraft:amethyst_shard"
+      "item": "minecraft:glass"
     },
     "B": {
       "item": "l2backpack:ender_pocket"
     },
+    "C": {
+      "tag": "forge:dyes/purple"
+    },
     "D": {
-      "item": "minecraft:gold_ingot"
+      "tag": "forge:dyes/yellow"
     }
   },
   "pattern": [
-    "DAD",
+    "CAC",
     "ABA",
     "DAD"
   ],

@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.backpack;
 
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
+import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -52,7 +53,7 @@ public final class BackpackMenuPvd implements MenuProvider {
 			tag.putBoolean("init", true);
 			tag.putUUID("container_id", UUID.randomUUID());
 			if (!tag.contains("rows"))
-				tag.putInt("rows", 1);
+				tag.putInt("rows", BackpackConfig.COMMON.initialRows.get());
 		}
 		NetworkHooks.openScreen(player, this, this::writeBuffer);
 	}

@@ -148,11 +148,11 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count));
 		}
 		LangData.addInfo(list,
+				LangData.Info.DRAWER_USE,
 				LangData.Info.DUMP,
 				LangData.Info.LOAD,
 				LangData.Info.EXTRACT_DRAWER,
-				LangData.Info.COLLECT_DRAWER,
-				LangData.Info.DRAWER_USE);
+				LangData.Info.COLLECT_DRAWER);
 	}
 
 }

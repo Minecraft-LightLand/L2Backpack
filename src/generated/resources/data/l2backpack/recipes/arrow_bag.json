@@ -7,17 +7,14 @@
     "B": {
       "item": "minecraft:arrow"
     },
-    "C": {
-      "item": "minecraft:bow"
-    },
     "D": {
       "item": "minecraft:string"
     }
   },
   "pattern": [
-    "DCD",
+    " AB",
     "ABA",
-    "AAA"
+    " AD"
   ],
   "result": {
     "item": "l2backpack:arrow_bag"

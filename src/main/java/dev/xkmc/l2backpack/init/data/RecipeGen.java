@@ -31,7 +31,7 @@ public class RecipeGen {
 				Item backpack = BackpackItems.BACKPACKS[i].get();
 
 				unlock(pvd, new ShapedRecipeBuilder(backpack, 1)::unlockedBy, backpack)
-						.group("backpack_craft").pattern("ADA").pattern("BCB").pattern("ADA")
+						.group("backpack_craft").pattern(" A ").pattern("DCD").pattern("BBB")
 						.define('A', Tags.Items.LEATHER).define('B', wool)
 						.define('C', Items.CHEST).define('D', Items.IRON_INGOT)
 						.save(pvd, L2Backpack.MODID + ":shaped/craft_backpack_" + color.getName());
@@ -47,22 +47,24 @@ public class RecipeGen {
 				Item storage = BackpackItems.DIMENSIONAL_STORAGE[i].get();
 
 				unlock(pvd, new ShapedRecipeBuilder(storage, 1)::unlockedBy, storage)
-						.group("dimensional_storage_craft").pattern("DAD").pattern("ACA").pattern("BAB")
+						.group("dimensional_storage_craft").pattern("EAE").pattern("DCD").pattern("BAB")
 						.define('A', BackpackItems.ENDER_POCKET.get()).define('B', wool)
 						.define('C', Items.ENDER_CHEST).define('D', Items.POPPED_CHORUS_FRUIT)
+						.define('E', Items.GOLD_NUGGET)
 						.save(pvd, L2Backpack.MODID + ":shaped/craft_storage_" + color.getName());
 			}
 			Item ender = BackpackItems.ENDER_BACKPACK.get();
 			unlock(pvd, new ShapedRecipeBuilder(ender, 1)::unlockedBy, ender)
-					.pattern("ADA").pattern("BCB").pattern("ADA")
-					.define('A', Tags.Items.LEATHER).define('B', Items.ENDER_PEARL)
-					.define('C', Items.ENDER_CHEST).define('D', Items.IRON_INGOT)
+					.pattern("EAE").pattern("BCB").pattern("DDD")
+					.define('A', Tags.Items.LEATHER).define('B', Items.IRON_INGOT)
+					.define('C', Items.ENDER_CHEST).define('D', Items.PURPLE_WOOL)
+					.define('E', Items.GOLD_NUGGET)
 					.save(pvd);
 			ender = BackpackItems.ENDER_POCKET.get();
-			unlock(pvd, new ShapedRecipeBuilder(ender, 1)::unlockedBy, ender)
+			unlock(pvd, new ShapedRecipeBuilder(ender, 4)::unlockedBy, ender)
 					.pattern("ADA").pattern("BCB").pattern("ADA")
-					.define('C', Tags.Items.LEATHER).define('B', Items.GOLD_INGOT)
-					.define('A', Items.ENDER_PEARL).define('D', Items.LAPIS_LAZULI)
+					.define('C', Items.ENDER_PEARL).define('B', Items.GOLD_NUGGET)
+					.define('A', Tags.Items.LEATHER).define('D', Items.LAPIS_LAZULI)
 					.save(pvd);
 		}
 		{
@@ -75,32 +77,32 @@ public class RecipeGen {
 					.save(pvd);
 			bag = BackpackItems.BOOK_BAG.get();
 			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
-					.pattern("DCD").pattern("ABA").pattern("AAA")
+					.pattern("DCD").pattern("ABA").pattern(" A ")
 					.define('A', Tags.Items.LEATHER).define('B', ender)
 					.define('D', Items.STRING).define('C', Items.BOOK)
 					.save(pvd);
 
 			bag = BackpackItems.ARROW_BAG.get();
 			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, Items.ARROW)
-					.pattern("DCD").pattern("ABA").pattern("AAA")
+					.pattern(" AB").pattern("ABA").pattern(" AD")
 					.define('A', Tags.Items.LEATHER).define('B', Items.ARROW)
-					.define('D', Items.STRING).define('C', Items.BOW)
+					.define('D', Items.STRING)
 					.save(pvd);
 
 			bag = BackpackItems.DRAWER.get();
 			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
-					.pattern("DAD").pattern("ABA").pattern("DAD")
-					.define('A', Items.AMETHYST_SHARD).define('B', ender)
-					.define('D', Items.GOLD_INGOT)
+					.pattern("CAC").pattern("ABA").pattern("DAD")
+					.define('A', Items.GLASS).define('B', ender)
+					.define('C', Tags.Items.DYES_PURPLE)
+					.define('D', Tags.Items.DYES_YELLOW)
 					.save(pvd);
 
 
 			bag = BackpackItems.ENDER_DRAWER.get();
 			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
-					.pattern("DAD").pattern("CBC").pattern("DED")
-					.define('A', ender).define('B', Items.END_CRYSTAL)
-					.define('C', Items.ENDER_PEARL).define('D', Items.OBSIDIAN)
-					.define('E', Items.ENDER_CHEST)
+					.pattern("DAD").pattern("ABA").pattern("DED")
+					.define('B', ender).define('A', Items.GLASS)
+					.define('D', Items.OBSIDIAN).define('E', Items.ENDER_CHEST)
 					.save(pvd);
 
 			unlock(pvd, new ShapelessRecipeBuilder(bag, 1)::unlockedBy, bag)

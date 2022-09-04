@@ -16,9 +16,9 @@
     }
   },
   "pattern": [
-    "ADA",
-    "BCB",
-    "ADA"
+    " A ",
+    "DCD",
+    "BBB"
   ],
   "result": {
     "item": "l2backpack:backpack_lime"

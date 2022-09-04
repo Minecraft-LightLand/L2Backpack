@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "A": {
-      "item": "minecraft:ender_pearl"
+      "tag": "forge:leather"
     },
     "B": {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:gold_nugget"
     },
     "C": {
-      "tag": "forge:leather"
+      "item": "minecraft:ender_pearl"
     },
     "D": {
       "item": "minecraft:lapis_lazuli"
@@ -20,6 +20,7 @@
     "ADA"
   ],
   "result": {
+    "count": 4,
     "item": "l2backpack:ender_pocket"
   }
 }

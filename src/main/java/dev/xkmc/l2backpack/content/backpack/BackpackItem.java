@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -32,13 +33,17 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, stack.getOrCreateTag().getInt("rows")), 6));
+		int rows = stack.getOrCreateTag().getInt("rows");
+		if (rows == 0) {
+			rows = BackpackConfig.COMMON.initialRows.get();
+		}
+		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, rows), 6));
 		LangData.addInfo(list,
-				LangData.Info.DUMP,
-				LangData.Info.LOAD,
 				LangData.Info.QUICK_INV_ACCESS,
 				LangData.Info.KEYBIND,
 				LangData.Info.UPGRADE,
+				LangData.Info.DUMP,
+				LangData.Info.LOAD,
 				LangData.Info.EXIT
 		);
 	}

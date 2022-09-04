@@ -71,7 +71,7 @@ public class RecipeGen {
 			Item ender = BackpackItems.ENDER_POCKET.get();
 			Item bag = BackpackItems.ARMOR_BAG.get();
 			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
-					.pattern("DCD").pattern("ABA").pattern("AAA")
+					.pattern("DCD").pattern("ABA").pattern(" A ")
 					.define('A', Tags.Items.LEATHER).define('B', ender)
 					.define('D', Items.STRING).define('C', Items.IRON_CHESTPLATE)
 					.save(pvd);

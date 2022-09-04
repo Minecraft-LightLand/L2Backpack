@@ -67,8 +67,8 @@ public class L2Backpack {
 
 	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();
-		BackpackBlocks.register();
 		BackpackItems.register();
+		BackpackBlocks.register();
 		BackpackMenu.register();
 		BackpackRecipe.register(bus);
 		Handlers.register();

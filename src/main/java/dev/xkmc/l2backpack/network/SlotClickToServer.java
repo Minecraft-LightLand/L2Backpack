@@ -67,14 +67,17 @@ public class SlotClickToServer extends SerialPacketBase {
 
 		if (playerSlot != null && stack.getItem() instanceof BaseBagItem bag) {
 			bag.open(player, playerSlot, stack);
-			ScreenTracker.onServerOpen(player, menu, playerSlot);
+			if (wid != -1 || slot != -1 || index != -1)
+				ScreenTracker.onServerOpen(player, menu, playerSlot);
 		} else if (stack.getItem() instanceof EnderBackpackItem) {
 			NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
 					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getDisplayName()));
 		} else if (stack.getItem() instanceof WorldChestItem chest) {
 			new WorldChestMenuPvd(player, stack, chest).open();
 			if (playerSlot != null) {
-				ScreenTracker.onServerOpen(player, menu, playerSlot);
+				if (wid != -1 || slot != -1 || index != -1) {
+					ScreenTracker.onServerOpen(player, menu, playerSlot);
+				}
 			}
 			if (container != null) {
 				container.setChanged();

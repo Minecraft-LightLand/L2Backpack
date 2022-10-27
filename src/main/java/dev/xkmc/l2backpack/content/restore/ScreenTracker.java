@@ -20,6 +20,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -49,6 +51,7 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		return HOLDER.get(player);
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	public static boolean onClientClose(int wid) {
 		ScreenTracker tracker = get(Proxy.getClientPlayer());
 		if (tracker.onClientCloseImpl(wid)) {
@@ -59,6 +62,7 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		return false;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	public static void onClientOpen(Screen prev, int wid, BaseOpenableScreen<?> current) {
 	}
 
@@ -136,6 +140,7 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 	// --- client only values
 	private boolean isWaiting;
 
+	@OnlyIn(Dist.CLIENT)
 	public void clientAddLayer(TrackedEntry entry, int toRemove, int wid) {
 		for (int i = 0; i < toRemove; i++) {
 			if (stack.size() > 0) {
@@ -146,12 +151,14 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		stack.add(entry);
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	public void clientClear(ScreenType type) {
 		isWaiting = false;
 		stack.clear();
 		type.perform();
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private boolean onClientCloseImpl(int wid) {
 		if (Screen.hasShiftDown() || isWaiting) {
 			// second exit: close screen
@@ -162,6 +169,7 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		return this.wid == wid;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	public void clientPop(LayerPopType type, int wid) {
 		isWaiting = false;
 		if (type == LayerPopType.REMAIN) {
@@ -171,4 +179,5 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		}
 		this.wid = wid;
 	}
+
 }

@@ -18,6 +18,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -25,6 +27,7 @@ import java.util.UUID;
 
 public class TooltipUpdateEvents {
 
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
 		if (event.phase != TickEvent.Phase.END) return;
@@ -33,6 +36,7 @@ public class TooltipUpdateEvents {
 		}
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static boolean continueSession() {
 		Screen screen = Minecraft.getInstance().screen;
 		if (screen instanceof AbstractContainerScreen<?> cont)
@@ -42,6 +46,7 @@ public class TooltipUpdateEvents {
 		else return false;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static boolean screenSession(AbstractContainerScreen<?> cont) {
 		Slot slot = cont.getSlotUnderMouse();
 		if (slot == null) return false;
@@ -52,6 +57,7 @@ public class TooltipUpdateEvents {
 		return true;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static boolean blockSession() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		var ray = RayTraceUtil.rayTraceBlock(player.level, player, player.getReachDistance());
@@ -85,6 +91,7 @@ public class TooltipUpdateEvents {
 		id = null;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	private static void startSession(Item content, UUID owner) {
 		if (step == Step.NONE) {
 			focus = content;

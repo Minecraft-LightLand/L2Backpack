@@ -42,6 +42,10 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 		stack.getOrCreateTag().put("Items", list);
 	}
 
+	public static long getTimeStamp(ItemStack stack){
+		return stack.getOrCreateTag().getLong("TimeStamp");
+	}
+
 	@OnlyIn(Dist.CLIENT)
 	public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
 		if (entity != Proxy.getClientPlayer()) return 0;

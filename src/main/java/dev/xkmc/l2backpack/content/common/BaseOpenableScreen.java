@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.xkmc.l2backpack.content.restore.ScreenTracker;
+import dev.xkmc.l2backpack.content.restore.ScreenTrackerClient;
 import dev.xkmc.l2library.base.menu.BaseContainerScreen;
 import dev.xkmc.l2library.base.menu.SpriteManager;
 import net.minecraft.client.Minecraft;
@@ -12,7 +12,7 @@ public class BaseOpenableScreen<T extends BaseOpenableContainer<T>> extends Base
 
 	public BaseOpenableScreen(T cont, Inventory plInv, Component title) {
 		super(cont, plInv, title);
-		ScreenTracker.onClientOpen(Minecraft.getInstance().screen, getMenu().containerId, this);
+		ScreenTrackerClient.onClientOpen(Minecraft.getInstance().screen, getMenu().containerId, this);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class BaseOpenableScreen<T extends BaseOpenableContainer<T>> extends Base
 	}
 
 	public void onClose() {
-		if (!ScreenTracker.onClientClose(getMenu().containerId)) {
+		if (!ScreenTrackerClient.onClientClose(getMenu().containerId)) {
 			super.onClose();
 		}
 	}

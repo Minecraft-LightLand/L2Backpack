@@ -14,9 +14,14 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Predicate;
 
-public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenableContainer<T> {
+public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenableContainer<T> {
+
+	@ServerOnly
+	private static final ConcurrentHashMap<UUID, ConcurrentLinkedQueue<BaseBagContainer<?>>> MAP = new ConcurrentHashMap<>();
 
 	protected final PlayerSlot item_slot;
 	protected final UUID uuid;
@@ -28,12 +33,18 @@ public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenabl
 		this.uuid = uuid;
 		this.addSlot("grid", pred);
 		if (!this.player.level.isClientSide()) {
-			ItemStack stack = getStack();
-			if (!stack.isEmpty()) {
-				ListTag tag = BaseBagItem.getListTag(stack);
-				for (int i = 0; i < tag.size(); i++) {
-					this.container.setItem(i, ItemStack.of((CompoundTag) tag.get(i)));
-				}
+			MAP.computeIfAbsent(uuid, e -> new ConcurrentLinkedQueue<>()).add(this);
+			reload();
+		}
+	}
+
+	@ServerOnly
+	private void reload() {
+		ItemStack stack = getStack();
+		if (!stack.isEmpty()) {
+			ListTag tag = BaseBagItem.getListTag(stack);
+			for (int i = 0; i < tag.size(); i++) {
+				this.container.setItem(i, ItemStack.of((CompoundTag) tag.get(i)));
 			}
 		}
 	}
@@ -46,6 +57,7 @@ public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenabl
 	@Override
 	public void removed(Player player) {
 		if (!player.level.isClientSide) {
+			MAP.computeIfAbsent(uuid, e -> new ConcurrentLinkedQueue<>()).remove(this);
 			save();
 			ScreenTracker.onServerClose(player, containerId);
 		}
@@ -62,6 +74,7 @@ public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenabl
 			}
 			BaseBagItem.setListTag(stack, list);
 		}
+		MAP.computeIfAbsent(uuid, e -> new ConcurrentLinkedQueue<>()).forEach(BaseBagContainer::reload);
 	}
 
 	private ItemStack stack_cache = ItemStack.EMPTY;
@@ -69,7 +82,9 @@ public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenabl
 	@ServerOnly
 	@Override
 	public boolean stillValid(Player player) {
-		return !getStackRaw().isEmpty();
+		ItemStack oldStack = stack_cache;
+		ItemStack newStack = getStackRaw();
+		return !getStackRaw().isEmpty() && oldStack == newStack;
 	}
 
 	public ItemStack getStack() {
@@ -87,6 +102,5 @@ public class BaseBagContainer<T extends BaseBagContainer<T>> extends BaseOpenabl
 		stack_cache = stack;
 		return stack;
 	}
-
 
 }

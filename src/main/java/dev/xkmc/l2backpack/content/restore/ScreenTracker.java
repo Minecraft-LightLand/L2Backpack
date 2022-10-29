@@ -1,27 +1,21 @@
 package dev.xkmc.l2backpack.content.restore;
 
 import dev.xkmc.l2backpack.content.common.BaseOpenableContainer;
-import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
 import dev.xkmc.l2backpack.content.common.ContainerType;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.network.restore.AddTrackedToClient;
 import dev.xkmc.l2backpack.network.restore.PopLayerToClient;
-import dev.xkmc.l2backpack.network.restore.RestoreMenuToServer;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2library.util.Proxy;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -51,21 +45,6 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 		return HOLDER.get(player);
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	public static boolean onClientClose(int wid) {
-		ScreenTracker tracker = get(Proxy.getClientPlayer());
-		if (tracker.onClientCloseImpl(wid)) {
-			tracker.isWaiting = true;
-			L2Backpack.HANDLER.toServer(new RestoreMenuToServer(wid));
-			return true;
-		}
-		return false;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public static void onClientOpen(Screen prev, int wid, BaseOpenableScreen<?> current) {
-	}
-
 	public static void onServerOpen(ServerPlayer player, AbstractContainerMenu prev, PlayerSlot slot) {
 		if (!(player.containerMenu instanceof BaseOpenableContainer<?> cont)) return;
 		Component comp = prev instanceof BaseOpenableContainer<?> prevOpen ? prevOpen.title : null;
@@ -83,9 +62,9 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 
 	// non-static
 
-	private final Stack<TrackedEntry> stack = new Stack<>();
+	final Stack<TrackedEntry> stack = new Stack<>();
 
-	private int wid;
+	int wid;
 
 	// --- server only values
 
@@ -138,46 +117,6 @@ public class ScreenTracker extends PlayerCapabilityTemplate<ScreenTracker> {
 	}
 
 	// --- client only values
-	private boolean isWaiting;
-
-	@OnlyIn(Dist.CLIENT)
-	public void clientAddLayer(TrackedEntry entry, int toRemove, int wid) {
-		for (int i = 0; i < toRemove; i++) {
-			if (stack.size() > 0) {
-				stack.pop();
-			} else break;
-		}
-		this.wid = wid;
-		stack.add(entry);
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public void clientClear(ScreenType type) {
-		isWaiting = false;
-		stack.clear();
-		type.perform();
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	private boolean onClientCloseImpl(int wid) {
-		if (Screen.hasShiftDown() || isWaiting) {
-			// second exit: close screen
-			isWaiting = false;
-			return false;
-		}
-		if (stack.isEmpty()) return false;
-		return this.wid == wid;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public void clientPop(LayerPopType type, int wid) {
-		isWaiting = false;
-		if (type == LayerPopType.REMAIN) {
-			stack.pop();
-		} else {
-			stack.clear();
-		}
-		this.wid = wid;
-	}
+	boolean isWaiting;
 
 }

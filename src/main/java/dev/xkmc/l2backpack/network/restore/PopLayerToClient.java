@@ -1,10 +1,9 @@
 package dev.xkmc.l2backpack.network.restore;
 
 import dev.xkmc.l2backpack.content.restore.LayerPopType;
-import dev.xkmc.l2backpack.content.restore.ScreenTracker;
+import dev.xkmc.l2backpack.content.restore.ScreenTrackerClient;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
-import dev.xkmc.l2library.util.Proxy;
 import net.minecraftforge.network.NetworkEvent;
 
 @SerialClass
@@ -28,7 +27,7 @@ public class PopLayerToClient extends SerialPacketBase {
 
 	@Override
 	public void handle(NetworkEvent.Context context) {
-		ScreenTracker.get(Proxy.getClientPlayer()).clientPop(type, wid);
+		ScreenTrackerClient.clientPop(type, wid);
 	}
 
 }

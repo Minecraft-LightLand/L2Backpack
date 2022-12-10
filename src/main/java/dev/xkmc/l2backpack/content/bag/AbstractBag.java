@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
@@ -83,7 +83,7 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 			throwOut(list, player);
 		} else {
 			Queue<Holder<ItemStack>> queue = new ArrayDeque<>();
-			player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			player.getCapability(ForgeCapabilities.ITEM_HANDLER)
 					.resolve().ifPresent(e -> {
 						for (int i = 9; i < 36; i++) {
 							ItemStack inv_stack = player.getInventory().items.get(i);

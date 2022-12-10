@@ -1,24 +1,28 @@
 package dev.xkmc.l2backpack.content.arrowbag;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.init.data.BackpackConfig;
+import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 import java.util.List;
 
-public class ArrowBagOverlay implements IGuiOverlay {
+public class ArrowBagOverlay extends SelectionSideBar {
 
-	public static boolean isScreenOn() {
+	public static ArrowBagOverlay INSTANCE = new ArrowBagOverlay();
+
+	private ItemStack used = ItemStack.EMPTY;
+
+	public ArrowBagOverlay() {
+		super(40, 3);
+	}
+
+	public boolean isScreenOn() {
 		if (Minecraft.getInstance().screen != null) return false;
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
@@ -34,66 +38,50 @@ public class ArrowBagOverlay implements IGuiOverlay {
 	}
 
 	@Override
-	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
-		if (!isScreenOn()) return;
-		gui.setupOverlayRenderState(true, false);
+	public Pair<List<ItemStack>, Integer> getItems() {
 		LocalPlayer player = Proxy.getClientPlayer();
-		ProjectileWeaponItem weapon = (ProjectileWeaponItem) player.getMainHandItem().getItem();
 		ItemStack bag = ArrowBagManager.getArrowBag(player);
 		List<ItemStack> list = BaseBagItem.getItems(bag);
-		ItemRenderer renderer = gui.getMinecraft().getItemRenderer();
-		Font font = gui.getMinecraft().font;
 		int selected = ArrowBag.getSelected(bag);
-		ItemStack used = player.getProjectile(player.getMainHandItem());
-		for (int i = 0; i < list.size(); i++) {
-			ItemStack stack = list.get(i);
-			int x = width / 2 + 18 * 3 + 1;
-			int y = height / 2 - 81 + 18 * i + 1;
-			if (selected == i) {
-				boolean shift = Minecraft.getInstance().options.keyShift.isDown();
-				boolean match = !used.isEmpty() && ItemStack.isSameItemSameTags(stack, used) && stack.getCount() == used.getCount();
-				renderCooldown(x, y, shift ? 127 : 64, match);
-			}
-			if (!stack.isEmpty()) {
-				renderer.renderAndDecorateItem(stack, x, y);
-				renderer.renderGuiItemDecorations(font, stack, x, y);
-			}
-		}
+		return Pair.of(list, selected);
 	}
 
-	private static void renderCooldown(int x, int y, int a, boolean selected) {
-		RenderSystem.disableDepthTest();
-		RenderSystem.disableTexture();
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
-		Tesselator tex = Tesselator.getInstance();
-		BufferBuilder builder = tex.getBuilder();
-
-		if (selected) {
-			fillRect(builder, x, y, 16, 16, 255, 255, 255, a);
-			drawRect(builder, x, y, 16, 16, 0xff, 0xaa, 0, 255);
-		} else {
-			fillRect(builder, x, y, 16, 16, 255, 0, 0, a);
-		}
-		RenderSystem.enableTexture();
-		RenderSystem.enableDepthTest();
+	@Override
+	public int getSignature() {
+		LocalPlayer player = Proxy.getClientPlayer();
+		ItemStack bag = ArrowBagManager.getArrowBag(player);
+		int selected = ArrowBag.getSelected(bag);
+		int focus = player.getInventory().selected;
+		return focus * 10 + selected;
 	}
 
-	private static void drawRect(BufferBuilder builder, int x, int y, int w, int h, int r, int g, int b, int a) {
-		fillRect(builder, x - 1, y - 1, w + 2, 1, r, g, b, a);
-		fillRect(builder, x - 1, y - 1, 1, h + 2, r, g, b, a);
-		fillRect(builder, x - 1, y + h, w + 2, 1, r, g, b, a);
-		fillRect(builder, x + w, y - 1, 1, h + 2, r, g, b, a);
+	@Override
+	public boolean isAvailable(ItemStack stack) {
+		return !used.isEmpty() && ItemStack.isSameItemSameTags(stack, used) && stack.getCount() == used.getCount();
 	}
 
-	private static void fillRect(BufferBuilder builder, int x, int y, int w, int h, int r, int g, int b, int a) {
-		RenderSystem.setShader(GameRenderer::getPositionColorShader);
-		builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-		builder.vertex(x, y, 0.0D).color(r, g, b, a).endVertex();
-		builder.vertex(x, y + h, 0.0D).color(r, g, b, a).endVertex();
-		builder.vertex(x + w, y + h, 0.0D).color(r, g, b, a).endVertex();
-		builder.vertex(x + w, y, 0.0D).color(r, g, b, a).endVertex();
-		BufferUploader.drawWithShader(builder.end());
+	@Override
+	public boolean onCenter() {
+		return BackpackConfig.CLIENT.previewOnCenter.get();
 	}
 
+	@Override
+	public void initRender() {
+		LocalPlayer player = Proxy.getClientPlayer();
+		this.used = player.getProjectile(player.getMainHandItem());
+	}
+
+	@Override
+	protected int getXOffset(int width) {
+		float progress = (max_ease - ease_time) / max_ease;
+		if (onCenter())
+			return width / 2 + 18 * 3 + 1 + Math.round(progress * width / 2);
+		else
+			return width - 18 + Math.round(progress * 20);
+	}
+
+	@Override
+	protected int getYOffset(int height) {
+		return height / 2 - 81 + 1;
+	}
 }

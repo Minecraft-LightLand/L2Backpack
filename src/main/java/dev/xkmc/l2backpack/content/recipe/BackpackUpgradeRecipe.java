@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
 public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgradeRecipe> {
@@ -30,7 +29,7 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public Serializer<BackpackUpgradeRecipe> getSerializer() {
 		return BackpackRecipe.RSC_BAG_UPGRADE.get();
 	}
 }

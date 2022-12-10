@@ -13,6 +13,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -125,7 +126,7 @@ public class ContentTransfer {
 			BlockPos pos = context.getClickedPos();
 			BlockEntity target = context.getLevel().getBlockEntity(pos);
 			if (target != null) {
-				var capLazy = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+				var capLazy = target.getCapability(ForgeCapabilities.ITEM_HANDLER);
 				if (capLazy.resolve().isPresent()) {
 					var cap = capLazy.resolve().get();
 					item.click(player, context.getItemInHand(), context.getLevel().isClientSide(), player.isShiftKeyDown(), true, cap);
@@ -140,7 +141,7 @@ public class ContentTransfer {
 		if (player != null) {
 			BlockEntity target = level.getBlockEntity(pos);
 			if (target != null) {
-				var capLazy = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+				var capLazy = target.getCapability(ForgeCapabilities.ITEM_HANDLER);
 				if (capLazy.resolve().isPresent()) {
 					var cap = capLazy.resolve().get();
 					load.click(player, stack, level.isClientSide(), player.isShiftKeyDown(), false, cap);

@@ -30,7 +30,7 @@ public class BackpackDyeRecipe extends AbstractShapelessRecipe<BackpackDyeRecipe
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public Serializer<BackpackDyeRecipe> getSerializer() {
 		return BackpackRecipe.RSC_BAG_DYE.get();
 	}
 }

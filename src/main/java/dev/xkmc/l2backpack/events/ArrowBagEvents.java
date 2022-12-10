@@ -45,7 +45,7 @@ public class ArrowBagEvents {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void keyEvent(InputEvent.Key event) {
-		if (ArrowBagOverlay.isScreenOn()) {
+		if (ArrowBagOverlay.INSTANCE.isScreenOn()) {
 			if (event.getKey() == Keys.UP.map.getKey().getValue() && event.getAction() == InputConstants.PRESS) {
 				L2Backpack.HANDLER.toServer(new SetArrowToServer(-1));
 			} else if (event.getKey() == Keys.DOWN.map.getKey().getValue() && event.getAction() == InputConstants.PRESS) {

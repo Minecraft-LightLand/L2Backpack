@@ -9,8 +9,13 @@ public class BackpackConfig {
 
 	public static class Client {
 
+		public final ForgeConfigSpec.BooleanValue previewOnCenter;
+
 		Client(ForgeConfigSpec.Builder builder) {
+			previewOnCenter = builder.comment("Put quiver preview near the center of the screen, rather than edge of the screen")
+					.define("previewOnCenter", true);
 		}
+
 
 	}
 
@@ -22,7 +27,6 @@ public class BackpackConfig {
 			initialRows = builder.comment("Initial Rows (x9 slots) for backpack")
 					.defineInRange("initialRows", 2, 1, 6);
 		}
-
 	}
 
 	public static final ForgeConfigSpec CLIENT_SPEC;

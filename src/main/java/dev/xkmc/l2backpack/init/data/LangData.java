@@ -28,7 +28,7 @@ public class LangData {
 	public enum IDS {
 		BACKPACK_SLOT("tooltip.backpack_slot", 2, "Upgrade: %s/%s"),
 		STORAGE_OWNER("tooltip.owner", 1, "Owner: %s"),
-		BAG_SIZE("tooltip.bag.size", 2, "Content: %s/%s"),
+		BAG_SIZE("tooltip.item.size", 2, "Content: %s/%s"),
 		DRAWER_CONTENT("tooltip.drawer.content", 2, "Content: %s x%s"),
 		DUMP_FEEDBACK("chat.feedback.dump", 1, "Dumped %s items into target block"),
 		LOAD_FEEDBACK("chat.feedback.load", 1, "Loaded %s items from target block"),
@@ -55,9 +55,9 @@ public class LangData {
 
 	public enum Info {
 		SHIFT("tooltip.shift", "Press [shift] to show usage"),
-		COLLECT_BAG("tooltip.collect.bag", "Right click to store matching items on inventory, other than hotbar"),
+		COLLECT_BAG("tooltip.collect.item", "Right click to store matching items on inventory, other than hotbar"),
 		COLLECT_DRAWER("tooltip.collect.drawer", "Shift + right click to store matching items on inventory"),
-		EXTRACT_BAG("tooltip.extract.bag", "Shift + right click to throw out all stored items"),
+		EXTRACT_BAG("tooltip.extract.item", "Shift + right click to throw out all stored items"),
 		EXTRACT_DRAWER("tooltip.extract.drawer", "Right click to take one stack item out"),
 		DUMP("tooltip.dump", "Shift + right click chests or other storage blocks to dump all items into the block"),
 		LOAD("tooltip.load", "Shift + left click chests or other storage blocks to load items from the block"),

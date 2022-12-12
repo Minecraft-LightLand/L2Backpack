@@ -1,9 +1,9 @@
 package dev.xkmc.l2backpack.init.registrate;
 
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBagContainer;
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBagScreen;
 import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
 import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
+import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBagContainer;
+import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBagScreen;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestScreen;
 import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;

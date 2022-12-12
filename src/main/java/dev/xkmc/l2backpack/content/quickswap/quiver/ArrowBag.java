@@ -1,34 +1,23 @@
 package dev.xkmc.l2backpack.content.quickswap.quiver;
 
-import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ArrowBag extends BaseBagItem {
-
-	public static void setSelected(ItemStack stack, int i) {
-		int slot = i;
-		if (i < 0) {
-			slot = getSelected(stack);
-			if (i == -1) slot--;
-			else slot++;
-			slot = (slot + 9) % 9;
-		}
-		stack.getOrCreateTag().putInt("selected", slot);
-	}
-
-	public static int getSelected(ItemStack stack) {
-		return Mth.clamp(stack.getOrCreateTag().getInt("selected"), 0, 8);
-	}
+public class ArrowBag extends SingleSwapItem {
 
 	public ArrowBag(Properties props) {
 		super(props.stacksTo(1).fireResistant());
@@ -59,4 +48,21 @@ public class ArrowBag extends BaseBagItem {
 				LangData.Info.LOAD,
 				LangData.Info.EXIT);
 	}
+
+	@Nullable
+	@Override
+	public IQuickSwapToken getTokenOfType(ItemStack stack, Player player, QuickSwapType type) {
+		if (type != QuickSwapType.ARROW)
+			return null;
+		if (!(player.getMainHandItem().getItem() instanceof ProjectileWeaponItem bow))
+			return null;
+		List<ItemStack> list = getItems(stack);
+		if (list.isEmpty()) return null;
+		for (ItemStack arrow : list) {
+			if (!arrow.isEmpty() && bow.getAllSupportedProjectiles().test(arrow))
+				return new SingleSwapToken(this, stack, QuickSwapType.ARROW);
+		}
+		return null;
+	}
+
 }

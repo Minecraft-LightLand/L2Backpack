@@ -2,10 +2,10 @@ package dev.xkmc.l2backpack.events;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
-import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
 import dev.xkmc.l2backpack.network.SetArrowToServer;
@@ -30,14 +30,15 @@ public class ArrowBagEvents {
 	public static void onProjectileSearch(LivingGetProjectileEvent event) {
 		if (!(event.getEntity() instanceof Player player)) return;
 		if (!(event.getProjectileWeaponItemStack().getItem() instanceof ProjectileWeaponItem weapon)) return;
-		ItemStack bag = QuickSwapManager.getArrowBag(player);
-		if (bag.isEmpty()) return;
-		List<ItemStack> arrows = BaseBagItem.getItems(bag);
+		IQuickSwapToken token = QuickSwapManager.getToken(player);
+		if (token == null) return;
+		if (token.type() != QuickSwapType.ARROW) return;
+		List<ItemStack> arrows = token.getList();
 		var pred = weapon.getAllSupportedProjectiles();
-		int selected = ArrowBag.getSelected(bag);
+		int selected = token.getSelected();
 		ItemStack stack = arrows.get(selected);
 		if (pred.test(stack)) {
-			TEMP.set(Pair.of(stack, c -> shrinkStack(bag, selected, c)));
+			TEMP.set(Pair.of(stack, token::shrink));
 			event.setProjectileItemStack(stack);
 		}
 	}
@@ -58,12 +59,6 @@ public class ArrowBagEvents {
 				}
 			}
 		}
-	}
-
-	private static void shrinkStack(ItemStack offhand, int index, int count) {
-		List<ItemStack> list = BaseBagItem.getItems(offhand);
-		list.get(index).shrink(count);
-		BaseBagItem.setItems(offhand, list);
 	}
 
 	public static void shrink(ItemStack stack, int count) {

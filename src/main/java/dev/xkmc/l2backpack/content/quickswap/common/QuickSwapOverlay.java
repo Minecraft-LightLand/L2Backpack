@@ -1,15 +1,12 @@
 package dev.xkmc.l2backpack.content.quickswap.common;
 
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2backpack.content.common.BaseBagItem;
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
 
 import java.util.List;
 
@@ -27,31 +24,27 @@ public class QuickSwapOverlay extends SelectionSideBar {
 		if (Minecraft.getInstance().screen != null) return false;
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
-		if (!(player.getMainHandItem().getItem() instanceof ProjectileWeaponItem weapon)) return false;
-		ItemStack bag = QuickSwapManager.getArrowBag(player);
-		if (bag.isEmpty()) return false;
-		List<ItemStack> list = BaseBagItem.getItems(bag);
-		if (list.isEmpty()) return false;
-		for (ItemStack stack : list) {
-			if (!stack.isEmpty() && weapon.getAllSupportedProjectiles().test(stack)) return true;
-		}
-		return false;
+		IQuickSwapToken token = QuickSwapManager.getToken(player);
+		if (token == null) return false;
+		return token.isTokenValid(player);
 	}
 
 	@Override
 	public Pair<List<ItemStack>, Integer> getItems() {
 		LocalPlayer player = Proxy.getClientPlayer();
-		ItemStack bag = QuickSwapManager.getArrowBag(player);
-		List<ItemStack> list = BaseBagItem.getItems(bag);
-		int selected = ArrowBag.getSelected(bag);
+		IQuickSwapToken token = QuickSwapManager.getToken(player);
+		assert token != null;
+		List<ItemStack> list = token.getList();
+		int selected = token.getSelected();
 		return Pair.of(list, selected);
 	}
 
 	@Override
 	public int getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
-		ItemStack bag = QuickSwapManager.getArrowBag(player);
-		int selected = ArrowBag.getSelected(bag);
+		IQuickSwapToken token = QuickSwapManager.getToken(player);
+		assert token != null;
+		int selected = token.getSelected();
 		int focus = player.getInventory().selected;
 		return focus * 10 + selected;
 	}

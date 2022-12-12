@@ -42,7 +42,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 		stack.getOrCreateTag().put("Items", list);
 	}
 
-	public static long getTimeStamp(ItemStack stack){
+	public static long getTimeStamp(ItemStack stack) {
 		return stack.getOrCreateTag().getLong("TimeStamp");
 	}
 

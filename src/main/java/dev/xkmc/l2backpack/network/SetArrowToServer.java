@@ -1,11 +1,10 @@
 package dev.xkmc.l2backpack.network;
 
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 
 @SerialClass
@@ -27,8 +26,8 @@ public class SetArrowToServer extends SerialPacketBase {
 	public void handle(NetworkEvent.Context ctx) {
 		Player sender = ctx.getSender();
 		if (sender == null) return;
-		ItemStack bag = QuickSwapManager.getArrowBag(sender);
-		if (bag.isEmpty()) return;
-		ArrowBag.setSelected(bag, slot);
+		IQuickSwapToken token = QuickSwapManager.getToken(sender);
+		if (token == null) return;
+		token.setSelected(slot);
 	}
 }

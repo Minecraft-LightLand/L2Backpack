@@ -1,7 +1,8 @@
-package dev.xkmc.l2backpack.content.arrowbag;
+package dev.xkmc.l2backpack.content.quickswap.common;
 
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.util.Proxy;
@@ -12,13 +13,13 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 
 import java.util.List;
 
-public class ArrowBagOverlay extends SelectionSideBar {
+public class QuickSwapOverlay extends SelectionSideBar {
 
-	public static ArrowBagOverlay INSTANCE = new ArrowBagOverlay();
+	public static QuickSwapOverlay INSTANCE = new QuickSwapOverlay();
 
 	private ItemStack used = ItemStack.EMPTY;
 
-	public ArrowBagOverlay() {
+	public QuickSwapOverlay() {
 		super(40, 3);
 	}
 
@@ -27,7 +28,7 @@ public class ArrowBagOverlay extends SelectionSideBar {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
 		if (!(player.getMainHandItem().getItem() instanceof ProjectileWeaponItem weapon)) return false;
-		ItemStack bag = ArrowBagManager.getArrowBag(player);
+		ItemStack bag = QuickSwapManager.getArrowBag(player);
 		if (bag.isEmpty()) return false;
 		List<ItemStack> list = BaseBagItem.getItems(bag);
 		if (list.isEmpty()) return false;
@@ -40,7 +41,7 @@ public class ArrowBagOverlay extends SelectionSideBar {
 	@Override
 	public Pair<List<ItemStack>, Integer> getItems() {
 		LocalPlayer player = Proxy.getClientPlayer();
-		ItemStack bag = ArrowBagManager.getArrowBag(player);
+		ItemStack bag = QuickSwapManager.getArrowBag(player);
 		List<ItemStack> list = BaseBagItem.getItems(bag);
 		int selected = ArrowBag.getSelected(bag);
 		return Pair.of(list, selected);
@@ -49,7 +50,7 @@ public class ArrowBagOverlay extends SelectionSideBar {
 	@Override
 	public int getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
-		ItemStack bag = ArrowBagManager.getArrowBag(player);
+		ItemStack bag = QuickSwapManager.getArrowBag(player);
 		int selected = ArrowBag.getSelected(bag);
 		int focus = player.getInventory().selected;
 		return focus * 10 + selected;

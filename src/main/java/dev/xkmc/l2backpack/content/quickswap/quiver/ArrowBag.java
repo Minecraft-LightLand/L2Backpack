@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.arrowbag;
+package dev.xkmc.l2backpack.content.quickswap.quiver;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;

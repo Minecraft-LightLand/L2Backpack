@@ -2,9 +2,9 @@ package dev.xkmc.l2backpack.events;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
-import dev.xkmc.l2backpack.content.arrowbag.ArrowBagManager;
-import dev.xkmc.l2backpack.content.arrowbag.ArrowBagOverlay;
+import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
+import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
@@ -30,7 +30,7 @@ public class ArrowBagEvents {
 	public static void onProjectileSearch(LivingGetProjectileEvent event) {
 		if (!(event.getEntity() instanceof Player player)) return;
 		if (!(event.getProjectileWeaponItemStack().getItem() instanceof ProjectileWeaponItem weapon)) return;
-		ItemStack bag = ArrowBagManager.getArrowBag(player);
+		ItemStack bag = QuickSwapManager.getArrowBag(player);
 		if (bag.isEmpty()) return;
 		List<ItemStack> arrows = BaseBagItem.getItems(bag);
 		var pred = weapon.getAllSupportedProjectiles();
@@ -45,7 +45,7 @@ public class ArrowBagEvents {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void keyEvent(InputEvent.Key event) {
-		if (ArrowBagOverlay.INSTANCE.isScreenOn()) {
+		if (QuickSwapOverlay.INSTANCE.isScreenOn()) {
 			if (event.getKey() == Keys.UP.map.getKey().getValue() && event.getAction() == InputConstants.PRESS) {
 				L2Backpack.HANDLER.toServer(new SetArrowToServer(-1));
 			} else if (event.getKey() == Keys.DOWN.map.getKey().getValue() && event.getAction() == InputConstants.PRESS) {

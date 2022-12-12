@@ -8,6 +8,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
+
 public class ScreenTrackerClient {
 
 	@OnlyIn(Dist.CLIENT)
@@ -22,7 +24,7 @@ public class ScreenTrackerClient {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static void onClientOpen(Screen prev, int wid, BaseOpenableScreen<?> current) {
+	public static void onClientOpen(@Nullable Screen prev, int wid, BaseOpenableScreen<?> current) {
 	}
 
 	@OnlyIn(Dist.CLIENT)

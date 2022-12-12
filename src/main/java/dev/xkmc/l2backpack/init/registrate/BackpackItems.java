@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.init.registrate;
 
-import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.bag.ArmorBag;

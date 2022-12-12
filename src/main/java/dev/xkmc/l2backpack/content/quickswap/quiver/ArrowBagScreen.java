@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.arrowbag;
+package dev.xkmc.l2backpack.content.quickswap.quiver;
 
 import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
 import net.minecraft.network.chat.Component;

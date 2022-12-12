@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
-import dev.xkmc.l2backpack.content.arrowbag.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;

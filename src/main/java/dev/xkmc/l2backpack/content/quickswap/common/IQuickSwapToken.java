@@ -11,8 +11,6 @@ public interface IQuickSwapToken {
 
 	List<ItemStack> getList();
 
-	boolean isTokenValid(LocalPlayer player);
-
 	int getSelected();
 
 	void shrink(int i);

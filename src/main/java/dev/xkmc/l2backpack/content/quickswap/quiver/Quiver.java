@@ -1,14 +1,12 @@
 package dev.xkmc.l2backpack.content.quickswap.quiver;
 
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
-import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
-import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
-import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.*;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.TooltipFlag;
@@ -17,11 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ArrowBag extends SingleSwapItem {
-
-	public ArrowBag(Properties props) {
-		super(props.stacksTo(1).fireResistant());
-	}
+public class Quiver extends SingleSwapItem {
 
 	public static float displayArrow(ItemStack stack) {
 		int disp = 0;
@@ -33,9 +27,18 @@ public class ArrowBag extends SingleSwapItem {
 		return disp == 0 ? 0 : (float) (Math.ceil(disp / 3f) + 0.5f);
 	}
 
+	public static boolean isValidStack(ItemStack stack) {
+		return stack.getItem().canFitInsideContainerItems() &&
+				stack.getItem() instanceof ArrowItem;
+	}
+
+	public Quiver(Properties props) {
+		super(props.stacksTo(1).fireResistant());
+	}
+
 	@Override
 	public void open(ServerPlayer player, PlayerSlot slot, ItemStack stack) {
-		new ArrowBagMenuPvd(player, slot, stack).open();
+		new SimpleMenuPvd(player, slot, stack, QuiverContainer::new).open();
 	}
 
 	@Override
@@ -65,4 +68,8 @@ public class ArrowBag extends SingleSwapItem {
 		return null;
 	}
 
+	@Override
+	public boolean isValidContent(ItemStack stack) {
+		return isValidStack(stack);
+	}
 }

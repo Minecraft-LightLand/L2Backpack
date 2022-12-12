@@ -5,7 +5,7 @@ import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.bag.ArmorBag;
 import dev.xkmc.l2backpack.content.bag.BookBag;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -64,7 +64,7 @@ public class BackpackItems {
 
 	public static final ItemEntry<ArmorBag> ARMOR_BAG;
 	public static final ItemEntry<BookBag> BOOK_BAG;
-	public static final ItemEntry<ArrowBag> ARROW_BAG;
+	public static final ItemEntry<Quiver> ARROW_BAG;
 
 	public static final ItemEntry<DrawerItem> DRAWER;
 	public static final ItemEntry<EnderDrawerItem> ENDER_DRAWER;
@@ -98,7 +98,7 @@ public class BackpackItems {
 
 			ARMOR_BAG = REGISTRATE.item("armor_bag", ArmorBag::new).defaultLang().register();
 			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultLang().register();
-			ARROW_BAG = REGISTRATE.item("arrow_bag", ArrowBag::new).model(BackpackItems::createArrowBagModel)
+			ARROW_BAG = REGISTRATE.item("arrow_bag", Quiver::new).model(BackpackItems::createArrowBagModel)
 					.tag(curios_tag).lang("Quiver").register();
 
 			DRAWER = REGISTRATE.item("drawer", DrawerItem::new)
@@ -133,7 +133,7 @@ public class BackpackItems {
 	}
 
 
-	public static <T extends ArrowBag> void createArrowBagModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider pvd) {
+	public static <T extends Quiver> void createArrowBagModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider pvd) {
 		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "generated");
 		builder.texture("layer0", "item/" + ctx.getName() + "_0");
 		for (int i = 1; i < 4; i++) {

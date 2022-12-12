@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.common;
 
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -74,7 +74,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 		for (int i = 0; i < list.size(); i++) {
 			tag.add(i, list.get(i).save(new CompoundTag()));
 		}
-		ArrowBag.setListTag(stack, tag);
+		Quiver.setListTag(stack, tag);
 	}
 
 	@Override
@@ -111,11 +111,15 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 
 		if (!client && shift && !right && target != null) {
 			var list = getItems(stack);
-			int moved = ContentTransfer.loadFrom(list, target, player, e -> e.getItem().canFitInsideContainerItems());
+			int moved = ContentTransfer.loadFrom(list, target, player, this::isValidContent);
 			setItems(stack, list);
 			ContentTransfer.onLoad(player, moved);
 		} else if (client && shift && !right && target != null)
 			ContentTransfer.playSound(player);
+	}
+
+	public boolean isValidContent(ItemStack stack) {
+		return stack.getItem().canFitInsideContainerItems();
 	}
 
 	public abstract void open(ServerPlayer player, PlayerSlot slot, ItemStack stack);

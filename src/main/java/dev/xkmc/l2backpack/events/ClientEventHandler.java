@@ -5,7 +5,7 @@ import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
@@ -111,7 +111,7 @@ public class ClientEventHandler {
 			if ((inv >= 0 || ind >= 0) && (slot.getItem().getItem() instanceof EnderBackpackItem ||
 					slot.getItem().getItem() instanceof WorldChestItem ||
 					slot.getItem().getItem() instanceof BackpackItem ||
-					slot.getItem().getItem() instanceof ArrowBag)) {
+					slot.getItem().getItem() instanceof Quiver)) {
 				L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
 				return true;
 			}

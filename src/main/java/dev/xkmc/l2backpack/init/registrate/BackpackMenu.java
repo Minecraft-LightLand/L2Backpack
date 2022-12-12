@@ -2,8 +2,9 @@ package dev.xkmc.l2backpack.init.registrate;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
 import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBagContainer;
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBagScreen;
+import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
+import dev.xkmc.l2backpack.content.quickswap.quiver.QuiverContainer;
+import dev.xkmc.l2backpack.content.quickswap.scabbard.ScabbardContainer;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestScreen;
 import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
@@ -24,8 +25,16 @@ public class BackpackMenu {
 			BackpackContainer::fromNetwork, () -> BackpackScreen::new).lang(BackpackMenu::getLangKey).register();
 	public static final MenuEntry<WorldChestContainer> MT_WORLD_CHEST = REGISTRATE.menu("dimensional_storage",
 			WorldChestContainer::fromNetwork, () -> WorldChestScreen::new).lang(BackpackMenu::getLangKey).register();
-	public static final MenuEntry<ArrowBagContainer> MT_ARROW = REGISTRATE.menu("arrow_bag",
-			ArrowBagContainer::fromNetwork, () -> ArrowBagScreen::new).lang(BackpackMenu::getLangKey).register();
+
+	public static final MenuEntry<QuiverContainer> MT_ARROW = REGISTRATE.menu("arrow_bag",
+					QuiverContainer::fromNetwork,
+					() -> BaseOpenableScreen<QuiverContainer>::new)
+			.lang(BackpackMenu::getLangKey).register();
+
+	public static final MenuEntry<ScabbardContainer> MT_TOOL = REGISTRATE.menu("tool_bag",
+					ScabbardContainer::fromNetwork,
+					() -> BaseOpenableScreen<ScabbardContainer>::new)
+			.lang(BackpackMenu::getLangKey).register();
 
 	public static void register() {
 
@@ -33,6 +42,7 @@ public class BackpackMenu {
 
 	public static String getLangKey(MenuType<?> menu) {
 		ResourceLocation rl = ForgeRegistries.MENU_TYPES.getKey(menu);
+		assert rl != null;
 		return "container." + rl.getNamespace() + "." + rl.getPath();
 	}
 

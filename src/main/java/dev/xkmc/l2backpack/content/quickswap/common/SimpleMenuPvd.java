@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.quickswap.quiver;
+package dev.xkmc.l2backpack.content.quickswap.common;
 
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import net.minecraft.nbt.CompoundTag;
@@ -14,16 +14,24 @@ import net.minecraftforge.network.NetworkHooks;
 
 import java.util.UUID;
 
-public final class ArrowBagMenuPvd implements MenuProvider {
+public final class SimpleMenuPvd implements MenuProvider {
+
+	public interface BagMenuFactory {
+
+		AbstractContainerMenu create(int id, Inventory inventory, PlayerSlot slot, UUID uuid, Component title);
+
+	}
 
 	private final ServerPlayer player;
 	private final PlayerSlot slot;
 	private final ItemStack stack;
+	private final BagMenuFactory factory;
 
-	public ArrowBagMenuPvd(ServerPlayer player, PlayerSlot slot, ItemStack stack) {
+	public SimpleMenuPvd(ServerPlayer player, PlayerSlot slot, ItemStack stack, BagMenuFactory factory) {
 		this.player = player;
 		this.slot = slot;
 		this.stack = stack;
+		this.factory = factory;
 	}
 
 	@Override
@@ -35,7 +43,7 @@ public final class ArrowBagMenuPvd implements MenuProvider {
 	public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
 		CompoundTag tag = stack.getOrCreateTag();
 		UUID uuid = tag.getUUID("container_id");
-		return new ArrowBagContainer(id, inventory, slot, uuid, getDisplayName());
+		return factory.create(id, inventory, slot, uuid, getDisplayName());
 	}
 
 	public void writeBuffer(FriendlyByteBuf buf) {

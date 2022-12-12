@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -39,13 +39,13 @@ public class ItemOnBackLayerRenderer<T extends LivingEntity, M extends HumanoidM
 
 	public void render(PoseStack pose, MultiBufferSource buffer, int i, T entity, float f0, float f1, float f2, float f3, float f4, float f5) {
 		ItemStack stack = entity.getItemBySlot(EquipmentSlot.CHEST);
-		ArrowBag item = null;
-		if (stack.getItem() instanceof ArrowBag backpack) {
+		Quiver item = null;
+		if (stack.getItem() instanceof Quiver backpack) {
 			item = backpack;
 		} else if (entity instanceof Player player) {
-			stack = CuriosCompat.getSlot(player, e -> e.getItem() instanceof ArrowBag);
+			stack = CuriosCompat.getSlot(player, e -> e.getItem() instanceof Quiver);
 			if (!stack.isEmpty())
-				item = (ArrowBag) stack.getItem();
+				item = (Quiver) stack.getItem();
 		}
 		if (item == null) return;
 		pose.pushPose();

@@ -25,8 +25,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
 		IQuickSwapToken token = QuickSwapManager.getToken(player);
-		if (token == null) return false;
-		return token.isTokenValid(player);
+		return token != null;
 	}
 
 	@Override

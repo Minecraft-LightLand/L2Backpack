@@ -4,7 +4,7 @@ import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
-import dev.xkmc.l2backpack.content.quickswap.quiver.ArrowBag;
+import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderPreviewOverlay;
 import dev.xkmc.l2backpack.content.render.RenderEvents;
 import dev.xkmc.l2backpack.init.data.Keys;
@@ -37,7 +37,7 @@ public class L2BackpackClient {
 				ItemProperties.register(entry.get(), new ResourceLocation("open"), BaseBagItem::isOpened);
 			}
 			ItemProperties.register(BackpackItems.ENDER_BACKPACK.get(), new ResourceLocation("open"), EnderBackpackItem::isOpened);
-			ItemProperties.register(BackpackItems.ARROW_BAG.get(), new ResourceLocation(L2Backpack.MODID, "arrow"), (stack, level, entity, i) -> ArrowBag.displayArrow(stack));
+			ItemProperties.register(BackpackItems.ARROW_BAG.get(), new ResourceLocation(L2Backpack.MODID, "arrow"), (stack, level, entity, i) -> Quiver.displayArrow(stack));
 
 		});
 	}

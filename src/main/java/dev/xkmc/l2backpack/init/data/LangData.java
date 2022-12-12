@@ -65,13 +65,15 @@ public class LangData {
 		KEYBIND("tooltip.keybind", "This can be put on chest slot (or back slot of Curios), and can be opened via key bind."),
 		QUICK_INV_ACCESS("tooltip.info.quick_inv", "Right click to open. Or right click in inventory / ender chest / dimensional storage GUI to open directly."),
 		QUICK_ANY_ACCESS("tooltip.info.quick_any", "Right click to open. Or right click in any GUI to open directly."),
-		ARROW_INFO("tooltip.info.arrow_bag", "Put in off hand or chest slot (or back slot of Curios) and hold bow in main hand to preview, choose, and shoot arrows from quiver. Press shift + number of up/down to switch arrows"),
+		ARROW_INFO("tooltip.info.arrow_bag", "Put in off hand or chest slot (or back slot of Curios) and hold bow in main hand to preview, choose, and shoot arrows from quiver. Press shift + number or up/down to switch arrows"),
 		DRAWER_USE("tooltip.info.drawer", "In inventory, left click drawer with a stack to store item. Right click drawer to take item out. Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks."),
 		ENDER_DRAWER_USE("tooltip.info.ender_drawer_block", "For ender drawer block, right click it with item to store, and right click it with empty hand to retrieve a stack. For bulk transport, use drawer item to interact with it."),
 		DIMENSIONAL("tooltip.info.dimensional", "All dimensional storage with the same color and owned by the same player shares the same inventory space, for both item and block form."),
 		ENDER_DRAWER("tooltip.info.ender_drawer", "All ender drawer set to the same item and owned by the same player shares the same inventory space, for both item and block form."),
 		UPGRADE("tooltip.info.upgrade", "Upgrade by applying an Ender Pocket in Smithing Table. Content and name will be preserved."),
-		EXIT("tooltip.info.exit", "When exiting GUI, it will return to the previous GUI if opened in accessible GUI. Press Shift + Esc to close all.");
+		EXIT("tooltip.info.exit", "When exiting GUI, it will return to the previous GUI if opened in accessible GUI. Press Shift + Esc to close all."),
+		SCABBARD_INFO("tooltip.info.tool_bag", "Put in off hand or chest slot (or back slot of Curios) and hold tools or weapons in main hand to preview, choose, and swap arrows from scabbard. Press shift + number or up/down to switch tools. Press G to swap"),
+		;
 
 		final String id, def;
 

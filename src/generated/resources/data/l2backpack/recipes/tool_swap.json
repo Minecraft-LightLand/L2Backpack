@@ -5,7 +5,7 @@
       "tag": "forge:leather"
     },
     "B": {
-      "item": "minecraft:arrow"
+      "item": "minecraft:stone_sword"
     },
     "D": {
       "item": "minecraft:string"
@@ -17,6 +17,6 @@
     " AD"
   ],
   "result": {
-    "item": "l2backpack:arrow_bag"
+    "item": "l2backpack:tool_swap"
   }
 }

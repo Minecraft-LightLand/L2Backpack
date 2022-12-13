@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "l2backpack:combined_swap"
+    },
+    {
+      "item": "l2backpack:ender_backpack"
+    },
+    {
+      "item": "l2backpack:ender_pocket"
+    }
+  ],
+  "result": {
+    "item": "l2backpack:ender_swap"
+  }
+}

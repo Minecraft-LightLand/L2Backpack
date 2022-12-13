@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "l2backpack:arrow_bag"
+        "recipe": "l2backpack:armor_swap"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "l2backpack:arrow_bag"
+      "l2backpack:armor_swap"
     ]
   }
 }

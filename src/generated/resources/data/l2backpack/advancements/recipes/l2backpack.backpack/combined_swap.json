@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_leather": {
+    "has_ender_pocket": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:leather"
+              "l2backpack:ender_pocket"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "l2backpack:arrow_bag"
+        "recipe": "l2backpack:combined_swap"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_leather",
+      "has_ender_pocket",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "l2backpack:arrow_bag"
+      "l2backpack:combined_swap"
     ]
   }
 }

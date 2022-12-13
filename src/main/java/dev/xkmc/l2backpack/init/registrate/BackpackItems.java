@@ -2,10 +2,14 @@ package dev.xkmc.l2backpack.init.registrate;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
-import dev.xkmc.l2backpack.content.bag.EquipmentBag;
 import dev.xkmc.l2backpack.content.bag.BookBag;
+import dev.xkmc.l2backpack.content.bag.EquipmentBag;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
+import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSwap;
+import dev.xkmc.l2backpack.content.quickswap.merged.EnderSwitch;
+import dev.xkmc.l2backpack.content.quickswap.merged.MultiSwitch;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
+import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -64,7 +68,11 @@ public class BackpackItems {
 
 	public static final ItemEntry<EquipmentBag> ARMOR_BAG;
 	public static final ItemEntry<BookBag> BOOK_BAG;
-	public static final ItemEntry<Quiver> ARROW_BAG;
+	public static final ItemEntry<Quiver> QUIVER;
+	public static final ItemEntry<Scabbard> SCABBARD;
+	public static final ItemEntry<ArmorSwap> ARMOR_SWAP;
+	public static final ItemEntry<MultiSwitch> MULTI_SWITCH;
+	public static final ItemEntry<EnderSwitch> ENDER_SWITCH;
 
 	public static final ItemEntry<DrawerItem> DRAWER;
 	public static final ItemEntry<EnderDrawerItem> ENDER_DRAWER;
@@ -96,10 +104,14 @@ public class BackpackItems {
 
 			ENDER_POCKET = simpleItem("ender_pocket");
 
-			ARMOR_BAG = REGISTRATE.item("armor_bag", EquipmentBag::new).defaultLang().register();
+			ARMOR_BAG = REGISTRATE.item("armor_bag", EquipmentBag::new).lang("Equipment Bag").register();
 			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultLang().register();
-			ARROW_BAG = REGISTRATE.item("arrow_bag", Quiver::new).model(BackpackItems::createArrowBagModel)
+			QUIVER = REGISTRATE.item("arrow_bag", Quiver::new).model(BackpackItems::createArrowBagModel)
 					.tag(curios_tag).lang("Quiver").register();
+			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).tag(curios_tag).defaultLang().register();
+			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).tag(curios_tag).defaultLang().register();
+			MULTI_SWITCH = REGISTRATE.item("combined_swap", MultiSwitch::new).tag(curios_tag).defaultLang().register();
+			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).tag(curios_tag).defaultLang().register();
 
 			DRAWER = REGISTRATE.item("drawer", DrawerItem::new)
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(

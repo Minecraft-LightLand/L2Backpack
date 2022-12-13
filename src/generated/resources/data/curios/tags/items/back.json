@@ -33,6 +33,10 @@
     "l2backpack:dimensional_storage_red",
     "l2backpack:dimensional_storage_black",
     "l2backpack:ender_backpack",
-    "l2backpack:arrow_bag"
+    "l2backpack:arrow_bag",
+    "l2backpack:tool_swap",
+    "l2backpack:armor_swap",
+    "l2backpack:combined_swap",
+    "l2backpack:ender_swap"
   ]
 }

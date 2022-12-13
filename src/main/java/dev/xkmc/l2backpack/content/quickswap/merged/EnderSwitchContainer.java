@@ -16,18 +16,18 @@ import net.minecraft.world.inventory.MenuType;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class MultiSwitchContainer extends BaseBagContainer<MultiSwitchContainer> {
+public class EnderSwitchContainer extends BaseBagContainer<EnderSwitchContainer> {
 
-	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "multi_switch");
+	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "ender_switch");
 
-	public static MultiSwitchContainer fromNetwork(MenuType<MultiSwitchContainer> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
+	public static EnderSwitchContainer fromNetwork(MenuType<EnderSwitchContainer> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
 		PlayerSlot slot = PlayerSlot.read(buf);
 		UUID id = buf.readUUID();
-		return new MultiSwitchContainer(windowId, inv, slot, id, null);
+		return new EnderSwitchContainer(windowId, inv, slot, id, null);
 	}
 
-	public MultiSwitchContainer(int windowId, Inventory inventory, PlayerSlot hand, UUID uuid, @Nullable Component title) {
-		super(BackpackMenu.MT_MULTI.get(), windowId, inventory, MANAGERS, hand, uuid, 3, e -> e.getItem().canFitInsideContainerItems(), title);
+	public EnderSwitchContainer(int windowId, Inventory inventory, PlayerSlot hand, UUID uuid, @Nullable Component title) {
+		super(BackpackMenu.MT_ES.get(), windowId, inventory, MANAGERS, hand, uuid, 3, e -> e.getItem().canFitInsideContainerItems(), title);
 		addSlot("arrow", Quiver::isValidStack);
 		addSlot("tool", Scabbard::isValidItem);
 		addSlot("arrow", ArmorSwap::isValidItem);

@@ -82,11 +82,41 @@ public class RecipeGen {
 					.define('D', Items.STRING).define('C', Items.BOOK)
 					.save(pvd);
 
-			bag = BackpackItems.ARROW_BAG.get();
-			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, Items.ARROW)
-					.pattern(" AB").pattern("ABA").pattern(" AD")
+			bag = BackpackItems.QUIVER.get();
+			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, Items.LEATHER)
+					.pattern(" A ").pattern("ABA").pattern(" AD")
 					.define('A', Tags.Items.LEATHER).define('B', Items.ARROW)
 					.define('D', Items.STRING)
+					.save(pvd);
+
+			bag = BackpackItems.SCABBARD.get();
+			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, Items.LEATHER)
+					.pattern(" A ").pattern("ABA").pattern(" AD")
+					.define('A', Tags.Items.LEATHER).define('B', Items.STONE_SWORD)
+					.define('D', Items.STRING)
+					.save(pvd);
+
+			bag = BackpackItems.ARMOR_SWAP.get();
+			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, Items.LEATHER)
+					.pattern(" A ").pattern("ABA").pattern(" AD")
+					.define('A', Tags.Items.LEATHER).define('B', Items.IRON_HELMET)
+					.define('D', Items.STRING)
+					.save(pvd);
+
+			bag = BackpackItems.MULTI_SWITCH.get();
+			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
+					.pattern(" 1 ").pattern("2A3")
+					.define('1', BackpackItems.QUIVER.get())
+					.define('2', BackpackItems.SCABBARD.get())
+					.define('3', BackpackItems.ARMOR_SWAP.get())
+					.define('A', ender)
+					.save(pvd);
+
+			bag = BackpackItems.ENDER_SWITCH.get();
+			unlock(pvd, new ShapelessRecipeBuilder(bag, 1)::unlockedBy, ender)
+					.requires(BackpackItems.MULTI_SWITCH.get())
+					.requires(BackpackItems.ENDER_BACKPACK.get())
+					.requires(ender)
 					.save(pvd);
 
 			bag = BackpackItems.DRAWER.get();

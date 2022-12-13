@@ -5,7 +5,7 @@
       "tag": "forge:leather"
     },
     "B": {
-      "item": "minecraft:arrow"
+      "item": "minecraft:iron_helmet"
     },
     "D": {
       "item": "minecraft:string"
@@ -17,6 +17,6 @@
     " AD"
   ],
   "result": {
-    "item": "l2backpack:arrow_bag"
+    "item": "l2backpack:armor_swap"
   }
 }

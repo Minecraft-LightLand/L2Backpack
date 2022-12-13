@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
+import dev.xkmc.l2backpack.content.quickswap.merged.EnderSwitchContainer;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.events.ClientEventHandler;
 import net.minecraft.Util;
@@ -23,6 +24,9 @@ public record PlayerSlot(ContainerType type, int slot, UUID uuid) {
 	@Nullable
 	public static PlayerSlot ofOtherInventory(int slot, int index, int wid, AbstractContainerMenu menu) {
 		if (menu instanceof ChestMenu chest && chest.getContainer() instanceof PlayerEnderChestContainer) {
+			return new PlayerSlot(ContainerType.ENDER, index, Util.NIL_UUID);
+		}
+		if (menu instanceof EnderSwitchContainer && index < 27) {
 			return new PlayerSlot(ContainerType.ENDER, index, Util.NIL_UUID);
 		}
 		if (menu instanceof WorldChestContainer cont) {

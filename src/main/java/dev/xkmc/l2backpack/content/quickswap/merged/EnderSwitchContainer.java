@@ -27,7 +27,7 @@ public class EnderSwitchContainer extends BaseBagContainer<EnderSwitchContainer>
 	}
 
 	public EnderSwitchContainer(int windowId, Inventory inventory, PlayerSlot hand, UUID uuid, @Nullable Component title) {
-		super(BackpackMenu.MT_ES.get(), windowId, inventory, MANAGERS, hand, uuid, 3, e -> e.getItem().canFitInsideContainerItems(), title);
+		super(BackpackMenu.MT_ES.get(), windowId, inventory, MANAGERS, hand, uuid, 6, e -> e.getItem().canFitInsideContainerItems(), title);
 		addSlot("arrow", Quiver::isValidStack);
 		addSlot("tool", Scabbard::isValidItem);
 		addSlot("arrow", ArmorSwap::isValidItem);

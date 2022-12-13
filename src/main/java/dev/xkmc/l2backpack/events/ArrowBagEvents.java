@@ -8,7 +8,7 @@ import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
-import dev.xkmc.l2backpack.network.SetArrowToServer;
+import dev.xkmc.l2backpack.network.SetSelectedToServer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -47,14 +47,16 @@ public class ArrowBagEvents {
 	@SubscribeEvent
 	public static void keyEvent(InputEvent.Key event) {
 		if (QuickSwapOverlay.INSTANCE.isScreenOn()) {
-			if (event.getKey() == Keys.UP.map.getKey().getValue() && event.getAction() == InputConstants.PRESS) {
-				L2Backpack.HANDLER.toServer(new SetArrowToServer(-1));
+			if (event.getKey() == Keys.SWAP.map.getKey().getValue() && event.getAction() == InputConstants.PRESS) {
+				L2Backpack.HANDLER.toServer(new SetSelectedToServer(SetSelectedToServer.SWAP));
+			} else if (event.getKey() == Keys.UP.map.getKey().getValue() && event.getAction() == InputConstants.PRESS) {
+				L2Backpack.HANDLER.toServer(new SetSelectedToServer(SetSelectedToServer.UP));
 			} else if (event.getKey() == Keys.DOWN.map.getKey().getValue() && event.getAction() == InputConstants.PRESS) {
-				L2Backpack.HANDLER.toServer(new SetArrowToServer(-2));
+				L2Backpack.HANDLER.toServer(new SetSelectedToServer(SetSelectedToServer.DOWN));
 			} else if (Minecraft.getInstance().options.keyShift.isDown()) {
 				for (int i = 0; i < 9; i++) {
 					if (Minecraft.getInstance().options.keyHotbarSlots[i].consumeClick()) {
-						L2Backpack.HANDLER.toServer(new SetArrowToServer(i));
+						L2Backpack.HANDLER.toServer(new SetSelectedToServer(i));
 					}
 				}
 			}

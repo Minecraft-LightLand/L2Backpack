@@ -72,8 +72,8 @@ public class LangData {
 		ENDER_DRAWER("tooltip.info.ender_drawer", "All ender drawer set to the same item and owned by the same player shares the same inventory space, for both item and block form."),
 		UPGRADE("tooltip.info.upgrade", "Upgrade by applying an Ender Pocket in Smithing Table. Content and name will be preserved."),
 		EXIT("tooltip.info.exit", "When exiting GUI, it will return to the previous GUI if opened in accessible GUI. Press Shift + Esc to close all."),
-		SCABBARD_INFO("tooltip.info.tool_bag", "Put in off hand or chest slot (or back slot of Curios) and hold tools or weapons in main hand to preview, choose, and swap tools from scabbard. Press shift + number or up/down to switch tools. Press G to swap"),
-		ARMORBAG_INFO("tooltip.info.armor_bag", "Put in off hand or chest slot (or back slot of Curios) and hold nothing in main hand to preview, choose, and swap armors from scabbard. Press shift + number or up/down to switch armors. Press G to swap"),
+		SCABBARD_INFO("tooltip.info.tool_bag", "Put in off hand or chest slot (or back slot of Curios) and hold tools or weapons in main hand to preview, choose, and swap tools from scabbard. Press shift + number or up/down to switch tools. Press R to swap"),
+		ARMORBAG_INFO("tooltip.info.armor_bag", "Put in off hand or chest slot (or back slot of Curios) and hold nothing in main hand to preview, choose, and swap armors from scabbard. Press shift + number or up/down to switch armors. Press R to swap"),
 		;
 
 		final String id, def;
@@ -101,6 +101,7 @@ public class LangData {
 		pvd.accept(Keys.OPEN.id, "Open backpack on back");
 		pvd.accept(Keys.UP.id, "Arrow Select Up");
 		pvd.accept(Keys.DOWN.id, "Arrow Select Down");
+		pvd.accept(Keys.SWAP.id, "Tool/Armor Swap");
 	}
 
 	public static String asId(String name) {

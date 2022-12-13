@@ -11,7 +11,7 @@ import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
-import dev.xkmc.l2backpack.network.SetArrowToServer;
+import dev.xkmc.l2backpack.network.SetSelectedToServer;
 import dev.xkmc.l2backpack.network.SlotClickToServer;
 import dev.xkmc.l2backpack.network.drawer.CreativeSetCarryToClient;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
@@ -54,7 +54,7 @@ public class L2Backpack {
 	public static final PacketHandler HANDLER = new PacketHandler(
 			new ResourceLocation(MODID, "main"), 1,
 			e -> e.create(SlotClickToServer.class, PLAY_TO_SERVER),
-			e -> e.create(SetArrowToServer.class, PLAY_TO_SERVER),
+			e -> e.create(SetSelectedToServer.class, PLAY_TO_SERVER),
 			e -> e.create(DrawerInteractToServer.class, PLAY_TO_SERVER),
 			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
 			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),

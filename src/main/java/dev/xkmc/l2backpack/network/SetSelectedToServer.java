@@ -8,17 +8,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkEvent;
 
 @SerialClass
-public class SetArrowToServer extends SerialPacketBase {
+public class SetSelectedToServer extends SerialPacketBase {
+
+	public static final int UP = -1, DOWN = -2, SWAP = -3;
 
 	@SerialClass.SerialField
 	private int slot;
 
 	@Deprecated
-	public SetArrowToServer() {
+	public SetSelectedToServer() {
 
 	}
 
-	public SetArrowToServer(int slot) {
+	public SetSelectedToServer(int slot) {
 		this.slot = slot;
 	}
 
@@ -28,6 +30,9 @@ public class SetArrowToServer extends SerialPacketBase {
 		if (sender == null) return;
 		IQuickSwapToken token = QuickSwapManager.getToken(sender);
 		if (token == null) return;
-		token.setSelected(slot);
+		if (slot == SWAP)
+			token.swap(sender);
+		else
+			token.setSelected(slot);
 	}
 }

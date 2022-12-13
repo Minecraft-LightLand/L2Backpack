@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "l2backpack:multiswitch_craft",
   "key": {
     "1": {
       "item": "l2backpack:arrow_bag"
@@ -15,7 +15,7 @@
     }
   },
   "pattern": [
-    " 1 ",
+    "A1A",
     "2A3"
   ],
   "result": {

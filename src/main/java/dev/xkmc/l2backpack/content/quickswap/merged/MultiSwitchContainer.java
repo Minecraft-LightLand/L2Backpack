@@ -1,10 +1,8 @@
 package dev.xkmc.l2backpack.content.quickswap.merged;
 
 import dev.xkmc.l2backpack.content.common.BaseBagContainer;
+import dev.xkmc.l2backpack.content.common.BaseOpenableContainer;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
-import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSwap;
-import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
-import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2library.base.menu.SpriteManager;
@@ -27,10 +25,7 @@ public class MultiSwitchContainer extends BaseBagContainer<MultiSwitchContainer>
 	}
 
 	public MultiSwitchContainer(int windowId, Inventory inventory, PlayerSlot hand, UUID uuid, @Nullable Component title) {
-		super(BackpackMenu.MT_MULTI.get(), windowId, inventory, MANAGERS, hand, uuid, 3, e -> e.getItem().canFitInsideContainerItems(), title);
-		addSlot("arrow", Quiver::isValidStack);
-		addSlot("tool", Scabbard::isValidItem);
-		addSlot("arrow", ArmorSwap::isValidItem);
+		super(BackpackMenu.MT_MULTI.get(), windowId, inventory, MANAGERS, hand, uuid, 3, e -> true, title);
 	}
 
 }

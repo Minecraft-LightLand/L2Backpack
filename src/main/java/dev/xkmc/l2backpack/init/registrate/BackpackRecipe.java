@@ -2,6 +2,8 @@ package dev.xkmc.l2backpack.init.registrate;
 
 import dev.xkmc.l2backpack.content.recipe.BackpackDyeRecipe;
 import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipe;
+import dev.xkmc.l2backpack.content.recipe.MultiSwitchCraftRecipe;
+import dev.xkmc.l2library.base.recipe.AbstractShapedRecipe;
 import dev.xkmc.l2library.base.recipe.AbstractShapelessRecipe;
 import dev.xkmc.l2library.base.recipe.AbstractSmithingRecipe;
 import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
@@ -16,6 +18,8 @@ public class BackpackRecipe {
 			REGISTRATE.simple("backpack_dye", ForgeRegistries.Keys.RECIPE_SERIALIZERS, () -> new AbstractShapelessRecipe.Serializer<>(BackpackDyeRecipe::new));
 	public static final RegistryEntry<AbstractSmithingRecipe.Serializer<BackpackUpgradeRecipe>> RSC_BAG_UPGRADE =
 			REGISTRATE.simple("backpack_upgrade", ForgeRegistries.Keys.RECIPE_SERIALIZERS, () -> new AbstractSmithingRecipe.Serializer<>(BackpackUpgradeRecipe::new));
+	public static final RegistryEntry<AbstractShapedRecipe.Serializer<MultiSwitchCraftRecipe>> RSC_BAG_CRAFT =
+			REGISTRATE.simple("multiswitch_craft", ForgeRegistries.Keys.RECIPE_SERIALIZERS, () -> new AbstractShapedRecipe.Serializer<>(MultiSwitchCraftRecipe::new));
 
 
 	public static void register(IEventBus bus) {

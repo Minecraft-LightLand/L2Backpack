@@ -6,6 +6,7 @@ import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
 import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorBagContainer;
 import dev.xkmc.l2backpack.content.quickswap.merged.EnderSwitchContainer;
 import dev.xkmc.l2backpack.content.quickswap.merged.MultiSwitchContainer;
+import dev.xkmc.l2backpack.content.quickswap.merged.MultiSwitchScreen;
 import dev.xkmc.l2backpack.content.quickswap.quiver.QuiverContainer;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.ScabbardContainer;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
@@ -49,12 +50,12 @@ public class BackpackMenu {
 
 	public static final MenuEntry<MultiSwitchContainer> MT_MULTI = REGISTRATE.menu("multi_switch",
 					MultiSwitchContainer::fromNetwork,
-					() -> BaseOpenableScreen<MultiSwitchContainer>::new)
+					() -> MultiSwitchScreen<MultiSwitchContainer>::new)
 			.lang(BackpackMenu::getLangKey).register();
 
 	public static final MenuEntry<EnderSwitchContainer> MT_ES = REGISTRATE.menu("ender_switch",
 					EnderSwitchContainer::fromNetwork,
-					() -> BaseOpenableScreen<EnderSwitchContainer>::new)
+					() -> MultiSwitchScreen<EnderSwitchContainer>::new)
 			.lang(BackpackMenu::getLangKey).register();
 
 	public static void register() {

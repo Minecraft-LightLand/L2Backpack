@@ -35,11 +35,7 @@ public class ArmorSwap extends SingleSwapItem {
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		LangData.addInfo(list,
 				LangData.Info.ARMORBAG_INFO,
-				LangData.Info.QUICK_INV_ACCESS,
-				LangData.Info.KEYBIND,
-				LangData.Info.DUMP,
-				LangData.Info.LOAD,
-				LangData.Info.EXIT);
+				LangData.Info.INHERIT);
 	}
 
 	@Nullable

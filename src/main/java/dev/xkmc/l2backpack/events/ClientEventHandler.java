@@ -1,11 +1,9 @@
 package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
-import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
-import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
@@ -108,10 +106,10 @@ public class ClientEventHandler {
 			int inv = b1 ? slot.getSlotIndex() : -1;
 			int ind = inv == -1 ? slot.index : -1;
 			int wid = cont.getMenu().containerId;
-			if ((inv >= 0 || ind >= 0) && (slot.getItem().getItem() instanceof EnderBackpackItem ||
-					slot.getItem().getItem() instanceof WorldChestItem ||
-					slot.getItem().getItem() instanceof BackpackItem ||
-					slot.getItem().getItem() instanceof Quiver)) {
+			if ((inv >= 0 || ind >= 0) &&
+					(slot.getItem().getItem() instanceof EnderBackpackItem ||
+							slot.getItem().getItem() instanceof WorldChestItem ||
+							slot.getItem().getItem() instanceof BaseBagItem)) {
 				L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
 				return true;
 			}

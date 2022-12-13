@@ -68,13 +68,17 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 		if (player.getLevel().isClientSide()) return;
 		ItemStack stack = getStack();
 		if (!stack.isEmpty()) {
-			ListTag list = new ListTag();
-			for (int i = 0; i < this.container.getContainerSize(); i++) {
-				list.add(i, this.container.getItem(i).save(new CompoundTag()));
-			}
-			BaseBagItem.setListTag(stack, list);
+			serializeContents(stack);
 		}
 		MAP.computeIfAbsent(uuid, e -> new ConcurrentLinkedQueue<>()).forEach(BaseBagContainer::reload);
+	}
+
+	protected void serializeContents(ItemStack stack) {
+		ListTag list = new ListTag();
+		for (int i = 0; i < this.container.getContainerSize(); i++) {
+			list.add(i, this.container.getItem(i).save(new CompoundTag()));
+		}
+		BaseBagItem.setListTag(stack, list);
 	}
 
 	private ItemStack stack_cache = ItemStack.EMPTY;

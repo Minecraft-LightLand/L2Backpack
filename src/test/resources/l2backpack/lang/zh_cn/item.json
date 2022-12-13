@@ -10,7 +10,11 @@
 	"book_bag": "附魔书袋",
 	"arrow_bag": "箭袋",
 	"drawer": "水晶匣子",
-	"ender_drawer": "末影匣子"
+	"ender_drawer": "末影匣子",
+	"armor_swap": "护甲切换袋",
+	"combined_swap": "三合一切换袋",
+	"ender_swap": "四合一切换袋",
+	"tool_swap": "工具切换袋"
   },
   "-cartesian": {
 	"backpack": {

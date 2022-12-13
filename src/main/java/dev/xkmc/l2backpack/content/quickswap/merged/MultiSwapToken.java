@@ -47,6 +47,7 @@ public record MultiSwapToken(IQuickSwapItem item, ItemStack stack,
 			player.setItemInHand(InteractionHand.MAIN_HAND, a);
 		}
 		if (type == QuickSwapType.ARMOR) {
+			if (a.isEmpty()) return;
 			EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(a);
 			sublist.set(i, player.getItemBySlot(slot));
 			player.setItemSlot(slot, a);

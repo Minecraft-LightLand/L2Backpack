@@ -1,5 +1,8 @@
 {
   "side": [
+	"altas_arrow",
+	"altas_tool",
+	"altas_armor"
   ],
   "comp": {
 	"grid": {
@@ -10,21 +13,21 @@
 	  "ry": 0
 	},
 	"arrow": {
-	  "sprite": "altas_arrow",
+	  "sprite": "slot",
 	  "x": 16,
 	  "y": 0,
 	  "rx": 9,
 	  "ry": 1
 	},
 	"tool": {
-	  "sprite": "altas_tool",
+	  "sprite": "slot",
 	  "x": 16,
 	  "y": 18,
 	  "rx": 9,
 	  "ry": 1
 	},
 	"armor": {
-	  "sprite": "altas_armor",
+	  "sprite": "slot",
 	  "x": 16,
 	  "y": 36,
 	  "rx": 9,

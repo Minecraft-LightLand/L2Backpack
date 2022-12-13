@@ -53,14 +53,8 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		LangData.addInfo(list,
-				LangData.Info.ARROW_INFO,
-				LangData.Info.SCABBARD_INFO,
-				LangData.Info.ARMORBAG_INFO,
-				LangData.Info.QUICK_INV_ACCESS,
-				LangData.Info.KEYBIND,
-				LangData.Info.DUMP,
-				LangData.Info.LOAD,
-				LangData.Info.EXIT);
+				LangData.Info.MULTI_SWITCH_INFO,
+				LangData.Info.INHERIT);
 	}
 
 	@Nullable

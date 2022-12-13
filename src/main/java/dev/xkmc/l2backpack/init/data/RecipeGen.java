@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.init.data;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
+import dev.xkmc.l2library.base.recipe.CustomShapedBuilder;
 import dev.xkmc.l2library.base.recipe.CustomShapelessBuilder;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateRecipeProvider;
 import dev.xkmc.l2library.repack.registrate.util.DataIngredient;
@@ -104,8 +105,8 @@ public class RecipeGen {
 					.save(pvd);
 
 			bag = BackpackItems.MULTI_SWITCH.get();
-			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, ender)
-					.pattern(" 1 ").pattern("2A3")
+			unlock(pvd, new CustomShapedBuilder<>(BackpackRecipe.RSC_BAG_CRAFT, bag, 1)::unlockedBy, ender)
+					.pattern("A1A").pattern("2A3")
 					.define('1', BackpackItems.QUIVER.get())
 					.define('2', BackpackItems.SCABBARD.get())
 					.define('3', BackpackItems.ARMOR_SWAP.get())
@@ -113,10 +114,11 @@ public class RecipeGen {
 					.save(pvd);
 
 			bag = BackpackItems.ENDER_SWITCH.get();
-			unlock(pvd, new ShapelessRecipeBuilder(bag, 1)::unlockedBy, ender)
-					.requires(BackpackItems.MULTI_SWITCH.get())
-					.requires(BackpackItems.ENDER_BACKPACK.get())
-					.requires(ender)
+			unlock(pvd, new CustomShapedBuilder<>(BackpackRecipe.RSC_BAG_CRAFT, bag, 1)::unlockedBy, ender)
+					.pattern("1A").pattern("A2")
+					.define('1', BackpackItems.MULTI_SWITCH.get())
+					.define('2', BackpackItems.ENDER_BACKPACK.get())
+					.define('A', ender)
 					.save(pvd);
 
 			bag = BackpackItems.DRAWER.get();

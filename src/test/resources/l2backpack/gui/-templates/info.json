@@ -5,6 +5,17 @@
         "dx": 1,
         "dy": 1
     },
+    "altas": {
+        "ids": [
+            "_arrow",
+            "_armor",
+            "_tool"
+        ],
+        "w": 18,
+        "h": 18,
+        "dx": 1,
+        "dy": 1
+    },
     "result_slot": {
         "w": 26,
         "h": 26,

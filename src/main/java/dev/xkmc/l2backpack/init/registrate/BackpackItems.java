@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.init.registrate;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
-import dev.xkmc.l2backpack.content.bag.ArmorBag;
+import dev.xkmc.l2backpack.content.bag.EquipmentBag;
 import dev.xkmc.l2backpack.content.bag.BookBag;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
@@ -62,7 +62,7 @@ public class BackpackItems {
 	public static final ItemEntry<EnderBackpackItem> ENDER_BACKPACK;
 	public static final ItemEntry<Item> ENDER_POCKET;
 
-	public static final ItemEntry<ArmorBag> ARMOR_BAG;
+	public static final ItemEntry<EquipmentBag> ARMOR_BAG;
 	public static final ItemEntry<BookBag> BOOK_BAG;
 	public static final ItemEntry<Quiver> ARROW_BAG;
 
@@ -96,7 +96,7 @@ public class BackpackItems {
 
 			ENDER_POCKET = simpleItem("ender_pocket");
 
-			ARMOR_BAG = REGISTRATE.item("armor_bag", ArmorBag::new).defaultLang().register();
+			ARMOR_BAG = REGISTRATE.item("armor_bag", EquipmentBag::new).defaultLang().register();
 			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultLang().register();
 			ARROW_BAG = REGISTRATE.item("arrow_bag", Quiver::new).model(BackpackItems::createArrowBagModel)
 					.tag(curios_tag).lang("Quiver").register();

@@ -1,0 +1,34 @@
+{
+  "side": [
+  ],
+  "comp": {
+	"grid": {
+	  "sprite": "slot",
+	  "x": 16,
+	  "y": 0,
+	  "rx": 9,
+	  "ry": 0
+	},
+	"arrow": {
+	  "sprite": "altas_arrow",
+	  "x": 16,
+	  "y": 0,
+	  "rx": 9,
+	  "ry": 1
+	},
+	"tool": {
+	  "sprite": "altas_tool",
+	  "x": 16,
+	  "y": 18,
+	  "rx": 9,
+	  "ry": 1
+	},
+	"armor": {
+	  "sprite": "altas_armor",
+	  "x": 16,
+	  "y": 36,
+	  "rx": 9,
+	  "ry": 1
+	}
+  }
+}

@@ -7,9 +7,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ArmorBag extends AbstractBag {
+public class EquipmentBag extends AbstractBag {
 
-	public ArmorBag(Properties props) {
+	public EquipmentBag(Properties props) {
 		super(props);
 	}
 

@@ -14,13 +14,16 @@ public class QuickSwapManager {
 
 	@Nullable
 	public static QuickSwapType getValidType(Player player) {
+		if (player.getMainHandItem().isEmpty()) {
+			return QuickSwapType.ARMOR;
+		}
 		if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
 			return QuickSwapType.ARROW;
 		}
 		if (player.getMainHandItem().getMaxDamage() > 0) {
 			return QuickSwapType.TOOL;
 		}
-		return QuickSwapType.ARMOR;
+		return null;
 	}
 
 	@Nullable

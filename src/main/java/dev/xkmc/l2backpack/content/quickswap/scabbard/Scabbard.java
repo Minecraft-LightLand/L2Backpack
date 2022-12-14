@@ -5,6 +5,8 @@ import dev.xkmc.l2backpack.content.quickswap.common.*;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
@@ -18,7 +20,9 @@ public class Scabbard extends SingleSwapItem {
 
 	public static boolean isValidItem(ItemStack stack) {
 		return stack.getItem().canFitInsideContainerItems() &&
-				stack.getMaxDamage() > 0 && !(stack.getItem() instanceof ProjectileWeaponItem);
+				stack.getMaxDamage() > 0 &&
+				!(stack.getItem() instanceof ProjectileWeaponItem) &&
+				LivingEntity.getEquipmentSlotForItem(stack).getType() != EquipmentSlot.Type.ARMOR;
 	}
 
 	public Scabbard(Properties props) {

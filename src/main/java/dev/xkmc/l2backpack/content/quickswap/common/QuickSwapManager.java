@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.quickswap.common;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
+import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +21,7 @@ public class QuickSwapManager {
 		if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
 			return QuickSwapType.ARROW;
 		}
-		if (player.getMainHandItem().getMaxDamage() > 0) {
+		if (Scabbard.isValidItem(player.getMainHandItem())) {
 			return QuickSwapType.TOOL;
 		}
 		return null;

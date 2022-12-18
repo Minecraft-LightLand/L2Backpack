@@ -1,0 +1,33 @@
+{
+  "parent": "l2backpack:backpacks/multi_switch",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          null
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2backpack.advancements.backpacks.ender_switch.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "l2backpack:ender_swap"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2backpack.advancements.backpacks.ender_switch.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

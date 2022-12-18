@@ -1,0 +1,33 @@
+{
+  "parent": "l2backpack:backpacks/folder_structure",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          null
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2backpack.advancements.backpacks.close_all.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "l2backpack:backpack_lime"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2backpack.advancements.backpacks.close_all.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

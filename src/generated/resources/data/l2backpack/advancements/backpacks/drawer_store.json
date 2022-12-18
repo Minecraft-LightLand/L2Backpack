@@ -1,0 +1,33 @@
+{
+  "parent": "l2backpack:backpacks/drawer",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          null
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2backpack.advancements.backpacks.drawer_store.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "l2backpack:drawer"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2backpack.advancements.backpacks.drawer_store.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

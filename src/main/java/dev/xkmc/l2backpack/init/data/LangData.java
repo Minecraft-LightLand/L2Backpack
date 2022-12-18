@@ -55,7 +55,7 @@ public class LangData {
 
 	public enum Info {
 		SHIFT("tooltip.shift", "Press [shift] to show usage"),
-		COLLECT_BAG("tooltip.collect.item", "Right click to store matching items on inventory, other than hotbar"),
+		COLLECT_BAG("tooltip.collect.item", "Right click to store matching items in inventory, other than hotbar"),
 		COLLECT_DRAWER("tooltip.collect.drawer", "Shift + right click to store matching items on inventory"),
 		EXTRACT_BAG("tooltip.extract.item", "Shift + right click to throw out all stored items"),
 		EXTRACT_DRAWER("tooltip.extract.drawer", "Right click to take one stack item out"),

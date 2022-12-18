@@ -1,0 +1,33 @@
+{
+  "parent": "l2backpack:backpacks/bag_collect",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          null
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2backpack.advancements.backpacks.bag_dump.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "l2backpack:armor_bag"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2backpack.advancements.backpacks.bag_dump.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

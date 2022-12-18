@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.remote.WorldStorage;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
+import dev.xkmc.l2backpack.init.data.AdvGen;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.data.RecipeGen;
@@ -74,6 +75,7 @@ public class L2Backpack {
 		Handlers.register();
 		ScreenTracker.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
+		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 	}
 
 	private static void registerForgeEvents() {

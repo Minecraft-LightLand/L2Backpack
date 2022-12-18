@@ -1,0 +1,33 @@
+{
+  "parent": "l2backpack:backpacks/dimension",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          null
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2backpack.advancements.backpacks.dimension_hopper.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "l2backpack:dimensional_storage_light_gray"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2backpack.advancements.backpacks.dimension_hopper.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

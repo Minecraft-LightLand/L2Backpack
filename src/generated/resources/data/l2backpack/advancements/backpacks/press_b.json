@@ -1,0 +1,33 @@
+{
+  "parent": "l2backpack:backpacks/backpack",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          null
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2backpack.advancements.backpacks.press_b.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "l2backpack:backpack_cyan"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2backpack.advancements.backpacks.press_b.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

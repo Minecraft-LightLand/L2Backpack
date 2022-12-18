@@ -1,0 +1,37 @@
+{
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:chest"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "l2backpack:textures/gui/advancements/backgrounds/backpacks.png",
+    "description": {
+      "translate": "advancements.l2backpack.advancements.backpacks.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "l2backpack:backpack_white"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.l2backpack.advancements.backpacks.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

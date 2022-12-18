@@ -1,0 +1,33 @@
+{
+  "parent": "l2backpack:backpacks/safe_storage",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          null
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2backpack.advancements.backpacks.color.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "l2backpack:backpack_green"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2backpack.advancements.backpacks.color.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

@@ -1,9 +1,10 @@
 package dev.xkmc.l2backpack.init;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
-import dev.xkmc.l2backpack.content.remote.WorldStorage;
+import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
+import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2backpack.init.data.AdvGen;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.data.LangData;
@@ -74,6 +75,7 @@ public class L2Backpack {
 		BackpackRecipe.register(bus);
 		Handlers.register();
 		ScreenTracker.register();
+		BackpackTriggers.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 	}

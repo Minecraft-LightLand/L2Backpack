@@ -1,13 +1,16 @@
 {
-  "parent": "l2backpack:backpacks/dimension_recursion",
+  "parent": "l2backpack:backpacks/ender_drawer_place",
   "criteria": {
     "0": {
       "conditions": {
-        "items": [
-          null
-        ]
+        "keybind": false,
+        "others": true
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "l2backpack:slot_click"
+    },
+    "1": {
+      "conditions": {},
+      "trigger": "l2backpack:drawer_interact"
     }
   },
   "display": {
@@ -15,10 +18,10 @@
     "description": {
       "translate": "advancements.l2backpack.advancements.backpacks.dimension_share.description"
     },
-    "frame": "task",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "l2backpack:dimensional_storage_red"
+      "item": "l2backpack:dimensional_storage_blue"
     },
     "show_toast": true,
     "title": {
@@ -27,7 +30,8 @@
   },
   "requirements": [
     [
-      "0"
+      "0",
+      "1"
     ]
   ]
 }

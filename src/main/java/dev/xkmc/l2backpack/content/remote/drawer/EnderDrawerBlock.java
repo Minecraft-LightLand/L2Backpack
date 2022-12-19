@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
-import dev.xkmc.l2backpack.content.remote.DrawerAccess;
+import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
@@ -35,7 +35,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 	public static final EnderDrawerBlock INSTANCE = new EnderDrawerBlock();
 
 	public static final BlockEntityBlockMethod<EnderDrawerBlockEntity> TILE_ENTITY_SUPPLIER_BUILDER =
-			new CustomAnalogBlockEntity<>(BackpackBlocks.TE_ENDER_DRAWER, EnderDrawerBlockEntity.class);
+			new EnderDrawerAnalogBlockEntity<>(BackpackBlocks.TE_ENDER_DRAWER, EnderDrawerBlockEntity.class);
 
 	@Override
 	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
@@ -44,7 +44,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 		if (blockentity instanceof EnderDrawerBlockEntity chest) {
 			if (!stack.isEmpty() && !stack.hasTag() && stack.getItem() == chest.item) {
 				if (!level.isClientSide()) {
-					stack = new EnderDawerItemHandler(chest.getAccess()).insertItem(0, stack, false);
+					stack = new EnderDawerItemHandler(chest.getAccess(), false).insertItem(0, stack, false);
 					player.setItemInHand(hand, stack);
 				} else {
 					ContentTransfer.playDrawerSound(player);
@@ -53,7 +53,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 			} else if (stack.isEmpty()) {
 				if (!level.isClientSide()) {
 					DrawerAccess access = chest.getAccess();
-					stack = new EnderDawerItemHandler(access).extractItem(0, access.item().getMaxStackSize(), false);
+					stack = new EnderDawerItemHandler(access, false).extractItem(0, access.item().getMaxStackSize(), false);
 					player.setItemInHand(hand, stack);
 				} else {
 					ContentTransfer.playDrawerSound(player);

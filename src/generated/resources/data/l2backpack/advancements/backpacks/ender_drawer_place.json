@@ -3,26 +3,24 @@
   "criteria": {
     "0": {
       "conditions": {
-        "items": [
-          null
-        ]
+        "block": "l2backpack:ender_drawer"
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "minecraft:placed_block"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.l2backpack.advancements.backpacks.ender_drawer_view.description"
+      "translate": "advancements.l2backpack.advancements.backpacks.ender_drawer_place.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
       "item": "l2backpack:ender_drawer"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.l2backpack.advancements.backpacks.ender_drawer_view.title"
+      "translate": "advancements.l2backpack.advancements.backpacks.ender_drawer_place.title"
     }
   },
   "requirements": [

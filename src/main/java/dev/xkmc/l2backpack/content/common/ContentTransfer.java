@@ -1,5 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
+import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
+import dev.xkmc.l2backpack.init.advancement.BagInteractTrigger;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -149,27 +151,31 @@ public class ContentTransfer {
 		}
 	}
 
-	public static void onDump(Player player, int count) {
+	public static void onDump(Player player, int count, ItemStack stack) {
 		if (player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.sendSystemMessage(LangData.IDS.DUMP_FEEDBACK.get(count), true);
+			BackpackTriggers.INTERACT.trigger(serverPlayer, stack, BagInteractTrigger.Type.DUMP, count);
 		}
 	}
 
-	public static void onLoad(Player player, int count) {
+	public static void onLoad(Player player, int count, ItemStack stack) {
 		if (player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.sendSystemMessage(LangData.IDS.LOAD_FEEDBACK.get(count), true);
+			BackpackTriggers.INTERACT.trigger(serverPlayer, stack, BagInteractTrigger.Type.LOAD, count);
 		}
 	}
 
-	public static void onExtract(Player player, int count) {
+	public static void onExtract(Player player, int count, ItemStack stack) {
 		if (player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.sendSystemMessage(LangData.IDS.EXTRACT_FEEDBACK.get(count), true);
+			BackpackTriggers.INTERACT.trigger(serverPlayer, stack, BagInteractTrigger.Type.EXTRACT, count);
 		}
 	}
 
-	public static void onCollect(Player player, int count) {
+	public static void onCollect(Player player, int count, ItemStack stack) {
 		if (player instanceof ServerPlayer serverPlayer) {
 			serverPlayer.sendSystemMessage(LangData.IDS.COLLECT_FEEDBACK.get(count), true);
+			BackpackTriggers.INTERACT.trigger(serverPlayer, stack, BagInteractTrigger.Type.COLLECT, count);
 		}
 	}
 

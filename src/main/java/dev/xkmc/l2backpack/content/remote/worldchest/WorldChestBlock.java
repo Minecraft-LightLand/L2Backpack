@@ -44,7 +44,7 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
 
 	public static final BlockEntityBlockMethod<WorldChestBlockEntity> TILE_ENTITY_SUPPLIER_BUILDER =
-			new BlockEntityBlockMethodImpl<>(BackpackBlocks.TE_WORLD_CHEST, WorldChestBlockEntity.class);
+			new WorldChestAnalogBlockEntity<>(BackpackBlocks.TE_WORLD_CHEST, WorldChestBlockEntity.class);
 
 	public static final EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);
 

@@ -58,7 +58,7 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 			int max = Math.min(item.getMaxStackSize(), count);
 			player.getInventory().placeItemBackInInventory(new ItemStack(item, max));
 			setCount(stack, count - max);
-			ContentTransfer.onExtract(player, max);
+			ContentTransfer.onExtract(player, max, stack);
 		} else {
 			Item item = BaseDrawerItem.getItem(stack);
 			int count = getCount(stack);
@@ -75,7 +75,7 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 				int ext = BaseDrawerItem.loadFromInventory(max, count, item, player);
 				count += ext;
 				setCount(stack, count);
-				ContentTransfer.onCollect(player, ext);
+				ContentTransfer.onCollect(player, ext, stack);
 			}
 		}
 		return InteractionResultHolder.success(stack);
@@ -92,7 +92,7 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 			Item item = BaseDrawerItem.getItem(stack);
 			int count = getCount(stack);
 			int remain = ContentTransfer.transfer(item, count, target);
-			ContentTransfer.onDump(player, count - remain);
+			ContentTransfer.onDump(player, count - remain, stack);
 			setCount(stack, remain);
 		} else if (client && shift && right && target != null)
 			ContentTransfer.playDrawerSound(player);
@@ -110,7 +110,7 @@ public class DrawerItem extends Item implements BaseDrawerItem, ContentTransfer.
 				int count = getCount(stack);
 				int max = MAX * item.getMaxStackSize();
 				int remain = ContentTransfer.loadFrom(item, max - count, target);
-				ContentTransfer.onLoad(player, remain);
+				ContentTransfer.onLoad(player, remain, stack);
 				setCount(stack, count + remain);
 			}
 		} else if (client && shift && !right && target != null)

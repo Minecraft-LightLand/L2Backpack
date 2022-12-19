@@ -3,11 +3,11 @@
   "criteria": {
     "0": {
       "conditions": {
-        "items": [
-          null
-        ]
+        "keybind": false,
+        "origin": "ENDER",
+        "others": false
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "l2backpack:slot_click"
     }
   },
   "display": {

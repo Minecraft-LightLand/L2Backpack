@@ -53,7 +53,7 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 			int post = 0;
 			for (ItemStack inv : list) post += inv.getCount();
 			ContainerHelper.saveAllItems(tag, list);
-			ContentTransfer.onDump(player, pre - post);
+			ContentTransfer.onDump(player, pre - post, stack);
 		} else if (client && shift && right && target != null)
 			ContentTransfer.playSound(player);
 		if (!client && shift && !right && target != null) {
@@ -62,7 +62,7 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 			if (tag.contains("Items")) ContainerHelper.loadAllItems(tag, list);
 			int count = ContentTransfer.loadFrom(list, target, player, e -> matches(stack, e));
 			ContainerHelper.saveAllItems(tag, list);
-			ContentTransfer.onLoad(player, count);
+			ContentTransfer.onLoad(player, count, stack);
 		} else if (client && shift && !right && target != null)
 			ContentTransfer.playSound(player);
 	}
@@ -80,7 +80,7 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 			ContainerHelper.loadAllItems(tag, list);
 		}
 		if (player.isShiftKeyDown()) {
-			throwOut(list, player);
+			throwOut(list, player, stack);
 		} else {
 			Queue<Holder<ItemStack>> queue = new ArrayDeque<>();
 			player.getCapability(ForgeCapabilities.ITEM_HANDLER)
@@ -96,7 +96,7 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 						}
 					});
 			int moved = add(list, queue);
-			ContentTransfer.onCollect(player, moved);
+			ContentTransfer.onCollect(player, moved, stack);
 		}
 		ContainerHelper.saveAllItems(tag, list);
 		return InteractionResultHolder.success(stack);
@@ -145,7 +145,7 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 		return ans;
 	}
 
-	private void throwOut(NonNullList<ItemStack> list, Player player) {
+	private void throwOut(NonNullList<ItemStack> list, Player player, ItemStack bag) {
 		int count = 0;
 		for (ItemStack stack : list) {
 			if (!stack.isEmpty()) {
@@ -153,7 +153,7 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 				player.getInventory().placeItemBackInInventory(stack.copy());
 			}
 		}
-		ContentTransfer.onExtract(player, count);
+		ContentTransfer.onExtract(player, count, bag);
 		list.clear();
 	}
 

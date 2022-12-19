@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.remote;
+package dev.xkmc.l2backpack.content.remote.common;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

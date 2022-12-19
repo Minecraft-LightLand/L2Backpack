@@ -4,7 +4,9 @@
     "0": {
       "conditions": {
         "items": [
-          null
+          {
+            "tag": "l2backpack:dimensional_storages"
+          }
         ]
       },
       "trigger": "minecraft:inventory_changed"

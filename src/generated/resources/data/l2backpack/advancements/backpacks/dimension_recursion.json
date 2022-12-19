@@ -1,13 +1,13 @@
 {
-  "parent": "l2backpack:backpacks/dimension_hopper",
+  "parent": "l2backpack:backpacks/dimension",
   "criteria": {
     "0": {
       "conditions": {
-        "items": [
-          null
-        ]
+        "keybind": false,
+        "origin": "DIMENSION",
+        "others": false
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "l2backpack:slot_click"
     }
   },
   "display": {
@@ -15,7 +15,7 @@
     "description": {
       "translate": "advancements.l2backpack.advancements.backpacks.dimension_recursion.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
       "item": "l2backpack:dimensional_storage_yellow"

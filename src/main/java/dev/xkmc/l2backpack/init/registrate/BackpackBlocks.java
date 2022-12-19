@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.init.registrate;
 
-import dev.xkmc.l2backpack.content.remote.EnderParticleBlock;
+import dev.xkmc.l2backpack.content.remote.common.EnderParticleBlock;
 import dev.xkmc.l2backpack.content.remote.drawer.AlternateBlockForm;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlock;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;

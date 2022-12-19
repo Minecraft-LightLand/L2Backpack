@@ -4,7 +4,86 @@
     "0": {
       "conditions": {
         "items": [
-          null
+          {
+            "items": [
+              "l2backpack:backpack_white"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_orange"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_magenta"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_light_blue"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_yellow"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_lime"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_pink"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_gray"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_light_gray"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_cyan"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_purple"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_blue"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_brown"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_green"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_red"
+            ]
+          },
+          {
+            "items": [
+              "l2backpack:backpack_black"
+            ]
+          }
         ]
       },
       "trigger": "minecraft:inventory_changed"

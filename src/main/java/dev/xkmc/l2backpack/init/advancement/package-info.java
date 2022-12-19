@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2backpack.content.remote;
+package dev.xkmc.l2backpack.init.advancement;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

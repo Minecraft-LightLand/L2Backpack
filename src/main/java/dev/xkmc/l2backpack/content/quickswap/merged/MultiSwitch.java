@@ -76,7 +76,7 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem {
 			var list = getItems(stack);
 			int moved = ContentTransfer.transfer(list, target);
 			setItems(stack, list);
-			ContentTransfer.onDump(player, moved);
+			ContentTransfer.onDump(player, moved, stack);
 		} else if (client && shift && right && target != null)
 			ContentTransfer.playSound(player);
 
@@ -90,7 +90,7 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem {
 			int moved_c = ContentTransfer.loadFrom(list_c, target, player, ArmorSwap::isValidItem);
 			int moved = moved_a + moved_b + moved_c;
 			setItems(stack, list);
-			ContentTransfer.onLoad(player, moved);
+			ContentTransfer.onLoad(player, moved, stack);
 		} else if (client && shift && !right && target != null)
 			ContentTransfer.playSound(player);
 	}

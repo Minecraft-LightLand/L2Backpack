@@ -105,7 +105,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 			var list = getItems(stack);
 			int moved = ContentTransfer.transfer(list, target);
 			setItems(stack, list);
-			ContentTransfer.onDump(player, moved);
+			ContentTransfer.onDump(player, moved, stack);
 		} else if (client && shift && right && target != null)
 			ContentTransfer.playSound(player);
 
@@ -113,7 +113,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 			var list = getItems(stack);
 			int moved = ContentTransfer.loadFrom(list, target, player, this::isValidContent);
 			setItems(stack, list);
-			ContentTransfer.onLoad(player, moved);
+			ContentTransfer.onLoad(player, moved, stack);
 		} else if (client && shift && !right && target != null)
 			ContentTransfer.playSound(player);
 	}

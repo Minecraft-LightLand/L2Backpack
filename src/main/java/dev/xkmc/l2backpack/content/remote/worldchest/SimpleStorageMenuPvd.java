@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
-import dev.xkmc.l2backpack.content.remote.StorageContainer;
+import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;

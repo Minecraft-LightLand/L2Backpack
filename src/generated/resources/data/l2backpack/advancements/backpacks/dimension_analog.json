@@ -1,0 +1,29 @@
+{
+  "parent": "l2backpack:backpacks/dimension_hopper",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "l2backpack:analog_signal"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2backpack.advancements.backpacks.dimension_analog.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "l2backpack:dimensional_storage_red"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2backpack.advancements.backpacks.dimension_analog.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
-import dev.xkmc.l2backpack.content.remote.StorageContainer;
-import dev.xkmc.l2backpack.content.remote.WorldStorage;
+import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
+import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.block.NameSetable;
@@ -60,7 +60,7 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 			}
 			if (handler == null) {
 				Optional<StorageContainer> storage = WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password);
-				handler = storage.isEmpty() ? LazyOptional.empty() : LazyOptional.of(() -> new InvWrapper(storage.get().container));
+				handler = storage.isEmpty() ? LazyOptional.empty() : LazyOptional.of(() -> new WorldChestInvWrapper(storage.get().container, owner_id));
 			}
 			return this.handler.cast();
 		}

@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.init.advancement;
+package dev.xkmc.l2backpack.init.advancement.util;
 
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateAdvancementProvider;
 import net.minecraft.advancements.Advancement;

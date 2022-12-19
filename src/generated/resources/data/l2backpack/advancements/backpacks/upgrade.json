@@ -4,7 +4,10 @@
     "0": {
       "conditions": {
         "items": [
-          null
+          {
+            "nbt": "{rows:3}",
+            "tag": "l2backpack:backpacks"
+          }
         ]
       },
       "trigger": "minecraft:inventory_changed"

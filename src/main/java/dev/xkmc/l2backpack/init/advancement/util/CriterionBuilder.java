@@ -1,10 +1,11 @@
-package dev.xkmc.l2backpack.init.advancement;
+package dev.xkmc.l2backpack.init.advancement.util;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -20,6 +21,14 @@ public class CriterionBuilder {
 
 	public static CriterionBuilder item(Item item) {
 		return one(InventoryChangeTrigger.TriggerInstance.hasItems(item));
+	}
+
+	public static CriterionBuilder item(TagKey<Item> item, CompoundTag tag) {
+		return one(InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(item).hasNbt(tag).build()));
+	}
+
+	public static CriterionBuilder items(Item... item) {
+		return one(InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(item).build()));
 	}
 
 	public static CriterionBuilder item(TagKey<Item> item) {
@@ -45,7 +54,7 @@ public class CriterionBuilder {
 		this.req = req;
 	}
 
-	private CriterionBuilder add(CriterionTriggerInstance instance) {
+	public CriterionBuilder add(CriterionTriggerInstance instance) {
 		list.add(instance);
 		return this;
 	}

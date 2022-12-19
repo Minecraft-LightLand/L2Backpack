@@ -4,7 +4,11 @@
     "0": {
       "conditions": {
         "items": [
-          null
+          {
+            "items": [
+              "l2backpack:tool_swap"
+            ]
+          }
         ]
       },
       "trigger": "minecraft:inventory_changed"

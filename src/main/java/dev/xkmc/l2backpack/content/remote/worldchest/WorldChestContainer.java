@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.remote.worldchest;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
 import dev.xkmc.l2backpack.content.common.BaseOpenableContainer;
-import dev.xkmc.l2backpack.content.remote.StorageContainer;
+import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.network.chat.Component;

@@ -1,7 +1,9 @@
 package dev.xkmc.l2backpack.network.drawer;
 
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.server.level.ServerPlayer;
@@ -52,6 +54,7 @@ public class DrawerInteractToServer extends SerialPacketBase {
 		if (wid != 0 && !menu.getSlot(slot).allowModification(player)) return;
 		ItemStack drawer = wid == 0 ? player.getInventory().getItem(slot) : menu.getSlot(slot).getItem();
 		if (!(drawer.getItem() instanceof BaseDrawerItem drawerItem)) return;
+		boolean other = drawerItem instanceof EnderDrawerItem && !EnderDrawerItem.getOwner(drawer).map(e -> e.equals(player.getUUID())).orElse(false);
 		ItemStack carried = menu.getCarried();
 		if (player.isCreative() && wid == 0) {
 			carried = new ItemStack(item, count);
@@ -63,14 +66,19 @@ public class DrawerInteractToServer extends SerialPacketBase {
 			} else {
 				menu.setCarried(stack);
 			}
+			if (!stack.isEmpty()) {
+				BackpackTriggers.DRAWER.trigger(player, Type.TAKE, other);
+			}
 		} else if (type == Type.INSERT) {
 			if (BaseDrawerItem.canAccept(drawer, carried) && !carried.isEmpty() && !carried.hasTag()) {
 				drawerItem.insert(drawer, carried, player);
+				BackpackTriggers.DRAWER.trigger(player, Type.INSERT, other);
 			}
 		} else if (type == Type.SET) {
 			if (drawerItem.canSetNewItem(drawer) && !carried.isEmpty() && !carried.hasTag()) {
 				drawerItem.setItem(drawer, carried.getItem(), player);
 				drawerItem.insert(drawer, carried, player);
+				BackpackTriggers.DRAWER.trigger(player, Type.INSERT, other);
 			}
 		}
 		if (player.isCreative() && wid == 0) {

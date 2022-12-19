@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.remote;
+package dev.xkmc.l2backpack.content.remote.common;
 
 import dev.xkmc.l2library.block.mult.AnimateTickBlockMethod;
 import net.minecraft.core.BlockPos;

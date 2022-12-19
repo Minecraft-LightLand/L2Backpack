@@ -1,18 +1,17 @@
-package dev.xkmc.l2backpack.content.remote;
+package dev.xkmc.l2backpack.content.remote.common;
 
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public final class DrawerAccess {
 
@@ -54,6 +53,10 @@ public final class DrawerAccess {
 
 	public Item item() {
 		return item;
+	}
+
+	public Optional<ServerPlayer> getOwner() {
+		return Proxy.getServer().map(e -> e.getPlayerList().getPlayer(id));
 	}
 
 }

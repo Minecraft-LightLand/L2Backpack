@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.restore;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.common.BaseOpenableContainer;
 import dev.xkmc.l2backpack.content.common.ContainerType;
-import dev.xkmc.l2backpack.content.remote.WorldStorage;
+import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.remote.worldchest.SimpleStorageMenuPvd;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.init.L2Backpack;

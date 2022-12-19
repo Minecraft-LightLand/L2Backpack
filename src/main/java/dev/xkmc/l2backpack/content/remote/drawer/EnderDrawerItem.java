@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.remote.drawer;
 import dev.xkmc.l2backpack.content.common.BaseItemRenderer;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
-import dev.xkmc.l2backpack.content.remote.DrawerAccess;
+import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.ChatFormatting;
@@ -22,6 +22,8 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
@@ -30,6 +32,16 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 	public static final String KEY_OWNER_NAME = "owner_name";
 
 	public static final int MAX = 64;
+
+	public static Optional<UUID> getOwner(ItemStack stack) {
+		CompoundTag tag = stack.getTag();
+		if (tag != null) {
+			if (tag.contains(KEY_OWNER_ID)) {
+				return Optional.of(tag.getUUID(KEY_OWNER_ID));
+			}
+		}
+		return Optional.empty();
+	}
 
 	public EnderDrawerItem(Block block, Properties properties) {
 		super(block, properties.stacksTo(1).fireResistant());
@@ -60,7 +72,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			ItemStack take = takeItem(stack, player);
 			int c = take.getCount();
 			player.getInventory().placeItemBackInInventory(take);
-			ContentTransfer.onExtract(player, c);
+			ContentTransfer.onExtract(player, c, stack);
 		} else {
 			DrawerAccess access = DrawerAccess.of(world, stack);
 			int count = access.getCount();
@@ -68,7 +80,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			int ext = BaseDrawerItem.loadFromInventory(max, count, access.item(), player);
 			count += ext;
 			access.setCount(count);
-			ContentTransfer.onCollect(player, ext);
+			ContentTransfer.onCollect(player, ext, stack);
 		}
 		return InteractionResultHolder.success(stack);
 	}

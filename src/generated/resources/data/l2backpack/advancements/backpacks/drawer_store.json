@@ -3,11 +3,9 @@
   "criteria": {
     "0": {
       "conditions": {
-        "items": [
-          null
-        ]
+        "type": "INSERT"
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "l2backpack:drawer_interact"
     }
   },
   "display": {

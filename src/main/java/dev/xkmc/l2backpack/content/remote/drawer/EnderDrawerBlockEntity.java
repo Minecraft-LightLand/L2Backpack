@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
-import dev.xkmc.l2backpack.content.remote.DrawerAccess;
+import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.core.BlockPos;
@@ -46,7 +46,7 @@ public class EnderDrawerBlockEntity extends BaseBlockEntity {
 				return LazyOptional.of(() -> new InvWrapper(new SimpleContainer(64))).cast();
 			}
 			if (handler == null) {
-				handler = owner_id == null ? LazyOptional.empty() : LazyOptional.of(() -> new EnderDawerItemHandler(getAccess()));
+				handler = owner_id == null ? LazyOptional.empty() : LazyOptional.of(() -> new EnderDawerItemHandler(getAccess(), true));
 			}
 			return this.handler.cast();
 		}

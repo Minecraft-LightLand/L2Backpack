@@ -3,7 +3,6 @@ package dev.xkmc.l2backpack.content.remote.worldchest;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
-import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
 import dev.xkmc.l2library.block.mult.*;
 import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
 import dev.xkmc.l2library.block.one.GetBlockItemBlockMethod;

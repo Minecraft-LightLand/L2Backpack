@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.quickswap.quiver;
 
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.quickswap.common.*;
+import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Quiver extends SingleSwapItem {
+public class Quiver extends SingleSwapItem implements ItemOnBackItem {
 
 	public static float displayArrow(ItemStack stack) {
 		int disp = 0;

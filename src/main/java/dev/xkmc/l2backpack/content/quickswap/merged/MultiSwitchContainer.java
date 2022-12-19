@@ -1,7 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.merged;
 
 import dev.xkmc.l2backpack.content.common.BaseBagContainer;
-import dev.xkmc.l2backpack.content.common.BaseOpenableContainer;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSwap;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;

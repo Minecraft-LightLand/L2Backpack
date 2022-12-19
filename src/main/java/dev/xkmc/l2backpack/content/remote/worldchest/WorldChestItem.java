@@ -22,8 +22,20 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class WorldChestItem extends BlockItem implements BackpackModelItem {
+
+	public static Optional<UUID> getOwner(ItemStack stack) {
+		CompoundTag tag = stack.getTag();
+		if (tag != null) {
+			if (tag.contains("owner_id")) {
+				return Optional.of(tag.getUUID("owner_id"));
+			}
+		}
+		return Optional.empty();
+	}
 
 	public final DyeColor color;
 

@@ -8,6 +8,7 @@ import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.ClientEventHandler;
+import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.server.level.ServerPlayer;
@@ -64,7 +65,7 @@ public class SlotClickToServer extends SerialPacketBase {
 			stack = menu.getSlot(index).getItem();
 			container = menu.getSlot(index).container;
 		}
-
+		boolean others = false;
 		if (playerSlot != null && stack.getItem() instanceof BaseBagItem bag) {
 			bag.open(player, playerSlot, stack);
 			if (wid != -1 || slot != -1 || index != -1)
@@ -73,6 +74,7 @@ public class SlotClickToServer extends SerialPacketBase {
 			NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
 					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getDisplayName()));
 		} else if (stack.getItem() instanceof WorldChestItem chest) {
+			others = WorldChestItem.getOwner(stack).map(e -> e.equals(player.getUUID())).orElse(false);
 			new WorldChestMenuPvd(player, stack, chest).open();
 			if (playerSlot != null) {
 				if (wid != -1 || slot != -1 || index != -1) {
@@ -82,6 +84,9 @@ public class SlotClickToServer extends SerialPacketBase {
 			if (container != null) {
 				container.setChanged();
 			}
+		}
+		if (playerSlot != null) {
+			BackpackTriggers.SLOT_CLICK.trigger(player, playerSlot.type(), wid == -1 && slot == -1 && index == -1, others);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.init.advancement;
 
-import dev.xkmc.l2backpack.init.advancement.util.BaseCriterion;
-import dev.xkmc.l2backpack.init.advancement.util.BaseCriterionInstance;
+import dev.xkmc.l2library.base.advancements.BaseCriterion;
+import dev.xkmc.l2library.base.advancements.BaseCriterionInstance;
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.resources.ResourceLocation;

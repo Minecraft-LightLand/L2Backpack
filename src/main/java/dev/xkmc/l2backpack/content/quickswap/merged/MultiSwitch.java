@@ -10,6 +10,7 @@ import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
+import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Locale;
 
-public class MultiSwitch extends BaseBagItem implements IQuickSwapItem {
+public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBackItem {
 
 	public static void setSelected(ItemStack stack, QuickSwapType type, int i) {
 		int slot = i;

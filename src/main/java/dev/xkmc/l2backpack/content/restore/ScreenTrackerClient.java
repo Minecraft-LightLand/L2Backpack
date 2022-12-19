@@ -50,7 +50,7 @@ public class ScreenTrackerClient {
 	@OnlyIn(Dist.CLIENT)
 	private static boolean onClientCloseImpl(ScreenTracker tracker, int wid) {
 		if (Screen.hasShiftDown() || tracker.isWaiting) {
-			// TODO second exit: close screen
+			// second exit: close screen
 			tracker.isWaiting = false;
 			L2Backpack.HANDLER.toServer(new RestoreMenuToServer(-1));
 			return false;

@@ -22,12 +22,6 @@ public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotCl
 		return ans;
 	}
 
-	public static Ins fromOthers() {
-		Ins ans = fromGUI();
-		ans.others = true;
-		return ans;
-	}
-
 	public static Ins fromBackpack(ContainerType type) {
 		Ins ans = fromGUI();
 		ans.origin = type;
@@ -38,10 +32,8 @@ public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotCl
 		super(id, Ins::new, Ins.class);
 	}
 
-	public void trigger(ServerPlayer player, ContainerType type, boolean keybind, boolean others) {
-		this.trigger(player, e -> (e.origin == null || e.origin == type) &&
-				e.keybind == keybind &&
-				(!e.others || others));
+	public void trigger(ServerPlayer player, ContainerType type, boolean keybind) {
+		this.trigger(player, e -> (e.origin == null || e.origin == type) && e.keybind == keybind);
 	}
 
 	@SerialClass
@@ -53,9 +45,6 @@ public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotCl
 
 		@SerialClass.SerialField
 		private boolean keybind = false;
-
-		@SerialClass.SerialField
-		private boolean others = false;
 
 		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
 			super(id, player);

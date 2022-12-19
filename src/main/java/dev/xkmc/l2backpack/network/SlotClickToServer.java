@@ -74,7 +74,7 @@ public class SlotClickToServer extends SerialPacketBase {
 			NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
 					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getDisplayName()));
 		} else if (stack.getItem() instanceof WorldChestItem chest) {
-			others = WorldChestItem.getOwner(stack).map(e -> e.equals(player.getUUID())).orElse(false);
+			others = WorldChestItem.getOwner(stack).map(e -> !e.equals(player.getUUID())).orElse(false);
 			new WorldChestMenuPvd(player, stack, chest).open();
 			if (playerSlot != null) {
 				if (wid != -1 || slot != -1 || index != -1) {
@@ -86,7 +86,10 @@ public class SlotClickToServer extends SerialPacketBase {
 			}
 		}
 		if (playerSlot != null) {
-			BackpackTriggers.SLOT_CLICK.trigger(player, playerSlot.type(), wid == -1 && slot == -1 && index == -1, others);
+			BackpackTriggers.SLOT_CLICK.trigger(player, playerSlot.type(), wid == -1 && slot == -1 && index == -1);
+		}
+		if (others) {
+			BackpackTriggers.SHARE.trigger(player);
 		}
 	}
 }

@@ -121,7 +121,7 @@ public class AdvGen {
 								.placedBlock(BackpackBlocks.ENDER_DRAWER.get())),
 						"Remote Logistics", "Place down an Ender Drawer").type(FrameType.GOAL)
 				.create("dimension_share", dimension(DyeColor.BLUE),
-						CriterionBuilder.or().add(SlotClickTrigger.fromOthers()).add(DrawerInteractTrigger.fromOthers()),
+						CriterionBuilder.one(SharedDriveTrigger.ins()),
 						"Shared Drive", "Open a Dimensional Backpack or use an Ender Drawer that belongs to someone else").type(FrameType.CHALLENGE)
 
 				// bags

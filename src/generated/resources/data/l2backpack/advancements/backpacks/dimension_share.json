@@ -2,15 +2,8 @@
   "parent": "l2backpack:backpacks/ender_drawer_place",
   "criteria": {
     "0": {
-      "conditions": {
-        "keybind": false,
-        "others": true
-      },
-      "trigger": "l2backpack:slot_click"
-    },
-    "1": {
       "conditions": {},
-      "trigger": "l2backpack:drawer_interact"
+      "trigger": "l2backpack:shared_drive"
     }
   },
   "display": {
@@ -30,8 +23,7 @@
   },
   "requirements": [
     [
-      "0",
-      "1"
+      "0"
     ]
   ]
 }

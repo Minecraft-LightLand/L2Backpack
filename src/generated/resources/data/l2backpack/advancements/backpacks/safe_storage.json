@@ -4,8 +4,7 @@
     "0": {
       "conditions": {
         "keybind": false,
-        "origin": "ENDER",
-        "others": false
+        "origin": "ENDER"
       },
       "trigger": "l2backpack:slot_click"
     }

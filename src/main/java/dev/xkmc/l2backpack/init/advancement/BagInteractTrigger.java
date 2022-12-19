@@ -33,7 +33,7 @@ public class BagInteractTrigger extends BaseCriterion<BagInteractTrigger.Ins, Ba
 	public void trigger(ServerPlayer player, ItemStack stack, Type type, int count) {
 		if (count > 0)
 			this.trigger(player, e -> e.type == type &&
-					(e.ingredient == null || e.ingredient.test(stack)));
+					(e.ingredient.isEmpty() || e.ingredient.test(stack)));
 	}
 
 	@SerialClass
@@ -42,9 +42,8 @@ public class BagInteractTrigger extends BaseCriterion<BagInteractTrigger.Ins, Ba
 		@SerialClass.SerialField
 		private Type type;
 
-		@Nullable
 		@SerialClass.SerialField
-		private Ingredient ingredient;
+		private Ingredient ingredient = Ingredient.EMPTY;
 
 		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
 			super(id, player);

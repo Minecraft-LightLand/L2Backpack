@@ -18,18 +18,12 @@ public class DrawerInteractTrigger extends BaseCriterion<DrawerInteractTrigger.I
 		return ans;
 	}
 
-	public static Ins fromOthers() {
-		Ins ans = new Ins(BackpackTriggers.DRAWER.getId(), EntityPredicate.Composite.ANY);
-		ans.other = true;
-		return ans;
-	}
-
 	public DrawerInteractTrigger(ResourceLocation id) {
 		super(id, Ins::new, Ins.class);
 	}
 
-	public void trigger(ServerPlayer player, DrawerInteractToServer.Type type, boolean other) {
-		this.trigger(player, e -> (e.type == null || e.type == type) && (!e.other || other));
+	public void trigger(ServerPlayer player, DrawerInteractToServer.Type type) {
+		this.trigger(player, e -> (e.type == null || e.type == type));
 	}
 
 	@SerialClass
@@ -38,8 +32,6 @@ public class DrawerInteractTrigger extends BaseCriterion<DrawerInteractTrigger.I
 		@Nullable
 		@SerialClass.SerialField
 		private DrawerInteractToServer.Type type;
-
-		private boolean other = false;
 
 		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
 			super(id, player);

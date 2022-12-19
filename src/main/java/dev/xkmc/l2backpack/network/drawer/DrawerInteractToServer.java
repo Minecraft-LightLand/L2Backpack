@@ -54,7 +54,9 @@ public class DrawerInteractToServer extends SerialPacketBase {
 		if (wid != 0 && !menu.getSlot(slot).allowModification(player)) return;
 		ItemStack drawer = wid == 0 ? player.getInventory().getItem(slot) : menu.getSlot(slot).getItem();
 		if (!(drawer.getItem() instanceof BaseDrawerItem drawerItem)) return;
-		boolean other = drawerItem instanceof EnderDrawerItem && !EnderDrawerItem.getOwner(drawer).map(e -> e.equals(player.getUUID())).orElse(false);
+		if (drawerItem instanceof EnderDrawerItem && EnderDrawerItem.getOwner(drawer).map(e -> !e.equals(player.getUUID())).orElse(false)) {
+			BackpackTriggers.SHARE.trigger(player);
+		}
 		ItemStack carried = menu.getCarried();
 		if (player.isCreative() && wid == 0) {
 			carried = new ItemStack(item, count);
@@ -67,18 +69,18 @@ public class DrawerInteractToServer extends SerialPacketBase {
 				menu.setCarried(stack);
 			}
 			if (!stack.isEmpty()) {
-				BackpackTriggers.DRAWER.trigger(player, Type.TAKE, other);
+				BackpackTriggers.DRAWER.trigger(player, Type.TAKE);
 			}
 		} else if (type == Type.INSERT) {
 			if (BaseDrawerItem.canAccept(drawer, carried) && !carried.isEmpty() && !carried.hasTag()) {
 				drawerItem.insert(drawer, carried, player);
-				BackpackTriggers.DRAWER.trigger(player, Type.INSERT, other);
+				BackpackTriggers.DRAWER.trigger(player, Type.INSERT);
 			}
 		} else if (type == Type.SET) {
 			if (drawerItem.canSetNewItem(drawer) && !carried.isEmpty() && !carried.hasTag()) {
 				drawerItem.setItem(drawer, carried.getItem(), player);
 				drawerItem.insert(drawer, carried, player);
-				BackpackTriggers.DRAWER.trigger(player, Type.INSERT, other);
+				BackpackTriggers.DRAWER.trigger(player, Type.INSERT);
 			}
 		}
 		if (player.isCreative() && wid == 0) {

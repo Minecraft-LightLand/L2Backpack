@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.remote.worldchest;
 
 import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
+import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -28,6 +29,9 @@ public record WorldChestMenuPvd(ServerPlayer player, ItemStack stack, WorldChest
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
 		StorageContainer container = getContainer((ServerLevel) player.level).get();
+		if (!container.id.equals(player.getUUID())) {
+			BackpackTriggers.SHARE.trigger((ServerPlayer) player);
+		}
 		return new WorldChestContainer(id, inventory, container.container, container, null, getDisplayName());
 	}
 

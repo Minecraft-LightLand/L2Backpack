@@ -3,8 +3,7 @@
   "criteria": {
     "0": {
       "conditions": {
-        "keybind": true,
-        "others": false
+        "keybind": true
       },
       "trigger": "l2backpack:slot_click"
     }

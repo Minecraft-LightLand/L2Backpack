@@ -4,8 +4,7 @@
     "0": {
       "conditions": {
         "keybind": false,
-        "origin": "DIMENSION",
-        "others": false
+        "origin": "DIMENSION"
       },
       "trigger": "l2backpack:slot_click"
     }

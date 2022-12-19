@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.network.restore;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.content.restore.ScreenType;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,10 +28,15 @@ public class RestoreMenuToServer extends SerialPacketBase {
 	public void handle(NetworkEvent.Context context) {
 		ServerPlayer player = context.getSender();
 		if (player == null) return;
+		if (wid == -1) {
+			BackpackTriggers.EXIT_MENU.trigger(player, true);
+			return;
+		}
 		AbstractContainerMenu menu = player.containerMenu;
 		if (menu.containerId != wid || !ScreenTracker.get(player).serverRestore(player, wid)) {
 			L2Backpack.HANDLER.toClientPlayer(new SetScreenToClient(ScreenType.NONE), player);
 		}
+		BackpackTriggers.EXIT_MENU.trigger(player, false);
 	}
 
 }

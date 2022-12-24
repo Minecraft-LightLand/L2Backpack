@@ -36,7 +36,7 @@ public final class SimpleMenuPvd implements MenuProvider {
 
 	@Override
 	public Component getDisplayName() {
-		return stack.getDisplayName();
+		return stack.getHoverName();
 	}
 
 	@Override

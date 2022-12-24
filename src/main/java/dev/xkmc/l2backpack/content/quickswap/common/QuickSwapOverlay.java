@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 
 import java.util.List;
@@ -74,10 +75,15 @@ public class QuickSwapOverlay extends SelectionSideBar {
 
 	@Override
 	public boolean isAvailable(ItemStack stack) {
-		QuickSwapType type = QuickSwapManager.getValidType(Proxy.getClientPlayer());
-		if (type == QuickSwapType.ARROW)
-			return !used.isEmpty() && ItemStack.isSameItemSameTags(stack, used) &&
-					stack.getCount() == used.getCount();
+		LocalPlayer player = Proxy.getClientPlayer();
+		QuickSwapType type = QuickSwapManager.getValidType(player);
+		if (type == QuickSwapType.ARROW) {
+			ItemStack bowStack = player.getMainHandItem();
+			if (bowStack.getItem() instanceof ProjectileWeaponItem bow) {
+				return !stack.isEmpty() && bow.getAllSupportedProjectiles().test(stack);
+			}
+			return false;
+		}
 		if (type == QuickSwapType.ARMOR)
 			return !stack.isEmpty();
 		return true;

@@ -22,7 +22,7 @@ public record WorldChestMenuPvd(ServerPlayer player, ItemStack stack, WorldChest
 
 	@Override
 	public Component getDisplayName() {
-		return stack.getDisplayName();
+		return stack.getHoverName();
 	}
 
 	@ServerOnly

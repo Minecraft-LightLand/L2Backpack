@@ -9,7 +9,7 @@
 	"bag_collect.description": "右键收纳袋以收起背包内用不到的装备或附魔书",
 	"bag_collect.title": "一键收纳",
 	"bag_dump.description": "将收集到的武器和工具通过shift加右键从包里扔掉",
-	"bag_dump.title": "清理大师",
+	"bag_dump.title": "一键清理",
 	"close_all.description": "用shift+esc直接退出所有GUI",
 	"close_all.title": "一键退出",
 	"color.description": "获得所有颜色的背包",

@@ -47,7 +47,7 @@
 	"folder_structure.description": "退出背包的GUI并返回上一页",
 	"folder_structure.title": "这是...文件夹?",
 	"interact_dump.description": "手持水晶匣子shift加右键将物品倒入一个箱子里",
-	"interact_dump.title": "泄洪！",
+	"interact_dump.title": "卸货！",
 	"interact_load.description": "通过shift加左键单击箱子将东西装入水晶匣子",
 	"interact_load.title": "拿来吧你",
 	"multi_switch.description": "获得一个三合一切换袋",

@@ -46,7 +46,7 @@ public class ItemOnBackLayerRenderer<T extends LivingEntity, M extends HumanoidM
 			if (!stack.isEmpty())
 				item = (ItemOnBackItem) stack.getItem();
 		}
-		if (item == null) return;
+		if (item == null || !item.shouldRender()) return;
 		pose.pushPose();
 		pose.scale(this.scaleX, this.scaleY, this.scaleZ);
 		boolean flag = entity instanceof Villager || entity instanceof ZombieVillager;

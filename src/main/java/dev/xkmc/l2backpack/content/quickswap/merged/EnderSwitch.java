@@ -33,7 +33,12 @@ public class EnderSwitch extends MultiSwitch implements BackpackModelItem {
 
 	@Override
 	public ResourceLocation getModelTexture(ItemStack stack) {
-		return new ResourceLocation(L2Backpack.MODID, "textures/block/ender_backpack.png");
+		return new ResourceLocation(L2Backpack.MODID, "textures/block/ender_swap.png");
+	}
+
+	@Override
+	public boolean shouldRender() {
+		return false;
 	}
 
 }

@@ -44,7 +44,7 @@ public class EnderBackpackItem extends Item implements BackpackModelItem {
 	}
 
 	public EnderBackpackItem(Properties props) {
-		super(props);
+		super(props.stacksTo(1));
 	}
 
 	@Override

@@ -94,19 +94,19 @@ public class RecipeGen {
 			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, Items.LEATHER)
 					.pattern(" A ").pattern("ABA").pattern(" AD")
 					.define('A', Tags.Items.LEATHER).define('B', Items.STONE_SWORD)
-					.define('D', Items.STRING)
+					.define('D', Items.IRON_INGOT)
 					.save(pvd);
 
 			bag = BackpackItems.ARMOR_SWAP.get();
 			unlock(pvd, new ShapedRecipeBuilder(bag, 1)::unlockedBy, Items.LEATHER)
-					.pattern(" A ").pattern("ABA").pattern(" AD")
+					.pattern(" A ").pattern("ABA").pattern("DAD")
 					.define('A', Tags.Items.LEATHER).define('B', Items.IRON_HELMET)
-					.define('D', Items.STRING)
+					.define('D', Items.IRON_INGOT)
 					.save(pvd);
 
 			bag = BackpackItems.MULTI_SWITCH.get();
 			unlock(pvd, new CustomShapedBuilder<>(BackpackRecipe.RSC_BAG_CRAFT, bag, 1)::unlockedBy, ender)
-					.pattern("A1A").pattern("2A3")
+					.pattern("2A1").pattern("A3A")
 					.define('1', BackpackItems.QUIVER.get())
 					.define('2', BackpackItems.SCABBARD.get())
 					.define('3', BackpackItems.ARMOR_SWAP.get())

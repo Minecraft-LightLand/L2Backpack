@@ -15,8 +15,8 @@
     }
   },
   "pattern": [
-    "A1A",
-    "2A3"
+    "2A1",
+    "A3A"
   ],
   "result": {
     "item": "l2backpack:combined_swap"

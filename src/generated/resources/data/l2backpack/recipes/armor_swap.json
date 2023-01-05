@@ -8,13 +8,13 @@
       "item": "minecraft:iron_helmet"
     },
     "D": {
-      "item": "minecraft:string"
+      "item": "minecraft:iron_ingot"
     }
   },
   "pattern": [
     " A ",
     "ABA",
-    " AD"
+    "DAD"
   ],
   "result": {
     "item": "l2backpack:armor_swap"

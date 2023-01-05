@@ -132,7 +132,7 @@ dependencies {
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
     implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}")
-    runtimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:0.2.4')
+    runtimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:0.3.3')
     runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:0.4.4')
     //runtimeOnly fg.deobf('dev.xkmc.l2artifacts:l2artifacts:1.1.2')
 

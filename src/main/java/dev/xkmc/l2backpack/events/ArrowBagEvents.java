@@ -30,7 +30,7 @@ public class ArrowBagEvents {
 	public static void onProjectileSearch(LivingGetProjectileEvent event) {
 		if (!(event.getEntity() instanceof Player player)) return;
 		if (!(event.getProjectileWeaponItemStack().getItem() instanceof ProjectileWeaponItem weapon)) return;
-		IQuickSwapToken token = QuickSwapManager.getToken(player);
+		IQuickSwapToken token = QuickSwapManager.getToken(player, false);
 		if (token == null) return;
 		if (token.type() != QuickSwapType.ARROW) return;
 		List<ItemStack> arrows = token.getList();

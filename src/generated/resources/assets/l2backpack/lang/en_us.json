@@ -149,7 +149,7 @@
   "l2backpack.tooltip.info.multi_switch": "This is a Quiver, a Scabbard, and an Armor Swap at the same time. Hold a bow to activate Quiver mode. Hold a tool to activate Scabbard mode. Hold nothing to activate Armor Swap mode.",
   "l2backpack.tooltip.info.quick_any": "Right click to open. Or right click in any GUI to open directly.",
   "l2backpack.tooltip.info.quick_inv": "Right click to open. Or right click in inventory / ender chest / dimensional storage GUI to open directly.",
-  "l2backpack.tooltip.info.tool_bag": "Put in off hand or chest slot (or back slot of Curios) and hold tools or weapons in main hand to preview, choose, and swap tools from scabbard. Press shift + number or up/down to switch tools. Press R to swap",
+  "l2backpack.tooltip.info.tool_bag": "Put in off hand or chest slot (or back slot of Curios) and hold tools or weapons in main hand (or hold nothing and press alt) to preview, choose, and swap tools from scabbard. Press shift + number or up/down to switch tools. Press R to swap",
   "l2backpack.tooltip.info.upgrade": "Upgrade by applying an Ender Pocket in Smithing Table. Content and name will be preserved.",
   "l2backpack.tooltip.item.size": "Content: %s/%s",
   "l2backpack.tooltip.keybind": "This can be put on chest slot (or back slot of Curios), and can be opened via key bind.",

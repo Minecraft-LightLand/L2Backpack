@@ -44,6 +44,7 @@ public record SingleSwapToken(IQuickSwapItem item, ItemStack stack,
 		if (type == QuickSwapType.ARMOR) {
 			if (a.isEmpty()) return;
 			EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(a);
+			if (player.getItemBySlot(slot).getItem() instanceof BaseBagItem) return;
 			list.set(i, player.getItemBySlot(slot));
 			player.setItemSlot(slot, a);
 		}

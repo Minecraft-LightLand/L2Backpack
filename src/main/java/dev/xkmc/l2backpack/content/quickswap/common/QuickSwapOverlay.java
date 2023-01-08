@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.datafixers.util.Pair;
+import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.OverlayUtils;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
@@ -26,8 +27,6 @@ public class QuickSwapOverlay extends SelectionSideBar {
 
 	public static QuickSwapOverlay INSTANCE = new QuickSwapOverlay();
 
-	private ItemStack used = ItemStack.EMPTY;
-
 	public QuickSwapOverlay() {
 		super(40, 3);
 	}
@@ -36,14 +35,14 @@ public class QuickSwapOverlay extends SelectionSideBar {
 		if (Minecraft.getInstance().screen != null) return false;
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
-		IQuickSwapToken token = QuickSwapManager.getToken(player);
+		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
 		return token != null;
 	}
 
 	@Override
 	public Pair<List<ItemStack>, Integer> getItems() {
 		LocalPlayer player = Proxy.getClientPlayer();
-		IQuickSwapToken token = QuickSwapManager.getToken(player);
+		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
 		assert token != null;
 		List<ItemStack> list = token.getList();
 		int selected = token.getSelected();
@@ -53,7 +52,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	@Override
 	public int getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
-		IQuickSwapToken token = QuickSwapManager.getToken(player);
+		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
 		assert token != null;
 		int selected = token.getSelected();
 		int focus = player.getInventory().selected;
@@ -76,7 +75,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	@Override
 	public boolean isAvailable(ItemStack stack) {
 		LocalPlayer player = Proxy.getClientPlayer();
-		QuickSwapType type = QuickSwapManager.getValidType(player);
+		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
 		if (type == QuickSwapType.ARROW) {
 			ItemStack bowStack = player.getMainHandItem();
 			if (bowStack.getItem() instanceof ProjectileWeaponItem bow) {
@@ -84,8 +83,15 @@ public class QuickSwapOverlay extends SelectionSideBar {
 			}
 			return false;
 		}
-		if (type == QuickSwapType.ARMOR)
-			return !stack.isEmpty();
+		if (type == QuickSwapType.ARMOR) {
+			if (stack.isEmpty()) {
+				return false;
+			}
+			EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
+			if (player.getItemBySlot(slot).getItem() instanceof BaseBagItem) {
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -95,24 +101,15 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	}
 
 	@Override
-	public void initRender() {
-		LocalPlayer player = Proxy.getClientPlayer();
-		QuickSwapType type = QuickSwapManager.getValidType(player);
-		if (type == QuickSwapType.ARROW)
-			this.used = player.getProjectile(player.getMainHandItem());
-	}
-
-	@Override
 	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
 		super.render(gui, poseStack, partialTick, width, height);
 		LocalPlayer player = Proxy.getClientPlayer();
-		if (QuickSwapManager.getValidType(player) == QuickSwapType.ARMOR && ease_time == max_ease) {
+		if (QuickSwapManager.getValidType(player, Screen.hasAltDown()) == QuickSwapType.ARMOR && ease_time == max_ease) {
 			int x = getXOffset(width);
 			int y = 45 + getYOffset(height);
 			if (onCenter()) {
 				x -= 18;
 			} else x += 18;
-			boolean shift = Screen.hasShiftDown();
 			ItemRenderer renderer = gui.getMinecraft().getItemRenderer();
 			var pair = getItems();
 			ItemStack hover = pair.getFirst().get(pair.getSecond());
@@ -121,7 +118,8 @@ public class QuickSwapOverlay extends SelectionSideBar {
 				EquipmentSlot slot = EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 3 - i);
 				ItemStack stack = player.getItemBySlot(slot);
 				Font font = gui.getMinecraft().font;
-				renderArmorSlot(x, y, 64, target == slot);
+				ItemStack targetStack = player.getItemBySlot(target);
+				renderArmorSlot(x, y, 64, target == slot, targetStack.getItem() instanceof BaseBagItem);
 				if (!stack.isEmpty()) {
 					renderer.renderAndDecorateItem(stack, x, y);
 					renderer.renderGuiItemDecorations(font, stack, x, y);
@@ -131,7 +129,26 @@ public class QuickSwapOverlay extends SelectionSideBar {
 		}
 	}
 
-	public void renderArmorSlot(int x, int y, int a, boolean target) {
+	public void renderSelection(int x, int y, int a, boolean available, boolean selected) {
+		RenderSystem.disableDepthTest();
+		RenderSystem.disableTexture();
+		RenderSystem.enableBlend();
+		RenderSystem.defaultBlendFunc();
+		Tesselator tex = Tesselator.getInstance();
+		BufferBuilder builder = tex.getBuilder();
+		if (available) {
+			OverlayUtils.fillRect(builder, x, y, 16, 16, 255, 255, 255, a);
+		} else {
+			OverlayUtils.fillRect(builder, x, y, 16, 16, 255, 0, 0, a);
+		}
+		if (selected) {
+			OverlayUtils.drawRect(builder, x, y, 16, 16, 255, 170, 0, 255);
+		}
+		RenderSystem.enableTexture();
+		RenderSystem.enableDepthTest();
+	}
+
+	public void renderArmorSlot(int x, int y, int a, boolean target, boolean invalid) {
 		RenderSystem.disableDepthTest();
 		RenderSystem.disableTexture();
 		RenderSystem.enableBlend();
@@ -140,7 +157,11 @@ public class QuickSwapOverlay extends SelectionSideBar {
 		BufferBuilder builder = tex.getBuilder();
 		OverlayUtils.fillRect(builder, x, y, 16, 16, 255, 255, 255, a);
 		if (target) {
-			OverlayUtils.drawRect(builder, x, y, 16, 16, 70, 150, 185, 255);
+			if (invalid) {
+				OverlayUtils.drawRect(builder, x, y, 16, 16, 220, 70, 70, 255);
+			} else {
+				OverlayUtils.drawRect(builder, x, y, 16, 16, 70, 150, 185, 255);
+			}
 		}
 		RenderSystem.enableTexture();
 		RenderSystem.enableDepthTest();

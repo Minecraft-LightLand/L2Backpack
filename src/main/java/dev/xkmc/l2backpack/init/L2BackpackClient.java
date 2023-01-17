@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.init;
 
+import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
@@ -9,7 +10,6 @@ import dev.xkmc.l2backpack.content.remote.drawer.EnderPreviewOverlay;
 import dev.xkmc.l2backpack.content.render.RenderEvents;
 import dev.xkmc.l2backpack.init.data.Keys;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
-import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

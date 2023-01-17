@@ -131,7 +131,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
-    implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}")
+    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}-slim")
     //bruntimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:0.3.3')
     //runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:0.4.4')
     //runtimeOnly fg.deobf('dev.xkmc.l2artifacts:l2artifacts:1.1.2')

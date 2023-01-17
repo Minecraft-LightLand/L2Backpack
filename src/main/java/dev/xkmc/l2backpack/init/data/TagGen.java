@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.init.data;
 
+import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2library.repack.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;

@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.init.registrate;
 
+import com.tterrag.registrate.util.entry.MenuEntry;
 import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
 import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
 import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
@@ -11,7 +12,6 @@ import dev.xkmc.l2backpack.content.quickswap.quiver.QuiverContainer;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.ScabbardContainer;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestScreen;
-import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.registries.ForgeRegistries;

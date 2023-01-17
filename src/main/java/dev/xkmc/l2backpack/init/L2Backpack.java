@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.init;
 
+import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
@@ -14,7 +15,6 @@ import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
 import dev.xkmc.l2backpack.network.SetSelectedToServer;
-import dev.xkmc.l2backpack.network.SlotClickToServer;
 import dev.xkmc.l2backpack.network.drawer.CreativeSetCarryToClient;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
 import dev.xkmc.l2backpack.network.drawer.RequestTooltipUpdateEvent;
@@ -24,7 +24,6 @@ import dev.xkmc.l2backpack.network.restore.PopLayerToClient;
 import dev.xkmc.l2backpack.network.restore.RestoreMenuToServer;
 import dev.xkmc.l2backpack.network.restore.SetScreenToClient;
 import dev.xkmc.l2library.base.L2Registrate;
-import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.serial.handler.Handlers;
 import dev.xkmc.l2library.serial.network.PacketHandler;
 import net.minecraft.resources.ResourceLocation;
@@ -37,6 +36,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -52,10 +52,10 @@ public class L2Backpack {
 	public static final String MODID = "l2backpack";
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
+	public static final BackpackSlotClickListener SLOT_CLICK = new BackpackSlotClickListener();
 
 	public static final PacketHandler HANDLER = new PacketHandler(
 			new ResourceLocation(MODID, "main"), 1,
-			e -> e.create(SlotClickToServer.class, PLAY_TO_SERVER),
 			e -> e.create(SetSelectedToServer.class, PLAY_TO_SERVER),
 			e -> e.create(DrawerInteractToServer.class, PLAY_TO_SERVER),
 			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),

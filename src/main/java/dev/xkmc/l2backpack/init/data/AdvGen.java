@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.init.data;
 
+import com.tterrag.registrate.providers.RegistrateAdvancementProvider;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.common.ContainerType;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -9,7 +10,6 @@ import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
 import dev.xkmc.l2library.base.advancements.AdvancementGenerator;
 import dev.xkmc.l2library.base.advancements.CriterionBuilder;
-import dev.xkmc.l2library.repack.registrate.providers.RegistrateAdvancementProvider;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.PlacedBlockTrigger;

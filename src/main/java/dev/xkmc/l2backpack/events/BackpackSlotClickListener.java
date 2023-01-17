@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.network;
+package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
@@ -7,10 +7,10 @@ import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
-import dev.xkmc.l2backpack.events.ClientEventHandler;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
-import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2library.serial.network.SerialPacketBase;
+import dev.xkmc.l2library.init.L2Library;
+import dev.xkmc.l2library.init.events.click.SlotClickHandler;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleMenuProvider;
@@ -18,33 +18,31 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkHooks;
 
-@SerialClass
-public class SlotClickToServer extends SerialPacketBase {
+public class BackpackSlotClickListener extends SlotClickHandler {
 
-	/**
-	 * slot click for backpack
-	 */
-	@SerialClass.SerialField
-	private int index, slot, wid;
-
-	@Deprecated
-	public SlotClickToServer() {
-
+	public static boolean canOpen(ItemStack stack) {
+		return stack.getItem() instanceof BaseBagItem ||
+				stack.getItem() instanceof EnderBackpackItem ||
+				stack.getItem() instanceof WorldChestItem;
 	}
 
-	public SlotClickToServer(int index, int slot, int wid) {
-		this.index = index;
-		this.slot = slot;
-		this.wid = wid;
+	public BackpackSlotClickListener() {
+		super(new ResourceLocation(L2Library.MODID, "backpack"));
 	}
 
 	@Override
-	public void handle(NetworkEvent.Context ctx) {
-		ServerPlayer player = ctx.getSender();
-		if (player == null) return;
+	public boolean isAllowed(ItemStack itemStack) {
+		return canOpen(itemStack);
+	}
+
+	public void keyBind() {
+		slotClickToServer(-1, -1, -1);
+	}
+
+	@Override
+	public void handle(ServerPlayer player, int index, int slot, int wid) {
 		ItemStack stack;
 		Container container = null;
 		PlayerSlot playerSlot;
@@ -52,8 +50,8 @@ public class SlotClickToServer extends SerialPacketBase {
 		if (wid == -1) {
 			stack = player.getItemBySlot(EquipmentSlot.CHEST);
 			playerSlot = PlayerSlot.ofInventory(36 + EquipmentSlot.CHEST.getIndex());
-			if (!ClientEventHandler.canOpen(stack)) {
-				stack = CuriosCompat.getSlot(player, ClientEventHandler::canOpen);
+			if (!canOpen(stack)) {
+				stack = CuriosCompat.getSlot(player, BackpackSlotClickListener::canOpen);
 				playerSlot = PlayerSlot.ofCurio(player);
 			}
 		} else if (slot >= 0) {
@@ -92,4 +90,5 @@ public class SlotClickToServer extends SerialPacketBase {
 			BackpackTriggers.SHARE.trigger(player);
 		}
 	}
+
 }

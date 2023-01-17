@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.common;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.quickswap.merged.EnderSwitchContainer;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
-import dev.xkmc.l2backpack.events.ClientEventHandler;
+import dev.xkmc.l2backpack.events.BackpackSlotClickListener;
 import net.minecraft.Util;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
@@ -46,7 +46,7 @@ public record PlayerSlot(ContainerType type, int slot, UUID uuid) {
 
 	@Nullable
 	public static PlayerSlot ofCurio(Player player) {
-		return CuriosCompat.getSearchBag(player, ClientEventHandler::canOpen)
+		return CuriosCompat.getSearchBag(player, BackpackSlotClickListener::canOpen)
 				.map(e -> new PlayerSlot(ContainerType.CURIO, e, Util.NIL_UUID)).orElse(null);
 	}
 

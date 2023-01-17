@@ -1,12 +1,12 @@
 package dev.xkmc.l2backpack.init.registrate;
 
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2backpack.content.recipe.BackpackDyeRecipe;
 import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipe;
 import dev.xkmc.l2backpack.content.recipe.MultiSwitchCraftRecipe;
 import dev.xkmc.l2library.base.recipe.AbstractShapedRecipe;
 import dev.xkmc.l2library.base.recipe.AbstractShapelessRecipe;
 import dev.xkmc.l2library.base.recipe.AbstractSmithingRecipe;
-import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ForgeRegistries;
 

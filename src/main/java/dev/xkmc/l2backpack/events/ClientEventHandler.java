@@ -1,13 +1,9 @@
 package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
-import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
-import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
-import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
-import dev.xkmc.l2backpack.network.SlotClickToServer;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
@@ -27,19 +23,13 @@ import javax.annotation.Nullable;
 
 public class ClientEventHandler {
 
-	public static boolean canOpen(ItemStack stack) {
-		return stack.getItem() instanceof BaseBagItem ||
-				stack.getItem() instanceof EnderBackpackItem ||
-				stack.getItem() instanceof WorldChestItem;
-	}
-
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void keyEvent(InputEvent.Key event) {
 		if (Minecraft.getInstance().screen == null && Proxy.getClientPlayer() != null && Keys.OPEN.map.isDown()) {
-			if (canOpen(Proxy.getClientPlayer().getItemBySlot(EquipmentSlot.CHEST)) ||
-					!CuriosCompat.getSlot(Proxy.getClientPlayer(), ClientEventHandler::canOpen).isEmpty())
-				L2Backpack.HANDLER.toServer(new SlotClickToServer(-1, -1, -1));
+			if (BackpackSlotClickListener.canOpen(Proxy.getClientPlayer().getItemBySlot(EquipmentSlot.CHEST)) ||
+					!CuriosCompat.getSlot(Proxy.getClientPlayer(), BackpackSlotClickListener::canOpen).isEmpty())
+				L2Backpack.SLOT_CLICK.keyBind();
 		}
 	}
 
@@ -84,34 +74,11 @@ public class ClientEventHandler {
 				if (insertItem(event, cont, slot, false)) return true;
 			}
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-				if (openBackpack(event, cont, slot)) return true;
 				if (extractItem(event, cont, slot)) return true;
 				if (slot != null) {
 					return slot.getItem().getItem() instanceof BaseDrawerItem &&
 							!cont.getMenu().getCarried().isEmpty();
 				}
-			}
-		}
-		return false;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	private static boolean openBackpack(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
-		if (slot == null) {
-			return false;
-		}
-		boolean b1 = slot.container == Proxy.getClientPlayer().getInventory();
-		boolean b2 = cont.getMenu().containerId > 0;
-		if (b1 || b2) {
-			int inv = b1 ? slot.getSlotIndex() : -1;
-			int ind = inv == -1 ? slot.index : -1;
-			int wid = cont.getMenu().containerId;
-			if ((inv >= 0 || ind >= 0) &&
-					(slot.getItem().getItem() instanceof EnderBackpackItem ||
-							slot.getItem().getItem() instanceof WorldChestItem ||
-							slot.getItem().getItem() instanceof BaseBagItem)) {
-				L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
-				return true;
 			}
 		}
 		return false;

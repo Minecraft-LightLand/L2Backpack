@@ -1,5 +1,7 @@
 package dev.xkmc.l2backpack.init.registrate;
 
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2backpack.content.remote.common.EnderParticleBlock;
 import dev.xkmc.l2backpack.content.remote.drawer.AlternateBlockForm;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlock;
@@ -11,8 +13,6 @@ import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2library.block.BlockProxy;
 import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;
-import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
-import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;

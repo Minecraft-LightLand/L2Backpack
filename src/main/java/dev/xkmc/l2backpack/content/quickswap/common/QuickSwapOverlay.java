@@ -129,25 +129,6 @@ public class QuickSwapOverlay extends SelectionSideBar {
 		}
 	}
 
-	public void renderSelection(int x, int y, int a, boolean available, boolean selected) {
-		RenderSystem.disableDepthTest();
-		RenderSystem.disableTexture();
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
-		Tesselator tex = Tesselator.getInstance();
-		BufferBuilder builder = tex.getBuilder();
-		if (available) {
-			OverlayUtils.fillRect(builder, x, y, 16, 16, 255, 255, 255, a);
-		} else {
-			OverlayUtils.fillRect(builder, x, y, 16, 16, 255, 0, 0, a);
-		}
-		if (selected) {
-			OverlayUtils.drawRect(builder, x, y, 16, 16, 255, 170, 0, 255);
-		}
-		RenderSystem.enableTexture();
-		RenderSystem.enableDepthTest();
-	}
-
 	public void renderArmorSlot(int x, int y, int a, boolean target, boolean invalid) {
 		RenderSystem.disableDepthTest();
 		RenderSystem.disableTexture();

@@ -26,7 +26,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '2022.08.14-1.19.2'
+    mappings channel: 'parchment', version: '2022.12.18-1.19.3'
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         client {
@@ -132,16 +132,17 @@ dependencies {
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
     implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}")
-    runtimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:0.3.3')
-    runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:0.4.4')
+    //bruntimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:0.3.3')
+    //runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:0.4.4')
     //runtimeOnly fg.deobf('dev.xkmc.l2artifacts:l2artifacts:1.1.2')
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 
-    runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:3906013')
-    runtimeOnly fg.deobf('curse.maven:badpackets-615134:3903799')
-    runtimeOnly fg.deobf('curse.maven:storage-drawers-223852:3884263')
+    runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:4297548')
+    runtimeOnly fg.deobf('curse.maven:badpackets-615134:4162675')
+    runtimeOnly fg.deobf('curse.maven:attributefix-280510:4325842')
+    runtimeOnly fg.deobf('curse.maven:max-health-fix-492246:4326612')
 
 }
 

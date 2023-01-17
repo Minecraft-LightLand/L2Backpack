@@ -28,7 +28,7 @@ public class AdvGen {
 						CriterionBuilder.item(Tags.Items.CHESTS),
 						"Welcome to L2Backpack", "Guide to Backpacks")
 				.root().create("backpack", backpack(DyeColor.RED),
-						CriterionBuilder.item(ItemTags.BACKPACKS.tag),
+						CriterionBuilder.item(TagGen.BACKPACKS),
 						"Your First Backpack!", "Obtain a Backpack")
 				.create("press_b", backpack(DyeColor.CYAN),
 						CriterionBuilder.one(SlotClickTrigger.fromKeyBind()),
@@ -69,19 +69,19 @@ public class AdvGen {
 						CriterionBuilder.item(BackpackItems.ENDER_POCKET.get()),
 						"4D Pocket", "Obtain an Ender Pocket")
 				.create("upgrade", backpack(DyeColor.LIGHT_GRAY),
-						CriterionBuilder.item(ItemTags.BACKPACKS.tag,
+						CriterionBuilder.item(TagGen.BACKPACKS,
 								BackpackItem.setRow(backpack(DyeColor.WHITE)
 										.getDefaultInstance(), 3).getOrCreateTag()),
 						"Expand the Space", "Upgrade a Backpack")
 				.create("upgrade_max", backpack(DyeColor.GRAY),
-						CriterionBuilder.item(ItemTags.BACKPACKS.tag,
+						CriterionBuilder.item(TagGen.BACKPACKS,
 								BackpackItem.setRow(backpack(DyeColor.WHITE)
 										.getDefaultInstance(), 6).getOrCreateTag()),
 						"Maximize the Space", "Upgrade a Backpack to max level").type(FrameType.CHALLENGE)
 
 				// dimensional backpack
 				.root().enter().create("dimension", dimension(DyeColor.WHITE),
-						CriterionBuilder.item(ItemTags.DIMENSIONAL_STORAGES.tag),
+						CriterionBuilder.item(TagGen.DIMENSIONAL_STORAGES),
 						"Another Ender Chest?", "Obtain a Dimensional Backpack")
 				.create("dimension_recursion", dimension(DyeColor.YELLOW),
 						CriterionBuilder.one(SlotClickTrigger.fromBackpack(ContainerType.DIMENSION)),

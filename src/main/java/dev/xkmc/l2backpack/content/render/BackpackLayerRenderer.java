@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -50,7 +50,7 @@ public class BackpackLayerRenderer<T extends LivingEntity, M extends HumanoidMod
 		VertexConsumer vc = buffer.getBuffer(RenderType.armorCutoutNoCull(texture));
 		pose.pushPose();
 		this.getParentModel().body.translateAndRotate(pose);
-		pose.mulPose(Vector3f.YP.rotationDegrees(180));
+		pose.mulPose(Axis.YP.rotationDegrees(180));
 		pose.scale(0.6F, 0.6F, 0.6F);
 		this.model.body.getChild("main_body").render(pose, vc, i, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 		pose.popPose();

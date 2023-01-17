@@ -25,7 +25,7 @@ import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 public class BackpackBlocks {
 
 	static {
-		REGISTRATE.creativeModeTab(() -> BackpackItems.TAB_MAIN);
+		REGISTRATE.creativeModeTab("backpack", e -> e.icon(BackpackItems.ENDER_BACKPACK::asStack));
 	}
 
 	public static final BlockEntry<DelegateBlock> WORLD_CHEST;

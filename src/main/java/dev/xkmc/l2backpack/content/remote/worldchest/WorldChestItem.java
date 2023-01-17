@@ -52,12 +52,6 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 		}
 	}
 
-	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> list) {
-		if (super.allowedIn(tab)) {
-			list.add(new ItemStack(this));
-		}
-	}
-
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);

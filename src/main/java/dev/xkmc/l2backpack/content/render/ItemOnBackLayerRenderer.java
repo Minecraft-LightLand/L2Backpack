@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HumanoidModel;
@@ -65,7 +65,7 @@ public class ItemOnBackLayerRenderer<T extends LivingEntity, M extends HumanoidM
 	public static void translateToHead(PoseStack pose, boolean villager) {
 		float f = 1;
 		pose.translate(0.0D, 1D, -0.25D);
-		pose.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+		pose.mulPose(Axis.YP.rotationDegrees(180.0F));
 		pose.scale(f, -f, -f);
 		if (villager) {
 			pose.translate(0.0D, 0.1875D, 0.0D);

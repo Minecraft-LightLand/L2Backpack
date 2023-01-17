@@ -26,8 +26,8 @@ public record PlayerSlot(ContainerType type, int slot, UUID uuid) {
 		if (menu instanceof ChestMenu chest && chest.getContainer() instanceof PlayerEnderChestContainer) {
 			return new PlayerSlot(ContainerType.ENDER, index, Util.NIL_UUID);
 		}
-		if (menu instanceof EnderSwitchContainer && index < 27) {
-			return new PlayerSlot(ContainerType.ENDER, index, Util.NIL_UUID);
+		if (menu instanceof EnderSwitchContainer && index >= 36 && index < 63) {
+			return new PlayerSlot(ContainerType.ENDER, index - 36, Util.NIL_UUID);
 		}
 		if (menu instanceof WorldChestContainer cont) {
 			return new PlayerSlot(ContainerType.DIMENSION, cont.getColor() * 27 + index - 36, cont.getOwner());

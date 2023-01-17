@@ -5,6 +5,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.contents.TranslatableContents;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class LangData {
 		if (Screen.hasShiftDown()) {
 			boolean col = false;
 			for (Info info : text) {
-				list.add(info.get().withStyle(col ? ChatFormatting.YELLOW : ChatFormatting.GREEN));
+				list.add(info.get().withStyle(col ? Style.EMPTY.withColor(0x6abe30) : Style.EMPTY.withColor(0x5fcde4)));
 				col = !col;
 			}
 		} else {
@@ -65,15 +66,15 @@ public class LangData {
 		KEYBIND("tooltip.keybind", "This can be put on chest slot (or back slot of Curios), and can be opened via key bind."),
 		QUICK_INV_ACCESS("tooltip.info.quick_inv", "Right click to open. Or right click in inventory / ender chest / dimensional storage GUI to open directly."),
 		QUICK_ANY_ACCESS("tooltip.info.quick_any", "Right click to open. Or right click in any GUI to open directly."),
-		ARROW_INFO("tooltip.info.arrow_bag", "Put in off hand or chest slot (or back slot of Curios) and hold bow in main hand to preview, choose, and shoot arrows from quiver. Press shift + number or up/down to switch arrows"),
+		ARROW_INFO("tooltip.info.arrow_bag", "Put in off hand or chest slot (or back slot of Curios) and hold bow in main hand to preview, choose, and shoot arrows from quiver. Press [sneak] + number or up/down to switch arrows"),
 		DRAWER_USE("tooltip.info.drawer", "In inventory, left click drawer with a stack to store item. Right click drawer to take item out. Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks."),
 		ENDER_DRAWER_USE("tooltip.info.ender_drawer_block", "For ender drawer block, right click it with item to store, and right click it with empty hand to retrieve a stack. For bulk transport, use drawer item to interact with it."),
 		DIMENSIONAL("tooltip.info.dimensional", "All dimensional storage with the same color and owned by the same player shares the same inventory space, for both item and block form."),
 		ENDER_DRAWER("tooltip.info.ender_drawer", "All ender drawer set to the same item and owned by the same player shares the same inventory space, for both item and block form."),
 		UPGRADE("tooltip.info.upgrade", "Upgrade by applying an Ender Pocket in Smithing Table. Content and name will be preserved."),
 		EXIT("tooltip.info.exit", "When exiting GUI, it will return to the previous GUI if opened in accessible GUI. Press Shift + Esc to close all."),
-		SCABBARD_INFO("tooltip.info.tool_bag", "Put in off hand or chest slot (or back slot of Curios) and hold tools or weapons in main hand (or hold nothing and press alt) to preview, choose, and swap tools from scabbard. Press shift + number or up/down to switch tools. Press R to swap"),
-		ARMORBAG_INFO("tooltip.info.armor_bag", "Put in off hand or chest slot (or back slot of Curios) and hold nothing in main hand to preview, choose, and swap armors from scabbard. Press shift + number or up/down to switch armors. Press R to swap"),
+		SCABBARD_INFO("tooltip.info.tool_bag", "Put in off hand or chest slot (or back slot of Curios) and hold tools or weapons in main hand (or hold nothing and press alt) to preview, choose, and swap tools from scabbard. Press [sneak] + number or up/down to switch tools. Press R to swap"),
+		ARMORBAG_INFO("tooltip.info.armor_bag", "Put in off hand or chest slot (or back slot of Curios) and hold nothing in main hand to preview, choose, and swap armors from scabbard. Press [sneak] + number or up/down to switch armors. Press R to swap"),
 		MULTI_SWITCH_INFO("tooltip.info.multi_switch", "This is a Quiver, a Scabbard, and an Armor Swap at the same time. Hold a bow to activate Quiver mode. Hold a tool to activate Scabbard mode. Hold nothing to activate Armor Swap mode."),
 		ENDER_SWITCH_INFO("tooltip.info.ender_switch", "This is a Combined Swap and an Ender Backpack at the same time. Note that the arrows, tools, and armors are stored within this item still, not in remote inventory. It inherits all properties of a backpack and an ender backpack."),
 		INHERIT("tooltip.info.inherit", "Inherit all properties of a regular backpack, except that it cannot be upgraded.");

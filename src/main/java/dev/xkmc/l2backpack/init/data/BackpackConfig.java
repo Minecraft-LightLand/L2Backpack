@@ -11,9 +11,24 @@ public class BackpackConfig {
 
 		public final ForgeConfigSpec.BooleanValue previewOnCenter;
 
+		public final ForgeConfigSpec.BooleanValue showArrowOnlyWithShift;
+		public final ForgeConfigSpec.BooleanValue showToolOnlyWithShift;
+		public final ForgeConfigSpec.BooleanValue showArmorOnlyWithShift;
+
+
 		Client(ForgeConfigSpec.Builder builder) {
 			previewOnCenter = builder.comment("Put quiver preview near the center of the screen, rather than edge of the screen")
 					.define("previewOnCenter", true);
+
+			showArrowOnlyWithShift = builder.comment("Show arrow quick swap only when shift is pressed")
+					.define("showArrowOnlyWithShift", false);
+
+			showToolOnlyWithShift = builder.comment("Show arrow quick swap only when shift is pressed")
+					.define("showToolOnlyWithShift", false);
+
+			showArmorOnlyWithShift = builder.comment("Show arrow quick swap only when shift is pressed")
+					.define("showArmorOnlyWithShift", false);
+
 		}
 
 

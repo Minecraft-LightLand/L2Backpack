@@ -24,10 +24,10 @@ public class BackpackConfig {
 					.define("showArrowOnlyWithShift", false);
 
 			showToolOnlyWithShift = builder.comment("Show arrow quick swap only when shift is pressed")
-					.define("showToolOnlyWithShift", false);
+					.define("showToolOnlyWithShift", true);
 
 			showArmorOnlyWithShift = builder.comment("Show arrow quick swap only when shift is pressed")
-					.define("showArmorOnlyWithShift", false);
+					.define("showArmorOnlyWithShift", true);
 
 		}
 

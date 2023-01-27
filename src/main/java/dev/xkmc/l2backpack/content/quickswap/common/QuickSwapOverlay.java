@@ -36,7 +36,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
 		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
-		if (!Screen.hasShiftDown()) {
+		if (!Minecraft.getInstance().options.keyShift.isDown()) {
 			if (type == QuickSwapType.ARROW && BackpackConfig.CLIENT.showArrowOnlyWithShift.get()) return false;
 			if (type == QuickSwapType.TOOL && BackpackConfig.CLIENT.showToolOnlyWithShift.get()) return false;
 			if (type == QuickSwapType.ARMOR && BackpackConfig.CLIENT.showArmorOnlyWithShift.get()) return false;

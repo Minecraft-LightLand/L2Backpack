@@ -92,8 +92,11 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 			matrix.scale(2f, 2f, 2f);
 			matrix.translate(0, -0.2f, 0);
 			matrix.mulPose(Vector3f.YP.rotationDegrees(time * 4.5F));
+			var r = Minecraft.getInstance().getItemRenderer();
+			//if (r.getModel(stack, null, null, 0).usesBlockLight())
 			Lighting.setupForFlatItems();
-			Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, matrix, buffer, 0);
+			r.renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, matrix, buffer, 0);
+			Lighting.setupFor3DItems();
 			matrix.popPose();
 		}
 

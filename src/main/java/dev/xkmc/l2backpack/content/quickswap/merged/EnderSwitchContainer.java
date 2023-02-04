@@ -13,8 +13,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -43,4 +45,16 @@ public class EnderSwitchContainer extends BaseBagContainer<EnderSwitchContainer>
 		this.sprite.getSlot("ender", (x, y) -> new Slot(ender, this.enderAdded++, x, y), this::addSlot);
 	}
 
+	@Override
+	public ItemStack quickMoveStack(Player pl, int id) {
+		ItemStack stack = this.slots.get(id).getItem();
+		if (id >= 36) {
+			this.moveItemStackTo(stack, 0, 36, true);
+		} else {
+			if (!this.moveItemStackTo(stack, 36 + 27, 36 + 27 + 27, false))
+				this.moveItemStackTo(stack, 36, 36 + 27, false);
+		}
+		this.container.setChanged();
+		return ItemStack.EMPTY;
+	}
 }

@@ -4,6 +4,8 @@ import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Matrix3f;
+import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
@@ -53,7 +55,9 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 	@Override
 	public void renderByItem(ItemStack stack, ItemTransforms.TransformType type, PoseStack poseStack,
 							 MultiBufferSource bufferSource, int light, int overlay) {
-
+		int size = poseStack.poseStack.size();
+		Matrix4f mat = poseStack.last().pose();
+		Matrix3f normal = poseStack.last().normal();
 		poseStack.popPose();
 		poseStack.pushPose();
 
@@ -80,6 +84,12 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 		renderItemInside(inv, item instanceof BlockItem ? 0.5D : 0.625D, poseStack, type, bufferSource, light, overlay);
 
 		poseStack.popPose();
+		if (poseStack.poseStack.size() > size) {
+			poseStack.popPose();
+		}
+		poseStack.setIdentity();
+		poseStack.last().pose().multiply(mat);
+		poseStack.last().normal().mul(normal);
 	}
 
 

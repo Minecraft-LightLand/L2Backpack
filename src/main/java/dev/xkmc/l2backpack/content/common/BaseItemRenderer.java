@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.common;
 import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
+import com.mojang.math.Vector3f;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
 import dev.xkmc.l2backpack.content.remote.drawer.AlternateBlockForm;
@@ -91,9 +91,12 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 			matrix.translate(0.5D, height, 0.5D);
 			matrix.scale(2f, 2f, 2f);
 			matrix.translate(0, -0.2f, 0);
-			matrix.mulPose(Axis.YP.rotationDegrees(time * 4.5F));
+			matrix.mulPose(Vector3f.YP.rotationDegrees(time * 4.5F));
+			var r = Minecraft.getInstance().getItemRenderer();
+			//if (r.getModel(stack, null, null, 0).usesBlockLight())
 			Lighting.setupForFlatItems();
-			Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, matrix, buffer, 0);
+			r.renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, matrix, buffer, 0);
+			Lighting.setupFor3DItems();
 			matrix.popPose();
 		}
 

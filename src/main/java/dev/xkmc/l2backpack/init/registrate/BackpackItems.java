@@ -19,8 +19,10 @@ import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.TagGen;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -29,6 +31,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.tags.ITagManager;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
@@ -36,8 +39,11 @@ import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 @MethodsReturnNonnullByDefault
 public class BackpackItems {
 
-	static {
-	}
+	public static final Supplier<CreativeModeTab> TAB = REGISTRATE
+			.buildCreativeModeTab("backpack", e -> e
+					.icon(BackpackItems.ENDER_BACKPACK::asStack)
+					.title(Component.translatable("itemGroup.l2backpack.backpack")));
+
 
 	// -------- common --------
 	public static final ItemEntry<BackpackItem>[] BACKPACKS;
@@ -68,7 +74,8 @@ public class BackpackItems {
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p))
 						.tag(TagGen.BACKPACKS, curios_tag).model(BackpackItems::createBackpackModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
-						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_backpack")).register();
+						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_backpack"))
+						.register();
 			}
 			DIMENSIONAL_STORAGE = new ItemEntry[16];
 			for (int i = 0; i < 16; i++) {
@@ -111,7 +118,7 @@ public class BackpackItems {
 	}
 
 	private static void createWorldChestModel(DataGenContext<Item, WorldChestItem> ctx, RegistrateItemModelProvider pvd) {
-		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "l2backpack:dimensional_storage");
+		pvd.withExistingParent(ctx.getName(), "l2backpack:dimensional_storage");
 	}
 
 	private static void createEnderBackpackModel(DataGenContext<Item, EnderBackpackItem> ctx, RegistrateItemModelProvider pvd) {

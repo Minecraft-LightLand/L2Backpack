@@ -1,5 +1,6 @@
 {
   "type": "l2backpack:multiswitch_craft",
+  "category": "misc",
   "key": {
     "1": {
       "item": "l2backpack:arrow_bag"

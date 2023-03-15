@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "dimensional_storage_craft",
   "key": {
     "A": {

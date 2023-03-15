@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.recipe;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
-import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
+import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.base.recipe.AbstractShapedRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
@@ -78,7 +78,7 @@ public class MultiSwitchCraftRecipe extends AbstractShapedRecipe<MultiSwitchCraf
 
 	@Override
 	public Serializer<MultiSwitchCraftRecipe> getSerializer() {
-		return BackpackRecipe.RSC_BAG_CRAFT.get();
+		return BackpackMisc.RSC_BAG_CRAFT.get();
 	}
 
 }

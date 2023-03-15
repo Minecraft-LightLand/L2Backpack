@@ -5,10 +5,10 @@ import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,7 +16,10 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
@@ -37,6 +40,22 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 		return Optional.empty();
 	}
 
+	public static Component getName(String name) {
+		if (name.startsWith(L2Backpack.MODID + ".names.")) {
+			return Component.translatable(name);
+		}
+		return Component.literal(name);
+	}
+
+	public static ItemStack initLootGen(ItemStack stack, UUID uuid, String name, DyeColor color, ResourceLocation loot) {
+		var ctag = stack.getOrCreateTag();
+		ctag.putUUID("owner_id", uuid);
+		ctag.putString("owner_name", name);
+		ctag.putLong("password", color.getId());
+		ctag.putString("loot", loot.toString());
+		return stack;
+	}
+
 	public final DyeColor color;
 
 	public WorldChestItem(DyeColor color, Properties props) {
@@ -45,10 +64,14 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 	}
 
 	void refresh(ItemStack stack, Player player) {
-		if (!stack.getOrCreateTag().contains("owner_id")) {
-			stack.getOrCreateTag().putUUID("owner_id", player.getUUID());
-			stack.getOrCreateTag().putString("owner_name", player.getName().getString());
-			stack.getOrCreateTag().putLong("password", color.getId());
+		var ctag = stack.getOrCreateTag();
+		if (!ctag.contains("owner_id")) {
+			ctag.putUUID("owner_id", player.getUUID());
+			ctag.putString("owner_name", player.getName().getString());
+			ctag.putLong("password", color.getId());
+		}
+		if (ctag.contains("loot")) {
+			new WorldChestMenuPvd((ServerPlayer) player, stack, this).getContainer((ServerLevel) player.level);
 		}
 	}
 
@@ -87,7 +110,10 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 		if (tag != null) {
 			if (tag.contains("owner_name")) {
 				String name = tag.getString("owner_name");
-				list.add(LangData.IDS.STORAGE_OWNER.get(name));
+				list.add(LangData.IDS.STORAGE_OWNER.get(getName(name)));
+			}
+			if (tag.contains("loot")) {
+				list.add(LangData.IDS.LOOT.get());
 			}
 		}
 		LangData.addInfo(list, LangData.Info.QUICK_ANY_ACCESS,

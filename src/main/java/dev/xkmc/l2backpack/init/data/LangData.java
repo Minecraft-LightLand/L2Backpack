@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.init.data;
 
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2backpack.init.loot.LootGen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -35,7 +36,9 @@ public class LangData {
 		LOAD_FEEDBACK("chat.feedback.load", 1, "Loaded %s items from target block"),
 		EXTRACT_FEEDBACK("chat.feedback.extract", 1, "Extracted %s items"),
 		COLLECT_FEEDBACK("chat.feedback.collect", 1, "Collected %s items"),
-		NO_ITEM("chat.feedback.no_item", 0, "No item set for ender drawer. Cannot be placed.");
+		NO_ITEM("chat.feedback.no_item", 0, "No item set for ender drawer. Cannot be placed."),
+		LOOT("tooltip.info.loot", 0, "It may have loots inside"),
+		;
 
 		final String id, def;
 		final int count;
@@ -77,7 +80,8 @@ public class LangData {
 		ARMORBAG_INFO("tooltip.info.armor_bag", "Put in off hand or chest slot (or back slot of Curios). Sneak and hold nothing in main hand to preview, choose, and swap armors. Press [sneak] + number or up/down to switch armors. Press R to swap"),
 		MULTI_SWITCH_INFO("tooltip.info.multi_switch", "This is a Quiver, a Tool Swap, and an Armor Swap at the same time. Sneak and hold respective items to trigger each mode. When holding nothing and pressing alt, tool swap mode is activated."),
 		ENDER_SWITCH_INFO("tooltip.info.ender_switch", "This is a Combined Swap and an Ender Backpack at the same time. Note that the arrows, tools, and armors are stored within this item still, not in remote inventory. It inherits all properties of a backpack and an ender backpack."),
-		INHERIT("tooltip.info.inherit", "Inherit all properties of a regular backpack, except that it cannot be upgraded.");
+		INHERIT("tooltip.info.inherit", "Inherit all properties of a regular backpack, except that it cannot be upgraded."),
+		;
 
 		final String id, def;
 
@@ -98,6 +102,9 @@ public class LangData {
 		}
 		for (Info id : Info.values()) {
 			pvd.accept(L2Backpack.MODID + "." + id.id, id.def);
+		}
+		for (LootGen.HiddenPlayer pl : LootGen.HiddenPlayer.values()) {
+			pvd.accept(pl.id, pl.def);
 		}
 		pvd.accept("itemGroup.l2backpack.backpack", "L2 Backpack");
 		pvd.accept("key.categories.l2backpack", "L2Backpack Keys");

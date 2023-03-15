@@ -6,14 +6,13 @@ import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
-import dev.xkmc.l2backpack.init.data.AdvGen;
-import dev.xkmc.l2backpack.init.data.BackpackConfig;
-import dev.xkmc.l2backpack.init.data.LangData;
-import dev.xkmc.l2backpack.init.data.RecipeGen;
+import dev.xkmc.l2backpack.init.data.*;
+import dev.xkmc.l2backpack.init.loot.BackpackGLMProvider;
+import dev.xkmc.l2backpack.init.loot.LootGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
-import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
+import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2backpack.network.SetSelectedToServer;
 import dev.xkmc.l2backpack.network.drawer.CreativeSetCarryToClient;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
@@ -36,7 +35,6 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -72,12 +70,13 @@ public class L2Backpack {
 		BackpackBlocks.register();
 		BackpackItems.register();
 		BackpackMenu.register();
-		BackpackRecipe.register(bus);
+		BackpackMisc.register(bus);
 		Handlers.register();
 		ScreenTracker.register();
 		BackpackTriggers.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
+		REGISTRATE.addDataGenerator(ProviderType.LOOT, LootGen::genLoot);
 	}
 
 	private static void registerForgeEvents() {
@@ -107,6 +106,7 @@ public class L2Backpack {
 
 	public static void gatherData(GatherDataEvent event) {
 		LangData.addTranslations(REGISTRATE::addRawLang);
+		event.getGenerator().addProvider(event.includeServer(), new BackpackGLMProvider(event.getGenerator().getPackOutput()));
 	}
 
 	public static void registerCaps(RegisterCapabilitiesEvent event) {

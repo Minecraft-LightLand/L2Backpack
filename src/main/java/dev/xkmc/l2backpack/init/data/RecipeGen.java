@@ -4,7 +4,7 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
-import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
+import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.base.recipe.CustomShapedBuilder;
 import dev.xkmc.l2library.base.recipe.CustomShapelessBuilder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -38,11 +38,11 @@ public class RecipeGen {
 						.define('C', Items.CHEST).define('D', Items.IRON_INGOT)
 						.save(pvd, L2Backpack.MODID + ":shaped/craft_backpack_" + color.getName());
 
-				unlock(pvd, new CustomShapelessBuilder<>(BackpackRecipe.RSC_BAG_DYE, backpack, 1)::unlockedBy, backpack)
+				unlock(pvd, new CustomShapelessBuilder<>(BackpackMisc.RSC_BAG_DYE, backpack, 1)::unlockedBy, backpack)
 						.group("backpack_dye").requires(Ingredient.of(TagGen.BACKPACKS))
 						.requires(Ingredient.of(dye)).save(pvd, L2Backpack.MODID + ":shapeless/dye_backpack_" + color.getName());
 
-				unlock(pvd, new UpgradeRecipeBuilder(BackpackRecipe.RSC_BAG_UPGRADE.get(), Ingredient.of(backpack),
+				unlock(pvd, new UpgradeRecipeBuilder(BackpackMisc.RSC_BAG_UPGRADE.get(), Ingredient.of(backpack),
 						Ingredient.of(BackpackItems.ENDER_POCKET.get()), RecipeCategory.MISC, backpack)::unlocks, backpack)
 						.save(pvd, L2Backpack.MODID + ":smithing/upgrade_backpack_" + color.getName());
 
@@ -106,7 +106,7 @@ public class RecipeGen {
 					.save(pvd);
 
 			bag = BackpackItems.MULTI_SWITCH.get();
-			unlock(pvd, new CustomShapedBuilder<>(BackpackRecipe.RSC_BAG_CRAFT, bag, 1)::unlockedBy, ender)
+			unlock(pvd, new CustomShapedBuilder<>(BackpackMisc.RSC_BAG_CRAFT, bag, 1)::unlockedBy, ender)
 					.pattern("2A1").pattern("A3A")
 					.define('1', BackpackItems.QUIVER.get())
 					.define('2', BackpackItems.SCABBARD.get())
@@ -115,7 +115,7 @@ public class RecipeGen {
 					.save(pvd);
 
 			bag = BackpackItems.ENDER_SWITCH.get();
-			unlock(pvd, new CustomShapedBuilder<>(BackpackRecipe.RSC_BAG_CRAFT, bag, 1)::unlockedBy, ender)
+			unlock(pvd, new CustomShapedBuilder<>(BackpackMisc.RSC_BAG_CRAFT, bag, 1)::unlockedBy, ender)
 					.pattern("1A").pattern("A2")
 					.define('1', BackpackItems.MULTI_SWITCH.get())
 					.define('2', BackpackItems.ENDER_BACKPACK.get())

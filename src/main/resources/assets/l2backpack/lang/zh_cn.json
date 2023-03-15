@@ -143,6 +143,7 @@
   "l2backpack.tooltip.info.ender_switch": "同时拥有三合一切换袋和末影背包的功能。注意箭/工具/护甲是储存在这个物品内的，而不是末影箱内",
   "l2backpack.tooltip.info.inherit": "继承背包的所有功能，只是不能升级",
   "l2backpack.tooltip.info.multi_switch": "同时拥有箭/工具/护甲的快速切换功能。蹲下并主手持对应物品激活对应模式。空手按alt激活工具切换模式。",
+  "l2backpack.tooltip.info.loot": "里面可能有奖励",
   "l2backpack.tooltip.collect.item": "拿在手上右键收起工具栏以外的背包内的对应物品",
   "l2backpack.tooltip.collect.drawer": "拿在手上蹲下右键收起背包内的对应物品",
   "l2backpack.tooltip.extract.item": "蹲下右键倒出所有物品",
@@ -156,5 +157,6 @@
   "l2backpack.chat.feedback.load": "已从目标方块取出%s物品",
   "l2backpack.chat.feedback.extract": "已取出%s物品",
   "l2backpack.chat.feedback.collect": "已收集%s物品",
-  "l2backpack.chat.feedback.no_item": "末影匣子没有设置物品，不能放置"
+  "l2backpack.chat.feedback.no_item": "末影匣子没有设置物品，不能放置",
+  "l2backpack.names.unnamed": "无名的冒险家"
 }

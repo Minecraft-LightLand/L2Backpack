@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.recipe;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
-import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
+import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.base.recipe.AbstractSmithingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -30,6 +30,6 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 
 	@Override
 	public Serializer<BackpackUpgradeRecipe> getSerializer() {
-		return BackpackRecipe.RSC_BAG_UPGRADE.get();
+		return BackpackMisc.RSC_BAG_UPGRADE.get();
 	}
 }

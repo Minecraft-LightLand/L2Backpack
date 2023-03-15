@@ -2,12 +2,19 @@ package dev.xkmc.l2backpack.content.remote.common;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,7 +41,9 @@ public class WorldStorage {
 		this.level = level;
 	}
 
-	public Optional<StorageContainer> getOrCreateStorage(UUID id, int color, long password) {
+	public Optional<StorageContainer> getOrCreateStorage(UUID id, int color, long password,
+														 @Nullable ServerPlayer player,
+														 @Nullable ResourceLocation loot) {
 		if (cache.containsKey(id)) {
 			StorageContainer storage = cache.get(id)[color];
 			if (storage != null) {
@@ -47,6 +56,14 @@ public class WorldStorage {
 		if (col.getLong("password") != password)
 			return Optional.empty();
 		StorageContainer storage = new StorageContainer(id, color, col);
+		if (loot != null) {
+			LootTable loottable = this.level.getServer().getLootTables().get(loot);
+			LootContext.Builder builder = new LootContext.Builder(this.level);
+			if (player != null) {
+				builder.withLuck(player.getLuck()).withParameter(LootContextParams.THIS_ENTITY, player);
+			}
+			loottable.fill(storage.container, builder.create(LootContextParamSets.CHEST));
+		}
 		putStorage(id, color, storage);
 		return Optional.of(storage);
 	}

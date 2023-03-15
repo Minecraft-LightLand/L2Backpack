@@ -59,7 +59,7 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 				return LazyOptional.of(() -> new InvWrapper(new SimpleContainer(27))).cast();
 			}
 			if (handler == null) {
-				Optional<StorageContainer> storage = WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password);
+				Optional<StorageContainer> storage = WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password, null, null);
 				handler = storage.isEmpty() ? LazyOptional.empty() : LazyOptional.of(() -> new WorldChestInvWrapper(storage.get().container, owner_id));
 			}
 			return this.handler.cast();
@@ -78,7 +78,7 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 
 	@Override
 	public Component getName() {
-		return name == null ? LangData.IDS.STORAGE_OWNER.get(owner_name) : name;
+		return name == null ? LangData.IDS.STORAGE_OWNER.get(WorldChestItem.getName(owner_name)) : name;
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 
 	private Optional<StorageContainer> getAccess() {
 		assert level != null;
-		return WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password);
+		return WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password, null, null);
 	}
 
 	private boolean added = false;

@@ -6,6 +6,7 @@ import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
@@ -36,11 +37,16 @@ public record WorldChestMenuPvd(ServerPlayer player, ItemStack stack, WorldChest
 	}
 
 	@ServerOnly
-	private Optional<StorageContainer> getContainer(ServerLevel level) {
+	public Optional<StorageContainer> getContainer(ServerLevel level) {
 		CompoundTag tag = stack.getOrCreateTag();
 		UUID id = tag.getUUID("owner_id");
 		long pwd = tag.getLong("password");
-		return WorldStorage.get(level).getOrCreateStorage(id, item.color.getId(), pwd);
+		ResourceLocation loot = null;
+		if (tag.contains("loot")) {
+			loot = new ResourceLocation(tag.getString("loot"));
+			tag.remove("loot");
+		}
+		return WorldStorage.get(level).getOrCreateStorage(id, item.color.getId(), pwd, player, loot);
 	}
 
 	@ServerOnly

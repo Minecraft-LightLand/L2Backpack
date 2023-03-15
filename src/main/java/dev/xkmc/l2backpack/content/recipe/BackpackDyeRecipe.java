@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.recipe;
 
 import dev.xkmc.l2backpack.init.data.TagGen;
-import dev.xkmc.l2backpack.init.registrate.BackpackRecipe;
+import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.base.recipe.AbstractShapelessRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +30,6 @@ public class BackpackDyeRecipe extends AbstractShapelessRecipe<BackpackDyeRecipe
 
 	@Override
 	public Serializer<BackpackDyeRecipe> getSerializer() {
-		return BackpackRecipe.RSC_BAG_DYE.get();
+		return BackpackMisc.RSC_BAG_DYE.get();
 	}
 }

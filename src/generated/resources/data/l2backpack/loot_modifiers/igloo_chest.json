@@ -1,0 +1,13 @@
+{
+  "type": "l2backpack:main",
+  "chance": 1.0,
+  "color": 8,
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/igloo_chest"
+    }
+  ],
+  "loot": "l2backpack:igloo_chest",
+  "name": "unnamed"
+}

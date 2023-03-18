@@ -62,7 +62,7 @@ public class WorldStorage {
 			if (player != null) {
 				builder.withLuck(player.getLuck()).withParameter(LootContextParams.THIS_ENTITY, player);
 			}
-			loottable.fill(storage.container, builder.create(LootContextParamSets.CHEST));
+			loottable.fill(storage.container, builder.create(LootContextParamSets.EMPTY));
 		}
 		putStorage(id, color, storage);
 		return Optional.of(storage);

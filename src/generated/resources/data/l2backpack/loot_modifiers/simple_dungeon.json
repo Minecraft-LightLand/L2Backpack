@@ -1,0 +1,13 @@
+{
+  "type": "l2backpack:main",
+  "chance": 1.0,
+  "color": 5,
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/simple_dungeon"
+    }
+  ],
+  "loot": "l2backpack:simple_dungeon",
+  "name": "unnamed"
+}

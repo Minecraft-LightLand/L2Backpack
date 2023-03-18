@@ -1,0 +1,13 @@
+{
+  "type": "l2backpack:main",
+  "chance": 1.0,
+  "color": 2,
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/ruined_portal"
+    }
+  ],
+  "loot": "l2backpack:ruined_portal",
+  "name": "unnamed"
+}

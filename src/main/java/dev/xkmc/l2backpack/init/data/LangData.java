@@ -37,8 +37,7 @@ public class LangData {
 		EXTRACT_FEEDBACK("chat.feedback.extract", 1, "Extracted %s items"),
 		COLLECT_FEEDBACK("chat.feedback.collect", 1, "Collected %s items"),
 		NO_ITEM("chat.feedback.no_item", 0, "No item set for ender drawer. Cannot be placed."),
-		LOOT("tooltip.info.loot", 0, "It may have loots inside"),
-		;
+		LOOT("tooltip.info.loot", 0, "It may have loots inside");
 
 		final String id, def;
 		final int count;
@@ -104,7 +103,8 @@ public class LangData {
 			pvd.accept(L2Backpack.MODID + "." + id.id, id.def);
 		}
 		for (LootGen.HiddenPlayer pl : LootGen.HiddenPlayer.values()) {
-			pvd.accept(pl.id, pl.def);
+			pvd.accept(L2Backpack.MODID + ".loot." + pl.id + ".name", pl.pname);
+			pvd.accept(L2Backpack.MODID + ".loot." + pl.id + ".item", pl.bname);
 		}
 		pvd.accept("itemGroup.l2backpack.backpack", "L2 Backpack");
 		pvd.accept("key.categories.l2backpack", "L2Backpack Keys");

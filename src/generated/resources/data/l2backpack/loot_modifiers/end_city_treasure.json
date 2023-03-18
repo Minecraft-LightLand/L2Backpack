@@ -8,7 +8,6 @@
       "loot_table_id": "minecraft:chests/end_city_treasure"
     }
   ],
-  "loot": "l2backpack:end_city",
-  "name": "l2backpack.names.unnamed",
-  "uuid_base": "l2backpack.names.unnamed"
+  "loot": "l2backpack:end_city_treasure",
+  "name": "unnamed"
 }

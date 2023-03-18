@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -42,7 +43,7 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 
 	public static Component getName(String name) {
 		if (name.startsWith(L2Backpack.MODID + ".names.")) {
-			return Component.translatable(name);
+			return Component.translatable(name).withStyle(ChatFormatting.GOLD);
 		}
 		return Component.literal(name);
 	}
@@ -113,7 +114,7 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 				list.add(LangData.IDS.STORAGE_OWNER.get(getName(name)));
 			}
 			if (tag.contains("loot")) {
-				list.add(LangData.IDS.LOOT.get());
+				list.add(LangData.IDS.LOOT.get().withStyle(ChatFormatting.AQUA));
 			}
 		}
 		LangData.addInfo(list, LangData.Info.QUICK_ANY_ACCESS,

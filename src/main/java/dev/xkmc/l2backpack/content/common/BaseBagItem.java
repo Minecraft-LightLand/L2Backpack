@@ -31,7 +31,8 @@ import java.util.List;
 public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 
 	public static ListTag getListTag(ItemStack stack) {
-		if (stack.getOrCreateTag().contains("Items")) {
+		var tag = stack.getOrCreateTag();
+		if (tag.contains("Items")) {
 			return stack.getOrCreateTag().getList("Items", Tag.TAG_COMPOUND);
 		} else {
 			return new ListTag();

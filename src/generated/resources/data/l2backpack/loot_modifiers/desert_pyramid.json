@@ -1,0 +1,13 @@
+{
+  "type": "l2backpack:main",
+  "chance": 1.0,
+  "color": 4,
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/desert_pyramid"
+    }
+  ],
+  "loot": "l2backpack:desert_pyramid",
+  "name": "unnamed"
+}

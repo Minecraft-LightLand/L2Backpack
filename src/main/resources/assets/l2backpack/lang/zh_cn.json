@@ -158,5 +158,6 @@
   "l2backpack.chat.feedback.extract": "已取出%s物品",
   "l2backpack.chat.feedback.collect": "已收集%s物品",
   "l2backpack.chat.feedback.no_item": "末影匣子没有设置物品，不能放置",
-  "l2backpack.names.unnamed": "无名的冒险家"
+  "l2backpack.loot.unnamed.name": "无名的冒险家",
+  "l2backpack.loot.unnamed.item": "无名者的保险箱"
 }

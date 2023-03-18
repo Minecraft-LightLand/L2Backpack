@@ -9,9 +9,9 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
+import java.util.Locale;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -19,15 +19,16 @@ import java.util.function.Supplier;
 public class LootGen {
 
 	public enum HiddenPlayer {
-		UNNAMED("unnamed", "the unnamed explorer");
+		UNNAMED("unnamed", "the Unnamed Explorer", "Backpack of the Unnamed Explorer");
 
 		public final String id;
-		public final String def;
+		public final String pname, bname;
 		public final UUID uuid;
 
-		HiddenPlayer(String id, String def) {
-			this.id = L2Backpack.MODID + ".names." + id;
-			this.def = def;
+		HiddenPlayer(String id, String def, String bname) {
+			this.id = id;
+			this.pname = def;
+			this.bname = bname;
 			this.uuid = MathHelper.getUUIDFromString(id);
 		}
 
@@ -49,18 +50,41 @@ public class LootGen {
 						.add(LootTableTemplate.getItem(Items.EMERALD, 16, 32)));
 	}
 
+	private static LootTable.Builder buildPlaceholderLoot() {
+		return LootTable.lootTable().withPool(LootTableTemplate.getPool(1, 0)
+				.add(LootTableTemplate.getItem(Items.COAL, 1, 16)));
+	}
+
 	public enum LootDefinition {
-		END_CITY("end_city", HiddenPlayer.UNNAMED, DyeColor.MAGENTA, BuiltInLootTables.END_CITY_TREASURE, LootGen::buildEndCityExtraLoot);
+		END_CITY_TREASURE(1, HiddenPlayer.UNNAMED, DyeColor.MAGENTA, BuiltInLootTables.END_CITY_TREASURE, LootGen::buildEndCityExtraLoot),
+		BASTION_TREASURE(1, HiddenPlayer.UNNAMED, DyeColor.BLACK, BuiltInLootTables.BASTION_TREASURE, LootGen::buildPlaceholderLoot),
+		DESERT_PYRAMID(1, HiddenPlayer.UNNAMED, DyeColor.YELLOW, BuiltInLootTables.DESERT_PYRAMID, LootGen::buildPlaceholderLoot),
+		ANCIENT_CITY(1, HiddenPlayer.UNNAMED, DyeColor.CYAN, BuiltInLootTables.ANCIENT_CITY, LootGen::buildPlaceholderLoot),
+		SHIPWRECK_TREASURE(1, HiddenPlayer.UNNAMED, DyeColor.BLUE, BuiltInLootTables.SHIPWRECK_TREASURE, LootGen::buildPlaceholderLoot),
+		UNDERWATER_RUIN_BIG(1, HiddenPlayer.UNNAMED, DyeColor.LIGHT_BLUE, BuiltInLootTables.UNDERWATER_RUIN_BIG, LootGen::buildPlaceholderLoot),
+		VILLAGE_CARTOGRAPHER(1, HiddenPlayer.UNNAMED, DyeColor.WHITE, BuiltInLootTables.VILLAGE_CARTOGRAPHER, LootGen::buildPlaceholderLoot),
+		IGLOO_CHEST(1, HiddenPlayer.UNNAMED, DyeColor.LIGHT_GRAY, BuiltInLootTables.IGLOO_CHEST, LootGen::buildPlaceholderLoot),
+		STRONGHOLD_CORRIDOR(1, HiddenPlayer.UNNAMED, DyeColor.GRAY, BuiltInLootTables.STRONGHOLD_CORRIDOR, LootGen::buildPlaceholderLoot),
+		WOODLAND_MANSION(1, HiddenPlayer.UNNAMED, DyeColor.BROWN, BuiltInLootTables.WOODLAND_MANSION, LootGen::buildPlaceholderLoot),
+		NETHER_BRIDGE(1, HiddenPlayer.UNNAMED, DyeColor.RED, BuiltInLootTables.NETHER_BRIDGE, LootGen::buildPlaceholderLoot),
+		PILLAGER_OUTPOST(1, HiddenPlayer.UNNAMED, DyeColor.ORANGE, BuiltInLootTables.PILLAGER_OUTPOST, LootGen::buildPlaceholderLoot),
+		RUINED_PORTAL(1, HiddenPlayer.UNNAMED, DyeColor.MAGENTA, BuiltInLootTables.RUINED_PORTAL, LootGen::buildPlaceholderLoot),
+		ABANDONED_MINESHAFT(1, HiddenPlayer.UNNAMED, DyeColor.PINK, BuiltInLootTables.ABANDONED_MINESHAFT, LootGen::buildPlaceholderLoot),
+		JUNGLE_TEMPLE(1, HiddenPlayer.UNNAMED, DyeColor.GRAY, BuiltInLootTables.JUNGLE_TEMPLE, LootGen::buildPlaceholderLoot),
+		SIMPLE_DUNGEON(1, HiddenPlayer.UNNAMED, DyeColor.LIME, BuiltInLootTables.SIMPLE_DUNGEON, LootGen::buildPlaceholderLoot),
+		;
 
 		public final String id;
+		public final double chance;
 		public final HiddenPlayer player;
 		public final DyeColor color;
 		public final ResourceLocation target;
 		public final Supplier<LootTable.Builder> loot;
 
 
-		LootDefinition(String id, HiddenPlayer player, DyeColor color, ResourceLocation target, Supplier<LootTable.Builder> loot) {
-			this.id = id;
+		LootDefinition(double chance, HiddenPlayer player, DyeColor color, ResourceLocation target, Supplier<LootTable.Builder> loot) {
+			this.chance = chance;
+			this.id = name().toLowerCase(Locale.ROOT);
 			this.player = player;
 			this.color = color;
 			this.target = target;

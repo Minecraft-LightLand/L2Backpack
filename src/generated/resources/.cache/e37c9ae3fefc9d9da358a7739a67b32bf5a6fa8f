@@ -1,8 +1,8 @@
-// 1.19.3	2023-03-14T19:28:56.535891	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.3	2023-03-17T22:08:35.611958	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 530cfc8939fcc948a19b693d06af8389391a97a4 assets/l2backpack/blockstates/dimensional_storage.json
 f7337397894aa38265fed541012134e275b2ffcf assets/l2backpack/blockstates/ender_drawer.json
-560cf3d512f79a9bb0cc5e2f81c633399c97e3d4 assets/l2backpack/lang/en_ud.json
-187b7b902c9580511f5ce88cf74b352583d0309b assets/l2backpack/lang/en_us.json
+7698d5e4c167ba652ca0f34ef4a4adf5f1a393af assets/l2backpack/lang/en_ud.json
+05449d3c65e85bcaf2733340c336754d4b9d5bb2 assets/l2backpack/lang/en_us.json
 3b258604ade2999f486e4cafd6e0e239a07ef986 assets/l2backpack/models/block/dimensional_storage_black.json
 1367dda416328c37ba0b14711a17836f3d47b011 assets/l2backpack/models/block/dimensional_storage_blue.json
 b699a725cdd4fc66a3559ebcf4b68266281696f7 assets/l2backpack/models/block/dimensional_storage_brown.json
@@ -179,9 +179,24 @@ b7c097528d1c961892824d6771ad136f8fb97f3f data/l2backpack/advancements/recipes/sh
 608d2b233b414308da5131527d7a086d6d0e90c9 data/l2backpack/advancements/recipes/shapeless/dye_backpack_red.json
 7b385ff637a281873dc225d5922d33bca1e0d9a2 data/l2backpack/advancements/recipes/shapeless/dye_backpack_white.json
 298591ad17e55eb668f215254a4ddede656b13db data/l2backpack/advancements/recipes/shapeless/dye_backpack_yellow.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/abandoned_mineshaft.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/ancient_city.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/bastion_treasure.json
 34d4163aed01fc354b4ae7f07e5f8afba51cefc5 data/l2backpack/loot_tables/blocks/dimensional_storage.json
 34d4163aed01fc354b4ae7f07e5f8afba51cefc5 data/l2backpack/loot_tables/blocks/ender_drawer.json
-4501bf41bc4b9a0e5588c01d1223619675965b5e data/l2backpack/loot_tables/end_city.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/desert_pyramid.json
+4501bf41bc4b9a0e5588c01d1223619675965b5e data/l2backpack/loot_tables/end_city_treasure.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/igloo_chest.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/jungle_temple.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/nether_bridge.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/pillager_outpost.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/ruined_portal.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/shipwreck_treasure.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/simple_dungeon.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/stronghold_corridor.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/underwater_ruin_big.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/village_cartographer.json
+006b1ab1c3ee0cf43c80aa6e971ccf5abc2af360 data/l2backpack/loot_tables/woodland_mansion.json
 669aa3c0ec9b3ddb89a87b240dc289d09dc086ce data/l2backpack/recipes/armor_bag.json
 da6862057f076f75f75c696de766162678c1eec4 data/l2backpack/recipes/armor_swap.json
 68f93cbc4e5573231876c6acb91e35a6a0507089 data/l2backpack/recipes/arrow_bag.json

@@ -1,0 +1,13 @@
+{
+  "type": "l2backpack:main",
+  "chance": 1.0,
+  "color": 1,
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/pillager_outpost"
+    }
+  ],
+  "loot": "l2backpack:pillager_outpost",
+  "name": "unnamed"
+}

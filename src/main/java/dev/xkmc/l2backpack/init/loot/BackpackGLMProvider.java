@@ -14,7 +14,7 @@ public class BackpackGLMProvider extends GlobalLootModifierProvider {
 	@Override
 	protected void start() {
 		for (LootGen.LootDefinition def : LootGen.LootDefinition.values()) {
-			this.add(def.id, new BackpackLootModifier(1, def, LootTableIdCondition.builder(def.target).build()));
+			this.add(def.id, new BackpackLootModifier(def.chance, def, LootTableIdCondition.builder(def.target).build()));
 		}
 	}
 }

@@ -6,11 +6,17 @@ import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -43,6 +49,21 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 		ItemStack stack = getStack();
 		if (!stack.isEmpty()) {
 			ListTag tag = BaseBagItem.getListTag(stack);
+			if (tag.size() == 0) {
+				CompoundTag ctag = stack.getOrCreateTag();
+				if (ctag.contains("loot")) {
+					ResourceLocation rl = new ResourceLocation(ctag.getString("loot"));
+					ctag.remove("loot");
+					if (player.level instanceof ServerLevel sl) {
+						LootTable loottable = sl.getServer().getLootTables().get(rl);
+						LootContext.Builder builder = new LootContext.Builder(sl);
+						builder.withLuck(player.getLuck()).withParameter(LootContextParams.THIS_ENTITY, player);
+						loottable.fill(container, builder.create(LootContextParamSets.EMPTY));
+						save();
+					}
+				}
+				return;
+			}
 			for (int i = 0; i < tag.size(); i++) {
 				this.container.setItem(i, ItemStack.of((CompoundTag) tag.get(i)));
 			}

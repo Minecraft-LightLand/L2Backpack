@@ -1,6 +1,21 @@
 {
   "entries": [
-    "l2backpack:end_city"
+    "l2backpack:woodland_mansion",
+    "l2backpack:abandoned_mineshaft",
+    "l2backpack:underwater_ruin_big",
+    "l2backpack:desert_pyramid",
+    "l2backpack:bastion_treasure",
+    "l2backpack:end_city_treasure",
+    "l2backpack:nether_bridge",
+    "l2backpack:jungle_temple",
+    "l2backpack:pillager_outpost",
+    "l2backpack:stronghold_corridor",
+    "l2backpack:village_cartographer",
+    "l2backpack:shipwreck_treasure",
+    "l2backpack:simple_dungeon",
+    "l2backpack:ancient_city",
+    "l2backpack:igloo_chest",
+    "l2backpack:ruined_portal"
   ],
   "replace": false
 }

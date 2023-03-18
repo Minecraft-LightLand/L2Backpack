@@ -6,6 +6,7 @@ import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.data.LangData;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,8 +17,15 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class BackpackItem extends BaseBagItem implements BackpackModelItem {
+
+	public static ItemStack initLootGen(ItemStack stack, ResourceLocation loot) {
+		var ctag = stack.getOrCreateTag();
+		ctag.putString("loot", loot.toString());
+		return stack;
+	}
 
 	public final DyeColor color;
 
@@ -33,11 +41,15 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		int rows = stack.getOrCreateTag().getInt("rows");
+		var tag = stack.getOrCreateTag();
+		int rows = tag.getInt("rows");
 		if (rows == 0) {
 			rows = BackpackConfig.COMMON.initialRows.get();
 		}
 		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, rows), 6));
+		if (tag.contains("loot")) {
+			list.add(LangData.IDS.LOOT.get().withStyle(ChatFormatting.AQUA));
+		}
 		LangData.addInfo(list,
 				LangData.Info.QUICK_INV_ACCESS,
 				LangData.Info.KEYBIND,

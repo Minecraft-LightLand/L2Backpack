@@ -11,6 +11,7 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
 import net.minecraft.data.recipes.UpgradeRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
@@ -42,7 +43,7 @@ public class RecipeGen {
 						.group("backpack_dye").requires(Ingredient.of(TagGen.BACKPACKS))
 						.requires(Ingredient.of(dye)).save(pvd, L2Backpack.MODID + ":shapeless/dye_backpack_" + color.getName());
 
-				unlock(pvd, new UpgradeRecipeBuilder(BackpackMisc.RSC_BAG_UPGRADE.get(), Ingredient.of(backpack),
+				unlock(pvd, new SmithingTransformRecipeBuilder(BackpackMisc.RSC_BAG_UPGRADE.get(), Ingredient.EMPTY, Ingredient.of(backpack),
 						Ingredient.of(BackpackItems.ENDER_POCKET.get()), RecipeCategory.MISC, backpack)::unlocks, backpack)
 						.save(pvd, L2Backpack.MODID + ":smithing/upgrade_backpack_" + color.getName());
 

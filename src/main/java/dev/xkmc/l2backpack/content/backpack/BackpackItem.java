@@ -58,4 +58,9 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 		return new ResourceLocation(L2Backpack.MODID, "textures/block/backpack/" + color.getName() + ".png");
 	}
 
+	@Override
+	public boolean canFitInsideContainerItems() {
+		return false;
+	}
+
 }

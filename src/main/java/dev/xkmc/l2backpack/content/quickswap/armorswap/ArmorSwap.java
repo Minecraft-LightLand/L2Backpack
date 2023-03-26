@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.armorswap;
 
+import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.quickswap.common.*;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
@@ -8,7 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -19,7 +19,7 @@ import java.util.List;
 public class ArmorSwap extends SingleSwapItem implements ItemOnBackItem {
 
 	public static boolean isValidItem(ItemStack stack) {
-		return stack.getItem().canFitInsideContainerItems() &&
+		return stack.getItem().canFitInsideContainerItems() && !(stack.getItem() instanceof BaseBagItem) &&
 				LivingEntity.getEquipmentSlotForItem(stack).getType() == EquipmentSlot.Type.ARMOR;
 	}
 

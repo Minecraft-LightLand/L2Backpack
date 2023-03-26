@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.init;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
+import dev.xkmc.l2backpack.compat.GolemCompat;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
@@ -76,6 +77,7 @@ public class L2Backpack {
 		Handlers.register();
 		ScreenTracker.register();
 		BackpackTriggers.register();
+		GolemCompat.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 	}

@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.quickswap.common;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
@@ -14,7 +15,7 @@ import java.util.List;
 public class QuickSwapManager {
 
 	@Nullable
-	public static QuickSwapType getValidType(Player player, boolean isAltDown) {
+	public static QuickSwapType getValidType(LivingEntity player, boolean isAltDown) {
 		if (!isAltDown && player.getMainHandItem().isEmpty()) {
 			return QuickSwapType.ARMOR;
 		}
@@ -29,17 +30,18 @@ public class QuickSwapManager {
 	}
 
 	@Nullable
-	public static IQuickSwapToken getToken(Player player, boolean isAltDown) {
+	public static IQuickSwapToken getToken(LivingEntity user, boolean isAltDown) {
 		List<ItemStack> list = new ArrayList<>();
-		list.add(player.getOffhandItem());
-		list.add(player.getItemBySlot(EquipmentSlot.CHEST));
-		list.add(CuriosCompat.getSlot(player, stack -> stack.getItem() instanceof IQuickSwapItem));
-		QuickSwapType type = getValidType(player, isAltDown);
+		list.add(user.getOffhandItem());
+		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
+		if (user instanceof Player pl)
+			list.add(CuriosCompat.getSlot(pl, stack -> stack.getItem() instanceof IQuickSwapItem));
+		QuickSwapType type = getValidType(user, isAltDown);
 		if (type == null)
 			return null;
 		for (ItemStack stack : list) {
 			if (stack.getItem() instanceof IQuickSwapItem item) {
-				IQuickSwapToken token = item.getTokenOfType(stack, player, type);
+				IQuickSwapToken token = item.getTokenOfType(stack, user, type);
 				if (token != null) {
 					return token;
 				}

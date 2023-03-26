@@ -15,6 +15,7 @@ import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -60,7 +61,7 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBa
 
 	@Nullable
 	@Override
-	public IQuickSwapToken getTokenOfType(ItemStack stack, Player player, QuickSwapType type) {
+	public IQuickSwapToken getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
 		List<ItemStack> list = getItems(stack);
 		if (list.isEmpty()) return null;
 		return new MultiSwapToken(this, stack, type);

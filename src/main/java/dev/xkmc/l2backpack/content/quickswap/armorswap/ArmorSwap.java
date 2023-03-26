@@ -41,7 +41,7 @@ public class ArmorSwap extends SingleSwapItem implements ItemOnBackItem {
 
 	@Nullable
 	@Override
-	public IQuickSwapToken getTokenOfType(ItemStack stack, Player player, QuickSwapType type) {
+	public IQuickSwapToken getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
 		if (type != QuickSwapType.ARMOR)
 			return null;
 		return new SingleSwapToken(this, stack, type);

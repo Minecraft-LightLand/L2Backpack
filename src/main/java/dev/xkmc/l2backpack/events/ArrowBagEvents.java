@@ -10,7 +10,6 @@ import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
 import dev.xkmc.l2backpack.network.SetSelectedToServer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraftforge.api.distmarker.Dist;
@@ -28,9 +27,8 @@ public class ArrowBagEvents {
 
 	@SubscribeEvent
 	public static void onProjectileSearch(LivingGetProjectileEvent event) {
-		if (!(event.getEntity() instanceof Player player)) return;
 		if (!(event.getProjectileWeaponItemStack().getItem() instanceof ProjectileWeaponItem weapon)) return;
-		IQuickSwapToken token = QuickSwapManager.getToken(player, false);
+		IQuickSwapToken token = QuickSwapManager.getToken(event.getEntity(), false);
 		if (token == null) return;
 		if (token.type() != QuickSwapType.ARROW) return;
 		List<ItemStack> arrows = token.getList();

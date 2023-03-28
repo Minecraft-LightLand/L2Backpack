@@ -10,7 +10,7 @@ import net.minecraftforge.fml.ModList;
 public class GolemCompat {
 
 	public static void register() {
-		if (ModList.get().isLoaded("modulargolem")) {
+		if (ModList.get().isLoaded("modulargolems")) {
 			registerImpl();
 		}
 	}

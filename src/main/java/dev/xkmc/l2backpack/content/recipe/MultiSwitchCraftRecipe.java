@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.base.recipe.AbstractShapedRecipe;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +21,7 @@ public class MultiSwitchCraftRecipe extends AbstractShapedRecipe<MultiSwitchCraf
 	}
 
 	@Override
-	public ItemStack assemble(CraftingContainer container) {
+	public ItemStack assemble(CraftingContainer container, RegistryAccess access) {
 		List<ItemStack> q = null, s = null, a = null, m = null;
 		for (int i = 0; i < container.getContainerSize(); i++) {
 			ItemStack stack = container.getItem(i);
@@ -71,7 +72,7 @@ public class MultiSwitchCraftRecipe extends AbstractShapedRecipe<MultiSwitchCraf
 				}
 			}
 		}
-		ItemStack ans = super.assemble(container);
+		ItemStack ans = super.assemble(container, access);
 		BaseBagItem.setItems(ans, m);
 		return ans;
 	}

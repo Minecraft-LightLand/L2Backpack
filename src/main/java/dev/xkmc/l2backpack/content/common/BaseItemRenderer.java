@@ -15,13 +15,14 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -50,7 +51,7 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 	}
 
 	@Override
-	public void renderByItem(ItemStack stack, ItemTransforms.TransformType type, PoseStack poseStack,
+	public void renderByItem(ItemStack stack, ItemDisplayContext type, PoseStack poseStack,
 							 MultiBufferSource bufferSource, int light, int overlay) {
 
 		poseStack.popPose();
@@ -83,7 +84,8 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 	}
 
 
-	public static void renderItemInside(ItemStack stack, double height, PoseStack matrix, ItemTransforms.TransformType type, MultiBufferSource buffer, int light, int overlay) {
+	public static void renderItemInside(ItemStack stack, double height, PoseStack matrix, ItemDisplayContext type,
+										MultiBufferSource buffer, int light, int overlay) {
 		var mc = Minecraft.getInstance();
 		float time = (mc.getPartialTick() + Proxy.getPlayer().tickCount) % 80;
 		if (!stack.isEmpty()) {
@@ -95,7 +97,7 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 			var r = Minecraft.getInstance().getItemRenderer();
 			//if (r.getModel(stack, null, null, 0).usesBlockLight())
 			Lighting.setupForFlatItems();
-			r.renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, matrix, buffer, 0);
+			r.renderStatic(stack, ItemDisplayContext.GROUND, light, overlay, matrix, buffer, null, 0);
 			Lighting.setupFor3DItems();
 			matrix.popPose();
 		}

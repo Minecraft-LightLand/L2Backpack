@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.recipe;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.base.recipe.AbstractSmithingRecipe;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -22,8 +23,8 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 	}
 
 	@Override
-	public ItemStack assemble(Container container) {
-		ItemStack stack = super.assemble(container);
+	public ItemStack assemble(Container container, RegistryAccess access) {
+		ItemStack stack = super.assemble(container, access);
 		stack.getOrCreateTag().putInt("rows", Math.max(1, stack.getOrCreateTag().getInt("rows")) + 1);
 		return stack;
 	}

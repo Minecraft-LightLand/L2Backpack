@@ -16,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 public class ItemOnBackLayerRenderer<T extends LivingEntity, M extends HumanoidModel<T> & HeadedModel> extends RenderLayer<T, M> {
@@ -58,7 +59,7 @@ public class ItemOnBackLayerRenderer<T extends LivingEntity, M extends HumanoidM
 
 		this.getParentModel().body.translateAndRotate(pose);
 		translateToHead(pose, flag);
-		this.itemInHandRenderer.renderItem(entity, stack, ItemTransforms.TransformType.HEAD, false, pose, buffer, i);
+		this.itemInHandRenderer.renderItem(entity, stack, ItemDisplayContext.HEAD, false, pose, buffer, i);
 		pose.popPose();
 	}
 

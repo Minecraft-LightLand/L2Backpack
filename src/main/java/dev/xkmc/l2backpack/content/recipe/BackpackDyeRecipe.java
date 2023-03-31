@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.init.data.TagGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.base.recipe.AbstractShapelessRecipe;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
@@ -16,14 +17,14 @@ public class BackpackDyeRecipe extends AbstractShapelessRecipe<BackpackDyeRecipe
 	}
 
 	@Override
-	public ItemStack assemble(CraftingContainer container) {
+	public ItemStack assemble(CraftingContainer container, RegistryAccess access) {
 		ItemStack bag = ItemStack.EMPTY;
 		for (int i = 0; i < container.getContainerSize(); i++) {
 			if (container.getItem(i).is(TagGen.BACKPACKS)) {
 				bag = container.getItem(i);
 			}
 		}
-		ItemStack stack = super.assemble(container);
+		ItemStack stack = super.assemble(container, access);
 		stack.setTag(bag.getTag());
 		return stack;
 	}

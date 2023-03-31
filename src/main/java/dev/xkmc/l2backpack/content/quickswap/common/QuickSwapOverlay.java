@@ -127,8 +127,8 @@ public class QuickSwapOverlay extends SelectionSideBar {
 				ItemStack targetStack = player.getItemBySlot(target);
 				renderArmorSlot(x, y, 64, target == slot, targetStack.getItem() instanceof BaseBagItem);
 				if (!stack.isEmpty()) {
-					renderer.renderAndDecorateItem(stack, x, y);
-					renderer.renderGuiItemDecorations(font, stack, x, y);
+					renderer.renderAndDecorateItem(poseStack, stack, x, y);
+					renderer.renderGuiItemDecorations(poseStack, font, stack, x, y);
 				}
 				y += 18;
 			}
@@ -137,7 +137,6 @@ public class QuickSwapOverlay extends SelectionSideBar {
 
 	public void renderArmorSlot(int x, int y, int a, boolean target, boolean invalid) {
 		RenderSystem.disableDepthTest();
-		RenderSystem.disableTexture();
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 		Tesselator tex = Tesselator.getInstance();
@@ -150,7 +149,6 @@ public class QuickSwapOverlay extends SelectionSideBar {
 				OverlayUtils.drawRect(builder, x, y, 16, 16, 70, 150, 185, 255);
 			}
 		}
-		RenderSystem.enableTexture();
 		RenderSystem.enableDepthTest();
 	}
 

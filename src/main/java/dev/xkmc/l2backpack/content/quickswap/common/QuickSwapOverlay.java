@@ -94,9 +94,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 				return false;
 			}
 			EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
-			if (player.getItemBySlot(slot).getItem() instanceof BaseBagItem) {
-				return false;
-			}
+			return !(player.getItemBySlot(slot).getItem() instanceof BaseBagItem);
 		}
 		return true;
 	}

@@ -13,7 +13,6 @@ import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2library.block.BlockProxy;
 import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;

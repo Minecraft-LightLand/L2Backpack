@@ -26,5 +26,6 @@
   ],
   "result": {
     "item": "l2backpack:dimensional_storage_orange"
-  }
+  },
+  "show_notification": true
 }

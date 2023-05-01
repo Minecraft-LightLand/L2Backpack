@@ -1,5 +1,5 @@
 {
-  "type": "l2backpack:backpack_dye",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "group": "backpack_dye",
   "ingredients": [

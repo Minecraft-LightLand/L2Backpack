@@ -23,5 +23,6 @@
   "result": {
     "count": 4,
     "item": "l2backpack:ender_pocket"
-  }
+  },
+  "show_notification": true
 }

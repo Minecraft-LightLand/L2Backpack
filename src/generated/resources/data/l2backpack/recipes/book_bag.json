@@ -22,5 +22,6 @@
   ],
   "result": {
     "item": "l2backpack:book_bag"
-  }
+  },
+  "show_notification": true
 }

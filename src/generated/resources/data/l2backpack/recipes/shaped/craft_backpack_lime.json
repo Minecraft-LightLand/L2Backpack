@@ -23,5 +23,6 @@
   ],
   "result": {
     "item": "l2backpack:backpack_lime"
-  }
+  },
+  "show_notification": true
 }

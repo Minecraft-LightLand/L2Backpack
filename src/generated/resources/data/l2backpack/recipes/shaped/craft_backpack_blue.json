@@ -23,5 +23,6 @@
   ],
   "result": {
     "item": "l2backpack:backpack_blue"
-  }
+  },
+  "show_notification": true
 }

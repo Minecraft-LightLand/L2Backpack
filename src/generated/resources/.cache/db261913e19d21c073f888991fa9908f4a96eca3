@@ -1,4 +1,4 @@
-// 1.19.3	2023-03-17T22:08:35.610028	Global Loot Modifiers : l2backpack
+// 1.19.4	2023-05-01T16:58:23.41158	Global Loot Modifiers : l2backpack
 f3f439cbd220bb8675b981aeb1be8cdd5f6ddf14 data/forge/loot_modifiers/global_loot_modifiers.json
 af10ee4245f3a6ed1ae36fdd84faa9e3ab5fae9d data/l2backpack/loot_modifiers/abandoned_mineshaft.json
 89a59868aabdd3974311880eba5b7d54da6fa2be data/l2backpack/loot_modifiers/ancient_city.json

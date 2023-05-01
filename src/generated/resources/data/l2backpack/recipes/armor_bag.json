@@ -22,5 +22,6 @@
   ],
   "result": {
     "item": "l2backpack:armor_bag"
-  }
+  },
+  "show_notification": true
 }

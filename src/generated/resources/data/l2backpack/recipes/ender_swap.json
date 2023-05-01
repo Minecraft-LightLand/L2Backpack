@@ -1,5 +1,5 @@
 {
-  "type": "l2backpack:multiswitch_craft",
+  "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
     "1": {
@@ -18,5 +18,6 @@
   ],
   "result": {
     "item": "l2backpack:ender_swap"
-  }
+  },
+  "show_notification": false
 }

@@ -23,5 +23,6 @@
   ],
   "result": {
     "item": "l2backpack:backpack_brown"
-  }
+  },
+  "show_notification": true
 }

@@ -22,5 +22,6 @@
   ],
   "result": {
     "item": "l2backpack:drawer"
-  }
+  },
+  "show_notification": true
 }

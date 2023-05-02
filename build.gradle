@@ -26,7 +26,8 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '1.19.3-2023.03.12-1.19.4'
+    //mappings channel: 'parchment', version: '1.19.3-2023.03.12-1.19.4'
+    mappings channel: 'official', version: "${minecraft_version}"
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         client {
@@ -86,6 +87,7 @@ mixin {
 }
 
 repositories {
+    maven { url 'https://jitpack.io' }
     maven {
         // Location of the maven that hosts JEI files (and TiC)
         name 'Progwml6 maven'
@@ -119,7 +121,7 @@ repositories {
         }
     }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    flatDir{
+    flatDir {
         dirs 'libs'
     }
     maven {
@@ -129,11 +131,13 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
+    implementation("com.github.llamalad7.mixinextras:mixinextras-forge:${mixin_extras_version}")
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}-slim")
-    //bruntimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:0.3.3')
+    //runtimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:0.3.3')
     //runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:0.4.4')
     //runtimeOnly fg.deobf('dev.xkmc.l2artifacts:l2artifacts:1.1.2')
 

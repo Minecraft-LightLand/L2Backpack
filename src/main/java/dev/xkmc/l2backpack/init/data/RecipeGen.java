@@ -8,10 +8,7 @@ import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.base.recipe.CustomShapedBuilder;
 import dev.xkmc.l2library.base.recipe.CustomShapelessBuilder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -24,6 +21,7 @@ import java.util.function.BiFunction;
 
 public class RecipeGen {
 
+	@SuppressWarnings("removal")
 	public static void genRecipe(RegistrateRecipeProvider pvd) {
 		{
 			for (int i = 0; i < 16; i++) {
@@ -45,6 +43,11 @@ public class RecipeGen {
 				unlock(pvd, new SmithingTransformRecipeBuilder(BackpackMisc.RSC_BAG_UPGRADE.get(), Ingredient.EMPTY, Ingredient.of(backpack),
 						Ingredient.of(BackpackItems.ENDER_POCKET.get()), RecipeCategory.MISC, backpack)::unlocks, backpack)
 						.save(pvd, L2Backpack.MODID + ":smithing/upgrade_backpack_" + color.getName());
+
+				//TODO removal
+				unlock(pvd, new LegacyUpgradeRecipeBuilder(BackpackMisc.RSC_BAG_UPGRADE_OLD.get(), Ingredient.of(backpack),
+						Ingredient.of(BackpackItems.ENDER_POCKET.get()), RecipeCategory.MISC, backpack)::unlocks, backpack)
+						.save(pvd, L2Backpack.MODID + ":smithing/upgrade_backpack_" + color.getName() + "_old");
 
 				Item storage = BackpackItems.DIMENSIONAL_STORAGE[i].get();
 

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_backpack_magenta": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2backpack:backpack_magenta"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "l2backpack:smithing/upgrade_backpack_magenta_old"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_backpack_magenta",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "l2backpack:smithing/upgrade_backpack_magenta_old"
+    ]
+  }
+}

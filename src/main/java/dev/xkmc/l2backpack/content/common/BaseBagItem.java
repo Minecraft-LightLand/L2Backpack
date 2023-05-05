@@ -79,11 +79,6 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 	}
 
 	@Override
-	public boolean canFitInsideContainerItems() {
-		return false;
-	}
-
-	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!level.isClientSide()) {
@@ -128,6 +123,11 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 	@Override
 	public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
 		return armorType == EquipmentSlot.CHEST;
+	}
+
+	@Override
+	public @Nullable EquipmentSlot getEquipmentSlot(ItemStack stack) {
+		return EquipmentSlot.CHEST;
 	}
 
 }

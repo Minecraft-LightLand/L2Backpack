@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
+import dev.xkmc.l2backpack.compat.GolemCompat;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
@@ -37,6 +38,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -77,6 +79,7 @@ public class L2Backpack {
 		Handlers.register();
 		ScreenTracker.register();
 		BackpackTriggers.register();
+		if (ModList.get().isLoaded("modulargolems")) GolemCompat.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 		REGISTRATE.addDataGenerator(ProviderType.LOOT, LootGen::genLoot);

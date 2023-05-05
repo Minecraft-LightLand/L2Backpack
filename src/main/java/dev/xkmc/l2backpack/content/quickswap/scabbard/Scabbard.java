@@ -44,7 +44,7 @@ public class Scabbard extends SingleSwapItem implements ItemOnBackItem {
 
 	@Nullable
 	@Override
-	public IQuickSwapToken getTokenOfType(ItemStack stack, Player player, QuickSwapType type) {
+	public IQuickSwapToken getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
 		if (type != QuickSwapType.TOOL)
 			return null;
 		return new SingleSwapToken(this, stack, type);

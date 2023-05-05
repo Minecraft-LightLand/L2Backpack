@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.common;
+package dev.xkmc.l2backpack.content.render;
 
 import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.platform.Lighting;
@@ -59,7 +59,7 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 		poseStack.pushPose();
 		BlockState state = BackpackBlocks.ENDER_DRAWER.getDefaultState();
 		if (stack.getItem() instanceof DrawerItem) {
-			state = state.setValue(AlternateBlockForm.ALT, true);
+			state = BackpackBlocks.DRAWER.getDefaultState();
 		}
 		BakedModel model = Minecraft.getInstance().getModelManager().getBlockModelShaper().getBlockModel(state);
 		model = model.applyTransform(type, poseStack, false);

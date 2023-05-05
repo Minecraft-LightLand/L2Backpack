@@ -64,7 +64,7 @@ public class DrawerHandler implements IItemHandler {
 		int toInsert = Math.min(max - count, stack.getCount());
 		if (!simulate) {
 			item = stack.getItem();
-			count = toInsert;
+			count += toInsert;
 			parent.sync();
 		}
 		if (toInsert == stack.getCount()) {

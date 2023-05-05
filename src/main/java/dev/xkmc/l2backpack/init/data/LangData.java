@@ -63,7 +63,7 @@ public class LangData {
 		EXTRACT_DRAWER("tooltip.extract.drawer", "Right click to take one stack item out"),
 		DUMP("tooltip.dump", "Shift + right click chests or other storage blocks to dump all items into the block"),
 		LOAD("tooltip.load", "Shift + left click chests or other storage blocks to load items from the block"),
-		PLACE("tooltip.place", "Alt + right click to place it as a block"),
+		PLACE("tooltip.place", "Shift + right click to place it as a block"),
 		KEYBIND("tooltip.keybind", "This can be put on chest slot (or back slot of Curios), and can be opened via key bind."),
 		QUICK_INV_ACCESS("tooltip.info.quick_inv", "Right click to open. Or right click in inventory / ender chest / dimensional storage GUI to open directly."),
 		QUICK_ANY_ACCESS("tooltip.info.quick_any", "Right click to open. Or right click in any GUI to open directly."),

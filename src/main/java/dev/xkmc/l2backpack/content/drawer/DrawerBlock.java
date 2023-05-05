@@ -41,7 +41,7 @@ public class DrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMethod,
 		BlockEntity blockentity = level.getBlockEntity(pos);
 		ItemStack stack = player.getItemInHand(hand);
 		if (blockentity instanceof DrawerBlockEntity chest) {
-			if (!stack.isEmpty() && !stack.hasTag() && stack.getItem() == chest.getItem()) {
+			if (!stack.isEmpty() && !stack.hasTag() && stack.getItem() == chest.getItem() || chest.getItem() == Items.AIR) {
 				if (!level.isClientSide()) {
 					stack = chest.handler.insertItem(0, stack, false);
 					player.setItemInHand(hand, stack);

@@ -112,7 +112,7 @@ public class L2Backpack {
 
 	public static void gatherData(GatherDataEvent event) {
 		LangData.addTranslations(REGISTRATE::addRawLang);
-		event.getGenerator().addProvider(event.includeServer(), new BackpackGLMProvider(event.getGenerator().getPackOutput()));
+		//TODO event.getGenerator().addProvider(event.includeServer(), new BackpackGLMProvider(event.getGenerator().getPackOutput()));
 	}
 
 	public static void registerCaps(RegisterCapabilitiesEvent event) {

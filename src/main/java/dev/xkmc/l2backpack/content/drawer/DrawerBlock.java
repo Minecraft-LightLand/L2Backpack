@@ -1,10 +1,9 @@
-package dev.xkmc.l2backpack.content.remote.drawer;
+package dev.xkmc.l2backpack.content.drawer;
 
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
-import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
-import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
+import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
 import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
 import dev.xkmc.l2library.block.mult.SetPlacedByBlockMethod;
 import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
@@ -17,6 +16,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,23 +28,22 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.UUID;
 
-public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMethod, SpecialDropBlockMethod, SetPlacedByBlockMethod {
+public class DrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMethod, SpecialDropBlockMethod, SetPlacedByBlockMethod {
 
-	public static final EnderDrawerBlock INSTANCE = new EnderDrawerBlock();
+	public static final DrawerBlock INSTANCE = new DrawerBlock();
 
-	public static final BlockEntityBlockMethod<EnderDrawerBlockEntity> BLOK_ENTITY =
-			new EnderDrawerAnalogBlockEntity<>(BackpackBlocks.TE_ENDER_DRAWER, EnderDrawerBlockEntity.class);
+	public static final BlockEntityBlockMethod<DrawerBlockEntity> BLOCK_ENTITY =
+			new BlockEntityBlockMethodImpl<>(BackpackBlocks.TE_DRAWER, DrawerBlockEntity.class);
 
 	@Override
 	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		BlockEntity blockentity = level.getBlockEntity(pos);
 		ItemStack stack = player.getItemInHand(hand);
-		if (blockentity instanceof EnderDrawerBlockEntity chest) {
-			if (!stack.isEmpty() && !stack.hasTag() && stack.getItem() == chest.item) {
+		if (blockentity instanceof DrawerBlockEntity chest) {
+			if (!stack.isEmpty() && !stack.hasTag() && stack.getItem() == chest.getItem()) {
 				if (!level.isClientSide()) {
-					stack = new EnderDawerItemHandler(chest.getAccess(), false).insertItem(0, stack, false);
+					stack = chest.handler.insertItem(0, stack, false);
 					player.setItemInHand(hand, stack);
 				} else {
 					ContentTransfer.playDrawerSound(player);
@@ -52,8 +51,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 				return InteractionResult.SUCCESS;
 			} else if (stack.isEmpty()) {
 				if (!level.isClientSide()) {
-					DrawerAccess access = chest.getAccess();
-					stack = new EnderDawerItemHandler(access, false).extractItem(0, access.item().getMaxStackSize(), false);
+					stack = chest.handler.extractItem(0, chest.getItem().getMaxStackSize(), false);
 					player.setItemInHand(hand, stack);
 				} else {
 					ContentTransfer.playDrawerSound(player);
@@ -68,43 +66,36 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState blockState, @Nullable LivingEntity livingEntity, ItemStack stack) {
 		BlockEntity blockentity = level.getBlockEntity(pos);
-		UUID id = stack.getOrCreateTag().getUUID(EnderDrawerItem.KEY_OWNER_ID);
-		String name = stack.getOrCreateTag().getString(EnderDrawerItem.KEY_OWNER_NAME);
-		if (blockentity instanceof EnderDrawerBlockEntity chest) {
-			chest.owner_id = id;
-			chest.owner_name = name;
-			chest.item = BaseDrawerItem.getItem(stack);
-			chest.addToListener();
+		if (blockentity instanceof DrawerBlockEntity chest) {
+			chest.handler.count = DrawerItem.getCount(stack);
+			chest.handler.item = chest.handler.count == 0 ? Items.AIR : BaseDrawerItem.getItem(stack);
 		}
 	}
 
 	@Override
 	public ItemStack getCloneItemStack(BlockGetter world, BlockPos pos, BlockState state) {
 		BlockEntity be = world.getBlockEntity(pos);
-		if (be instanceof EnderDrawerBlockEntity chest) {
+		if (be instanceof DrawerBlockEntity chest) {
 			return buildStack(chest);
 		}
-		return BackpackItems.ENDER_DRAWER.asStack();
+		return BackpackItems.DRAWER.asStack();
 	}
 
 	@Override
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		BlockEntity blockentity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-		if (blockentity instanceof EnderDrawerBlockEntity chest) {
+		if (blockentity instanceof DrawerBlockEntity chest) {
 			return List.of(buildStack(chest));
 		}
-		return List.of(BackpackItems.ENDER_DRAWER.asStack());
+		return List.of(BackpackItems.DRAWER.asStack());
 	}
 
-	private ItemStack buildStack(EnderDrawerBlockEntity chest) {
-		ItemStack stack = BackpackItems.ENDER_DRAWER.asStack();
-		if (chest.owner_id != null) {
-			stack.getOrCreateTag().putUUID(EnderDrawerItem.KEY_OWNER_ID, chest.owner_id);
-			stack.getOrCreateTag().putString(EnderDrawerItem.KEY_OWNER_NAME, chest.owner_name);
-			ResourceLocation rl = ForgeRegistries.ITEMS.getKey(chest.item);
-			assert rl != null;
-			stack.getOrCreateTag().putString(BaseDrawerItem.KEY, rl.toString());
-		}
+	private ItemStack buildStack(DrawerBlockEntity chest) {
+		ItemStack stack = BackpackItems.DRAWER.asStack();
+		ResourceLocation rl = ForgeRegistries.ITEMS.getKey(chest.getItem());
+		assert rl != null;
+		stack.getOrCreateTag().putString(BaseDrawerItem.KEY, rl.toString());
+		DrawerItem.setCount(stack, chest.handler.count);
 		return stack;
 	}
 

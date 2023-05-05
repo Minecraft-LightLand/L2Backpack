@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
+import dev.xkmc.l2backpack.content.drawer.IDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 @SerialClass
-public class EnderDrawerBlockEntity extends BaseBlockEntity {
+public class EnderDrawerBlockEntity extends IDrawerBlockEntity {
 
 	@SerialClass.SerialField(toClient = true)
 	public UUID owner_id;
@@ -91,4 +92,8 @@ public class EnderDrawerBlockEntity extends BaseBlockEntity {
 		}
 	}
 
+	@Override
+	public Item getItem() {
+		return item;
+	}
 }

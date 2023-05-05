@@ -6,7 +6,7 @@ import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
-import dev.xkmc.l2backpack.content.remote.drawer.EnderPreviewOverlay;
+import dev.xkmc.l2backpack.content.render.EnderPreviewOverlay;
 import dev.xkmc.l2backpack.content.render.RenderEvents;
 import dev.xkmc.l2backpack.init.data.Keys;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;

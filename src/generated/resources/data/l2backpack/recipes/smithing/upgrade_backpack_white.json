@@ -9,5 +9,7 @@
   "result": {
     "item": "l2backpack:backpack_white"
   },
-  "template": []
+  "template": {
+    "item": "minecraft:paper"
+  }
 }

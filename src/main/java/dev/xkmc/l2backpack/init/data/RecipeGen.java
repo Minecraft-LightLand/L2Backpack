@@ -19,6 +19,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.BiFunction;
 
+import static dev.xkmc.l2library.base.recipe.AbstractSmithingRecipe.TEMPLATE_PLACEHOLDER;
+
 public class RecipeGen {
 
 	@SuppressWarnings("removal")
@@ -40,7 +42,7 @@ public class RecipeGen {
 						.group("backpack_dye").requires(Ingredient.of(TagGen.BACKPACKS))
 						.requires(Ingredient.of(dye)).save(pvd, L2Backpack.MODID + ":shapeless/dye_backpack_" + color.getName());
 
-				unlock(pvd, new SmithingTransformRecipeBuilder(BackpackMisc.RSC_BAG_UPGRADE.get(), Ingredient.EMPTY, Ingredient.of(backpack),
+				unlock(pvd, new SmithingTransformRecipeBuilder(BackpackMisc.RSC_BAG_UPGRADE.get(), TEMPLATE_PLACEHOLDER, Ingredient.of(backpack),
 						Ingredient.of(BackpackItems.ENDER_POCKET.get()), RecipeCategory.MISC, backpack)::unlocks, backpack)
 						.save(pvd, L2Backpack.MODID + ":smithing/upgrade_backpack_" + color.getName());
 

@@ -1,9 +1,9 @@
 package dev.xkmc.l2backpack.content.recipe;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
+import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.base.recipe.AbstractOldSmithingRecipe;
-import dev.xkmc.l2library.base.recipe.AbstractSmithingRecipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 public class BackpackUpgradeRecipeOld extends AbstractOldSmithingRecipe<BackpackUpgradeRecipeOld> {
 
 	public BackpackUpgradeRecipeOld(ResourceLocation rl, Ingredient left, Ingredient right, ItemStack result) {
-		super(rl, left, right, BackpackItem.setRow(result, 2));
+		super(rl, left, right, BackpackItem.setRow(result, BackpackConfig.COMMON.initialRows.get() + 1));
 	}
 
 	@Override

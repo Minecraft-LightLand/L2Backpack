@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.common;
 
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;

@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.recipe;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
-import dev.xkmc.l2library.base.recipe.AbstractOldSmithingRecipe;
+import dev.xkmc.l2library.serial.recipe.AbstractOldSmithingRecipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;

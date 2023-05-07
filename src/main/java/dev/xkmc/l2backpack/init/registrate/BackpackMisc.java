@@ -7,10 +7,10 @@ import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipe;
 import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipeOld;
 import dev.xkmc.l2backpack.content.recipe.MultiSwitchCraftRecipe;
 import dev.xkmc.l2backpack.init.loot.BackpackLootModifier;
-import dev.xkmc.l2library.base.recipe.AbstractOldSmithingRecipe;
-import dev.xkmc.l2library.base.recipe.AbstractShapedRecipe;
-import dev.xkmc.l2library.base.recipe.AbstractShapelessRecipe;
-import dev.xkmc.l2library.base.recipe.AbstractSmithingRecipe;
+import dev.xkmc.l2library.serial.recipe.AbstractOldSmithingRecipe;
+import dev.xkmc.l2library.serial.recipe.AbstractShapedRecipe;
+import dev.xkmc.l2library.serial.recipe.AbstractShapelessRecipe;
+import dev.xkmc.l2library.serial.recipe.AbstractSmithingRecipe;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ForgeRegistries;
 

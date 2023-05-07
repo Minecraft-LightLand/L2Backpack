@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.remote.worldchest;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2backpack.content.remote.common.AnalogTrigger;
-import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
+import dev.xkmc.l2modularblock.impl.BlockEntityBlockMethodImpl;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;

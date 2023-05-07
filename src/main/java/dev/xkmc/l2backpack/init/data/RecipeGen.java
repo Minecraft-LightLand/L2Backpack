@@ -5,8 +5,8 @@ import com.tterrag.registrate.util.DataIngredient;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
-import dev.xkmc.l2library.base.recipe.CustomShapedBuilder;
-import dev.xkmc.l2library.base.recipe.CustomShapelessBuilder;
+import dev.xkmc.l2library.serial.recipe.CustomShapedBuilder;
+import dev.xkmc.l2library.serial.recipe.CustomShapelessBuilder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.BiFunction;
 
-import static dev.xkmc.l2library.base.recipe.AbstractSmithingRecipe.TEMPLATE_PLACEHOLDER;
+import static dev.xkmc.l2library.serial.recipe.AbstractSmithingRecipe.TEMPLATE_PLACEHOLDER;
 
 public class RecipeGen {
 

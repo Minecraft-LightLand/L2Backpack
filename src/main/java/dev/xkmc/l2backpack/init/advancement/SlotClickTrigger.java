@@ -1,9 +1,9 @@
 package dev.xkmc.l2backpack.init.advancement;
 
 import dev.xkmc.l2backpack.content.common.ContainerType;
-import dev.xkmc.l2library.base.advancements.BaseCriterion;
-import dev.xkmc.l2library.base.advancements.BaseCriterionInstance;
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.serial.advancements.BaseCriterion;
+import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;

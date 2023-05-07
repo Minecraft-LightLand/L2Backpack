@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.recipe;
 
 import dev.xkmc.l2backpack.init.data.TagGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
-import dev.xkmc.l2library.base.recipe.AbstractShapelessRecipe;
+import dev.xkmc.l2library.serial.recipe.AbstractShapelessRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;

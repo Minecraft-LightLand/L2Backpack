@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.common;
 
-import dev.xkmc.l2library.block.mult.AnimateTickBlockMethod;
+import dev.xkmc.l2modularblock.mult.AnimateTickBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;

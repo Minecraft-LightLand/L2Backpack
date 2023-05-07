@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.recipe;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
-import dev.xkmc.l2library.base.recipe.AbstractShapedRecipe;
+import dev.xkmc.l2library.serial.recipe.AbstractShapedRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;

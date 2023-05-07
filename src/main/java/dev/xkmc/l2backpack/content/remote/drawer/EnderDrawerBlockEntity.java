@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.drawer.IDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.SimpleContainer;

@@ -2,8 +2,8 @@ package dev.xkmc.l2backpack.network;
 
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
-import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2library.serial.network.SerialPacketBase;
+import dev.xkmc.l2serial.network.SerialPacketBase;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;

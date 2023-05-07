@@ -27,5 +27,5 @@ Also have some specialized bag for equipments, enchant books, and arrows.
 [[dependencies.l2backpack]]
     modId="l2library"
     mandatory=true
-    versionRange="[2.1.0,)"
+    versionRange="[2.2.0,)"
     ordering="AFTER"

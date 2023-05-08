@@ -48,6 +48,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	@Override
 	public Pair<List<ItemStack>, Integer> getItems() {
 		LocalPlayer player = Proxy.getClientPlayer();
+		assert player != null;
 		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
 		assert token != null;
 		List<ItemStack> list = token.getList();
@@ -58,6 +59,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	@Override
 	public int getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
+		assert player != null;
 		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
 		assert token != null;
 		int selected = token.getSelected();
@@ -81,6 +83,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	@Override
 	public boolean isAvailable(ItemStack stack) {
 		LocalPlayer player = Proxy.getClientPlayer();
+		assert player != null;
 		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
 		if (type == QuickSwapType.ARROW) {
 			ItemStack bowStack = player.getMainHandItem();
@@ -108,6 +111,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
 		super.render(gui, poseStack, partialTick, width, height);
 		LocalPlayer player = Proxy.getClientPlayer();
+		assert player != null;
 		if (QuickSwapManager.getValidType(player, Screen.hasAltDown()) == QuickSwapType.ARMOR && ease_time == max_ease) {
 			int x = getXOffset(width);
 			int y = 45 + getYOffset(height);

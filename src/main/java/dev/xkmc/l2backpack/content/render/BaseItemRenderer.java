@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
-import dev.xkmc.l2backpack.content.remote.drawer.AlternateBlockForm;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;

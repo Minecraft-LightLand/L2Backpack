@@ -139,7 +139,7 @@ dependencies {
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}-slim")
     implementation fg.deobf("dev.xkmc.l2serial:l2serial:1.0.0")
-    implementation(jarJar("dev.xkmc.l2modularblock:l2modularblock:1.0.0")) {
+    implementation fg.deobf(jarJar("dev.xkmc.l2modularblock:l2modularblock:1.0.0")) {
         transitive = false
         jarJar.ranged(it, "[1.0.0,)")
     }

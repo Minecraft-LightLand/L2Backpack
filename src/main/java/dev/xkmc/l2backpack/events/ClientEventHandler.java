@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
+import dev.xkmc.l2library.init.data.L2Keys;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;

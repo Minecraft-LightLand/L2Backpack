@@ -16,7 +16,6 @@ import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
-import dev.xkmc.l2backpack.network.SetSelectedToServer;
 import dev.xkmc.l2backpack.network.drawer.CreativeSetCarryToClient;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
 import dev.xkmc.l2backpack.network.drawer.RequestTooltipUpdateEvent;
@@ -26,6 +25,7 @@ import dev.xkmc.l2backpack.network.restore.PopLayerToClient;
 import dev.xkmc.l2backpack.network.restore.RestoreMenuToServer;
 import dev.xkmc.l2backpack.network.restore.SetScreenToClient;
 import dev.xkmc.l2library.base.L2Registrate;
+import dev.xkmc.l2library.init.events.select.SelectionRegistry;
 import dev.xkmc.l2library.serial.config.PacketHandler;
 import dev.xkmc.l2serial.serialization.custom_handler.Handlers;
 import net.minecraft.resources.ResourceLocation;
@@ -58,7 +58,6 @@ public class L2Backpack {
 
 	public static final PacketHandler HANDLER = new PacketHandler(
 			new ResourceLocation(MODID, "main"), 1,
-			e -> e.create(SetSelectedToServer.class, PLAY_TO_SERVER),
 			e -> e.create(DrawerInteractToServer.class, PLAY_TO_SERVER),
 			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
 			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),
@@ -107,6 +106,7 @@ public class L2Backpack {
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> L2BackpackClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
 		registerRegistrates(bus);
 		registerForgeEvents();
+		SelectionRegistry.register(-1000, BackpackSel.INSTANCE);
 	}
 
 	public static void gatherData(GatherDataEvent event) {

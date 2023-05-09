@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.OverlayUtils;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
@@ -32,7 +33,6 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	}
 
 	public boolean isScreenOn() {
-		if (Minecraft.getInstance().screen != null) return false;
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
 		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
@@ -41,8 +41,7 @@ public class QuickSwapOverlay extends SelectionSideBar {
 			if (type == QuickSwapType.TOOL && BackpackConfig.CLIENT.showToolOnlyWithShift.get()) return false;
 			if (type == QuickSwapType.ARMOR && BackpackConfig.CLIENT.showArmorOnlyWithShift.get()) return false;
 		}
-		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
-		return token != null;
+		return BackpackSel.INSTANCE.isClientActive(player);
 	}
 
 	@Override

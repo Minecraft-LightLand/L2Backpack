@@ -60,7 +60,7 @@ public class TooltipUpdateEvents {
 	@OnlyIn(Dist.CLIENT)
 	private static boolean blockSession() {
 		LocalPlayer player = Proxy.getClientPlayer();
-		var ray = RayTraceUtil.rayTraceBlock(player.level, player, player.getReachDistance());
+		var ray = RayTraceUtil.rayTraceBlock(player.level, player, player.getBlockReach());
 		if (ray.getType() == HitResult.Type.BLOCK) {
 			BlockPos pos = ray.getBlockPos();
 			BlockEntity entity = player.level.getBlockEntity(pos);

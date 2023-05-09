@@ -2,29 +2,42 @@ package dev.xkmc.l2backpack.content.quickswap.common;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
+import dev.xkmc.l2library.base.overlay.ItemSelSideBar;
 import dev.xkmc.l2library.base.overlay.OverlayUtils;
-import dev.xkmc.l2library.base.overlay.SelectionSideBar;
+import dev.xkmc.l2library.base.overlay.SideBar;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class QuickSwapOverlay extends SelectionSideBar {
+public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSignature> {
+
+	public record BackpackSignature(int backpackSelect, boolean ignoreOther, QuickSwapType type,
+									int playerSelect, ItemStack stack)
+			implements Signature<BackpackSignature> {
+
+		@Override
+		public boolean shouldRefreshIdle(SideBar<?> sideBar, @Nullable QuickSwapOverlay.BackpackSignature old) {
+			if (ignoreOther) {
+				if (old == null) return false;
+				if (old.type != type()) return true;
+				return old.backpackSelect != backpackSelect();
+			}
+			return !equals(old);
+		}
+	}
 
 	public static QuickSwapOverlay INSTANCE = new QuickSwapOverlay();
 
@@ -35,13 +48,12 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	public boolean isScreenOn() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
-		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
-		if (!Minecraft.getInstance().options.keyShift.isDown()) {
-			if (type == QuickSwapType.ARROW && BackpackConfig.CLIENT.showArrowOnlyWithShift.get()) return false;
-			if (type == QuickSwapType.TOOL && BackpackConfig.CLIENT.showToolOnlyWithShift.get()) return false;
-			if (type == QuickSwapType.ARMOR && BackpackConfig.CLIENT.showArmorOnlyWithShift.get()) return false;
-		}
 		return BackpackSel.INSTANCE.isClientActive(player);
+	}
+
+	@Override
+	protected boolean isOnHold() {
+		return super.isOnHold() || Screen.hasShiftDown() || Screen.hasAltDown();
 	}
 
 	@Override
@@ -56,27 +68,30 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	}
 
 	@Override
-	public int getSignature() {
+	public BackpackSignature getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
 		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
 		assert token != null;
 		int selected = token.getSelected();
+		boolean ignoreOther = false;
+		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
+		if (!Minecraft.getInstance().options.keyShift.isDown()) {
+			ignoreOther = type == QuickSwapType.ARROW && BackpackConfig.CLIENT.showArrowOnlyWithShift.get()
+					|| type == QuickSwapType.TOOL && BackpackConfig.CLIENT.showToolOnlyWithShift.get()
+					|| type == QuickSwapType.ARMOR && BackpackConfig.CLIENT.showArmorOnlyWithShift.get();
+		}
 		int focus = player.getInventory().selected;
-		int ans = focus * 10 + selected;
-		ans += token.type().ordinal() * 100;
-		if (token.type() == QuickSwapType.ARROW)
-			return ans;
 		if (token.type() == QuickSwapType.TOOL) {
-			ans += player.getMainHandItem().hashCode() & 0xFFFF;
+			return new BackpackSignature(selected, ignoreOther, type, focus, player.getMainHandItem());
 		} else {
 			for (EquipmentSlot slot : EquipmentSlot.values()) {
 				if (slot.getType() != EquipmentSlot.Type.ARMOR)
 					continue;
-				ans += player.getItemBySlot(slot).hashCode() & 0xFFFF;
+				return new BackpackSignature(selected, ignoreOther, type, focus, player.getItemBySlot(slot));
 			}
 		}
-		return ans;
+		return new BackpackSignature(selected, ignoreOther, type, focus, ItemStack.EMPTY);
 	}
 
 	@Override
@@ -107,36 +122,31 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	}
 
 	@Override
-	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
-		super.render(gui, poseStack, partialTick, width, height);
+	public void renderContent(Context ctx) {
+		super.renderContent(ctx);
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
 		if (QuickSwapManager.getValidType(player, Screen.hasAltDown()) == QuickSwapType.ARMOR && ease_time == max_ease) {
-			int x = getXOffset(width);
-			int y = 45 + getYOffset(height);
+			float x = ctx.x0();
+			float y = 45 + ctx.y0();
 			if (onCenter()) {
 				x -= 18;
 			} else x += 18;
-			ItemRenderer renderer = gui.getMinecraft().getItemRenderer();
 			var pair = getItems();
 			ItemStack hover = pair.getFirst().get(pair.getSecond());
 			EquipmentSlot target = LivingEntity.getEquipmentSlotForItem(hover);
 			for (int i = 0; i < 4; i++) {
 				EquipmentSlot slot = EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 3 - i);
 				ItemStack stack = player.getItemBySlot(slot);
-				Font font = gui.getMinecraft().font;
 				ItemStack targetStack = player.getItemBySlot(target);
 				renderArmorSlot(x, y, 64, target == slot, targetStack.getItem() instanceof BaseBagItem);
-				if (!stack.isEmpty()) {
-					renderer.renderAndDecorateItem(poseStack, stack, x, y);
-					renderer.renderGuiItemDecorations(poseStack, font, stack, x, y);
-				}
+				ctx.renderItem(stack, (int) x, (int) y);
 				y += 18;
 			}
 		}
 	}
 
-	public void renderArmorSlot(int x, int y, int a, boolean target, boolean invalid) {
+	public void renderArmorSlot(float x, float y, int a, boolean target, boolean invalid) {
 		RenderSystem.disableDepthTest();
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
@@ -154,17 +164,17 @@ public class QuickSwapOverlay extends SelectionSideBar {
 	}
 
 	@Override
-	protected int getXOffset(int width) {
+	protected float getXOffset(int width) {
 		float progress = (max_ease - ease_time) / max_ease;
 		if (onCenter())
-			return width / 2 + 18 * 3 + 1 + Math.round(progress * width / 2);
+			return width / 2f + 18 * 3 + 1 + progress * width / 2;
 		else
-			return width - 36 + Math.round(progress * 20);
+			return width - 36 + progress * 20;
 	}
 
 	@Override
-	protected int getYOffset(int height) {
-		return height / 2 - 81 + 1;
+	protected float getYOffset(int height) {
+		return height / 2f - 81 + 1;
 	}
 
 }

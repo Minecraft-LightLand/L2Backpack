@@ -144,10 +144,11 @@ dependencies {
         jarJar.ranged(it, "[1.0.0,)")
     })
 
-    implementation fg.deobf('dev.xkmc.modulargolems:modulargolems:2.2.0.pre0')
+    implementation fg.deobf('dev.xkmc.modulargolems:modulargolems:2.2.0.pre3')
     runtimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:2.2.0.pre0')
-    //runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:0.4.4')
-    //runtimeOnly fg.deobf('dev.xkmc.l2artifacts:l2artifacts:1.1.2')
+    //runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:2.2.0.pre0')
+    //runtimeOnly fg.deobf('dev.xkmc.l2weaponry:l2weaponry:2.2.0.pre0')
+    runtimeOnly fg.deobf('dev.xkmc.l2artifacts:l2artifacts:2.2.0.pre0')
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")

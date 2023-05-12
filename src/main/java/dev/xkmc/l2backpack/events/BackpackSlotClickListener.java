@@ -7,6 +7,7 @@ import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2library.init.L2Library;
 import dev.xkmc.l2library.init.events.click.SlotClickHandler;
@@ -29,7 +30,7 @@ public class BackpackSlotClickListener extends SlotClickHandler {
 	}
 
 	public BackpackSlotClickListener() {
-		super(new ResourceLocation(L2Library.MODID, "backpack"));
+		super(new ResourceLocation(L2Backpack.MODID, "backpack"));
 	}
 
 	@Override

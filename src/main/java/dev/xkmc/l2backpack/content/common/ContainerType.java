@@ -15,7 +15,8 @@ public enum ContainerType {
 			WorldStorage.get((ServerLevel) player.getLevel())
 					.getStorageWithoutPassword(slot.uuid(), slot.slot() / 27)
 					.map(e -> e.container.getItem(slot.slot() % 27)).orElse(ItemStack.EMPTY)),
-	CURIO(CuriosCompat::getItemFromSlot);
+	CURIO(CuriosCompat::getItemFromSlot),
+	CURIO_TAB(CuriosCompat::getItemFromSlot);
 
 	private final BiFunction<Player, PlayerSlot, ItemStack> getter;
 

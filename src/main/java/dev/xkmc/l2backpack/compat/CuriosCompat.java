@@ -1,6 +1,9 @@
 package dev.xkmc.l2backpack.compat;
 
+import dev.xkmc.l2backpack.content.common.ContainerType;
 import dev.xkmc.l2backpack.content.common.PlayerSlot;
+import dev.xkmc.l2library.base.tabs.curios.CuriosListMenu;
+import net.minecraft.Util;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -35,7 +38,7 @@ public class CuriosCompat {
 		return ItemStack.EMPTY;
 	}
 
-	public static Optional<Integer> getPlayerSlot(int slot, int index, int wid, AbstractContainerMenu menu) {
+	public static Optional<PlayerSlot> getPlayerSlot(int slot, int index, int wid, AbstractContainerMenu menu) {
 		if (ModList.get().isLoaded("curios")) {
 			return getPlayerSlotImpl(slot, index, wid, menu);
 		}
@@ -82,7 +85,7 @@ public class CuriosCompat {
 		return ItemStack.EMPTY;
 	}
 
-	private static Optional<Integer> getPlayerSlotImpl(int slot, int index, int wid, AbstractContainerMenu menu) {
+	private static Optional<PlayerSlot> getPlayerSlotImpl(int slot, int index, int wid, AbstractContainerMenu menu) {
 		if (menu.containerId == wid && menu instanceof CuriosContainer cont) {
 			Slot s = cont.getSlot(index);
 			if (s instanceof CurioSlot curioSlot) {
@@ -91,7 +94,18 @@ public class CuriosCompat {
 					return Optional.empty();
 				}
 				int val = slotIndex + curioSlot.getSlotIndex();
-				return Optional.of(val);
+				return Optional.of(new PlayerSlot(ContainerType.CURIO, val, Util.NIL_UUID));
+			}
+		}
+		if (menu.containerId == wid && menu instanceof CuriosListMenu cont) {
+			Slot s = cont.getSlot(index);
+			if (s instanceof CurioSlot curioSlot) {
+				int slotIndex = getSlotIndexInContainer(cont.inventory.player, curioSlot.getIdentifier());
+				if (slotIndex < 0) {
+					return Optional.empty();
+				}
+				int val = slotIndex + curioSlot.getSlotIndex();
+				return Optional.of(new PlayerSlot(ContainerType.CURIO_TAB, val, Util.NIL_UUID));
 			}
 		}
 		return Optional.empty();

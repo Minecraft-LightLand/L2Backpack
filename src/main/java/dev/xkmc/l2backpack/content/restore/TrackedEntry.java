@@ -9,6 +9,7 @@ import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2backpack.network.restore.SetScreenToClient;
+import dev.xkmc.l2library.base.tabs.curios.CuriosScreenCompat;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,6 +43,9 @@ public record TrackedEntry(ContainerType type, UUID id, int slot, String title) 
 			return LayerPopType.CLEAR;
 		} else if (type == ContainerType.CURIO) {
 			return CuriosCompat.openCurio(player) ? LayerPopType.CLEAR : LayerPopType.FAIL;
+		} else if (type == ContainerType.CURIO_TAB) {
+			CuriosScreenCompat.openScreen(player);
+			return LayerPopType.CLEAR;
 		} else if (type == ContainerType.ENDER) {
 			if (comp == null) comp = Component.translatable("container.enderchest");
 			NetworkHooks.openScreen(player, new SimpleMenuProvider((wid, inv, pl) ->

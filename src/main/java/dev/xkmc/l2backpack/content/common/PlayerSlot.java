@@ -33,7 +33,6 @@ public record PlayerSlot(ContainerType type, int slot, UUID uuid) {
 			return new PlayerSlot(ContainerType.DIMENSION, cont.getColor() * 27 + index - 36, cont.getOwner());
 		}
 		return CuriosCompat.getPlayerSlot(slot, index, wid, menu)
-				.map(e -> new PlayerSlot(ContainerType.CURIO, e, Util.NIL_UUID))
 				.orElse(null);
 	}
 

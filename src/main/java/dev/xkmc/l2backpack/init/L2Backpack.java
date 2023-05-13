@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.compat.GolemCompat;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
+import dev.xkmc.l2backpack.events.quickaccess.DefaultQuickAccessActions;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2backpack.init.data.AdvGen;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
@@ -39,6 +40,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -97,6 +99,8 @@ public class L2Backpack {
 		bus.addListener(EventPriority.LOWEST, L2Backpack::gatherData);
 		bus.addListener(L2Backpack::registerCaps);
 		bus.addListener(L2Backpack::sendMessage);
+		bus.addListener(L2Backpack::commonSetup);
+
 	}
 
 	public L2Backpack() {
@@ -106,6 +110,10 @@ public class L2Backpack {
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> L2BackpackClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
 		registerRegistrates(bus);
 		registerForgeEvents();
+	}
+
+	public static void commonSetup(FMLCommonSetupEvent event) {
+		event.enqueueWork(DefaultQuickAccessActions::register);
 	}
 
 	public static void gatherData(GatherDataEvent event) {

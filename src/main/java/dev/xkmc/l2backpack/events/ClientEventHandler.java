@@ -5,11 +5,14 @@ import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
+import dev.xkmc.l2backpack.events.quickaccess.QuickAccessClickHandler;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.Keys;
+import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.network.SlotClickToServer;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
 import dev.xkmc.l2library.util.Proxy;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -20,6 +23,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
 
@@ -56,6 +60,13 @@ public class ClientEventHandler {
 	public static void onScreenRightClick(ScreenEvent.MouseButtonPressed.Pre event) {
 		if (onPress(event)) {
 			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onTooltipEvent(ItemTooltipEvent event) {
+		if (QuickAccessClickHandler.isAllowed(event.getItemStack())) {
+			event.getToolTip().add(LangData.Info.QUICK_ACCESS.get().withStyle(ChatFormatting.GRAY));
 		}
 	}
 
@@ -109,7 +120,8 @@ public class ClientEventHandler {
 			if ((inv >= 0 || ind >= 0) &&
 					(slot.getItem().getItem() instanceof EnderBackpackItem ||
 							slot.getItem().getItem() instanceof WorldChestItem ||
-							slot.getItem().getItem() instanceof BaseBagItem)) {
+							slot.getItem().getItem() instanceof BaseBagItem ||
+							QuickAccessClickHandler.isAllowed(slot.getItem()))) {
 				L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
 				return true;
 			}

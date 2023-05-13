@@ -156,5 +156,6 @@
   "l2backpack.tooltip.load": "Shift + left click chests or other storage blocks to load items from the block",
   "l2backpack.tooltip.owner": "Owner: %s",
   "l2backpack.tooltip.place": "Shift + right click to place it as a block",
+  "l2backpack.tooltip.quick_access": "Right click in GUI to open",
   "l2backpack.tooltip.shift": "Press [shift] to show usage"
 }

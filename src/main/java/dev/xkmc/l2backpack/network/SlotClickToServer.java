@@ -8,6 +8,7 @@ import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.ClientEventHandler;
+import dev.xkmc.l2backpack.events.quickaccess.QuickAccessClickHandler;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
@@ -64,6 +65,10 @@ public class SlotClickToServer extends SerialPacketBase {
 			playerSlot = PlayerSlot.ofOtherInventory(slot, index, wid, menu);
 			stack = menu.getSlot(index).getItem();
 			container = menu.getSlot(index).container;
+		}
+		if (QuickAccessClickHandler.isAllowed(stack) && stack.getCount() == 1) {
+			QuickAccessClickHandler.handle(player, stack);
+			return;
 		}
 		boolean others = false;
 		if (playerSlot != null && stack.getItem() instanceof BaseBagItem bag) {

@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "l2backpack:multiswitch_craft",
   "category": "misc",
   "key": {
     "1": {

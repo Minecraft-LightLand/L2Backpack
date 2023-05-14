@@ -113,7 +113,7 @@ public class BackpackItems {
 			MULTI_SWITCH = REGISTRATE.item("combined_swap", MultiSwitch::new).tag(curios_tag).defaultLang().register();
 			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).tag(curios_tag).defaultLang().register();
 
-			DRAWER = REGISTRATE.item("drawer", DrawerItem::new)
+			DRAWER = REGISTRATE.item("drawer", p -> new DrawerItem(BackpackBlocks.DRAWER.get(), p))
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 							new ModelFile.UncheckedModelFile("builtin/entity")))
 					.defaultLang().register();

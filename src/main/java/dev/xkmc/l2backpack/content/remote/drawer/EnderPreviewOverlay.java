@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.remote.drawer;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.xkmc.l2backpack.content.drawer.DrawerBlockEntity;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2library.util.Proxy;
@@ -11,6 +12,8 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
@@ -25,10 +28,18 @@ public class EnderPreviewOverlay implements IGuiOverlay {
 		if (ray.getType() == HitResult.Type.BLOCK) {
 			BlockPos pos = ray.getBlockPos();
 			BlockEntity entity = player.level.getBlockEntity(pos);
+			int count = 0;
+			Item item = Items.AIR;
 			if (entity instanceof EnderDrawerBlockEntity drawer) {
-				int count = TooltipUpdateEvents.getCount(drawer.owner_id, drawer.item);
+				count = TooltipUpdateEvents.getCount(drawer.owner_id, drawer.item);
+				item = drawer.getItem();
+			} else if (entity instanceof DrawerBlockEntity drawer) {
+				count = drawer.handler.count;
+				item = drawer.getItem();
+			}
+			if (item != Items.AIR) {
 				gui.setupOverlayRenderState(true, false);
-				Component text = LangData.IDS.DRAWER_CONTENT.get(drawer.item.getDescription(), count < 0 ? "???" : count);
+				Component text = LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count < 0 ? "???" : count);
 				renderText(gui, poseStack, screenWidth / 2f, screenHeight / 2f + 16, text);
 			}
 		}

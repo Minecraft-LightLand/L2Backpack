@@ -1,10 +1,12 @@
 package dev.xkmc.l2backpack.init.registrate;
 
+import dev.xkmc.l2backpack.content.drawer.DrawerBlock;
+import dev.xkmc.l2backpack.content.drawer.DrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.common.EnderParticleBlock;
 import dev.xkmc.l2backpack.content.remote.drawer.AlternateBlockForm;
+import dev.xkmc.l2backpack.content.remote.drawer.DrawerRenderer;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlock;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
-import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerRenderer;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestBlock;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestBlockEntity;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -34,6 +36,9 @@ public class BackpackBlocks {
 	public static final BlockEntry<DelegateBlock> ENDER_DRAWER;
 	public static final BlockEntityEntry<EnderDrawerBlockEntity> TE_ENDER_DRAWER;
 
+	public static final BlockEntry<DelegateBlock> DRAWER;
+	public static final BlockEntityEntry<DrawerBlockEntity> TE_DRAWER;
+
 	static {
 		WORLD_CHEST = REGISTRATE.block("dimensional_storage", p -> DelegateBlock.newBaseBlock(DelegateBlockProperties.copy(Blocks.ENDER_CHEST),
 						BlockProxy.HORIZONTAL, WorldChestBlock.INSTANCE, EnderParticleBlock.INSTANCE,
@@ -55,7 +60,7 @@ public class BackpackBlocks {
 						EnderDrawerBlock.TILE_ENTITY_SUPPLIER_BUILDER, AlternateBlockForm.INSTANCE))
 				.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), state -> {
 					String alt = state.getValue(AlternateBlockForm.ALT) ? "drawer" : "ender";
-					return pvd.models().withExistingParent(ctx.getName() + "_" + alt, new ResourceLocation(L2Backpack.MODID, "block/drawer"))
+					return pvd.models().withExistingParent(ctx.getName() + "_" + alt, new ResourceLocation(L2Backpack.MODID, "block/drawer_base"))
 							.texture("0", "block/drawer/" + alt + "_bottom")
 							.texture("1", "block/drawer/" + alt + "_front")
 							.texture("2", "block/drawer/" + alt + "_side")
@@ -67,7 +72,25 @@ public class BackpackBlocks {
 				.defaultLang().register();
 
 		TE_ENDER_DRAWER = REGISTRATE.blockEntity("ender_drawer", EnderDrawerBlockEntity::new)
-				.validBlock(ENDER_DRAWER).renderer(() -> EnderDrawerRenderer::new).register();
+				.validBlock(ENDER_DRAWER).renderer(() -> DrawerRenderer::new).register();
+
+		DRAWER = REGISTRATE.block("drawer", p -> DelegateBlock.newBaseBlock(
+						DelegateBlockProperties.copy(Blocks.GLASS).make(e -> e.requiresCorrectToolForDrops()
+								.lightLevel(state -> 15)),
+						BlockProxy.HORIZONTAL, DrawerBlock.INSTANCE, DrawerBlock.BLOCK_ENTITY))
+				.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), state -> pvd.models().withExistingParent(ctx.getName(),
+								new ResourceLocation(L2Backpack.MODID, "block/drawer_base"))
+						.texture("0", "block/drawer/drawer_bottom")
+						.texture("1", "block/drawer/drawer_front")
+						.texture("2", "block/drawer/drawer_side")
+						.texture("3", "block/drawer/drawer_top")
+						.renderType("cutout")))
+				.loot((table, block) -> table.dropOther(block, Blocks.GLASS))
+				.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+				.defaultLang().register();
+
+		TE_DRAWER = REGISTRATE.blockEntity("drawer", DrawerBlockEntity::new)
+				.validBlock(DRAWER).renderer(() -> DrawerRenderer::new).register();
 
 	}
 

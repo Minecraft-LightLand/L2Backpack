@@ -68,6 +68,7 @@
   "advancements.l2backpack.advancements.backpacks.upgrade_max.description": "Upgrade a Backpack to max level",
   "advancements.l2backpack.advancements.backpacks.upgrade_max.title": "Maximize the Space",
   "block.l2backpack.dimensional_storage": "Dimensional Storage",
+  "block.l2backpack.drawer": "Drawer",
   "block.l2backpack.ender_drawer": "Ender Drawer",
   "container.l2backpack.armor_bag": "Armor Bag",
   "container.l2backpack.arrow_bag": "Arrow Bag",

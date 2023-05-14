@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "l2backpack:block/drawer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "l2backpack:block/drawer"
+    },
+    "facing=south": {
+      "model": "l2backpack:block/drawer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "l2backpack:block/drawer",
+      "y": 270
+    }
+  }
+}

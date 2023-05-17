@@ -1,10 +1,10 @@
 package dev.xkmc.l2backpack.content.quickswap.merged;
 
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
-import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
+import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,7 +22,7 @@ public class EnderSwitch extends MultiSwitch implements BackpackModelItem {
 	}
 
 	@Override
-	public void open(ServerPlayer player, PlayerSlot slot, ItemStack stack) {
+	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
 		new SimpleMenuPvd(player, slot, stack, (a, b, c, d, e) -> new EnderSwitchContainer(a, b, player.getEnderChestInventory(), c, d, e)).open();
 	}
 

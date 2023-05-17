@@ -1,9 +1,9 @@
 package dev.xkmc.l2backpack.content.quickswap.scabbard;
 
-import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.quickswap.common.*;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
+import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -30,7 +30,7 @@ public class Scabbard extends SingleSwapItem implements ItemOnBackItem {
 	}
 
 	@Override
-	public void open(ServerPlayer player, PlayerSlot slot, ItemStack stack) {
+	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
 		new SimpleMenuPvd(player, slot, stack, ScabbardContainer::new).open();
 	}
 

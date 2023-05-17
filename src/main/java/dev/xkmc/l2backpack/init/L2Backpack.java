@@ -4,7 +4,6 @@ import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.compat.GolemCompat;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
-import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2backpack.init.data.AdvGen;
@@ -20,10 +19,6 @@ import dev.xkmc.l2backpack.network.drawer.CreativeSetCarryToClient;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
 import dev.xkmc.l2backpack.network.drawer.RequestTooltipUpdateEvent;
 import dev.xkmc.l2backpack.network.drawer.RespondTooltipUpdateEvent;
-import dev.xkmc.l2backpack.network.restore.AddTrackedToClient;
-import dev.xkmc.l2backpack.network.restore.PopLayerToClient;
-import dev.xkmc.l2backpack.network.restore.RestoreMenuToServer;
-import dev.xkmc.l2backpack.network.restore.SetScreenToClient;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.init.events.select.SelectionRegistry;
 import dev.xkmc.l2library.serial.config.PacketHandler;
@@ -39,6 +34,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -61,11 +57,7 @@ public class L2Backpack {
 			e -> e.create(DrawerInteractToServer.class, PLAY_TO_SERVER),
 			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
 			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),
-			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT),
-			e -> e.create(RestoreMenuToServer.class, PLAY_TO_SERVER),
-			e -> e.create(AddTrackedToClient.class, PLAY_TO_CLIENT),
-			e -> e.create(SetScreenToClient.class, PLAY_TO_CLIENT),
-			e -> e.create(PopLayerToClient.class, PLAY_TO_CLIENT)
+			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT)
 	);
 
 	private static void registerRegistrates(IEventBus bus) {
@@ -75,7 +67,6 @@ public class L2Backpack {
 		BackpackMenu.register();
 		BackpackMisc.register(bus);
 		Handlers.register();
-		ScreenTracker.register();
 		BackpackTriggers.register();
 		if (ModList.get().isLoaded("modulargolems")) GolemCompat.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
@@ -107,6 +98,11 @@ public class L2Backpack {
 		registerRegistrates(bus);
 		registerForgeEvents();
 		SelectionRegistry.register(-1000, BackpackSel.INSTANCE);
+	}
+
+	public static void commonSetup(FMLCommonSetupEvent event) {
+		event.enqueueWork(() ->
+				BackpackMisc.commonSetup());
 	}
 
 	public static void gatherData(GatherDataEvent event) {

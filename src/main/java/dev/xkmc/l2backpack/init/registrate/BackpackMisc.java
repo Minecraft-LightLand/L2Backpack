@@ -6,13 +6,27 @@ import dev.xkmc.l2backpack.content.recipe.BackpackDyeRecipe;
 import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipe;
 import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipeOld;
 import dev.xkmc.l2backpack.content.recipe.MultiSwitchCraftRecipe;
+import dev.xkmc.l2backpack.content.restore.DimensionItemSource;
+import dev.xkmc.l2backpack.content.restore.DimensionSourceData;
+import dev.xkmc.l2backpack.content.restore.DimensionTrace;
+import dev.xkmc.l2backpack.content.restore.DimensionTraceData;
 import dev.xkmc.l2backpack.init.loot.BackpackLootModifier;
+import dev.xkmc.l2library.init.L2Library;
+import dev.xkmc.l2library.init.events.screen.base.ScreenTrackerRegistry;
+import dev.xkmc.l2library.init.events.screen.source.MenuSourceRegistry;
+import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
+import dev.xkmc.l2library.init.events.screen.source.SimpleSlotData;
+import dev.xkmc.l2library.init.events.screen.track.MenuTraceRegistry;
+import dev.xkmc.l2library.init.events.screen.track.NoData;
+import dev.xkmc.l2library.init.events.screen.track.TrackedEntry;
 import dev.xkmc.l2library.serial.recipe.AbstractOldSmithingRecipe;
 import dev.xkmc.l2library.serial.recipe.AbstractShapedRecipe;
 import dev.xkmc.l2library.serial.recipe.AbstractShapelessRecipe;
 import dev.xkmc.l2library.serial.recipe.AbstractSmithingRecipe;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Optional;
 
 import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
@@ -30,7 +44,28 @@ public class BackpackMisc {
 
 	public static final RegistryEntry<Codec<BackpackLootModifier>> SER = REGISTRATE.simple("main", ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> BackpackLootModifier.CODEC);
 
+	public static final RegistryEntry<DimensionItemSource> IS_DIM = L2Library.REGISTRATE.simple("dimension", ScreenTrackerRegistry.ITEM_SOURCE.key(), DimensionItemSource::new);
+	public static final RegistryEntry<DimensionTrace> TE_DIM = L2Library.REGISTRATE.simple("dimension", ScreenTrackerRegistry.TRACKED_ENTRY_TYPE.key(), DimensionTrace::new);
+
 	public static void register(IEventBus bus) {
 	}
 
+	public static void commonSetup() {
+
+		MenuTraceRegistry.register(BackpackMenu.MT_ES.get(), (menu, comp) ->
+				Optional.of(TrackedEntry.of(ScreenTrackerRegistry.TE_ENDER.get(), NoData.DATA, comp)));
+
+		MenuTraceRegistry.register(BackpackMenu.MT_WORLD_CHEST.get(), (menu, comp) ->
+				Optional.of(TrackedEntry.of(TE_DIM.get(),
+						new DimensionTraceData(menu.getColor(), menu.getOwner()), comp)));
+
+		MenuSourceRegistry.register(BackpackMenu.MT_ES.get(), (menu, slot, index, wid) ->
+				index >= 36 && index < 63 ?
+						Optional.of(new PlayerSlot<>(ScreenTrackerRegistry.IS_ENDER.get(), new SimpleSlotData(index - 36))) :
+						Optional.empty());
+
+		MenuSourceRegistry.register(BackpackMenu.MT_WORLD_CHEST.get(), (menu, slot, index, wid) ->
+				Optional.of(new PlayerSlot<>(IS_DIM.get(),
+						new DimensionSourceData(menu.getColor(), index - 36, menu.getOwner()))));
+	}
 }

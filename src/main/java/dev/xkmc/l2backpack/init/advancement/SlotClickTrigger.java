@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.init.advancement;
 
-import dev.xkmc.l2backpack.content.common.ContainerType;
+import dev.xkmc.l2library.init.events.screen.source.ItemSource;
 import dev.xkmc.l2library.serial.advancements.BaseCriterion;
 import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
 import dev.xkmc.l2serial.serialization.SerialClass;
@@ -22,7 +22,7 @@ public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotCl
 		return ans;
 	}
 
-	public static Ins fromBackpack(ContainerType type) {
+	public static Ins fromBackpack(ItemSource<?> type) {
 		Ins ans = fromGUI();
 		ans.origin = type;
 		return ans;
@@ -32,7 +32,7 @@ public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotCl
 		super(id, Ins::new, Ins.class);
 	}
 
-	public void trigger(ServerPlayer player, ContainerType type, boolean keybind) {
+	public void trigger(ServerPlayer player, ItemSource<?> type, boolean keybind) {
 		this.trigger(player, e -> (e.origin == null || e.origin == type) && e.keybind == keybind);
 	}
 
@@ -41,7 +41,7 @@ public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotCl
 
 		@Nullable
 		@SerialClass.SerialField
-		private ContainerType origin;
+		private ItemSource<?> origin;
 
 		@SerialClass.SerialField
 		private boolean keybind = false;

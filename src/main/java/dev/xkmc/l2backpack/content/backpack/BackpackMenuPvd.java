@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.backpack;
 
-import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
+import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -18,10 +18,10 @@ import java.util.UUID;
 public final class BackpackMenuPvd implements MenuProvider {
 
 	private final ServerPlayer player;
-	private final PlayerSlot slot;
+	private final PlayerSlot<?> slot;
 	private final ItemStack stack;
 
-	public BackpackMenuPvd(ServerPlayer player, PlayerSlot slot, ItemStack stack) {
+	public BackpackMenuPvd(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
 		this.player = player;
 		this.slot = slot;
 		this.stack = stack;

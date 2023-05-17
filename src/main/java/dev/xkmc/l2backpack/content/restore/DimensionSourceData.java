@@ -1,0 +1,36 @@
+package dev.xkmc.l2backpack.content.restore;
+
+import dev.xkmc.l2library.init.events.screen.source.ItemSourceData;
+import dev.xkmc.l2serial.serialization.SerialClass;
+
+import java.util.UUID;
+
+@SerialClass
+public final class DimensionSourceData extends ItemSourceData<DimensionSourceData> {
+
+	@SerialClass.SerialField
+	private final int color;
+	@SerialClass.SerialField
+	private final int slot;
+	@SerialClass.SerialField
+	private final UUID uuid;
+
+	public DimensionSourceData(int color, int slot, UUID uuid) {
+		this.color = color;
+		this.slot = slot;
+		this.uuid = uuid;
+	}
+
+	public int color() {
+		return color;
+	}
+
+	public int slot() {
+		return slot;
+	}
+
+	public UUID uuid() {
+		return uuid;
+	}
+
+}

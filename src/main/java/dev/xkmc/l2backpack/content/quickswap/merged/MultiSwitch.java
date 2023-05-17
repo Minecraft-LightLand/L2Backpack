@@ -2,7 +2,6 @@ package dev.xkmc.l2backpack.content.quickswap.merged;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
-import dev.xkmc.l2backpack.content.common.PlayerSlot;
 import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSwap;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
@@ -12,6 +11,7 @@ import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
+import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -48,7 +48,7 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBa
 	}
 
 	@Override
-	public void open(ServerPlayer player, PlayerSlot slot, ItemStack stack) {
+	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
 		new SimpleMenuPvd(player, slot, stack, MultiSwitchContainer::new).open();
 	}
 

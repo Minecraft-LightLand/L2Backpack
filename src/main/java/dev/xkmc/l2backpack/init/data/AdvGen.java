@@ -2,12 +2,14 @@ package dev.xkmc.l2backpack.init.data;
 
 import com.tterrag.registrate.providers.RegistrateAdvancementProvider;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
-import dev.xkmc.l2backpack.content.common.ContainerType;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.advancement.*;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
+import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
+import dev.xkmc.l2library.init.events.screen.base.ScreenTrackerRegistry;
+import dev.xkmc.l2library.init.events.screen.triggers.ExitMenuTrigger;
 import dev.xkmc.l2library.serial.advancements.AdvancementGenerator;
 import dev.xkmc.l2library.serial.advancements.CriterionBuilder;
 import net.minecraft.advancements.FrameType;
@@ -48,7 +50,7 @@ public class AdvGen {
 						CriterionBuilder.item(BackpackItems.ENDER_BACKPACK.get()),
 						"Portable Ender Chest", "Obtain an Ender Backpack")
 				.create("safe_storage", backpack(DyeColor.PURPLE),
-						CriterionBuilder.one(SlotClickTrigger.fromBackpack(ContainerType.ENDER)),
+						CriterionBuilder.one(SlotClickTrigger.fromBackpack(ScreenTrackerRegistry.IS_ENDER.get())),
 						"GameRule KeepInventory True", "Open a Backpack in Ender Backpack")
 				.create("color", backpack(DyeColor.GREEN),
 						CriterionBuilder.one(InventoryChangeTrigger.TriggerInstance.hasItems(
@@ -84,7 +86,7 @@ public class AdvGen {
 						CriterionBuilder.item(TagGen.DIMENSIONAL_STORAGES),
 						"Another Ender Chest?", "Obtain a Dimensional Backpack")
 				.create("dimension_recursion", dimension(DyeColor.YELLOW),
-						CriterionBuilder.one(SlotClickTrigger.fromBackpack(ContainerType.DIMENSION)),
+						CriterionBuilder.one(SlotClickTrigger.fromBackpack(BackpackMisc.IS_DIM.get())),
 						"Infinite Recursion", "Open a Backpack in Dimensional Backpack").type(FrameType.GOAL)
 				.create("dimension_hopper", dimension(DyeColor.LIGHT_GRAY),
 						CriterionBuilder.one(RemoteHopperTrigger.ins()),

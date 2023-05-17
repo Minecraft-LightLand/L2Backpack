@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
+import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -118,7 +119,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 		return stack.getItem().canFitInsideContainerItems();
 	}
 
-	public abstract void open(ServerPlayer player, PlayerSlot slot, ItemStack stack);
+	public abstract void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack);
 
 	@Override
 	public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {

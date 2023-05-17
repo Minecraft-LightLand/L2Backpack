@@ -5,7 +5,7 @@
       "conditions": {
         "all": true
       },
-      "trigger": "l2backpack:exit_menu"
+      "trigger": "l2library:exit_menu"
     }
   },
   "display": {

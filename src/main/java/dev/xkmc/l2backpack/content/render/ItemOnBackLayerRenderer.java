@@ -42,7 +42,10 @@ public class ItemOnBackLayerRenderer<T extends LivingEntity, M extends HumanoidM
 		if (stack.getItem() instanceof ItemOnBackItem backpack) {
 			item = backpack;
 		} else if (entity instanceof Player player) {
-			stack = CuriosCompat.getSlot(player, e -> e.getItem() instanceof ItemOnBackItem);
+			var opt = CuriosCompat.getSlot(player, e -> e.getItem() instanceof ItemOnBackItem);
+			if (opt.isPresent()) {
+				stack = opt.get().getFirst();
+			}
 			if (!stack.isEmpty())
 				item = (ItemOnBackItem) stack.getItem();
 		}

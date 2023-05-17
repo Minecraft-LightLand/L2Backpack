@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.common;
 
-import dev.xkmc.l2backpack.content.common.PlayerSlot;
+import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -18,16 +18,16 @@ public final class SimpleMenuPvd implements MenuProvider {
 
 	public interface BagMenuFactory {
 
-		AbstractContainerMenu create(int id, Inventory inventory, PlayerSlot slot, UUID uuid, Component title);
+		AbstractContainerMenu create(int id, Inventory inventory, PlayerSlot<?> slot, UUID uuid, Component title);
 
 	}
 
 	private final ServerPlayer player;
-	private final PlayerSlot slot;
+	private final PlayerSlot<?> slot;
 	private final ItemStack stack;
 	private final BagMenuFactory factory;
 
-	public SimpleMenuPvd(ServerPlayer player, PlayerSlot slot, ItemStack stack, BagMenuFactory factory) {
+	public SimpleMenuPvd(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack, BagMenuFactory factory) {
 		this.player = player;
 		this.slot = slot;
 		this.stack = stack;

@@ -67,20 +67,18 @@ public class BackpackSlotClickListener extends SlotClickHandler {
 			container = menu.getSlot(index).container;
 		}
 		boolean others = false;
-		if (playerSlot != null && stack.getItem() instanceof BaseBagItem bag) {
-			if (wid != -1 || slot != -1 || index != -1)
+		if (playerSlot != null) {
+			if (wid != -1 || slot != -1 || index != -1) {
 				ScreenTracker.onServerOpen(player, menu, playerSlot);
+			}
+		}
+		if (playerSlot != null && stack.getItem() instanceof BaseBagItem bag) {
 			bag.open(player, playerSlot, stack);
 		} else if (stack.getItem() instanceof EnderBackpackItem) {
 			NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
 					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getHoverName()));
 		} else if (stack.getItem() instanceof WorldChestItem chest) {
 			others = WorldChestItem.getOwner(stack).map(e -> !e.equals(player.getUUID())).orElse(false);
-			if (playerSlot != null) {
-				if (wid != -1 || slot != -1 || index != -1) {
-					ScreenTracker.onServerOpen(player, menu, playerSlot);
-				}
-			}
 			new WorldChestMenuPvd(player, stack, chest).open();
 			if (container != null) {
 				container.setChanged();

@@ -81,7 +81,6 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 		if (!player.level.isClientSide) {
 			MAP.computeIfAbsent(uuid, e -> new ConcurrentLinkedQueue<>()).remove(this);
 			save();
-			ScreenTracker.onServerClose(player, containerId);
 		}
 		super.removed(player);
 	}

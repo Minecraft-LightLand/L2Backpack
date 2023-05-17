@@ -9,10 +9,14 @@ import java.util.UUID;
 public final class DimensionTraceData extends TrackedEntryData<DimensionTraceData> {
 
 	@SerialClass.SerialField
-	private final int color;
+	private int color;
 
 	@SerialClass.SerialField
-	private final UUID uuid;
+	private UUID uuid;
+
+	@Deprecated
+	public DimensionTraceData() {
+	}
 
 	public DimensionTraceData(int color, UUID uuid) {
 		this.color = color;

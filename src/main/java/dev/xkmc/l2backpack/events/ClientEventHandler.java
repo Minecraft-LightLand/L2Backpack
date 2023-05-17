@@ -13,27 +13,26 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
 
+@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = L2Backpack.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientEventHandler {
 
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void keyEvent(InputEvent.Key event) {
 		if (Minecraft.getInstance().screen == null && Proxy.getClientPlayer() != null && Keys.OPEN.map.isDown()) {
 			if (BackpackSlotClickListener.canOpen(Proxy.getClientPlayer().getItemBySlot(EquipmentSlot.CHEST)) ||
-					!CuriosCompat.getSlot(Proxy.getClientPlayer(), BackpackSlotClickListener::canOpen).isEmpty())
+					CuriosCompat.getSlot(Proxy.getClientPlayer(), BackpackSlotClickListener::canOpen).isPresent())
 				L2Backpack.SLOT_CLICK.keyBind();
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onScreenLeftClick(ScreenEvent.MouseButtonReleased.Pre event) {
 		if (onRelease(event)) {
@@ -41,7 +40,6 @@ public class ClientEventHandler {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onScreenRightClick(ScreenEvent.MouseButtonPressed.Pre event) {
 		if (onPress(event)) {
@@ -49,7 +47,6 @@ public class ClientEventHandler {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static boolean onRelease(ScreenEvent.MouseButtonReleased.Pre event) {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
@@ -65,7 +62,6 @@ public class ClientEventHandler {
 		return false;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static boolean onPress(ScreenEvent.MouseButtonPressed.Pre event) {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
@@ -84,7 +80,6 @@ public class ClientEventHandler {
 		return false;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static boolean insertItem(ScreenEvent event, AbstractContainerScreen<?> cont, @Nullable Slot slot, boolean perform) {
 		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
@@ -108,7 +103,6 @@ public class ClientEventHandler {
 		return false;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static boolean extractItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
 		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
@@ -122,7 +116,6 @@ public class ClientEventHandler {
 		return false;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static void sendDrawerPacket(DrawerInteractToServer.Type type, AbstractContainerScreen<?> cont, Slot slot) {
 		int index = cont.getMenu().containerId == 0 ? slot.getSlotIndex() : slot.index;
 		L2Backpack.HANDLER.toServer(new DrawerInteractToServer(type, cont.getMenu().containerId, index, cont.getMenu().getCarried()));

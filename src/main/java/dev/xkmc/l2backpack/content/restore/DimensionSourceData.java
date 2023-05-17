@@ -9,11 +9,16 @@ import java.util.UUID;
 public final class DimensionSourceData extends ItemSourceData<DimensionSourceData> {
 
 	@SerialClass.SerialField
-	private final int color;
+	private int color;
 	@SerialClass.SerialField
-	private final int slot;
+	private int slot;
 	@SerialClass.SerialField
-	private final UUID uuid;
+	private UUID uuid;
+
+	@Deprecated
+	public DimensionSourceData() {
+
+	}
 
 	public DimensionSourceData(int color, int slot, UUID uuid) {
 		this.color = color;

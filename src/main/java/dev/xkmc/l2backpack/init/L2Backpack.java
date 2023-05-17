@@ -4,7 +4,8 @@ import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.compat.GolemCompat;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
-import dev.xkmc.l2backpack.events.*;
+import dev.xkmc.l2backpack.events.BackpackSel;
+import dev.xkmc.l2backpack.events.BackpackSlotClickListener;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2backpack.init.data.AdvGen;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
@@ -24,14 +25,11 @@ import dev.xkmc.l2library.init.events.select.SelectionRegistry;
 import dev.xkmc.l2library.serial.config.PacketHandler;
 import dev.xkmc.l2serial.serialization.custom_handler.Handlers;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -44,7 +42,8 @@ import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
 import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("l2backpack")
+@Mod(L2Backpack.MODID)
+@Mod.EventBusSubscriber(modid = L2Backpack.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class L2Backpack {
 
 	public static final String MODID = "l2backpack";
@@ -68,53 +67,38 @@ public class L2Backpack {
 		BackpackMisc.register(bus);
 		Handlers.register();
 		BackpackTriggers.register();
+		BackpackConfig.init();
 		if (ModList.get().isLoaded("modulargolems")) GolemCompat.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 		REGISTRATE.addDataGenerator(ProviderType.LOOT, LootGen::genLoot);
 	}
 
-	private static void registerForgeEvents() {
-		BackpackConfig.init();
-		MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
-		MinecraftForge.EVENT_BUS.register(ArrowBagEvents.class);
-		MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(TooltipUpdateEvents.class);
-		MinecraftForge.EVENT_BUS.register(LoadContainerEvents.class);
-
-	}
-
-	private static void registerModBusEvents(IEventBus bus) {
-		bus.addListener(EventPriority.LOWEST, L2Backpack::gatherData);
-		bus.addListener(L2Backpack::registerCaps);
-		bus.addListener(L2Backpack::sendMessage);
-	}
-
 	public L2Backpack() {
 		FMLJavaModLoadingContext ctx = FMLJavaModLoadingContext.get();
 		IEventBus bus = ctx.getModEventBus();
-		registerModBusEvents(bus);
-		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> L2BackpackClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
 		registerRegistrates(bus);
-		registerForgeEvents();
 		SelectionRegistry.register(-1000, BackpackSel.INSTANCE);
 	}
 
+	@SubscribeEvent
 	public static void commonSetup(FMLCommonSetupEvent event) {
-		event.enqueueWork(() ->
-				BackpackMisc.commonSetup());
+		event.enqueueWork(BackpackMisc::commonSetup);
 	}
 
+	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		LangData.addTranslations(REGISTRATE::addRawLang);
 		//TODO event.getGenerator().addProvider(event.includeServer(), new BackpackGLMProvider(event.getGenerator().getPackOutput()));
 	}
 
+	@SubscribeEvent
 	public static void registerCaps(RegisterCapabilitiesEvent event) {
 		event.register(WorldStorage.class);
 	}
 
-	private static void sendMessage(final InterModEnqueueEvent event) {
+	@SubscribeEvent
+	public static void sendMessage(final InterModEnqueueEvent event) {
 		CuriosCompat.init();
 	}
 

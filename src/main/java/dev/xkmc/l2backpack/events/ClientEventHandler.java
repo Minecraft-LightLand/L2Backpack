@@ -117,11 +117,12 @@ public class ClientEventHandler {
 			int inv = b1 ? slot.getSlotIndex() : -1;
 			int ind = inv == -1 ? slot.index : -1;
 			int wid = cont.getMenu().containerId;
+			ItemStack stack = slot.getItem();
 			if ((inv >= 0 || ind >= 0) &&
-					(slot.getItem().getItem() instanceof EnderBackpackItem ||
-							slot.getItem().getItem() instanceof WorldChestItem ||
-							slot.getItem().getItem() instanceof BaseBagItem ||
-							QuickAccessClickHandler.isAllowed(slot.getItem()))) {
+					(stack.getItem() instanceof EnderBackpackItem ||
+							stack.getItem() instanceof WorldChestItem ||
+							stack.getItem() instanceof BaseBagItem ||
+							QuickAccessClickHandler.isAllowed(stack) && stack.getCount() == 1)) {
 				L2Backpack.HANDLER.toServer(new SlotClickToServer(ind, inv, wid));
 				return true;
 			}

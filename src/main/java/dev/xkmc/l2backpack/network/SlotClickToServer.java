@@ -66,7 +66,7 @@ public class SlotClickToServer extends SerialPacketBase {
 			stack = menu.getSlot(index).getItem();
 			container = menu.getSlot(index).container;
 		}
-		if (QuickAccessClickHandler.isAllowed(stack) && stack.getCount() == 1) {
+		if (QuickAccessClickHandler.isAllowed(stack)) {
 			QuickAccessClickHandler.handle(player, stack);
 			return;
 		}

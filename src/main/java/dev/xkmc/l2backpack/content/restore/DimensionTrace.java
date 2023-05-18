@@ -2,13 +2,11 @@ package dev.xkmc.l2backpack.content.restore;
 
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.remote.worldchest.SimpleStorageMenuPvd;
-import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestContainer;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
 import dev.xkmc.l2library.init.events.screen.base.LayerPopType;
 import dev.xkmc.l2library.init.events.screen.track.TrackedEntryType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -29,10 +27,8 @@ public class DimensionTrace extends TrackedEntryType<DimensionTraceData> {
 	}
 
 	@Override
-	public boolean match(AbstractContainerMenu current, DimensionTraceData data) {
-		return current instanceof WorldChestContainer chest &&
-				chest.getColor() == data.color() &&
-				chest.getOwner().equals(data.uuid());
+	public boolean match(DimensionTraceData self, DimensionTraceData other) {
+		return self.color() == other.color() && self.uuid().equals(other.uuid());
 	}
 
 }

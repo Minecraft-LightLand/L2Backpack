@@ -1,7 +1,6 @@
 package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2library.base.menu.SpriteManager;
-import dev.xkmc.l2library.init.events.screen.base.ScreenTracker;
 import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +29,7 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 	@ServerOnly
 	private static final ConcurrentHashMap<UUID, ConcurrentLinkedQueue<BaseBagContainer<?>>> MAP = new ConcurrentHashMap<>();
 
-	protected final PlayerSlot<?> item_slot;
+	public final PlayerSlot<?> item_slot;
 	protected final UUID uuid;
 
 	public BaseBagContainer(MenuType<T> type, int windowId, Inventory inventory, SpriteManager manager,

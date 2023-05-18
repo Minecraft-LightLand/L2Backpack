@@ -69,7 +69,7 @@ public class BackpackSlotClickListener extends SlotClickHandler {
 		boolean others = false;
 		if (playerSlot != null) {
 			if (wid != -1 || slot != -1 || index != -1) {
-				ScreenTracker.onServerOpen(player, menu, playerSlot);
+				ScreenTracker.onServerOpen(player);
 			}
 		}
 		if (playerSlot != null && stack.getItem() instanceof BaseBagItem bag) {

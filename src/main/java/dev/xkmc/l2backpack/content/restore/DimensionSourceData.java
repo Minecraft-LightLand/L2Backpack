@@ -38,4 +38,8 @@ public final class DimensionSourceData extends ItemSourceData<DimensionSourceDat
 		return uuid;
 	}
 
+	@Override
+	public boolean canReplace(DimensionSourceData other) {
+		return color == other.color && slot == other.slot && uuid.equals(other.uuid);
+	}
 }

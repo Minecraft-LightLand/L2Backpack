@@ -26,9 +26,4 @@ public class DimensionTrace extends TrackedEntryType<DimensionTraceData> {
 		return LayerPopType.FAIL;
 	}
 
-	@Override
-	public boolean match(DimensionTraceData self, DimensionTraceData other) {
-		return self.color() == other.color() && self.uuid().equals(other.uuid());
-	}
-
 }

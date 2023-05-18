@@ -49,7 +49,8 @@ public class BackpackLootModifier extends LootModifier {
 	}
 
 	@Override
-	protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> list, LootContext context) {
+	protected @NotNull
+	ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> list, LootContext context) {
 		if (chance > context.getRandom().nextDouble()) {
 			ItemStack stack;
 			if (name.length() > 0) {

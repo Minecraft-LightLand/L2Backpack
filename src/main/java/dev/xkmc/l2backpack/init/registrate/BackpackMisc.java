@@ -61,9 +61,9 @@ public class BackpackMisc {
 				Optional.of(new PlayerSlot<>(IS_DIM.get(),
 						new DimensionSourceData(menu.getColor(), index - 36, menu.getOwner()))));
 
-		MenuTraceRegistry.register(BackpackMenu.MT_WORLD_CHEST.get(), (menu, comp) ->
+		MenuTraceRegistry.register(BackpackMenu.MT_WORLD_CHEST.get(), menu ->
 				Optional.of(TrackedEntry.of(TE_DIM.get(),
-						new DimensionTraceData(menu.getColor(), menu.getOwner()), comp)));
+						new DimensionTraceData(menu.getColor(), menu.getOwner()))));
 
 		addBag(BackpackMenu.MT_BACKPACK);
 		addBag(BackpackMenu.MT_ARMOR);
@@ -74,10 +74,10 @@ public class BackpackMisc {
 	}
 
 	private static <T extends BaseBagContainer<T>> void addBag(MenuEntry<T> type) {
-		MenuTraceRegistry.register(type.get(), (menu, comp) ->
+		MenuTraceRegistry.register(type.get(), menu ->
 				Optional.of(TrackedEntry.of(TE_BAG.get(),
 						new ItemBasedTraceData(menu.item_slot,
-								menu.getStack().getItem()), comp)));
+								menu.getStack().getItem()))));
 	}
 
 }

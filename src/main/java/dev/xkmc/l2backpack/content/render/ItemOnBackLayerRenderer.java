@@ -45,9 +45,8 @@ public class ItemOnBackLayerRenderer<T extends LivingEntity, M extends HumanoidM
 			var opt = CuriosCompat.getSlot(player, e -> e.getItem() instanceof ItemOnBackItem);
 			if (opt.isPresent()) {
 				stack = opt.get().getFirst();
-			}
-			if (!stack.isEmpty())
 				item = (ItemOnBackItem) stack.getItem();
+			}
 		}
 		if (item == null || !item.shouldRender()) return;
 		pose.pushPose();

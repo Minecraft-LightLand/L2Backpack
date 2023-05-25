@@ -2,13 +2,17 @@ package dev.xkmc.l2backpack.content.remote.worldchest;
 
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
+import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
+import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
+import dev.xkmc.l2library.util.annotation.ServerOnly;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -116,5 +120,16 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 	public ResourceLocation getModelTexture(ItemStack stack) {
 		return new ResourceLocation(L2Backpack.MODID, "textures/block/dimensional_storage/" + color.getName() + ".png");
 	}
+
+	@ServerOnly
+	public Optional<StorageContainer> getContainer(ItemStack stack, ServerLevel level) {
+		if (!stack.hasTag()) return Optional.empty();
+		CompoundTag tag = stack.getOrCreateTag();
+		if (!tag.contains("owner_id")) return Optional.empty();
+		UUID id = tag.getUUID("owner_id");
+		long pwd = tag.getLong("password");
+		return WorldStorage.get(level).getOrCreateStorage(id, color.getId(), pwd);
+	}
+
 
 }

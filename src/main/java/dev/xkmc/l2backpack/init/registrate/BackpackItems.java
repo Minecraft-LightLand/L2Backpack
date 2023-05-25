@@ -13,7 +13,7 @@ import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2backpack.init.data.ItemTags;
+import dev.xkmc.l2backpack.init.data.TagGen;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateItemModelProvider;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
@@ -87,7 +87,7 @@ public class BackpackItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p))
-						.tag(ItemTags.BACKPACKS.tag, curios_tag).model(BackpackItems::createBackpackModel)
+						.tag(TagGen.BACKPACKS, curios_tag).model(BackpackItems::createBackpackModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_backpack")).register();
 			}
@@ -95,7 +95,7 @@ public class BackpackItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p))
-						.tag(ItemTags.DIMENSIONAL_STORAGES.tag, curios_tag).model(BackpackItems::createWorldChestModel)
+						.tag(TagGen.DIMENSIONAL_STORAGES, curios_tag).model(BackpackItems::createWorldChestModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMaterialColor().col)
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_dimensional_backpack")).register();
 			}

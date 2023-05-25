@@ -10,6 +10,7 @@ import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestBlock;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestBlockEntity;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2backpack.init.data.TagGen;
 import dev.xkmc.l2library.block.BlockProxy;
 import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;

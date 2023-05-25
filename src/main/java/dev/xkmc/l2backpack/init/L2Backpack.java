@@ -7,10 +7,7 @@ import dev.xkmc.l2backpack.content.restore.ScreenTracker;
 import dev.xkmc.l2backpack.events.*;
 import dev.xkmc.l2backpack.events.quickaccess.DefaultQuickAccessActions;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
-import dev.xkmc.l2backpack.init.data.AdvGen;
-import dev.xkmc.l2backpack.init.data.BackpackConfig;
-import dev.xkmc.l2backpack.init.data.LangData;
-import dev.xkmc.l2backpack.init.data.RecipeGen;
+import dev.xkmc.l2backpack.init.data.*;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
@@ -83,6 +80,7 @@ public class L2Backpack {
 		if (ModList.get().isLoaded("modulargolems")) GolemCompat.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
+		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, TagGen::onBlockTagGen);
 	}
 
 	private static void registerForgeEvents() {

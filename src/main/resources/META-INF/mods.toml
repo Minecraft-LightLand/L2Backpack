@@ -32,6 +32,6 @@ Also have some specialized bag for equipments, enchant books, and arrows.
 [[dependencies.l2backpack]]
     modId="modulargolems"
     mandatory=false
-    versionRange="[1.7.3,)"
+    versionRange="[1.9.0,)"
     ordering="AFTER"
     side="BOTH"

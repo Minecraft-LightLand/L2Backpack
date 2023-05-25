@@ -38,7 +38,7 @@ public class RecipeGen {
 						.save(pvd, L2Backpack.MODID + ":shaped/craft_backpack_" + color.getName());
 
 				unlock(pvd, new CustomShapelessBuilder<>(BackpackRecipe.RSC_BAG_DYE, backpack, 1)::unlockedBy, backpack)
-						.group("backpack_dye").requires(Ingredient.of(ItemTags.BACKPACKS.tag))
+						.group("backpack_dye").requires(Ingredient.of(TagGen.BACKPACKS))
 						.requires(Ingredient.of(dye)).save(pvd, L2Backpack.MODID + ":shapeless/dye_backpack_" + color.getName());
 
 				unlock(pvd, new UpgradeRecipeBuilder(BackpackRecipe.RSC_BAG_UPGRADE.get(), Ingredient.of(backpack),

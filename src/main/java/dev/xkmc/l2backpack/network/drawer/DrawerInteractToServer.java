@@ -83,6 +83,7 @@ public class DrawerInteractToServer extends SerialPacketBase {
 				BackpackTriggers.DRAWER.trigger(player, Type.INSERT);
 			}
 		}
+		menu.getSlot(slot).setChanged();
 		if (player.isCreative() && wid == 0) {
 			L2Backpack.HANDLER.toClientPlayer(new CreativeSetCarryToClient(carried), player);
 		}

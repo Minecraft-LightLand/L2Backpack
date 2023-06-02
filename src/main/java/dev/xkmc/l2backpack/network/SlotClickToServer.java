@@ -86,9 +86,9 @@ public class SlotClickToServer extends SerialPacketBase {
 					ScreenTracker.onServerOpen(player, menu, playerSlot);
 				}
 			}
-			if (container != null) {
-				container.setChanged();
-			}
+		}
+		if (container != null) {
+			container.setChanged();
 		}
 		if (playerSlot != null) {
 			BackpackTriggers.SLOT_CLICK.trigger(player, playerSlot.type(), wid == -1 && slot == -1 && index == -1);

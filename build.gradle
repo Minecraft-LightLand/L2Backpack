@@ -140,9 +140,11 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 
+    runtimeOnly fg.deobf('curse.maven:advanced-shulkerboxes-253861:3920751')
     runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:3906013')
     runtimeOnly fg.deobf('curse.maven:badpackets-615134:3903799')
     runtimeOnly fg.deobf('curse.maven:storage-drawers-223852:3884263')
+    runtimeOnly fg.deobf('curse.maven:corpse-316582:3920717')
 
 }
 

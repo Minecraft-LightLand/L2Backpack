@@ -20,7 +20,6 @@ import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.TagGen;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
@@ -39,9 +38,9 @@ import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 @MethodsReturnNonnullByDefault
 public class BackpackItems {
 
-	public static final RegistryEntry<CreativeModeTab> TAB = REGISTRATE.defaultCreativeTab("backpack", e -> e
-			.icon(BackpackItems.ENDER_BACKPACK::asStack)
-			.title(Component.translatable("itemGroup.l2backpack.backpack"))).register();
+	public static final RegistryEntry<CreativeModeTab> TAB = REGISTRATE
+			.buildCreativeTab("backpack", "L2 Backpack",
+					e -> e.icon(BackpackItems.ENDER_BACKPACK::asStack));
 
 	// -------- common --------
 	public static final ItemEntry<BackpackItem>[] BACKPACKS;

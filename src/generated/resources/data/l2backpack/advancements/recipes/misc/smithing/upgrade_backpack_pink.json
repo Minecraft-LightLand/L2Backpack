@@ -30,5 +30,6 @@
     "recipes": [
       "l2backpack:smithing/upgrade_backpack_pink"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

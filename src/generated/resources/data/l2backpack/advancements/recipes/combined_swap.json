@@ -30,5 +30,6 @@
     "recipes": [
       "l2backpack:combined_swap"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

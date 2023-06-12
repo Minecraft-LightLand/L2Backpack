@@ -30,5 +30,6 @@
     "recipes": [
       "l2backpack:shapeless/dye_backpack_lime"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

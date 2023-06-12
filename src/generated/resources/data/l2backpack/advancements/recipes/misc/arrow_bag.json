@@ -30,5 +30,6 @@
     "recipes": [
       "l2backpack:arrow_bag"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

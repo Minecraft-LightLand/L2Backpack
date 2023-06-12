@@ -30,5 +30,6 @@
     "recipes": [
       "l2backpack:shaped/craft_storage_cyan"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -5,7 +5,7 @@
       "conditions": {
         "all": false
       },
-      "trigger": "l2library:exit_menu"
+      "trigger": "l2screentracker:exit_menu"
     }
   },
   "display": {
@@ -27,5 +27,6 @@
     [
       "0"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

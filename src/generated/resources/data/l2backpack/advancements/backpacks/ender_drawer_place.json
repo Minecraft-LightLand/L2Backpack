@@ -3,7 +3,12 @@
   "criteria": {
     "0": {
       "conditions": {
-        "block": "l2backpack:ender_drawer"
+        "location": [
+          {
+            "block": "l2backpack:ender_drawer",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
       },
       "trigger": "minecraft:placed_block"
     }
@@ -27,5 +32,6 @@
     [
       "0"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

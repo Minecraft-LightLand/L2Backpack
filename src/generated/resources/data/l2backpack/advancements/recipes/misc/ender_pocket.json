@@ -30,5 +30,6 @@
     "recipes": [
       "l2backpack:ender_pocket"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

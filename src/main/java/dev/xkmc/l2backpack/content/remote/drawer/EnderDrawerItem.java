@@ -111,7 +111,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 	@Override
 	public void insert(ItemStack drawer, ItemStack stack, Player player) {
 		refresh(drawer, player);
-		DrawerAccess access = DrawerAccess.of(player.getLevel(), drawer);
+		DrawerAccess access = DrawerAccess.of(player.level(), drawer);
 		int count = access.getCount();
 		int take = Math.min(MAX * stack.getMaxStackSize() - count, stack.getCount());
 		access.setCount(access.getCount() + take);
@@ -121,7 +121,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 	@Override
 	public ItemStack takeItem(ItemStack drawer, Player player) {
 		refresh(drawer, player);
-		DrawerAccess access = DrawerAccess.of(player.getLevel(), drawer);
+		DrawerAccess access = DrawerAccess.of(player.level(), drawer);
 		Item item = BaseDrawerItem.getItem(drawer);
 		int take = Math.min(access.getCount(), item.getMaxStackSize());
 		access.setCount(access.getCount() - take);

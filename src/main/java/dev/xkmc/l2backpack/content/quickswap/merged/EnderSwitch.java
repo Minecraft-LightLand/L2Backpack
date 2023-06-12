@@ -4,7 +4,7 @@ import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
-import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
+import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;

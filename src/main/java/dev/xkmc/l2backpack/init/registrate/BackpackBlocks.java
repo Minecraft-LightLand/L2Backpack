@@ -12,9 +12,9 @@ import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestBlockEntity;
 import dev.xkmc.l2backpack.content.render.DrawerRenderer;
 import dev.xkmc.l2modularblock.BlockProxy;
 import dev.xkmc.l2modularblock.DelegateBlock;
-import dev.xkmc.l2modularblock.DelegateBlockProperties;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
@@ -33,7 +33,7 @@ public class BackpackBlocks {
 	public static final BlockEntityEntry<DrawerBlockEntity> TE_DRAWER;
 
 	static {
-		WORLD_CHEST = REGISTRATE.block("dimensional_storage", p -> DelegateBlock.newBaseBlock(DelegateBlockProperties.copy(Blocks.ENDER_CHEST),
+		WORLD_CHEST = REGISTRATE.block("dimensional_storage", p -> DelegateBlock.newBaseBlock(BlockBehaviour.Properties.copy(Blocks.ENDER_CHEST),
 						BlockProxy.HORIZONTAL, WorldChestBlock.INSTANCE, EnderParticleBlock.INSTANCE,
 						WorldChestBlock.TILE_ENTITY_SUPPLIER_BUILDER))
 				.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), state -> pvd.models()
@@ -47,8 +47,8 @@ public class BackpackBlocks {
 				.validBlock(WORLD_CHEST).register();
 
 		ENDER_DRAWER = REGISTRATE.block("ender_drawer", p -> DelegateBlock.newBaseBlock(
-						DelegateBlockProperties.copy(Blocks.GLASS).make(e -> e.requiresCorrectToolForDrops()
-								.strength(22.5F, 600.0F).lightLevel(state -> 15)),
+						BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
+								.strength(22.5F, 600.0F).lightLevel(state -> 15),
 						BlockProxy.HORIZONTAL, EnderDrawerBlock.INSTANCE, EnderParticleBlock.INSTANCE,
 						EnderDrawerBlock.BLOK_ENTITY))
 				.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), state -> pvd.models()
@@ -66,8 +66,8 @@ public class BackpackBlocks {
 				.validBlock(ENDER_DRAWER).renderer(() -> DrawerRenderer::new).register();
 
 		DRAWER = REGISTRATE.block("drawer", p -> DelegateBlock.newBaseBlock(
-						DelegateBlockProperties.copy(Blocks.GLASS).make(e -> e.requiresCorrectToolForDrops()
-								.lightLevel(state -> 15)),
+						BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops()
+								.lightLevel(state -> 15),
 						BlockProxy.HORIZONTAL, DrawerBlock.INSTANCE, DrawerBlock.BLOCK_ENTITY))
 				.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), state -> pvd.models().withExistingParent(ctx.getName(),
 								pvd.modLoc("block/drawer_base"))

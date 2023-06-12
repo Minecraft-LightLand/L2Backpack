@@ -24,28 +24,32 @@ public class BackpackLootModifier extends LootModifier {
 					Codec.DOUBLE.fieldOf("chance").forGetter(e -> e.chance),
 					Codec.INT.fieldOf("color").forGetter(e -> e.color.ordinal()),
 					Codec.STRING.fieldOf("name").forGetter(e -> e.name),
-					Codec.STRING.fieldOf("loot").forGetter(e -> e.loot.toString())))
+					Codec.STRING.fieldOf("loot").forGetter(e -> e.loot.toString()),
+					Codec.LONG.fieldOf("seed").forGetter(e -> e.seed)))
 			.apply(i, BackpackLootModifier::new));
 
 	private final double chance;
 	private final DyeColor color;
 	private final String name;
 	private final ResourceLocation loot;
+	private final long seed;
 
-	private BackpackLootModifier(LootItemCondition[] conditionsIn, double chance, int color, String name, String loot) {
+	private BackpackLootModifier(LootItemCondition[] conditionsIn, double chance, int color, String name, String loot, long seed) {
 		super(conditionsIn);
 		this.chance = chance;
 		this.color = DyeColor.values()[color % DyeColor.values().length];
 		this.name = name;
 		this.loot = new ResourceLocation(loot);
+		this.seed = seed;
 	}
 
-	public BackpackLootModifier(double chance, LootGen.LootDefinition def, LootItemCondition... conditionsIn) {
+	public BackpackLootModifier(double chance, LootGen.LootDefinition def, long seed, LootItemCondition... conditionsIn) {
 		super(conditionsIn);
 		this.chance = chance;
 		this.color = def.color;
 		this.name = def.player.id;
 		this.loot = new ResourceLocation(L2Backpack.MODID, def.id);
+		this.seed = seed;
 	}
 
 	@Override

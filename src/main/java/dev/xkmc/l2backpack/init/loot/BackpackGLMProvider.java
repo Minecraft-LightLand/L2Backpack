@@ -5,6 +5,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
 
+import java.util.Random;
+
 public class BackpackGLMProvider extends GlobalLootModifierProvider {
 
 	public BackpackGLMProvider(PackOutput gen) {
@@ -13,8 +15,9 @@ public class BackpackGLMProvider extends GlobalLootModifierProvider {
 
 	@Override
 	protected void start() {
+		Random r = new Random(12345);
 		for (LootGen.LootDefinition def : LootGen.LootDefinition.values()) {
-			this.add(def.id, new BackpackLootModifier(def.chance, def, LootTableIdCondition.builder(def.target).build()));
+			this.add(def.id, new BackpackLootModifier(def.chance, def, r.nextLong(), LootTableIdCondition.builder(def.target).build()));
 		}
 	}
 }

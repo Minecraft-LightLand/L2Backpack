@@ -11,7 +11,7 @@ import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
-import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
+import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;

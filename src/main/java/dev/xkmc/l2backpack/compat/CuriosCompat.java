@@ -1,9 +1,9 @@
 package dev.xkmc.l2backpack.compat;
 
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2library.init.compat.CuriosTrackCompatImpl;
-import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
-import dev.xkmc.l2library.init.events.screen.source.SimpleSlotData;
+import dev.xkmc.l2screentracker.compat.CuriosTrackCompatImpl;
+import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
+import dev.xkmc.l2screentracker.screen.source.SimpleSlotData;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.InterModComms;

@@ -1,9 +1,9 @@
 package dev.xkmc.l2backpack.content.restore;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
-import dev.xkmc.l2library.init.events.screen.base.LayerPopType;
-import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
-import dev.xkmc.l2library.init.events.screen.track.ItemBasedTrace;
+import dev.xkmc.l2screentracker.screen.base.LayerPopType;
+import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
+import dev.xkmc.l2screentracker.screen.track.ItemBasedTrace;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;

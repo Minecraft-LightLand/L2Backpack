@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.bag.BookBag;
@@ -31,7 +32,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.tags.ITagManager;
 
 import java.util.Objects;
-import java.util.function.Supplier;
 
 import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
@@ -39,11 +39,9 @@ import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 @MethodsReturnNonnullByDefault
 public class BackpackItems {
 
-	public static final Supplier<CreativeModeTab> TAB = REGISTRATE
-			.buildCreativeModeTab("backpack", e -> e
-					.icon(BackpackItems.ENDER_BACKPACK::asStack)
-					.title(Component.translatable("itemGroup.l2backpack.backpack")));
-
+	public static final RegistryEntry<CreativeModeTab> TAB = REGISTRATE.defaultCreativeTab("backpack", e -> e
+			.icon(BackpackItems.ENDER_BACKPACK::asStack)
+			.title(Component.translatable("itemGroup.l2backpack.backpack"))).register();
 
 	// -------- common --------
 	public static final ItemEntry<BackpackItem>[] BACKPACKS;
@@ -73,7 +71,7 @@ public class BackpackItems {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p))
 						.tag(TagGen.BACKPACKS, curios_tag).model(BackpackItems::createBackpackModel)
-						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
+						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMapColor().col)
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_backpack"))
 						.register();
 			}
@@ -82,7 +80,7 @@ public class BackpackItems {
 				DyeColor color = DyeColor.values()[i];
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p))
 						.tag(TagGen.DIMENSIONAL_STORAGES, curios_tag).model(BackpackItems::createWorldChestModel)
-						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMaterialColor().col)
+						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMapColor().col)
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_dimensional_backpack")).register();
 			}
 			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(BackpackItems::createEnderBackpackModel)

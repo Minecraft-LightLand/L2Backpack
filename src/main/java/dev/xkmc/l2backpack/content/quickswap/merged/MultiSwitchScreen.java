@@ -1,9 +1,8 @@
 package dev.xkmc.l2backpack.content.quickswap.merged;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2backpack.content.common.BaseOpenableContainer;
 import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
-import dev.xkmc.l2library.base.menu.SpriteManager;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -14,9 +13,9 @@ public class MultiSwitchScreen<T extends BaseOpenableContainer<T>> extends BaseO
 	}
 
 	@Override
-	protected void renderBg(PoseStack stack, float pt, int mx, int my) {
-		SpriteManager sm = menu.sprite;
-		SpriteManager.ScreenRenderer sr = sm.getRenderer(this);
+	protected void renderBg(GuiGraphics stack, float pt, int mx, int my) {
+		var sm = menu.sprite.get();
+		var sr = sm.getRenderer(this);
 		sr.start(stack);
 		int offset = getMenu().slots.size() / 9 - 3;
 		for (int i = 0; i < 9; i++)

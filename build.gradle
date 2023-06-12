@@ -138,25 +138,32 @@ dependencies {
 
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
     implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}-slim")
-    implementation fg.deobf("dev.xkmc.l2serial:l2serial:1.1.0")
-    implementation fg.deobf(jarJar("dev.xkmc.l2modularblock:l2modularblock:1.0.0") {
+    implementation fg.deobf("dev.xkmc.l2serial:l2serial:1.2.0")
+    implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.1.0")
+    implementation fg.deobf("dev.xkmc.l2screentracker:l2screentracker:0.1.0")
+    implementation fg.deobf(jarJar("dev.xkmc.l2modularblock:l2modularblock:1.1.0") {
         transitive = false
-        jarJar.ranged(it, "[1.0.0,)")
+        jarJar.ranged(it, "[1.1.0,)")
     })
 
-    implementation fg.deobf('dev.xkmc.modulargolems:modulargolems:2.2.0.pre3')
-    runtimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:2.2.0.pre0')
+    implementation fg.deobf(jarJar("dev.xkmc.l2itemselector:l2itemselector:0.1.0") {
+        transitive = false
+        jarJar.ranged(it, "[0.1.0,)")
+    })
+
+    //implementation fg.deobf('dev.xkmc.modulargolems:modulargolems:2.2.0.pre3')
+    //runtimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:2.2.0.pre0')
     //runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:2.2.0.pre0')
     //runtimeOnly fg.deobf('dev.xkmc.l2weaponry:l2weaponry:2.2.0.pre0')
-    runtimeOnly fg.deobf('dev.xkmc.l2artifacts:l2artifacts:2.2.0.pre3')
+    //runtimeOnly fg.deobf('dev.xkmc.l2artifacts:l2artifacts:2.2.0.pre3')
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 
-    runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:4512108')
-    runtimeOnly fg.deobf('curse.maven:badpackets-615134:4438956')
-    runtimeOnly fg.deobf('curse.maven:attributefix-280510:4445193')
-    runtimeOnly fg.deobf('curse.maven:max-health-fix-492246:4447240')
+    //runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:4512108')
+    //runtimeOnly fg.deobf('curse.maven:badpackets-615134:4438956')
+    //runtimeOnly fg.deobf('curse.maven:attributefix-280510:4445193')
+    //runtimeOnly fg.deobf('curse.maven:max-health-fix-492246:4447240')
 
 }
 

@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -96,7 +97,7 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 		return BackpackItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
 	}
 
-	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 		BlockEntity blockentity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
 		if (blockentity instanceof WorldChestBlockEntity chest) {
 			return List.of(buildStack(state, chest));

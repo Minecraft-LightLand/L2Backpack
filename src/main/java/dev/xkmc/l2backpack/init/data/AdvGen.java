@@ -8,13 +8,13 @@ import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
-import dev.xkmc.l2library.init.events.screen.base.ScreenTrackerRegistry;
-import dev.xkmc.l2library.init.events.screen.triggers.ExitMenuTrigger;
 import dev.xkmc.l2library.serial.advancements.AdvancementGenerator;
 import dev.xkmc.l2library.serial.advancements.CriterionBuilder;
+import dev.xkmc.l2screentracker.screen.base.ScreenTrackerRegistry;
+import dev.xkmc.l2screentracker.screen.triggers.ExitMenuTrigger;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.PlacedBlockTrigger;
+import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -119,7 +119,7 @@ public class AdvGen {
 						CriterionBuilder.item(BackpackItems.ENDER_DRAWER.get()),
 						"A Third Ender Chest?", "Obtain an Ender Drawer")
 				.create("ender_drawer_place", BackpackItems.ENDER_DRAWER.get(),
-						CriterionBuilder.one(PlacedBlockTrigger.TriggerInstance
+						CriterionBuilder.one(ItemUsedOnLocationTrigger.TriggerInstance
 								.placedBlock(BackpackBlocks.ENDER_DRAWER.get())),
 						"Remote Logistics", "Place down an Ender Drawer").type(FrameType.GOAL)
 				.create("dimension_share", dimension(DyeColor.BLUE),

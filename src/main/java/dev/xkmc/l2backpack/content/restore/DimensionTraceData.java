@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.restore;
 
-import dev.xkmc.l2library.init.events.screen.track.TrackedEntryData;
+import dev.xkmc.l2screentracker.screen.track.TrackedEntryData;
 
 import java.util.UUID;
 

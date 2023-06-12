@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -43,7 +43,8 @@ public class WorldStorage {
 
 	public Optional<StorageContainer> getOrCreateStorage(UUID id, int color, long password,
 														 @Nullable ServerPlayer player,
-														 @Nullable ResourceLocation loot) {
+														 @Nullable ResourceLocation loot,
+														 long seed) {
 		if (cache.containsKey(id)) {
 			StorageContainer storage = cache.get(id)[color];
 			if (storage != null) {
@@ -57,12 +58,12 @@ public class WorldStorage {
 			return Optional.empty();
 		StorageContainer storage = new StorageContainer(id, color, col);
 		if (loot != null) {
-			LootTable loottable = this.level.getServer().getLootTables().get(loot);
-			LootContext.Builder builder = new LootContext.Builder(this.level);
+			LootTable loottable = this.level.getServer().getLootData().getLootTable(loot);
+			LootParams.Builder builder = new LootParams.Builder(this.level);
 			if (player != null) {
 				builder.withLuck(player.getLuck()).withParameter(LootContextParams.THIS_ENTITY, player);
 			}
-			loottable.fill(storage.container, builder.create(LootContextParamSets.EMPTY));
+			loottable.fill(storage.container, builder.create(LootContextParamSets.EMPTY), seed);
 		}
 		putStorage(id, color, storage);
 		return Optional.of(storage);

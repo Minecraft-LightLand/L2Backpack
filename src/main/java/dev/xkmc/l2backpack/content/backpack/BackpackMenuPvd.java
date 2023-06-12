@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.backpack;
 
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
-import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
+import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;

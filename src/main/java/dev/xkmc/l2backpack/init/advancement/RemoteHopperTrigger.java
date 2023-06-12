@@ -3,14 +3,14 @@ package dev.xkmc.l2backpack.init.advancement;
 import dev.xkmc.l2library.serial.advancements.BaseCriterion;
 import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class RemoteHopperTrigger extends BaseCriterion<RemoteHopperTrigger.Ins, RemoteHopperTrigger> {
 
 	public static Ins ins() {
-		return new Ins(BackpackTriggers.REMOTE.getId(), EntityPredicate.Composite.ANY);
+		return new Ins(BackpackTriggers.REMOTE.getId(), ContextAwarePredicate.ANY);
 	}
 
 	public RemoteHopperTrigger(ResourceLocation id) {
@@ -24,7 +24,7 @@ public class RemoteHopperTrigger extends BaseCriterion<RemoteHopperTrigger.Ins, 
 	@SerialClass
 	public static class Ins extends BaseCriterionInstance<Ins, RemoteHopperTrigger> {
 
-		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
+		public Ins(ResourceLocation id, ContextAwarePredicate player) {
 			super(id, player);
 		}
 

@@ -7,11 +7,11 @@ import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
-import dev.xkmc.l2library.init.events.click.writable.ClickedPlayerSlotResult;
-import dev.xkmc.l2library.init.events.click.writable.ContainerCallback;
-import dev.xkmc.l2library.init.events.click.writable.WritableStackClickHandler;
-import dev.xkmc.l2library.init.events.screen.base.ScreenTracker;
-import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
+import dev.xkmc.l2screentracker.click.writable.ClickedPlayerSlotResult;
+import dev.xkmc.l2screentracker.click.writable.ContainerCallback;
+import dev.xkmc.l2screentracker.click.writable.WritableStackClickHandler;
+import dev.xkmc.l2screentracker.screen.base.ScreenTracker;
+import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
@@ -19,7 +19,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.Nullable;
 
 public class BackpackSlotClickListener extends WritableStackClickHandler {
 
@@ -42,7 +41,6 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 		slotClickToServer(-1, -1, -1);
 	}
 
-	@Nullable
 	@Override
 	protected ClickedPlayerSlotResult getSlot(ServerPlayer player, int index, int slot, int wid) {
 		if (wid == -1) {

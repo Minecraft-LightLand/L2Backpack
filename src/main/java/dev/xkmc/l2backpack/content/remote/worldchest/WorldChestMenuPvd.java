@@ -29,7 +29,7 @@ public record WorldChestMenuPvd(ServerPlayer player, ItemStack stack, WorldChest
 	@ServerOnly
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-		StorageContainer container = getContainer((ServerLevel) player.level).get();
+		StorageContainer container = getContainer((ServerLevel) player.level()).get();
 		if (!container.id.equals(player.getUUID())) {
 			BackpackTriggers.SHARE.trigger((ServerPlayer) player);
 		}
@@ -41,18 +41,21 @@ public record WorldChestMenuPvd(ServerPlayer player, ItemStack stack, WorldChest
 		CompoundTag tag = stack.getOrCreateTag();
 		UUID id = tag.getUUID("owner_id");
 		long pwd = tag.getLong("password");
+		long seed = 0;
 		ResourceLocation loot = null;
 		if (tag.contains("loot")) {
 			loot = new ResourceLocation(tag.getString("loot"));
 			tag.remove("loot");
+			seed = tag.getLong("seed");
+			tag.remove("seed");
 		}
-		return WorldStorage.get(level).getOrCreateStorage(id, item.color.getId(), pwd, player, loot);
+		return WorldStorage.get(level).getOrCreateStorage(id, item.color.getId(), pwd, player, loot, seed);
 	}
 
 	@ServerOnly
 	public void open() {
 		item.refresh(stack, player);
-		if (player.level.isClientSide() || getContainer((ServerLevel) player.level).isEmpty())
+		if (player.level().isClientSide() || getContainer((ServerLevel) player.level()).isEmpty())
 			return;
 		NetworkHooks.openScreen(player, this);
 	}

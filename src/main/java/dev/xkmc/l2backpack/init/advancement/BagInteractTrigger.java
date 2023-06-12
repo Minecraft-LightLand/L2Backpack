@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.init.advancement;
 import dev.xkmc.l2library.serial.advancements.BaseCriterion;
 import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class BagInteractTrigger extends BaseCriterion<BagInteractTrigger.Ins, BagInteractTrigger> {
 
 	public static Ins fromType(Type type) {
-		Ins ans = new Ins(BackpackTriggers.INTERACT.getId(), EntityPredicate.Composite.ANY);
+		Ins ans = new Ins(BackpackTriggers.INTERACT.getId(), ContextAwarePredicate.ANY);
 		ans.type = type;
 		return ans;
 	}
@@ -43,7 +43,7 @@ public class BagInteractTrigger extends BaseCriterion<BagInteractTrigger.Ins, Ba
 		@SerialClass.SerialField
 		private Ingredient ingredient = Ingredient.EMPTY;
 
-		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
+		public Ins(ResourceLocation id, ContextAwarePredicate player) {
 			super(id, player);
 		}
 

@@ -31,7 +31,7 @@ public class RequestTooltipUpdateEvent extends SerialPacketBase {
 	@Override
 	public void handle(NetworkEvent.Context context) {
 		if (context.getSender() == null) return;
-		int count = DrawerAccess.of(context.getSender().getLevel(), id, item).getCount();
+		int count = DrawerAccess.of(context.getSender().level(), id, item).getCount();
 		L2Backpack.HANDLER.toClientPlayer(new RespondTooltipUpdateEvent(item, id, count), context.getSender());
 	}
 

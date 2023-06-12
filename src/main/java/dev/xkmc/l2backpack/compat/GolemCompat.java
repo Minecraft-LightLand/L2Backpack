@@ -1,11 +1,6 @@
 package dev.xkmc.l2backpack.compat;
 
-import dev.xkmc.l2backpack.content.common.BaseBagItem;
-import dev.xkmc.modulargolems.events.event.GolemEquipEvent;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class GolemCompat {
 
@@ -13,6 +8,7 @@ public class GolemCompat {
 		MinecraftForge.EVENT_BUS.register(GolemCompat.class);
 	}
 
+	/*
 	@SubscribeEvent
 	public static void onEquip(GolemEquipEvent event) {
 		if (event.getStack().getItem() instanceof BaseBagItem) {
@@ -22,5 +18,7 @@ public class GolemCompat {
 			else event.setSlot(EquipmentSlot.OFFHAND, 1);
 		}
 	}
+
+	 */
 
 }

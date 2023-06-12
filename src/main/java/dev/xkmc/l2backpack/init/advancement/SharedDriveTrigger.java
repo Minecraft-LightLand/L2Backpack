@@ -3,14 +3,14 @@ package dev.xkmc.l2backpack.init.advancement;
 import dev.xkmc.l2library.serial.advancements.BaseCriterion;
 import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class SharedDriveTrigger extends BaseCriterion<SharedDriveTrigger.Ins, SharedDriveTrigger> {
 
 	public static Ins ins() {
-		return new Ins(BackpackTriggers.SHARE.getId(), EntityPredicate.Composite.ANY);
+		return new Ins(BackpackTriggers.SHARE.getId(), ContextAwarePredicate.ANY);
 	}
 
 	public SharedDriveTrigger(ResourceLocation id) {
@@ -24,7 +24,7 @@ public class SharedDriveTrigger extends BaseCriterion<SharedDriveTrigger.Ins, Sh
 	@SerialClass
 	public static class Ins extends BaseCriterionInstance<Ins, SharedDriveTrigger> {
 
-		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
+		public Ins(ResourceLocation id, ContextAwarePredicate player) {
 			super(id, player);
 		}
 

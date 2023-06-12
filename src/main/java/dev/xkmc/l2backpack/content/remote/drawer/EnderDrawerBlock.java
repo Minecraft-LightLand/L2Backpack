@@ -21,7 +21,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -88,7 +88,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 	}
 
 	@Override
-	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 		BlockEntity blockentity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
 		if (blockentity instanceof EnderDrawerBlockEntity chest) {
 			return List.of(buildStack(chest));

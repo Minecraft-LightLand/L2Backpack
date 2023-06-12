@@ -1,8 +1,8 @@
 package dev.xkmc.l2backpack.content.common;
 
-import dev.xkmc.l2library.base.menu.SpriteManager;
-import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
+import dev.xkmc.l2library.base.menu.base.SpriteManager;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
+import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -38,7 +38,7 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 		this.item_slot = hand;
 		this.uuid = uuid;
 		this.addSlot("grid", pred);
-		if (!this.player.level.isClientSide()) {
+		if (!this.player.level().isClientSide()) {
 			MAP.computeIfAbsent(uuid, e -> new ConcurrentLinkedQueue<>()).add(this);
 			reload();
 		}
@@ -53,12 +53,14 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 				CompoundTag ctag = stack.getOrCreateTag();
 				if (ctag.contains("loot")) {
 					ResourceLocation rl = new ResourceLocation(ctag.getString("loot"));
+					long seed = ctag.getLong("seed");
 					ctag.remove("loot");
-					if (player.level instanceof ServerLevel sl) {
-						LootTable loottable = sl.getServer().getLootTables().get(rl);
-						LootContext.Builder builder = new LootContext.Builder(sl);
+					ctag.remove("seed");
+					if (player.level() instanceof ServerLevel sl) {
+						LootTable loottable = sl.getServer().getLootData().getLootTable(rl);
+						LootParams.Builder builder = new LootParams.Builder(sl);
 						builder.withLuck(player.getLuck()).withParameter(LootContextParams.THIS_ENTITY, player);
-						loottable.fill(container, builder.create(LootContextParamSets.EMPTY));
+						loottable.fill(container, builder.create(LootContextParamSets.EMPTY), seed);
 						save();
 					}
 				}
@@ -77,7 +79,7 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 
 	@Override
 	public void removed(Player player) {
-		if (!player.level.isClientSide) {
+		if (!player.level().isClientSide) {
 			MAP.computeIfAbsent(uuid, e -> new ConcurrentLinkedQueue<>()).remove(this);
 			save();
 		}
@@ -85,7 +87,7 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 	}
 
 	private void save() {
-		if (player.getLevel().isClientSide()) return;
+		if (player.level().isClientSide()) return;
 		ItemStack stack = getStack();
 		if (!stack.isEmpty()) {
 			serializeContents(stack);

@@ -62,10 +62,10 @@ public class TooltipUpdateEvents {
 	@OnlyIn(Dist.CLIENT)
 	private static boolean blockSession() {
 		LocalPlayer player = Proxy.getClientPlayer();
-		var ray = RayTraceUtil.rayTraceBlock(player.level, player, player.getBlockReach());
+		var ray = RayTraceUtil.rayTraceBlock(player.level(), player, player.getBlockReach());
 		if (ray.getType() == HitResult.Type.BLOCK) {
 			BlockPos pos = ray.getBlockPos();
-			BlockEntity entity = player.level.getBlockEntity(pos);
+			BlockEntity entity = player.level().getBlockEntity(pos);
 			if (entity instanceof EnderDrawerBlockEntity drawer) {
 				startSession(drawer.item, drawer.owner_id);
 				return true;

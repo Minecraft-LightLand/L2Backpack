@@ -6,8 +6,8 @@ import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
-import dev.xkmc.l2library.base.menu.SpriteManager;
-import dev.xkmc.l2library.init.events.screen.source.PlayerSlot;
+import dev.xkmc.l2library.base.menu.base.SpriteManager;
+import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
@@ -42,7 +42,7 @@ public class EnderSwitchContainer extends BaseBagContainer<EnderSwitchContainer>
 	private int enderAdded = 0;
 
 	protected void addEnderSlot(Container ender) {
-		this.sprite.getSlot("ender", (x, y) -> new Slot(ender, this.enderAdded++, x, y), this::addSlot);
+		this.sprite.get().getSlot("ender", (x, y) -> new Slot(ender, this.enderAdded++, x, y), this::addSlot);
 	}
 
 	@Override

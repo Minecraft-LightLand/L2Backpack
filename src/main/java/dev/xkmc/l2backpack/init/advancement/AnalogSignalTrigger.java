@@ -3,14 +3,14 @@ package dev.xkmc.l2backpack.init.advancement;
 import dev.xkmc.l2library.serial.advancements.BaseCriterion;
 import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class AnalogSignalTrigger extends BaseCriterion<AnalogSignalTrigger.Ins, AnalogSignalTrigger> {
 
 	public static Ins ins() {
-		return new Ins(BackpackTriggers.ANALOG.getId(), EntityPredicate.Composite.ANY);
+		return new Ins(BackpackTriggers.ANALOG.getId(), ContextAwarePredicate.ANY);
 	}
 
 	public AnalogSignalTrigger(ResourceLocation id) {
@@ -24,7 +24,7 @@ public class AnalogSignalTrigger extends BaseCriterion<AnalogSignalTrigger.Ins, 
 	@SerialClass
 	public static class Ins extends BaseCriterionInstance<Ins, AnalogSignalTrigger> {
 
-		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
+		public Ins(ResourceLocation id, ContextAwarePredicate player) {
 			super(id, player);
 		}
 

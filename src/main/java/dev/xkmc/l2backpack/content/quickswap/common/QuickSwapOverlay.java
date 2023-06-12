@@ -1,17 +1,14 @@
 package dev.xkmc.l2backpack.content.quickswap.common;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.ItemSelSideBar;
-import dev.xkmc.l2library.base.overlay.OverlayUtils;
 import dev.xkmc.l2library.base.overlay.SideBar;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -127,8 +124,8 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
 		if (QuickSwapManager.getValidType(player, Screen.hasAltDown()) == QuickSwapType.ARMOR && ease_time == max_ease) {
-			float x = ctx.x0();
-			float y = 45 + ctx.y0();
+			int x = ctx.x0();
+			int y = 45 + ctx.y0();
 			if (onCenter()) {
 				x -= 18;
 			} else x += 18;
@@ -139,42 +136,36 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 				EquipmentSlot slot = EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 3 - i);
 				ItemStack stack = player.getItemBySlot(slot);
 				ItemStack targetStack = player.getItemBySlot(target);
-				renderArmorSlot(x, y, 64, target == slot, targetStack.getItem() instanceof BaseBagItem);
-				ctx.renderItem(stack, (int) x, (int) y);
+				renderArmorSlot(ctx.g(), x, y, 64, target == slot, targetStack.getItem() instanceof BaseBagItem);
+				ctx.renderItem(stack, x, y);
 				y += 18;
 			}
 		}
 	}
 
-	public void renderArmorSlot(float x, float y, int a, boolean target, boolean invalid) {
-		RenderSystem.disableDepthTest();
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
-		Tesselator tex = Tesselator.getInstance();
-		BufferBuilder builder = tex.getBuilder();
-		OverlayUtils.fillRect(builder, x, y, 16, 16, 255, 255, 255, a);
+	public void renderArmorSlot(GuiGraphics g, int x, int y, int a, boolean target, boolean invalid) {
+		g.fill(x, y, 16, 16, color(255, 255, 255, a));
 		if (target) {
 			if (invalid) {
-				OverlayUtils.drawRect(builder, x, y, 16, 16, 220, 70, 70, 255);
+				g.fill(x, y, 16, 16, color(220, 70, 70, 255));
 			} else {
-				OverlayUtils.drawRect(builder, x, y, 16, 16, 70, 150, 185, 255);
+				g.fill(x, y, 16, 16, color(70, 150, 185, 255));
 			}
 		}
-		RenderSystem.enableDepthTest();
 	}
 
 	@Override
-	protected float getXOffset(int width) {
+	protected int getXOffset(int width) {
 		float progress = (max_ease - ease_time) / max_ease;
 		if (onCenter())
-			return width / 2f + 18 * 3 + 1 + progress * width / 2;
+			return Math.round(width / 2f + 18 * 3 + 1 + progress * width / 2);
 		else
-			return width - 36 + progress * 20;
+			return Math.round(width - 36 + progress * 20);
 	}
 
 	@Override
-	protected float getYOffset(int height) {
-		return height / 2f - 81 + 1;
+	protected int getYOffset(int height) {
+		return height / 2 - 81 + 1;
 	}
 
 }

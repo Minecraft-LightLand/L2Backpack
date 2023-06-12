@@ -1,10 +1,10 @@
 package dev.xkmc.l2backpack.init.advancement;
 
-import dev.xkmc.l2library.init.events.screen.source.ItemSource;
 import dev.xkmc.l2library.serial.advancements.BaseCriterion;
 import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
+import dev.xkmc.l2screentracker.screen.source.ItemSource;
 import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotClickTrigger> {
 
 	public static Ins fromGUI() {
-		return new Ins(BackpackTriggers.SLOT_CLICK.getId(), EntityPredicate.Composite.ANY);
+		return new Ins(BackpackTriggers.SLOT_CLICK.getId(), ContextAwarePredicate.ANY);
 	}
 
 	public static Ins fromKeyBind() {
@@ -46,7 +46,7 @@ public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotCl
 		@SerialClass.SerialField
 		private boolean keybind = false;
 
-		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
+		public Ins(ResourceLocation id, ContextAwarePredicate player) {
 			super(id, player);
 		}
 

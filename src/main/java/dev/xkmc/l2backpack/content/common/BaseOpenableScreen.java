@@ -1,8 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import dev.xkmc.l2library.base.menu.BaseContainerScreen;
-import dev.xkmc.l2library.base.menu.SpriteManager;
+import dev.xkmc.l2library.base.menu.base.BaseContainerScreen;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -18,10 +17,10 @@ public class BaseOpenableScreen<T extends BaseOpenableContainer<T>> extends Base
 	}
 
 	@Override
-	protected void renderBg(PoseStack stack, float pt, int mx, int my) {
-		SpriteManager sm = menu.sprite;
-		SpriteManager.ScreenRenderer sr = sm.getRenderer(this);
-		sr.start(stack);
+	protected void renderBg(GuiGraphics g, float pt, int mx, int my) {
+		var sm = menu.sprite.get();
+		var sr = sm.getRenderer(this);
+		sr.start(g);
 	}
 
 }

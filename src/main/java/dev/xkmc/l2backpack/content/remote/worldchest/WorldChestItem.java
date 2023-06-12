@@ -72,7 +72,7 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 			ctag.putLong("password", color.getId());
 		}
 		if (ctag.contains("loot")) {
-			new WorldChestMenuPvd((ServerPlayer) player, stack, this).getContainer((ServerLevel) player.level);
+			new WorldChestMenuPvd((ServerPlayer) player, stack, this).getContainer((ServerLevel) player.level());
 		}
 	}
 

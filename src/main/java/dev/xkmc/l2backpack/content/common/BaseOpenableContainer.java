@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
-import dev.xkmc.l2library.base.menu.BaseContainerMenu;
-import dev.xkmc.l2library.base.menu.SpriteManager;
+import dev.xkmc.l2library.base.menu.base.BaseContainerMenu;
+import dev.xkmc.l2library.base.menu.base.SpriteManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

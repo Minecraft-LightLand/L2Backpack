@@ -121,7 +121,6 @@
   "item.l2backpack.ender_swap": "Ender Swap",
   "item.l2backpack.tool_swap": "Tool Swap",
   "itemGroup.l2library.backpack": "L2 Backpack",
-  "key.categories.l2backpack": "L2Backpack Keys",
   "key.l2backpack.open": "Open backpack on back",
   "l2backpack.chat.feedback.collect": "Collected %s items",
   "l2backpack.chat.feedback.dump": "Dumped %s items into target block",

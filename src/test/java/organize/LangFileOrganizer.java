@@ -1,4 +1,4 @@
-package organize.sub;
+package organize;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

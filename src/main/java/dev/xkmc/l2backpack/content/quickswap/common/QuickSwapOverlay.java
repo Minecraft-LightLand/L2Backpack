@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.ItemSelSideBar;
+import dev.xkmc.l2library.base.overlay.OverlayUtil;
 import dev.xkmc.l2library.base.overlay.SideBar;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
@@ -144,12 +145,12 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 	}
 
 	public void renderArmorSlot(GuiGraphics g, int x, int y, int a, boolean target, boolean invalid) {
-		g.fill(x, y, 16, 16, color(255, 255, 255, a));
+		OverlayUtil.fillRect(g, x, y, 16, 16, color(255, 255, 255, a));
 		if (target) {
 			if (invalid) {
-				g.fill(x, y, 16, 16, color(220, 70, 70, 255));
+				OverlayUtil.drawRect(g, x, y, 16, 16, color(220, 70, 70, 255));
 			} else {
-				g.fill(x, y, 16, 16, color(70, 150, 185, 255));
+				OverlayUtil.drawRect(g, x, y, 16, 16, color(70, 150, 185, 255));
 			}
 		}
 	}

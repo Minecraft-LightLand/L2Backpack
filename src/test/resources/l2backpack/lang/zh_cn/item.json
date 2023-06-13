@@ -1,7 +1,8 @@
 {
   "block.l2backpack": {
 	"dimensional_storage": "空间箱子",
-	"ender_drawer": "末影匣子"
+	"ender_drawer": "末影匣子",
+	"drawer": "水晶匣子"
   },
   "item.l2backpack":{
 	"ender_backpack": "末影背包",

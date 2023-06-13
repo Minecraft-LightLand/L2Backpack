@@ -46,12 +46,6 @@ public class L2BackpackClient {
 	}
 
 	@SubscribeEvent
-	public static void registerKeys(RegisterKeyMappingsEvent event) {
-		for (Keys k : Keys.values())
-			event.register(k.map);
-	}
-
-	@SubscribeEvent
 	public static void registerReloadListener(RegisterClientReloadListenersEvent event) {
 		event.registerReloadListener((ResourceManagerReloadListener) resourceManager -> RenderEvents.registerBackpackLayer());
 	}

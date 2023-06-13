@@ -8,14 +8,6 @@
 	"multi_switch": "三合一切换袋",
 	"tool_bag": "工具切换袋"
   },
-  "itemGroup.l2backpack": {
-	"backpack": "莱特兰·背包"
-  },
-  "key": {
-	"categories.l2backpack": "背包按键",
-	"l2backpack.open": "打开背部饰品栏的容器",
-	"l2backpack.up": "箭矢选择-向上",
-	"l2backpack.down": "箭矢选择-向下",
-	"l2backpack.swap": "工具/护甲交换"
-  }
+  "itemGroup.l2library.backpack": "莱特兰·背包",
+  "key.l2backpack.open": "打开背部饰品栏的容器"
 }

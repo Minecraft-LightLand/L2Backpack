@@ -7,10 +7,7 @@ import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.events.BackpackSlotClickListener;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
-import dev.xkmc.l2backpack.init.data.AdvGen;
-import dev.xkmc.l2backpack.init.data.BackpackConfig;
-import dev.xkmc.l2backpack.init.data.LangData;
-import dev.xkmc.l2backpack.init.data.RecipeGen;
+import dev.xkmc.l2backpack.init.data.*;
 import dev.xkmc.l2backpack.init.loot.LootGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
@@ -72,6 +69,7 @@ public class L2Backpack {
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 		REGISTRATE.addDataGenerator(ProviderType.LOOT, LootGen::genLoot);
+		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, TagGen::onBlockTagGen);
 	}
 
 	public L2Backpack() {

@@ -26,7 +26,6 @@ import static dev.xkmc.l2library.serial.recipe.AbstractSmithingRecipe.TEMPLATE_P
 
 public class RecipeGen {
 
-	@SuppressWarnings("removal")
 	public static void genRecipe(RegistrateRecipeProvider pvd) {
 		{
 			for (int i = 0; i < 16; i++) {

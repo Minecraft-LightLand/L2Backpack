@@ -104,7 +104,7 @@ public class LangData {
 			pvd.accept(L2Backpack.MODID + ".loot." + pl.id + ".name", pl.pname);
 			pvd.accept(L2Backpack.MODID + ".loot." + pl.id + ".item", pl.bname);
 		}
-		pvd.accept(Keys.OPEN.id, "Open backpack on back");
+		pvd.accept(BackpackKeys.OPEN.id, "Open backpack on back");
 	}
 
 	public static String asId(String name) {

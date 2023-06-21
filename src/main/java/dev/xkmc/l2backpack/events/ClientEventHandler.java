@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.events;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2backpack.init.data.Keys;
+import dev.xkmc.l2backpack.init.data.BackpackKeys;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
@@ -26,7 +26,7 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public static void keyEvent(InputEvent.Key event) {
-		if (Minecraft.getInstance().screen == null && Proxy.getClientPlayer() != null && Keys.OPEN.map.isDown()) {
+		if (Minecraft.getInstance().screen == null && Proxy.getClientPlayer() != null && BackpackKeys.OPEN.map.isDown()) {
 			if (BackpackSlotClickListener.canOpen(Proxy.getClientPlayer().getItemBySlot(EquipmentSlot.CHEST)) ||
 					CuriosCompat.getSlot(Proxy.getClientPlayer(), BackpackSlotClickListener::canOpen).isPresent())
 				L2Backpack.SLOT_CLICK.keyBind();

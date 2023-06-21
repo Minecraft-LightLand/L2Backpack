@@ -9,22 +9,22 @@ import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = L2ScreenTracker.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public enum Keys {
+public enum BackpackKeys {
 	OPEN("key.l2backpack.open", GLFW.GLFW_KEY_B);
 
 	public final String id;
 	public final int key;
 	public final KeyMapping map;
 
-	Keys(String id, int key) {
+	BackpackKeys(String id, int key) {
 		this.id = id;
 		this.key = key;
-		map = new KeyMapping(id, key, "key.categories.l2backpack");
+		map = new KeyMapping(id, key, "key.categories.l2mods");
 	}
 
 	@SubscribeEvent
 	public static void registerKeys(RegisterKeyMappingsEvent event) {
-		for (Keys k : Keys.values())
+		for (BackpackKeys k : BackpackKeys.values())
 			event.register(k.map);
 	}
 

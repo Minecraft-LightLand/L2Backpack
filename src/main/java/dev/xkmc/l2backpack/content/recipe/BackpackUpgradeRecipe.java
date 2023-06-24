@@ -26,7 +26,7 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 	@Override
 	public ItemStack assemble(Container container, RegistryAccess access) {
 		ItemStack stack = super.assemble(container, access);
-		stack.getOrCreateTag().putInt("rows", Math.max(1, stack.getOrCreateTag().getInt("rows")) + 1);
+		stack.getOrCreateTag().putInt("rows", Math.max(BackpackConfig.COMMON.initialRows.get(), stack.getOrCreateTag().getInt("rows")) + 1);
 		return stack;
 	}
 

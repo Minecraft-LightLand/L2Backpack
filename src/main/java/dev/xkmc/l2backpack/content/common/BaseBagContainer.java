@@ -31,6 +31,7 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 
 	public final PlayerSlot<?> item_slot;
 	protected final UUID uuid;
+	private boolean init = false;
 
 	public BaseBagContainer(MenuType<T> type, int windowId, Inventory inventory, SpriteManager manager,
 							PlayerSlot<?> hand, UUID uuid, int row, Predicate<ItemStack> pred, @Nullable Component title) {
@@ -42,10 +43,12 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 			MAP.computeIfAbsent(uuid, e -> new ConcurrentLinkedQueue<>()).add(this);
 			reload();
 		}
+		init = true;
 	}
 
 	@ServerOnly
 	private void reload() {
+		init = false;
 		ItemStack stack = getStack();
 		if (!stack.isEmpty()) {
 			ListTag tag = BaseBagItem.getListTag(stack);
@@ -64,12 +67,14 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 						save();
 					}
 				}
+				init = true;
 				return;
 			}
 			for (int i = 0; i < tag.size(); i++) {
 				this.container.setItem(i, ItemStack.of((CompoundTag) tag.get(i)));
 			}
 		}
+		init = true;
 	}
 
 	@Override
@@ -87,7 +92,7 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 	}
 
 	private void save() {
-		if (player.level().isClientSide()) return;
+		if (player.level().isClientSide() || !init) return;
 		ItemStack stack = getStack();
 		if (!stack.isEmpty()) {
 			serializeContents(stack);

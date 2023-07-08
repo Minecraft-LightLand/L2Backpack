@@ -4,6 +4,8 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.common.InvClientTooltip;
+import dev.xkmc.l2backpack.content.common.InvTooltip;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.render.BackpackModel;
@@ -16,6 +18,7 @@ import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,8 +36,12 @@ public class L2BackpackClient {
 			}
 			ItemProperties.register(BackpackItems.ENDER_BACKPACK.get(), new ResourceLocation("open"), EnderBackpackItem::isOpened);
 			ItemProperties.register(BackpackItems.QUIVER.get(), new ResourceLocation(L2Backpack.MODID, "arrow"), (stack, level, entity, i) -> Quiver.displayArrow(stack));
-
 		});
+	}
+
+	@SubscribeEvent
+	public static void registerClientTooltip(RegisterClientTooltipComponentFactoriesEvent event) {
+		event.register(InvTooltip.class, InvClientTooltip::new);
 	}
 
 	@SubscribeEvent

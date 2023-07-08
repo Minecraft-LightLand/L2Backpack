@@ -1,5 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
+import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2backpack.network.SendLogToClient;
 import dev.xkmc.l2library.base.menu.base.SpriteManager;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
@@ -8,6 +10,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -96,16 +99,31 @@ public abstract class BaseBagContainer<T extends BaseBagContainer<T>> extends Ba
 		ItemStack stack = getStack();
 		if (!stack.isEmpty()) {
 			serializeContents(stack);
+		} else {
+			sendInfo("Backpack stack not found. Save failed");
+		}
+		if (stack != item_slot.getItem(player)) {
+			sendInfo("Stack mismatch");
 		}
 		MAP.computeIfAbsent(uuid, e -> new ConcurrentLinkedQueue<>()).forEach(BaseBagContainer::reload);
 	}
 
 	protected void serializeContents(ItemStack stack) {
 		ListTag list = new ListTag();
+		int count = 0;
 		for (int i = 0; i < this.container.getContainerSize(); i++) {
-			list.add(i, this.container.getItem(i).save(new CompoundTag()));
+			ItemStack st = this.container.getItem(i);
+			count += st.getCount();
+			list.add(i, st.save(new CompoundTag()));
 		}
 		BaseBagItem.setListTag(stack, list);
+		sendInfo("Save " + count + " items to backpack");
+	}
+
+	protected void sendInfo(String info) {//TODO debug
+		if (inventory.player instanceof ServerPlayer sp) {
+			L2Backpack.HANDLER.toClientPlayer(new SendLogToClient(info), sp);
+		}
 	}
 
 	private ItemStack stack_cache = ItemStack.EMPTY;

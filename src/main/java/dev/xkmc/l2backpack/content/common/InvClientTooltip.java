@@ -12,7 +12,7 @@ public record InvClientTooltip(InvTooltip inv) implements ClientTooltipComponent
 
 	@Override
 	public int getHeight() {
-		return BaseBagItem.getItems(inv.stack()).size() / 9;
+		return BaseBagItem.getItems(inv.stack()).size() / 9 * 18 + 2;
 	}
 
 	@Override

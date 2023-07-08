@@ -20,7 +20,7 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 	@Override
 	public boolean matches(Container container, Level level) {
 		if (!super.matches(container, level)) return false;
-		return container.getItem(0).getOrCreateTag().getInt("rows") < 6;
+		return container.getItem(1).getOrCreateTag().getInt("rows") < 6;
 	}
 
 	@Override

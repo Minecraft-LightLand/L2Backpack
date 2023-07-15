@@ -1,12 +1,12 @@
 package dev.xkmc.l2backpack.content.quickswap.merged;
 
-import dev.xkmc.l2backpack.content.common.BaseOpenableContainer;
 import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
+import dev.xkmc.l2library.base.menu.base.BaseContainerMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class MultiSwitchScreen<T extends BaseOpenableContainer<T>> extends BaseOpenableScreen<T> {
+public class MultiSwitchScreen<T extends BaseContainerMenu<T>> extends BaseOpenableScreen<T> {
 
 	public MultiSwitchScreen(T cont, Inventory plInv, Component title) {
 		super(cont, plInv, title);

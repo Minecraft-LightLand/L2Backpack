@@ -2,7 +2,7 @@ package dev.xkmc.l2backpack.content.restore;
 
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.remote.worldchest.SimpleStorageMenuPvd;
-import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
+import dev.xkmc.l2backpack.init.registrate.BackpackMenus;
 import dev.xkmc.l2screentracker.screen.base.LayerPopType;
 import dev.xkmc.l2screentracker.screen.track.TrackedEntryType;
 import net.minecraft.network.chat.Component;
@@ -17,7 +17,7 @@ public class DimensionTrace extends TrackedEntryType<DimensionTraceData> {
 	@Override
 	public LayerPopType restoreMenuNotifyClient(ServerPlayer player, DimensionTraceData data, @Nullable Component comp) {
 		if (comp == null) {
-			comp = Component.translatable(BackpackMenu.getLangKey(BackpackMenu.MT_WORLD_CHEST.get()));
+			comp = Component.translatable(BackpackMenus.getLangKey(BackpackMenus.MT_WORLD_CHEST.get()));
 		}
 		var op = WorldStorage.get((ServerLevel) player.level()).getStorageWithoutPassword(data.uuid(), data.color());
 		if (op.isPresent()) {

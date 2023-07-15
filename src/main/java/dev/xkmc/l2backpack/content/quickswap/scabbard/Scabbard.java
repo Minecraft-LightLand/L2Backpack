@@ -31,7 +31,7 @@ public class Scabbard extends SingleSwapItem implements ItemOnBackItem {
 
 	@Override
 	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
-		new SimpleMenuPvd(player, slot, stack, ScabbardContainer::new).open();
+		new SimpleMenuPvd(player, slot, stack, ScabbardMenu::new).open();
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -20,10 +21,17 @@ import java.util.List;
 
 public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 
+	private static final String ROW = "rows";
+
 	public static ItemStack initLootGen(ItemStack stack, ResourceLocation loot) {
 		var ctag = stack.getOrCreateTag();
-		ctag.putString("loot", loot.toString());
+		ctag.putString(LOOT, loot.toString());
 		return stack;
+	}
+
+	public static ItemStack setRow(ItemStack result, int i) {
+		result.getOrCreateTag().putInt(ROW, i);
+		return result;
 	}
 
 	public final DyeColor color;
@@ -33,9 +41,14 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 		this.color = color;
 	}
 
-	public static ItemStack setRow(ItemStack result, int i) {
-		result.getOrCreateTag().putInt("rows", i);
-		return result;
+	@Override
+	public int getRows(ItemStack stack) {
+		int ans = Mth.clamp(stack.getOrCreateTag().getInt(ROW),
+				BackpackConfig.COMMON.initialRows.get(), 6);
+		if (!stack.getOrCreateTag().contains(ROW)) {
+			stack.getOrCreateTag().putInt(ROW, ans);
+		}
+		return ans;
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import dev.xkmc.l2backpack.init.data.*;
 import dev.xkmc.l2backpack.init.loot.LootGen;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
-import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
+import dev.xkmc.l2backpack.init.registrate.BackpackMenus;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2backpack.network.drawer.CreativeSetCarryToClient;
 import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
@@ -60,7 +60,7 @@ public class L2Backpack {
 		ForgeMod.enableMilkFluid();
 		BackpackBlocks.register();
 		BackpackItems.register();
-		BackpackMenu.register();
+		BackpackMenus.register();
 		BackpackMisc.register(bus);
 		Handlers.register();
 		BackpackTriggers.register();

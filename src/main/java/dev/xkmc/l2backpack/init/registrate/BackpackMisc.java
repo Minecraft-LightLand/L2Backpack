@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.init.registrate;
 import com.mojang.serialization.Codec;
 import com.tterrag.registrate.util.entry.MenuEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import dev.xkmc.l2backpack.content.common.BaseBagContainer;
+import dev.xkmc.l2backpack.content.common.BaseBagMenu;
 import dev.xkmc.l2backpack.content.recipe.BackpackDyeRecipe;
 import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipe;
 import dev.xkmc.l2backpack.content.recipe.MultiSwitchCraftRecipe;
@@ -47,28 +47,28 @@ public class BackpackMisc {
 
 	public static void commonSetup() {
 
-		MenuSourceRegistry.register(BackpackMenu.MT_ES.get(), (menu, slot, index, wid) ->
+		MenuSourceRegistry.register(BackpackMenus.MT_ES.get(), (menu, slot, index, wid) ->
 				index >= 36 && index < 63 ?
 						Optional.of(new PlayerSlot<>(ScreenTrackerRegistry.IS_ENDER.get(), new SimpleSlotData(index - 36))) :
 						Optional.empty());
 
-		MenuSourceRegistry.register(BackpackMenu.MT_WORLD_CHEST.get(), (menu, slot, index, wid) ->
+		MenuSourceRegistry.register(BackpackMenus.MT_WORLD_CHEST.get(), (menu, slot, index, wid) ->
 				Optional.of(new PlayerSlot<>(IS_DIM.get(),
 						new DimensionSourceData(menu.getColor(), index - 36, menu.getOwner()))));
 
-		MenuTraceRegistry.register(BackpackMenu.MT_WORLD_CHEST.get(), menu ->
+		MenuTraceRegistry.register(BackpackMenus.MT_WORLD_CHEST.get(), menu ->
 				Optional.of(TrackedEntry.of(TE_DIM.get(),
 						new DimensionTraceData(menu.getColor(), menu.getOwner()))));
 
-		addBag(BackpackMenu.MT_BACKPACK);
-		addBag(BackpackMenu.MT_ARMOR);
-		addBag(BackpackMenu.MT_ARROW);
-		addBag(BackpackMenu.MT_TOOL);
-		addBag(BackpackMenu.MT_MULTI);
-		addBag(BackpackMenu.MT_ES);
+		addBag(BackpackMenus.MT_BACKPACK);
+		addBag(BackpackMenus.MT_ARMOR);
+		addBag(BackpackMenus.MT_ARROW);
+		addBag(BackpackMenus.MT_TOOL);
+		addBag(BackpackMenus.MT_MULTI);
+		addBag(BackpackMenus.MT_ES);
 	}
 
-	private static <T extends BaseBagContainer<T>> void addBag(MenuEntry<T> type) {
+	private static <T extends BaseBagMenu<T>> void addBag(MenuEntry<T> type) {
 		MenuTraceRegistry.register(type.get(), menu ->
 				Optional.of(TrackedEntry.of(TE_BAG.get(),
 						new ItemBasedTraceData(menu.item_slot,

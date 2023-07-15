@@ -9,11 +9,10 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,12 +20,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -34,6 +38,9 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
+
+	protected static final String LOOT = "loot";
+	protected static final String SEED = "seed";
 
 	public static ListTag getListTag(ItemStack stack) {
 		var tag = stack.getOrCreateTag();
@@ -56,7 +63,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 	public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
 		if (entity != Proxy.getClientPlayer()) return 0;
 		Screen screen = Minecraft.getInstance().screen;
-		if ((screen instanceof BaseOpenableScreen<?> gui) && (gui.getMenu() instanceof BaseBagContainer<?> cont)) {
+		if ((screen instanceof BaseOpenableScreen<?> gui) && (gui.getMenu() instanceof BaseBagMenu<?> cont)) {
 			return cont.getStack() == stack ? 1 : 0;
 		}
 		return 0;
@@ -72,6 +79,12 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 		for (Tag value : tag) {
 			ans.add(ItemStack.of((CompoundTag) value));
 		}
+		if (ans.size() > 0) {
+			int size = ((BaseBagItem) stack.getItem()).getRows(stack) * 9;
+			while (ans.size() < size) {
+				ans.add(ItemStack.EMPTY);
+			}
+		}
 		return ans;
 	}
 
@@ -81,6 +94,28 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 			tag.add(i, list.get(i).save(new CompoundTag()));
 		}
 		Quiver.setListTag(stack, tag);
+	}
+
+	public static void checkLootGen(ItemStack stack, Player player) {
+		if (getListTag(stack).size() > 0) return;
+		CompoundTag ctag = stack.getOrCreateTag();
+		if (!ctag.contains(LOOT)) return;
+		ResourceLocation rl = new ResourceLocation(ctag.getString(LOOT));
+		long seed = ctag.getLong(SEED);
+		ctag.remove(LOOT);
+		ctag.remove(SEED);
+		if (!(player.level() instanceof ServerLevel sl)) return;
+		LootTable loottable = sl.getServer().getLootData().getLootTable(rl);
+		LootParams.Builder builder = new LootParams.Builder(sl);
+		builder.withLuck(player.getLuck()).withParameter(LootContextParams.THIS_ENTITY, player);
+		BaseBagItem bag = (BaseBagItem) stack.getItem();
+		Container cont = new SimpleContainer(bag.getRows(stack));
+		loottable.fill(cont, builder.create(LootContextParamSets.EMPTY), seed);
+		List<ItemStack> list = new ArrayList<>();
+		for (int i = 0; i < cont.getContainerSize(); i++) {
+			list.add(cont.getItem(i));
+		}
+		setItems(stack, list);
 	}
 
 	@Override
@@ -140,8 +175,17 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 		return InvTooltip.get(this, stack);
 	}
 
-	@Override
-	public void appendHoverText(ItemStack p_41421_, @Nullable Level p_41422_, List<Component> p_41423_, TooltipFlag p_41424_) {
-		super.appendHoverText(p_41421_, p_41422_, p_41423_, p_41424_);
+	public int getRows(ItemStack stack) {
+		return 1;
 	}
+
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+		return isValidContent(stack);
+	}
+
+	@Override
+	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+		return new BaseBagInvWrapper(stack);
+	}
+
 }

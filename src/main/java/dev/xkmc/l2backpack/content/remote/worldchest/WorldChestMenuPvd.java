@@ -33,7 +33,7 @@ public record WorldChestMenuPvd(ServerPlayer player, ItemStack stack, WorldChest
 		if (!container.id.equals(player.getUUID())) {
 			BackpackTriggers.SHARE.trigger((ServerPlayer) player);
 		}
-		return new WorldChestContainer(id, inventory, container.container, container, null, getDisplayName());
+		return new WorldChestContainer(id, inventory, container.container, container, null);
 	}
 
 	@ServerOnly

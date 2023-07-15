@@ -1,11 +1,10 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
-import dev.xkmc.l2backpack.content.backpack.BackpackContainer;
-import dev.xkmc.l2backpack.content.common.BaseOpenableContainer;
+import dev.xkmc.l2backpack.content.backpack.BackpackMenu;
 import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
-import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
+import dev.xkmc.l2backpack.init.registrate.BackpackMenus;
+import dev.xkmc.l2library.base.menu.base.BaseContainerMenu;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -14,11 +13,13 @@ import net.minecraft.world.inventory.MenuType;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class WorldChestContainer extends BaseOpenableContainer<WorldChestContainer> {
+public class WorldChestContainer extends BaseContainerMenu<WorldChestContainer> {
 
 	public static WorldChestContainer fromNetwork(MenuType<WorldChestContainer> type, int windowId, Inventory inv) {
-		return new WorldChestContainer(windowId, inv, new SimpleContainer(27), null, null, null);
+		return new WorldChestContainer(windowId, inv, new SimpleContainer(27), null, null);
 	}
+
+	protected final Player player;
 
 	@Nullable
 	protected final StorageContainer storage;
@@ -28,9 +29,9 @@ public class WorldChestContainer extends BaseOpenableContainer<WorldChestContain
 
 	public WorldChestContainer(int windowId, Inventory inventory, SimpleContainer cont,
 							   @Nullable StorageContainer storage,
-							   @Nullable WorldChestBlockEntity entity,
-							   @Nullable Component title) {
-		super(BackpackMenu.MT_WORLD_CHEST.get(), windowId, inventory, BackpackContainer.MANAGERS[2], menu -> cont, title);
+							   @Nullable WorldChestBlockEntity entity) {
+		super(BackpackMenus.MT_WORLD_CHEST.get(), windowId, inventory, BackpackMenu.MANAGERS[2], menu -> cont, false);
+		this.player = inventory.player;
 		this.addSlot("grid", stack -> true);
 		this.storage = storage;
 		this.activeChest = entity;

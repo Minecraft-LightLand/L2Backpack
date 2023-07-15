@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -48,8 +49,13 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBa
 	}
 
 	@Override
+	public int getRows(ItemStack stack) {
+		return 3;
+	}
+
+	@Override
 	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
-		new SimpleMenuPvd(player, slot, stack, MultiSwitchContainer::new).open();
+		new SimpleMenuPvd(player, slot, stack, MultiSwitchMenu::new).open();
 	}
 
 	@Override
@@ -65,6 +71,16 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBa
 		List<ItemStack> list = getItems(stack);
 		if (list.isEmpty()) return null;
 		return new MultiSwapToken(this, stack, type);
+	}
+
+	@Override
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+		return switch (slot / 9) {
+			case 0 -> Quiver.isValidStack(stack);
+			case 1 -> Scabbard.isValidItem(stack);
+			case 2 -> ArmorSwap.isValidItem(stack);
+			default -> false;
+		};
 	}
 
 	@Override

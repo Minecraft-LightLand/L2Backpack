@@ -16,7 +16,7 @@ public record SimpleStorageMenuPvd(Component comp, StorageContainer cont) implem
 
 	@Override
 	public AbstractContainerMenu createMenu(int wid, Inventory inv, Player player) {
-		return new WorldChestContainer(wid, inv, cont.container, cont, null, getDisplayName());
+		return new WorldChestContainer(wid, inv, cont.container, cont, null);
 	}
 
 }

@@ -16,11 +16,14 @@ public class QuickSwapManager {
 
 	@Nullable
 	public static QuickSwapType getValidType(LivingEntity player, boolean isAltDown) {
-		if (!isAltDown && player.getMainHandItem().isEmpty()) {
-			return QuickSwapType.ARMOR;
-		}
 		if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
 			return QuickSwapType.ARROW;
+		}
+		if (player.getOffhandItem().getItem() instanceof ProjectileWeaponItem) {
+			return QuickSwapType.ARROW;
+		}
+		if (!isAltDown && player.getMainHandItem().isEmpty()) {
+			return QuickSwapType.ARMOR;
 		}
 		if (isAltDown && player.getMainHandItem().isEmpty() ||
 				Scabbard.isValidItem(player.getMainHandItem())) {

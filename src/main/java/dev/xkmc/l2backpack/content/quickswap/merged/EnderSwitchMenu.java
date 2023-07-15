@@ -1,11 +1,8 @@
 package dev.xkmc.l2backpack.content.quickswap.merged;
 
-import dev.xkmc.l2backpack.content.common.BaseBagContainer;
-import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSwap;
-import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
-import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
+import dev.xkmc.l2backpack.content.common.BaseBagMenu;
 import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
+import dev.xkmc.l2backpack.init.registrate.BackpackMenus;
 import dev.xkmc.l2library.base.menu.base.SpriteManager;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.network.FriendlyByteBuf;
@@ -21,22 +18,22 @@ import net.minecraft.world.item.ItemStack;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class EnderSwitchContainer extends BaseBagContainer<EnderSwitchContainer> {
+public class EnderSwitchMenu extends BaseBagMenu<EnderSwitchMenu> {
 
 	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "ender_switch");
 
-	public static EnderSwitchContainer fromNetwork(MenuType<EnderSwitchContainer> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
+	public static EnderSwitchMenu fromNetwork(MenuType<EnderSwitchMenu> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
 		PlayerSlot<?> slot = PlayerSlot.read(buf);
 		UUID id = buf.readUUID();
-		return new EnderSwitchContainer(windowId, inv, new SimpleContainer(27), slot, id, null);
+		return new EnderSwitchMenu(windowId, inv, new SimpleContainer(27), slot, id, null);
 	}
 
-	public EnderSwitchContainer(int windowId, Inventory inventory, Container ender, PlayerSlot<?> hand, UUID uuid, @Nullable Component title) {
-		super(BackpackMenu.MT_ES.get(), windowId, inventory, MANAGERS, hand, uuid, 3, e -> true, title);
+	public EnderSwitchMenu(int windowId, Inventory inventory, Container ender, PlayerSlot<?> hand, UUID uuid, @Nullable Component title) {
+		super(BackpackMenus.MT_ES.get(), windowId, inventory, MANAGERS, hand, uuid, 3);
 		addEnderSlot(ender);
-		addSlot("arrow", Quiver::isValidStack);
-		addSlot("tool", Scabbard::isValidItem);
-		addSlot("armor", ArmorSwap::isValidItem);
+		addSlot("arrow");
+		addSlot("tool");
+		addSlot("armor");
 	}
 
 	private int enderAdded = 0;
@@ -54,7 +51,7 @@ public class EnderSwitchContainer extends BaseBagContainer<EnderSwitchContainer>
 			if (!this.moveItemStackTo(stack, 36 + 27, 36 + 27 + 27, false))
 				this.moveItemStackTo(stack, 36, 36 + 27, false);
 		}
-		this.container.setChanged();
+		this.slots.get(id).setChanged();
 		return ItemStack.EMPTY;
 	}
 }

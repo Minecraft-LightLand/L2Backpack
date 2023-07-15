@@ -1,8 +1,8 @@
 package dev.xkmc.l2backpack.content.quickswap.scabbard;
 
-import dev.xkmc.l2backpack.content.common.BaseBagContainer;
+import dev.xkmc.l2backpack.content.common.BaseBagMenu;
 import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2backpack.init.registrate.BackpackMenu;
+import dev.xkmc.l2backpack.init.registrate.BackpackMenus;
 import dev.xkmc.l2library.base.menu.base.SpriteManager;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.network.FriendlyByteBuf;
@@ -13,18 +13,18 @@ import net.minecraft.world.inventory.MenuType;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class ScabbardContainer extends BaseBagContainer<ScabbardContainer> {
+public class ScabbardMenu extends BaseBagMenu<ScabbardMenu> {
 
 	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "backpack_1");
 
-	public static ScabbardContainer fromNetwork(MenuType<ScabbardContainer> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
+	public static ScabbardMenu fromNetwork(MenuType<ScabbardMenu> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
 		PlayerSlot<?> slot = PlayerSlot.read(buf);
 		UUID id = buf.readUUID();
-		return new ScabbardContainer(windowId, inv, slot, id, null);
+		return new ScabbardMenu(windowId, inv, slot, id, null);
 	}
 
-	public ScabbardContainer(int windowId, Inventory inventory, PlayerSlot<?> hand, UUID uuid, @Nullable Component title) {
-		super(BackpackMenu.MT_TOOL.get(), windowId, inventory, MANAGERS, hand, uuid, 1, Scabbard::isValidItem, title);
+	public ScabbardMenu(int windowId, Inventory inventory, PlayerSlot<?> hand, UUID uuid, @Nullable Component title) {
+		super(BackpackMenus.MT_TOOL.get(), windowId, inventory, MANAGERS, hand, uuid, 1);
 	}
 
 }

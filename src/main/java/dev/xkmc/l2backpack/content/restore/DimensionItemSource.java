@@ -10,6 +10,7 @@ public class DimensionItemSource extends ItemSource<DimensionSourceData> {
 
 	@Override
 	public ItemStack getItem(Player player, DimensionSourceData data) {
+		if (player.level().isClientSide()) return ItemStack.EMPTY;
 		return WorldStorage.get((ServerLevel) player.level())
 				.getStorageWithoutPassword(data.uuid(), data.color())
 				.map(e -> e.container.getItem(data.slot())).orElse(ItemStack.EMPTY);

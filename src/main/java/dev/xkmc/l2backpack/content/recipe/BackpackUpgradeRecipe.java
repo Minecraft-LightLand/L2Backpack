@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.recipe;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
+import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
 import dev.xkmc.l2library.serial.recipe.AbstractSmithingRecipe;
@@ -20,13 +21,16 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 	@Override
 	public boolean matches(Container container, Level level) {
 		if (!super.matches(container, level)) return false;
-		return container.getItem(1).getOrCreateTag().getInt("rows") < 6;
+		ItemStack stack = container.getItem(1);
+		BaseBagItem bag = (BaseBagItem) stack.getItem();
+		return bag.getRows(stack) < 6;
 	}
 
 	@Override
 	public ItemStack assemble(Container container, RegistryAccess access) {
 		ItemStack stack = super.assemble(container, access);
-		stack.getOrCreateTag().putInt("rows", Math.max(BackpackConfig.COMMON.initialRows.get(), stack.getOrCreateTag().getInt("rows")) + 1);
+		BaseBagItem bag = (BaseBagItem) stack.getItem();
+		BackpackItem.setRow(stack, bag.getRows(stack) + 1);
 		return stack;
 	}
 

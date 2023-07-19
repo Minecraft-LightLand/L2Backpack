@@ -5,7 +5,6 @@ import dev.xkmc.l2library.base.menu.base.SpriteManager;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +14,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContainerMenu<T> {
@@ -57,10 +55,7 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		if (getStackRaw().isEmpty() || oldStack != newStack) {
 			return false;
 		}
-		if (getStack().getCapability(ForgeCapabilities.ITEM_HANDLER).resolve().get() != handler) {
-			return false;
-		}
-		return true;
+		return getStack().getCapability(ForgeCapabilities.ITEM_HANDLER).resolve().get() == handler;
 	}
 
 	public ItemStack getStack() {

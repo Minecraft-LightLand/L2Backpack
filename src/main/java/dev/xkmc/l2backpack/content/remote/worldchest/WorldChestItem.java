@@ -148,7 +148,7 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 		if (!tag.contains("owner_id")) return Optional.empty();
 		UUID id = tag.getUUID("owner_id");
 		long pwd = tag.getLong("password");
-		return WorldStorage.get(level).getOrCreateStorage(id, color.getId(), pwd, null, null,0);
+		return WorldStorage.get(level).getOrCreateStorage(id, color.getId(), pwd, null, null, 0);
 	}
 
 }

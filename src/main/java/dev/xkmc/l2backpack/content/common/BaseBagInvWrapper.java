@@ -1,7 +1,6 @@
 package dev.xkmc.l2backpack.content.common;
 
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -20,9 +19,6 @@ public class BaseBagInvWrapper implements IItemHandlerModifiable, ICapabilityPro
 	private final ItemStack stack;
 	private final BaseBagItem bag;
 	private final LazyOptional<IItemHandler> holder = LazyOptional.of(() -> this);
-
-	private CompoundTag cachedTag;
-	private List<ItemStack> itemStacksCache;
 
 	public BaseBagInvWrapper(ItemStack stack) {
 		this.stack = stack;
@@ -141,25 +137,16 @@ public class BaseBagInvWrapper implements IItemHandlerModifiable, ICapabilityPro
 	}
 
 	private List<ItemStack> getItemList() {
-		CompoundTag rootTag = stack.getOrCreateTag();
-		if (cachedTag == null || !cachedTag.equals(rootTag))
-			itemStacksCache = refreshItemList(rootTag);
-		return itemStacksCache;
-	}
-
-	private List<ItemStack> refreshItemList(CompoundTag rootTag) {
 		List<ItemStack> list = BaseBagItem.getItems(stack);
 		int size = getSlots();
 		while (list.size() < size) {
 			list.add(ItemStack.EMPTY);
 		}
-		cachedTag = rootTag;
 		return list;
 	}
 
 	private void setItemList(List<ItemStack> itemStacks) {
 		BaseBagItem.setItems(stack, itemStacks);
-		cachedTag = stack.getOrCreateTag();
 	}
 
 	@Override

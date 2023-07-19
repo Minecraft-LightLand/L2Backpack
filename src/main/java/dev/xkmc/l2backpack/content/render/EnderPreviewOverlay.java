@@ -1,6 +1,5 @@
 package dev.xkmc.l2backpack.content.render;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import dev.xkmc.l2backpack.content.drawer.DrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;

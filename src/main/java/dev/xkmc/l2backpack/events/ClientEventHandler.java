@@ -1,10 +1,12 @@
 package dev.xkmc.l2backpack.events;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.BackpackKeys;
-import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
+import dev.xkmc.l2backpack.network.DrawerInteractToServer;
+import dev.xkmc.l2itemselector.events.GenericKeyEvent;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -13,7 +15,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,8 +26,11 @@ import javax.annotation.Nullable;
 public class ClientEventHandler {
 
 	@SubscribeEvent
-	public static void keyEvent(InputEvent.Key event) {
-		if (Minecraft.getInstance().screen == null && Proxy.getClientPlayer() != null && BackpackKeys.OPEN.map.isDown()) {
+	public static void keyEvent(GenericKeyEvent event) {
+		if (Minecraft.getInstance().screen == null &&
+				Proxy.getClientPlayer() != null &&
+				event.test(BackpackKeys.OPEN.map.getKey()) &&
+				event.getAction() == InputConstants.PRESS) {
 			if (BackpackSlotClickListener.canOpen(Proxy.getClientPlayer().getItemBySlot(EquipmentSlot.CHEST)) ||
 					CuriosCompat.getSlot(Proxy.getClientPlayer(), BackpackSlotClickListener::canOpen).isPresent())
 				L2Backpack.SLOT_CLICK.keyBind();

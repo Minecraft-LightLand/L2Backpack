@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.network.drawer;
+package dev.xkmc.l2backpack.network;
 
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2serial.network.SerialPacketBase;

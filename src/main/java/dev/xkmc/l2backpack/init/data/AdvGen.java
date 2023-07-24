@@ -7,7 +7,7 @@ import dev.xkmc.l2backpack.init.advancement.*;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
-import dev.xkmc.l2backpack.network.drawer.DrawerInteractToServer;
+import dev.xkmc.l2backpack.network.DrawerInteractToServer;
 import dev.xkmc.l2library.serial.advancements.AdvancementGenerator;
 import dev.xkmc.l2library.serial.advancements.CriterionBuilder;
 import dev.xkmc.l2screentracker.screen.base.ScreenTrackerRegistry;

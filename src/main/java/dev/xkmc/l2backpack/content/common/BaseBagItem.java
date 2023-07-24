@@ -93,7 +93,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 		for (int i = 0; i < list.size(); i++) {
 			tag.add(i, list.get(i).save(new CompoundTag()));
 		}
-		Quiver.setListTag(stack, tag);
+		BaseBagItem.setListTag(stack, tag);
 	}
 
 	public static void checkLootGen(ItemStack stack, Player player) {

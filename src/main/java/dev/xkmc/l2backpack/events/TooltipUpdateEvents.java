@@ -4,7 +4,7 @@ import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2backpack.network.drawer.RequestTooltipUpdateEvent;
+import dev.xkmc.l2backpack.network.RequestTooltipUpdateEvent;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
 import net.minecraft.client.Minecraft;

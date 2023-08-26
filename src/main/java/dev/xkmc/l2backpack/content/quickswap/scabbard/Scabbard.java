@@ -9,7 +9,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
@@ -19,9 +18,7 @@ import java.util.List;
 public class Scabbard extends SingleSwapItem implements ItemOnBackItem {
 
 	public static boolean isValidItem(ItemStack stack) {
-		return stack.getItem().canFitInsideContainerItems() &&
-				stack.getMaxDamage() > 0 &&
-				!(stack.getItem() instanceof ProjectileWeaponItem) &&
+		return stack.getItem().canFitInsideContainerItems() && !stack.isStackable() &&
 				LivingEntity.getEquipmentSlotForItem(stack).getType() != EquipmentSlot.Type.ARMOR;
 	}
 

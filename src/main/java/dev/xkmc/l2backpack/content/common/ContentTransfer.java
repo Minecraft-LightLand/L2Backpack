@@ -67,8 +67,8 @@ public class ContentTransfer {
 				if (!pred.test(stack)) break; // invalid
 				if (!stack.isStackable()) {
 					boolean hasSpace = false;
-					for (int j = 0; j < list.size(); i++) {
-						if (cont.getItem(i).isEmpty()) {
+					for (int j = 0; j < list.size(); j++) {
+						if (cont.getItem(j).isEmpty()) {
 							hasSpace = true;
 							break;
 						}

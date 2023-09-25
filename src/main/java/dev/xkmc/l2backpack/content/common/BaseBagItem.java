@@ -1,6 +1,5 @@
 package dev.xkmc.l2backpack.content.common;
 
-import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.client.Minecraft;
@@ -137,21 +136,28 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 
 	@Override
 	public void click(Player player, ItemStack stack, boolean client, boolean shift, boolean right, @Nullable IItemHandler target) {
+		List<ItemStack> list = null;
+		if (!client && shift && target != null) {
+			list = getItems(stack);
+			int slot = getRows(stack) * 9;
+			while (list.size() < slot) {
+				list.add(ItemStack.EMPTY);
+			}
+		}
 		if (!client && shift && right && target != null) {
-			var list = getItems(stack);
 			int moved = ContentTransfer.transfer(list, target);
 			setItems(stack, list);
 			ContentTransfer.onDump(player, moved, stack);
-		} else if (client && shift && right && target != null)
+		} else if (client && shift && right && target != null) {
 			ContentTransfer.playSound(player);
-
+		}
 		if (!client && shift && !right && target != null) {
-			var list = getItems(stack);
 			int moved = ContentTransfer.loadFrom(list, target, player, this::isValidContent);
 			setItems(stack, list);
 			ContentTransfer.onLoad(player, moved, stack);
-		} else if (client && shift && !right && target != null)
+		} else if (client && shift && !right && target != null) {
 			ContentTransfer.playSound(player);
+		}
 	}
 
 	public boolean isValidContent(ItemStack stack) {

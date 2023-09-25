@@ -9,7 +9,7 @@ import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.modulargolems.content.entity.common.AbstractGolemEntity;
 import dev.xkmc.modulargolems.events.event.GolemEquipEvent;
 import dev.xkmc.modulargolems.events.event.GolemHandleItemEvent;
-import dev.xkmc.modulargolems.init.data.TagGen;
+import dev.xkmc.modulargolems.init.data.MGTagGen;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
@@ -75,7 +75,7 @@ public class GolemCompat {
 	}
 
 	public static void genBlockTag(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {
-		pvd.addTag(TagGen.POTENTIAL_DST).add(BackpackBlocks.WORLD_CHEST.get());
+		pvd.addTag(MGTagGen.POTENTIAL_DST).add(BackpackBlocks.WORLD_CHEST.get());
 	}
 
 }

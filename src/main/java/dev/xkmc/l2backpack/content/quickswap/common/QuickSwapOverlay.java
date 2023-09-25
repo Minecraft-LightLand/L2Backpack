@@ -51,7 +51,7 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 
 	@Override
 	protected boolean isOnHold() {
-		return super.isOnHold() || Screen.hasShiftDown() || Screen.hasAltDown();
+		return super.isOnHold() || Screen.hasAltDown();
 	}
 
 	@Override

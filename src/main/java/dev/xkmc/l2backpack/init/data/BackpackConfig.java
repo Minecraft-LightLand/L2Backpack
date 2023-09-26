@@ -16,6 +16,8 @@ public class BackpackConfig {
 		public final ForgeConfigSpec.BooleanValue showToolOnlyWithShift;
 		public final ForgeConfigSpec.BooleanValue showArmorOnlyWithShift;
 
+		public final ForgeConfigSpec.BooleanValue reverseScroll;
+
 
 		Client(ForgeConfigSpec.Builder builder) {
 			previewOnCenter = builder.comment("Put quiver preview near the center of the screen, rather than edge of the screen")
@@ -29,6 +31,9 @@ public class BackpackConfig {
 
 			showArmorOnlyWithShift = builder.comment("Show arrow quick swap only when shift is pressed")
 					.define("showArmorOnlyWithShift", true);
+
+			reverseScroll = builder.comment("Reverse scrolling direction for quick swap")
+					.define("reverseScroll", false);
 
 		}
 

@@ -1,0 +1,6 @@
+2.4.11
+- Fix dump/load on empty backpacks
+- Fix dump/load of unstackable items
+- Fix shift still trigger quickswap when shift is binded to other keys
+- Fix quick swap scrolling
+- Fix scrolling direction, add config option

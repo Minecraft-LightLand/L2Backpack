@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.select.ISelectionListener;
 import dev.xkmc.l2itemselector.select.SetSelectedToServer;
@@ -46,14 +47,15 @@ public class BackpackSel implements ISelectionListener {
 
 	@Override
 	public boolean handleClientScroll(int i, Player player) {
-		if (i < 0) {
-			toServer(UP);
-			return true;
-		} else if (i > 0) {
-			toServer(DOWN);
-			return true;
+		if (BackpackConfig.CLIENT.reverseScroll.get()) {
+			i = -i;
 		}
-		return false;
+		if (i > 0) {
+			toServer(UP);
+		} else if (i < 0) {
+			toServer(DOWN);
+		}
+		return true;
 	}
 
 	@Override

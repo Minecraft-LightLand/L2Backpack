@@ -1,7 +1,6 @@
 package dev.xkmc.l2backpack.init;
 
 import com.tterrag.registrate.providers.ProviderType;
-import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.compat.GolemCompat;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.events.BackpackSel;
@@ -30,7 +29,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -87,17 +85,15 @@ public class L2Backpack {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		LangData.addTranslations(REGISTRATE::addRawLang);
+		var gen = event.getGenerator();
+		boolean server = event.includeServer();
+		gen.addProvider(server, new SlotGen(gen));
 		//TODO event.getGenerator().addProvider(event.includeServer(), new BackpackGLMProvider(event.getGenerator().getPackOutput()));
 	}
 
 	@SubscribeEvent
 	public static void registerCaps(RegisterCapabilitiesEvent event) {
 		event.register(WorldStorage.class);
-	}
-
-	@SubscribeEvent
-	public static void sendMessage(final InterModEnqueueEvent event) {
-		CuriosCompat.init();
 	}
 
 }

@@ -4,7 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2screentracker.compat.CuriosTrackCompatImpl;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import dev.xkmc.l2screentracker.screen.source.SimpleSlotData;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
@@ -17,26 +17,17 @@ import java.util.function.Predicate;
 
 public class CuriosCompat {
 
-	public static void init() {
-		if (ModList.get().isLoaded("curios"))
-			initImpl();
-	}
-
-	public static Optional<Pair<ItemStack, PlayerSlot<?>>> getSlot(Player player, Predicate<ItemStack> pred) {
+	public static Optional<Pair<ItemStack, PlayerSlot<?>>> getSlot(LivingEntity player, Predicate<ItemStack> pred) {
 		if (ModList.get().isLoaded("curios")) {
 			return getSlotImpl(player, pred);
 		}
 		return Optional.empty();
 	}
 
-	private static void initImpl() {
-		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BACK.getMessageBuilder().build());
-	}
-
-	private static Optional<Pair<ItemStack, PlayerSlot<?>>> getSlotImpl(Player player, Predicate<ItemStack> pred) {
-		var curio = CuriosApi.getCuriosHelper().getEquippedCurios(player);
+	private static Optional<Pair<ItemStack, PlayerSlot<?>>> getSlotImpl(LivingEntity player, Predicate<ItemStack> pred) {
+		var curio = CuriosApi.getCuriosInventory(player);
 		if (curio.isPresent() && curio.resolve().isPresent()) {
-			var e = curio.resolve().get();
+			var e = curio.resolve().get().getEquippedCurios();
 			for (int i = 0; i < e.getSlots(); i++) {
 				ItemStack stack = e.getStackInSlot(i);
 				if (pred.test(stack)) {

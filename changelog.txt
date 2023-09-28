@@ -1,3 +1,7 @@
+2.4.12
+- Now non-player can also use quick swap
+- Move to new curios API
+
 2.4.11
 - Fix dump/load on empty backpacks
 - Fix dump/load of unstackable items

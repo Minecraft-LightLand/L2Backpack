@@ -4,7 +4,6 @@ import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 
@@ -40,10 +39,8 @@ public class QuickSwapManager {
 		List<ItemStack> list = new ArrayList<>();
 		list.add(user.getOffhandItem());
 		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
-		if (user instanceof Player pl) {
-			var opt = CuriosCompat.getSlot(pl, stack -> stack.getItem() instanceof IQuickSwapItem);
-			opt.ifPresent(pair -> list.add(pair.getFirst()));
-		}
+		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
+		opt.ifPresent(pair -> list.add(pair.getFirst()));
 		QuickSwapType type = getValidType(user, isAltDown);
 		if (type == null)
 			return null;

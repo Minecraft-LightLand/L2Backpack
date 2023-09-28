@@ -1,4 +1,4 @@
-// 1.20	2023-06-19T01:30:33.456656	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-09-26T23:19:45.896826	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 530cfc8939fcc948a19b693d06af8389391a97a4 assets/l2backpack/blockstates/dimensional_storage.json
 c8a12d1045e3e7eccdfa66ade2f5fd44f2359d78 assets/l2backpack/blockstates/drawer.json
 1b95dd478e92493373a61b041acce8ee59dfdec7 assets/l2backpack/blockstates/ender_drawer.json

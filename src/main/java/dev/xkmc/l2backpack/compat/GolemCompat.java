@@ -45,6 +45,14 @@ public class GolemCompat {
 				return new GenericItemStack<>(item, stack);
 			}
 		}
+		var opt = CuriosCompat.getSlot(golem,
+				e -> e.getItem() instanceof WorldChestItem);
+		if (opt.isPresent()) {
+			ItemStack stack = opt.get().getFirst();
+			if (stack.getItem() instanceof WorldChestItem item) {
+				return new GenericItemStack<>(item, stack);
+			}
+		}
 		return null;
 	}
 

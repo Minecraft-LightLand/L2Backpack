@@ -101,6 +101,8 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 			ItemStack bowStack = player.getMainHandItem();
 			if (bowStack.getItem() instanceof ProjectileWeaponItem bow) {
 				return !stack.isEmpty() && bow.getAllSupportedProjectiles().test(stack);
+			}else if (player.getOffhandItem().getItem() instanceof ProjectileWeaponItem bow) {
+				return !stack.isEmpty() && bow.getAllSupportedProjectiles().test(stack);
 			}
 			return false;
 		}

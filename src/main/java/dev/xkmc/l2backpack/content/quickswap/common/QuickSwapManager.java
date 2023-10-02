@@ -15,20 +15,27 @@ public class QuickSwapManager {
 
 	@Nullable
 	public static QuickSwapType getValidType(LivingEntity player, boolean isAltDown) {
-		if (isAltDown && Scabbard.isValidItem(player.getMainHandItem())) {
+		QuickSwapType main = getValidType(player, player.getMainHandItem(), isAltDown);
+		if (main != null) {
+			return main;
+		}
+		if (player.getOffhandItem().getItem() instanceof ProjectileWeaponItem)
+			return getValidType(player, player.getOffhandItem(), isAltDown);
+		return null;
+	}
+
+	@Nullable
+	public static QuickSwapType getValidType(LivingEntity player, ItemStack focus, boolean isAltDown) {
+		if (isAltDown && Scabbard.isValidItem(focus)) {
 			return QuickSwapType.TOOL;
 		}
-		if (player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
+		if (focus.getItem() instanceof ProjectileWeaponItem) {
 			return QuickSwapType.ARROW;
 		}
-		if (player.getOffhandItem().getItem() instanceof ProjectileWeaponItem) {
-			return QuickSwapType.ARROW;
-		}
-		if (isAltDown && player.getMainHandItem().isEmpty() ||
-				Scabbard.isValidItem(player.getMainHandItem())) {
+		if (isAltDown && focus.isEmpty() || Scabbard.isValidItem(focus)) {
 			return QuickSwapType.TOOL;
 		}
-		if (player.getMainHandItem().isEmpty()) {
+		if (focus.isEmpty()) {
 			return QuickSwapType.ARMOR;
 		}
 		return null;
@@ -36,12 +43,17 @@ public class QuickSwapManager {
 
 	@Nullable
 	public static IQuickSwapToken getToken(LivingEntity user, boolean isAltDown) {
+		return getToken(user, null, isAltDown);
+	}
+
+	@Nullable
+	public static IQuickSwapToken getToken(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
 		List<ItemStack> list = new ArrayList<>();
 		list.add(user.getOffhandItem());
 		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
 		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
 		opt.ifPresent(pair -> list.add(pair.getFirst()));
-		QuickSwapType type = getValidType(user, isAltDown);
+		QuickSwapType type = focus == null ? getValidType(user, isAltDown) : getValidType(user, focus, isAltDown);
 		if (type == null)
 			return null;
 		for (ItemStack stack : list) {

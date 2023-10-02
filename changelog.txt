@@ -1,6 +1,7 @@
 2.4.12
 - Now non-player can also use quick swap
 - Move to new curios API
+- Now golems can shoot all arrows from quiver, and can shoot from dimensional backpack
 
 2.4.11
 - Fix dump/load on empty backpacks

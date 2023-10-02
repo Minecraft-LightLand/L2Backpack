@@ -1,9 +1,14 @@
 package dev.xkmc.l2backpack.compat;
 
+import com.mojang.datafixers.util.Pair;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
+import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestInvWrapper;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
+import dev.xkmc.l2backpack.events.ArrowBagEvents;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.modulargolems.content.entity.common.AbstractGolemEntity;
@@ -15,6 +20,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.ItemHandlerHelper;
 
@@ -80,6 +86,35 @@ public class GolemCompat {
 		var handler = new WorldChestInvWrapper(storage.container, storage.id);
 		ItemStack remain = ItemHandlerHelper.insertItem(handler, stack, false);
 		event.getItem().setItem(remain);
+	}
+
+
+	@SubscribeEvent(priority = EventPriority.LOW)
+	public static void onArrowFind(ArrowBagEvents.ArrowFindEvent event) {
+		if (!(event.getEntity() instanceof AbstractGolemEntity<?, ?> golem)) return;
+		IQuickSwapToken token = QuickSwapManager.getToken(event.getEntity(), event.getStack(), false);
+		if (token != null && token.type() == QuickSwapType.ARROW) {
+			List<ItemStack> arrows = token.getList();
+			for (int i = 0; i < 9; i++) {
+				ItemStack stack = arrows.get(i);
+				if (event.setProjectile(Pair.of(stack, token::shrink))) {
+					return;
+				}
+			}
+		}
+		var backpack = getBackpack(golem);
+		if (backpack == null) return;
+		if (event.getEntity().level() instanceof ServerLevel level) {
+			var cont = backpack.item().getContainer(backpack.stack(), level);
+			if (cont.isEmpty()) return;
+			var storage = cont.get();
+			for (int i = 0; i < storage.container.getContainerSize(); i++) {
+				ItemStack stack = storage.container.getItem(i);
+				if (event.setProjectile(Pair.of(stack, x -> storage.container.setChanged()))) {
+					return;
+				}
+			}
+		}
 	}
 
 	public static void genBlockTag(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {

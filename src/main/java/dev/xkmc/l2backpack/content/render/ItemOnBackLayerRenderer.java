@@ -14,7 +14,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
@@ -41,8 +40,8 @@ public class ItemOnBackLayerRenderer<T extends LivingEntity, M extends HumanoidM
 		ItemOnBackItem item = null;
 		if (stack.getItem() instanceof ItemOnBackItem backpack) {
 			item = backpack;
-		} else if (entity instanceof Player player) {
-			var opt = CuriosCompat.getSlot(player, e -> e.getItem() instanceof ItemOnBackItem);
+		} else {
+			var opt = CuriosCompat.getSlot(entity, e -> e.getItem() instanceof ItemOnBackItem);
 			if (opt.isPresent()) {
 				stack = opt.get().getFirst();
 				item = (ItemOnBackItem) stack.getItem();

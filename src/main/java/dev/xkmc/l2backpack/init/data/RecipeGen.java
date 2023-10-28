@@ -57,6 +57,12 @@ public class RecipeGen {
 						.define('E', Items.GOLD_NUGGET)
 						.save(pvd, L2Backpack.MODID + ":shaped/craft_storage_" + color.getName());
 			}
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, BackpackItems.PICKUP_TWEAKER.get(), 1)::unlockedBy, Items.STICK)
+					.pattern(" G ").pattern(" IG").pattern("S  ")
+					.define('S', Items.STICK).define('G', Items.GOLD_NUGGET).define('I',Items.IRON_INGOT)
+					.save(pvd);
+
 			Item ender = BackpackItems.ENDER_BACKPACK.get();
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, ender, 1)::unlockedBy, ender)
 					.pattern("EAE").pattern("BCB").pattern("DDD")

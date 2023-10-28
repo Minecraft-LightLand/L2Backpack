@@ -70,7 +70,7 @@ public class DrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMethod,
 		if (blockentity instanceof DrawerBlockEntity chest) {
 			chest.handler.count = DrawerItem.getCount(stack);
 			chest.handler.item = chest.handler.count == 0 ? Items.AIR : BaseDrawerItem.getItem(stack);
-			chest.config = BackpackCap.getConfig(stack);
+			chest.handler.config = BackpackCap.getConfig(stack);
 		}
 	}
 
@@ -98,7 +98,7 @@ public class DrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMethod,
 		assert rl != null;
 		stack.getOrCreateTag().putString(BaseDrawerItem.KEY, rl.toString());
 		DrawerItem.setCount(stack, chest.handler.count);
-		BackpackCap.setConfig(stack, chest.config);
+		BackpackCap.setConfig(stack, chest.handler.config);
 		return stack;
 	}
 

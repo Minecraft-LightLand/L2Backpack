@@ -1,5 +1,7 @@
 package dev.xkmc.l2backpack.content.backpack;
 
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -31,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class EnderBackpackItem extends Item implements BackpackModelItem {
+public class EnderBackpackItem extends Item implements BackpackModelItem, PickupBagItem {
 
 	@OnlyIn(Dist.CLIENT)
 	public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
@@ -62,7 +64,11 @@ public class EnderBackpackItem extends Item implements BackpackModelItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		LangData.addInfo(list, LangData.Info.QUICK_ANY_ACCESS, LangData.Info.KEYBIND);
+		BackpackCap.addText(stack, list);
+		LangData.addInfo(list,
+				LangData.Info.QUICK_ANY_ACCESS,
+				LangData.Info.KEYBIND,
+				LangData.Info.PICKUP);
 	}
 
 	@Override

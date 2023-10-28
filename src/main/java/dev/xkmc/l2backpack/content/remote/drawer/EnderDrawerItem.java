@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.drawer.DrawerInvWrapper;
@@ -151,6 +152,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			if (tag.contains(KEY_OWNER_NAME)) {
 				String name = tag.getString(KEY_OWNER_NAME);
 				list.add(LangData.IDS.STORAGE_OWNER.get(name));
+				BackpackCap.addText(stack, list);
 			}
 		}
 		LangData.addInfo(list,
@@ -159,7 +161,8 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 				LangData.Info.PLACE,
 				LangData.Info.COLLECT_DRAWER,
 				LangData.Info.ENDER_DRAWER,
-				LangData.Info.ENDER_DRAWER_USE);
+				LangData.Info.ENDER_DRAWER_USE,
+				LangData.Info.PICKUP);
 	}
 
 	public String getDescriptionId() {

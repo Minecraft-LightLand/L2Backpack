@@ -19,9 +19,6 @@ public class DrawerBlockEntity extends IDrawerBlockEntity {
 	@SerialClass.SerialField(toClient = true)
 	public final DrawerHandler handler = new DrawerHandler(this);
 
-	@SerialClass.SerialField(toClient = true)
-	public CompoundTag config;
-
 	public DrawerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}

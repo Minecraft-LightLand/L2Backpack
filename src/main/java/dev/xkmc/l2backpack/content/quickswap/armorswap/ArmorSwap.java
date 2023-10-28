@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.armorswap;
 
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.common.*;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;

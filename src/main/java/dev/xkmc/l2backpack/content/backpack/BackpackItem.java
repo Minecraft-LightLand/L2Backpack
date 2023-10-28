@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.backpack;
 
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -61,6 +62,8 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, rows), 6));
 		if (tag.contains("loot")) {
 			list.add(LangData.IDS.LOOT.get().withStyle(ChatFormatting.AQUA));
+		} else {
+			BackpackCap.addText(stack, list);
 		}
 		LangData.addInfo(list,
 				LangData.Info.QUICK_INV_ACCESS,
@@ -68,7 +71,8 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 				LangData.Info.UPGRADE,
 				LangData.Info.DUMP,
 				LangData.Info.LOAD,
-				LangData.Info.EXIT
+				LangData.Info.EXIT,
+				LangData.Info.PICKUP
 		);
 	}
 

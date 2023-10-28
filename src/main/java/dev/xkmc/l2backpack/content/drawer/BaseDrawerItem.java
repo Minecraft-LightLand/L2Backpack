@@ -1,5 +1,8 @@
 package dev.xkmc.l2backpack.content.drawer;
 
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupBagItem;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -9,9 +12,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Optional;
 
-public interface BaseDrawerItem {
+public interface BaseDrawerItem extends PickupBagItem {
 
-	String KEY = "drawerItem";
+	String KEY = "drawerItem", STACKING = "StackingFactor";
 
 	static boolean canAccept(ItemStack drawer, ItemStack stack) {
 		return !stack.hasTag() && !stack.isEmpty() && stack.getItem() == getItem(drawer);
@@ -40,7 +43,13 @@ public interface BaseDrawerItem {
 	}
 
 	static int getStackingFactor(ItemStack drawer) {
-		return getStackingFactor();
+		return getStackingFactor(BackpackCap.getConfig(drawer));
+	}
+
+	static int getStackingFactor(CompoundTag tag) {
+		int factor = tag.getInt(STACKING);
+		if (factor < 1) factor = 1;
+		return getStackingFactor() * factor;
 	}
 
 	static int getStackingFactor() {
@@ -55,7 +64,7 @@ public interface BaseDrawerItem {
 		drawer.getOrCreateTag().putString(KEY, rl.toString());
 	}
 
-	default ItemStack takeItem(ItemStack drawer, Player player){
+	default ItemStack takeItem(ItemStack drawer, Player player) {
 		return takeItem(drawer, Integer.MAX_VALUE, player, false);
 	}
 

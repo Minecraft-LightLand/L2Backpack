@@ -2,7 +2,9 @@ package dev.xkmc.l2backpack.events;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
+import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.tool.IBagTool;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.BackpackKeys;
 import dev.xkmc.l2backpack.network.DrawerInteractToServer;
@@ -39,6 +41,14 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public static void onScreenLeftClick(ScreenEvent.MouseButtonReleased.Pre event) {
+		if (event.getScreen() instanceof AbstractContainerScreen<?> scr &&
+				scr.getMenu().getCarried().getItem() instanceof IBagTool) {
+			var slot = scr.getSlotUnderMouse();
+			if (slot != null && slot.getItem().getItem() instanceof PickupBagItem) {
+				event.setCanceled(true);
+			}
+			return;
+		}
 		if (onRelease(event)) {
 			event.setCanceled(true);
 		}
@@ -46,6 +56,10 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public static void onScreenRightClick(ScreenEvent.MouseButtonPressed.Pre event) {
+		if (event.getScreen() instanceof AbstractContainerScreen<?> scr &&
+				scr.getMenu().getCarried().getItem() instanceof IBagTool) {
+			return;
+		}
 		if (onPress(event)) {
 			event.setCanceled(true);
 		}

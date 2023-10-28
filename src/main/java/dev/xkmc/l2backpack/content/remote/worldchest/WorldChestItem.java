@@ -1,7 +1,8 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
-import dev.xkmc.l2backpack.content.common.BaseBagInvWrapper;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
@@ -34,7 +35,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class WorldChestItem extends BlockItem implements BackpackModelItem {
+public class WorldChestItem extends BlockItem implements BackpackModelItem, PickupBagItem {
 
 	public static Optional<UUID> getOwner(ItemStack stack) {
 		CompoundTag tag = stack.getTag();
@@ -117,6 +118,7 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 			if (tag.contains("owner_name")) {
 				String name = tag.getString("owner_name");
 				list.add(LangData.IDS.STORAGE_OWNER.get(getName(name)));
+				BackpackCap.addText(stack, list);
 			}
 			if (tag.contains("loot")) {
 				list.add(LangData.IDS.LOOT.get().withStyle(ChatFormatting.AQUA));
@@ -126,7 +128,8 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 				LangData.Info.PLACE,
 				LangData.Info.DIMENSIONAL,
 				LangData.Info.KEYBIND,
-				LangData.Info.EXIT);
+				LangData.Info.EXIT,
+				LangData.Info.PICKUP);
 	}
 
 	public String getDescriptionId() {

@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.drawer;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -15,6 +16,9 @@ public class DrawerHandler implements IItemHandler {
 
 	@SerialClass.SerialField(toClient = true)
 	public int count;
+
+	@SerialClass.SerialField(toClient = true)
+	public CompoundTag config;
 
 	private final DrawerBlockEntity parent;
 
@@ -40,7 +44,7 @@ public class DrawerHandler implements IItemHandler {
 		if (stack.hasTag()) {
 			return stack;
 		}
-		int max = DrawerItem.MAX_STACK_SIZE * stack.getMaxStackSize();
+		int max = BaseDrawerItem.getStackingFactor(config) * stack.getMaxStackSize();
 		if (count >= max) {
 			return ItemStack.EMPTY;
 		}

@@ -2,9 +2,12 @@ package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
+import dev.xkmc.l2backpack.content.tool.IBagTool;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2screentracker.click.writable.ClickedPlayerSlotResult;
@@ -89,6 +92,13 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 	protected void handle(ServerPlayer player, ClickedPlayerSlotResult result) {
 		boolean others = false;
 		boolean keybind = result.container() instanceof PlayerInvCallback;
+		if (!keybind && player.containerMenu.getCarried().getItem() instanceof IBagTool tool) {
+			if (result.stack().getItem() instanceof PickupBagItem) {
+				tool.click(result.stack());
+				result.container().update();
+				return;
+			}
+		}
 		if (!keybind) {
 			ScreenTracker.onServerOpen(player);
 		}

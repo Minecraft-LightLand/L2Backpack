@@ -32,12 +32,17 @@ public class CapabilityEvents {
 	@SubscribeEvent
 	public static void onItemPickup(EntityItemPickupEvent event) {
 		if (!(event.getEntity() instanceof ServerPlayer player)) return;
+		ItemStack stack = event.getItem().getItem();
 		ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
-		var cap = chest.getCapability(BackpackCap.TOKEN).resolve().or(() ->
-				CuriosCompat.getSlot(player, e -> e.getCapability(BackpackCap.TOKEN).resolve().isPresent())
-						.flatMap(e -> e.getFirst().getCapability(BackpackCap.TOKEN).resolve()));
-		if (cap.isEmpty()) return;
-		cap.get().doPickup(event.getItem().getItem(), new PickupTrace(player));
+		chest.getCapability(BackpackCap.TOKEN).resolve().ifPresent(
+				cap -> cap.doPickup(stack, new PickupTrace(player)));
+		if (stack.isEmpty()) return;
+		CuriosCompat.getSlot(player, e -> {
+			if (stack.isEmpty()) return false;
+			e.getCapability(BackpackCap.TOKEN).resolve().ifPresent(
+					cap -> cap.doPickup(stack, new PickupTrace(player)));
+			return false;
+		});
 	}
 
 }

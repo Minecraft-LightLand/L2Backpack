@@ -46,7 +46,7 @@ public abstract class InvBackpackCap<T extends IItemHandlerModifiable> implement
 		if (trace.getMode() == PickupMode.STACKING) return ans;
 		for (int i = 0; i < inv.getSlots(); i++) {
 			if (stack.isEmpty()) break;
-			ItemStack result = inv.insertItem(i, stack, false);
+			ItemStack result = inv.insertItem(i, stack.copy(), false);
 			int count = stack.getCount();
 			int remain = result.getCount();
 			ans += count - remain;

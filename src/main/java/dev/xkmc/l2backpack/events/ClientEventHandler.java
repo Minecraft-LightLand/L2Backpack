@@ -18,6 +18,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
@@ -54,7 +55,7 @@ public class ClientEventHandler {
 		}
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onScreenRightClick(ScreenEvent.MouseButtonPressed.Pre event) {
 		if (event.getScreen() instanceof AbstractContainerScreen<?> scr &&
 				scr.getMenu().getCarried().getItem() instanceof IBagTool) {

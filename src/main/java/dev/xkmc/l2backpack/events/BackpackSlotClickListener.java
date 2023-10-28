@@ -2,9 +2,9 @@ package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
-import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2backpack.content.tool.IBagTool;
@@ -37,7 +37,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 
 	@Override
 	public boolean isAllowed(ItemStack itemStack) {
-		return canOpen(itemStack);
+		return canOpen(itemStack) || itemStack.getItem() instanceof BaseDrawerItem;
 	}
 
 	public void keyBind() {
@@ -71,20 +71,29 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 	public void handle(ServerPlayer player, int index, int slot, int wid) {
 		ClickedPlayerSlotResult result = this.getSlot(player, index, slot, wid);
 		if (result != null) this.handle(player, result);
-		else {
-			ItemStack stack = player.containerMenu.getSlot(index).getItem();
-			boolean others = false;
-			ScreenTracker.onServerOpen(player);
-			if (stack.getItem() instanceof EnderBackpackItem) {
-				NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
-						ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getHoverName()));
-			} else if (stack.getItem() instanceof WorldChestItem chest) {
-				others = WorldChestItem.getOwner(stack).map(e -> !e.equals(player.getUUID())).orElse(false);
-				new WorldChestMenuPvd(player, stack, chest).open();
+		else this.handleNoMenu(player, index);
+	}
+
+	private void handleNoMenu(ServerPlayer player, int index) {
+		ItemStack stack = player.containerMenu.getSlot(index).getItem();
+		if (player.containerMenu.getCarried().getItem() instanceof IBagTool tool) {
+			if (stack.getItem() instanceof PickupBagItem) {
+				tool.click(stack);
+				return;
 			}
-			if (others) {
-				BackpackTriggers.SHARE.trigger(player);
-			}
+		}
+		if (stack.getItem() instanceof BaseDrawerItem) return;
+		boolean others = false;
+		ScreenTracker.onServerOpen(player);
+		if (stack.getItem() instanceof EnderBackpackItem) {
+			NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
+					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getHoverName()));
+		} else if (stack.getItem() instanceof WorldChestItem chest) {
+			others = WorldChestItem.getOwner(stack).map(e -> !e.equals(player.getUUID())).orElse(false);
+			new WorldChestMenuPvd(player, stack, chest).open();
+		}
+		if (others) {
+			BackpackTriggers.SHARE.trigger(player);
 		}
 	}
 
@@ -99,6 +108,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 				return;
 			}
 		}
+		if (result.stack().getItem() instanceof BaseDrawerItem) return;
 		if (!keybind) {
 			ScreenTracker.onServerOpen(player);
 		}

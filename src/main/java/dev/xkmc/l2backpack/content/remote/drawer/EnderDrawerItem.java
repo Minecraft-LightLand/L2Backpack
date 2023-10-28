@@ -156,13 +156,11 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			}
 		}
 		LangData.addInfo(list,
-				LangData.Info.DRAWER_USE,
+				LangData.Info.ENDER_DRAWER,
 				LangData.Info.EXTRACT_DRAWER,
 				LangData.Info.PLACE,
 				LangData.Info.COLLECT_DRAWER,
-				LangData.Info.ENDER_DRAWER,
-				LangData.Info.ENDER_DRAWER_USE,
-				LangData.Info.PICKUP);
+				LangData.Info.ENDER_DRAWER_USE);
 	}
 
 	public String getDescriptionId() {

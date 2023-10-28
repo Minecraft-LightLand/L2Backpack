@@ -33,8 +33,6 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 	public static final String KEY_OWNER_ID = "owner_id";
 	public static final String KEY_OWNER_NAME = "owner_name";
 
-	public static final int MAX = 64;
-
 	public static Optional<UUID> getOwner(ItemStack stack) {
 		CompoundTag tag = stack.getTag();
 		if (tag != null) {
@@ -78,7 +76,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		} else {
 			DrawerAccess access = DrawerAccess.of(world, stack);
 			int count = access.getCount();
-			int max = MAX * access.item().getMaxStackSize();
+			int max = BaseDrawerItem.getStackingFactor(stack) * access.item().getMaxStackSize();
 			int ext = BaseDrawerItem.loadFromInventory(max, count, access.item(), player);
 			count += ext;
 			access.setCount(count);
@@ -86,7 +84,6 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		}
 		return InteractionResultHolder.success(stack);
 	}
-
 
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
@@ -115,7 +112,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		refresh(drawer, player);
 		DrawerAccess access = DrawerAccess.of(player.level(), drawer);
 		int count = access.getCount();
-		int take = Math.min(MAX * stack.getMaxStackSize() - count, stack.getCount());
+		int take = Math.min(BaseDrawerItem.getStackingFactor(stack) * stack.getMaxStackSize() - count, stack.getCount());
 		access.setCount(access.getCount() + take);
 		stack.shrink(take);
 	}

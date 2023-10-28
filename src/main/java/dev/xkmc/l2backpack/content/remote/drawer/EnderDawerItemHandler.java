@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
+import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +26,7 @@ public record EnderDawerItemHandler(DrawerAccess access, boolean logistics) impl
 	public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
 		if (stack.hasTag() || stack.getItem() != access.item()) return stack;
 		int count = access.getCount();
-		int max = access.item().getMaxStackSize() * EnderDrawerItem.MAX;
+		int max = access.item().getMaxStackSize() * BaseDrawerItem.getStackingFactor();
 		int insert = Math.min(max - count, stack.getCount());
 		if (!simulate) {
 			access.setCount(count + insert);

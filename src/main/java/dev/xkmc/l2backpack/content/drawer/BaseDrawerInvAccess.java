@@ -49,11 +49,11 @@ public interface BaseDrawerInvAccess extends IItemHandlerModifiable {
 	@Override
 	default int getSlotLimit(int slot) {
 		Item item = getStoredItem();
-		return DrawerItem.MAX * item.getMaxStackSize();
+		return BaseDrawerItem.getStackingFactor(drawerStack()) * item.getMaxStackSize();
 	}
 
 	default int getMax(ItemStack stack) {
-		return DrawerItem.MAX * stack.getMaxStackSize();
+		return BaseDrawerItem.getStackingFactor(drawerStack()) * stack.getMaxStackSize();
 	}
 
 	@Override

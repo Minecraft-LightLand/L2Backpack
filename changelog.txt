@@ -1,3 +1,19 @@
+2.4.13
+- add pickup option
+- add pickup wand TODO
+- add pickup tooltip TODO
+    backpack
+    dim backpack
+    ender backpack
+    quiver
+    tool
+    armor
+    3-1
+    4-1
+    drawer
+    ender drawer
+- add drawer upgrade persistence
+
 2.4.12
 - Now non-player can also use quick swap
 - Move to new curios API

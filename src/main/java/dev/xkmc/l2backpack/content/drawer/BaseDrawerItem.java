@@ -39,6 +39,14 @@ public interface BaseDrawerItem {
 		return ext;
 	}
 
+	static int getStackingFactor(ItemStack drawer) {
+		return getStackingFactor();
+	}
+
+	static int getStackingFactor() {
+		return 64;
+	}
+
 	void insert(ItemStack drawer, ItemStack stack, Player player);
 
 	default void setItem(ItemStack drawer, Item item, Player player) {

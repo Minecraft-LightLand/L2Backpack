@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -30,6 +31,9 @@ public class EnderDrawerBlockEntity extends IDrawerBlockEntity {
 
 	@SerialClass.SerialField(toClient = true)
 	public Item item;
+
+	@SerialClass.SerialField(toClient = true)
+	public CompoundTag config;
 
 	private LazyOptional<IItemHandler> handler;
 

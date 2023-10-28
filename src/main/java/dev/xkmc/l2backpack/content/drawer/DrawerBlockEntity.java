@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.drawer;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,6 +18,9 @@ public class DrawerBlockEntity extends IDrawerBlockEntity {
 
 	@SerialClass.SerialField(toClient = true)
 	public final DrawerHandler handler = new DrawerHandler(this);
+
+	@SerialClass.SerialField(toClient = true)
+	public CompoundTag config;
 
 	public DrawerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

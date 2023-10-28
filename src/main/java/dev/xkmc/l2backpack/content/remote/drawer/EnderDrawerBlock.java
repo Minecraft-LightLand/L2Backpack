@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
@@ -74,6 +75,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 			chest.owner_id = id;
 			chest.owner_name = name;
 			chest.item = BaseDrawerItem.getItem(stack);
+			chest.config = BackpackCap.getConfig(stack);
 			chest.addToListener();
 		}
 	}
@@ -104,6 +106,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 			ResourceLocation rl = ForgeRegistries.ITEMS.getKey(chest.item);
 			assert rl != null;
 			stack.getOrCreateTag().putString(BaseDrawerItem.KEY, rl.toString());
+			BackpackCap.setConfig(stack, chest.config);
 		}
 		return stack;
 	}

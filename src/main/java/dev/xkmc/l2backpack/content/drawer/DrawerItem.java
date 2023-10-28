@@ -27,8 +27,6 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 
 	private static final String COUNT = "drawerCount";
 
-	public static final int MAX = 64;
-
 	public static int getCount(ItemStack drawer) {
 		return Optional.ofNullable(drawer.getTag()).map(e -> e.getInt(COUNT)).orElse(0);
 	}
@@ -63,7 +61,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 		} else {
 			Item item = BaseDrawerItem.getItem(stack);
 			int count = getCount(stack);
-			int max = item.getMaxStackSize() * MAX;
+			int max = item.getMaxStackSize() * BaseDrawerItem.getStackingFactor(stack);
 			boolean perform = !canSetNewItem(stack);
 			if (!perform) {
 				item = ContentTransfer.filterMaxItem(new InvWrapper(player.getInventory()));
@@ -116,7 +114,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 			}
 			if (perform) {
 				int count = getCount(stack);
-				int max = MAX * item.getMaxStackSize();
+				int max = BaseDrawerItem.getStackingFactor(stack) * item.getMaxStackSize();
 				int remain = ContentTransfer.loadFrom(item, max - count, target);
 				ContentTransfer.onLoad(player, remain, stack);
 				setCount(stack, count + remain);
@@ -128,7 +126,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 	@Override
 	public void insert(ItemStack drawer, ItemStack stack, @Nullable Player player) {
 		int count = getCount(drawer);
-		int allow = Math.min(MAX * stack.getMaxStackSize() - count, stack.getCount());
+		int allow = Math.min(BaseDrawerItem.getStackingFactor(drawer) * stack.getMaxStackSize() - count, stack.getCount());
 		setCount(drawer, count + allow);
 		stack.shrink(allow);
 	}

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
-public class DrawerInvWrapper extends InvBackpackCap implements ICapabilityProvider {
+public class DrawerInvWrapper extends InvBackpackCap<BaseDrawerInvAccess> implements ICapabilityProvider {
 
 	private final ItemStack stack;
 	private final Function<PickupTrace, BaseDrawerInvAccess> access;
@@ -28,8 +28,13 @@ public class DrawerInvWrapper extends InvBackpackCap implements ICapabilityProvi
 	}
 
 	@Override
-	public @Nullable IItemHandlerModifiable getInv(PickupTrace trace) {
+	public @Nullable BaseDrawerInvAccess getInv(PickupTrace trace) {
 		return access.apply(trace);
+	}
+
+	@Override
+	public boolean mayStack(BaseDrawerInvAccess inv, int slot, ItemStack stack) {
+		return inv.mayStack(inv, slot, stack);
 	}
 
 	@Override

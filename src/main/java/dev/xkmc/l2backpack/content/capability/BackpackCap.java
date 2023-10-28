@@ -26,7 +26,7 @@ public interface BackpackCap {
 				return PickupMode.valueOf(str);
 			}
 		}
-		return PickupMode.NONE;
+		return PickupMode.STACKING;
 	}
 
 	PickupMode getMode();

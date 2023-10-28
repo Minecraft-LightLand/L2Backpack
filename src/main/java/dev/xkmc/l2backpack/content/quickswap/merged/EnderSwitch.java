@@ -5,12 +5,14 @@ import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -39,6 +41,11 @@ public class EnderSwitch extends MultiSwitch implements BackpackModelItem {
 	@Override
 	public boolean shouldRender() {
 		return false;
+	}
+
+	@Override
+	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+		return new EnderSwitchCaps(stack);
 	}
 
 }

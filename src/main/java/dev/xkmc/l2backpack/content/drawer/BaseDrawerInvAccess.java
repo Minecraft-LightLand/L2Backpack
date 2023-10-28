@@ -96,4 +96,8 @@ public interface BaseDrawerInvAccess extends IItemHandlerModifiable {
 		return drawerItem().takeItem(drawerStack(), amount, player(), simulate);
 	}
 
+	default boolean mayStack(BaseDrawerInvAccess inv, int slot, ItemStack stack) {
+		return !isEmpty() && isItemValid(stack);
+	}
+
 }

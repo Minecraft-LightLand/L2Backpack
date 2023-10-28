@@ -9,11 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class WorldChestCaps extends InvBackpackCap implements ICapabilityProvider {
+public class WorldChestCaps extends InvBackpackCap<WorldChestInvWrapper> implements ICapabilityProvider {
 
 	private final ItemStack stack;
 	private final LazyOptional<WorldChestCaps> holder = LazyOptional.of(() -> this);
@@ -40,7 +39,7 @@ public class WorldChestCaps extends InvBackpackCap implements ICapabilityProvide
 	}
 
 	@Override
-	public IItemHandlerModifiable getInv(PickupTrace trace) {
+	public WorldChestInvWrapper getInv(PickupTrace trace) {
 		if (stack.getItem() instanceof WorldChestItem item) {
 			var opt = item.getContainer(stack, trace.player.serverLevel());
 			if (opt.isPresent()) {

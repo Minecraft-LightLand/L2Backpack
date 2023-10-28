@@ -4,10 +4,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class InvBackpackCap implements BackpackCap {
+public abstract class InvBackpackCap<T extends IItemHandlerModifiable> implements BackpackCap {
 
 	@Nullable
-	public abstract IItemHandlerModifiable getInv(PickupTrace trace);
+	public abstract T getInv(PickupTrace trace);
+
+	public boolean mayStack(T inv, int slot, ItemStack stack) {
+		return ItemStack.isSameItemSameTags(inv.getStackInSlot(slot), stack);
+	}
 
 	@Override
 	public int doPickup(ItemStack stack, PickupTrace trace) {
@@ -19,17 +23,25 @@ public abstract class InvBackpackCap implements BackpackCap {
 	}
 
 	private int doPickupInternal(ItemStack stack, PickupTrace trace) {
-		IItemHandlerModifiable inv = getInv(trace);
+		T inv = getInv(trace);
 		if (inv == null) return 0;
 		int ans = 0;
 		if (trace.getMode() == PickupMode.NONE) return ans;
 		for (int i = 0; i < inv.getSlots(); i++) {
 			if (stack.isEmpty()) break;
-			ItemStack slot = inv.getStackInSlot(i);
-			if (slot.isEmpty()) continue;
-			var opt = slot.getCapability(BackpackCap.TOKEN).resolve();
-			if (opt.isEmpty()) continue;
-			ans += opt.get().doPickup(stack, trace);
+			if (mayStack(inv, i, stack)) {
+				ItemStack result = inv.insertItem(i, stack, false);
+				int count = stack.getCount();
+				int remain = result.getCount();
+				ans += count - remain;
+				stack.setCount(remain);
+			} else {
+				ItemStack slot = inv.getStackInSlot(i);
+				if (slot.isEmpty()) continue;
+				var opt = slot.getCapability(BackpackCap.TOKEN).resolve();
+				if (opt.isEmpty()) continue;
+				ans += opt.get().doPickup(stack, trace);
+			}
 		}
 		if (trace.getMode() == PickupMode.STACKING) return ans;
 		for (int i = 0; i < inv.getSlots(); i++) {

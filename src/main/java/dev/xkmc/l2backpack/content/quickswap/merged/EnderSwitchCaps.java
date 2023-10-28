@@ -1,0 +1,22 @@
+package dev.xkmc.l2backpack.content.quickswap.merged;
+
+import dev.xkmc.l2backpack.content.backpack.EnderBackpackCaps;
+import dev.xkmc.l2backpack.content.capability.PickupTrace;
+import dev.xkmc.l2backpack.content.common.BaseBagInvWrapper;
+import net.minecraft.world.item.ItemStack;
+
+public class EnderSwitchCaps extends BaseBagInvWrapper {
+
+	private final EnderBackpackCaps ender;
+
+	public EnderSwitchCaps(ItemStack stack) {
+		super(stack);
+		ender = new EnderBackpackCaps(stack);
+	}
+
+	@Override
+	public int doPickup(ItemStack stack, PickupTrace trace) {
+		return super.doPickup(stack, trace) + ender.doPickup(stack, trace);
+	}
+
+}

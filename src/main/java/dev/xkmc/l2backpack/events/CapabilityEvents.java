@@ -1,11 +1,18 @@
 package dev.xkmc.l2backpack.events;
 
+import dev.xkmc.l2backpack.compat.CuriosCompat;
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupTrace;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorageCapability;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -20,6 +27,17 @@ public class CapabilityEvents {
 						new WorldStorageCapability(level));
 			}
 		}
+	}
+
+	@SubscribeEvent
+	public static void onItemPickup(EntityItemPickupEvent event) {
+		if (!(event.getEntity() instanceof ServerPlayer player)) return;
+		ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
+		var cap = chest.getCapability(BackpackCap.TOKEN).resolve().or(() ->
+				CuriosCompat.getSlot(player, e -> e.getCapability(BackpackCap.TOKEN).resolve().isPresent())
+						.flatMap(e -> e.getFirst().getCapability(BackpackCap.TOKEN).resolve()));
+		if (cap.isEmpty()) return;
+		cap.get().doPickup(event.getItem().getItem(), new PickupTrace(player));
 	}
 
 }

@@ -65,6 +65,27 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 	}
 
 	@Override
+	public void handle(ServerPlayer player, int index, int slot, int wid) {
+		ClickedPlayerSlotResult result = this.getSlot(player, index, slot, wid);
+		if (result != null) this.handle(player, result);
+		else {
+			ItemStack stack = player.containerMenu.getSlot(index).getItem();
+			boolean others = false;
+			ScreenTracker.onServerOpen(player);
+			if (stack.getItem() instanceof EnderBackpackItem) {
+				NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
+						ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getHoverName()));
+			} else if (stack.getItem() instanceof WorldChestItem chest) {
+				others = WorldChestItem.getOwner(stack).map(e -> !e.equals(player.getUUID())).orElse(false);
+				new WorldChestMenuPvd(player, stack, chest).open();
+			}
+			if (others) {
+				BackpackTriggers.SHARE.trigger(player);
+			}
+		}
+	}
+
+	@Override
 	protected void handle(ServerPlayer player, ClickedPlayerSlotResult result) {
 		boolean others = false;
 		boolean keybind = result.container() instanceof PlayerInvCallback;

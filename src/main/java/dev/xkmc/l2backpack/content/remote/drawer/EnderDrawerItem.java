@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.drawer.DrawerInvWrapper;
 import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
@@ -19,6 +20,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -119,12 +121,13 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 	}
 
 	@Override
-	public ItemStack takeItem(ItemStack drawer, Player player) {
+	public ItemStack takeItem(ItemStack drawer, int max, Player player, boolean simulate) {
 		refresh(drawer, player);
 		DrawerAccess access = DrawerAccess.of(player.level(), drawer);
 		Item item = BaseDrawerItem.getItem(drawer);
-		int take = Math.min(access.getCount(), item.getMaxStackSize());
-		access.setCount(access.getCount() - take);
+		int take = Math.min(access.getCount(), Math.min(max, item.getMaxStackSize()));
+		if (!simulate)
+			access.setCount(access.getCount() - take);
 		return new ItemStack(item, take);
 	}
 
@@ -164,6 +167,11 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 
 	public String getDescriptionId() {
 		return this.getOrCreateDescriptionId();
+	}
+
+	@Override
+	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+		return new DrawerInvWrapper(stack, trace -> new EnderDrawerInvAccess(stack, this, trace.player));
 	}
 
 }

@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
+import dev.xkmc.l2backpack.content.common.BaseBagInvWrapper;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
@@ -26,6 +27,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -149,6 +151,11 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem {
 		UUID id = tag.getUUID("owner_id");
 		long pwd = tag.getLong("password");
 		return WorldStorage.get(level).getOrCreateStorage(id, color.getId(), pwd, null, null, 0);
+	}
+
+	@Override
+	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+		return new WorldChestCaps(stack);
 	}
 
 }

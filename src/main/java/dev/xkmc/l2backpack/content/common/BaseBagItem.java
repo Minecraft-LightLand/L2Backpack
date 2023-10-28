@@ -76,7 +76,14 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad {
 		List<ItemStack> ans = new ArrayList<>();
 		ListTag tag = getListTag(stack);
 		for (Tag value : tag) {
-			ans.add(ItemStack.of((CompoundTag) value));
+			if (value instanceof CompoundTag ctag) {
+				ItemStack i = ItemStack.of(ctag);
+				int count = ctag.getInt("Count");
+				if (i.getCount() < count) {
+					i.setCount(count);
+				}
+				ans.add(i);
+			}
 		}
 		if (ans.size() > 0) {
 			int size = ((BaseBagItem) stack.getItem()).getRows(stack) * 9;

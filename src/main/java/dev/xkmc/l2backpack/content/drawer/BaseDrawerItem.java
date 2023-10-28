@@ -47,7 +47,12 @@ public interface BaseDrawerItem {
 		drawer.getOrCreateTag().putString(KEY, rl.toString());
 	}
 
-	ItemStack takeItem(ItemStack drawer, Player player);
+	default ItemStack takeItem(ItemStack drawer, Player player){
+		return takeItem(drawer, Integer.MAX_VALUE, player, false);
+	}
+
+	ItemStack takeItem(ItemStack drawer, int max, Player player, boolean simulate);
 
 	boolean canSetNewItem(ItemStack drawer);
+
 }

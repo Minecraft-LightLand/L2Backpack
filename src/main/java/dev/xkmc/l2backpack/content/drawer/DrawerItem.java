@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.drawer;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.init.data.LangData;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +26,8 @@ import java.util.function.Consumer;
 public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTransfer.Quad {
 
 	private static final String COUNT = "drawerCount";
-	private static final int MAX = 64;
+
+	public static final int MAX = 64;
 
 	public static int getCount(ItemStack drawer) {
 		return Optional.ofNullable(drawer.getTag()).map(e -> e.getInt(COUNT)).orElse(0);
@@ -123,7 +126,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 	}
 
 	@Override
-	public void insert(ItemStack drawer, ItemStack stack, Player player) {
+	public void insert(ItemStack drawer, ItemStack stack, @Nullable Player player) {
 		int count = getCount(drawer);
 		int allow = Math.min(MAX * stack.getMaxStackSize() - count, stack.getCount());
 		setCount(drawer, count + allow);
@@ -131,12 +134,13 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 	}
 
 	@Override
-	public ItemStack takeItem(ItemStack drawer, Player player) {
+	public ItemStack takeItem(ItemStack drawer, int max, @Nullable Player player, boolean simulate) {
 		if (canSetNewItem(drawer)) return ItemStack.EMPTY;
 		Item item = BaseDrawerItem.getItem(drawer);
 		int count = getCount(drawer);
-		int take = Math.min(count, item.getMaxStackSize());
-		setCount(drawer, count - take);
+		int take = Math.min(count, Math.min(max, item.getMaxStackSize()));
+		if (!simulate)
+			setCount(drawer, count - take);
 		return new ItemStack(item, take);
 	}
 
@@ -163,6 +167,12 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 
 	public String getDescriptionId() {
 		return this.getOrCreateDescriptionId();
+	}
+
+	@Override
+	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+		var access = new DrawerInvAccess(stack, this);
+		return new DrawerInvWrapper(stack, trace -> access);
 	}
 
 }

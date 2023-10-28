@@ -1,5 +1,9 @@
 package dev.xkmc.l2backpack.content.common;
 
+import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.InvBackpackCap;
+import dev.xkmc.l2backpack.content.capability.MergedInvBackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupMode;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
@@ -7,19 +11,17 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BaseBagInvWrapper implements IItemHandlerModifiable, ICapabilityProvider {
+public class BaseBagInvWrapper extends MergedInvBackpackCap implements ICapabilityProvider {
 
 	private final ItemStack stack;
 	private final BaseBagItem bag;
-	private final LazyOptional<IItemHandler> holder = LazyOptional.of(() -> this);
+	private final LazyOptional<BaseBagInvWrapper> holder = LazyOptional.of(() -> this);
 
 	private ListTag cachedTag;
 	private List<ItemStack> itemStacksCache;
@@ -165,7 +167,23 @@ public class BaseBagInvWrapper implements IItemHandlerModifiable, ICapabilityPro
 	@Override
 	@NotNull
 	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-		return ForgeCapabilities.ITEM_HANDLER.orEmpty(cap, this.holder);
+		if (cap == ForgeCapabilities.ITEM_HANDLER) {
+			return holder.cast();
+		}
+		if (cap == BackpackCap.TOKEN) {
+			return holder.cast();
+		}
+		return LazyOptional.empty();
+	}
+
+	@Override
+	public PickupMode getMode() {
+		return BackpackCap.getMode(stack);
+	}
+
+	@Override
+	public int getSignature() {
+		return stack.hashCode();
 	}
 
 }

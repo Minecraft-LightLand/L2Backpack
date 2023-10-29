@@ -6,6 +6,8 @@ import net.minecraftforge.fml.config.IConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
 
+import static dev.xkmc.l2backpack.content.backpack.BackpackItem.MAX_ROW;
+
 public class BackpackConfig {
 
 	public static class Client {
@@ -46,7 +48,7 @@ public class BackpackConfig {
 
 		Common(ForgeConfigSpec.Builder builder) {
 			initialRows = builder.comment("Initial Rows (x9 slots) for backpack")
-					.defineInRange("initialRows", 2, 1, 6);
+					.defineInRange("initialRows", 2, 1, MAX_ROW);
 		}
 	}
 

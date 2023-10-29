@@ -158,7 +158,6 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 		BackpackCap.addText(stack, list);
 		LangData.addInfo(list,
 				LangData.Info.DRAWER_USE,
-				LangData.Info.DUMP,
 				LangData.Info.LOAD,
 				LangData.Info.PLACE,
 				LangData.Info.EXTRACT_DRAWER,

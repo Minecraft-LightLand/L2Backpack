@@ -24,6 +24,8 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 
 	private static final String ROW = "rows";
 
+	public static final int MAX_ROW = 8;
+
 	public static ItemStack initLootGen(ItemStack stack, ResourceLocation loot) {
 		var ctag = stack.getOrCreateTag();
 		ctag.putString(LOOT, loot.toString());
@@ -45,7 +47,7 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 	@Override
 	public int getRows(ItemStack stack) {
 		int ans = Mth.clamp(stack.getOrCreateTag().getInt(ROW),
-				BackpackConfig.COMMON.initialRows.get(), 6);
+				BackpackConfig.COMMON.initialRows.get(), MAX_ROW);
 		if (!stack.getOrCreateTag().contains(ROW)) {
 			stack.getOrCreateTag().putInt(ROW, ans);
 		}
@@ -59,7 +61,7 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 		if (rows == 0) {
 			rows = BackpackConfig.COMMON.initialRows.get();
 		}
-		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, rows), 6));
+		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, rows), MAX_ROW));
 		if (tag.contains("loot")) {
 			list.add(LangData.IDS.LOOT.get().withStyle(ChatFormatting.AQUA));
 		} else {
@@ -69,7 +71,6 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 				LangData.Info.QUICK_INV_ACCESS,
 				LangData.Info.KEYBIND,
 				LangData.Info.UPGRADE,
-				LangData.Info.DUMP,
 				LangData.Info.LOAD,
 				LangData.Info.EXIT,
 				LangData.Info.PICKUP

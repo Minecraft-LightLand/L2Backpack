@@ -134,7 +134,6 @@
   "l2backpack.tooltip.collect.drawer": "ʎɹoʇuǝʌuı uo sɯǝʇı buıɥɔʇɐɯ ǝɹoʇs oʇ ʞɔıןɔ ʇɥbıɹ + ʇɟıɥS",
   "l2backpack.tooltip.collect.item": "ɹɐqʇoɥ uɐɥʇ ɹǝɥʇo 'ʎɹoʇuǝʌuı uı sɯǝʇı buıɥɔʇɐɯ ǝɹoʇs oʇ ʞɔıןɔ ʇɥbıᴚ",
   "l2backpack.tooltip.drawer.content": "%sx %s :ʇuǝʇuoƆ",
-  "l2backpack.tooltip.dump": "ʞɔoןq ǝɥʇ oʇuı sɯǝʇı ןןɐ dɯnp oʇ sʞɔoןq ǝbɐɹoʇs ɹǝɥʇo ɹo sʇsǝɥɔ ʞɔıןɔ ʇɥbıɹ + ʇɟıɥS",
   "l2backpack.tooltip.extract.drawer": "ʇno ɯǝʇı ʞɔɐʇs ǝuo ǝʞɐʇ oʇ ʞɔıןɔ ʇɥbıᴚ",
   "l2backpack.tooltip.extract.item": "sɯǝʇı pǝɹoʇs ןןɐ ʇno ʍoɹɥʇ oʇ ʞɔıןɔ ʇɥbıɹ + ʇɟıɥS",
   "l2backpack.tooltip.info.armor_bag": "dɐʍs oʇ ᴚ ssǝɹԀ ˙sɹoɯɹɐ ɥɔʇıʍs oʇ uʍop/dn ɹo ɹǝqɯnu + ]ʞɐǝus[ ssǝɹԀ ˙sɹoɯɹɐ dɐʍs puɐ 'ǝsooɥɔ 'ʍǝıʌǝɹd oʇ puɐɥ uıɐɯ uı buıɥʇou pןoɥ puɐ ʞɐǝuS ˙)soıɹnƆ ɟo ʇoןs ʞɔɐq ɹo( ʇoןs ʇsǝɥɔ ɹo puɐɥ ɟɟo uı ʇnԀ",
@@ -148,7 +147,7 @@
   "l2backpack.tooltip.info.inherit": "˙ssǝɔɔɐ ʞɔınb ɹoɟ ǝbɐɹoʇs ןɐuoısuǝɯıp uı ʇı ʇnԀ ˙ʞɔɐdʞɔɐq ɹɐןnbǝɹ uı ʎןʇɔǝɹıp uǝdo ʇouuɐɔ ʇnq 'sʞɔɐdʞɔɐq ɹɐןnbǝɹ uı pǝɔɐןd ǝq uɐƆ ˙pǝpɐɹbdn ǝq ʇouuɐɔ ʇı ʇɐɥʇ ʇdǝɔxǝ 'ʞɔɐdʞɔɐq ɹɐןnbǝɹ ɐ ɟo sǝıʇɹǝdoɹd ןןɐ ʇıɹǝɥuI",
   "l2backpack.tooltip.info.loot": "ǝpısuı sʇooן ǝʌɐɥ ʎɐɯ ʇI",
   "l2backpack.tooltip.info.multi_switch": "˙pǝʇɐʌıʇɔɐ sı ǝpoɯ dɐʍs ןooʇ 'ʇןɐ buıssǝɹd puɐ buıɥʇou buıpןoɥ uǝɥM ˙ǝpoɯ ɥɔɐǝ ɹǝbbıɹʇ oʇ sɯǝʇı ǝʌıʇɔǝdsǝɹ pןoɥ puɐ ʞɐǝuS ˙ǝɯıʇ ǝɯɐs ǝɥʇ ʇɐ dɐʍS ɹoɯɹⱯ uɐ puɐ 'dɐʍS ןoo⟘ ɐ 'ɹǝʌınὉ ɐ sı sıɥ⟘",
-  "l2backpack.tooltip.info.pickup": "˙ʎןǝʌısɹnɔǝɹ ʞɹoʍ osןɐ ןןıʍ sʞɔɐdʞɔɐq ǝpısuı sɹǝʍɐɹp puɐ sʞɔɐdʞɔɐᗺ ˙ʇıɟ uǝɥʍ 'ʎןןɐɔıʇɐɯoʇnɐ ʞɔɐq ɹnoʎ uo sʞɔɐdʞɔɐq oʇuı pǝɔɐןd ǝq ןןıʍ dnʞɔıd noʎ sɯǝʇı 'pǝןqɐuǝ sı ǝpoɯ dnʞɔıd uǝɥM",
+  "l2backpack.tooltip.info.pickup": "dnʞɔıd ǝʌısɹnɔǝɹ sʇɹoddnS",
   "l2backpack.tooltip.info.pickup_tweaker": "˙sʇoןs ʎʇdɯǝ ǝʞɐʇ oʇ ɯǝʇı sʍoןןɐ ǝpoɯ ɯǝʇı ןןⱯ ˙ʞɔɐdʞɔɐq uı dn pǝʞɔıd ǝq oʇ sʇoןs ʎʇdɯǝ buıʞɐʇ ʇnoɥʇıʍ ʇıɟ uɐɔ ʇɐɥʇ sɯǝʇı sʍoןןɐ ǝpoɯ buıʞɔɐʇS ˙ǝpoɯ dnʞɔıd ɥɔʇıʍs oʇ ɯǝʇı sıɥʇ ɥʇıʍ ʎɹoʇuǝʌuı uı sɹǝʍɐɹp ɹo sʞɔɐdʞɔɐq ʞɔıןɔ ʇɥbıᴚ",
   "l2backpack.tooltip.info.quick_any": "˙ʎןʇɔǝɹıp uǝdo oʇ I∩⅁ ʎuɐ uı ʞɔıןɔ ʇɥbıɹ ɹO ˙uǝdo oʇ ʞɔıןɔ ʇɥbıᴚ",
   "l2backpack.tooltip.info.quick_inv": "˙ʎןʇɔǝɹıp uǝdo oʇ I∩⅁ ǝbɐɹoʇs ןɐuoısuǝɯıp / ʇsǝɥɔ ɹǝpuǝ / ʎɹoʇuǝʌuı uı ʞɔıןɔ ʇɥbıɹ ɹO ˙uǝdo oʇ ʞɔıןɔ ʇɥbıᴚ",
@@ -156,12 +155,14 @@
   "l2backpack.tooltip.info.upgrade": "˙pǝʌɹǝsǝɹd ǝq ןןıʍ ǝɯɐu puɐ ʇuǝʇuoƆ ˙ǝןqɐ⟘ buıɥʇıɯS uı ʇǝʞɔoԀ ɹǝpuƎ uɐ buıʎןddɐ ʎq ǝpɐɹbd∩",
   "l2backpack.tooltip.item.size": "%s/%s :ʇuǝʇuoƆ",
   "l2backpack.tooltip.keybind": "˙puıq ʎǝʞ ɐıʌ pǝuǝdo ǝq uɐɔ puɐ ')soıɹnƆ ɟo ʇoןs ʞɔɐq ɹo( ʇoןs ʇsǝɥɔ uo ʇnd ǝq uɐɔ sıɥ⟘",
-  "l2backpack.tooltip.load": "ʞɔoןq ǝɥʇ ɯoɹɟ sɯǝʇı pɐoן oʇ sʞɔoןq ǝbɐɹoʇs ɹǝɥʇo ɹo sʇsǝɥɔ ʞɔıןɔ ʇɟǝן + ʇɟıɥS",
+  "l2backpack.tooltip.load": "ʇsǝɥƆ ɥʇıʍ dɯnᗡ / pɐoꞀ sʇɹoddnS",
   "l2backpack.tooltip.mode.all": "ǝʌısɹnɔǝᴚ 'sɯǝʇI buıʇʇıℲ ןןⱯ",
   "l2backpack.tooltip.mode.disp": "%s :ǝpoW dnʞɔıԀ",
   "l2backpack.tooltip.mode.none": "dnʞɔıԀ oN",
   "l2backpack.tooltip.mode.stacking": "ǝʌısɹnɔǝᴚ 'ʎןuO sʇoןS buıʞɔɐʇS o⟘",
   "l2backpack.tooltip.owner": "%s :ɹǝuʍO",
   "l2backpack.tooltip.place": "ʞɔoןq ɐ sɐ ʇı ǝɔɐןd oʇ ʞɔıןɔ ʇɥbıɹ + ʇɟıɥS",
-  "l2backpack.tooltip.shift": "ǝbɐsn ʍoɥs oʇ ]ʇɟıɥs[ ssǝɹԀ"
+  "l2backpack.tooltip.shift": "ǝbɐsn ʍoɥs oʇ ]ʇɟıɥs[ ssǝɹԀ",
+  "patchouli.l2backpack.landing": "poɯ ǝbɐɹoʇs ǝʌısɹnɔǝɹ ɐ 'ʞɔɐdʞɔɐᗺᄅꞀ oʇ ǝɯoɔןǝM",
+  "patchouli.l2backpack.title": "ǝpın⅁ ʞɔɐdʞɔɐᗺᄅꞀ"
 }

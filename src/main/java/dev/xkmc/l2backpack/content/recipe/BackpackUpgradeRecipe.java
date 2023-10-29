@@ -12,6 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 
+import static dev.xkmc.l2backpack.content.backpack.BackpackItem.MAX_ROW;
+
 public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgradeRecipe> {
 
 	public BackpackUpgradeRecipe(ResourceLocation rl, Ingredient left, Ingredient right, ItemStack result) {
@@ -23,7 +25,7 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 		if (!super.matches(container, level)) return false;
 		ItemStack stack = container.getItem(1);
 		BaseBagItem bag = (BaseBagItem) stack.getItem();
-		return bag.getRows(stack) < 6;
+		return bag.getRows(stack) < MAX_ROW;
 	}
 
 	@Override

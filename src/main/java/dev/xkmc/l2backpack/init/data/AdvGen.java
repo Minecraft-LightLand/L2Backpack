@@ -22,6 +22,8 @@ import net.minecraftforge.common.Tags;
 
 import java.util.Arrays;
 
+import static dev.xkmc.l2backpack.content.backpack.BackpackItem.MAX_ROW;
+
 public class AdvGen {
 
 	public static void genAdvancements(RegistrateAdvancementProvider pvd) {
@@ -78,7 +80,7 @@ public class AdvGen {
 				.create("upgrade_max", backpack(DyeColor.GRAY),
 						CriterionBuilder.item(TagGen.BACKPACKS,
 								BackpackItem.setRow(backpack(DyeColor.WHITE)
-										.getDefaultInstance(), 6).getOrCreateTag()),
+										.getDefaultInstance(), MAX_ROW).getOrCreateTag()),
 						"Maximize the Space", "Upgrade a Backpack to max level").type(FrameType.CHALLENGE)
 
 				// dimensional backpack

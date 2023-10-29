@@ -1,0 +1,14 @@
+{
+  "name": "Drawer",
+  "icon": "l2backpack:drawer",
+  "category": "l2backpack:items",
+  "sortnum": 5,
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2backpack:drawer",
+	  "text": "In inventory, left click drawer with a stack to store item. Right click drawer to take item out.$(br2)Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks.$(br2)You can put drawers inside your backpack, so that your backpack can store more items."
+	},
+	"Features:$(li)Drawer Collect: Shift + right click with drawer to store matching items from inventory.$(li)Drawer Extract: Right click with drawer to take one stack item out.$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)$(li)Shift + right click to place it as a block"
+  ]
+}

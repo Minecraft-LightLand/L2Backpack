@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "nbt": "{rows:6}",
+            "nbt": "{rows:8}",
             "tag": "l2backpack:backpacks"
           }
         ]

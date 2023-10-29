@@ -85,31 +85,31 @@ public class BackpackItems {
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_dimensional_backpack")).register();
 			}
 			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(BackpackItems::createEnderBackpackModel)
-					.tag(curios_tag).defaultLang().register();
+					.tag(curios_tag, TagGen.ENDER_CHEST).defaultLang().register();
 
 			ENDER_POCKET = simpleItem("ender_pocket");
 
 			PICKUP_TWEAKER = REGISTRATE.item("pickup_tweaker_tool", p -> new PickupTweakerTool(p.stacksTo(1)))
 					.defaultModel().defaultLang().register();
 
-			ARMOR_BAG = REGISTRATE.item("armor_bag", EquipmentBag::new).defaultModel().lang("Equipment Bag").register();
-			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).defaultModel().defaultLang().register();
+			ARMOR_BAG = REGISTRATE.item("armor_bag", EquipmentBag::new).tag(TagGen.BAGS).defaultModel().lang("Equipment Bag").register();
+			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).tag(TagGen.BAGS).defaultModel().defaultLang().register();
 			QUIVER = REGISTRATE.item("arrow_bag", Quiver::new).model(BackpackItems::createArrowBagModel)
-					.tag(curios_tag).lang("Quiver").register();
-			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(curios_tag).defaultLang().register();
-			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).defaultModel().tag(curios_tag).defaultLang().register();
-			MULTI_SWITCH = REGISTRATE.item("combined_swap", MultiSwitch::new).defaultModel().tag(curios_tag).defaultLang().register();
-			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).defaultModel().tag(curios_tag).defaultLang().register();
+					.tag(curios_tag, TagGen.SWAPS).lang("Quiver").register();
+			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
+			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
+			MULTI_SWITCH = REGISTRATE.item("combined_swap", MultiSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
+			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS, TagGen.ENDER_CHEST).defaultLang().register();
 
 			DRAWER = REGISTRATE.item("drawer", p -> new DrawerItem(BackpackBlocks.DRAWER.get(), p))
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 							new ModelFile.UncheckedModelFile("builtin/entity")))
-					.defaultLang().register();
+					.tag(TagGen.DRAWERS).defaultLang().register();
 
 			ENDER_DRAWER = REGISTRATE.item("ender_drawer", p -> new EnderDrawerItem(BackpackBlocks.ENDER_DRAWER.get(), p))
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 							new ModelFile.UncheckedModelFile("builtin/entity")))
-					.defaultLang().register();
+					.tag(TagGen.DRAWERS).defaultLang().register();
 		}
 	}
 

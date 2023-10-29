@@ -24,8 +24,7 @@ public class PickupTweakerTool extends Item implements IBagTool {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		LangData.addInfo(list,
-				LangData.Info.PICKUP_TWEAKER,
-				LangData.Info.PICKUP);
+		LangData.addInfo(list, LangData.Info.PICKUP_TWEAKER);
 	}
+
 }

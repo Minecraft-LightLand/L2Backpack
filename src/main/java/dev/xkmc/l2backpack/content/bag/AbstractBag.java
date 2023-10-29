@@ -105,7 +105,6 @@ public abstract class AbstractBag extends Item implements ContentTransfer.Quad {
 		list.add(LangData.IDS.BAG_SIZE.get(getSize(stack), SIZE));
 		LangData.addInfo(list,
 				LangData.Info.COLLECT_BAG,
-				LangData.Info.DUMP,
 				LangData.Info.LOAD,
 				LangData.Info.EXTRACT_BAG);
 	}

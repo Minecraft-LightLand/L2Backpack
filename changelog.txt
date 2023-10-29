@@ -1,9 +1,12 @@
 2.4.13
 - add pickup option
-- add pickup wand TODO
+- add pickup wand
 - add pickup tooltip
 - add drawer upgrade persistence
 - keybind name
+- add drawer upgrade TODO
+- add upgrade page TODO
+- add wand page TODO
 
 2.4.12
 - Now non-player can also use quick swap

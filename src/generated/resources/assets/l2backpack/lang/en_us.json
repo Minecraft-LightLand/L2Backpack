@@ -134,7 +134,6 @@
   "l2backpack.tooltip.collect.drawer": "Shift + right click to store matching items on inventory",
   "l2backpack.tooltip.collect.item": "Right click to store matching items in inventory, other than hotbar",
   "l2backpack.tooltip.drawer.content": "Content: %s x%s",
-  "l2backpack.tooltip.dump": "Shift + right click chests or other storage blocks to dump all items into the block",
   "l2backpack.tooltip.extract.drawer": "Right click to take one stack item out",
   "l2backpack.tooltip.extract.item": "Shift + right click to throw out all stored items",
   "l2backpack.tooltip.info.armor_bag": "Put in off hand or chest slot (or back slot of Curios). Sneak and hold nothing in main hand to preview, choose, and swap armors. Press [sneak] + number or up/down to switch armors. Press R to swap",
@@ -148,7 +147,7 @@
   "l2backpack.tooltip.info.inherit": "Inherit all properties of a regular backpack, except that it cannot be upgraded. Can be placed in regular backpacks, but cannot open directly in regular backpack. Put it in dimensional storage for quick access.",
   "l2backpack.tooltip.info.loot": "It may have loots inside",
   "l2backpack.tooltip.info.multi_switch": "This is a Quiver, a Tool Swap, and an Armor Swap at the same time. Sneak and hold respective items to trigger each mode. When holding nothing and pressing alt, tool swap mode is activated.",
-  "l2backpack.tooltip.info.pickup": "When pickup mode is enabled, items you pickup will be placed into backpacks on your back automatically, when fit. Backpacks and drawers inside backpacks will also work recursively.",
+  "l2backpack.tooltip.info.pickup": "Supports recursive pickup",
   "l2backpack.tooltip.info.pickup_tweaker": "Right click backpacks or drawers in inventory with this item to switch pickup mode. Stacking mode allows items that can fit without taking empty slots to be picked up in backpack. All item mode allows item to take empty slots.",
   "l2backpack.tooltip.info.quick_any": "Right click to open. Or right click in any GUI to open directly.",
   "l2backpack.tooltip.info.quick_inv": "Right click to open. Or right click in inventory / ender chest / dimensional storage GUI to open directly.",
@@ -156,12 +155,14 @@
   "l2backpack.tooltip.info.upgrade": "Upgrade by applying an Ender Pocket in Smithing Table. Content and name will be preserved.",
   "l2backpack.tooltip.item.size": "Content: %s/%s",
   "l2backpack.tooltip.keybind": "This can be put on chest slot (or back slot of Curios), and can be opened via key bind.",
-  "l2backpack.tooltip.load": "Shift + left click chests or other storage blocks to load items from the block",
+  "l2backpack.tooltip.load": "Supports Load / Dump with Chest",
   "l2backpack.tooltip.mode.all": "All Fitting Items, Recursive",
   "l2backpack.tooltip.mode.disp": "Pickup Mode: %s",
   "l2backpack.tooltip.mode.none": "No Pickup",
   "l2backpack.tooltip.mode.stacking": "To Stacking Slots Only, Recursive",
   "l2backpack.tooltip.owner": "Owner: %s",
   "l2backpack.tooltip.place": "Shift + right click to place it as a block",
-  "l2backpack.tooltip.shift": "Press [shift] to show usage"
+  "l2backpack.tooltip.shift": "Press [shift] to show usage",
+  "patchouli.l2backpack.landing": "Welcome to L2Backpack, a recursive storage mod",
+  "patchouli.l2backpack.title": "L2Backpack Guide"
 }

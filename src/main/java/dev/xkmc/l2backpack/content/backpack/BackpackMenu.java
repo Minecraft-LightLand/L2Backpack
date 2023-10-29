@@ -15,10 +15,10 @@ import java.util.UUID;
 
 public class BackpackMenu extends BaseBagMenu<BackpackMenu> {
 
-	public static final SpriteManager[] MANAGERS = new SpriteManager[6];
+	public static final SpriteManager[] MANAGERS = new SpriteManager[BackpackItem.MAX_ROW];
 
 	static {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < BackpackItem.MAX_ROW; i++) {
 			MANAGERS[i] = new SpriteManager(L2Backpack.MODID, "backpack_" + (i + 1));
 		}
 	}

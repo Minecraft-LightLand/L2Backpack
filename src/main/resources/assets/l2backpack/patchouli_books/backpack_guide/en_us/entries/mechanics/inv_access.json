@@ -1,0 +1,9 @@
+{
+  "name": "Quick Inventory Access",
+  "icon": "l2backpack:backpack_white",
+  "category": "l2backpack:mechanics",
+  "pages": [
+	"Items with this feature:$(li)$(l:items/1_backpacks)Backpacks$(/l)$(li)$(l:items/4_swaps)Quick Swaps$(/l)$(br2)Right click to open. Or right click item in inventory / ender chest / dimensional storage / curios GUI to open directly.$(br2)This is similar to $(l:mechanics/any_access)Quick Access$(/l) but with more restrictions.",
+    "These items store content inside item stack NBT, just like shulker boxes. Thus, it does not fit inside other shulker box-like backpack items.$(br2)However, you can put it inside $(l:mechanics/any_access)Quick Access$(/l) backpacks, such as dimensional storage or ender backpacks, and you can also put those within these backpacks. Then you get recursive backpacks that can be opened like folders in your computer."
+  ]
+}

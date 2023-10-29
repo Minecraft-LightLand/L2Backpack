@@ -1,0 +1,14 @@
+{
+  "name": "Dimensional Storages",
+  "icon": "l2backpack:dimensional_storage_white",
+  "category": "l2backpack:items",
+  "sortnum": 2,
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "tag:l2backpack:dimensional_storages",
+	  "text": "You can put it inside other backpacks, and you can put backpacks inside this.$(br2)All dimensional storage with the same color and owned by the same player shares the same inventory space, for both item and block form.$(br2)Supports quick access in anywhere."
+	},
+	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/any_access)Quick Access$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)$(li)Shift + right click to place it as a block"
+  ]
+}

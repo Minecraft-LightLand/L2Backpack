@@ -1,0 +1,14 @@
+{
+  "name": "Ender Drawer",
+  "icon": "l2backpack:ender_drawer",
+  "category": "l2backpack:items",
+  "sortnum": 6,
+  "pages": [
+	"Same usage as a $(l:items/5_drawer)Drawer$(/l). All ender drawers set to the same item and owned by the same player shares the same inventory space, for both item and block form.$(br2)For ender drawer block, right click it with item to store, and right click it with empty hand to retrieve a stack. For bulk transport, use drawer item to interact with it.",
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2backpack:ender_drawer",
+	  "text": "Features:$(li)Shift + right click to place it as a block.$(li)Drawer Extract: Right click with it to take one stack item out$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)$(li)Drawer Collect feature will trigger when shift + right click a point that cannot have a block placed."
+	}
+  ]
+}

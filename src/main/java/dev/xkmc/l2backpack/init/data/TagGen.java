@@ -14,6 +14,10 @@ public class TagGen {
 
 
 	public static final TagKey<Item> BACKPACKS = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "backpacks"));
+	public static final TagKey<Item> BAGS = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "bags"));
+	public static final TagKey<Item> DRAWERS = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "drawers"));
+	public static final TagKey<Item> SWAPS = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "swaps"));
+	public static final TagKey<Item> ENDER_CHEST = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "ender_chest_access"));
 	public static final TagKey<Item> DIMENSIONAL_STORAGES = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "dimensional_storages"));
 
 	public static void onBlockTagGen(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {

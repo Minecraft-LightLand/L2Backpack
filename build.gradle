@@ -206,4 +206,6 @@ dependencies {
     //runtimeOnly fg.deobf('curse.maven:attributefix-280510:4445193')
     //runtimeOnly fg.deobf('curse.maven:max-health-fix-492246:4447240')
 
+    runtimeOnly fg.deobf("curse.maven:patchouli-306770:4636277")
+
 }

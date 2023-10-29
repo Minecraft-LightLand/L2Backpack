@@ -66,8 +66,7 @@ public class LangData {
 		COLLECT_DRAWER("tooltip.collect.drawer", "Shift + right click to store matching items on inventory"),
 		EXTRACT_BAG("tooltip.extract.item", "Shift + right click to throw out all stored items"),
 		EXTRACT_DRAWER("tooltip.extract.drawer", "Right click to take one stack item out"),
-		DUMP("tooltip.dump", "Shift + right click chests or other storage blocks to dump all items into the block"),
-		LOAD("tooltip.load", "Shift + left click chests or other storage blocks to load items from the block"),
+		LOAD("tooltip.load", "Supports Load / Dump with Chest"),
 		PLACE("tooltip.place", "Shift + right click to place it as a block"),
 		KEYBIND("tooltip.keybind", "This can be put on chest slot (or back slot of Curios), and can be opened via key bind."),
 		QUICK_INV_ACCESS("tooltip.info.quick_inv", "Right click to open. Or right click in inventory / ender chest / dimensional storage GUI to open directly."),
@@ -84,7 +83,7 @@ public class LangData {
 		MULTI_SWITCH_INFO("tooltip.info.multi_switch", "This is a Quiver, a Tool Swap, and an Armor Swap at the same time. Sneak and hold respective items to trigger each mode. When holding nothing and pressing alt, tool swap mode is activated."),
 		ENDER_SWITCH_INFO("tooltip.info.ender_switch", "This is a Combined Swap and an Ender Backpack at the same time. Note that the arrows, tools, and armors are stored within this item still, not in remote inventory. It inherits all properties of a backpack and an ender backpack."),
 		INHERIT("tooltip.info.inherit", "Inherit all properties of a regular backpack, except that it cannot be upgraded. Can be placed in regular backpacks, but cannot open directly in regular backpack. Put it in dimensional storage for quick access."),
-		PICKUP("tooltip.info.pickup", "When pickup mode is enabled, items you pickup will be placed into backpacks on your back automatically, when fit. Backpacks and drawers inside backpacks will also work recursively."),
+		PICKUP("tooltip.info.pickup", "Supports recursive pickup"),
 		PICKUP_TWEAKER("tooltip.info.pickup_tweaker", "Right click backpacks or drawers in inventory with this item to switch pickup mode. Stacking mode allows items that can fit without taking empty slots to be picked up in backpack. All item mode allows item to take empty slots."),
 		;
 
@@ -113,6 +112,8 @@ public class LangData {
 			pvd.accept(L2Backpack.MODID + ".loot." + pl.id + ".item", pl.bname);
 		}
 		pvd.accept(BackpackKeys.OPEN.id, "Open backpack on back");
+		pvd.accept("patchouli.l2backpack.title", "L2Backpack Guide");
+		pvd.accept("patchouli.l2backpack.landing", "Welcome to L2Backpack, a recursive storage mod");
 	}
 
 	public static String asId(String name) {

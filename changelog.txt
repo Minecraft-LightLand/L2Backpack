@@ -7,6 +7,9 @@
 - add drawer upgrade TODO
 - add upgrade page TODO
 - add wand page TODO
+- drawer upgrade patchouli TODO
+- drawer upgrade jei TODO
+- drawer upgrade recipe TODO
 
 2.4.12
 - Now non-player can also use quick swap

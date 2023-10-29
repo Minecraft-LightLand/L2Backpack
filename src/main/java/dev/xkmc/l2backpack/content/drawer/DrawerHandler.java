@@ -5,11 +5,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 @SerialClass
-public class DrawerHandler implements IItemHandler {
+public class DrawerHandler implements IDrawerHandler {
 
 	@SerialClass.SerialField(toClient = true)
 	public Item item;
@@ -28,11 +27,14 @@ public class DrawerHandler implements IItemHandler {
 
 	@Override
 	public int getSlots() {
-		return 1;
+		return 2;
 	}
 
 	@Override
 	public @NotNull ItemStack getStackInSlot(int slot) {
+		if (slot == 1) {
+			return ItemStack.EMPTY;
+		}
 		return new ItemStack(item, count);
 	}
 
@@ -44,9 +46,9 @@ public class DrawerHandler implements IItemHandler {
 		if (stack.hasTag()) {
 			return stack;
 		}
-		int max = BaseDrawerItem.getStackingFactor(config) * stack.getMaxStackSize();
+		int max = BaseDrawerItem.getStacking(config) * stack.getMaxStackSize();
 		if (count >= max) {
-			return ItemStack.EMPTY;
+			return stack;
 		}
 		if (item == Items.AIR) {
 			int toInsert = Math.min(max, stack.getCount());
@@ -98,7 +100,7 @@ public class DrawerHandler implements IItemHandler {
 
 	@Override
 	public int getSlotLimit(int slot) {
-		return 64 * DrawerItem.MAX_STACK_SIZE;
+		return BaseDrawerItem.getStacking(config) * item.getMaxStackSize();
 	}
 
 	@Override

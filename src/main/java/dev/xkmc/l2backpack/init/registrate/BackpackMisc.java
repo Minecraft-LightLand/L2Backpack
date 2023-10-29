@@ -6,6 +6,7 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2backpack.content.common.BaseBagMenu;
 import dev.xkmc.l2backpack.content.recipe.BackpackDyeRecipe;
 import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipe;
+import dev.xkmc.l2backpack.content.recipe.DrawerUpgradeRecipe;
 import dev.xkmc.l2backpack.content.recipe.MultiSwitchCraftRecipe;
 import dev.xkmc.l2backpack.content.restore.*;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -33,6 +34,8 @@ public class BackpackMisc {
 			REGISTRATE.simple("backpack_dye", ForgeRegistries.Keys.RECIPE_SERIALIZERS, () -> new AbstractShapelessRecipe.Serializer<>(BackpackDyeRecipe::new));
 	public static final RegistryEntry<AbstractSmithingRecipe.Serializer<BackpackUpgradeRecipe>> RSC_BAG_UPGRADE =
 			REGISTRATE.simple("backpack_upgrade", ForgeRegistries.Keys.RECIPE_SERIALIZERS, () -> new AbstractSmithingRecipe.Serializer<>(BackpackUpgradeRecipe::new));
+	public static final RegistryEntry<AbstractSmithingRecipe.Serializer<DrawerUpgradeRecipe>> RSC_DRAWER_UPGRADE =
+			REGISTRATE.simple("drawer_upgrade", ForgeRegistries.Keys.RECIPE_SERIALIZERS, () -> new AbstractSmithingRecipe.Serializer<>(DrawerUpgradeRecipe::new));
 	public static final RegistryEntry<AbstractShapedRecipe.Serializer<MultiSwitchCraftRecipe>> RSC_BAG_CRAFT =
 			REGISTRATE.simple("multiswitch_craft", ForgeRegistries.Keys.RECIPE_SERIALIZERS, () -> new AbstractShapedRecipe.Serializer<>(MultiSwitchCraftRecipe::new));
 

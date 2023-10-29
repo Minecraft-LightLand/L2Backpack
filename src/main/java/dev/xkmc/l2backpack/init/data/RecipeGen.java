@@ -60,7 +60,7 @@ public class RecipeGen {
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, BackpackItems.PICKUP_TWEAKER.get(), 1)::unlockedBy, Items.STICK)
 					.pattern(" G ").pattern(" IG").pattern("S  ")
-					.define('S', Items.STICK).define('G', Items.GOLD_NUGGET).define('I',Items.IRON_INGOT)
+					.define('S', Items.STICK).define('G', Items.GOLD_NUGGET).define('I', Items.IRON_INGOT)
 					.save(pvd);
 
 			Item ender = BackpackItems.ENDER_BACKPACK.get();
@@ -138,6 +138,9 @@ public class RecipeGen {
 					.define('D', Tags.Items.DYES_YELLOW)
 					.save(pvd);
 
+			unlock(pvd, new SmithingTransformRecipeBuilder(BackpackMisc.RSC_DRAWER_UPGRADE.get(), TEMPLATE_PLACEHOLDER, Ingredient.of(bag),
+					Ingredient.of(BackpackItems.ENDER_POCKET.get()), RecipeCategory.MISC, bag)::unlocks, bag)
+					.save(pvd, L2Backpack.MODID + ":smithing/upgrade_drawer");
 
 			bag = BackpackItems.ENDER_DRAWER.get();
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, ender)

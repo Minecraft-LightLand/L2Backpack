@@ -77,7 +77,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		} else {
 			DrawerAccess access = DrawerAccess.of(world, stack);
 			int count = access.getCount();
-			int max = BaseDrawerItem.getStackingFactor(stack) * access.item().getMaxStackSize();
+			int max = BaseDrawerItem.getStacking(stack) * access.item().getMaxStackSize();
 			int ext = BaseDrawerItem.loadFromInventory(max, count, access.item(), player);
 			count += ext;
 			access.setCount(count);
@@ -113,7 +113,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		refresh(drawer, player);
 		DrawerAccess access = DrawerAccess.of(player.level(), drawer);
 		int count = access.getCount();
-		int take = Math.min(BaseDrawerItem.getStackingFactor(stack) * stack.getMaxStackSize() - count, stack.getCount());
+		int take = Math.min(BaseDrawerItem.getStacking(stack) * stack.getMaxStackSize() - count, stack.getCount());
 		access.setCount(access.getCount() + take);
 		stack.shrink(take);
 	}

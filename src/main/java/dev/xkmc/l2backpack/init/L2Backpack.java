@@ -13,10 +13,7 @@ import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenus;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
-import dev.xkmc.l2backpack.network.CreativeSetCarryToClient;
-import dev.xkmc.l2backpack.network.DrawerInteractToServer;
-import dev.xkmc.l2backpack.network.RequestTooltipUpdateEvent;
-import dev.xkmc.l2backpack.network.RespondTooltipUpdateEvent;
+import dev.xkmc.l2backpack.network.*;
 import dev.xkmc.l2itemselector.select.SelectionRegistry;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.serial.config.PacketHandler;
@@ -51,6 +48,7 @@ public class L2Backpack {
 			new ResourceLocation(MODID, "main"), 1,
 			e -> e.create(DrawerInteractToServer.class, PLAY_TO_SERVER),
 			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
+			e -> e.create(CreativeSetCarryToServer.class, PLAY_TO_SERVER),
 			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),
 			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT)
 	);

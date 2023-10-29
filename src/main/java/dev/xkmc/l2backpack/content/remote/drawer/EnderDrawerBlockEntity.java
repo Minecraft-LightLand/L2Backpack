@@ -50,7 +50,7 @@ public class EnderDrawerBlockEntity extends IDrawerBlockEntity {
 				return LazyOptional.of(() -> new InvWrapper(new SimpleContainer(64))).cast();
 			}
 			if (handler == null) {
-				handler = owner_id == null ? LazyOptional.empty() : LazyOptional.of(() -> new EnderDawerItemHandler(getAccess(), true));
+				handler = owner_id == null ? LazyOptional.empty() : LazyOptional.of(() -> new EnderDrawerItemHandler(getAccess(), true));
 			}
 			return this.handler.cast();
 		}

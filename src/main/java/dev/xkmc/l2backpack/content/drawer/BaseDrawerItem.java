@@ -16,6 +16,8 @@ public interface BaseDrawerItem extends PickupBagItem {
 
 	String KEY = "drawerItem", STACKING = "StackingFactor";
 
+	int MAX_FACTOR = 8;
+
 	static boolean canAccept(ItemStack drawer, ItemStack stack) {
 		return !stack.hasTag() && !stack.isEmpty() && stack.getItem() == getItem(drawer);
 	}
@@ -42,17 +44,28 @@ public interface BaseDrawerItem extends PickupBagItem {
 		return ext;
 	}
 
-	static int getStackingFactor(ItemStack drawer) {
-		return getStackingFactor(BackpackCap.getConfig(drawer));
+	static int getStacking(ItemStack drawer) {
+		return getStacking(BackpackCap.getConfig(drawer));
 	}
 
-	static int getStackingFactor(CompoundTag tag) {
+	static int getStacking(CompoundTag tag) {
 		int factor = tag.getInt(STACKING);
 		if (factor < 1) factor = 1;
-		return getStackingFactor() * factor;
+		return getStacking() * factor;
 	}
 
-	static int getStackingFactor() {
+	static int getStackingFactor(ItemStack drawer) {
+		int factor = BackpackCap.getConfig(drawer).getInt(STACKING);
+		if (factor < 1) factor = 1;
+		return factor;
+	}
+
+	static ItemStack setStackingFactor(ItemStack drawer, int factor) {
+		BackpackCap.getConfig(drawer).putInt(STACKING, factor);
+		return drawer;
+	}
+
+	static int getStacking() {
 		return 64;
 	}
 

@@ -7,6 +7,7 @@ import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.tool.IBagTool;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.BackpackKeys;
+import dev.xkmc.l2backpack.network.CreativeSetCarryToServer;
 import dev.xkmc.l2backpack.network.DrawerInteractToServer;
 import dev.xkmc.l2itemselector.events.GenericKeyEvent;
 import dev.xkmc.l2library.util.Proxy;
@@ -46,6 +47,8 @@ public class ClientEventHandler {
 				scr.getMenu().getCarried().getItem() instanceof IBagTool) {
 			var slot = scr.getSlotUnderMouse();
 			if (slot != null && slot.getItem().getItem() instanceof PickupBagItem) {
+				if (Proxy.getClientPlayer().getAbilities().instabuild)
+					L2Backpack.HANDLER.toServer(new CreativeSetCarryToServer(ItemStack.EMPTY));
 				event.setCanceled(true);
 			}
 			return;
@@ -59,6 +62,11 @@ public class ClientEventHandler {
 	public static void onScreenRightClick(ScreenEvent.MouseButtonPressed.Pre event) {
 		if (event.getScreen() instanceof AbstractContainerScreen<?> scr &&
 				scr.getMenu().getCarried().getItem() instanceof IBagTool) {
+			var slot = scr.getSlotUnderMouse();
+			if (slot != null && slot.getItem().getItem() instanceof PickupBagItem) {
+				if (Proxy.getClientPlayer().getAbilities().instabuild)
+					L2Backpack.HANDLER.toServer(new CreativeSetCarryToServer(scr.getMenu().getCarried()));
+			}
 			return;
 		}
 		if (onPress(event)) {

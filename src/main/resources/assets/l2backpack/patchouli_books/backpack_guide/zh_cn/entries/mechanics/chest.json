@@ -1,0 +1,9 @@
+{
+  "name": "Load / Dump with Chest",
+  "icon": "l2backpack:drawer",
+  "category": "l2backpack:mechanics",
+  "pages": [
+    "Items with this feature:$(li)$(l:items/1_backpacks)Backpacks$(/l)$(li)$(l:items/4_swaps)Quick Swaps$(/l)$(li)$(l:items/5_drawer)Drawers$(/l)$(li)$(l:items/7_storage_bags)Storage Bags$(/l)",
+	"Shift + left click chests or other storage blocks to load items from the block.$(br2)Shift + right click chests or other storage blocks to dump all items into the block.$(br2)This feature allows yot to move items between chests very fast."
+  ]
+}

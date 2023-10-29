@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.common;
 
+import dev.xkmc.l2backpack.content.drawer.IDrawerHandler;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2backpack.init.advancement.BagInteractTrigger;
 import dev.xkmc.l2backpack.init.data.LangData;
@@ -42,10 +43,10 @@ public class ContentTransfer {
 	}
 
 	public static int transfer(Item item, int count, IItemHandler cap) {
-		int maxSize = item.getMaxStackSize();
+		int maxSize = cap instanceof IDrawerHandler ? count : item.getMaxStackSize();
 		while (count > 0) {
 			int step = Math.min(maxSize, count);
-			ItemStack toInsert = new ItemStack(item, step);
+			ItemStack toInsert = new ItemStack(item, step);//TODO bug fix
 			ItemStack remainer = ItemHandlerHelper.insertItemStacked(cap, toInsert, false);
 			count = count - step + remainer.getCount();
 			if (!remainer.isEmpty()) {

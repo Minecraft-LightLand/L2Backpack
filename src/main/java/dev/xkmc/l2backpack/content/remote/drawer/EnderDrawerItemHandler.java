@@ -1,14 +1,13 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.drawer.IDrawerHandler;
 import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
-public record EnderDawerItemHandler(DrawerAccess access, boolean logistics) implements IItemHandler {
+public record EnderDrawerItemHandler(DrawerAccess access, boolean logistics) implements IDrawerHandler {
 
 	@Override
 	public int getSlots() {
@@ -27,7 +26,7 @@ public record EnderDawerItemHandler(DrawerAccess access, boolean logistics) impl
 	public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
 		if (stack.hasTag() || stack.getItem() != access.item()) return stack;
 		int count = access.getCount();
-		int max = access.item().getMaxStackSize() * BaseDrawerItem.getStackingFactor();
+		int max = access.item().getMaxStackSize() * BaseDrawerItem.getStacking();
 		int insert = Math.min(max - count, stack.getCount());
 		if (!simulate) {
 			access.setCount(count + insert);
@@ -53,7 +52,7 @@ public record EnderDawerItemHandler(DrawerAccess access, boolean logistics) impl
 
 	@Override
 	public int getSlotLimit(int slot) {
-		return 64 * 64;
+		return 64 * access.item().getMaxStackSize();
 	}
 
 	@Override

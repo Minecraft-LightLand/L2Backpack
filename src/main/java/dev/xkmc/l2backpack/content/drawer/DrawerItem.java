@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.init.data.LangData;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -62,7 +63,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 		} else {
 			Item item = BaseDrawerItem.getItem(stack);
 			int count = getCount(stack);
-			int max = item.getMaxStackSize() * BaseDrawerItem.getStackingFactor(stack);
+			int max = item.getMaxStackSize() * BaseDrawerItem.getStacking(stack);
 			boolean perform = !canSetNewItem(stack);
 			if (!perform) {
 				item = ContentTransfer.filterMaxItem(new InvWrapper(player.getInventory()));
@@ -115,7 +116,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 			}
 			if (perform) {
 				int count = getCount(stack);
-				int max = BaseDrawerItem.getStackingFactor(stack) * item.getMaxStackSize();
+				int max = BaseDrawerItem.getStacking(stack) * item.getMaxStackSize();
 				int remain = ContentTransfer.loadFrom(item, max - count, target);
 				ContentTransfer.onLoad(player, remain, stack);
 				setCount(stack, count + remain);
@@ -127,7 +128,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 	@Override
 	public void insert(ItemStack drawer, ItemStack stack, @Nullable Player player) {
 		int count = getCount(drawer);
-		int allow = Math.min(BaseDrawerItem.getStackingFactor(drawer) * stack.getMaxStackSize() - count, stack.getCount());
+		int allow = Math.min(BaseDrawerItem.getStacking(drawer) * stack.getMaxStackSize() - count, stack.getCount());
 		setCount(drawer, count + allow);
 		stack.shrink(allow);
 	}
@@ -155,6 +156,8 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 		if (!canSetNewItem(stack)) {
 			list.add(LangData.IDS.DRAWER_CONTENT.get(item.getDescription(), count));
 		}
+		list.add(LangData.IDS.BACKPACK_SLOT.get(BaseDrawerItem.getStackingFactor(stack), MAX_FACTOR)
+				.withStyle(ChatFormatting.GRAY));
 		BackpackCap.addText(stack, list);
 		LangData.addInfo(list,
 				LangData.Info.DRAWER_USE,

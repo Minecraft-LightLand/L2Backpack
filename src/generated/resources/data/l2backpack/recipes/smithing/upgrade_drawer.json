@@ -1,0 +1,13 @@
+{
+  "type": "l2backpack:drawer_upgrade",
+  "addition": {
+    "item": "l2backpack:ender_pocket"
+  },
+  "base": {
+    "item": "l2backpack:drawer"
+  },
+  "result": {
+    "item": "l2backpack:drawer"
+  },
+  "template": []
+}

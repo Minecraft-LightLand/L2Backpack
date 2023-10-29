@@ -1,0 +1,9 @@
+{
+  "name": "Quick Access",
+  "icon": "l2backpack:dimensional_storage_white",
+  "category": "l2backpack:mechanics",
+  "pages": [
+	"Items with this feature: $(li)$(l:items/2_dimensional_storages)Dimensional Storages$(/l)$(li)$(l:items/3_ender_backpack)Ender Backpack$(/l)$(br2)Right click to open. Or right click item in any inventory / container GUI to open directly.$(br2)This is similar to $(l:mechanics/inv_access)Quick Inventory Access$(/l) but with less restrictions.",
+    "These items store content in game saves directly. Thus, it fits inside shulker box and other backpack items.$(br2)You can put other backpacks with Quick Inventory Access inside, so you can open them directly, creating stacking menu. This is very helpful for organizing your items.These items store content in game saves directly. Thus, it fits inside shulker box and other backpack items."
+  ]
+}

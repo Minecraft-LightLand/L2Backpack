@@ -45,7 +45,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 		if (blockentity instanceof EnderDrawerBlockEntity chest) {
 			if (!stack.isEmpty() && !stack.hasTag() && stack.getItem() == chest.item) {
 				if (!level.isClientSide()) {
-					stack = new EnderDawerItemHandler(chest.getAccess(), false).insertItem(0, stack, false);
+					stack = new EnderDrawerItemHandler(chest.getAccess(), false).insertItem(0, stack, false);
 					player.setItemInHand(hand, stack);
 				} else {
 					ContentTransfer.playDrawerSound(player);
@@ -54,7 +54,7 @@ public class EnderDrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMe
 			} else if (stack.isEmpty()) {
 				if (!level.isClientSide()) {
 					DrawerAccess access = chest.getAccess();
-					stack = new EnderDawerItemHandler(access, false).extractItem(0, access.item().getMaxStackSize(), false);
+					stack = new EnderDrawerItemHandler(access, false).extractItem(0, access.item().getMaxStackSize(), false);
 					player.setItemInHand(hand, stack);
 				} else {
 					ContentTransfer.playDrawerSound(player);

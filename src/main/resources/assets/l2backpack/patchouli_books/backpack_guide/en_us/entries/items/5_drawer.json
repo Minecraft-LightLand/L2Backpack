@@ -7,8 +7,8 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:drawer",
-	  "text": "In inventory, left click drawer with a stack to store item. Right click drawer to take item out.$(br2)Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks.$(br2)You can put drawers inside your backpack, so that your backpack can store more items."
+	  "text": "In inventory, left click drawer with a stack to store item. Right click drawer to take item out.$(br2)Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks. Use $(l:items/8_ender_pocket)Ender Pocket$(/l) up upgrade to at most 512 stacks.$(br2)You can put drawers inside your backpack, so that your backpack can store more items."
 	},
-	"Features:$(li)Shift + right click to place it as a block$(li)Drawer Collect: Shift + right click on non-placeable point to store matching items from inventory.$(li)Drawer Extract: Right click with drawer to take one stack item out.$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
+	"Features:$(li)Shift + right click to place it as a block$(li)Drawer Collect: Shift + right click on non-placeable point to store matching items from inventory.$(li)Drawer Extract: Right click with drawer to take one stack item out.$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
   ]
 }

@@ -7,8 +7,8 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "tag:l2backpack:backpacks",
-	  "text": "Backpack stores items inside, but cannot put into shulker boxes or other backpacks. It has 16 colors.$(br2)It has 18 slots at the beginning, and you can upgrade it with Ender Pocket.$(br2)Supports Quick Access from inventory."
+	  "text": "Backpack stores items inside, but cannot put into shulker boxes or other backpacks. It has 16 colors.$(br2)It has 18 slots at the beginning, and you can upgrade it with $(l:items/8_ender_pocket)Ender Pocket$(/l).$(br2)Supports Quick Access from inventory."
 	},
-	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/inv_access)Quick Inventory Access$(/l)$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
+	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/inv_access)Quick Inventory Access$(/l)$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
   ]
 }

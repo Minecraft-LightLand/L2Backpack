@@ -1,14 +1,11 @@
 package dev.xkmc.l2backpack.network;
 
-import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
-import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
+import dev.xkmc.l2backpack.content.insert.OverlayInsertItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2serial.network.SerialPacketBase;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -16,7 +13,7 @@ import net.minecraftforge.network.NetworkEvent;
 public class DrawerInteractToServer extends SerialPacketBase {
 
 	public enum Type {
-		SET, INSERT, TAKE
+		INSERT, TAKE
 	}
 
 	@SerialClass.SerialField
@@ -26,10 +23,7 @@ public class DrawerInteractToServer extends SerialPacketBase {
 	public int wid, slot;
 
 	@SerialClass.SerialField
-	public Item item;
-
-	@SerialClass.SerialField
-	public int count;
+	public ItemStack stack;
 
 
 	@Deprecated
@@ -41,8 +35,7 @@ public class DrawerInteractToServer extends SerialPacketBase {
 		this.type = type;
 		this.wid = wid;
 		this.slot = slot;
-		this.item = carried.getItem();
-		this.count = carried.getCount();
+		this.stack = carried;
 	}
 
 	@Override
@@ -52,36 +45,22 @@ public class DrawerInteractToServer extends SerialPacketBase {
 		AbstractContainerMenu menu = player.containerMenu;
 		if (menu.containerId != wid) return;
 		if (wid != 0 && !menu.getSlot(slot).allowModification(player)) return;
-		ItemStack drawer = wid == 0 ? player.getInventory().getItem(slot) : menu.getSlot(slot).getItem();
-		if (!(drawer.getItem() instanceof BaseDrawerItem drawerItem)) return;
-		if (drawerItem instanceof EnderDrawerItem && EnderDrawerItem.getOwner(drawer).map(e -> !e.equals(player.getUUID())).orElse(false)) {
-			BackpackTriggers.SHARE.trigger(player);
-		}
+		ItemStack storage = wid == 0 ? player.getInventory().getItem(slot) : menu.getSlot(slot).getItem();
+		if (!(storage.getItem() instanceof OverlayInsertItem drawerItem)) return;
+		drawerItem.serverTrigger(storage, player);
 		ItemStack carried = menu.getCarried();
 		if (player.isCreative() && wid == 0) {
-			carried = new ItemStack(item, count);
+			carried = stack;
 		}
 		if (type == Type.TAKE) {
-			ItemStack stack = drawerItem.takeItem(drawer, player);
+			ItemStack stack = drawerItem.takeItem(storage, player);
 			if (player.isCreative() && wid == 0) {
 				carried = stack;
 			} else {
 				menu.setCarried(stack);
 			}
-			if (!stack.isEmpty()) {
-				BackpackTriggers.DRAWER.trigger(player, Type.TAKE);
-			}
-		} else if (type == Type.INSERT) {
-			if (BaseDrawerItem.canAccept(drawer, carried) && !carried.isEmpty() && !carried.hasTag()) {
-				drawerItem.insert(drawer, carried, player);
-				BackpackTriggers.DRAWER.trigger(player, Type.INSERT);
-			}
-		} else if (type == Type.SET) {
-			if (drawerItem.canSetNewItem(drawer) && !carried.isEmpty() && !carried.hasTag()) {
-				drawerItem.setItem(drawer, carried.getItem(), player);
-				drawerItem.insert(drawer, carried, player);
-				BackpackTriggers.DRAWER.trigger(player, Type.INSERT);
-			}
+		} else {
+			drawerItem.attemptInsert(storage, carried, player);
 		}
 		if (wid != 0) {
 			menu.getSlot(slot).setChanged();

@@ -8,7 +8,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:ender_drawer",
-	  "text": "Features:$(li)Shift + right click to place it as a block.$(li)Drawer Collect: Shift + right click on non-placeable point to store matching items from inventory.$(li)Drawer Extract: Right click with it to take one stack item out$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
+	  "text": "Features:$(li)Shift + right click to place it as a block.$(li)Drawer Collect: Shift + right click on non-placeable point to store matching items from inventory.$(li)Drawer Extract: Right click with it to take one stack item out$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
 	}
   ]
 }

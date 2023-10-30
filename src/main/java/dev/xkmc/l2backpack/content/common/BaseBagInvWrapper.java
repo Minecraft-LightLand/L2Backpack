@@ -1,7 +1,6 @@
 package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.content.capability.BackpackCap;
-import dev.xkmc.l2backpack.content.capability.InvBackpackCap;
 import dev.xkmc.l2backpack.content.capability.MergedInvBackpackCap;
 import dev.xkmc.l2backpack.content.capability.PickupMode;
 import net.minecraft.core.Direction;
@@ -144,7 +143,7 @@ public class BaseBagInvWrapper extends MergedInvBackpackCap implements ICapabili
 
 	private List<ItemStack> getItemList() {
 		ListTag rootTag = BaseBagItem.getListTag(stack);
-		if (cachedTag == null || !cachedTag.equals(rootTag))
+		if (itemStacksCache == null || cachedTag == null || !cachedTag.equals(rootTag))
 			itemStacksCache = refreshItemList(rootTag);
 		return itemStacksCache;
 	}
@@ -162,6 +161,7 @@ public class BaseBagInvWrapper extends MergedInvBackpackCap implements ICapabili
 	private void setItemList(List<ItemStack> itemStacks) {
 		BaseBagItem.setItems(stack, itemStacks);
 		cachedTag = BaseBagItem.getListTag(stack);
+		itemStacksCache = null;
 	}
 
 	@Override

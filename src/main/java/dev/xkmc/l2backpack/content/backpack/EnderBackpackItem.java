@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
+import dev.xkmc.l2backpack.content.insert.InsertOnlyItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2library.util.Proxy;
@@ -14,6 +15,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleMenuProvider;
@@ -29,11 +31,13 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class EnderBackpackItem extends Item implements BackpackModelItem, PickupBagItem {
+public class EnderBackpackItem extends Item implements BackpackModelItem, PickupBagItem, InsertOnlyItem {
 
 	@OnlyIn(Dist.CLIENT)
 	public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
@@ -79,6 +83,11 @@ public class EnderBackpackItem extends Item implements BackpackModelItem, Pickup
 	@Override
 	public ResourceLocation getModelTexture(ItemStack stack) {
 		return new ResourceLocation(L2Backpack.MODID, "textures/block/ender_backpack.png");
+	}
+
+	@Override
+	public @Nullable IItemHandler getInvCap(ItemStack storage, ServerPlayer player) {
+		return new InvWrapper(player.getEnderChestInventory());
 	}
 
 	@Override

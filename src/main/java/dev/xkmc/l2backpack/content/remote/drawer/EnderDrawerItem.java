@@ -7,6 +7,7 @@ import dev.xkmc.l2backpack.content.drawer.DrawerInvWrapper;
 import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
+import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -65,12 +66,12 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		ItemStack stack = player.getItemInHand(hand);
 		if (BaseDrawerItem.getItem(stack) == Items.AIR)
 			return InteractionResultHolder.fail(stack);
-		if (world.isClientSide()) {
+		if (!(player instanceof ServerPlayer sp)) {
 			ContentTransfer.playDrawerSound(player);
 			return InteractionResultHolder.success(stack);
 		} else refresh(stack, player);
 		if (!player.isShiftKeyDown()) {
-			ItemStack take = takeItem(stack, player);
+			ItemStack take = takeItem(stack, sp);
 			int c = take.getCount();
 			player.getInventory().placeItemBackInInventory(take);
 			ContentTransfer.onExtract(player, c, stack);
@@ -172,4 +173,10 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 		return new DrawerInvWrapper(stack, trace -> new EnderDrawerInvAccess(stack, this, trace.player));
 	}
 
+	@Override
+	public void serverTrigger(ItemStack storage, ServerPlayer player) {
+		if (EnderDrawerItem.getOwner(storage).map(e -> !e.equals(player.getUUID())).orElse(false)) {
+			BackpackTriggers.SHARE.trigger(player);
+		}
+	}
 }

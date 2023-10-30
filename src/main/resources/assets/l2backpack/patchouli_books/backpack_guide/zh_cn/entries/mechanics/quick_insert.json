@@ -1,0 +1,9 @@
+{
+  "name": "Quick Insert",
+  "icon": "l2backpack:backpack_purple",
+  "category": "l2backpack:mechanics",
+  "pages": [
+	"Items with this feature:$(li)$(l:items/1_backpacks)Backpacks$(/l)$(li)$(l:items/2_dimensional_storages)Dimensional Storages$(/l)$(li)$(l:items/3_ender_backpack)Ender Backpack$(/l)$(li)$(l:items/4_swaps)Quick Swaps$(/l)$(li)$(l:items/5_drawer)Drawers$(/l)$(li)$(l:items/6_ender_drawer)Ender Drawers$(/l)$(br2)",
+	"In any inventory, left click your drawers (or backpacks, etc) with item to put item into your drawers.$(br2)For backpacks, you can also use right click. For drawers, right click is reserved for quick extract.$(br2)This is pretty similar to bundles, and widely supported by many backpack mods."
+  ]
+}

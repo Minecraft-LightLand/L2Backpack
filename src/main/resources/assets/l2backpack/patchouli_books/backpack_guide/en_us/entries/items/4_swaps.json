@@ -16,6 +16,6 @@
 	  "item": "l2backpack:combined_swap,l2backpack:ender_swap",
 	  "text": "There is also the Combined swap, which is a combination of all 3 swaps. You can trigger$(br2)Or you can combine ender backpack together, which will be Ender Swap, giving you functionality of all 4 items. Note that in Ender Swap, the arrows / tools / armors are still stored inside the swap item, not ender chest."
 	},
-	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/inv_access)Quick Inventory Access$(/l)$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
+	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/inv_access)Quick Inventory Access$(/l)$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
   ]
 }

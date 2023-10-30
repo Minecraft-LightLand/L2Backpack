@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
+import dev.xkmc.l2backpack.content.insert.InsertOnlyItem;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.client.Minecraft;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, PickupBagItem {
+public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, PickupBagItem, InsertOnlyItem {
 
 	protected static final String LOOT = "loot";
 	protected static final String SEED = "seed";

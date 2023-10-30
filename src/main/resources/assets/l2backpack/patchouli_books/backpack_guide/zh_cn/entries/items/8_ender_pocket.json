@@ -1,0 +1,13 @@
+{
+  "name": "Ender Pocket",
+  "icon": "l2backpack:ender_pocket",
+  "category": "l2backpack:items",
+  "sortnum": 8,
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2backpack:ender_pocket",
+	  "text": "Use it to upgrade backpacks or drawers in smithing table. You don't need templates for this.$(br2)$(l:items/1_backpacks)Backpacks$(/l) increase 9 slots per upgrade, and can have at most 72 slot.$(br2)$(l:items/5_drawer)Drawer$(/l) capacity increases by 64 stacks (4096 items) per upgrade, can can have at most 512 stacks (32768 items)."
+	}
+  ]
+}

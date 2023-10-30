@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.insert.OverlayInsertItem;
 import dev.xkmc.l2backpack.content.tool.IBagTool;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.BackpackKeys;
@@ -14,6 +15,7 @@ import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -47,7 +49,7 @@ public class ClientEventHandler {
 				scr.getMenu().getCarried().getItem() instanceof IBagTool) {
 			var slot = scr.getSlotUnderMouse();
 			if (slot != null && slot.getItem().getItem() instanceof PickupBagItem) {
-				if (Proxy.getClientPlayer().getAbilities().instabuild)
+				if (scr instanceof CreativeModeInventoryScreen)
 					L2Backpack.HANDLER.toServer(new CreativeSetCarryToServer(ItemStack.EMPTY));
 				event.setCanceled(true);
 			}
@@ -64,7 +66,7 @@ public class ClientEventHandler {
 				scr.getMenu().getCarried().getItem() instanceof IBagTool) {
 			var slot = scr.getSlotUnderMouse();
 			if (slot != null && slot.getItem().getItem() instanceof PickupBagItem) {
-				if (Proxy.getClientPlayer().getAbilities().instabuild)
+				if (scr instanceof CreativeModeInventoryScreen)
 					L2Backpack.HANDLER.toServer(new CreativeSetCarryToServer(scr.getMenu().getCarried()));
 			}
 			return;
@@ -78,8 +80,12 @@ public class ClientEventHandler {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.getSlotUnderMouse();
-			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-				if (insertItem(event, cont, slot, true)) return true;
+			ItemStack carried = cont.getMenu().getCarried();
+			boolean bypass = !carried.isEmpty() &&
+					slot != null && slot.getItem().getItem() instanceof OverlayInsertItem item &&
+					!item.mayClientTake();
+			if (bypass || event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+				return insertItem(event, cont, slot, true);
 			}
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && slot != null) {
 				return slot.getItem().getItem() instanceof BaseDrawerItem &&
@@ -93,8 +99,12 @@ public class ClientEventHandler {
 		Screen screen = event.getScreen();
 		if (screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.getSlotUnderMouse();
-			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-				if (insertItem(event, cont, slot, false)) return true;
+			ItemStack carried = cont.getMenu().getCarried();
+			boolean bypass = !carried.isEmpty() &&
+					slot != null && slot.getItem().getItem() instanceof OverlayInsertItem item &&
+					!item.mayClientTake();
+			if (bypass || event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+				return insertItem(event, cont, slot, false);
 			}
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
 				if (extractItem(event, cont, slot)) return true;
@@ -111,21 +121,10 @@ public class ClientEventHandler {
 		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
 		}
-		ItemStack drawerStack = slot.getItem();
-		ItemStack stack = cont.getMenu().getCarried();
-		if (drawerStack.getItem() instanceof BaseDrawerItem drawer) {
-			if (stack.isEmpty()) return false;
-			if (stack.hasTag()) return true;
-			if (drawer.canSetNewItem(drawerStack)) {
-				if (perform)
-					sendDrawerPacket(DrawerInteractToServer.Type.SET, cont, slot);
-				return true;
-			}
-			if (BaseDrawerItem.canAccept(drawerStack, stack)) {
-				if (perform)
-					sendDrawerPacket(DrawerInteractToServer.Type.INSERT, cont, slot);
-				return true;
-			}
+		ItemStack storage = slot.getItem();
+		ItemStack carried = cont.getMenu().getCarried();
+		if (storage.getItem() instanceof OverlayInsertItem drawer) {
+			return drawer.clientInsert(storage, carried, cont.getMenu().containerId, slot, perform);
 		}
 		return false;
 	}
@@ -136,7 +135,7 @@ public class ClientEventHandler {
 		}
 		ItemStack stack = cont.getMenu().getCarried();
 		ItemStack drawerStack = slot.getItem();
-		if (drawerStack.getItem() instanceof BaseDrawerItem drawer && stack.isEmpty()) {
+		if (drawerStack.getItem() instanceof OverlayInsertItem drawer && drawer.mayClientTake() && stack.isEmpty()) {
 			sendDrawerPacket(DrawerInteractToServer.Type.TAKE, cont, slot);
 			return true;
 		}

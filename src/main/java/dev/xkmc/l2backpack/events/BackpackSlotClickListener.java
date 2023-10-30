@@ -76,12 +76,14 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 
 	private void handleNoMenu(ServerPlayer player, int index) {
 		ItemStack stack = player.containerMenu.getSlot(index).getItem();
-		if (player.containerMenu.getCarried().getItem() instanceof IBagTool tool) {
+		ItemStack carried = player.containerMenu.getCarried();
+		if (carried.getItem() instanceof IBagTool tool) {
 			if (stack.getItem() instanceof PickupBagItem) {
 				tool.click(stack);
 				return;
 			}
 		}
+		if (!carried.isEmpty()) return;
 		if (stack.getItem() instanceof BaseDrawerItem) return;
 		boolean others = false;
 		ScreenTracker.onServerOpen(player);
@@ -101,13 +103,15 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 	protected void handle(ServerPlayer player, ClickedPlayerSlotResult result) {
 		boolean others = false;
 		boolean keybind = result.container() instanceof PlayerInvCallback;
-		if (!keybind && player.containerMenu.getCarried().getItem() instanceof IBagTool tool) {
+		ItemStack carried = player.containerMenu.getCarried();
+		if (!keybind && carried.getItem() instanceof IBagTool tool) {
 			if (result.stack().getItem() instanceof PickupBagItem) {
 				tool.click(result.stack());
 				result.container().update();
 				return;
 			}
 		}
+		if (!carried.isEmpty()) return;
 		if (result.stack().getItem() instanceof BaseDrawerItem) return;
 		if (!keybind) {
 			ScreenTracker.onServerOpen(player);

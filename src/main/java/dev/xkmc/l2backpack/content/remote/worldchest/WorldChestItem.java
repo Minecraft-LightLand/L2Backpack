@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
+import dev.xkmc.l2backpack.content.insert.InsertOnlyItem;
 import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -29,13 +30,14 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class WorldChestItem extends BlockItem implements BackpackModelItem, PickupBagItem {
+public class WorldChestItem extends BlockItem implements BackpackModelItem, PickupBagItem, InsertOnlyItem {
 
 	public static Optional<UUID> getOwner(ItemStack stack) {
 		CompoundTag tag = stack.getTag();
@@ -159,6 +161,16 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem, Pick
 	@Override
 	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
 		return new WorldChestCaps(stack);
+	}
+
+	@Override
+	public @Nullable IItemHandler getInvCap(ItemStack stack, ServerPlayer player) {
+		var opt = getContainer(stack, player.serverLevel());
+		if (opt.isPresent()) {
+			var storage = opt.get();
+			return new WorldChestInvWrapper(storage.container, storage.id);
+		}
+		return null;
 	}
 
 }

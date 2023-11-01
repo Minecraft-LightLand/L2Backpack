@@ -65,6 +65,12 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 		return Pair.of(list, selected);
 	}
 
+	public static boolean onlyWithShift(@Nullable QuickSwapType type) {
+		return type == QuickSwapType.ARROW && BackpackConfig.CLIENT.showArrowOnlyWithShift.get()
+				|| type == QuickSwapType.TOOL && BackpackConfig.CLIENT.showToolOnlyWithShift.get()
+				|| type == QuickSwapType.ARMOR && BackpackConfig.CLIENT.showArmorOnlyWithShift.get();
+	}
+
 	@Override
 	public BackpackSignature getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
@@ -75,9 +81,7 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 		boolean ignoreOther = false;
 		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
 		if (!Minecraft.getInstance().options.keyShift.isDown()) {
-			ignoreOther = type == QuickSwapType.ARROW && BackpackConfig.CLIENT.showArrowOnlyWithShift.get()
-					|| type == QuickSwapType.TOOL && BackpackConfig.CLIENT.showToolOnlyWithShift.get()
-					|| type == QuickSwapType.ARMOR && BackpackConfig.CLIENT.showArmorOnlyWithShift.get();
+			ignoreOther = onlyWithShift(type);
 		}
 		int focus = player.getInventory().selected;
 		if (token.type() == QuickSwapType.TOOL) {
@@ -101,7 +105,7 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 			ItemStack bowStack = player.getMainHandItem();
 			if (bowStack.getItem() instanceof ProjectileWeaponItem bow) {
 				return !stack.isEmpty() && bow.getAllSupportedProjectiles().test(stack);
-			}else if (player.getOffhandItem().getItem() instanceof ProjectileWeaponItem bow) {
+			} else if (player.getOffhandItem().getItem() instanceof ProjectileWeaponItem bow) {
 				return !stack.isEmpty() && bow.getAllSupportedProjectiles().test(stack);
 			}
 			return false;

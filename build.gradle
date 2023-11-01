@@ -186,13 +186,13 @@ dependencies {
         jarJar.ranged(it, "[1.1.0,)")
     })
 
-    implementation fg.deobf(jarJar("dev.xkmc.l2itemselector:l2itemselector:0.1.4") {
+    implementation fg.deobf(jarJar("dev.xkmc.l2itemselector:l2itemselector:0.1.6") {
         transitive = false
-        jarJar.ranged(it, "[0.1.4,)")
+        jarJar.ranged(it, "[0.1.6,)")
     })
 
     implementation fg.deobf('dev.xkmc.modulargolems:modulargolems:2.4.13-slim')
-    runtimeOnly fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.1.5")
+    runtimeOnly fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.1.6")
     runtimeOnly fg.deobf('dev.xkmc.l2complements:l2complements:2.4.16-slim')
     //runtimeOnly fg.deobf('dev.xkmc.l2archery:l2archery:2.2.0.pre0')
     //runtimeOnly fg.deobf('dev.xkmc.l2weaponry:l2weaponry:2.2.0.pre0')

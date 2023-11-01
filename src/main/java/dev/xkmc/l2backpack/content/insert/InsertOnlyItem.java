@@ -46,7 +46,7 @@ public interface InsertOnlyItem extends OverlayInsertItem {
 	default void attemptInsert(ItemStack storage, ItemStack carried, ServerPlayer player) {
 		var handler = getInvCap(storage, player);
 		if (handler == null) return;
-		ItemStack remain = ItemHandlerHelper.insertItem(handler, carried, false);
+		ItemStack remain = ItemHandlerHelper.insertItem(handler, carried.copy(), false);
 		carried.setCount(remain.getCount());
 	}
 

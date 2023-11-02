@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 
 public interface OverlayInsertItem {
 
-	boolean clientInsert(ItemStack storage, ItemStack carried, int cid, Slot slot, boolean perform);
+	boolean clientInsert(ItemStack storage, ItemStack carried, int cid, Slot slot, boolean perform, int button);
 
 	boolean mayClientTake();
 

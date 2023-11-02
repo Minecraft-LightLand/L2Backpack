@@ -1,10 +1,12 @@
 package dev.xkmc.l2backpack.init.data;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.IConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
+import org.lwjgl.glfw.GLFW;
 
 import static dev.xkmc.l2backpack.content.backpack.BackpackItem.MAX_ROW;
 
@@ -19,6 +21,9 @@ public class BackpackConfig {
 		public final ForgeConfigSpec.BooleanValue showArmorOnlyWithShift;
 
 		public final ForgeConfigSpec.BooleanValue reverseScroll;
+		public final ForgeConfigSpec.BooleanValue backpackInsertRequiresShift;
+		public final ForgeConfigSpec.BooleanValue backpackEnableLeftClickInsert;
+		public final ForgeConfigSpec.BooleanValue backpackEnableRightClickInsert;
 
 
 		Client(ForgeConfigSpec.Builder builder) {
@@ -37,8 +42,33 @@ public class BackpackConfig {
 			reverseScroll = builder.comment("Reverse scrolling direction for quick swap")
 					.define("reverseScroll", false);
 
+			backpackInsertRequiresShift = builder.comment("Backpack inventory quick insert requires shift click")
+					.define("backpackInsertRequiresShift", false);
+
+			backpackEnableLeftClickInsert = builder.comment("Backpack inventory quick insert allows left click insert")
+					.define("backpackEnableLeftClickInsert", true);
+
+			backpackEnableRightClickInsert = builder.comment("Backpack inventory quick insert allows right click insert")
+					.define("backpackEnableRightClickInsert", true);
+
 		}
 
+		public boolean allowBackpackInsert(int button) {
+			if (backpackInsertRequiresShift.get()) {
+				if (!Screen.hasShiftDown())
+					return false;
+			}
+			boolean allow = false;
+			if (backpackEnableLeftClickInsert.get()) {
+				if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT)
+					allow = true;
+			}
+			if (backpackEnableRightClickInsert.get()) {
+				if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT)
+					allow = true;
+			}
+			return allow;
+		}
 
 	}
 

@@ -186,9 +186,9 @@ dependencies {
         jarJar.ranged(it, "[1.1.0,)")
     })
 
-    implementation fg.deobf(jarJar("dev.xkmc.l2itemselector:l2itemselector:0.1.6") {
+    implementation fg.deobf(jarJar("dev.xkmc.l2itemselector:l2itemselector:0.1.7") {
         transitive = false
-        jarJar.ranged(it, "[0.1.6,)")
+        jarJar.ranged(it, "[0.1.7,)")
     })
 
     implementation fg.deobf('dev.xkmc.modulargolems:modulargolems:2.4.13-slim')

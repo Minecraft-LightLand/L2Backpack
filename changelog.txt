@@ -1,11 +1,17 @@
+2.4.15
+- add wand page TODO
+- keybind name TODO
+
+2.4.14
+- Fix drawer crash if placed in 2.4.12
+- Update texture
+- Fix scrolling
+
 2.4.13
 - add pickup option
 - add drawer upgrade
 - Overlay item insert
 - patchouli page
-- add wand page TODO
-- keybind name TODO
--
 
 2.4.12
 - Now non-player can also use quick swap

@@ -38,7 +38,7 @@ public class BackpackSel implements ISelectionListener {
 		if (token == null) return false;
 		QuickSwapType type = token.type();
 		if (onlyWithShift(type)) {
-			return Minecraft.getInstance().options.keyShift.isDown();
+			return Screen.hasAltDown() || Minecraft.getInstance().options.keyShift.isDown();
 		}
 		return true;
 	}

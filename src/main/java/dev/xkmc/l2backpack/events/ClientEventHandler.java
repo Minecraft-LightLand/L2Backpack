@@ -85,7 +85,7 @@ public class ClientEventHandler {
 					slot != null && slot.getItem().getItem() instanceof OverlayInsertItem item &&
 					!item.mayClientTake();
 			if (bypass || event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-				return insertItem(event, cont, slot, true);
+				return insertItem(event, cont, slot, true, event.getButton());
 			}
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT && slot != null) {
 				return slot.getItem().getItem() instanceof BaseDrawerItem &&
@@ -104,7 +104,7 @@ public class ClientEventHandler {
 					slot != null && slot.getItem().getItem() instanceof OverlayInsertItem item &&
 					!item.mayClientTake();
 			if (bypass || event.getButton() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-				return insertItem(event, cont, slot, false);
+				return insertItem(event, cont, slot, false, event.getButton());
 			}
 			if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
 				if (extractItem(event, cont, slot)) return true;
@@ -117,14 +117,14 @@ public class ClientEventHandler {
 		return false;
 	}
 
-	private static boolean insertItem(ScreenEvent event, AbstractContainerScreen<?> cont, @Nullable Slot slot, boolean perform) {
+	private static boolean insertItem(ScreenEvent event, AbstractContainerScreen<?> cont, @Nullable Slot slot, boolean perform, int button) {
 		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
 			return false;
 		}
 		ItemStack storage = slot.getItem();
 		ItemStack carried = cont.getMenu().getCarried();
 		if (storage.getItem() instanceof OverlayInsertItem drawer) {
-			return drawer.clientInsert(storage, carried, cont.getMenu().containerId, slot, perform);
+			return drawer.clientInsert(storage, carried, cont.getMenu().containerId, slot, perform, button);
 		}
 		return false;
 	}

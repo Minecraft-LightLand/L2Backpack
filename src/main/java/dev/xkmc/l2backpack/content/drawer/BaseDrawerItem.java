@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -53,7 +54,8 @@ public interface BaseDrawerItem extends PickupBagItem, OverlayInsertItem {
 		return getStacking(BackpackCap.getConfig(drawer));
 	}
 
-	static int getStacking(CompoundTag tag) {
+	static int getStacking(@Nullable CompoundTag tag) {
+		if (tag == null) return getStacking();
 		int factor = tag.getInt(STACKING);
 		if (factor < 1) factor = 1;
 		return getStacking() * factor;
@@ -95,7 +97,7 @@ public interface BaseDrawerItem extends PickupBagItem, OverlayInsertItem {
 	boolean canSetNewItem(ItemStack drawer);
 
 	@Override
-	default boolean clientInsert(ItemStack storage, ItemStack carried, int cid, Slot slot, boolean perform) {
+	default boolean clientInsert(ItemStack storage, ItemStack carried, int cid, Slot slot, boolean perform, int button) {
 		if (carried.isEmpty()) return false;
 		if (carried.hasTag()) return true;
 		if (canSetNewItem(storage)) {

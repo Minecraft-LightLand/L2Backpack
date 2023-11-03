@@ -22,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class BackpackLayerRenderer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
 
-	private static final ModelLayerLocation MLL = new ModelLayerLocation(new ResourceLocation(L2Backpack.MODID, "backpack"), "main");
+	public static final ModelLayerLocation MLL = new ModelLayerLocation(new ResourceLocation(L2Backpack.MODID, "backpack"), "main");
 
 	private final BackpackModel<T> model;
 

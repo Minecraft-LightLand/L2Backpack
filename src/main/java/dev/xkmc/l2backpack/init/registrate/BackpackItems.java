@@ -71,8 +71,9 @@ public class BackpackItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p))
-						.tag(TagGen.BACKPACKS, curios_tag).model(BackpackItems::createBackpackModel)
-						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMapColor().col)
+						.tag(TagGen.BACKPACKS, curios_tag)
+						.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
+								new ModelFile.UncheckedModelFile("builtin/entity")))
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_backpack"))
 						.register();
 			}
@@ -80,8 +81,9 @@ public class BackpackItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p))
-						.tag(TagGen.DIMENSIONAL_STORAGES, curios_tag).model(BackpackItems::createWorldChestModel)
-						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMapColor().col)
+						.tag(TagGen.DIMENSIONAL_STORAGES, curios_tag)
+						.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
+								new ModelFile.UncheckedModelFile("builtin/entity")))
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_dimensional_backpack")).register();
 			}
 			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(BackpackItems::createEnderBackpackModel)

@@ -29,9 +29,6 @@ public class L2BackpackClient {
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
-			for (ItemEntry<BackpackItem> entry : BackpackItems.BACKPACKS) {
-				ItemProperties.register(entry.get(), new ResourceLocation("open"), BaseBagItem::isOpened);
-			}
 			ItemProperties.register(BackpackItems.ENDER_BACKPACK.get(), new ResourceLocation("open"), EnderBackpackItem::isOpened);
 			ItemProperties.register(BackpackItems.QUIVER.get(), new ResourceLocation(L2Backpack.MODID, "arrow"), (stack, level, entity, i) -> Quiver.displayArrow(stack));
 		});

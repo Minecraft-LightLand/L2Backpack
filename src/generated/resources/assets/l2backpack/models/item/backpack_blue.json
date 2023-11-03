@@ -1,11 +1,3 @@
 {
-  "parent": "l2backpack:item/backpack",
-  "overrides": [
-    {
-      "model": "l2backpack:item/backpack_open",
-      "predicate": {
-        "minecraft:open": 1.0
-      }
-    }
-  ]
+  "parent": "minecraft:builtin/entity"
 }

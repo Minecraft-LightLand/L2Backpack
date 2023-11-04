@@ -122,20 +122,19 @@ public class RecipeGen {
 					.define('A', ender)
 					.save(pvd);
 
-			bag = BackpackItems.ENDER_SWITCH.get();
-			unlock(pvd, new CustomShapedBuilder<>(BackpackMisc.RSC_BAG_CRAFT, bag, 1)::unlockedBy, ender)
-					.pattern("1A").pattern("A2")
-					.define('1', BackpackItems.MULTI_SWITCH.get())
-					.define('2', BackpackItems.ENDER_BACKPACK.get())
-					.define('A', ender)
-					.save(pvd);
-
 			bag = BackpackItems.DRAWER.get();
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, ender)
 					.pattern("CAC").pattern("ABA").pattern("DAD")
 					.define('A', Items.GLASS).define('B', ender)
 					.define('C', Tags.Items.DYES_PURPLE)
 					.define('D', Tags.Items.DYES_YELLOW)
+					.save(pvd, new ResourceLocation(L2Backpack.MODID, "drawer_cheap"));
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, ender)
+					.pattern("CAC").pattern("ABA").pattern("DAD")
+					.define('A', Items.GLASS).define('B', ender)
+					.define('C', Items.AMETHYST_SHARD)
+					.define('D', Items.GOLD_NUGGET)
 					.save(pvd);
 
 			unlock(pvd, new SmithingTransformRecipeBuilder(BackpackMisc.RSC_DRAWER_UPGRADE.get(), TEMPLATE_PLACEHOLDER, Ingredient.of(bag),

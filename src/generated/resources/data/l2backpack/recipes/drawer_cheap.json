@@ -9,10 +9,10 @@
       "item": "l2backpack:ender_pocket"
     },
     "C": {
-      "item": "minecraft:amethyst_shard"
+      "tag": "forge:dyes/purple"
     },
     "D": {
-      "item": "minecraft:gold_nugget"
+      "tag": "forge:dyes/yellow"
     }
   },
   "pattern": [

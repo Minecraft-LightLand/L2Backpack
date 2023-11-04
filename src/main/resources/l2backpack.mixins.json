@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_16",
   "refmap": "l2backpack.refmap.json",
   "mixins": [
+	"AbstractArrowMixin",
 	"ItemStackMixin"
   ],
   "client": [

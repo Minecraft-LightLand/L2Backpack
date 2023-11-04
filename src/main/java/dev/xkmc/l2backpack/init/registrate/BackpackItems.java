@@ -6,7 +6,6 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
-import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.bag.BookBag;
 import dev.xkmc.l2backpack.content.bag.EquipmentBag;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
@@ -16,6 +15,7 @@ import dev.xkmc.l2backpack.content.quickswap.merged.MultiSwitch;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
+import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.tool.PickupTweakerTool;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -103,7 +103,8 @@ public class BackpackItems {
 			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
 			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
 			MULTI_SWITCH = REGISTRATE.item("combined_swap", MultiSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
-			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS, TagGen.ENDER_CHEST).defaultLang().register();
+			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS, TagGen.ENDER_CHEST)
+					.removeTab(TAB.getKey()).defaultLang().register();
 
 			DRAWER = REGISTRATE.item("drawer", p -> new DrawerItem(BackpackBlocks.DRAWER.get(), p))
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(

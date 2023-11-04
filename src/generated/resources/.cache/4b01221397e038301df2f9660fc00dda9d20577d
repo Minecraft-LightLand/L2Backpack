@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-03T15:27:08.089971	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.20.1	2023-11-03T16:50:57.682474	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 530cfc8939fcc948a19b693d06af8389391a97a4 assets/l2backpack/blockstates/dimensional_storage.json
 c8a12d1045e3e7eccdfa66ade2f5fd44f2359d78 assets/l2backpack/blockstates/drawer.json
 1b95dd478e92493373a61b041acce8ee59dfdec7 assets/l2backpack/blockstates/ender_drawer.json
@@ -63,8 +63,7 @@ e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/l2backpack/models/item/dimension
 e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/l2backpack/models/item/dimensional_storage_white.json
 e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/l2backpack/models/item/dimensional_storage_yellow.json
 e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/l2backpack/models/item/drawer.json
-c7949585bdbea84bcd74acff64356383b1e89c49 assets/l2backpack/models/item/ender_backpack.json
-8cc1a585fa6251b8ea26696cec881cc0be8fbba9 assets/l2backpack/models/item/ender_backpack_open.json
+e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/l2backpack/models/item/ender_backpack.json
 e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/l2backpack/models/item/ender_drawer.json
 2e7d769568e35709ed56dc0e295da8fa82ff0fca assets/l2backpack/models/item/ender_pocket.json
 1e3531ab9a0d8c22d7f7ec0a604992472b8196c8 assets/l2backpack/models/item/ender_swap.json

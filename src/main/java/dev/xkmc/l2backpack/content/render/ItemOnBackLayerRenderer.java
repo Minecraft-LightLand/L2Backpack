@@ -41,9 +41,9 @@ public class ItemOnBackLayerRenderer<T extends LivingEntity, M extends HumanoidM
 		if (stack.getItem() instanceof ItemOnBackItem backpack) {
 			item = backpack;
 		} else {
-			var opt = CuriosCompat.getSlot(entity, e -> e.getItem() instanceof ItemOnBackItem);
+			var opt = CuriosCompat.getRenderingSlot(entity, e -> e.getItem() instanceof ItemOnBackItem);
 			if (opt.isPresent()) {
-				stack = opt.get().getFirst();
+				stack = opt.get();
 				item = (ItemOnBackItem) stack.getItem();
 			}
 		}

@@ -33,6 +33,9 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public static void keyEvent(GenericKeyEvent event) {
+		if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), 292)) {
+			return;
+		}
 		if (Minecraft.getInstance().screen == null &&
 				Proxy.getClientPlayer() != null &&
 				event.test(BackpackKeys.OPEN.map.getKey()) &&

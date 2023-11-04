@@ -39,9 +39,9 @@ public class BackpackLayerRenderer<T extends LivingEntity, M extends HumanoidMod
 		if (stack.getItem() instanceof BackpackModelItem backpack) {
 			item = backpack;
 		} else {
-			var opt = CuriosCompat.getSlot(entity, e -> e.getItem() instanceof BackpackModelItem);
+			var opt = CuriosCompat.getRenderingSlot(entity, e -> e.getItem() instanceof BackpackModelItem);
 			if (opt.isPresent()) {
-				stack = opt.get().getFirst();
+				stack = opt.get();
 				if (!stack.isEmpty())
 					item = (BackpackModelItem) stack.getItem();
 			}

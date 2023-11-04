@@ -86,7 +86,9 @@ public class BackpackItems {
 								new ModelFile.UncheckedModelFile("builtin/entity")))
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_dimensional_backpack")).register();
 			}
-			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(BackpackItems::createEnderBackpackModel)
+			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new)
+					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
+							new ModelFile.UncheckedModelFile("builtin/entity")))
 					.tag(curios_tag, TagGen.ENDER_CHEST).defaultLang().register();
 
 			ENDER_POCKET = simpleItem("ender_pocket");
@@ -114,26 +116,6 @@ public class BackpackItems {
 					.tag(TagGen.DRAWERS).defaultLang().register();
 		}
 	}
-
-	private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {
-		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "l2backpack:backpack");
-		builder.override().predicate(new ResourceLocation("open"), 1).model(
-				new ModelFile.UncheckedModelFile(L2Backpack.MODID + ":item/backpack_open"));
-	}
-
-	private static void createWorldChestModel(DataGenContext<Item, WorldChestItem> ctx, RegistrateItemModelProvider pvd) {
-		pvd.withExistingParent(ctx.getName(), "l2backpack:dimensional_storage");
-	}
-
-	private static void createEnderBackpackModel(DataGenContext<Item, EnderBackpackItem> ctx, RegistrateItemModelProvider pvd) {
-		pvd.withExistingParent("ender_backpack_open", "generated")
-				.texture("layer0", "item/ender_backpack_open");
-		ItemModelBuilder builder = pvd.withExistingParent("ender_backpack", "generated");
-		builder.texture("layer0", "item/ender_backpack");
-		builder.override().predicate(new ResourceLocation("open"), 1).model(
-				new ModelFile.UncheckedModelFile(L2Backpack.MODID + ":item/ender_backpack_open"));
-	}
-
 
 	public static <T extends Quiver> void createArrowBagModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider pvd) {
 		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "generated");

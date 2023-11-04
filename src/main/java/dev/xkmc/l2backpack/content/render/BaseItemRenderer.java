@@ -109,10 +109,10 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 			case NONE:
 			case HEAD:
 			case FIXED: {
-				pose.translate(0.5, 0.5, 0.5);
-				float size = 0.5f;
+				pose.translate(0.5, 0.5, 0.7);
+				float size = 0.8f;
 				pose.scale(size, -size, size);
-				pose.translate(0, -0.5, 0);
+				pose.translate(0, -0.6, 0);
 				return;
 			}
 		}

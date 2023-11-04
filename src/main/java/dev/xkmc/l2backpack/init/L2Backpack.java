@@ -4,6 +4,8 @@ import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.GolemCompat;
 import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
+import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
+import dev.xkmc.l2backpack.content.remote.player.EnderSyncPacket;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.events.BackpackSlotClickListener;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
@@ -50,7 +52,8 @@ public class L2Backpack {
 			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
 			e -> e.create(CreativeSetCarryToServer.class, PLAY_TO_SERVER),
 			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),
-			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT)
+			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT),
+			e -> e.create(EnderSyncPacket.class, PLAY_TO_CLIENT)
 	);
 
 	private static void registerRegistrates(IEventBus bus) {
@@ -63,6 +66,7 @@ public class L2Backpack {
 		BackpackTriggers.register();
 		BackpackConfig.init();
 		BackpackCap.register();
+		EnderSyncCap.register();
 		if (ModList.get().isLoaded("modulargolems")) GolemCompat.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);

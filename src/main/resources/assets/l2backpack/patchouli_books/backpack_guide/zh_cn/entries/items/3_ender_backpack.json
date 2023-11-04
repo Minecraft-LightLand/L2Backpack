@@ -7,7 +7,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:ender_backpack",
-	  "text": "Wearable Ender Chest, but with pickup options, and support quick access."
+	  "text": "Wearable Ender Chest, but with pickup options, and support quick access.$(br2)Quick swap items (quiver, tool swap, armor swap) inside the ender backpack will be effective as if the player wears them. Put your swaps inside and you won't lose them when you die."
 	},
 	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/any_access)Quick Access$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
   ]

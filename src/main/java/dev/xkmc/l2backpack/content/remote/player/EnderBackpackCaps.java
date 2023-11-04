@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.backpack;
+package dev.xkmc.l2backpack.content.remote.player;
 
 import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.capability.InvBackpackCap;

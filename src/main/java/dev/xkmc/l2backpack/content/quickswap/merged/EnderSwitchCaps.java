@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.merged;
 
-import dev.xkmc.l2backpack.content.backpack.EnderBackpackCaps;
+import dev.xkmc.l2backpack.content.remote.player.EnderBackpackCaps;
 import dev.xkmc.l2backpack.content.capability.PickupTrace;
 import dev.xkmc.l2backpack.content.common.BaseBagInvWrapper;
 import net.minecraft.world.item.ItemStack;

@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, PickupBagItem, InsertOnlyItem {
+public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, PickupBagItem, InsertOnlyItem, TooltipInvItem {
 
 	protected static final String LOOT = "loot";
 	protected static final String SEED = "seed";
@@ -201,6 +201,16 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, 
 	@Override
 	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
 		return new BaseBagInvWrapper(stack);
+	}
+
+	@Override
+	public int getInvSize(ItemStack stack) {
+		return BaseBagItem.getItems(stack).size();
+	}
+
+	@Override
+	public List<ItemStack> getInvItems(ItemStack stack, Player player) {
+		return BaseBagItem.getItems(stack);
 	}
 
 }

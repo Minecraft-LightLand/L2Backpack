@@ -1,9 +1,5 @@
 package dev.xkmc.l2backpack.init;
 
-import com.tterrag.registrate.util.entry.ItemEntry;
-import dev.xkmc.l2backpack.content.backpack.BackpackItem;
-import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
-import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.InvClientTooltip;
 import dev.xkmc.l2backpack.content.common.InvTooltip;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;

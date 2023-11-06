@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraftforge.fml.ModList;
 
 import java.util.List;
 import java.util.Locale;
@@ -23,6 +24,8 @@ public class LangData {
 			}
 		} else {
 			list.add(Info.SHIFT.get().withStyle(ChatFormatting.GRAY));
+			list.add(Info.PATCHOULI.get().withStyle(ModList.get().isLoaded("patchouli") ?
+					ChatFormatting.GRAY : ChatFormatting.YELLOW));
 		}
 	}
 
@@ -62,6 +65,7 @@ public class LangData {
 
 	public enum Info {
 		SHIFT("tooltip.shift", "Press [shift] to show usage"),
+		PATCHOULI("tooltip.patchouli", "Read Patchouli Book for details"),
 		COLLECT_BAG("tooltip.collect.item", "Right click to store matching items in inventory, other than hotbar"),
 		COLLECT_DRAWER("tooltip.collect.drawer", "Shift + right click to store matching items on inventory"),
 		EXTRACT_BAG("tooltip.extract.item", "Shift + right click to throw out all stored items"),

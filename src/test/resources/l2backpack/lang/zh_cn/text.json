@@ -1,6 +1,7 @@
 {
   "l2backpack": {
 	"tooltip": {
+	  "patchouli": "阅读帕秋莉教程书获取详细信息",
 	  "backpack_slot": "背包升级: %s / %s",
 	  "owner": "所有者: %s",
 	  "item": {

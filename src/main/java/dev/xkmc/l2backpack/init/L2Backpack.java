@@ -72,6 +72,7 @@ public class L2Backpack {
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 		REGISTRATE.addDataGenerator(ProviderType.LOOT, LootGen::genLoot);
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, TagGen::onBlockTagGen);
+		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, TagGen::onItemTagGen);
 	}
 
 	public L2Backpack() {

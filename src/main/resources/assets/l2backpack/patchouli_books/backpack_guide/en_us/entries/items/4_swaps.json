@@ -8,7 +8,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:arrow_bag,l2backpack:tool_swap,l2backpack:armor_swap",
-	  "text": "Swap UI cn be activated by sneaking. Then you can select items using up / down arrow button, or mouse scrolling.$(br2)For Quiver, the UI will appear when you hold a bow, and you will shoot the selected arrow.$(br2)For Tool Swap and Armor Swap, you need to press R to swap the item."
+	  "text": "Swap UI can be activated by sneaking. Then you can select items using up / down arrow button, or mouse scrolling.$(br2)For Quiver, the UI will appear when you hold a bow, and you will shoot the selected arrow.$(br2)For Tool Swap and Armor Swap, you need to press R to swap the item."
 	},
 	"Swap UI condition:$(li)Quiver UI: hold a bow in main hand or off hand.$(li)Tool Swap: hold a non-stackable item in your main hand.$(li)Armor Swap: hold nothing in your main hand.$(li)If you press ALT, Tool Swap UI will appear even when you are in Quiver or Armor Swap mode. Then allows you to swap bows, or get weapon from tool swap while holding nothing.",
 	{

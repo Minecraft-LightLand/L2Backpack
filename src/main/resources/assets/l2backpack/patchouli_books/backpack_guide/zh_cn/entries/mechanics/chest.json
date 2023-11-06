@@ -1,9 +1,9 @@
 {
-  "name": "Load / Dump with Chest",
+  "name": "箱子快速装卸",
   "icon": "l2backpack:drawer",
   "category": "l2backpack:mechanics",
   "pages": [
-    "Items with this feature:$(li)$(l:items/1_backpacks)Backpacks$(/l)$(li)$(l:items/4_swaps)Quick Swaps$(/l)$(li)$(l:items/5_drawer)Drawers$(/l)$(li)$(l:items/7_storage_bags)Storage Bags$(/l)",
-	"Shift + left click chests or other storage blocks to load items from the block.$(br2)Shift + right click chests or other storage blocks to dump all items into the block.$(br2)This feature allows yot to move items between chests very fast."
+    "有这个功能的物品：$(li)$(l:items/1_backpacks)背包$(/l)$(li)$(l:items/4_swaps)快捷切换袋$(/l)$(li)$(l:items/5_drawer)Dra水晶匣子wers$(/l)$(li)$(l:items/7_storage_bags)储物袋$(/l)",
+	"手持此物品潜行左键箱子或者其他容器方块可以从容器中尽可能的抽取物品。$(br2)手持此物品潜行右键箱子或者其他容器方块可以把物品尽可能地把放入容器中。$(br2)这个功能便于玩家在箱子间转移物品。"
   ]
 }

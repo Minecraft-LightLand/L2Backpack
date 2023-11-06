@@ -1,14 +1,14 @@
 {
-  "name": "Ender Drawer",
+  "name": "末影匣子",
   "icon": "l2backpack:ender_drawer",
   "category": "l2backpack:items",
   "sortnum": 6,
   "pages": [
-	"Same usage as a $(l:items/5_drawer)Drawer$(/l). All ender drawers set to the same item and owned by the same player shares the same inventory space, for both item and block form.$(br2)For ender drawer block, right click it with item to store, and right click it with empty hand to retrieve a stack. For bulk transport, use drawer item to interact with it.",
+	"和$(l:items/5_drawer)水晶匣子$(/l)有相同的使用方法。所有绑定相同所有者和标记相同物品的末影匣子共用空间，包括方块和物品形式。$(br2)手持物品右键末影匣子方块插入物品，空手右键末影匣子方块提取物品。",
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:ender_drawer",
-	  "text": "Features:$(li)Shift + right click to place it as a block.$(li)Drawer Collect: Shift + right click on non-placeable point to store matching items from inventory.$(li)Drawer Extract: Right click with it to take one stack item out$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
+	  "text": "物品功能：$(li)潜行右键以方块形式放置$(li)匣子快速收集：潜行右键无法放置方块的位置可以把背包中所有相同物品全部收入匣子中$(li)匣子快速提取：手持匣子右键可以从匣子中取出一组物品$(l:mechanics/quick_insert)物品便捷插入$(/l)$(li)$(l:mechanics/pickup)物品自动归类模式$(/l)"
 	}
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "name": "Backpacks",
+  "name": "背包",
   "icon": "l2backpack:backpack_white",
   "category": "l2backpack:items",
   "sortnum": 1,
@@ -7,8 +7,8 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "tag:l2backpack:backpacks",
-	  "text": "Backpack stores items inside, but cannot put into shulker boxes or other backpacks. It has 16 colors.$(br2)It has 18 slots at the beginning, and you can upgrade it with $(l:items/8_ender_pocket)Ender Pocket$(/l).$(br2)Supports Quick Access from inventory."
+	  "text": "背包类似潜影盒，可以储存物品，但是不能放入其他背包或者潜影盒。背包有16个颜色，方便分辨。$(br2)背包一开始有18个格子，可以通过$(l:items/8_ender_pocket)空间升级组件$(/l)在锻造台中升级，每次升级可以增加9个格子，最多72个格子。$(br2)支持物品栏快捷访问"
 	},
-	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/inv_access)Quick Inventory Access$(/l)$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
+	"物品功能：$(li)背包可以放在胸甲或者背部饰品栏位，通过绑定的按键打开（默认B）$(li)$(l:mechanics/inv_access)物品栏快速访问$(/l)$(li)$(l:mechanics/chest)箱子快速装卸$(/l)$(li)$(l:mechanics/quick_insert)物品便捷插入$(/l)$(li)$(l:mechanics/exit)UI叠加$(/l)$(li)$(l:mechanics/pickup)物品自动归类模式$(/l)"
   ]
 }

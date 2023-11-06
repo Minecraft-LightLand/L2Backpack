@@ -1,14 +1,14 @@
 {
-  "name": "Storage Bags",
+  "name": "储物袋",
   "icon": "l2backpack:armor_bag",
   "category": "l2backpack:items",
   "sortnum": 7,
   "pages": [
-	"Bags allows you to quickly collect unstackable items in your inventory. There are 2 kinds: Equipment bags collecting everything that has durability, and book bags collecting enchantment books.$(br2)Bags can store up to 64 items, but they don't have GUIs. To get items out of the bags, you have to dump everything out.",
+	"储物袋让你能大量储存各不相同的不可堆叠物品。目前有2种：装备袋储存任何有耐久的物品，附魔书袋储存附魔书。$(br2)一个储物袋可以储存至多64个物品，但是储物袋没有UI。需要拿出物品时，只能全部倒出。",
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "tag:l2backpack:bags",
-	  "text": "Features:$(li)Bag Collect: Right click to store matching items in inventory, other than hotbar.$(li)Bag Extract: Shift + right click to throw out all stored items.$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)"
+	  "text": "物品功能：$(li)储物袋收集：手持储物袋右键收集物品栏中（除了工具栏以外）所有符合的物品$(li)储物袋倾倒：潜行右键倒出袋中所有物品$(li)$(l:mechanics/chest)箱子快速装卸$(/l)"
 	}
   ]
 }

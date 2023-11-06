@@ -1,5 +1,5 @@
 {
-  "name": "Ender Backpack",
+  "name": "末影背包",
   "icon": "l2backpack:ender_backpack",
   "category": "l2backpack:items",
   "sortnum": 3,
@@ -7,8 +7,8 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:ender_backpack",
-	  "text": "Wearable Ender Chest, but with pickup options, and support quick access.$(br2)Quick swap items (quiver, tool swap, armor swap) inside the ender backpack will be effective as if the player wears them. Put your swaps inside and you won't lose them when you die."
+	  "text": "可穿戴的末影箱，并且支持物品自动归类，任意快捷访问。$(br2)末影背包内的快速切换袋（箭袋，工具切换袋，护甲切换袋）也会生效，等同穿戴它们。把切换袋放入末影背包可以避免死亡时丢失昂贵装备和重要物品。"
 	},
-	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/any_access)Quick Access$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
+	"物品功能：$(li)背包可以放在胸甲或者背部饰品栏位，通过绑定的按键打开（默认B）$(li)$(l:mechanics/any_access)任意快捷访问$(/l)$(li)$(l:mechanics/quick_insert)物品便捷插入$(/l)$(li)$(l:mechanics/exit)UI叠加$(/l)$(li)$(l:mechanics/pickup)物品自动归类模式$(/l)"
   ]
 }

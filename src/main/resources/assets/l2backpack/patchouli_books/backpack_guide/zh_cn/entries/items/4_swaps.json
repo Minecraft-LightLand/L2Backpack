@@ -1,21 +1,21 @@
 {
-  "name": "Quick Swaps",
+  "name": "快捷切换袋",
   "icon": "l2backpack:arrow_bag",
   "category": "l2backpack:items",
   "sortnum": 4,
   "pages": [
-	"Quick Swaps allows you to quickly select items among 9 options. There are 3 kinds: Quiver, Tool Swap, and Armor Swap.$(li)Quiver allows you to select arrows while pulling bow.$(li)Tool swap allows you to change tools on hand without opening inventory.$(li)Armor Swap allows you to change armor without opening inventory.",
+	"快捷切换袋有3种：箭袋，工具切换袋，护甲切换袋。$(li)箭袋允许你在拉弓时快速预览并选择你要射出的箭。$(li)工具切换袋允许你不打开物品栏也能快速切换手中的工具和武器。$(li)护甲切换袋允许你不打开物品栏也能快速切换身上的护甲。",
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:arrow_bag,l2backpack:tool_swap,l2backpack:armor_swap",
-	  "text": "Swap UI cn be activated by sneaking. Then you can select items using up / down arrow button, or mouse scrolling.$(br2)For Quiver, the UI will appear when you hold a bow, and you will shoot the selected arrow.$(br2)For Tool Swap and Armor Swap, you need to press R to swap the item."
+	  "text": "切换袋UI可以通过蹲下触发，然后用上/下键或者滚轮切换选中的物品$(br2)对于箭袋，只要你主/副手持弓就会触发，并且你射出的箭会是箭袋中被选中的箭。$(br2)对于工具/护甲切换袋，选中后按R切换物品"
 	},
-	"Swap UI condition:$(li)Quiver UI: hold a bow in main hand or off hand.$(li)Tool Swap: hold a non-stackable item in your main hand.$(li)Armor Swap: hold nothing in your main hand.$(li)If you press ALT, Tool Swap UI will appear even when you are in Quiver or Armor Swap mode. Then allows you to swap bows, or get weapon from tool swap while holding nothing.",
+	"切换UI触发条件：$(li)箭袋UI：主副手持弓触发$(li)工具切换袋：主手持有一个不可堆叠的物品时蹲下触发$(li)护甲切换袋：主手不持有物品时蹲下触发$(li)按下ALT时，即使你持有弓或者没持有物品，也会触发工具切换袋。这么做允许你用工具切换袋切换弓，或者在空手时从工具切换袋中切出物品。",
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:combined_swap",
-	  "text": "There is also the Combined swap, which is a combination of all 3 swaps.$(br2)And you can put Quick Swap items in your ender backpacks. Swaps can trigger inside ender backpack as well. Keeping swaps in your ender backpack allows you to not lose precious weapons and gears in swaps when killed."
+	  "text": "你也可以把3个切换袋合成三合一切换袋。三合一切换袋同时有三种切换袋的功能，让你不需要选择全部一起使用。$(br2)你也可以把切换袋放入末影背包，这个时候切换袋也能在末影背包中直接触发。把切换袋放入末影背包的好处是死亡时不会丢失切换袋中的珍贵装备。"
 	},
-	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/inv_access)Quick Inventory Access$(/l)$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
+	"物品功能：$(li)背包可以放在胸甲或者背部饰品栏位，通过绑定的按键打开（默认B）$(li)$(l:mechanics/inv_access)物品栏快速访问$(/l)$(li)$(l:mechanics/chest)箱子快速装卸$(/l)$(li)$(l:mechanics/quick_insert)物品便捷插入$(/l)$(li)$(l:mechanics/exit)UI叠加$(/l)$(li)$(l:mechanics/pickup)物品自动归类模式$(/l)"
   ]
 }

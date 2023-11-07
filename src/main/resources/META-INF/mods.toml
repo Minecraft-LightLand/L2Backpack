@@ -29,3 +29,8 @@ Also have some specialized bag for equipments, enchant books, and arrows.
     mandatory=true
     versionRange="[2.4.18,)"
     ordering="AFTER"
+[[dependencies.l2backpack]]
+    modId="curios"
+    mandatory=false
+    versionRange="[5.3.4,)"
+    side="BOTH"

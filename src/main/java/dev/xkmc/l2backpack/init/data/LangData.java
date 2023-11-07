@@ -116,8 +116,6 @@ public class LangData {
 			pvd.accept(L2Backpack.MODID + ".loot." + pl.id + ".item", pl.bname);
 		}
 		pvd.accept(BackpackKeys.OPEN.id, "Open backpack on back");
-		pvd.accept("patchouli.l2backpack.title", "L2Backpack Guide");
-		pvd.accept("patchouli.l2backpack.landing", "Welcome to L2Backpack, a recursive storage mod");
 	}
 
 	public static String asId(String name) {

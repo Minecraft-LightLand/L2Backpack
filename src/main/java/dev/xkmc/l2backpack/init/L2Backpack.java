@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.GolemCompat;
+import dev.xkmc.l2backpack.compat.PatchouliCompat;
 import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
@@ -73,6 +74,7 @@ public class L2Backpack {
 		REGISTRATE.addDataGenerator(ProviderType.LOOT, LootGen::genLoot);
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, TagGen::onBlockTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, TagGen::onItemTagGen);
+		if (ModList.get().isLoaded("patchouli")) PatchouliCompat.gen();
 	}
 
 	public L2Backpack() {

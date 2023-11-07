@@ -9,6 +9,7 @@
 - Swaps can now trigger in ender backpack
 - deprecate Ender Swap
 - arrow pickup into Quiver when pickup enabled
+- add patchouli book advancement
 
 2.4.14
 - Fix drawer crash if placed in 2.4.12

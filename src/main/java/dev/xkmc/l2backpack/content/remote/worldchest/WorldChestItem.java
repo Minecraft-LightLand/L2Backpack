@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
-import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
@@ -123,7 +123,7 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem, Pick
 			if (tag.contains("owner_name")) {
 				String name = tag.getString("owner_name");
 				list.add(LangData.IDS.STORAGE_OWNER.get(getName(name)));
-				BackpackCap.addText(stack, list);
+				PickupModeCap.addText(stack, list);
 			}
 			if (tag.contains("loot")) {
 				list.add(LangData.IDS.LOOT.get().withStyle(ChatFormatting.AQUA));

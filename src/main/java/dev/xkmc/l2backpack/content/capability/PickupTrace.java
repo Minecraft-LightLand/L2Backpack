@@ -18,7 +18,7 @@ public class PickupTrace {
 		this.player = player;
 	}
 
-	public boolean push(int sig, PickupMode mode) {
+	public boolean push(int sig, PickupConfig mode) {
 		if (visited.contains(sig)) {
 			return false;
 		}
@@ -33,11 +33,11 @@ public class PickupTrace {
 		active.remove(ent.sig());
 	}
 
-	public PickupMode getMode() {
+	public PickupConfig getMode() {
 		return layer.peek().mode();
 	}
 
-	private record Entry(int sig, PickupMode mode) {
+	private record Entry(int sig, PickupConfig mode) {
 
 	}
 

@@ -13,27 +13,32 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public interface BackpackCap {
+public interface PickupModeCap {
 
-	Capability<BackpackCap> TOKEN = CapabilityManager.get(new CapabilityToken<>() {
+	Capability<PickupModeCap> TOKEN = CapabilityManager.get(new CapabilityToken<>() {
 	});
 
-	String KEY_ROOT = "backpack_pickup_config", KEY_MODE = "mode";
+	String KEY_ROOT = "backpack_pickup_config", KEY_MODE = "mode", KEY_VOID = "void";
 
 	static void register() {
 
 	}
 
-	static PickupMode getMode(ItemStack stack) {
+	static PickupConfig getPickupMode(ItemStack stack) {
 		var tag = ItemCompoundTag.of(stack).getSubTag(KEY_ROOT);
+		PickupMode mode = PickupMode.NONE;
+		boolean destroy = false;
 		if (tag.isPresent()) {
 			var ctag = tag.getOrCreate();
 			if (ctag.contains(KEY_MODE)) {
 				String str = ctag.getString(KEY_MODE);
-				return PickupMode.valueOf(str);
+				mode = PickupMode.valueOf(str);
+			}
+			if (ctag.contains(KEY_VOID)) {
+				destroy = ctag.getBoolean(KEY_VOID);
 			}
 		}
-		return PickupMode.NONE;
+		return new PickupConfig(mode, destroy);
 	}
 
 	static CompoundTag getConfig(ItemStack stack) {
@@ -46,17 +51,25 @@ public interface BackpackCap {
 	}
 
 	static void addText(ItemStack stack, List<Component> list) {
-		var mode = getMode(stack);
-		list.add(LangData.IDS.MODE_DISPLAY.get(mode.getTooltip()).withStyle(ChatFormatting.GRAY));
+		var mode = getPickupMode(stack);
+		list.add(LangData.IDS.MODE_DISPLAY.get(mode.pickup().getTooltip()).withStyle(ChatFormatting.GRAY));
+		if (mode.destroy()) {
+			list.add(LangData.IDS.MODE_DESTROY.get().withStyle(ChatFormatting.RED));
+		}
 	}
 
 	static void iterateMode(ItemStack stack) {
-		PickupMode mode = getMode(stack);
-		PickupMode next = PickupMode.values()[(mode.ordinal() + 1) % PickupMode.values().length];
+		PickupConfig mode = getPickupMode(stack);
+		PickupMode next = PickupMode.values()[(mode.pickup().ordinal() + 1) % PickupMode.values().length];
 		getConfig(stack).putString(KEY_MODE, next.name());
 	}
 
-	PickupMode getMode();
+	static void iterateDestroy(ItemStack stack) {
+		PickupConfig mode = getPickupMode(stack);
+		getConfig(stack).putBoolean(KEY_VOID, !mode.destroy());
+	}
+
+	PickupConfig getPickupMode();
 
 	int doPickup(ItemStack stack, PickupTrace trace);
 

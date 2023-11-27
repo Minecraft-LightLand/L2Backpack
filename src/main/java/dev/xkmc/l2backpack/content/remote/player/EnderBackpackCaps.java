@@ -1,9 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.player;
 
-import dev.xkmc.l2backpack.content.capability.BackpackCap;
-import dev.xkmc.l2backpack.content.capability.InvBackpackCap;
-import dev.xkmc.l2backpack.content.capability.PickupMode;
-import dev.xkmc.l2backpack.content.capability.PickupTrace;
+import dev.xkmc.l2backpack.content.capability.*;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
@@ -23,8 +20,8 @@ public class EnderBackpackCaps extends InvBackpackCap<InvWrapper> implements ICa
 	}
 
 	@Override
-	public PickupMode getMode() {
-		return BackpackCap.getMode(stack);
+	public PickupConfig getPickupMode() {
+		return PickupModeCap.getPickupMode(stack);
 	}
 
 	@Override
@@ -39,7 +36,7 @@ public class EnderBackpackCaps extends InvBackpackCap<InvWrapper> implements ICa
 
 	@Override
 	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-		if (cap == BackpackCap.TOKEN) {
+		if (cap == PickupModeCap.TOKEN) {
 			return holder.cast();
 		}
 		return LazyOptional.empty();

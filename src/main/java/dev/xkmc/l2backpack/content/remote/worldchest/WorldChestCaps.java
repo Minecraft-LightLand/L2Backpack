@@ -1,9 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
-import dev.xkmc.l2backpack.content.capability.BackpackCap;
-import dev.xkmc.l2backpack.content.capability.InvBackpackCap;
-import dev.xkmc.l2backpack.content.capability.PickupMode;
-import dev.xkmc.l2backpack.content.capability.PickupTrace;
+import dev.xkmc.l2backpack.content.capability.*;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
@@ -22,8 +19,8 @@ public class WorldChestCaps extends InvBackpackCap<WorldChestInvWrapper> impleme
 	}
 
 	@Override
-	public PickupMode getMode() {
-		return BackpackCap.getMode(stack);
+	public PickupConfig getPickupMode() {
+		return PickupModeCap.getPickupMode(stack);
 	}
 
 	@Override
@@ -53,7 +50,7 @@ public class WorldChestCaps extends InvBackpackCap<WorldChestInvWrapper> impleme
 	@Override
 	@NotNull
 	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-		if (cap == BackpackCap.TOKEN) {
+		if (cap == PickupModeCap.TOKEN) {
 			return holder.cast();
 		}
 		return LazyOptional.empty();

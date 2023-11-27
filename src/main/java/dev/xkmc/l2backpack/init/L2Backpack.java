@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.init;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.GolemCompat;
 import dev.xkmc.l2backpack.compat.PatchouliCompat;
-import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncPacket;
@@ -66,7 +66,7 @@ public class L2Backpack {
 		Handlers.register();
 		BackpackTriggers.register();
 		BackpackConfig.init();
-		BackpackCap.register();
+		PickupModeCap.register();
 		EnderSyncCap.register();
 		if (ModList.get().isLoaded("modulargolems")) GolemCompat.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);

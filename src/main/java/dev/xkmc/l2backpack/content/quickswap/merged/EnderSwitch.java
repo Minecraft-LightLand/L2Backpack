@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.merged;
 
-import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -31,7 +31,7 @@ public class EnderSwitch extends MultiSwitch implements BackpackModelItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		BackpackCap.addText(stack, list);
+		PickupModeCap.addText(stack, list);
 		LangData.addInfo(list, LangData.Info.ENDER_SWITCH_INFO);
 	}
 

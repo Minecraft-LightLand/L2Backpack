@@ -4,6 +4,6 @@ import net.minecraft.world.item.ItemStack;
 
 public interface IBagTool {
 
-	void click(ItemStack stack);
+	void click(ItemStack stack, boolean shift);
 
 }

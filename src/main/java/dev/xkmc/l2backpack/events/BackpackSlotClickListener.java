@@ -1,10 +1,10 @@
 package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
-import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
+import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2backpack.content.tool.IBagTool;
@@ -79,7 +79,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 		ItemStack carried = player.containerMenu.getCarried();
 		if (carried.getItem() instanceof IBagTool tool) {
 			if (stack.getItem() instanceof PickupBagItem) {
-				tool.click(stack);
+				tool.click(stack, player.isShiftKeyDown());
 				return;
 			}
 		}
@@ -106,7 +106,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 		ItemStack carried = player.containerMenu.getCarried();
 		if (!keybind && carried.getItem() instanceof IBagTool tool) {
 			if (result.stack().getItem() instanceof PickupBagItem) {
-				tool.click(result.stack());
+				tool.click(result.stack(), player.isShiftKeyDown());
 				result.container().update();
 				return;
 			}

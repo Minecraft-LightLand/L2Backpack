@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
-import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.content.capability.PickupTrace;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorageCapability;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -41,12 +41,12 @@ public class CapabilityEvents {
 	 */
 	public static void tryInsertItem(ServerPlayer player, ItemStack stack) {
 		ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
-		chest.getCapability(BackpackCap.TOKEN).resolve().ifPresent(
+		chest.getCapability(PickupModeCap.TOKEN).resolve().ifPresent(
 				cap -> cap.doPickup(stack, new PickupTrace(player)));
 		if (stack.isEmpty()) return;
 		CuriosCompat.getSlot(player, e -> {
 			if (stack.isEmpty()) return false;
-			e.getCapability(BackpackCap.TOKEN).resolve().ifPresent(
+			e.getCapability(PickupModeCap.TOKEN).resolve().ifPresent(
 					cap -> cap.doPickup(stack, new PickupTrace(player)));
 			return false;
 		});

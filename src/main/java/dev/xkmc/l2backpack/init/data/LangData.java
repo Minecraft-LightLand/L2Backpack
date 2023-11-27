@@ -42,6 +42,7 @@ public class LangData {
 		LOOT("tooltip.info.loot", 0, "It may have loots inside"),
 
 		MODE_DISPLAY("tooltip.mode.disp", 1, "Pickup Mode: %s"),
+		MODE_DESTROY("tooltip.mode.destroy", 0, "Destroy excess items."),
 		MODE_NONE("tooltip.mode.none", 0, "No Pickup"),
 		MODE_STACKING("tooltip.mode.stacking", 0, "To Stacking Slots Only, Recursive"),
 		MODE_ALL("tooltip.mode.all", 0, "All Fitting Items, Recursive");
@@ -88,7 +89,7 @@ public class LangData {
 		ENDER_SWITCH_INFO("tooltip.info.ender_switch", "This is a Combined Swap and an Ender Backpack at the same time. Note that the arrows, tools, and armors are stored within this item still, not in remote inventory. It inherits all properties of a backpack and an ender backpack."),
 		INHERIT("tooltip.info.inherit", "Inherit all properties of a regular backpack, except that it cannot be upgraded. Can be placed in regular backpacks, but cannot open directly in regular backpack. Put it in dimensional storage for quick access."),
 		PICKUP("tooltip.info.pickup", "Supports recursive pickup"),
-		PICKUP_TWEAKER("tooltip.info.pickup_tweaker", "Right click backpacks or drawers in inventory with this item to switch pickup mode. Stacking mode allows items that can fit without taking empty slots to be picked up in backpack. All item mode allows item to take empty slots."),
+		PICKUP_TWEAKER("tooltip.info.pickup_tweaker", "Right click backpacks or drawers in inventory with this item to switch pickup mode. Shift right click them to toggle destroy mode."),
 		;
 
 		final String id, def;

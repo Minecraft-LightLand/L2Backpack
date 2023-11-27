@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.common;
 
-import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
+import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.content.capability.MergedInvBackpackCap;
 import dev.xkmc.l2backpack.content.capability.PickupMode;
 import net.minecraft.core.Direction;
@@ -170,15 +171,15 @@ public class BaseBagInvWrapper extends MergedInvBackpackCap implements ICapabili
 		if (cap == ForgeCapabilities.ITEM_HANDLER) {
 			return holder.cast();
 		}
-		if (cap == BackpackCap.TOKEN) {
+		if (cap == PickupModeCap.TOKEN) {
 			return holder.cast();
 		}
 		return LazyOptional.empty();
 	}
 
 	@Override
-	public PickupMode getMode() {
-		return BackpackCap.getMode(stack);
+	public PickupConfig getPickupMode() {
+		return PickupModeCap.getPickupMode(stack);
 	}
 
 	@Override

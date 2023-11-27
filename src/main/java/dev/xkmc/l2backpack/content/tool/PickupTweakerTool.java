@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.tool;
 
-import dev.xkmc.l2backpack.content.capability.BackpackCap;
+import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -18,8 +18,12 @@ public class PickupTweakerTool extends Item implements IBagTool {
 	}
 
 	@Override
-	public void click(ItemStack stack) {
-		BackpackCap.iterateMode(stack);
+	public void click(ItemStack stack, boolean shift) {
+		if (shift) {
+			PickupModeCap.iterateDestroy(stack);
+		} else {
+			PickupModeCap.iterateMode(stack);
+		}
 	}
 
 	@Override

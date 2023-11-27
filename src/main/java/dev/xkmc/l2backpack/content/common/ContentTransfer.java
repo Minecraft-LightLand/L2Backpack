@@ -46,7 +46,7 @@ public class ContentTransfer {
 		int maxSize = cap instanceof IDrawerHandler ? count : item.getMaxStackSize();
 		while (count > 0) {
 			int step = Math.min(maxSize, count);
-			ItemStack toInsert = new ItemStack(item, step);//TODO bug fix
+			ItemStack toInsert = new ItemStack(item, step);
 			ItemStack remainer = ItemHandlerHelper.insertItemStacked(cap, toInsert, false);
 			count = count - step + remainer.getCount();
 			if (!remainer.isEmpty()) {
@@ -160,7 +160,7 @@ public class ContentTransfer {
 	}
 
 	public static void onLoad(Player player, int count, ItemStack stack) {
-		if (player instanceof ServerPlayer serverPlayer) {
+		if (player instanceof ServerPlayer serverPlayer && count > 0) {//TODO event called twice
 			serverPlayer.sendSystemMessage(LangData.IDS.LOAD_FEEDBACK.get(count), true);
 			BackpackTriggers.INTERACT.trigger(serverPlayer, stack, BagInteractTrigger.Type.LOAD, count);
 		}

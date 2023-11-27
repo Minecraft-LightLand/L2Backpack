@@ -87,7 +87,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, 
 				ans.add(i);
 			}
 		}
-		if (ans.size() > 0) {
+		if (!ans.isEmpty()) {
 			int size = ((BaseBagItem) stack.getItem()).getRows(stack) * 9;
 			while (ans.size() < size) {
 				ans.add(ItemStack.EMPTY);
@@ -105,7 +105,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, 
 	}
 
 	public static void checkLootGen(ItemStack stack, Player player) {
-		if (getListTag(stack).size() > 0) return;
+		if (!getListTag(stack).isEmpty()) return;
 		CompoundTag ctag = stack.getOrCreateTag();
 		if (!ctag.contains(LOOT)) return;
 		ResourceLocation rl = new ResourceLocation(ctag.getString(LOOT));

@@ -15,7 +15,9 @@ public class LoadContainerEvents {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void playerLeftClick(@NotNull PlayerInteractEvent.LeftClickBlock event) {
 		if (event.getEntity().isShiftKeyDown() && event.getItemStack().getItem() instanceof ContentTransfer.Quad load) {
-			ContentTransfer.leftClick(load, event.getLevel(), event.getPos(), event.getItemStack(), event.getEntity());
+			if (!event.getLevel().isClientSide()) {
+				ContentTransfer.leftClick(load, event.getLevel(), event.getPos(), event.getItemStack(), event.getEntity());
+			}
 			event.setCanceled(true);
 		}
 	}

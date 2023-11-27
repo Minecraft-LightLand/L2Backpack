@@ -157,12 +157,6 @@ public class AdvGen {
 				.create("armor_swap", BackpackItems.ARMOR_SWAP.get(),
 						CriterionBuilder.item(BackpackItems.ARMOR_SWAP.get()),
 						"Backup Armors", "Obtain an Armor Swap")
-				.create("multi_switch", BackpackItems.MULTI_SWITCH.get(),
-						CriterionBuilder.item(BackpackItems.MULTI_SWITCH.get()),
-						"Three in One", "Obtain an Combined Swap").type(FrameType.GOAL)
-				.create("ender_switch", BackpackItems.ENDER_SWITCH.get(),
-						CriterionBuilder.item(BackpackItems.ENDER_SWITCH.get()),
-						"Four in One", "Obtain an Ender Swap").type(FrameType.CHALLENGE)
 				.finish();
 
 	}

@@ -17,6 +17,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -121,24 +122,35 @@ public class ClientEventHandler {
 	}
 
 	private static boolean insertItem(ScreenEvent event, AbstractContainerScreen<?> cont, @Nullable Slot slot, boolean perform, int button) {
-		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
+		if (slot == null) {
 			return false;
 		}
 		ItemStack storage = slot.getItem();
 		ItemStack carried = cont.getMenu().getCarried();
-		if (storage.getItem() instanceof OverlayInsertItem drawer) {
-			return drawer.clientInsert(storage, carried, cont.getMenu().containerId, slot, perform, button);
+		if (!(storage.getItem() instanceof OverlayInsertItem drawer)) {
+			return false;
 		}
-		return false;
+		Player player = Proxy.getClientPlayer();
+		if (player == null || !slot.allowModification(player)) {
+			return false;
+		}
+		return drawer.clientInsert(storage, carried, cont.getMenu().containerId, slot, perform, button);
 	}
 
 	private static boolean extractItem(ScreenEvent.MouseButtonPressed.Pre event, AbstractContainerScreen<?> cont, @Nullable Slot slot) {
-		if (slot == null || !slot.allowModification(Proxy.getClientPlayer())) {
+		if (slot == null) {
 			return false;
 		}
 		ItemStack stack = cont.getMenu().getCarried();
 		ItemStack drawerStack = slot.getItem();
-		if (drawerStack.getItem() instanceof OverlayInsertItem drawer && drawer.mayClientTake() && stack.isEmpty()) {
+		if (!(drawerStack.getItem() instanceof OverlayInsertItem drawer)) {
+			return false;
+		}
+		Player player = Proxy.getClientPlayer();
+		if (player == null || !slot.allowModification(player)) {
+			return false;
+		}
+		if (drawer.mayClientTake() && stack.isEmpty()) {
 			sendDrawerPacket(DrawerInteractToServer.Type.TAKE, cont, slot);
 			return true;
 		}

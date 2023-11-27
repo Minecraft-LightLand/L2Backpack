@@ -1,6 +1,22 @@
-2.4.15
 - add wand page TODO
 - keybind name TODO
+
+- add void mode
+
+2.4.16
+- Fix bag load displaying 0 item
+- Pickup prioritize latest mode
+- Remove multi-switch and ender-switch from advancements
+
+2.4.15
+- make all backpacks rendering as items instead
+- fix F3+B triggers backpacks
+- add support for Curios render toggle
+- add 3 backpack fast insert config options: left click, right click, shift
+- Swaps can now trigger in ender backpack
+- deprecate Ender Swap
+- arrow pickup into Quiver when pickup enabled
+- add patchouli book advancement
 
 2.4.14
 - Fix drawer crash if placed in 2.4.12

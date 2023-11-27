@@ -1,4 +1,3 @@
-2.4.15
 - add wand page TODO
 - keybind name TODO
 

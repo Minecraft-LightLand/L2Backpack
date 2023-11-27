@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.merged;
 
-import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSwap;
@@ -61,7 +61,7 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBa
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		PickupModeCap.addText(stack, list);
+		PickupConfig.addText(stack, list);
 		LangData.addInfo(list,
 				LangData.Info.MULTI_SWITCH_INFO,
 				LangData.Info.INHERIT);

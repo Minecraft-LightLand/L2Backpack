@@ -63,6 +63,12 @@ public class RecipeGen {
 					.define('S', Items.STICK).define('G', Items.GOLD_NUGGET).define('I', Items.IRON_INGOT)
 					.save(pvd);
 
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, BackpackItems.DESTROY_TWEAKER.get(), 1)::unlockedBy, Items.STICK)
+					.pattern(" G ").pattern(" IG").pattern("S  ")
+					.define('S', Items.STICK).define('G', Items.GOLD_NUGGET).define('I', Items.COPPER_INGOT)
+					.save(pvd);
+
 			Item ender = BackpackItems.ENDER_BACKPACK.get();
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, ender, 1)::unlockedBy, ender)
 					.pattern("EAE").pattern("BCB").pattern("DDD")

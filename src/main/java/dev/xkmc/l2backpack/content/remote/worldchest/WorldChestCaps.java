@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class WorldChestCaps extends InvBackpackCap<WorldChestInvWrapper> implements ICapabilityProvider {
+public class WorldChestCaps extends InvPickupCap<WorldChestInvWrapper> implements ICapabilityProvider {
 
 	private final ItemStack stack;
 	private final LazyOptional<WorldChestCaps> holder = LazyOptional.of(() -> this);
@@ -20,7 +20,7 @@ public class WorldChestCaps extends InvBackpackCap<WorldChestInvWrapper> impleme
 
 	@Override
 	public PickupConfig getPickupMode() {
-		return PickupModeCap.getPickupMode(stack);
+		return PickupConfig.getPickupMode(stack);
 	}
 
 	@Override

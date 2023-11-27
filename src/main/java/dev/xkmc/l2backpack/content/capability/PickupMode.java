@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.capability;
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 public enum PickupMode {
 	NONE(LangData.IDS.MODE_NONE),
@@ -15,7 +16,7 @@ public enum PickupMode {
 		this.lang = lang;
 	}
 
-	public Component getTooltip() {
+	public MutableComponent getTooltip() {
 		return lang.get().withStyle(ChatFormatting.AQUA);
 	}
 }

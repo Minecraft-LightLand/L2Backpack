@@ -40,12 +40,14 @@ public class LangData {
 		COLLECT_FEEDBACK("chat.feedback.collect", 1, "Collected %s items"),
 		NO_ITEM("chat.feedback.no_item", 0, "No item set for ender drawer. Cannot be placed."),
 		LOOT("tooltip.info.loot", 0, "It may have loots inside"),
-
-		MODE_DISPLAY("tooltip.mode.disp", 1, "Pickup Mode: %s"),
-		MODE_DESTROY("tooltip.mode.destroy", 0, "Destroy excess items."),
 		MODE_NONE("tooltip.mode.none", 0, "No Pickup"),
-		MODE_STACKING("tooltip.mode.stacking", 0, "To Stacking Slots Only, Recursive"),
-		MODE_ALL("tooltip.mode.all", 0, "All Fitting Items, Recursive");
+		MODE_STACKING("tooltip.mode.stacking", 0, "Pickup to Stacking Slots Only"),
+		MODE_ALL("tooltip.mode.all", 0, "Pickup all Fitting Items"),
+
+		DESTROY_NONE("tooltip.destroy.none", 0, "No Destroy"),
+		DESTROY_EXCESS("tooltip.destroy.excess", 0, "Destroy excess item"),
+		DESTROY_MATCH("tooltip.destroy.matching", 0, "Destroy matching item"),
+		DESTROY_ALL("tooltip.destroy.all", 0, "Destroy all items inserted");
 
 		final String id, def;
 		final int count;
@@ -89,7 +91,8 @@ public class LangData {
 		ENDER_SWITCH_INFO("tooltip.info.ender_switch", "This is a Combined Swap and an Ender Backpack at the same time. Note that the arrows, tools, and armors are stored within this item still, not in remote inventory. It inherits all properties of a backpack and an ender backpack."),
 		INHERIT("tooltip.info.inherit", "Inherit all properties of a regular backpack, except that it cannot be upgraded. Can be placed in regular backpacks, but cannot open directly in regular backpack. Put it in dimensional storage for quick access."),
 		PICKUP("tooltip.info.pickup", "Supports recursive pickup"),
-		PICKUP_TWEAKER("tooltip.info.pickup_tweaker", "Right click backpacks or drawers in inventory with this item to switch pickup mode. Shift right click them to toggle destroy mode."),
+		PICKUP_TWEAKER("tooltip.info.pickup_tweaker", "Right click backpacks or drawers in inventory with this item to switch pickup mode."),
+		DESTROY_TWEAKER("tooltip.info.destroy_tweaker", "Right click backpacks or drawers in inventory with this item to switch destroy mode."),
 		;
 
 		final String id, def;

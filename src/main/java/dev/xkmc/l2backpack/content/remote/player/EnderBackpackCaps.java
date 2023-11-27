@@ -10,7 +10,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class EnderBackpackCaps extends InvBackpackCap<InvWrapper> implements ICapabilityProvider {
+public class EnderBackpackCaps extends InvPickupCap<InvWrapper> implements ICapabilityProvider {
 
 	private final ItemStack stack;
 	private final LazyOptional<EnderBackpackCaps> holder = LazyOptional.of(() -> this);
@@ -21,7 +21,7 @@ public class EnderBackpackCaps extends InvBackpackCap<InvWrapper> implements ICa
 
 	@Override
 	public PickupConfig getPickupMode() {
-		return PickupModeCap.getPickupMode(stack);
+		return PickupConfig.getPickupMode(stack);
 	}
 
 	@Override

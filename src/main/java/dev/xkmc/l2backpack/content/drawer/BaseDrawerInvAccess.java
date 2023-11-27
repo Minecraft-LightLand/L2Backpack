@@ -1,5 +1,7 @@
 package dev.xkmc.l2backpack.content.drawer;
 
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
+import dev.xkmc.l2backpack.content.capability.PickupMode;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -96,7 +98,10 @@ public interface BaseDrawerInvAccess extends IItemHandlerModifiable {
 		return drawerItem().takeItem(drawerStack(), amount, player(), simulate);
 	}
 
-	default boolean mayStack(BaseDrawerInvAccess inv, int slot, ItemStack stack) {
+	default boolean mayStack(BaseDrawerInvAccess inv, int slot, ItemStack stack, PickupConfig config) {
+		if (config.pickup()== PickupMode.ALL && isEmpty()){
+			return true;
+		}
 		return !isEmpty() && isItemValid(stack);
 	}
 

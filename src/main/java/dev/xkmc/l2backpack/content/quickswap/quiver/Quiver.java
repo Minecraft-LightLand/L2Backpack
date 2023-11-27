@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.quiver;
 
-import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.quickswap.common.*;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
@@ -45,7 +45,7 @@ public class Quiver extends SingleSwapItem implements ItemOnBackItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		PickupModeCap.addText(stack, list);
+		PickupConfig.addText(stack, list);
 		LangData.addInfo(list,
 				LangData.Info.ARROW_INFO,
 				LangData.Info.INHERIT);

@@ -79,7 +79,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 		ItemStack carried = player.containerMenu.getCarried();
 		if (carried.getItem() instanceof IBagTool tool) {
 			if (stack.getItem() instanceof PickupBagItem) {
-				tool.click(stack, player.isShiftKeyDown());
+				tool.click(stack);
 				return;
 			}
 		}
@@ -106,7 +106,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 		ItemStack carried = player.containerMenu.getCarried();
 		if (!keybind && carried.getItem() instanceof IBagTool tool) {
 			if (result.stack().getItem() instanceof PickupBagItem) {
-				tool.click(result.stack(), player.isShiftKeyDown());
+				tool.click(result.stack());
 				result.container().update();
 				return;
 			}

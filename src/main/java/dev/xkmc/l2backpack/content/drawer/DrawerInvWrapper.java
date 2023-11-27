@@ -1,6 +1,9 @@
 package dev.xkmc.l2backpack.content.drawer;
 
-import dev.xkmc.l2backpack.content.capability.*;
+import dev.xkmc.l2backpack.content.capability.InvPickupCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
+import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.capability.PickupTrace;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
@@ -11,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
-public class DrawerInvWrapper extends InvBackpackCap<BaseDrawerInvAccess> implements ICapabilityProvider {
+public class DrawerInvWrapper extends InvPickupCap<BaseDrawerInvAccess> implements ICapabilityProvider {
 
 	private final ItemStack stack;
 	private final Function<PickupTrace, BaseDrawerInvAccess> access;
@@ -28,8 +31,8 @@ public class DrawerInvWrapper extends InvBackpackCap<BaseDrawerInvAccess> implem
 	}
 
 	@Override
-	public boolean mayStack(BaseDrawerInvAccess inv, int slot, ItemStack stack) {
-		return inv.mayStack(inv, slot, stack);
+	public boolean mayStack(BaseDrawerInvAccess inv, int slot, ItemStack stack, PickupConfig config) {
+		return inv.mayStack(inv, slot, stack, config);
 	}
 
 	@Override
@@ -43,7 +46,7 @@ public class DrawerInvWrapper extends InvBackpackCap<BaseDrawerInvAccess> implem
 
 	@Override
 	public PickupConfig getPickupMode() {
-		return PickupModeCap.getPickupMode(stack);
+		return PickupConfig.getPickupMode(stack);
 	}
 
 	@Override

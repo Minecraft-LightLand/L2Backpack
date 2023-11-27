@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.drawer;
 
-import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
@@ -70,7 +70,7 @@ public class DrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMethod,
 		if (blockentity instanceof DrawerBlockEntity chest) {
 			chest.handler.count = DrawerItem.getCount(stack);
 			chest.handler.item = chest.handler.count == 0 ? Items.AIR : BaseDrawerItem.getItem(stack);
-			chest.handler.config = PickupModeCap.getConfig(stack);
+			chest.handler.config = PickupConfig.getConfig(stack);
 		}
 	}
 
@@ -98,7 +98,7 @@ public class DrawerBlock implements OnClickBlockMethod, GetBlockItemBlockMethod,
 		assert rl != null;
 		stack.getOrCreateTag().putString(BaseDrawerItem.KEY, rl.toString());
 		DrawerItem.setCount(stack, chest.handler.count);
-		PickupModeCap.setConfig(stack, chest.handler.config);
+		PickupConfig.setConfig(stack, chest.handler.config);
 		return stack;
 	}
 

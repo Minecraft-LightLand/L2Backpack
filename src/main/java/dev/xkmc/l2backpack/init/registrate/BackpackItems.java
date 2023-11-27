@@ -17,6 +17,7 @@ import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
 import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
+import dev.xkmc.l2backpack.content.tool.DestroyTweakerTool;
 import dev.xkmc.l2backpack.content.tool.PickupTweakerTool;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.TagGen;
@@ -49,6 +50,7 @@ public class BackpackItems {
 	public static final ItemEntry<EnderBackpackItem> ENDER_BACKPACK;
 	public static final ItemEntry<Item> ENDER_POCKET;
 	public static final ItemEntry<PickupTweakerTool> PICKUP_TWEAKER;
+	public static final ItemEntry<DestroyTweakerTool> DESTROY_TWEAKER;
 
 	public static final ItemEntry<EquipmentBag> ARMOR_BAG;
 	public static final ItemEntry<BookBag> BOOK_BAG;
@@ -94,6 +96,8 @@ public class BackpackItems {
 			ENDER_POCKET = simpleItem("ender_pocket");
 
 			PICKUP_TWEAKER = REGISTRATE.item("pickup_tweaker_tool", p -> new PickupTweakerTool(p.stacksTo(1)))
+					.defaultModel().defaultLang().register();
+			DESTROY_TWEAKER = REGISTRATE.item("destroy_tweaker_tool", p -> new DestroyTweakerTool(p.stacksTo(1)))
 					.defaultModel().defaultLang().register();
 
 			ARMOR_BAG = REGISTRATE.item("armor_bag", EquipmentBag::new).tag(TagGen.BAGS).defaultModel().lang("Equipment Bag").register();

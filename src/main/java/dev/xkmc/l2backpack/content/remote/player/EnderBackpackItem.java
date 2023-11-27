@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.remote.player;
 
-import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
@@ -60,7 +60,7 @@ public class EnderBackpackItem extends Item implements
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		PickupModeCap.addText(stack, list);
+		PickupConfig.addText(stack, list);
 		LangData.addInfo(list,
 				LangData.Info.QUICK_ANY_ACCESS,
 				LangData.Info.KEYBIND,

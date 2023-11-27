@@ -3,7 +3,6 @@ package dev.xkmc.l2backpack.content.common;
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.content.capability.MergedInvBackpackCap;
-import dev.xkmc.l2backpack.content.capability.PickupMode;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
@@ -179,7 +178,7 @@ public class BaseBagInvWrapper extends MergedInvBackpackCap implements ICapabili
 
 	@Override
 	public PickupConfig getPickupMode() {
-		return PickupModeCap.getPickupMode(stack);
+		return PickupConfig.getPickupMode(stack);
 	}
 
 	@Override

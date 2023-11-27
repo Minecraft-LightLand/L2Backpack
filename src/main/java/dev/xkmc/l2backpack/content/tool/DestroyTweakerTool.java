@@ -11,20 +11,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PickupTweakerTool extends Item implements IBagTool {
+public class DestroyTweakerTool extends Item implements IBagTool {
 
-	public PickupTweakerTool(Properties properties) {
+	public DestroyTweakerTool(Properties properties) {
 		super(properties);
 	}
 
 	@Override
 	public void click(ItemStack stack) {
-		PickupConfig.iterateMode(stack);
+		PickupConfig.iterateDestroy(stack);
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		LangData.addInfo(list, LangData.Info.PICKUP_TWEAKER);
+		LangData.addInfo(list, LangData.Info.DESTROY_TWEAKER);
 	}
 
 }

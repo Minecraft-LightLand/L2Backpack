@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.drawer;
 
-import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.insert.OverlayInsertItem;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
@@ -51,7 +51,7 @@ public interface BaseDrawerItem extends PickupBagItem, OverlayInsertItem {
 	}
 
 	static int getStacking(ItemStack drawer) {
-		return getStacking(PickupModeCap.getConfig(drawer));
+		return getStacking(PickupConfig.getConfig(drawer));
 	}
 
 	static int getStacking(@Nullable CompoundTag tag) {
@@ -62,13 +62,13 @@ public interface BaseDrawerItem extends PickupBagItem, OverlayInsertItem {
 	}
 
 	static int getStackingFactor(ItemStack drawer) {
-		int factor = PickupModeCap.getConfig(drawer).getInt(STACKING);
+		int factor = PickupConfig.getConfig(drawer).getInt(STACKING);
 		if (factor < 1) factor = 1;
 		return factor;
 	}
 
 	static ItemStack setStackingFactor(ItemStack drawer, int factor) {
-		PickupModeCap.getConfig(drawer).putInt(STACKING, factor);
+		PickupConfig.getConfig(drawer).putInt(STACKING, factor);
 		return drawer;
 	}
 

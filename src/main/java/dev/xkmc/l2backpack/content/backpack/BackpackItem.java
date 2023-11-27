@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.backpack;
 
-import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
@@ -68,7 +68,7 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 		if (tag.contains("loot")) {
 			list.add(LangData.IDS.LOOT.get().withStyle(ChatFormatting.AQUA));
 		} else {
-			PickupModeCap.addText(stack, list);
+			PickupConfig.addText(stack, list);
 		}
 		LangData.addInfo(list,
 				LangData.Info.QUICK_INV_ACCESS,

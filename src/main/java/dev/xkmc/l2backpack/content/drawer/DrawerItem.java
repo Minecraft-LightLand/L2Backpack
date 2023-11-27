@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.drawer;
 
-import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.init.data.LangData;
@@ -158,7 +158,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 		}
 		list.add(LangData.IDS.BACKPACK_SLOT.get(BaseDrawerItem.getStackingFactor(stack), MAX_FACTOR)
 				.withStyle(ChatFormatting.GRAY));
-		PickupModeCap.addText(stack, list);
+		PickupConfig.addText(stack, list);
 		LangData.addInfo(list,
 				LangData.Info.DRAWER_USE,
 				LangData.Info.LOAD,

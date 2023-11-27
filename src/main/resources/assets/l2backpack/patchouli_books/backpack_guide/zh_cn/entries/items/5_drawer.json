@@ -1,5 +1,5 @@
 {
-  "name": "Drawer",
+  "name": "水晶匣子",
   "icon": "l2backpack:drawer",
   "category": "l2backpack:items",
   "sortnum": 5,
@@ -7,8 +7,8 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:drawer",
-	  "text": "In inventory, left click drawer with a stack to store item. Right click drawer to take item out.$(br2)Drawer can only store 1 kind of simple item that has no NBT, but can store up to 64 stacks. Use $(l:items/8_ender_pocket)Ender Pocket$(/l) up upgrade to at most 512 stacks.$(br2)You can put drawers inside your backpack, so that your backpack can store more items."
+	  "text": "物品栏中，用物品左键匣子以插入物品，右键匣子以提取一组或者全部物品。$(br2)匣子只能储存1种物品，并且储存的物品不能携带NBT数据，但是可以储存64组（4096个）。使用$(l:items/8_ender_pocket)空间升级组件$(/l)在锻造台中升级，每次升级可以增加64组容量，最多升级至512组（32768个物品）。$(br2)手持物品右键匣子方块插入物品，空手右键匣子方块提取物品。$(br2)你可以把匣子放入背包中，这样背包能装下至多两百万个物品。"
 	},
-	"Features:$(li)Shift + right click to place it as a block$(li)Drawer Collect: Shift + right click on non-placeable point to store matching items from inventory.$(li)Drawer Extract: Right click with drawer to take one stack item out.$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
+	"物品功能：$(li)潜行右键以方块形式放置$(li)匣子快速收集：潜行右键无法放置方块的位置可以把背包中所有相同物品全部收入匣子中$(li)匣子快速提取：手持匣子右键可以从匣子中取出一组物品$(li)$(l:mechanics/chest)箱子快速装卸$(/l)$(li)$(l:mechanics/quick_insert)物品便捷插入$(/l)$(li)$(l:mechanics/pickup)物品自动归类模式$(/l)"
   ]
 }

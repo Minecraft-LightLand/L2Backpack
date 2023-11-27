@@ -1,0 +1,8 @@
+{
+  "creative_tab": "l2library:backpack",
+  "landing_text": "patchouli.l2backpack.landing",
+  "model": "l2backpack:book",
+  "name": "patchouli.l2backpack.title",
+  "use_resource_pack": true,
+  "version": 1
+}

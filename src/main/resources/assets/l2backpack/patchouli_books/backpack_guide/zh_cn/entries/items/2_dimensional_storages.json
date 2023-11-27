@@ -1,5 +1,5 @@
 {
-  "name": "Dimensional Storages",
+  "name": "空间背包",
   "icon": "l2backpack:dimensional_storage_white",
   "category": "l2backpack:items",
   "sortnum": 2,
@@ -7,8 +7,8 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "tag:l2backpack:dimensional_storages",
-	  "text": "You can put it inside other backpacks, and you can put backpacks inside this.$(br2)All dimensional storage with the same color and owned by the same player shares the same inventory space, for both item and block form.$(br2)Supports quick access in anywhere."
+	  "text": "你可以把空间背包放进其他背包，也可以把其他背包放进空间背包。$(br2)所有相同颜色且绑定相同持有者的空间背包共享相同的空间。可以放置，放置的空间背包可以和漏斗等方块交互，且和物品模式共享空间。$(br2)支持任意快捷访问。"
 	},
-	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/any_access)Quick Access$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)$(li)Shift + right click to place it as a block"
+	"物品功能：$(li)背包可以放在胸甲或者背部饰品栏位，通过绑定的按键打开（默认B）$(li)$(l:mechanics/any_access)任意快捷访问$(/l)$(li)$(l:mechanics/quick_insert)物品便捷插入$(/l)$(li)$(l:mechanics/exit)UI叠加$(/l)$(li)$(l:mechanics/pickup)物品自动归类模式$(/l)$(li)潜行右键以方块形式放置"
   ]
 }

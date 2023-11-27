@@ -1,5 +1,5 @@
 {
-  "name": "Common Item Mechanics",
-  "description": "Common mechanics many items may share",
+  "name": "常见物品机制",
+  "description": "多种物品都有的常见背包便捷功能",
   "icon": "l2backpack:dimensional_storage_white"
 }

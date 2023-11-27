@@ -22,12 +22,6 @@ public class PickupTrace {
 		if (visited.contains(sig)) {
 			return false;
 		}
-		if (!layer.isEmpty()) {
-			var last = layer.peek();
-			if (last.mode().ordinal() < mode.ordinal()) {
-				mode = last.mode();
-			}
-		}
 		layer.push(new Entry(sig, mode));
 		visited.add(sig);
 		active.add(sig);

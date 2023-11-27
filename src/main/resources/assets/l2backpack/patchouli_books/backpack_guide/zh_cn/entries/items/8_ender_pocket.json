@@ -1,5 +1,5 @@
 {
-  "name": "Ender Pocket",
+  "name": "空间升级组件",
   "icon": "l2backpack:ender_pocket",
   "category": "l2backpack:items",
   "sortnum": 8,
@@ -7,7 +7,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:ender_pocket",
-	  "text": "Use it to upgrade backpacks or drawers in smithing table. You don't need templates for this.$(br2)$(l:items/1_backpacks)Backpacks$(/l) increase 9 slots per upgrade, and can have at most 72 slot.$(br2)$(l:items/5_drawer)Drawer$(/l) capacity increases by 64 stacks (4096 items) per upgrade, can can have at most 512 stacks (32768 items)."
+	  "text": "在锻造台中升级背包和水晶匣子。不需要升级模版。$(br2)$(l:items/1_backpacks)背包$(/l)每次升级增加9格，最多72格。$(br2)$(l:items/5_drawer)水晶匣子$(/l)一次升级增加64组（4096个物品）的容量，最多512组（32768个物品）"
 	}
   ]
 }

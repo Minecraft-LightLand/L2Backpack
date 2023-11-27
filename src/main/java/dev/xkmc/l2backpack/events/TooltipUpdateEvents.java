@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.events;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
+import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.network.RequestTooltipUpdateEvent;
 import dev.xkmc.l2library.util.Proxy;
@@ -28,6 +29,11 @@ import java.util.UUID;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = L2Backpack.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TooltipUpdateEvents {
+
+	@OnlyIn(Dist.CLIENT)
+	public static void onEnderSync(int slot, ItemStack stack) {
+		EnderSyncCap.HOLDER.get(Proxy.getClientPlayer()).setItem(slot, stack);
+	}
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent

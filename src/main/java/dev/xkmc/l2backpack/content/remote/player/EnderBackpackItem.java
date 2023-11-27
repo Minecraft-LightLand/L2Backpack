@@ -1,17 +1,18 @@
-package dev.xkmc.l2backpack.content.backpack;
+package dev.xkmc.l2backpack.content.remote.player;
 
 import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
+import dev.xkmc.l2backpack.content.common.InvTooltip;
+import dev.xkmc.l2backpack.content.common.TooltipInvItem;
 import dev.xkmc.l2backpack.content.insert.InsertOnlyItem;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
+import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
-import dev.xkmc.l2library.util.Proxy;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.ContainerScreen;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -24,32 +25,23 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
-public class EnderBackpackItem extends Item implements BackpackModelItem, PickupBagItem, InsertOnlyItem {
-
-	@OnlyIn(Dist.CLIENT)
-	public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
-		if (entity != Proxy.getClientPlayer()) return 0;
-		Screen screen = Minecraft.getInstance().screen;
-		if (screen instanceof ContainerScreen gui) {
-			if (gui.getMenu().getContainer() == Proxy.getClientPlayer().getEnderChestInventory()) {
-				return 1;
-			}
-		}
-		return 0;
-	}
+public class EnderBackpackItem extends Item implements
+		BackpackModelItem, PickupBagItem, InsertOnlyItem, TooltipInvItem, IQuickSwapItem {
 
 	public EnderBackpackItem(Properties props) {
 		super(props.stacksTo(1));
@@ -95,4 +87,29 @@ public class EnderBackpackItem extends Item implements BackpackModelItem, Pickup
 		return new EnderBackpackCaps(stack);
 	}
 
+	@Override
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(BaseItemRenderer.EXTENSIONS);
+	}
+
+	@Override
+	public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+		return InvTooltip.get(this, stack);
+	}
+
+	@Override
+	public int getInvSize(ItemStack stack) {
+		return 27;
+	}
+
+	@Override
+	public List<ItemStack> getInvItems(ItemStack stack, Player player) {
+		return EnderSyncCap.HOLDER.get(player).getItems();
+	}
+
+	@Nullable
+	@Override
+	public IQuickSwapToken getTokenOfType(ItemStack stack, LivingEntity entity, QuickSwapType type) {
+		return entity instanceof Player player ? EnderSyncCap.HOLDER.get(player).getToken(type) : null;
+	}
 }

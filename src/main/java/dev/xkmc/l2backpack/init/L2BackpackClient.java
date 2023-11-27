@@ -1,9 +1,5 @@
 package dev.xkmc.l2backpack.init;
 
-import com.tterrag.registrate.util.entry.ItemEntry;
-import dev.xkmc.l2backpack.content.backpack.BackpackItem;
-import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
-import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.common.InvClientTooltip;
 import dev.xkmc.l2backpack.content.common.InvTooltip;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
@@ -29,10 +25,6 @@ public class L2BackpackClient {
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
-			for (ItemEntry<BackpackItem> entry : BackpackItems.BACKPACKS) {
-				ItemProperties.register(entry.get(), new ResourceLocation("open"), BaseBagItem::isOpened);
-			}
-			ItemProperties.register(BackpackItems.ENDER_BACKPACK.get(), new ResourceLocation("open"), EnderBackpackItem::isOpened);
 			ItemProperties.register(BackpackItems.QUIVER.get(), new ResourceLocation(L2Backpack.MODID, "arrow"), (stack, level, entity, i) -> Quiver.displayArrow(stack));
 		});
 	}

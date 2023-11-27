@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.backpack;
 import dev.xkmc.l2backpack.content.capability.BackpackCap;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.data.LangData;
@@ -16,9 +17,11 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 
@@ -90,6 +93,11 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 	@Override
 	public boolean canFitInsideContainerItems() {
 		return false;
+	}
+
+	@Override
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(BaseItemRenderer.EXTENSIONS);
 	}
 
 }

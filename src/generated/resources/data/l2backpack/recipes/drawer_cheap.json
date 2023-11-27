@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:glass"
+    },
+    "B": {
+      "item": "l2backpack:ender_pocket"
+    },
+    "C": {
+      "tag": "forge:dyes/purple"
+    },
+    "D": {
+      "tag": "forge:dyes/yellow"
+    }
+  },
+  "pattern": [
+    "CAC",
+    "ABA",
+    "DAD"
+  ],
+  "result": {
+    "item": "l2backpack:drawer"
+  },
+  "show_notification": true
+}

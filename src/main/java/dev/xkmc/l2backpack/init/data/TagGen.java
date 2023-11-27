@@ -20,6 +20,8 @@ public class TagGen {
 	public static final TagKey<Item> ENDER_CHEST = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "ender_chest_access"));
 	public static final TagKey<Item> DIMENSIONAL_STORAGES = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "dimensional_storages"));
 
+	public static final TagKey<Item> BOOK = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "book_trigger"));
+
 	public static void onBlockTagGen(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {
 		if (ModList.get().isLoaded("modulargolems")) {
 			GolemCompat.genBlockTag(pvd);
@@ -27,6 +29,7 @@ public class TagGen {
 	}
 
 	public static void onItemTagGen(RegistrateTagsProvider.IntrinsicImpl<Item> pvd) {
+		pvd.addTag(BOOK).addTag(BACKPACKS).addTag(BAGS).addTag(DRAWERS).addTag(SWAPS).addTag(ENDER_CHEST).addTag(DIMENSIONAL_STORAGES);
 	}
 
 }

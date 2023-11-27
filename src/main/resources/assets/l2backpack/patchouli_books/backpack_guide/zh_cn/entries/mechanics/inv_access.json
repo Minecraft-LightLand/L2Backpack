@@ -1,9 +1,9 @@
 {
-  "name": "Quick Inventory Access",
+  "name": "物品栏快捷访问",
   "icon": "l2backpack:backpack_white",
   "category": "l2backpack:mechanics",
   "pages": [
-	"Items with this feature:$(li)$(l:items/1_backpacks)Backpacks$(/l)$(li)$(l:items/4_swaps)Quick Swaps$(/l)$(br2)Right click to open. Or right click item in inventory / ender chest / dimensional storage / curios GUI to open directly.$(br2)This is similar to $(l:mechanics/any_access)Quick Access$(/l) but with more restrictions.",
-    "These items store content inside item stack NBT, just like shulker boxes. Thus, it does not fit inside other shulker box-like backpack items.$(br2)However, you can put it inside $(l:mechanics/any_access)Quick Access$(/l) backpacks, such as dimensional storage or ender backpacks, and you can also put those within these backpacks. Then you get recursive backpacks that can be opened like folders in your computer."
+	"有这个功能的物品：$(li)$(l:items/1_backpacks)背包$(/l)$(li)$(l:items/4_swaps)快捷切换袋$(/l)$(br2)手持物品右键打开，或者在物品栏/末影箱/末影背包/空间背包/饰品栏中右键物品直接打开。$(br2)这个功能类似$(l:mechanics/any_access)任意快捷访问$(/l)，但是限制了能打开的地方。",
+    "这些物品把内容物储存在物品NBT中，类似潜影盒。所以，不能把背包放入潜影盒或者其他背包中。切换袋因为不能储存其他背包，所以可以放入背包中。$(br2)你可以把背包放入有$(l:mechanics/any_access)任意快捷访问$(/l)功能的物品中，比如空间背包和末影背包。然后你还可以把空间背包放入末影背包，这样就形成了类似文件夹的结构，便于分类和快速存取物品。"
   ]
 }

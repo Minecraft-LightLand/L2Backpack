@@ -8,13 +8,13 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:arrow_bag,l2backpack:tool_swap,l2backpack:armor_swap",
-	  "text": "Swap UI cn be activated by sneaking. Then you can select items using up / down arrow button, or mouse scrolling.$(br2)For Quiver, the UI will appear when you hold a bow, and you will shoot the selected arrow.$(br2)For Tool Swap and Armor Swap, you need to press R to swap the item."
+	  "text": "Swap UI can be activated by sneaking. Then you can select items using up / down arrow button, or mouse scrolling.$(br2)For Quiver, the UI will appear when you hold a bow, and you will shoot the selected arrow.$(br2)For Tool Swap and Armor Swap, you need to press R to swap the item."
 	},
 	"Swap UI condition:$(li)Quiver UI: hold a bow in main hand or off hand.$(li)Tool Swap: hold a non-stackable item in your main hand.$(li)Armor Swap: hold nothing in your main hand.$(li)If you press ALT, Tool Swap UI will appear even when you are in Quiver or Armor Swap mode. Then allows you to swap bows, or get weapon from tool swap while holding nothing.",
 	{
 	  "type": "patchouli:spotlight",
-	  "item": "l2backpack:combined_swap,l2backpack:ender_swap",
-	  "text": "There is also the Combined swap, which is a combination of all 3 swaps. You can trigger$(br2)Or you can combine ender backpack together, which will be Ender Swap, giving you functionality of all 4 items. Note that in Ender Swap, the arrows / tools / armors are still stored inside the swap item, not ender chest."
+	  "item": "l2backpack:combined_swap",
+	  "text": "There is also the Combined swap, which is a combination of all 3 swaps.$(br2)And you can put Quick Swap items in your ender backpacks. Swaps can trigger inside ender backpack as well. Keeping swaps in your ender backpack allows you to not lose precious weapons and gears in swaps when killed."
 	},
 	"Features:$(li)This can be put on chest slot (or back slot of Curios), and can be opened via key bind.$(li)$(l:mechanics/inv_access)Quick Inventory Access$(/l)$(li)$(l:mechanics/chest)Load / Dump with Chest$(/l)$(li)$(l:mechanics/quick_insert)Quick Insert$(/l)$(li)$(l:mechanics/exit)Menu Stacking$(/l)$(li)$(l:mechanics/pickup)Recursive Pickup$(/l)"
   ]

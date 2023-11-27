@@ -1,5 +1,5 @@
 {
-  "name": "All Items",
-  "description": "Introduction of all L2Backpack items",
+  "name": "物品",
+  "description": "莱特兰背包的所有物品的功能和使用介绍",
   "icon": "l2backpack:backpack_white"
 }

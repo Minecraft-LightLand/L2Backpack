@@ -1,9 +1,8 @@
 {
-  "name": "Menu Stacking",
+  "name": "UI叠加",
   "icon": "l2backpack:backpack_black",
   "category": "l2backpack:mechanics",
   "pages": [
-	"Items with this feature:$(li)$(l:mechanics/inv_access)Quick Inventory Access items$(/l)$(li)$(l:mechanics/any_access)Quick Access items$(/l)$(br2)When exiting GUI, it will return to the previous GUI if opened in accessible GUI. Press Shift + Esc to close all menu.",
-	"This feature is for items which can be opened in other menu, such as backpack and dimensional storage. When you open them, the previous menu will be cached and restored when you close the new menu, just like the back button. Thus we have a way to exit all menus at once, like the close button."
+	"有这个功能的物品：$(li)$(l:mechanics/inv_access)物品栏快捷访问物品$(/l)$(li)$(l:mechanics/any_access)任意快捷访问物品$(/l)$(br2)退出容器UI时，如果容器是在上一个UI中打开的，会返回到上一个UI中。如果需要全部退出，按Shift+Esc。"
   ]
 }

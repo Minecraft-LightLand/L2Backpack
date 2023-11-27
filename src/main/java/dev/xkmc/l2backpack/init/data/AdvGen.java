@@ -15,6 +15,7 @@ import dev.xkmc.l2screentracker.screen.triggers.ExitMenuTrigger;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -31,6 +32,11 @@ public class AdvGen {
 		gen.new TabBuilder("backpacks").root("root", backpack(DyeColor.WHITE),
 						CriterionBuilder.item(Tags.Items.CHESTS),
 						"Welcome to L2Backpack", "Guide to Backpacks")
+
+				.root().patchouli(L2Backpack.REGISTRATE, CriterionBuilder.item(TagGen.BOOK),
+						new ResourceLocation(L2Backpack.MODID, "backpack_guide"),
+						"Intro to Backpacks", "Read the backpack guide")
+
 				.root().create("backpack", backpack(DyeColor.RED),
 						CriterionBuilder.item(TagGen.BACKPACKS),
 						"Your First Backpack!", "Obtain a Backpack")
@@ -151,12 +157,6 @@ public class AdvGen {
 				.create("armor_swap", BackpackItems.ARMOR_SWAP.get(),
 						CriterionBuilder.item(BackpackItems.ARMOR_SWAP.get()),
 						"Backup Armors", "Obtain an Armor Swap")
-				.create("multi_switch", BackpackItems.MULTI_SWITCH.get(),
-						CriterionBuilder.item(BackpackItems.MULTI_SWITCH.get()),
-						"Three in One", "Obtain an Combined Swap").type(FrameType.GOAL)
-				.create("ender_switch", BackpackItems.ENDER_SWITCH.get(),
-						CriterionBuilder.item(BackpackItems.ENDER_SWITCH.get()),
-						"Four in One", "Obtain an Ender Swap").type(FrameType.CHALLENGE)
 				.finish();
 
 	}

@@ -1,9 +1,9 @@
 {
-  "name": "Quick Access",
+  "name": "任意快捷访问",
   "icon": "l2backpack:dimensional_storage_white",
   "category": "l2backpack:mechanics",
   "pages": [
-	"Items with this feature: $(li)$(l:items/2_dimensional_storages)Dimensional Storages$(/l)$(li)$(l:items/3_ender_backpack)Ender Backpack$(/l)$(br2)Right click to open. Or right click item in any inventory / container GUI to open directly.$(br2)This is similar to $(l:mechanics/inv_access)Quick Inventory Access$(/l) but with less restrictions.",
-    "These items store content in game saves directly. Thus, it fits inside shulker box and other backpack items.$(br2)You can put other backpacks with Quick Inventory Access inside, so you can open them directly, creating stacking menu. This is very helpful for organizing your items.These items store content in game saves directly. Thus, it fits inside shulker box and other backpack items."
+	"有这个功能的物品：$(li)$(l:items/2_dimensional_storages)空间背包$(/l)$(li)$(l:items/3_ender_backpack)末影背包$(/l)$(br2)手持物品右键打开，或者在任意容器UI中右键物品直接打开，不需要取出。$(br2)这个和$(l:mechanics/inv_access)物品栏快捷访问$(/l)相似，但是没有哪里可以打开的限制",
+    "这些物品并不会把内容物储存在物品NBT中，所以可以放入其他背包/潜影盒内，也可以储存其他背包/潜影盒，不需要考虑NBT溢出。$(br2)你可以把其他有物品栏快捷访问功能的背包放进末影背包，这样可以在末影背包中直接打开背包，让你能够直接从末影背包里面的背包里存取物品。"
   ]
 }

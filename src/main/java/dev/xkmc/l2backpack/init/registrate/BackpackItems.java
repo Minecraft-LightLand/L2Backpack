@@ -6,7 +6,6 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
-import dev.xkmc.l2backpack.content.backpack.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.bag.BookBag;
 import dev.xkmc.l2backpack.content.bag.EquipmentBag;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
@@ -16,6 +15,7 @@ import dev.xkmc.l2backpack.content.quickswap.merged.MultiSwitch;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerItem;
+import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.tool.PickupTweakerTool;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -71,8 +71,9 @@ public class BackpackItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p))
-						.tag(TagGen.BACKPACKS, curios_tag).model(BackpackItems::createBackpackModel)
-						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMapColor().col)
+						.tag(TagGen.BACKPACKS, curios_tag)
+						.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
+								new ModelFile.UncheckedModelFile("builtin/entity")))
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_backpack"))
 						.register();
 			}
@@ -80,11 +81,14 @@ public class BackpackItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p))
-						.tag(TagGen.DIMENSIONAL_STORAGES, curios_tag).model(BackpackItems::createWorldChestModel)
-						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMapColor().col)
+						.tag(TagGen.DIMENSIONAL_STORAGES, curios_tag)
+						.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
+								new ModelFile.UncheckedModelFile("builtin/entity")))
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_dimensional_backpack")).register();
 			}
-			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(BackpackItems::createEnderBackpackModel)
+			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new)
+					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
+							new ModelFile.UncheckedModelFile("builtin/entity")))
 					.tag(curios_tag, TagGen.ENDER_CHEST).defaultLang().register();
 
 			ENDER_POCKET = simpleItem("ender_pocket");
@@ -99,7 +103,8 @@ public class BackpackItems {
 			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
 			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
 			MULTI_SWITCH = REGISTRATE.item("combined_swap", MultiSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
-			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS, TagGen.ENDER_CHEST).defaultLang().register();
+			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS, TagGen.ENDER_CHEST)
+					.removeTab(TAB.getKey()).defaultLang().register();
 
 			DRAWER = REGISTRATE.item("drawer", p -> new DrawerItem(BackpackBlocks.DRAWER.get(), p))
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
@@ -112,26 +117,6 @@ public class BackpackItems {
 					.tag(TagGen.DRAWERS).defaultLang().register();
 		}
 	}
-
-	private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {
-		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "l2backpack:backpack");
-		builder.override().predicate(new ResourceLocation("open"), 1).model(
-				new ModelFile.UncheckedModelFile(L2Backpack.MODID + ":item/backpack_open"));
-	}
-
-	private static void createWorldChestModel(DataGenContext<Item, WorldChestItem> ctx, RegistrateItemModelProvider pvd) {
-		pvd.withExistingParent(ctx.getName(), "l2backpack:dimensional_storage");
-	}
-
-	private static void createEnderBackpackModel(DataGenContext<Item, EnderBackpackItem> ctx, RegistrateItemModelProvider pvd) {
-		pvd.withExistingParent("ender_backpack_open", "generated")
-				.texture("layer0", "item/ender_backpack_open");
-		ItemModelBuilder builder = pvd.withExistingParent("ender_backpack", "generated");
-		builder.texture("layer0", "item/ender_backpack");
-		builder.override().predicate(new ResourceLocation("open"), 1).model(
-				new ModelFile.UncheckedModelFile(L2Backpack.MODID + ":item/ender_backpack_open"));
-	}
-
 
 	public static <T extends Quiver> void createArrowBagModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider pvd) {
 		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "generated");

@@ -1,9 +1,9 @@
 {
-  "name": "Quick Insert",
+  "name": "物品便捷插入",
   "icon": "l2backpack:backpack_purple",
   "category": "l2backpack:mechanics",
   "pages": [
-	"Items with this feature:$(li)$(l:items/1_backpacks)Backpacks$(/l)$(li)$(l:items/2_dimensional_storages)Dimensional Storages$(/l)$(li)$(l:items/3_ender_backpack)Ender Backpack$(/l)$(li)$(l:items/4_swaps)Quick Swaps$(/l)$(li)$(l:items/5_drawer)Drawers$(/l)$(li)$(l:items/6_ender_drawer)Ender Drawers$(/l)$(br2)",
-	"In any inventory, left click your drawers (or backpacks, etc) with item to put item into your drawers.$(br2)For backpacks, you can also use right click. For drawers, right click is reserved for quick extract.$(br2)You can use this feature to insert items into backpacks in chests, as you cannot open backpacks from chests directly."
+	"有这个功能的物品：$(li)$(l:items/1_backpacks)背包$(/l)$(li)$(l:items/2_dimensional_storages)空间背包$(/l)$(li)$(l:items/3_ender_backpack)末影背包$(/l)$(li)$(l:items/4_swaps)快捷切换袋$(/l)$(li)$(l:items/5_drawer)水晶匣子$(/l)$(li)$(l:items/6_ender_drawer)末影匣子$(/l)$(br2)",
+	"在任何容器UI中，拿物品左键有这个功能的物品可以直接把物品塞进去。$(br2)对于各种背包和切换袋，右键也可以。抽屉右键是取出物品，所以不支持右键插入。$(br2)即使你不能直接打开箱子里的背包，你可以用这个方法往箱子里的背包塞物品。"
   ]
 }

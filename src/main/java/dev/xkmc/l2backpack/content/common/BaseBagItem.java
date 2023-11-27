@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, PickupBagItem, InsertOnlyItem {
+public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, PickupBagItem, InsertOnlyItem, TooltipInvItem {
 
 	protected static final String LOOT = "loot";
 	protected static final String SEED = "seed";
@@ -87,7 +87,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, 
 				ans.add(i);
 			}
 		}
-		if (ans.size() > 0) {
+		if (!ans.isEmpty()) {
 			int size = ((BaseBagItem) stack.getItem()).getRows(stack) * 9;
 			while (ans.size() < size) {
 				ans.add(ItemStack.EMPTY);
@@ -105,7 +105,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, 
 	}
 
 	public static void checkLootGen(ItemStack stack, Player player) {
-		if (getListTag(stack).size() > 0) return;
+		if (!getListTag(stack).isEmpty()) return;
 		CompoundTag ctag = stack.getOrCreateTag();
 		if (!ctag.contains(LOOT)) return;
 		ResourceLocation rl = new ResourceLocation(ctag.getString(LOOT));
@@ -201,6 +201,16 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, 
 	@Override
 	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
 		return new BaseBagInvWrapper(stack);
+	}
+
+	@Override
+	public int getInvSize(ItemStack stack) {
+		return BaseBagItem.getItems(stack).size();
+	}
+
+	@Override
+	public List<ItemStack> getInvItems(ItemStack stack, Player player) {
+		return BaseBagItem.getItems(stack);
 	}
 
 }

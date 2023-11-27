@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.common;
 
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -12,7 +13,7 @@ public record InvClientTooltip(InvTooltip inv) implements ClientTooltipComponent
 
 	@Override
 	public int getHeight() {
-		return BaseBagItem.getItems(inv.stack()).size() / 9 * 18 + 2;
+		return inv.item().getInvSize(inv.stack()) / 9 * 18 + 2;
 	}
 
 	@Override
@@ -22,7 +23,7 @@ public record InvClientTooltip(InvTooltip inv) implements ClientTooltipComponent
 
 	@Override
 	public void renderImage(Font font, int mx, int my, GuiGraphics g) {
-		var list = BaseBagItem.getItems(inv.stack());
+		var list = inv.item().getInvItems(inv.stack(), Proxy.getClientPlayer());
 		for (int i = 0; i < list.size(); i++) {
 			renderSlot(font, mx + i % 9 * 18, my + i / 9 * 18, g, list.get(i));
 		}

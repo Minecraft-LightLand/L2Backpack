@@ -9,5 +9,7 @@
 	"tool_bag": "工具切换袋"
   },
   "itemGroup.l2library.backpack": "莱特兰·背包",
-  "key.l2backpack.open": "打开背部饰品栏的容器"
+  "key.l2backpack.open": "打开背部饰品栏的容器",
+  "patchouli.l2backpack.landing": "欢迎使用莱特兰背包",
+  "patchouli.l2backpack.title": "莱特兰背包教程"
 }

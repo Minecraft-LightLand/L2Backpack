@@ -33,6 +33,13 @@ public class CapabilityEvents {
 	public static void onItemPickup(EntityItemPickupEvent event) {
 		if (!(event.getEntity() instanceof ServerPlayer player)) return;
 		ItemStack stack = event.getItem().getItem();
+		tryInsertItem(player, stack);
+	}
+
+	/**
+	 * if item inserted, stack is modified
+	 */
+	public static void tryInsertItem(ServerPlayer player, ItemStack stack) {
 		ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
 		chest.getCapability(BackpackCap.TOKEN).resolve().ifPresent(
 				cap -> cap.doPickup(stack, new PickupTrace(player)));

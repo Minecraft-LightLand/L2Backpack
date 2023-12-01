@@ -3,7 +3,6 @@ package dev.xkmc.l2backpack.events;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
@@ -15,8 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.function.BooleanSupplier;
-
-import static dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay.onlyWithShift;
 
 public class BackpackSel implements ISelectionListener {
 
@@ -35,12 +32,7 @@ public class BackpackSel implements ISelectionListener {
 	public boolean isClientActive(Player player) {
 		if (Minecraft.getInstance().screen != null) return false;
 		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
-		if (token == null) return false;
-		QuickSwapType type = token.type();
-		if (onlyWithShift(type)) {
-			return Screen.hasAltDown() || Minecraft.getInstance().options.keyShift.isDown();
-		}
-		return true;
+		return token != null;
 	}
 
 	@Override

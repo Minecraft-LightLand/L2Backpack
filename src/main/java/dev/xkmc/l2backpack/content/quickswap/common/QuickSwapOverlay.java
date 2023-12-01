@@ -22,7 +22,7 @@ import java.util.List;
 
 public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSignature> {
 
-	public record BackpackSignature(int backpackSelect, boolean ignoreOther, QuickSwapType type,
+	public record BackpackSignature(int backpackSelect, boolean ignoreOther, @Nullable QuickSwapType type,
 									int playerSelect, ItemStack stack)
 			implements Signature<BackpackSignature> {
 
@@ -30,8 +30,7 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 		public boolean shouldRefreshIdle(SideBar<?> sideBar, @Nullable QuickSwapOverlay.BackpackSignature old) {
 			if (ignoreOther) {
 				if (old == null) return false;
-				if (old.type != type()) return true;
-				return old.backpackSelect != backpackSelect();
+				return old.type == type && old.backpackSelect != backpackSelect();
 			}
 			return !equals(old);
 		}
@@ -65,10 +64,10 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 		return Pair.of(list, selected);
 	}
 
-	public static boolean onlyWithShift(@Nullable QuickSwapType type) {
-		return type == QuickSwapType.ARROW && BackpackConfig.CLIENT.showArrowOnlyWithShift.get()
-				|| type == QuickSwapType.TOOL && BackpackConfig.CLIENT.showToolOnlyWithShift.get()
-				|| type == QuickSwapType.ARMOR && BackpackConfig.CLIENT.showArmorOnlyWithShift.get();
+	public static boolean activePopup(@Nullable QuickSwapType type) {
+		return type == QuickSwapType.ARROW && BackpackConfig.CLIENT.popupArrowOnSwitch.get()
+				|| type == QuickSwapType.TOOL && BackpackConfig.CLIENT.popupToolOnSwitch.get()
+				|| type == QuickSwapType.ARMOR && BackpackConfig.CLIENT.popupArmorOnSwitch.get();
 	}
 
 	@Override
@@ -81,7 +80,7 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 		boolean ignoreOther = false;
 		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
 		if (!Minecraft.getInstance().options.keyShift.isDown()) {
-			ignoreOther = onlyWithShift(type);
+			ignoreOther = !activePopup(type);
 		}
 		int focus = player.getInventory().selected;
 		if (token.type() == QuickSwapType.TOOL) {

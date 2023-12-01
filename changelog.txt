@@ -1,6 +1,9 @@
 - add wand page TODO
 - keybind name TODO
 
+2.4.17
+- improve quick swap
+
 2.4.16
 - add pickup destroy mode
 - Fix bag load displaying 0 item

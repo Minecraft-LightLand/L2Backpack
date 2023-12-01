@@ -75,12 +75,6 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		return stack;
 	}
 
-	@Override
-	public void removed(Player player) {
-
-		super.removed(player);
-	}
-
 	public ItemStack quickMoveStack(Player pl, int id) {
 		ItemStack stack = this.slots.get(id).getItem();
 		int n = this.handler.getSlots();

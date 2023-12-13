@@ -99,7 +99,7 @@ public interface BaseDrawerInvAccess extends IItemHandlerModifiable {
 	}
 
 	default boolean mayStack(BaseDrawerInvAccess inv, int slot, ItemStack stack, PickupConfig config) {
-		if (config.pickup()== PickupMode.ALL && isEmpty()){
+		if (config.pickup() == PickupMode.ALL && isEmpty()) {
 			return true;
 		}
 		return !isEmpty() && isItemValid(stack);

@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.remote.worldchest;
 
-import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.insert.InsertOnlyItem;

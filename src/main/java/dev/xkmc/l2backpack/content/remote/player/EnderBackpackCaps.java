@@ -1,6 +1,9 @@
 package dev.xkmc.l2backpack.content.remote.player;
 
-import dev.xkmc.l2backpack.content.capability.*;
+import dev.xkmc.l2backpack.content.capability.InvPickupCap;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
+import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.capability.PickupTrace;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;

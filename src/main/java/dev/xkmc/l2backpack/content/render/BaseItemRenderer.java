@@ -73,7 +73,7 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 		switch (type) {
 			case GUI:
 				break;
-			case FIRST_PERSON_LEFT_HAND:{
+			case FIRST_PERSON_LEFT_HAND: {
 				pose.translate(0.3, 0.9, 0.6);
 				float size = 0.3f;
 				pose.scale(size, size, size);
@@ -82,7 +82,7 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 				pose.mulPose(Axis.YP.rotationDegrees(-250));
 				return;
 			}
-			case FIRST_PERSON_RIGHT_HAND:{
+			case FIRST_PERSON_RIGHT_HAND: {
 				pose.translate(0.7, 0.9, 0.6);
 				float size = 0.3f;
 				pose.scale(size, size, size);

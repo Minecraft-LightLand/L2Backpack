@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.drawer;
 
-import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.insert.OverlayInsertItem;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
 import dev.xkmc.l2backpack.network.DrawerInteractToServer;

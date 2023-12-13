@@ -2,7 +2,6 @@ package dev.xkmc.l2backpack.content.capability;
 
 import dev.xkmc.l2backpack.init.data.LangData;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 public enum PickupMode {

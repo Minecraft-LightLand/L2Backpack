@@ -1,7 +1,6 @@
 package dev.xkmc.l2backpack.content.capability;
 
 import dev.xkmc.l2library.util.nbt.ItemCompoundTag;
-import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;

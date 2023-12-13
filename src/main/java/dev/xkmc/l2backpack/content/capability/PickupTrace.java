@@ -1,6 +1,5 @@
 package dev.xkmc.l2backpack.content.capability;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.HashSet;

@@ -75,12 +75,12 @@ public class QuickSwapOverlay extends SelectionSideBar<OverlayToken<?>, QuickSwa
 		assert token != null;
 		int selected = token.getSelected();
 		boolean ignoreOther = false;
-		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
+		QuickSwapType type = token.type();
 		if (!Minecraft.getInstance().options.keyShift.isDown()) {
 			ignoreOther = !activePopup(type);
 		}
 		int focus = player.getInventory().selected;
-		ItemStack sel = type == null ? ItemStack.EMPTY : type.getSignatureItem(player);
+		ItemStack sel = type.getSignatureItem(player);
 		return new BackpackSignature(selected, ignoreOther, type, focus, sel);
 	}
 
@@ -88,8 +88,8 @@ public class QuickSwapOverlay extends SelectionSideBar<OverlayToken<?>, QuickSwa
 	public boolean isAvailable(OverlayToken<?> token) {
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
-		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
-		return type != null && type.isAvailable(player, token);
+		QuickSwapType type = token.token().type();
+		return type.isAvailable(player, token);
 	}
 
 	@Override
@@ -100,8 +100,7 @@ public class QuickSwapOverlay extends SelectionSideBar<OverlayToken<?>, QuickSwa
 	protected void renderEntry(SelectionSideBar.Context ctx, OverlayToken<?> token, int i, int selected) {
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
-		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
-		if (type == null) return;
+		QuickSwapType type = token.token().type();
 		type.renderSelected(ctx, player, token, ctx.x0(), 18 * i + ctx.y0(),
 				selected == i && this.ease_time == this.max_ease, onCenter());
 	}

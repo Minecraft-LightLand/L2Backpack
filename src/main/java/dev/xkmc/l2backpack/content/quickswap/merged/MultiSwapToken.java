@@ -18,7 +18,7 @@ public record MultiSwapToken(IQuickSwapItem item, ItemStack stack, QuickSwapType
 	}
 
 	public List<SingleOverlayToken> getList() {
-		return SingleOverlayToken.parse(BaseBagItem.getItems(stack)
+		return SingleOverlayToken.parse(this, BaseBagItem.getItems(stack)
 				.subList(type.getIndex() * 9, type.getIndex() * 9 + 9));
 	}
 

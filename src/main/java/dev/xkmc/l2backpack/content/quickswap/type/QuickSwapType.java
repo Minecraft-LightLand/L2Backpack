@@ -38,15 +38,15 @@ public abstract class QuickSwapType {
 
 	public abstract ItemStack getSignatureItem(Player player);
 
+	public boolean isAvailable(Player player, OverlayToken<?> token) {
+		return true;
+	}
+
 	public void swap(Player player, ItemStack stack, Consumer<ItemStack> cons) {
 	}
 
 	public boolean canSwap() {
 		return false;
-	}
-
-	public boolean isAvailable(Player player, OverlayToken<?> token) {
-		return true;
 	}
 
 	public void renderSelected(SelectionSideBar.Context ctx, Player player, OverlayToken<?> token, int x, int y, boolean selected, boolean center) {

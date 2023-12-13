@@ -4,6 +4,7 @@ import com.tterrag.registrate.util.entry.MenuEntry;
 import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
 import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
 import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorBagMenu;
+import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSetBagMenu;
 import dev.xkmc.l2backpack.content.quickswap.merged.EnderSwitchMenu;
 import dev.xkmc.l2backpack.content.quickswap.merged.MultiSwitchMenu;
 import dev.xkmc.l2backpack.content.quickswap.merged.MultiSwitchScreen;
@@ -45,6 +46,11 @@ public class BackpackMenus {
 	public static final MenuEntry<ArmorBagMenu> MT_ARMOR = REGISTRATE.menu("armor_bag",
 					ArmorBagMenu::fromNetwork,
 					() -> BaseOpenableScreen<ArmorBagMenu>::new)
+			.lang(BackpackMenus::getLangKey).register();
+
+	public static final MenuEntry<ArmorSetBagMenu> MT_ARMOR_SET = REGISTRATE.menu("armor_set",
+					ArmorSetBagMenu::fromNetwork,
+					() -> BaseOpenableScreen<ArmorSetBagMenu>::new)
 			.lang(BackpackMenus::getLangKey).register();
 
 	public static final MenuEntry<MultiSwitchMenu> MT_MULTI = REGISTRATE.menu("multi_switch",

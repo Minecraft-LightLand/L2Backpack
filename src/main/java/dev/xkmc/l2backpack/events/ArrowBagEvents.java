@@ -16,7 +16,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.IntConsumer;
 
 @Mod.EventBusSubscriber(modid = L2Backpack.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -39,12 +38,14 @@ public class ArrowBagEvents {
 	@SubscribeEvent
 	public static void onArrowFind(ArrowFindEvent event) {
 		if (!(event.getEntity() instanceof Player)) return;
-		IQuickSwapToken token = QuickSwapManager.getToken(event.getEntity(), event.getStack(), false);
+		IQuickSwapToken<?> token = QuickSwapManager.getToken(event.getEntity(), event.getStack(), false);
 		if (token == null) return;
 		if (token.type() != QuickSwapTypes.ARROW) return;
-		List<ItemStack> arrows = token.getList();
+		var arrows = token.getList();
 		int selected = token.getSelected();
-		ItemStack stack = arrows.get(selected);
+		var entry = arrows.get(selected);
+		ItemStack stack = entry.getStack();
+		if (stack.isEmpty()) return;
 		event.setProjectile(Pair.of(stack, token::shrink));
 	}
 

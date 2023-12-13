@@ -23,8 +23,7 @@ public class ArrowSwapType extends MatcherSwapType {
 
 	@Override
 	public boolean isAvailable(Player player, OverlayToken<?> token) {
-		if (!(token instanceof SingleOverlayToken single)) return false;
-		ItemStack stack = single.stack();
+		ItemStack stack = token.getStack();
 		ItemStack bowStack = getSignatureItem(player);
 		if (bowStack.getItem() instanceof ProjectileWeaponItem bow) {
 			return !stack.isEmpty() && bow.getAllSupportedProjectiles().test(stack);

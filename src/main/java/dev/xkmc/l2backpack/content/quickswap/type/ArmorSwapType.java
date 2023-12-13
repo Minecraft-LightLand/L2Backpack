@@ -50,7 +50,7 @@ public class ArmorSwapType extends QuickSwapType implements SideInfoRenderer {
 	@Override
 	public boolean isAvailable(Player player, OverlayToken<?> token) {
 		if (!(token instanceof SingleOverlayToken single)) return false;
-		ItemStack stack = single.stack();
+		ItemStack stack = single.stack();//TODO
 		if (stack.isEmpty()) return false;
 		EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
 		return test(player.getItemBySlot(slot));
@@ -58,7 +58,7 @@ public class ArmorSwapType extends QuickSwapType implements SideInfoRenderer {
 
 	public void renderSide(SelectionSideBar.Context ctx, int x, int y, Player player, OverlayToken<?> token) {
 		if (!(token instanceof SingleOverlayToken single)) return;
-		ItemStack hover = single.stack();
+		ItemStack hover = single.stack();//TODO
 		EquipmentSlot target = LivingEntity.getEquipmentSlotForItem(hover);
 		for (int i = 0; i < 4; i++) {
 			EquipmentSlot slot = EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 3 - i);

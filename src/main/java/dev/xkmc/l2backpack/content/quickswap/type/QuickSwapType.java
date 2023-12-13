@@ -50,16 +50,21 @@ public abstract class QuickSwapType {
 	}
 
 	public void renderSelected(SelectionSideBar.Context ctx, Player player, OverlayToken<?> token, int x, int y, boolean selected, boolean center) {
-		if (!(token instanceof SingleOverlayToken single)) return;
-		ItemStack stack = single.stack();
+		List<ItemStack> list = token.asList();
 		boolean shift = Minecraft.getInstance().options.keyShift.isDown();
-		renderSelection(ctx.g(), ctx.x0(), y, shift ? 127 : 64, this.isAvailable(player, token), selected);
-		if (selected) {
+		boolean avail = this.isAvailable(player, token);
+		for (int i = 0; i < list.size(); i++)
+			renderSelection(ctx.g(), x + i * 18, y, shift ? 127 : 64, avail, selected);
+		if (selected && list.size() == 1) {
+			ItemStack stack = list.get(0);
+			if (!stack.isEmpty()) {
 			ctx.g().renderTooltip(ctx.font(), stack.getHoverName(), 0, 0);
 			TextBox box = new TextBox(ctx.g(), center ? 0 : 2, 1, ctx.x0() + (center ? 22 : -6), y + 8, -1);
-			box.renderLongText(ctx.font(), List.of(stack.getHoverName()));
+				box.renderLongText(ctx.font(), List.of(stack.getHoverName()));
+			}
 		}
-		ctx.renderItem(stack, ctx.x0(), y);
+		for (int i = 0; i < list.size(); i++)
+			ctx.renderItem(list.get(i), x + i * 18, y);
 	}
 
 	public static void renderSelection(GuiGraphics g, int x, int y, int a, boolean available, boolean selected) {

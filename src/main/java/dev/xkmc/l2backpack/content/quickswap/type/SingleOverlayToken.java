@@ -10,4 +10,14 @@ public record SingleOverlayToken(ItemStack stack) implements OverlayToken<Single
 		return list.stream().map(SingleOverlayToken::new).toList();
 	}
 
+	@Override
+	public List<ItemStack> asList() {
+		return List.of(stack);
+	}
+
+	@Override
+	public ItemStack getStack() {
+		return stack;
+	}
+
 }

@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.init.data;
 
+import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2library.compat.curios.CurioEntityBuilder;
 import dev.xkmc.l2library.compat.curios.SlotCondition;
 import dev.xkmc.l2library.serial.config.RecordDataProvider;
@@ -18,7 +19,7 @@ public class SlotGen extends RecordDataProvider {
 
 	@Override
 	public void add(BiConsumer<String, Record> map) {
-		map.accept("curios/curios/entities/l2backpack_entity", new CurioEntityBuilder(
+		map.accept(L2Backpack.MODID + "/curios/entities/l2backpack_entity", new CurioEntityBuilder(
 				new ArrayList<>(List.of(new ResourceLocation("player"))),
 				new ArrayList<>(List.of("back")),
 				SlotCondition.of()

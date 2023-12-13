@@ -1,26 +1,25 @@
 package dev.xkmc.l2backpack.content.quickswap.common;
 
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.quickswap.type.OverlayToken;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.type.SideInfoRenderer;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
-import dev.xkmc.l2library.base.overlay.ItemSelSideBar;
-import dev.xkmc.l2library.base.overlay.OverlayUtil;
+import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.base.overlay.SideBar;
 import dev.xkmc.l2library.util.Proxy;
+import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSignature> {
+public class QuickSwapOverlay extends SelectionSideBar<OverlayToken<?>, QuickSwapOverlay.BackpackSignature> {
 
 	public record BackpackSignature(int backpackSelect, boolean ignoreOther, @Nullable QuickSwapType type,
 									int playerSelect, ItemStack stack)
@@ -54,27 +53,25 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 	}
 
 	@Override
-	public Pair<List<ItemStack>, Integer> getItems() {
+	public Pair<List<OverlayToken<?>>, Integer> getItems() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
-		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
+		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, Screen.hasAltDown());
 		assert token != null;
-		List<ItemStack> list = token.getList();
+		List<? extends OverlayToken<?>> list = token.getList();
 		int selected = token.getSelected();
-		return Pair.of(list, selected);
+		return Pair.of(Wrappers.cast(list), selected);
 	}
 
 	public static boolean activePopup(@Nullable QuickSwapType type) {
-		return type == QuickSwapType.ARROW && BackpackConfig.CLIENT.popupArrowOnSwitch.get()
-				|| type == QuickSwapType.TOOL && BackpackConfig.CLIENT.popupToolOnSwitch.get()
-				|| type == QuickSwapType.ARMOR && BackpackConfig.CLIENT.popupArmorOnSwitch.get();
+		return type != null && type.activePopup();
 	}
 
 	@Override
 	public BackpackSignature getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
-		IQuickSwapToken token = QuickSwapManager.getToken(player, Screen.hasAltDown());
+		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, Screen.hasAltDown());
 		assert token != null;
 		int selected = token.getSelected();
 		boolean ignoreOther = false;
@@ -83,40 +80,16 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 			ignoreOther = !activePopup(type);
 		}
 		int focus = player.getInventory().selected;
-		if (token.type() == QuickSwapType.TOOL) {
-			return new BackpackSignature(selected, ignoreOther, type, focus, player.getMainHandItem());
-		} else {
-			for (EquipmentSlot slot : EquipmentSlot.values()) {
-				if (slot.getType() != EquipmentSlot.Type.ARMOR)
-					continue;
-				return new BackpackSignature(selected, ignoreOther, type, focus, player.getItemBySlot(slot));
-			}
-		}
-		return new BackpackSignature(selected, ignoreOther, type, focus, ItemStack.EMPTY);
+		ItemStack sel = type == null ? ItemStack.EMPTY : type.getSignatureItem(player);
+		return new BackpackSignature(selected, ignoreOther, type, focus, sel);
 	}
 
 	@Override
-	public boolean isAvailable(ItemStack stack) {
+	public boolean isAvailable(OverlayToken<?> token) {
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
 		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
-		if (type == QuickSwapType.ARROW) {
-			ItemStack bowStack = player.getMainHandItem();
-			if (bowStack.getItem() instanceof ProjectileWeaponItem bow) {
-				return !stack.isEmpty() && bow.getAllSupportedProjectiles().test(stack);
-			} else if (player.getOffhandItem().getItem() instanceof ProjectileWeaponItem bow) {
-				return !stack.isEmpty() && bow.getAllSupportedProjectiles().test(stack);
-			}
-			return false;
-		}
-		if (type == QuickSwapType.ARMOR) {
-			if (stack.isEmpty()) {
-				return false;
-			}
-			EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
-			return !(player.getItemBySlot(slot).getItem() instanceof BaseBagItem);
-		}
-		return true;
+		return type != null && type.isAvailable(player, token);
 	}
 
 	@Override
@@ -124,39 +97,30 @@ public class QuickSwapOverlay extends ItemSelSideBar<QuickSwapOverlay.BackpackSi
 		return BackpackConfig.CLIENT.previewOnCenter.get();
 	}
 
+	protected void renderEntry(SelectionSideBar.Context ctx, OverlayToken<?> token, int i, int selected) {
+		LocalPlayer player = Proxy.getClientPlayer();
+		assert player != null;
+		QuickSwapType type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
+		if (type == null) return;
+		type.renderSelected(ctx, player, token, ctx.x0(), 18 * i + ctx.y0(),
+				selected == i && this.ease_time == this.max_ease, onCenter());
+	}
+
 	@Override
 	public void renderContent(Context ctx) {
 		super.renderContent(ctx);
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
-		if (QuickSwapManager.getValidType(player, Screen.hasAltDown()) == QuickSwapType.ARMOR && ease_time == max_ease) {
+		var type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
+		if (ease_time == max_ease && type instanceof SideInfoRenderer rtype) {
 			int x = ctx.x0();
 			int y = 45 + ctx.y0();
 			if (onCenter()) {
 				x -= 18;
 			} else x += 18;
 			var pair = getItems();
-			ItemStack hover = pair.getFirst().get(pair.getSecond());
-			EquipmentSlot target = LivingEntity.getEquipmentSlotForItem(hover);
-			for (int i = 0; i < 4; i++) {
-				EquipmentSlot slot = EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 3 - i);
-				ItemStack stack = player.getItemBySlot(slot);
-				ItemStack targetStack = player.getItemBySlot(target);
-				renderArmorSlot(ctx.g(), x, y, 64, target == slot, targetStack.getItem() instanceof BaseBagItem);
-				ctx.renderItem(stack, x, y);
-				y += 18;
-			}
-		}
-	}
-
-	public void renderArmorSlot(GuiGraphics g, int x, int y, int a, boolean target, boolean invalid) {
-		OverlayUtil.fillRect(g, x, y, 16, 16, color(255, 255, 255, a));
-		if (target) {
-			if (invalid) {
-				OverlayUtil.drawRect(g, x, y, 16, 16, color(220, 70, 70, 255));
-			} else {
-				OverlayUtil.drawRect(g, x, y, 16, 16, color(70, 150, 185, 255));
-			}
+			var hover = pair.getFirst().get(pair.getSecond());
+			rtype.renderSide(ctx, x, y, player, hover);
 		}
 	}
 

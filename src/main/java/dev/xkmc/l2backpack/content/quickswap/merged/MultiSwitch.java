@@ -6,10 +6,10 @@ import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSwap;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
@@ -26,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Locale;
 
 public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBackItem {
 
@@ -38,11 +37,11 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBa
 			else slot++;
 			slot = (slot + 9) % 9;
 		}
-		stack.getOrCreateTag().putInt("selected_" + type.name().toLowerCase(Locale.ROOT), slot);
+		stack.getOrCreateTag().putInt("selected_" + type.getName(), slot);
 	}
 
 	public static int getSelected(ItemStack stack, QuickSwapType type) {
-		return Mth.clamp(stack.getOrCreateTag().getInt("selected_" + type.name().toLowerCase(Locale.ROOT)), 0, 8);
+		return Mth.clamp(stack.getOrCreateTag().getInt("selected_" + type.getName()), 0, 8);
 	}
 
 	public MultiSwitch(Properties props) {
@@ -69,7 +68,8 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBa
 
 	@Nullable
 	@Override
-	public IQuickSwapToken getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
+	public IQuickSwapToken<?> getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
+		if (type.getIndex() >= 3) return null;
 		List<ItemStack> list = getItems(stack);
 		if (list.isEmpty()) return null;
 		return new MultiSwapToken(this, stack, type);

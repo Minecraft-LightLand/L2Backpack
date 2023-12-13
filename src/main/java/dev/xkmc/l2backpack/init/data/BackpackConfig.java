@@ -31,13 +31,13 @@ public class BackpackConfig {
 					.define("previewOnCenter", true);
 
 			popupArrowOnSwitch = builder.comment("Show arrow quick swap when switching to a bow")
-					.define("showArrowOnlyWithShift", true);
+					.define("popupArrowOnSwitch", true);
 
 			popupToolOnSwitch = builder.comment("Show tool quick swap when switching to a tool")
-					.define("showToolOnlyWithShift", false);
+					.define("popupToolOnSwitch", false);
 
 			popupArmorOnSwitch = builder.comment("Show armor quick swap when switching to empty hand")
-					.define("showArmorOnlyWithShift", false);
+					.define("popupArmorOnSwitch", false);
 
 			reverseScroll = builder.comment("Reverse scrolling direction for quick swap")
 					.define("reverseScroll", false);

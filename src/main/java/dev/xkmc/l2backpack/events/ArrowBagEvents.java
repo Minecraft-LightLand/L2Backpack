@@ -2,8 +2,8 @@ package dev.xkmc.l2backpack.events;
 
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -41,7 +41,7 @@ public class ArrowBagEvents {
 		if (!(event.getEntity() instanceof Player)) return;
 		IQuickSwapToken token = QuickSwapManager.getToken(event.getEntity(), event.getStack(), false);
 		if (token == null) return;
-		if (token.type() != QuickSwapType.ARROW) return;
+		if (token.type() != QuickSwapTypes.ARROW) return;
 		List<ItemStack> arrows = token.getList();
 		int selected = token.getSelected();
 		ItemStack stack = arrows.get(selected);

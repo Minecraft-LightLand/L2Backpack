@@ -5,7 +5,6 @@ import com.tterrag.registrate.util.DataIngredient;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
 import dev.xkmc.l2backpack.init.registrate.BackpackMisc;
-import dev.xkmc.l2library.serial.recipe.CustomShapedBuilder;
 import dev.xkmc.l2library.serial.recipe.CustomShapelessBuilder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -117,15 +116,6 @@ public class RecipeGen {
 					.pattern(" A ").pattern("ABA").pattern("DAD")
 					.define('A', Tags.Items.LEATHER).define('B', Items.IRON_HELMET)
 					.define('D', Items.IRON_INGOT)
-					.save(pvd);
-
-			bag = BackpackItems.MULTI_SWITCH.get();
-			unlock(pvd, new CustomShapedBuilder<>(BackpackMisc.RSC_BAG_CRAFT, bag, 1)::unlockedBy, ender)
-					.pattern("2A1").pattern("A3A")
-					.define('1', BackpackItems.QUIVER.get())
-					.define('2', BackpackItems.SCABBARD.get())
-					.define('3', BackpackItems.ARMOR_SWAP.get())
-					.define('A', ender)
 					.save(pvd);
 
 			bag = BackpackItems.DRAWER.get();

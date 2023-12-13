@@ -1,11 +1,12 @@
-package dev.xkmc.l2backpack.content.quickswap.common;
+package dev.xkmc.l2backpack.content.quickswap.type;
 
 import dev.xkmc.l2backpack.compat.CuriosCompat;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -19,35 +20,40 @@ public class QuickSwapManager {
 		if (main != null) {
 			return main;
 		}
-		if (player.getOffhandItem().getItem() instanceof ProjectileWeaponItem)
-			return getValidType(player, player.getOffhandItem(), isAltDown);
+		for (var e : QuickSwapTypes.MATCHER) {
+			if (e.allowsOffhand() && e.match(player.getOffhandItem())) {
+				return e;
+			}
+		}
 		return null;
 	}
 
 	@Nullable
 	public static QuickSwapType getValidType(LivingEntity player, ItemStack focus, boolean isAltDown) {
 		if (isAltDown && Scabbard.isValidItem(focus)) {
-			return QuickSwapType.TOOL;
+			return QuickSwapTypes.TOOL;
 		}
-		if (focus.getItem() instanceof ProjectileWeaponItem) {
-			return QuickSwapType.ARROW;
+		for (var e : QuickSwapTypes.MATCHER) {
+			if (e.match(focus)) {
+				return e;
+			}
 		}
 		if (isAltDown && focus.isEmpty() || Scabbard.isValidItem(focus)) {
-			return QuickSwapType.TOOL;
+			return QuickSwapTypes.TOOL;
 		}
 		if (focus.isEmpty()) {
-			return QuickSwapType.ARMOR;
+			return QuickSwapTypes.ARMOR;
 		}
 		return null;
 	}
 
 	@Nullable
-	public static IQuickSwapToken getToken(LivingEntity user, boolean isAltDown) {
+	public static IQuickSwapToken<?> getToken(LivingEntity user, boolean isAltDown) {
 		return getToken(user, null, isAltDown);
 	}
 
 	@Nullable
-	public static IQuickSwapToken getToken(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
+	public static IQuickSwapToken<?> getToken(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
 		List<ItemStack> list = new ArrayList<>();
 		list.add(user.getOffhandItem());
 		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
@@ -58,7 +64,7 @@ public class QuickSwapManager {
 			return null;
 		for (ItemStack stack : list) {
 			if (stack.getItem() instanceof IQuickSwapItem item) {
-				IQuickSwapToken token = item.getTokenOfType(stack, user, type);
+				IQuickSwapToken<?> token = item.getTokenOfType(stack, user, type);
 				if (token != null) {
 					return token;
 				}

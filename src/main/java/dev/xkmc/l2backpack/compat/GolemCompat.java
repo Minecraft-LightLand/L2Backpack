@@ -4,8 +4,8 @@ import com.mojang.datafixers.util.Pair;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestInvWrapper;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.events.ArrowBagEvents;
@@ -93,7 +93,7 @@ public class GolemCompat {
 	public static void onArrowFind(ArrowBagEvents.ArrowFindEvent event) {
 		if (!(event.getEntity() instanceof AbstractGolemEntity<?, ?> golem)) return;
 		IQuickSwapToken token = QuickSwapManager.getToken(event.getEntity(), event.getStack(), false);
-		if (token != null && token.type() == QuickSwapType.ARROW) {
+		if (token != null && token.type() == QuickSwapTypes.ARROW) {
 			List<ItemStack> arrows = token.getList();
 			for (int i = 0; i < 9; i++) {
 				ItemStack stack = arrows.get(i);

@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.content.remote.player;
 
-import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
+import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.common.InvTooltip;
@@ -9,7 +9,7 @@ import dev.xkmc.l2backpack.content.common.TooltipInvItem;
 import dev.xkmc.l2backpack.content.insert.InsertOnlyItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LangData;
@@ -109,7 +109,7 @@ public class EnderBackpackItem extends Item implements
 
 	@Nullable
 	@Override
-	public IQuickSwapToken getTokenOfType(ItemStack stack, LivingEntity entity, QuickSwapType type) {
+	public IQuickSwapToken<?> getTokenOfType(ItemStack stack, LivingEntity entity, QuickSwapType type) {
 		return entity instanceof Player player ? EnderSyncCap.HOLDER.get(player).getToken(type) : null;
 	}
 }

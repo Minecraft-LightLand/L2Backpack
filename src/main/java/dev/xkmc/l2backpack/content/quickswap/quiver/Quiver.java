@@ -1,7 +1,12 @@
 package dev.xkmc.l2backpack.content.quickswap.quiver;
 
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
-import dev.xkmc.l2backpack.content.quickswap.common.*;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
@@ -53,8 +58,8 @@ public class Quiver extends SingleSwapItem implements ItemOnBackItem {
 
 	@Nullable
 	@Override
-	public IQuickSwapToken getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
-		if (type != QuickSwapType.ARROW)
+	public IQuickSwapToken<?> getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
+		if (type != QuickSwapTypes.ARROW)
 			return null;
 		if (!(player.getMainHandItem().getItem() instanceof ProjectileWeaponItem bow))
 			return null;
@@ -62,7 +67,7 @@ public class Quiver extends SingleSwapItem implements ItemOnBackItem {
 		if (list.isEmpty()) return null;
 		for (ItemStack arrow : list) {
 			if (!arrow.isEmpty() && bow.getAllSupportedProjectiles().test(arrow))
-				return new SingleSwapToken(this, stack, QuickSwapType.ARROW);
+				return new SingleSwapToken(this, stack, QuickSwapTypes.ARROW);
 		}
 		return null;
 	}

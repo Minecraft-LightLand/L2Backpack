@@ -1,15 +1,16 @@
 package dev.xkmc.l2backpack.content.quickswap.common;
 
+import dev.xkmc.l2backpack.content.quickswap.type.OverlayToken;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public interface IQuickSwapToken {
+public interface IQuickSwapToken<T extends OverlayToken<T>> {
 
 	void setSelected(int slot);
 
-	List<ItemStack> getList();
+	List<T> getList();
 
 	int getSelected();
 

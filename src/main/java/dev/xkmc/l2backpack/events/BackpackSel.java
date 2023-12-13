@@ -1,8 +1,8 @@
 package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;

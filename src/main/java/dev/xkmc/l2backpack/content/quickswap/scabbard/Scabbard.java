@@ -1,6 +1,11 @@
 package dev.xkmc.l2backpack.content.quickswap.scabbard;
 
-import dev.xkmc.l2backpack.content.quickswap.common.*;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
@@ -40,8 +45,8 @@ public class Scabbard extends SingleSwapItem implements ItemOnBackItem {
 
 	@Nullable
 	@Override
-	public IQuickSwapToken getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
-		if (type != QuickSwapType.TOOL)
+	public IQuickSwapToken<?> getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
+		if (type != QuickSwapTypes.TOOL)
 			return null;
 		return new SingleSwapToken(this, stack, type);
 	}

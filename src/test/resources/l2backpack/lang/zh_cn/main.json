@@ -6,7 +6,8 @@
 	"armor_bag": "护甲切换袋",
 	"ender_switch": "四合一切换袋",
 	"multi_switch": "三合一切换袋",
-	"tool_bag": "工具切换袋"
+	"tool_bag": "工具切换袋",
+	"armor_set": "套装切换袋"
   },
   "itemGroup.l2library.backpack": "莱特兰·背包",
   "key.l2backpack.open": "打开背部饰品栏的容器",

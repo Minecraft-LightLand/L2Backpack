@@ -110,7 +110,7 @@ public class LangData {
 		private MutableComponent get() {
 			Object[] arr = new Object[key.length];
 			for (int i = 0; i < key.length; i++) {
-				arr[i] = Component.literal(L2Keys.SWAP.map.getKey().getName()).withStyle(ChatFormatting.YELLOW);
+				arr[i] = L2Keys.SWAP.map.getKey().getDisplayName().copy().withStyle(ChatFormatting.YELLOW);
 			}
 			return Component.translatable(L2Backpack.MODID + "." + id, arr);
 		}

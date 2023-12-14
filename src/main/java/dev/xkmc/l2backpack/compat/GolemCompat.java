@@ -92,11 +92,11 @@ public class GolemCompat {
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void onArrowFind(ArrowBagEvents.ArrowFindEvent event) {
 		if (!(event.getEntity() instanceof AbstractGolemEntity<?, ?> golem)) return;
-		IQuickSwapToken token = QuickSwapManager.getToken(event.getEntity(), event.getStack(), false);
+		IQuickSwapToken<?> token = QuickSwapManager.getToken(event.getEntity(), event.getStack(), false);
 		if (token != null && token.type() == QuickSwapTypes.ARROW) {
-			List<ItemStack> arrows = token.getList();
+			var arrows = token.getList();
 			for (int i = 0; i < 9; i++) {
-				ItemStack stack = arrows.get(i);
+				ItemStack stack = arrows.get(i).getStack();
 				if (event.setProjectile(Pair.of(stack, token::shrink))) {
 					return;
 				}

@@ -42,12 +42,16 @@ public abstract class QuickSwapType {
 		return true;
 	}
 
+	public boolean isAvailable(Player player, ISwapEntry<?> token, int index) {
+		return isAvailable(player, token);
+	}
+
 	public void renderSelected(SelectionSideBar.Context ctx, Player player, ISwapEntry<?> token, int x, int y, boolean selected, boolean center) {
 		List<ItemStack> list = token.asList();
 		boolean shift = Minecraft.getInstance().options.keyShift.isDown();
-		boolean avail = this.isAvailable(player, token);
+		boolean avail = isAvailable(player, token);
 		for (int i = 0; i < list.size(); i++)
-			renderSelection(ctx.g(), x + i * 18, y, shift ? 127 : 64, avail, selected);
+			renderSelection(ctx.g(), x + i * 18, y, shift ? 127 : 64, avail, (!avail || isAvailable(player, token, i)) && selected);
 		if (selected && list.size() == 1) {
 			ItemStack stack = list.get(0);
 			if (!stack.isEmpty()) {

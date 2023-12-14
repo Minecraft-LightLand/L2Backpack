@@ -33,7 +33,7 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		if (stack.getItem() instanceof BaseBagItem) {
 			this.handler = (IItemHandlerModifiable) stack.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve().get();
 		} else {
-			handler = new InvWrapper(new SimpleContainer(row * 9));
+			handler = new InvWrapper(new SimpleContainer(row * 9));//TODO
 		}
 		this.addSlot("grid");
 		if (!player.level().isClientSide()) {

@@ -49,7 +49,7 @@ public class ArmorSetSwap extends SetSwapItem implements ItemOnBackItem {
 	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
 		var e = LivingEntity.getEquipmentSlotForItem(stack);
 		if (e.getType() != EquipmentSlot.Type.ARMOR) return false;
-		return slot / 9 + e.ordinal() == 4;
+		return slot / 9 + e.ordinal() == 5;
 	}
 
 	@Override

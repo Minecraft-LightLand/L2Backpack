@@ -7,6 +7,7 @@ import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
+import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.base.overlay.SideBar;
 import dev.xkmc.l2library.util.Proxy;
@@ -49,7 +50,7 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 
 	@Override
 	protected boolean isOnHold() {
-		return super.isOnHold() || Screen.hasAltDown();
+		return super.isOnHold() || Screen.hasAltDown() || L2Keys.SWAP.map.isDown();
 	}
 
 	@Override
@@ -110,15 +111,15 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 		super.renderContent(ctx);
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
-		var type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
+		var pair = getItems();
+		var hover = pair.getFirst().get(pair.getSecond());
+		var type = hover.token().type();
 		if (ease_time == max_ease && type instanceof ISideInfoRenderer rtype) {
 			int x = ctx.x0();
 			int y = 45 + ctx.y0();
 			if (onCenter()) {
 				x -= 18;
-			} else x += 18;
-			var pair = getItems();
-			var hover = pair.getFirst().get(pair.getSecond());
+			} else x += 18 * hover.asList().size();
 			rtype.renderSide(ctx, x, y, player, hover);
 		}
 	}

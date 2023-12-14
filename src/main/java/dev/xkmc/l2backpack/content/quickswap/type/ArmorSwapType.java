@@ -33,6 +33,10 @@ public class ArmorSwapType extends QuickSwapType
 				!(stack.getItem() instanceof BaseBagItem);
 	}
 
+	private EquipmentSlot getSlot(int i) {
+		return EquipmentSlot.values()[5 - i];
+	}
+
 	@Override
 	public void swapSingle(Player player, ISingleSwapHandler handler) {
 		ItemStack stack = handler.getStack();
@@ -46,7 +50,7 @@ public class ArmorSwapType extends QuickSwapType
 	@Override
 	public void swapSet(Player player, ISetSwapHandler handler) {
 		for (int i = 0; i < 4; i++) {
-			EquipmentSlot e = EquipmentSlot.values()[5 - i];
+			EquipmentSlot e = getSlot(i);
 			if (!maySwapOut(player.getItemBySlot(e)))
 				continue;
 			ItemStack stack = handler.getStack(i);
@@ -63,31 +67,47 @@ public class ArmorSwapType extends QuickSwapType
 			EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
 			return maySwapOut(player.getItemBySlot(slot));
 		}
-		if (token instanceof SetSwapEntry set) {
+		if (token instanceof SetSwapEntry) {
 			for (int i = 0; i < 4; i++) {
-				EquipmentSlot e = EquipmentSlot.values()[5 - i];
-				ItemStack old = player.getItemBySlot(e);
-				ItemStack cur = set.asList().get(i);
-				if (maySwapOut(old) && (!old.isEmpty() || !cur.isEmpty())) {
+				if (isAvailable(player, token, i))
 					return true;
-				}
 			}
 			return false;
 		}
 		return false;
 	}
 
+
+	public boolean isAvailable(Player player, ISwapEntry<?> token, int index) {
+		EquipmentSlot e = getSlot(index);
+		ItemStack old = player.getItemBySlot(e);
+		ItemStack cur = token.asList().get(index);
+		return maySwapOut(old) && (!old.isEmpty() || !cur.isEmpty());
+	}
+
 	public void renderSide(SelectionSideBar.Context ctx, int x, int y, Player player, ISwapEntry<?> token) {
-		if (!(token instanceof SingleSwapEntry single)) return;
-		ItemStack hover = single.stack();//TODO
-		EquipmentSlot target = LivingEntity.getEquipmentSlotForItem(hover);
-		for (int i = 0; i < 4; i++) {
-			EquipmentSlot slot = EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 3 - i);
-			ItemStack stack = player.getItemBySlot(slot);
-			ItemStack targetStack = player.getItemBySlot(target);
-			renderArmorSlot(ctx.g(), x, y, 64, target == slot, !maySwapOut(targetStack));
-			ctx.renderItem(stack, x, y);
-			y += 18;
+		if (token instanceof SingleSwapEntry single) {
+			ItemStack hover = single.stack();
+			EquipmentSlot target = LivingEntity.getEquipmentSlotForItem(hover);
+			for (int i = 0; i < 4; i++) {
+				EquipmentSlot slot = getSlot(i);
+				ItemStack stack = player.getItemBySlot(slot);
+				ItemStack targetStack = player.getItemBySlot(target);
+				renderArmorSlot(ctx.g(), x, y, 64, target == slot, !maySwapOut(targetStack));
+				ctx.renderItem(stack, x, y);
+				y += 18;
+			}
+		}
+		if (token instanceof SetSwapEntry set) {
+			for (int i = 0; i < 4; i++) {
+				EquipmentSlot e = getSlot(i);
+				ItemStack old = player.getItemBySlot(e);
+				ItemStack cur = set.asList().get(i);
+				boolean avail = maySwapOut(old) && (!old.isEmpty() || !cur.isEmpty());
+				renderArmorSlot(ctx.g(), x, y, 64, !old.isEmpty() || !cur.isEmpty(), !avail);
+				ctx.renderItem(old, x, y);
+				y += 18;
+			}
 		}
 	}
 

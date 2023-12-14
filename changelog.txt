@@ -1,11 +1,9 @@
 - add wand page TODO
-- keybind name TODO
-
-Arrow - Arrow Type - Single item
 
 2.4.17
 - improve quick swap
 - deprecate combined swap
+- add suit swap
 
 2.4.16
 - add pickup destroy mode

@@ -2,9 +2,9 @@ package dev.xkmc.l2backpack.content.quickswap.common;
 
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2backpack.content.quickswap.entry.ISwapEntry;
+import dev.xkmc.l2backpack.content.quickswap.type.ISideInfoRenderer;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
-import dev.xkmc.l2backpack.content.quickswap.type.ISideInfoRenderer;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;

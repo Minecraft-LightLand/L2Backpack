@@ -1,6 +1,5 @@
 package dev.xkmc.l2backpack.content.quickswap.armorswap;
 
-import dev.xkmc.l2backpack.content.common.BagSlot;
 import dev.xkmc.l2backpack.content.common.BaseBagMenu;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenus;

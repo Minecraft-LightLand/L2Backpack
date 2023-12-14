@@ -51,8 +51,8 @@ public abstract class QuickSwapType {
 		if (selected && list.size() == 1) {
 			ItemStack stack = list.get(0);
 			if (!stack.isEmpty()) {
-			ctx.g().renderTooltip(ctx.font(), stack.getHoverName(), 0, 0);
-			TextBox box = new TextBox(ctx.g(), center ? 0 : 2, 1, ctx.x0() + (center ? 22 : -6), y + 8, -1);
+				ctx.g().renderTooltip(ctx.font(), stack.getHoverName(), 0, 0);
+				TextBox box = new TextBox(ctx.g(), center ? 0 : 2, 1, ctx.x0() + (center ? 22 : -6), y + 8, -1);
 				box.renderLongText(ctx.font(), List.of(stack.getHoverName()));
 			}
 		}

@@ -118,6 +118,13 @@ public class RecipeGen {
 					.define('D', Items.IRON_INGOT)
 					.save(pvd);
 
+			bag = BackpackItems.SUIT_SWAP.get();
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, Items.LEATHER)
+					.pattern("EAE").pattern("ABA").pattern("DAD")
+					.define('A', Tags.Items.LEATHER).define('B', Items.IRON_CHESTPLATE)
+					.define('D', Items.GOLD_INGOT).define('E', ender)
+					.save(pvd);
+
 			bag = BackpackItems.DRAWER.get();
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, ender)
 					.pattern("CAC").pattern("ABA").pattern("DAD")

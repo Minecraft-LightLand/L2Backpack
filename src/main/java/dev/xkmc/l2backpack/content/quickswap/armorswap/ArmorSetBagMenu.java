@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.armorswap;
 
+import dev.xkmc.l2backpack.content.common.BagSlot;
 import dev.xkmc.l2backpack.content.common.BaseBagMenu;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.BackpackMenus;
@@ -25,6 +26,11 @@ public class ArmorSetBagMenu extends BaseBagMenu<ArmorSetBagMenu> {
 
 	public ArmorSetBagMenu(int windowId, Inventory inventory, PlayerSlot<?> hand, UUID uuid, @Nullable Component title) {
 		super(BackpackMenus.MT_ARMOR_SET.get(), windowId, inventory, MANAGERS, hand, uuid, 4);
+	}
+
+	@Override
+	protected void addSlot(String name) {
+		this.sprite.get().getSlot(name, (x, y) -> new ArmorSetBagSlot(handler, this.added++, x, y), this::addSlot);
 	}
 
 }

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:leather"
+    },
+    "B": {
+      "item": "minecraft:iron_chestplate"
+    },
+    "D": {
+      "item": "minecraft:gold_ingot"
+    },
+    "E": {
+      "item": "l2backpack:ender_pocket"
+    }
+  },
+  "pattern": [
+    "EAE",
+    "ABA",
+    "DAD"
+  ],
+  "result": {
+    "item": "l2backpack:suit_swap"
+  },
+  "show_notification": true
+}

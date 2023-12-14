@@ -11,10 +11,12 @@ import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -32,7 +34,7 @@ public class ArmorSetSwap extends SetSwapItem implements ItemOnBackItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		LangData.addInfo(list, LangData.Info.ARMORBAG_INFO, LangData.Info.INHERIT);//TODO
+		LangData.addInfo(list, LangData.Info.SUIT_BAG_INFO, LangData.Info.INHERIT);
 	}
 
 	@Nullable
@@ -41,6 +43,13 @@ public class ArmorSetSwap extends SetSwapItem implements ItemOnBackItem {
 		if (type != QuickSwapTypes.ARMOR)
 			return null;
 		return new SetSwapToken(this, stack, type);
+	}
+
+	@Override
+	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+		var e = LivingEntity.getEquipmentSlotForItem(stack);
+		if (e.getType() != EquipmentSlot.Type.ARMOR) return false;
+		return slot / 9 + e.ordinal() == 4;
 	}
 
 	@Override

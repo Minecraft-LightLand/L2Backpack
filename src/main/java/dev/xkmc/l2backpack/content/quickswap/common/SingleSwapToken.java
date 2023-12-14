@@ -2,7 +2,8 @@ package dev.xkmc.l2backpack.content.quickswap.common;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.entry.SingleSwapEntry;
-import dev.xkmc.l2backpack.content.quickswap.type.ISwapAction;
+import dev.xkmc.l2backpack.content.quickswap.entry.SingleSwapHandler;
+import dev.xkmc.l2backpack.content.quickswap.type.ISingleSwapAction;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -36,11 +37,10 @@ public record SingleSwapToken(IQuickSwapItem item, ItemStack stack, QuickSwapTyp
 
 	@Override
 	public void swap(Player player) {
-		if (!(type instanceof ISwapAction action)) return;
+		if (!(type instanceof ISingleSwapAction action)) return;
 		List<ItemStack> list = getRawList();
 		int i = getSelected();
-		ItemStack a = list.get(i);
-		action.swap(player, a, r -> list.set(i, r));
+		action.swapSingle(player, new SingleSwapHandler(list, i));
 		BaseBagItem.setItems(stack, list);
 	}
 

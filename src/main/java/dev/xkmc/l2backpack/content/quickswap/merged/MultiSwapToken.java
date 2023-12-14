@@ -3,9 +3,10 @@ package dev.xkmc.l2backpack.content.quickswap.merged;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.type.ISwapAction;
-import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.entry.SingleSwapEntry;
+import dev.xkmc.l2backpack.content.quickswap.entry.SingleSwapHandler;
+import dev.xkmc.l2backpack.content.quickswap.type.ISingleSwapAction;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -36,12 +37,11 @@ public record MultiSwapToken(IQuickSwapItem item, ItemStack stack, QuickSwapType
 
 	@Override
 	public void swap(Player player) {
-		if (!(type instanceof ISwapAction action)) return;
+		if (!(type instanceof ISingleSwapAction action)) return;
 		List<ItemStack> list = BaseBagItem.getItems(stack);
 		List<ItemStack> sublist = list.subList(type.getIndex() * 9, type.getIndex() * 9 + 9);
 		int i = getSelected();
-		ItemStack a = sublist.get(i);
-		action.swap(player, a, r -> sublist.set(i, r));
+		action.swapSingle(player, new SingleSwapHandler(sublist, i));
 		BaseBagItem.setItems(stack, list);
 	}
 

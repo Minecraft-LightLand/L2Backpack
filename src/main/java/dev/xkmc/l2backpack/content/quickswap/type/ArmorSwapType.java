@@ -1,8 +1,7 @@
 package dev.xkmc.l2backpack.content.quickswap.type;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
-import dev.xkmc.l2backpack.content.quickswap.entry.ISwapEntry;
-import dev.xkmc.l2backpack.content.quickswap.entry.SingleSwapEntry;
+import dev.xkmc.l2backpack.content.quickswap.entry.*;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.OverlayUtil;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
@@ -12,9 +11,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.function.Consumer;
-
-public class ArmorSwapType extends QuickSwapType implements ISideInfoRenderer, ISwapAction {
+public class ArmorSwapType extends QuickSwapType
+		implements ISideInfoRenderer, ISingleSwapAction, ISetSwapAction {
 
 	public ArmorSwapType(String name, int index) {
 		super(name, index);
@@ -30,27 +28,53 @@ public class ArmorSwapType extends QuickSwapType implements ISideInfoRenderer, I
 		return ItemStack.EMPTY;
 	}
 
-	private boolean test(ItemStack stack) {
+	private boolean maySwapOut(ItemStack stack) {
 		return stack.getItem().canFitInsideContainerItems() &&
 				!(stack.getItem() instanceof BaseBagItem);
 	}
 
 	@Override
-	public void swap(Player player, ItemStack stack, Consumer<ItemStack> cons) {
-		if (stack.isEmpty()) return;//TODO
+	public void swapSingle(Player player, ISingleSwapHandler handler) {
+		ItemStack stack = handler.getStack();
+		if (stack.isEmpty()) return;
 		EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
-		if (!test(player.getItemBySlot(slot))) return;
-		cons.accept(player.getItemBySlot(slot));
+		if (!maySwapOut(player.getItemBySlot(slot))) return;
+		handler.replace(player.getItemBySlot(slot));
 		player.setItemSlot(slot, stack);
 	}
 
 	@Override
+	public void swapSet(Player player, ISetSwapHandler handler) {
+		for (int i = 0; i < 4; i++) {
+			EquipmentSlot e = EquipmentSlot.values()[5 - i];
+			if (!maySwapOut(player.getItemBySlot(e)))
+				continue;
+			ItemStack stack = handler.getStack(i);
+			handler.replace(i, player.getItemBySlot(e));
+			player.setItemSlot(e, stack);
+		}
+	}
+
+	@Override
 	public boolean isAvailable(Player player, ISwapEntry<?> token) {
-		if (!(token instanceof SingleSwapEntry single)) return false;
-		ItemStack stack = single.stack();//TODO
-		if (stack.isEmpty()) return false;
-		EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
-		return test(player.getItemBySlot(slot));
+		if (token instanceof SingleSwapEntry single) {
+			ItemStack stack = single.stack();
+			if (stack.isEmpty()) return false;
+			EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
+			return maySwapOut(player.getItemBySlot(slot));
+		}
+		if (token instanceof SetSwapEntry set) {
+			for (int i = 0; i < 4; i++) {
+				EquipmentSlot e = EquipmentSlot.values()[5 - i];
+				ItemStack old = player.getItemBySlot(e);
+				ItemStack cur = set.asList().get(i);
+				if (maySwapOut(old) && (!old.isEmpty() || !cur.isEmpty())) {
+					return true;
+				}
+			}
+			return false;
+		}
+		return false;
 	}
 
 	public void renderSide(SelectionSideBar.Context ctx, int x, int y, Player player, ISwapEntry<?> token) {
@@ -61,7 +85,7 @@ public class ArmorSwapType extends QuickSwapType implements ISideInfoRenderer, I
 			EquipmentSlot slot = EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 3 - i);
 			ItemStack stack = player.getItemBySlot(slot);
 			ItemStack targetStack = player.getItemBySlot(target);
-			renderArmorSlot(ctx.g(), x, y, 64, target == slot, !test(targetStack));
+			renderArmorSlot(ctx.g(), x, y, 64, target == slot, !maySwapOut(targetStack));
 			ctx.renderItem(stack, x, y);
 			y += 18;
 		}

@@ -9,6 +9,7 @@ import dev.xkmc.l2backpack.content.backpack.BackpackItem;
 import dev.xkmc.l2backpack.content.bag.BookBag;
 import dev.xkmc.l2backpack.content.bag.EquipmentBag;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
+import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSetSwap;
 import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSwap;
 import dev.xkmc.l2backpack.content.quickswap.merged.EnderSwitch;
 import dev.xkmc.l2backpack.content.quickswap.merged.MultiSwitch;
@@ -57,6 +58,7 @@ public class BackpackItems {
 	public static final ItemEntry<Quiver> QUIVER;
 	public static final ItemEntry<Scabbard> SCABBARD;
 	public static final ItemEntry<ArmorSwap> ARMOR_SWAP;
+	public static final ItemEntry<ArmorSetSwap> SUIT_SWAP;
 	public static final ItemEntry<MultiSwitch> MULTI_SWITCH;
 	public static final ItemEntry<EnderSwitch> ENDER_SWITCH;
 
@@ -106,6 +108,7 @@ public class BackpackItems {
 					.tag(curios_tag, TagGen.SWAPS).lang("Quiver").register();
 			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
 			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
+			SUIT_SWAP = REGISTRATE.item("suit_swap", ArmorSetSwap::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
 
 			MULTI_SWITCH = REGISTRATE.item("combined_swap", MultiSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS)
 					.removeTab(TAB.getKey()).defaultLang().register();

@@ -1,10 +1,10 @@
 package dev.xkmc.l2backpack.content.quickswap.common;
 
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2backpack.content.quickswap.type.OverlayToken;
+import dev.xkmc.l2backpack.content.quickswap.entry.ISwapEntry;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
-import dev.xkmc.l2backpack.content.quickswap.type.SideInfoRenderer;
+import dev.xkmc.l2backpack.content.quickswap.type.ISideInfoRenderer;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class QuickSwapOverlay extends SelectionSideBar<OverlayToken<?>, QuickSwapOverlay.BackpackSignature> {
+public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapOverlay.BackpackSignature> {
 
 	public record BackpackSignature(int backpackSelect, boolean ignoreOther, @Nullable QuickSwapType type,
 									int playerSelect, ItemStack stack)
@@ -53,12 +53,12 @@ public class QuickSwapOverlay extends SelectionSideBar<OverlayToken<?>, QuickSwa
 	}
 
 	@Override
-	public Pair<List<OverlayToken<?>>, Integer> getItems() {
+	public Pair<List<ISwapEntry<?>>, Integer> getItems() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
 		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, Screen.hasAltDown());
 		assert token != null;
-		List<? extends OverlayToken<?>> list = token.getList();
+		List<? extends ISwapEntry<?>> list = token.getList();
 		int selected = token.getSelected();
 		return Pair.of(Wrappers.cast(list), selected);
 	}
@@ -85,7 +85,7 @@ public class QuickSwapOverlay extends SelectionSideBar<OverlayToken<?>, QuickSwa
 	}
 
 	@Override
-	public boolean isAvailable(OverlayToken<?> token) {
+	public boolean isAvailable(ISwapEntry<?> token) {
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
 		QuickSwapType type = token.token().type();
@@ -97,7 +97,7 @@ public class QuickSwapOverlay extends SelectionSideBar<OverlayToken<?>, QuickSwa
 		return BackpackConfig.CLIENT.previewOnCenter.get();
 	}
 
-	protected void renderEntry(SelectionSideBar.Context ctx, OverlayToken<?> token, int i, int selected) {
+	protected void renderEntry(SelectionSideBar.Context ctx, ISwapEntry<?> token, int i, int selected) {
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
 		QuickSwapType type = token.token().type();
@@ -111,7 +111,7 @@ public class QuickSwapOverlay extends SelectionSideBar<OverlayToken<?>, QuickSwa
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
 		var type = QuickSwapManager.getValidType(player, Screen.hasAltDown());
-		if (ease_time == max_ease && type instanceof SideInfoRenderer rtype) {
+		if (ease_time == max_ease && type instanceof ISideInfoRenderer rtype) {
 			int x = ctx.x0();
 			int y = 45 + ctx.y0();
 			if (onCenter()) {

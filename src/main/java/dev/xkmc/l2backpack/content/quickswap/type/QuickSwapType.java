@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.type;
 
+import dev.xkmc.l2backpack.content.quickswap.entry.ISwapEntry;
 import dev.xkmc.l2library.base.overlay.OverlayUtil;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.base.overlay.TextBox;
@@ -9,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public abstract class QuickSwapType {
 
@@ -38,18 +38,11 @@ public abstract class QuickSwapType {
 
 	public abstract ItemStack getSignatureItem(Player player);
 
-	public boolean isAvailable(Player player, OverlayToken<?> token) {
+	public boolean isAvailable(Player player, ISwapEntry<?> token) {
 		return true;
 	}
 
-	public void swap(Player player, ItemStack stack, Consumer<ItemStack> cons) {
-	}
-
-	public boolean canSwap() {
-		return false;
-	}
-
-	public void renderSelected(SelectionSideBar.Context ctx, Player player, OverlayToken<?> token, int x, int y, boolean selected, boolean center) {
+	public void renderSelected(SelectionSideBar.Context ctx, Player player, ISwapEntry<?> token, int x, int y, boolean selected, boolean center) {
 		List<ItemStack> list = token.asList();
 		boolean shift = Minecraft.getInstance().options.keyShift.isDown();
 		boolean avail = this.isAvailable(player, token);

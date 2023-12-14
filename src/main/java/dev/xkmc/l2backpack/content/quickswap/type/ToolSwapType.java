@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Consumer;
 
-public class ToolSwapType extends QuickSwapType {
+public class ToolSwapType extends QuickSwapType implements ISwapAction {
 
 	public ToolSwapType(String name, int index) {
 		super(name, index);
@@ -21,11 +21,6 @@ public class ToolSwapType extends QuickSwapType {
 	@Override
 	public ItemStack getSignatureItem(Player player) {
 		return player.getMainHandItem();
-	}
-
-	@Override
-	public boolean canSwap() {
-		return true;
 	}
 
 	@Override

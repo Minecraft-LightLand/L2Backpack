@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.type;
 
+import dev.xkmc.l2backpack.content.quickswap.entry.ISwapEntry;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +23,7 @@ public class ArrowSwapType extends MatcherSwapType {
 	}
 
 	@Override
-	public boolean isAvailable(Player player, OverlayToken<?> token) {
+	public boolean isAvailable(Player player, ISwapEntry<?> token) {
 		ItemStack stack = token.getStack();
 		ItemStack bowStack = getSignatureItem(player);
 		if (bowStack.getItem() instanceof ProjectileWeaponItem bow) {

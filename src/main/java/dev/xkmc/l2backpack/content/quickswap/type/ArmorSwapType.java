@@ -1,6 +1,8 @@
 package dev.xkmc.l2backpack.content.quickswap.type;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.quickswap.entry.ISwapEntry;
+import dev.xkmc.l2backpack.content.quickswap.entry.SingleSwapEntry;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2library.base.overlay.OverlayUtil;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
@@ -12,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Consumer;
 
-public class ArmorSwapType extends QuickSwapType implements SideInfoRenderer {
+public class ArmorSwapType extends QuickSwapType implements ISideInfoRenderer, ISwapAction {
 
 	public ArmorSwapType(String name, int index) {
 		super(name, index);
@@ -28,11 +30,6 @@ public class ArmorSwapType extends QuickSwapType implements SideInfoRenderer {
 		return ItemStack.EMPTY;
 	}
 
-	@Override
-	public boolean canSwap() {
-		return true;
-	}
-
 	private boolean test(ItemStack stack) {
 		return stack.getItem().canFitInsideContainerItems() &&
 				!(stack.getItem() instanceof BaseBagItem);
@@ -40,7 +37,7 @@ public class ArmorSwapType extends QuickSwapType implements SideInfoRenderer {
 
 	@Override
 	public void swap(Player player, ItemStack stack, Consumer<ItemStack> cons) {
-		if (stack.isEmpty()) return;
+		if (stack.isEmpty()) return;//TODO
 		EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
 		if (!test(player.getItemBySlot(slot))) return;
 		cons.accept(player.getItemBySlot(slot));
@@ -48,16 +45,16 @@ public class ArmorSwapType extends QuickSwapType implements SideInfoRenderer {
 	}
 
 	@Override
-	public boolean isAvailable(Player player, OverlayToken<?> token) {
-		if (!(token instanceof SingleOverlayToken single)) return false;
+	public boolean isAvailable(Player player, ISwapEntry<?> token) {
+		if (!(token instanceof SingleSwapEntry single)) return false;
 		ItemStack stack = single.stack();//TODO
 		if (stack.isEmpty()) return false;
 		EquipmentSlot slot = LivingEntity.getEquipmentSlotForItem(stack);
 		return test(player.getItemBySlot(slot));
 	}
 
-	public void renderSide(SelectionSideBar.Context ctx, int x, int y, Player player, OverlayToken<?> token) {
-		if (!(token instanceof SingleOverlayToken single)) return;
+	public void renderSide(SelectionSideBar.Context ctx, int x, int y, Player player, ISwapEntry<?> token) {
+		if (!(token instanceof SingleSwapEntry single)) return;
 		ItemStack hover = single.stack();//TODO
 		EquipmentSlot target = LivingEntity.getEquipmentSlotForItem(hover);
 		for (int i = 0; i < 4; i++) {

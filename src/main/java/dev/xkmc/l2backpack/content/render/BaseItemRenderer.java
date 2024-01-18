@@ -135,8 +135,8 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 
 	public static void renderDrawer(ItemStack stack, ItemDisplayContext type, PoseStack poseStack,
 									MultiBufferSource bufferSource, int light, int overlay) {
-		poseStack.popPose();
-		poseStack.pushPose();
+		poseStack.popPose(); // transform hack
+		poseStack.pushPose(); // transform hack
 
 		poseStack.pushPose();
 		BlockState state = BackpackBlocks.ENDER_DRAWER.getDefaultState();

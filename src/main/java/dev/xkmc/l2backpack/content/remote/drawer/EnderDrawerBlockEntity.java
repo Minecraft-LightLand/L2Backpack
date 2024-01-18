@@ -3,11 +3,13 @@ package dev.xkmc.l2backpack.content.remote.drawer;
 import dev.xkmc.l2backpack.content.drawer.IDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.common.DrawerAccess;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -24,16 +26,16 @@ import java.util.UUID;
 public class EnderDrawerBlockEntity extends IDrawerBlockEntity {
 
 	@SerialClass.SerialField(toClient = true)
-	public UUID owner_id;
+	public UUID owner_id = Util.NIL_UUID;
 
 	@SerialClass.SerialField(toClient = true)
-	public String owner_name;
+	public String owner_name = "";
 
 	@SerialClass.SerialField(toClient = true)
-	public Item item;
+	public Item item = Items.AIR;
 
 	@SerialClass.SerialField(toClient = true)
-	public CompoundTag config;
+	public CompoundTag config = new CompoundTag();
 
 	private LazyOptional<IItemHandler> handler;
 

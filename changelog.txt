@@ -1,5 +1,8 @@
 - add wand page TODO
 
+2.4.18
+- Fix client drawer crash in multiplayer
+
 2.4.17
 - improve quick swap
 - deprecate combined swap

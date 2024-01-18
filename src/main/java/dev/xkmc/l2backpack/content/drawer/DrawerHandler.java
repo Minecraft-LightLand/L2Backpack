@@ -11,13 +11,13 @@ import org.jetbrains.annotations.NotNull;
 public class DrawerHandler implements IDrawerHandler {
 
 	@SerialClass.SerialField(toClient = true)
-	public Item item;
+	public Item item = Items.AIR;
 
 	@SerialClass.SerialField(toClient = true)
-	public int count;
+	public int count = 0;
 
 	@SerialClass.SerialField(toClient = true)
-	public CompoundTag config;
+	public CompoundTag config = new CompoundTag();
 
 	private final DrawerBlockEntity parent;
 

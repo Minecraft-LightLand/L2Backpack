@@ -81,7 +81,7 @@ public class L2Backpack {
 		FMLJavaModLoadingContext ctx = FMLJavaModLoadingContext.get();
 		IEventBus bus = ctx.getModEventBus();
 		registerRegistrates(bus);
-		SelectionRegistry.register(-1000, BackpackSel.INSTANCE);
+		SelectionRegistry.register(1000, BackpackSel.INSTANCE);
 	}
 
 	@SubscribeEvent

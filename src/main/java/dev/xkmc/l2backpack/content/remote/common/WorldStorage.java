@@ -1,18 +1,17 @@
 package dev.xkmc.l2backpack.content.remote.common;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -20,28 +19,39 @@ import java.util.Optional;
 import java.util.UUID;
 
 @SerialClass
-public class WorldStorage {
+public class WorldStorage extends SavedData {
 
-	public static Capability<WorldStorage> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
-	});
+	public static final String ID = "l2backpack:dimensional";
 
 	public static WorldStorage get(ServerLevel level) {
-		return level.getServer().overworld().getCapability(CAPABILITY).resolve().get();
+		return level.getDataStorage().computeIfAbsent(WorldStorage::new, WorldStorage::new, ID);
 	}
-
-
-	public final ServerLevel level;
 
 	@SerialClass.SerialField
 	private final HashMap<String, CompoundTag> storage = new HashMap<>();
 
 	private final HashMap<UUID, StorageContainer[]> cache = new HashMap<>();
 
-	public WorldStorage(ServerLevel level) {
-		this.level = level;
+	private WorldStorage() {
+
 	}
 
-	public Optional<StorageContainer> getOrCreateStorage(UUID id, int color, long password,
+	private WorldStorage(CompoundTag data) {
+		TagCodec.fromTag(data, WorldStorage.class, this, e -> true);
+	}
+
+	@Override
+	public boolean isDirty() {
+		return true;
+	}
+
+	@Override
+	public CompoundTag save(CompoundTag tag) {
+		TagCodec.toTag(tag, this);
+		return tag;
+	}
+
+	public Optional<StorageContainer> getOrCreateStorage(ServerLevel level, UUID id, int color, long password,
 														 @Nullable ServerPlayer player,
 														 @Nullable ResourceLocation loot,
 														 long seed) {
@@ -58,8 +68,8 @@ public class WorldStorage {
 			return Optional.empty();
 		StorageContainer storage = new StorageContainer(id, color, col);
 		if (loot != null) {
-			LootTable loottable = this.level.getServer().getLootData().getLootTable(loot);
-			LootParams.Builder builder = new LootParams.Builder(this.level);
+			LootTable loottable = level.getServer().getLootData().getLootTable(loot);
+			LootParams.Builder builder = new LootParams.Builder(level);
 			if (player != null) {
 				builder.withLuck(player.getLuck()).withParameter(LootContextParams.THIS_ENTITY, player);
 			}

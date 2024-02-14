@@ -2,7 +2,6 @@ package dev.xkmc.l2backpack.content.backpack;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
-import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -23,11 +22,11 @@ public final class BackpackMenuPvd implements MenuProvider {
 	private final ItemStack stack;
 	private final BaseBagItem bag;
 
-	public BackpackMenuPvd(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
+	public BackpackMenuPvd(ServerPlayer player, PlayerSlot<?> slot, BaseBagItem item, ItemStack stack) {
 		this.player = player;
 		this.slot = slot;
 		this.stack = stack;
-		bag = Wrappers.cast(stack.getItem());
+		bag = item;
 	}
 
 	@Override
@@ -52,10 +51,7 @@ public final class BackpackMenuPvd implements MenuProvider {
 
 	public void open() {
 		CompoundTag tag = stack.getOrCreateTag();
-		if (!tag.getBoolean("init")) {
-			tag.putBoolean("init", true);
-			tag.putUUID("container_id", UUID.randomUUID());
-		}
+		bag.checkInit(stack);
 		NetworkHooks.openScreen(player, this, this::writeBuffer);
 	}
 

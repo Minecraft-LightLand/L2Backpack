@@ -29,7 +29,7 @@ public class ArmorSetSwap extends SetSwapItem implements ItemOnBackItem {
 
 	@Override
 	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
-		new SimpleMenuPvd(player, slot, stack, ArmorSetBagMenu::new).open();
+		new SimpleMenuPvd(player, slot,this,  stack, ArmorSetBagMenu::new).open();
 	}
 
 	@Override

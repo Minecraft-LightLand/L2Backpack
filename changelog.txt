@@ -1,5 +1,9 @@
 - add wand page TODO
 
+2.4.19
+- Fix bug that when player put item into a new backpack inside dimensional backpack
+    and close the game directly, the items will not be stored
+
 2.4.18
 - Fix client drawer crash in multiplayer
 

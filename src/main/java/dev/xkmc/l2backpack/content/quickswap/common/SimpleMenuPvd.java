@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.common;
 
+import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -25,12 +26,14 @@ public final class SimpleMenuPvd implements MenuProvider {
 	private final ServerPlayer player;
 	private final PlayerSlot<?> slot;
 	private final ItemStack stack;
+	private final BaseBagItem bag;
 	private final BagMenuFactory factory;
 
-	public SimpleMenuPvd(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack, BagMenuFactory factory) {
+	public SimpleMenuPvd(ServerPlayer player, PlayerSlot<?> slot, BaseBagItem item, ItemStack stack, BagMenuFactory factory) {
 		this.player = player;
 		this.slot = slot;
 		this.stack = stack;
+		this.bag = item;
 		this.factory = factory;
 	}
 
@@ -54,11 +57,7 @@ public final class SimpleMenuPvd implements MenuProvider {
 	}
 
 	public void open() {
-		CompoundTag tag = stack.getOrCreateTag();
-		if (!tag.getBoolean("init")) {
-			tag.putBoolean("init", true);
-			tag.putUUID("container_id", UUID.randomUUID());
-		}
+		bag.checkInit(stack);
 		NetworkHooks.openScreen(player, this, this::writeBuffer);
 	}
 

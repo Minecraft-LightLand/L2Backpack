@@ -3,8 +3,13 @@ package dev.xkmc.l2backpack.content.common;
 import dev.xkmc.l2backpack.content.capability.MergedInvBackpackCap;
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
+import dev.xkmc.l2backpack.content.restore.DimensionSourceData;
+import dev.xkmc.l2screentracker.screen.source.ItemSourceData;
+import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -162,6 +167,7 @@ public class BaseBagInvWrapper extends MergedInvBackpackCap implements ICapabili
 		BaseBagItem.setItems(stack, itemStacks);
 		cachedTag = BaseBagItem.getListTag(stack);
 		itemStacksCache = null;
+		saveCallback();
 	}
 
 	@Override
@@ -184,6 +190,36 @@ public class BaseBagInvWrapper extends MergedInvBackpackCap implements ICapabili
 	@Override
 	public int getSignature() {
 		return stack.hashCode();
+	}
+
+	private CallbackData callbackData = null;
+
+	public void attachEnv(ServerPlayer player, PlayerSlot<?> hand) {
+		if (hand.data() instanceof DimensionSourceData data) {
+			callbackData = new CallbackData(this, player, data);
+		}
+	}
+
+	private void saveCallback() {
+		if (callbackData == null) return;
+		callbackData.setChanged();
+	}
+
+	private record CallbackData(BaseBagInvWrapper parent, ServerPlayer player, DimensionSourceData data) {
+
+		private void setChanged() {
+			var opt = WorldStorage.get(player.serverLevel())
+					.getStorageWithoutPassword(data.uuid(), data.color());
+			if (opt.isEmpty()) return;
+			var cont = opt.get();
+			var slot = cont.container.getItem(data.slot());
+			if (parent.stack != slot) {
+				parent.callbackData = null;
+				return;
+			}
+			cont.container.setChanged();
+		}
+
 	}
 
 }

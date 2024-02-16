@@ -37,6 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, PickupBagItem, InsertOnlyItem, TooltipInvItem {
 
@@ -211,6 +212,22 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, 
 	@Override
 	public List<ItemStack> getInvItems(ItemStack stack, Player player) {
 		return BaseBagItem.getItems(stack);
+	}
+
+	public void checkInit(ItemStack stack) {
+		CompoundTag tag = stack.getOrCreateTag();
+		if (!tag.getBoolean("init")) {
+			tag.putBoolean("init", true);
+			tag.putUUID("container_id", UUID.randomUUID());
+			if (!tag.contains("Items")) {
+				var list = getItems(stack);
+				int size = getRows(stack) * 9;
+				while (list.size() < size) {
+					list.add(ItemStack.EMPTY);
+				}
+				setItems(stack, list);
+			}
+		}
 	}
 
 }

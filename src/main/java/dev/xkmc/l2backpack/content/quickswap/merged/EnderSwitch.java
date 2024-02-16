@@ -26,7 +26,7 @@ public class EnderSwitch extends MultiSwitch implements BackpackModelItem {
 
 	@Override
 	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
-		new SimpleMenuPvd(player, slot, stack, (a, b, c, d, e) -> new EnderSwitchMenu(a, b, player.getEnderChestInventory(), c, d, e)).open();
+		new SimpleMenuPvd(player, slot, this, stack, (a, b, c, d, e) -> new EnderSwitchMenu(a, b, player.getEnderChestInventory(), c, d, e)).open();
 	}
 
 	@Override

@@ -45,7 +45,7 @@ public class Quiver extends SingleSwapItem implements ItemOnBackItem {
 
 	@Override
 	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
-		new SimpleMenuPvd(player, slot, stack, QuiverMenu::new).open();
+		new SimpleMenuPvd(player, slot,this,  stack, QuiverMenu::new).open();
 	}
 
 	@Override

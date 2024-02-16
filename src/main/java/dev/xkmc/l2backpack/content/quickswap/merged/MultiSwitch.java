@@ -55,7 +55,7 @@ public class MultiSwitch extends BaseBagItem implements IQuickSwapItem, ItemOnBa
 
 	@Override
 	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
-		new SimpleMenuPvd(player, slot, stack, MultiSwitchMenu::new).open();
+		new SimpleMenuPvd(player, slot, this, stack, MultiSwitchMenu::new).open();
 	}
 
 	@Override

@@ -82,7 +82,7 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 
 	@Override
 	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
-		new BackpackMenuPvd(player, slot, stack).open();
+		new BackpackMenuPvd(player, slot, this, stack).open();
 	}
 
 	@Override

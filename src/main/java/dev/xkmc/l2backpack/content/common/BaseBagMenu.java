@@ -5,6 +5,7 @@ import dev.xkmc.l2library.base.menu.base.SpriteManager;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -31,7 +32,11 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		this.player = inventory.player;
 		ItemStack stack = getStack();
 		if (stack.getItem() instanceof BaseBagItem) {
-			this.handler = (IItemHandlerModifiable) stack.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve().get();
+			var inv = stack.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve().get();
+			if (player instanceof ServerPlayer sp && inv instanceof BaseBagInvWrapper bag) {
+				bag.attachEnv(sp, hand);
+			}
+			this.handler = (IItemHandlerModifiable) inv;
 		} else {
 			handler = new InvWrapper(new SimpleContainer(row * 9));//TODO
 		}

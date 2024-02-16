@@ -118,6 +118,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 		}
 		if (result.stack().getItem() instanceof BaseBagItem bag) {
 			bag.open(player, result.slot(), result.stack());
+			result.container().update();
 		} else if (result.stack().getItem() instanceof EnderBackpackItem) {
 			NetworkHooks.openScreen(player, new SimpleMenuProvider((id, inv, pl) ->
 					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), result.stack().getHoverName()));

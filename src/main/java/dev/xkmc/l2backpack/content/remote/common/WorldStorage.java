@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -19,7 +18,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @SerialClass
-public class WorldStorage extends SavedData {
+public class WorldStorage extends BaseSavedData<WorldStorage> {
 
 	public static final String ID = "l2backpack:dimensional";
 
@@ -37,18 +36,7 @@ public class WorldStorage extends SavedData {
 	}
 
 	private WorldStorage(CompoundTag data) {
-		TagCodec.fromTag(data, WorldStorage.class, this, e -> true);
-	}
-
-	@Override
-	public boolean isDirty() {
-		return true;
-	}
-
-	@Override
-	public CompoundTag save(CompoundTag tag) {
-		TagCodec.toTag(tag, this);
-		return tag;
+		super(WorldStorage.class, data);
 	}
 
 	public Optional<StorageContainer> getOrCreateStorage(ServerLevel level, UUID id, int color, long password,
@@ -143,10 +131,6 @@ public class WorldStorage extends SavedData {
 			return Optional.empty();
 		}
 		return Optional.of(col);
-	}
-
-	public void init() {
-
 	}
 
 	@SerialClass.SerialField

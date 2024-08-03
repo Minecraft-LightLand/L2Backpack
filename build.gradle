@@ -176,7 +176,7 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
             "modulargolems",
             "mouse-tweaks",
             "sophisticated-backpacks")
-    mainFile.releaseType = "release"
+    mainFile.releaseType = "beta"
     disableVersionDetection()
 }
 
@@ -185,7 +185,7 @@ modrinth {
     projectId = project.modrinth_project
     versionName = "L2 Backpack ${project.mod_version}"
     versionNumber = project.mod_version
-    versionType = "release"
+    versionType = "beta"
     uploadFile = new File("./build/libs/${mod_id}-${mod_version}.jar")
     gameVersions = ["1.21"]
     loaders = ["neoforge"]

@@ -1,11 +1,11 @@
 package dev.xkmc.l2backpack.init;
 
 import dev.xkmc.l2backpack.content.bag.AbstractBag;
+import dev.xkmc.l2backpack.content.client.*;
 import dev.xkmc.l2backpack.content.common.InvClientTooltip;
 import dev.xkmc.l2backpack.content.common.InvTooltip;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
-import dev.xkmc.l2backpack.content.client.*;
 import dev.xkmc.l2backpack.init.data.LBKeys;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;

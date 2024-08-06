@@ -175,7 +175,7 @@ public class LBBEWLR extends BlockEntityWithoutLevelRenderer {
 	public static void renderItemInside(ItemStack stack, double height, PoseStack matrix, ItemDisplayContext type,
 										MultiBufferSource buffer, int light, int overlay) {
 		var mc = Minecraft.getInstance();
-		float time = (mc.getTimer().getGameTimeDeltaTicks() + mc.level.getGameTime()) % 80;
+		float time = (mc.getTimer().getGameTimeDeltaPartialTick(true) + mc.level.getGameTime()) % 80;
 		if (!stack.isEmpty()) {
 			matrix.pushPose();
 			matrix.translate(0.5D, height, 0.5D);

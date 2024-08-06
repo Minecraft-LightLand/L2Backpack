@@ -151,7 +151,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			PickupConfig.addText(stack, list);
 
 		}
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.ENDER_DRAWER,
 				LBLang.Info.EXTRACT_DRAWER,
 				LBLang.Info.PLACE,

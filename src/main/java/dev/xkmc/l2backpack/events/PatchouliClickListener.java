@@ -1,16 +1,5 @@
 package dev.xkmc.l2backpack.events;
 
-import dev.xkmc.l2backpack.init.L2Backpack;
-import dev.xkmc.l2menustacker.click.ReadOnlyStackClickHandler;
-import dev.xkmc.l2menustacker.init.L2MSLangData;
-import net.minecraft.ChatFormatting;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
-
-import java.awt.print.Book;
 /*
 public class PatchouliClickListener extends ReadOnlyStackClickHandler {
 

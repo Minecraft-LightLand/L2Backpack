@@ -56,11 +56,11 @@ public class EnderBackpackItem extends Item implements
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
 		PickupConfig.addText(stack, list);
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.QUICK_ANY_ACCESS,
 				LBLang.Info.KEYBIND,
 				LBLang.Info.PICKUP);
-		LBLang.altInsert(list);
+		LBLang.altInsert(flag, list);
 	}
 
 	@Override

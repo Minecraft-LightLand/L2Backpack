@@ -31,7 +31,11 @@ public class PickupTweakerTool extends TweakerTool {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
-		LBLang.addInfo(list, LBLang.Info.PICKUP_TWEAKER, LBLang.Info.TWEAKER_BACK, LBLang.Info.TWEAKER_BLOCK);
+		LBLang.addInfo(flag, list,
+				LBLang.Info.PICKUP_TWEAKER,
+				LBLang.Info.TWEAKER_BACK,
+				LBLang.Info.TWEAKER_BLOCK
+		);
 	}
 
 }

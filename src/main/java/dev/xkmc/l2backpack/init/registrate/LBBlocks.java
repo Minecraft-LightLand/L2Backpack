@@ -2,14 +2,14 @@ package dev.xkmc.l2backpack.init.registrate;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2backpack.content.client.DrawerRenderer;
 import dev.xkmc.l2backpack.content.drawer.DrawerBlock;
 import dev.xkmc.l2backpack.content.drawer.DrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.common.EnderParticleBlock;
-import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlock;
-import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalBlock;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalBlockEntity;
-import dev.xkmc.l2backpack.content.client.DrawerRenderer;
+import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlock;
+import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2modularblock.core.BlockTemplates;
 import dev.xkmc.l2modularblock.core.DelegateBlock;
 import net.minecraft.tags.BlockTags;

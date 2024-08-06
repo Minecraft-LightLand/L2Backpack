@@ -2,8 +2,8 @@ package dev.xkmc.l2backpack.content.remote.dimensional;
 
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.capability.PickupMode;
-import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2backpack.content.remote.common.LBSavedData;
+import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2core.base.tile.BaseBlockEntity;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;

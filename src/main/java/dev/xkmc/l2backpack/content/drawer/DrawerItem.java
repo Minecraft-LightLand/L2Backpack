@@ -185,7 +185,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 		list.add(LBLang.IDS.BACKPACK_SLOT.get(LBItems.DC_DRAWER_STACKING.getOrDefault(drawer, 1), MAX_FACTOR)
 				.withStyle(ChatFormatting.GRAY));
 		PickupConfig.addText(drawer, list);
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.DRAWER_USE,
 				LBLang.Info.LOAD,
 				LBLang.Info.PLACE,

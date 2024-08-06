@@ -48,7 +48,7 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 		} else {
 			PickupConfig.addText(stack, list);
 		}
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.QUICK_INV_ACCESS,
 				LBLang.Info.KEYBIND,
 				LBLang.Info.UPGRADE,
@@ -56,7 +56,7 @@ public class BackpackItem extends BaseBagItem implements BackpackModelItem {
 				LBLang.Info.EXIT,
 				LBLang.Info.PICKUP
 		);
-		LBLang.altInsert(list);
+		LBLang.altInsert(flag, list);
 	}
 
 	@Override

@@ -2,8 +2,8 @@ package dev.xkmc.l2backpack.content.client;
 
 import dev.xkmc.l2backpack.content.capability.PickupMode;
 import dev.xkmc.l2backpack.content.drawer.DrawerBlockEntity;
-import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalBlockEntity;
+import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.data.LBLang;
 import dev.xkmc.l2core.util.Proxy;

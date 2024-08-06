@@ -1,13 +1,13 @@
 package dev.xkmc.l2backpack.content.quickswap.quiver;
 
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
+import dev.xkmc.l2backpack.content.client.ItemOnBackItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
-import dev.xkmc.l2backpack.content.client.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LBLang;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
 import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
@@ -54,7 +54,7 @@ public class Quiver extends SingleSwapItem implements ItemOnBackItem {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
 		PickupConfig.addText(stack, list);
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.ARROW_INFO,
 				LBLang.Info.INHERIT);
 	}

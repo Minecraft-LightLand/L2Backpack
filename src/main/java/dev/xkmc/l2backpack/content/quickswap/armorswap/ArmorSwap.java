@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.armorswap;
 
+import dev.xkmc.l2backpack.content.client.ItemOnBackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
@@ -7,7 +8,6 @@ import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
-import dev.xkmc.l2backpack.content.client.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LBLang;
 import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
 import net.minecraft.network.chat.Component;
@@ -38,7 +38,7 @@ public class ArmorSwap extends SingleSwapItem implements ItemOnBackItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.ARMORBAG_INFO,
 				LBLang.Info.INHERIT);
 	}

@@ -21,7 +21,7 @@ public class DrawerRenderer implements BlockEntityRenderer<IDrawerBlockEntity> {
 	@Override
 	public void render(IDrawerBlockEntity entity, float pTick, PoseStack pose, MultiBufferSource buffer, int light, int overlay) {
 		var mc = Minecraft.getInstance();
-		float time = (mc.getTimer().getGameTimeDeltaTicks() + Proxy.getClientPlayer().tickCount) % 80;
+		float time = (mc.getTimer().getGameTimeDeltaPartialTick(true) + Proxy.getClientPlayer().tickCount) % 80;
 		ItemStack stack = entity.getItem();
 		if (!stack.isEmpty()) {
 			pose.pushPose();

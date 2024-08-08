@@ -160,6 +160,7 @@ dependencies {
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
     implementation "vazkii.patchouli:Patchouli:${patchouli_ver}"
     compileOnly "curse.maven:mouse-tweaks-60089:5437296"
+    implementation "curse.maven:polymorph-388800:5550094"
 }
 
 tasks.register('publishCurseForge', TaskPublishCurseForge) {

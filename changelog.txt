@@ -1,2 +1,6 @@
+3.0.5+3
+- Fix Backpack upgrade recipe with Polymorphism
+- Fix Drawer upgrade recipe
+
 3.0.5+2
-- UseNEoForge 163 for tooltip
+- UseNeoForge 163 for tooltip

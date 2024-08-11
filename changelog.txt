@@ -1,3 +1,7 @@
+3.0.5+4
+- Fix capability caching not invalidated
+- Use component approach for block entity data storing
+
 3.0.5+3
 - Fix Backpack upgrade recipe with Polymorphism
 - Fix Drawer upgrade recipe

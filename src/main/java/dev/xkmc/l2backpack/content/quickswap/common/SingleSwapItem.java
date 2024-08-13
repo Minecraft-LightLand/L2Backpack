@@ -2,6 +2,8 @@ package dev.xkmc.l2backpack.content.quickswap.common;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
+import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Equipable;
@@ -34,6 +36,11 @@ public abstract class SingleSwapItem extends BaseBagItem implements IQuickSwapIt
 
 	public SingleSwapItem(Properties props) {
 		super(props.stacksTo(1).fireResistant());
+	}
+
+	@Override
+	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
+		new SimpleMenuPvd(player, slot, this, stack, GenericSwapMenu::new).open();
 	}
 
 }

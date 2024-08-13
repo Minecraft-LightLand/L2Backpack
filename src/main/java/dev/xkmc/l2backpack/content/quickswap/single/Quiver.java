@@ -1,11 +1,8 @@
-package dev.xkmc.l2backpack.content.quickswap.quiver;
+package dev.xkmc.l2backpack.content.quickswap.single;
 
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.client.ItemOnBackItem;
-import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
-import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
-import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.*;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.data.LBLang;
@@ -44,11 +41,6 @@ public class Quiver extends SingleSwapItem implements ItemOnBackItem {
 
 	public Quiver(Properties props) {
 		super(props.stacksTo(1).fireResistant());
-	}
-
-	@Override
-	public void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack) {
-		new SimpleMenuPvd(player, slot, this, stack, QuiverMenu::new).open();
 	}
 
 	@Override

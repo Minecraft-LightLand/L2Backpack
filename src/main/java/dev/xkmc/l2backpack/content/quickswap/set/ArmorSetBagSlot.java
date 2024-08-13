@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.quickswap.armorswap;
+package dev.xkmc.l2backpack.content.quickswap.set;
 
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2backpack.content.common.BagSlot;

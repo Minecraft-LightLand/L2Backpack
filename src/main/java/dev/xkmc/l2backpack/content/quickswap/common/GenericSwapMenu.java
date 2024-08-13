@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack.content.quickswap.quiver;
+package dev.xkmc.l2backpack.content.quickswap.common;
 
 import dev.xkmc.l2backpack.content.common.BaseBagMenu;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -13,18 +13,18 @@ import net.minecraft.world.inventory.MenuType;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class QuiverMenu extends BaseBagMenu<QuiverMenu> {
+public class GenericSwapMenu extends BaseBagMenu<GenericSwapMenu> {
 
 	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "backpack_1");
 
-	public static QuiverMenu fromNetwork(MenuType<QuiverMenu> type, int windowId, Inventory inv, RegistryFriendlyByteBuf buf) {
+	public static GenericSwapMenu fromNetwork(MenuType<GenericSwapMenu> type, int windowId, Inventory inv, RegistryFriendlyByteBuf buf) {
 		PlayerSlot<?> slot = PlayerSlot.read(buf);
 		UUID id = buf.readUUID();
-		return new QuiverMenu(windowId, inv, slot, id, null);
+		return new GenericSwapMenu(windowId, inv, slot, id, null);
 	}
 
-	public QuiverMenu(int windowId, Inventory inventory, PlayerSlot<?> hand, UUID uuid, @Nullable Component title) {
-		super(LBMenu.MT_ARROW.get(), windowId, inventory, MANAGERS, hand, uuid, 1);
+	public GenericSwapMenu(int windowId, Inventory inventory, PlayerSlot<?> hand, UUID uuid, @Nullable Component title) {
+		super(LBMenu.MT_9.get(), windowId, inventory, MANAGERS, hand, uuid, 1);
 	}
 
 }

@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2backpack.content.quickswap.scabbard;
+package dev.xkmc.l2backpack.content.quickswap.set;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

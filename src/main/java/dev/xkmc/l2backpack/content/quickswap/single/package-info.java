@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2backpack.content.quickswap.quiver;
+package dev.xkmc.l2backpack.content.quickswap.single;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

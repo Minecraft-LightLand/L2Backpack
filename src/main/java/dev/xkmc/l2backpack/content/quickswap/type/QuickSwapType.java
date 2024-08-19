@@ -1,5 +1,6 @@
 package dev.xkmc.l2backpack.content.quickswap.type;
 
+import dev.xkmc.l2backpack.content.quickswap.common.EntryRenderContext;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.entry.ISwapEntry;
 import dev.xkmc.l2itemselector.overlay.OverlayUtil;
@@ -46,22 +47,24 @@ public abstract class QuickSwapType {
 		return isAvailable(player, token);
 	}
 
-	public void renderSelected(SelectionSideBar.Context ctx, Player player, ISwapEntry<?> token, int x, int y, boolean selected, boolean center) {
+	public void renderSelected(SelectionSideBar.Context ctx, Player player, ISwapEntry<?> token, EntryRenderContext entry) {
 		List<ItemStack> list = token.asList();
 		boolean shift = QuickSwapOverlay.hasShiftDown();
 		boolean avail = isAvailable(player, token);
 		for (int i = 0; i < list.size(); i++)
-			renderSelection(ctx.g(), x + i * 18, y, shift ? 127 : 64, avail, (!avail || isAvailable(player, token, i)) && selected);
-		if (selected && list.size() == 1) {
-			ItemStack stack = list.get(0);
+			renderSelection(ctx.g(), entry.x() + i * 18, entry.y(), shift ? 127 : 64, avail,
+					(!avail || isAvailable(player, token, i)) && entry.selected());
+		if (entry.selected() && list.size() == 1) {
+			ItemStack stack = list.getFirst();
 			if (!stack.isEmpty()) {
 				ctx.g().renderTooltip(ctx.font(), stack.getHoverName(), 0, 0);
-				TextBox box = new TextBox(ctx.g(), center ? 0 : 2, 1, ctx.x0() + (center ? 22 : -6), y + 8, -1);
+				TextBox box = new TextBox(ctx.g(), entry.center() ? 0 : 2, 1,
+						ctx.x0() + (entry.center() ? 22 : -6), entry.y() + 8, -1);
 				box.renderLongText(ctx.font(), List.of(stack.getHoverName()));
 			}
 		}
 		for (int i = 0; i < list.size(); i++)
-			ctx.renderItem(list.get(i), x + i * 18, y);
+			ctx.renderItem(list.get(i), entry.x() + i * 18, entry.y());
 	}
 
 	public static void renderSelection(GuiGraphics g, int x, int y, int a, boolean available, boolean selected) {

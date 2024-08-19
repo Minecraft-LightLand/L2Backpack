@@ -1,5 +1,7 @@
-3.0.5+6
+3.0.5+8
 - Merge all single swap menu into 1
+- Improve custom overlay rendering for swap types
+- Fix Backpack Signature
 
 3.0.5+4
 - Fix capability caching not invalidated

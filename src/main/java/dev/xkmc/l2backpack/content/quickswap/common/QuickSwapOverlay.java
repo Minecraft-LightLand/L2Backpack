@@ -32,6 +32,17 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 			}
 			return !equals(old);
 		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == this) return true;
+			if (!(obj instanceof BackpackSignature sig)) return false;
+			return backpackSelect == sig.backpackSelect &&
+					ignoreOther == sig.ignoreOther &&
+					type == sig.type &&
+					playerSelect == sig.playerSelect &&
+					ItemStack.isSameItemSameComponents(stack, sig.stack);
+		}
 	}
 
 	public static QuickSwapOverlay INSTANCE = new QuickSwapOverlay();
@@ -108,8 +119,9 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 		LocalPlayer player = Proxy.getClientPlayer();
 		assert player != null;
 		QuickSwapType type = token.token().type();
-		type.renderSelected(ctx, player, token, ctx.x0(), 18 * i + ctx.y0(),
-				selected == i && this.ease_time == this.max_ease, onCenter());
+		float progress = (max_ease - ease_time) / max_ease;
+		type.renderSelected(ctx, player, token, new EntryRenderContext(i, progress, ctx.x0(), 18 * i + ctx.y0(),
+				selected == i && this.ease_time == this.max_ease, onCenter()));
 	}
 
 	@Override

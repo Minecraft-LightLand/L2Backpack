@@ -73,7 +73,6 @@ public class L2Backpack {
 		LBItems.register();
 		LBMenu.register();
 		LBMisc.register();
-		Handlers.register();
 		LBTriggers.register();
 		LBConfig.init();
 		PickupModeCap.register();

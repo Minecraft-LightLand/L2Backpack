@@ -66,10 +66,17 @@ public class GolemCompat {
 	@SubscribeEvent
 	public static void onEquip(GolemEquipEvent event) {
 		if (canEquip(event.getStack())) {
+			if (event.getStack().getItem() instanceof BaseBagItem bag) {
+				EquipmentSlot slot = bag.getEquipmentSlot(event.getStack());
+				if (slot != EquipmentSlot.CHEST) {
+					event.setSlot(slot, 1);
+					return;
+				}
+			}
 			ItemStack back = event.getEntity().getItemBySlot(EquipmentSlot.CHEST);
-			if (back.isEmpty() || canEquip(back))
+			if (back.isEmpty() || canEquip(back)) {
 				event.setSlot(EquipmentSlot.CHEST, 1);
-			else event.setSlot(EquipmentSlot.OFFHAND, 1);
+			} else event.setSlot(EquipmentSlot.OFFHAND, 1);
 		}
 	}
 

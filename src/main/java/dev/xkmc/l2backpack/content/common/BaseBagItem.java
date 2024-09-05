@@ -28,6 +28,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -125,8 +126,9 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, 
 		return armorType == EquipmentSlot.CHEST;
 	}
 
+	@Nonnull
 	@Override
-	public @Nullable EquipmentSlot getEquipmentSlot(ItemStack stack) {
+	public EquipmentSlot getEquipmentSlot(ItemStack stack) {
 		return EquipmentSlot.CHEST;
 	}
 

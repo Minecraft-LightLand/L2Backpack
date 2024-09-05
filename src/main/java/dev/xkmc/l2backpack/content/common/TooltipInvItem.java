@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TooltipInvItem {
 
-	default int getRowSize(){
+	default int getRowSize() {
 		return 9;
 	}
 

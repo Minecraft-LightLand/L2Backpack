@@ -14,7 +14,12 @@ import static dev.xkmc.l2backpack.content.drawer.BaseDrawerItem.MAX_FACTOR;
 public class DrawerUpgradeRecipe extends AbstractSmithingRecipe<DrawerUpgradeRecipe> {
 
 	public DrawerUpgradeRecipe(Ingredient template, Ingredient base, Ingredient addition, ItemStack result) {
-		super(template, base, addition, LBItems.DC_DRAWER_STACKING.set(result, 2));
+		super(template, base, addition, result);
+	}
+
+	@Override
+	public ItemStack getResultItem(HolderLookup.Provider registries) {
+		return LBItems.DC_DRAWER_STACKING.set(super.getResultItem(registries).copy(), 2);
 	}
 
 	@Override

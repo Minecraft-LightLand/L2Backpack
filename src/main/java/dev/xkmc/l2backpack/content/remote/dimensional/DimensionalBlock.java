@@ -1,6 +1,5 @@
 package dev.xkmc.l2backpack.content.remote.dimensional;
 
-import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.tool.TweakerTool;
 import dev.xkmc.l2backpack.init.registrate.LBBlocks;
@@ -10,9 +9,8 @@ import dev.xkmc.l2modularblock.one.BlockEntityBlockMethod;
 import dev.xkmc.l2modularblock.one.GetBlockItemBlockMethod;
 import dev.xkmc.l2modularblock.one.ShapeBlockMethod;
 import dev.xkmc.l2modularblock.one.SpecialDropBlockMethod;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,7 +44,7 @@ public class DimensionalBlock implements CreateBlockStateBlockMethod, DefaultSta
 	protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
 
 	public static final BlockEntityBlockMethod<DimensionalBlockEntity> TILE_ENTITY_SUPPLIER_BUILDER =
-			new DimensionalAnalogBlockEntity<>(LBBlocks.TE_WORLD_CHEST, DimensionalBlockEntity.class);
+			new DimensionalAnalogBlockEntity<>(LBBlocks.TE_DIMENSIONAL, DimensionalBlockEntity.class);
 
 	public static final EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);
 
@@ -117,6 +115,8 @@ public class DimensionalBlock implements CreateBlockStateBlockMethod, DefaultSta
 			stack.set(LBItems.DC_PASSWORD, chest.password);
 			stack.set(LBItems.DC_PICKUP, chest.config);
 		}
+		if (chest.name != null)
+			stack.set(DataComponents.CUSTOM_NAME, chest.name);
 		return stack;
 	}
 
@@ -128,12 +128,7 @@ public class DimensionalBlock implements CreateBlockStateBlockMethod, DefaultSta
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
 		BlockEntity blockentity = level.getBlockEntity(pos);
-		var config = PickupConfig.get(stack);
 		if (blockentity instanceof DimensionalBlockEntity chest) {
-			chest.ownerId = LBItems.DC_OWNER_ID.getOrDefault(stack, Util.NIL_UUID);
-			chest.ownerName = LBItems.DC_OWNER_NAME.getOrDefault(stack, Component.empty());
-			chest.password = LBItems.DC_PASSWORD.getOrDefault(stack, 0L);
-			chest.config = config;
 			chest.setColor(state.getValue(COLOR).getId());
 			chest.addToListener();
 		}

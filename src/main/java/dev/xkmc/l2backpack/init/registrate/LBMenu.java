@@ -4,10 +4,8 @@ import com.tterrag.registrate.util.entry.MenuEntry;
 import dev.xkmc.l2backpack.content.backpack.BackpackMenu;
 import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
 import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
-import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorBagMenu;
-import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSetBagMenu;
-import dev.xkmc.l2backpack.content.quickswap.quiver.QuiverMenu;
-import dev.xkmc.l2backpack.content.quickswap.scabbard.ScabbardMenu;
+import dev.xkmc.l2backpack.content.quickswap.common.GenericSwapMenu;
+import dev.xkmc.l2backpack.content.quickswap.set.ArmorSetBagMenu;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalContainer;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalScreen;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -31,20 +29,10 @@ public class LBMenu {
 					() -> DimensionalScreen::new)
 			.lang(LBMenu::getLangKey).register();
 
-	public static final MenuEntry<QuiverMenu> MT_ARROW = REGISTRATE.menu("arrow_bag",
-					QuiverMenu::fromNetwork,
-					() -> BaseOpenableScreen<QuiverMenu>::new)
-			.lang(LBMenu::getLangKey).register();
-
-	public static final MenuEntry<ScabbardMenu> MT_TOOL = REGISTRATE.menu("tool_bag",
-					ScabbardMenu::fromNetwork,
-					() -> BaseOpenableScreen<ScabbardMenu>::new)
-			.lang(LBMenu::getLangKey).register();
-
-	public static final MenuEntry<ArmorBagMenu> MT_ARMOR = REGISTRATE.menu("armor_bag",
-					ArmorBagMenu::fromNetwork,
-					() -> BaseOpenableScreen<ArmorBagMenu>::new)
-			.lang(LBMenu::getLangKey).register();
+	public static final MenuEntry<GenericSwapMenu> MT_9 = REGISTRATE.menu("generic_swap",
+					GenericSwapMenu::fromNetwork,
+					() -> BaseOpenableScreen<GenericSwapMenu>::new)
+			.register();
 
 	public static final MenuEntry<ArmorSetBagMenu> MT_ARMOR_SET = REGISTRATE.menu("armor_set",
 					ArmorSetBagMenu::fromNetwork,

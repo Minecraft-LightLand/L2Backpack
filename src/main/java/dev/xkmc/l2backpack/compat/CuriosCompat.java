@@ -1,9 +1,9 @@
 package dev.xkmc.l2backpack.compat;
 
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2menustacker.compat.CuriosTrackCompatImpl;
 import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
-import dev.xkmc.l2menustacker.screen.source.SimpleSlotData;
+import dev.xkmc.l2tabs.compat.api.AccessoriesMultiplex;
+import dev.xkmc.l2tabs.compat.track.CurioSlotData;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.ModList;
@@ -31,14 +31,12 @@ public class CuriosCompat {
 	private static Optional<Pair<ItemStack, PlayerSlot<?>>> getSlotImpl(LivingEntity player, Predicate<ItemStack> pred) {
 		var curio = CuriosApi.getCuriosInventory(player);
 		if (curio.isPresent()) {
-			var e = curio.get().getEquippedCurios();
-			for (int i = 0; i < e.getSlots(); i++) {
-				ItemStack stack = e.getStackInSlot(i);
-				if (pred.test(stack)) {
-					return Optional.of(Pair.of(stack,
-							new PlayerSlot<>(CuriosTrackCompatImpl.get().IS_CURIOS.get(),
-									new SimpleSlotData(i))));
-				}
+			var ans = curio.get().findFirstCurio(pred);
+			if (ans.isPresent()) {
+				return Optional.of(Pair.of(ans.get().stack(),
+						new PlayerSlot<>(AccessoriesMultiplex.IS_CURIOS.get(),
+								new CurioSlotData(ans.get().slotContext().identifier(),
+										ans.get().slotContext().index()))));
 			}
 		}
 		return Optional.empty();

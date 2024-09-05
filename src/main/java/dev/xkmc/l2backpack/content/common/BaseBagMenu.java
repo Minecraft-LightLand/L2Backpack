@@ -59,10 +59,7 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 	public boolean stillValid(Player player) {
 		ItemStack oldStack = stack_cache;
 		ItemStack newStack = getStackRaw();
-		if (getStackRaw().isEmpty() || oldStack != newStack) {
-			return false;
-		}
-		return true;
+		return !getStackRaw().isEmpty() && oldStack == newStack;
 	}
 
 	public ItemStack getStack() {

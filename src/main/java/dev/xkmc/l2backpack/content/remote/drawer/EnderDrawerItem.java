@@ -4,10 +4,8 @@ import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.drawer.DrawerInvWrapper;
-import dev.xkmc.l2backpack.content.insert.CapInsertItem;
 import dev.xkmc.l2backpack.content.insert.OverlayInsertItem;
 import dev.xkmc.l2backpack.content.remote.common.EnderDrawerAccess;
-import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.events.TooltipUpdateEvents;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBLang;
@@ -25,11 +23,9 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 
@@ -155,7 +151,7 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 			PickupConfig.addText(stack, list);
 
 		}
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.ENDER_DRAWER,
 				LBLang.Info.EXTRACT_DRAWER,
 				LBLang.Info.PLACE,
@@ -168,7 +164,8 @@ public class EnderDrawerItem extends BlockItem implements BaseDrawerItem {
 	}
 
 	public DrawerInvWrapper getCaps(ItemStack stack, @Nullable Void ignored) {
-		return new DrawerInvWrapper(stack, trace -> trace.player == null ? null : new EnderDrawerInvAccess(stack, this, trace.player));
+		return new DrawerInvWrapper(stack, trace -> LBItems.DC_OWNER_ID.get(stack) == null && trace.player == null ? null :
+				new EnderDrawerInvAccess(stack, this, trace.level, trace.player));
 	}
 
 	@Override

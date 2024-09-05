@@ -4,7 +4,6 @@ import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.click.DoubleClickItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.insert.OverlayInsertItem;
-import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBLang;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
@@ -23,13 +22,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTransfer.Quad, DoubleClickItem {
 
@@ -188,7 +185,7 @@ public class DrawerItem extends BlockItem implements BaseDrawerItem, ContentTran
 		list.add(LBLang.IDS.BACKPACK_SLOT.get(LBItems.DC_DRAWER_STACKING.getOrDefault(drawer, 1), MAX_FACTOR)
 				.withStyle(ChatFormatting.GRAY));
 		PickupConfig.addText(drawer, list);
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.DRAWER_USE,
 				LBLang.Info.LOAD,
 				LBLang.Info.PLACE,

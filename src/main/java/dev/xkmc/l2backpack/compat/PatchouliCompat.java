@@ -8,17 +8,16 @@ import static dev.xkmc.l2backpack.init.L2Backpack.REGISTRATE;
 
 public class PatchouliCompat {
 
+	public static PatchouliHelper HELPER;
+
 	public static void gen() {
-		/* TODO
-		new PatchouliHelper(REGISTRATE, "backpack_guide")
+		HELPER = new PatchouliHelper(REGISTRATE, "backpack_guide")
 				.buildModel().buildShapelessRecipe(e -> e
 								.requires(Items.BOOK).requires(Items.IRON_NUGGET).requires(Items.PAPER),
 						() -> Items.BOOK)
 				.buildBook("L2Backpack Guide",
 						"Welcome to L2Backpack, a recursive storage mod",
-						1, LBItems.TAB.getKey());
-
-		 */
+						1, LBItems.TAB.key());
 	}
 
 }

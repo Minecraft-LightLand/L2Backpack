@@ -2,12 +2,16 @@ package dev.xkmc.l2backpack.content.remote.dimensional;
 
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.capability.PickupMode;
-import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2backpack.content.remote.common.LBSavedData;
+import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
+import dev.xkmc.l2backpack.init.registrate.LBItems;
 import dev.xkmc.l2core.base.tile.BaseBlockEntity;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.*;
@@ -37,7 +41,7 @@ public class DimensionalBlockEntity extends BaseBlockEntity implements MenuProvi
 	@SerialField
 	public PickupConfig config = PickupConfig.DEF;
 
-	private Component name;
+	protected Component name;
 
 	public DimensionalBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -136,12 +140,33 @@ public class DimensionalBlockEntity extends BaseBlockEntity implements MenuProvi
 	}
 
 	@Override
+	protected void applyImplicitComponents(DataComponentInput data) {
+		super.applyImplicitComponents(data);
+		name = data.get(DataComponents.CUSTOM_NAME);
+		config = data.getOrDefault(LBItems.DC_PICKUP, PickupConfig.DEF);
+		ownerId = data.getOrDefault(LBItems.DC_OWNER_ID, Util.NIL_UUID);
+		ownerName = data.getOrDefault(LBItems.DC_OWNER_NAME, Component.empty());
+		password = data.getOrDefault(LBItems.DC_PASSWORD, 0L);
+	}
+
+	@Override
+	protected void collectImplicitComponents(DataComponentMap.Builder data) {
+		super.collectImplicitComponents(data);
+		data.set(LBItems.DC_PICKUP, config);
+		data.set(LBItems.DC_OWNER_ID, ownerId);
+		data.set(LBItems.DC_OWNER_NAME, ownerName);
+		data.set(LBItems.DC_PASSWORD, password);
+		data.set(DataComponents.CUSTOM_NAME, name);
+	}
+
+	@Override
 	public void containerChanged(Container p_18983_) {
 		setChanged();
 	}
 
 	public void setPickupMode(PickupConfig click) {
 		this.config = click;
+		if (level != null) level.invalidateCapabilities(getBlockPos());
 		sync();
 		setChanged();
 	}

@@ -19,8 +19,7 @@ import java.util.UUID;
 public class DimensionalContainer extends BaseContainerMenu<DimensionalContainer> implements DrawerQuickInsert {
 
 	public static DimensionalContainer fromNetwork(MenuType<DimensionalContainer> type, int windowId, Inventory inv) {
-		//TODO
-		return new DimensionalContainer(windowId, inv, new SimpleContainer(27), null, null);
+		return new DimensionalContainer(windowId, inv, new SimpleContainer(54), null, null);
 	}
 
 	protected final Player player;
@@ -34,7 +33,7 @@ public class DimensionalContainer extends BaseContainerMenu<DimensionalContainer
 	public DimensionalContainer(int windowId, Inventory inventory, SimpleContainer cont,
 								@Nullable StorageContainer storage,
 								@Nullable DimensionalBlockEntity entity) {
-		super(LBMenu.MT_WORLD_CHEST.get(), windowId, inventory, BackpackMenu.MANAGERS[2], menu -> cont, false);
+		super(LBMenu.MT_WORLD_CHEST.get(), windowId, inventory, BackpackMenu.MANAGERS[5], menu -> cont, false);
 		this.player = inventory.player;
 		this.addSlot("grid", stack -> true);
 		this.storage = storage;

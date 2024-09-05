@@ -45,7 +45,7 @@ public class CapabilityEvents {
 		CuriosCompat.getSlot(player, e -> {
 			if (stack.isEmpty()) return false;
 			var ecap = e.getCapability(LBMisc.PICKUP);
-			if (ecap != null) ecap.doPickup(e, new PickupTrace(false, player));
+			if (ecap != null) ecap.doPickup(stack, new PickupTrace(false, player));
 			return false;
 		});
 	}

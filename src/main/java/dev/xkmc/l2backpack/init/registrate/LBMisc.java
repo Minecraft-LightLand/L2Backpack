@@ -68,9 +68,8 @@ public class LBMisc {
 						new DimensionTraceData(menu.getColor(), menu.getOwner()))));
 
 		addBag(LBMenu.MT_BACKPACK);
-		addBag(LBMenu.MT_ARMOR);
-		addBag(LBMenu.MT_ARROW);
-		addBag(LBMenu.MT_TOOL);
+		addBag(LBMenu.MT_ARMOR_SET);
+		addBag(LBMenu.MT_9);
 	}
 
 	private static <T extends BaseBagMenu<T>> void addBag(MenuEntry<T> type) {

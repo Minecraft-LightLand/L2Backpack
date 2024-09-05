@@ -2,6 +2,8 @@ package dev.xkmc.l2backpack.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.GolemCompat;
+import dev.xkmc.l2backpack.compat.LCCompat;
+import dev.xkmc.l2backpack.compat.PatchouliClickListener;
 import dev.xkmc.l2backpack.compat.PatchouliCompat;
 import dev.xkmc.l2backpack.content.bag.BagCaps;
 import dev.xkmc.l2backpack.content.bag.BagItemHandler;
@@ -18,6 +20,7 @@ import dev.xkmc.l2backpack.init.data.*;
 import dev.xkmc.l2backpack.init.loot.LootGen;
 import dev.xkmc.l2backpack.init.registrate.*;
 import dev.xkmc.l2backpack.network.*;
+import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2core.compat.patchouli.PatchouliHelper;
 import dev.xkmc.l2core.init.reg.registrate.L2Registrate;
 import dev.xkmc.l2core.init.reg.simple.Reg;
@@ -25,6 +28,7 @@ import dev.xkmc.l2core.util.MathHelper;
 import dev.xkmc.l2itemselector.select.SelectionRegistry;
 import dev.xkmc.l2serial.network.PacketHandler;
 import dev.xkmc.l2serial.serialization.custom_handler.Handlers;
+import dev.xkmc.modulargolems.init.ModularGolems;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
@@ -33,9 +37,11 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vazkii.patchouli.api.PatchouliAPI;
 
 import static dev.xkmc.l2serial.network.PacketHandler.NetDir.PLAY_TO_CLIENT;
 import static dev.xkmc.l2serial.network.PacketHandler.NetDir.PLAY_TO_SERVER;
@@ -67,22 +73,21 @@ public class L2Backpack {
 		LBItems.register();
 		LBMenu.register();
 		LBMisc.register();
-		Handlers.register();
 		LBTriggers.register();
 		LBConfig.init();
 		PickupModeCap.register();
 		EnderSyncCap.register();
-		if (ModList.get().isLoaded("modulargolems")) GolemCompat.register();
-		//TODO if (ModList.get().isLoaded(L2Complements.MODID)) NeoForge.EVENT_BUS.register(LCCompat.class);
+		if (ModList.get().isLoaded(ModularGolems.MODID)) GolemCompat.register();
+		if (ModList.get().isLoaded(L2Complements.MODID)) NeoForge.EVENT_BUS.register(LCCompat.class);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, LBRecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, LBAdvGen::genAdvancements);
 		REGISTRATE.addDataGenerator(ProviderType.LOOT, LootGen::genLoot);
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LBTagGen::onBlockTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, LBTagGen::onItemTagGen);
-		if (ModList.get().isLoaded("patchouli")) {
+		if (ModList.get().isLoaded(PatchouliAPI.MOD_ID)) {
 			PatchouliCompat.gen();
-			// TODO new PatchouliClickListener();
-			// TODO NeoForge.EVENT_BUS.register(PatchouliClickListener.class);
+			new PatchouliClickListener();
+			NeoForge.EVENT_BUS.register(PatchouliClickListener.class);
 		}
 		SelectionRegistry.register(1000, BackpackSel.INSTANCE);
 	}
@@ -108,7 +113,7 @@ public class L2Backpack {
 		{
 			event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, LBBlocks.TE_DRAWER.get(), (be, dir) -> be.handler);
 			event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, LBBlocks.TE_ENDER_DRAWER.get(), (be, dir) -> be.getItemHandler());
-			event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, LBBlocks.TE_WORLD_CHEST.get(), (be, dir) -> be.getItemHandler());
+			event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, LBBlocks.TE_DIMENSIONAL.get(), (be, dir) -> be.getItemHandler());
 		}
 	}
 

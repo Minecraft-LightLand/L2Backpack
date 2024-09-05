@@ -1,12 +1,32 @@
 package dev.xkmc.l2backpack.compat;
 
+import com.mojang.datafixers.util.Pair;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
+import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalInvWrapper;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalItem;
+import dev.xkmc.l2backpack.events.ArrowBagEvents;
+import dev.xkmc.l2backpack.init.registrate.LBBlocks;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
+import dev.xkmc.l2library.util.GenericItemStack;
+import dev.xkmc.modulargolems.content.entity.common.AbstractGolemEntity;
+import dev.xkmc.modulargolems.events.event.GolemEquipEvent;
+import dev.xkmc.modulargolems.events.event.GolemHandleItemEvent;
+import dev.xkmc.modulargolems.init.data.MGTagGen;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class GolemCompat {
 
@@ -24,20 +44,19 @@ public class GolemCompat {
 		return false;
 	}
 
-	/* TODO
 	@Nullable
-	private static GenericItemStack<WorldChestItem> getBackpack(AbstractGolemEntity<?, ?> golem) {
+	private static GenericItemStack<DimensionalItem> getBackpack(AbstractGolemEntity<?, ?> golem) {
 		for (var e : List.of(EquipmentSlot.CHEST, EquipmentSlot.OFFHAND)) {
 			ItemStack stack = golem.getItemBySlot(e);
-			if (stack.getItem() instanceof WorldChestItem item) {
+			if (stack.getItem() instanceof DimensionalItem item) {
 				return new GenericItemStack<>(item, stack);
 			}
 		}
 		var opt = CuriosCompat.getSlot(golem,
-				e -> e.getItem() instanceof WorldChestItem);
+				e -> e.getItem() instanceof DimensionalItem);
 		if (opt.isPresent()) {
 			ItemStack stack = opt.get().getFirst();
-			if (stack.getItem() instanceof WorldChestItem item) {
+			if (stack.getItem() instanceof DimensionalItem item) {
 				return new GenericItemStack<>(item, stack);
 			}
 		}
@@ -65,7 +84,7 @@ public class GolemCompat {
 		var cont = backpack.item().getContainer(backpack.stack(), level);
 		if (cont.isEmpty()) return;
 		var storage = cont.get();
-		var handler = new WorldChestInvWrapper(storage.container, storage.id);
+		var handler = new DimensionalInvWrapper(storage.get(), storage.id);
 		ItemStack remain = ItemHandlerHelper.insertItem(handler, stack, false);
 		event.getItem().setItem(remain);
 	}
@@ -90,19 +109,17 @@ public class GolemCompat {
 			var cont = backpack.item().getContainer(backpack.stack(), level);
 			if (cont.isEmpty()) return;
 			var storage = cont.get();
-			for (int i = 0; i < storage.container.getContainerSize(); i++) {
-				ItemStack stack = storage.container.getItem(i);
-				if (event.setProjectile(Pair.of(stack, x -> storage.container.setChanged()))) {
+			for (int i = 0; i < storage.get().getContainerSize(); i++) {
+				ItemStack stack = storage.get().getItem(i);
+				if (event.setProjectile(Pair.of(stack, x -> storage.get().setChanged()))) {
 					return;
 				}
 			}
 		}
 	}
 
-	 */
-
 	public static void genBlockTag(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {
-		// TODO pvd.addTag(MGTagGen.POTENTIAL_DST).add(LBBlocks.WORLD_CHEST.get());
+		pvd.addTag(MGTagGen.POTENTIAL_DST).add(LBBlocks.DIMENSIONAL.get());
 	}
 
 }

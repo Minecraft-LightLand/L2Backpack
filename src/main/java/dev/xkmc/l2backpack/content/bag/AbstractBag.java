@@ -10,7 +10,6 @@ import dev.xkmc.l2backpack.content.insert.CapInsertItem;
 import dev.xkmc.l2backpack.init.data.LBLang;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -122,18 +121,15 @@ public abstract class AbstractBag extends Item
 	}
 
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
-		if (Screen.hasAltDown()) {
-			return;
-		}
+		if (flag.hasAltDown()) return;
 		list.add(LBLang.IDS.BAG_SIZE.get(getSize(stack), SIZE));
 		PickupConfig.addText(stack, list);
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.COLLECT_BAG,
 				LBLang.Info.LOAD,
 				LBLang.Info.EXTRACT_BAG);
-		if (!Screen.hasShiftDown()) {
-			list.add(LBLang.Info.ALT_CONTENT.get().withStyle(ChatFormatting.GRAY));
-		}
+		if (flag.hasShiftDown()) return;
+		list.add(LBLang.Info.ALT_CONTENT.get().withStyle(ChatFormatting.GRAY));
 	}
 
 	@Override

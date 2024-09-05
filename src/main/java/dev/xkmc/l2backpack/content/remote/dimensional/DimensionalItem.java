@@ -5,9 +5,8 @@ import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.BackpackModelItem;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
 import dev.xkmc.l2backpack.content.insert.InsertOnlyItem;
-import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2backpack.content.remote.common.LBSavedData;
-import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
+import dev.xkmc.l2backpack.content.remote.common.StorageContainer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBLang;
 import dev.xkmc.l2backpack.init.registrate.LBBlocks;
@@ -30,14 +29,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 public class DimensionalItem extends BlockItem implements BackpackModelItem, PickupBagItem, InsertOnlyItem {
 
@@ -53,7 +50,7 @@ public class DimensionalItem extends BlockItem implements BackpackModelItem, Pic
 	public final DyeColor color;
 
 	public DimensionalItem(DyeColor color, Properties props) {
-		super(LBBlocks.WORLD_CHEST.get(), props.stacksTo(1).fireResistant());
+		super(LBBlocks.DIMENSIONAL.get(), props.stacksTo(1).fireResistant());
 		this.color = color;
 	}
 
@@ -106,13 +103,13 @@ public class DimensionalItem extends BlockItem implements BackpackModelItem, Pic
 		}
 		if (LBItems.DC_LOOT_ID.get(stack) != null)
 			list.add(LBLang.IDS.LOOT.get().withStyle(ChatFormatting.AQUA));
-		LBLang.addInfo(list, LBLang.Info.QUICK_ANY_ACCESS,
+		LBLang.addInfo(flag, list, LBLang.Info.QUICK_ANY_ACCESS,
 				LBLang.Info.PLACE,
 				LBLang.Info.DIMENSIONAL,
 				LBLang.Info.KEYBIND,
 				LBLang.Info.EXIT,
 				LBLang.Info.PICKUP);
-		LBLang.altInsert(list);
+		LBLang.altInsert(flag, list);
 	}
 
 	public String getDescriptionId() {

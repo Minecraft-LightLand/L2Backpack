@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.quickswap.type;
 import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.scabbard.Scabbard;
+import dev.xkmc.l2backpack.content.quickswap.single.Scabbard;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -55,6 +55,7 @@ public class QuickSwapManager {
 	@Nullable
 	public static IQuickSwapToken<?> getToken(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
 		List<ItemStack> list = new ArrayList<>();
+		list.add(user.getMainHandItem());
 		list.add(user.getOffhandItem());
 		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
 		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);

@@ -31,7 +31,11 @@ public class DestroyTweakerTool extends TweakerTool {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
-		LBLang.addInfo(list, LBLang.Info.DESTROY_TWEAKER, LBLang.Info.TWEAKER_BACK, LBLang.Info.TWEAKER_BLOCK);
+		LBLang.addInfo(flag, list,
+				LBLang.Info.DESTROY_TWEAKER,
+				LBLang.Info.TWEAKER_BACK,
+				LBLang.Info.TWEAKER_BLOCK
+		);
 	}
 
 }

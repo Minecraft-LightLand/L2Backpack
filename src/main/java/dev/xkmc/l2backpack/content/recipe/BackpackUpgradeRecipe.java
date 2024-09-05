@@ -21,7 +21,7 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 
 	@Override
 	public ItemStack getResultItem(HolderLookup.Provider pvd) {
-		return LBItems.DC_ROW.set(super.getResultItem(pvd), LBConfig.SERVER.initialRows.get());
+		return LBItems.DC_ROW.set(super.getResultItem(pvd).copy(), LBConfig.SERVER.initialRows.get());
 	}
 
 	@Override

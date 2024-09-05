@@ -3,7 +3,20 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "entries": [],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "patchouli:book": "l2backpack:backpack_guide"
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "patchouli:guide_book"
+        }
+      ],
       "rolls": 1.0
     }
   ],

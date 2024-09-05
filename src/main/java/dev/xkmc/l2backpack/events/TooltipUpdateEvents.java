@@ -98,7 +98,7 @@ public class TooltipUpdateEvents {
 			focus = content;
 			id = owner;
 			step = Step.SENT;
-			L2Backpack.HANDLER.toServer(new RequestTooltipUpdateEvent(focus, Proxy.getClientPlayer().getUUID()));
+			L2Backpack.HANDLER.toServer(new RequestTooltipUpdateEvent(focus, owner));
 		} else if (step == Step.COOLDOWN) {
 			if (cooldown > 0) {
 				cooldown--;

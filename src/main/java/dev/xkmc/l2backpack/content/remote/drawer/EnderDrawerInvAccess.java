@@ -1,18 +1,19 @@
 package dev.xkmc.l2backpack.content.remote.drawer;
 
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerInvAccess;
-import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.remote.common.EnderDrawerAccess;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.Nullable;
 
 public record EnderDrawerInvAccess(ItemStack drawerStack, EnderDrawerItem drawerItem,
-								   ServerPlayer player) implements BaseDrawerInvAccess {
+								   ServerLevel level, @Nullable ServerPlayer player) implements BaseDrawerInvAccess {
 
 	@Override
 	public int getStoredCount() {
-		return EnderDrawerAccess.of(player().level(), drawerStack()).getCount();
+		return EnderDrawerAccess.of(level, drawerStack()).getCount();
 	}
 
 	@Override
@@ -22,7 +23,7 @@ public record EnderDrawerInvAccess(ItemStack drawerStack, EnderDrawerItem drawer
 
 	@Override
 	public void setStoredCount(int count) {
-		EnderDrawerAccess.of(player().level(), drawerStack()).setCount(count);
+		EnderDrawerAccess.of(level, drawerStack()).setCount(count);
 	}
 
 }

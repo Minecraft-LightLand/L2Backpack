@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotClickTrigger> {
 
 	public static Ins fromGUI() {
-		return new Ins(LBTriggers.SLOT_CLICK.get());
+		return new Ins();
 	}
 
 	public static Ins fromKeyBind() {
@@ -46,8 +46,8 @@ public class SlotClickTrigger extends BaseCriterion<SlotClickTrigger.Ins, SlotCl
 		@SerialField
 		private boolean keybind = false;
 
-		protected Ins(SlotClickTrigger slotClickTrigger) {
-			super(slotClickTrigger);
+		public Ins() {
+			super(LBTriggers.SLOT_CLICK.get());
 		}
 	}
 

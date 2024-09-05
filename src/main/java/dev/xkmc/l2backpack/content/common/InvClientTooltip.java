@@ -1,6 +1,6 @@
 package dev.xkmc.l2backpack.content.common;
 
-import dev.xkmc.l2backpack.content.render.DrawerCountDeco;
+import dev.xkmc.l2backpack.content.client.DrawerCountDeco;
 import dev.xkmc.l2core.util.Proxy;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;

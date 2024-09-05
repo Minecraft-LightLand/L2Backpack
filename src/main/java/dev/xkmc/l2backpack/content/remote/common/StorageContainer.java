@@ -30,7 +30,7 @@ public class StorageContainer implements ContainerListener {
 
 	public SimpleContainer get() {
 		if (container == null) {
-			this.container = new SimpleContainer(27);//TODO
+			this.container = new SimpleContainer(54);
 			for (int i = 0; i < tag.size(); i++) {
 				this.container.setItem(i, tag.get(i));
 			}

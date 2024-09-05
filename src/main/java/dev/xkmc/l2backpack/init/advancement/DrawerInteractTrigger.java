@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 public class DrawerInteractTrigger extends BaseCriterion<DrawerInteractTrigger.Ins, DrawerInteractTrigger> {
 
 	public static Ins fromType(ClickInteractToServer.Type type) {
-		Ins ans = new Ins(LBTriggers.DRAWER.get());
+		Ins ans = new Ins();
 		ans.type = type;
 		return ans;
 	}
@@ -33,8 +33,8 @@ public class DrawerInteractTrigger extends BaseCriterion<DrawerInteractTrigger.I
 		@SerialField
 		private ClickInteractToServer.Type type;
 
-		protected Ins(DrawerInteractTrigger drawerInteractTrigger) {
-			super(drawerInteractTrigger);
+		public Ins() {
+			super(LBTriggers.DRAWER.get());
 		}
 	}
 

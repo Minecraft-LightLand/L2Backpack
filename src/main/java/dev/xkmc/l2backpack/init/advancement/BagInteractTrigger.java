@@ -13,7 +13,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class BagInteractTrigger extends BaseCriterion<BagInteractTrigger.Ins, BagInteractTrigger> {
 
 	public static Ins fromType(Type type) {
-		Ins ans = new Ins(LBTriggers.INTERACT.get());
+		Ins ans = new Ins();
 		ans.type = type;
 		return ans;
 	}
@@ -43,8 +43,8 @@ public class BagInteractTrigger extends BaseCriterion<BagInteractTrigger.Ins, Ba
 		@SerialField
 		private Ingredient ingredient = Ingredient.EMPTY;
 
-		protected Ins(BagInteractTrigger bagInteractTrigger) {
-			super(bagInteractTrigger);
+		public Ins() {
+			super(LBTriggers.INTERACT.get());
 		}
 	}
 

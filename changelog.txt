@@ -1,83 +1,15 @@
-TODO add more slots to dimensional storage
-TODO feeding module
-TODO experience module
+3.0.5+8
+- Merge all single swap menu into 1
+- Improve custom overlay rendering for swap types
+- Fix Backpack Signature
 
-2.4.22
-- L2C ender reach compat
-- Keybind for holding and switching selector
+3.0.5+4
+- Fix capability caching not invalidated
+- Use component approach for block entity data storing
 
-2.4.21
-- Drawers now show content directly when pressing alt / ctrl / shift, or when rendering backpack previews
-- Add config to make drawers always render content directly
-- Auto Pickup now supports pickup advancements, and plays item pickup sounds
-- Storage Bags now support
-  - pickup mode and auto pickup
-  - left click insert, right click take
-  - tooltip preview
-  - quick move
-  - content count (yellow)
-- Now Storage Bags only throw out 16 items at a time
-- Double Click drawer / bags to collect all similar items
-- Quick move now support chest and ender chest menu
-- Right click with wand to adjust backpack
-- Alt click to recursive insert
-- Fix drawer pickup ignoring tags
-- Grant player a backpack if they are spawned with 6 or more items (configurable)
-- Right click Patchouli Book to read
-- Items transported into dimensional storage block will follow pickup rule if configured
-- New texture for bags
+3.0.5+3
+- Fix Backpack upgrade recipe with Polymorphism
+- Fix Drawer upgrade recipe
 
-2.4.20
-- Drawer shift-click and MouseTweak scrolling
-
-2.4.19
-- Fix bug that when player put item into a new backpack inside dimensional backpack
-    and close the game directly, the items will not be stored
-
-2.4.18
-- Fix client drawer crash in multiplayer
-
-2.4.17
-- improve quick swap
-- deprecate combined swap
-- add suit swap
-
-2.4.16
-- add pickup destroy mode
-- Fix bag load displaying 0 item
-- Pickup prioritize latest mode
-- Remove multi-switch and ender-switch from advancements
-
-2.4.15
-- make all backpacks rendering as items instead
-- fix F3+B triggers backpacks
-- add support for Curios render toggle
-- add 3 backpack fast insert config options: left click, right click, shift
-- Swaps can now trigger in ender backpack
-- deprecate Ender Swap
-- arrow pickup into Quiver when pickup enabled
-- add patchouli book advancement
-
-2.4.14
-- Fix drawer crash if placed in 2.4.12
-- Update texture
-- Fix scrolling
-
-2.4.13
-- add pickup option
-- add drawer upgrade
-- Overlay item insert
-- patchouli page
-
-2.4.12
-- Now non-player can also use quick swap
-- Move to new curios API
-- Now golems can shoot all arrows from quiver, and can shoot from dimensional backpack
-- Fix bug that when you attempt to open backpack in disallowed container, client and server will desync
-
-2.4.11
-- Fix dump/load on empty backpacks
-- Fix dump/load of unstackable items
-- Fix shift still trigger quickswap when shift is binded to other keys
-- Fix quick swap scrolling
-- Fix scrolling direction, add config option
+3.0.5+2
+- UseNeoForge 163 for tooltip

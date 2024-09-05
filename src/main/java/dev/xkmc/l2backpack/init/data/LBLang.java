@@ -5,10 +5,10 @@ import dev.xkmc.l2backpack.init.loot.LootGen;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.fml.ModList;
 
 import java.util.List;
@@ -17,8 +17,8 @@ import java.util.function.BiConsumer;
 
 public class LBLang {
 
-	public static void addInfo(List<Component> list, Info... text) {
-		if (Screen.hasShiftDown()) {
+	public static void addInfo(TooltipFlag flag, List<Component> list, Info... text) {
+		if (flag.hasShiftDown()) {
 			boolean col = false;
 			for (Info info : text) {
 				list.add(info.get().withStyle(col ? Style.EMPTY.withColor(0x6abe30) : Style.EMPTY.withColor(0x5fcde4)));
@@ -31,8 +31,8 @@ public class LBLang {
 		}
 	}
 
-	public static void altInsert(List<Component> list) {
-		if (Screen.hasShiftDown()) return;
+	public static void altInsert(TooltipFlag flag, List<Component> list) {
+		if (flag.hasShiftDown()) return;
 		var player = Minecraft.getInstance().player;
 		var menu = player.containerMenu;
 		if (!menu.getCarried().isEmpty()) {

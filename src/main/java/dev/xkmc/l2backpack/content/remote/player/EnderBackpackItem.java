@@ -10,7 +10,6 @@ import dev.xkmc.l2backpack.content.insert.InsertOnlyItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
-import dev.xkmc.l2backpack.content.render.BaseItemRenderer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBLang;
 import dev.xkmc.l2backpack.init.registrate.LBMisc;
@@ -29,14 +28,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class EnderBackpackItem extends Item implements
 		BackpackModelItem, PickupBagItem, InsertOnlyItem, TooltipInvItem, IQuickSwapItem {
@@ -59,11 +56,11 @@ public class EnderBackpackItem extends Item implements
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
 		PickupConfig.addText(stack, list);
-		LBLang.addInfo(list,
+		LBLang.addInfo(flag, list,
 				LBLang.Info.QUICK_ANY_ACCESS,
 				LBLang.Info.KEYBIND,
 				LBLang.Info.PICKUP);
-		LBLang.altInsert(list);
+		LBLang.altInsert(flag, list);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.init.data;
 
 import com.tterrag.registrate.providers.RegistrateAdvancementProvider;
+import dev.xkmc.l2backpack.compat.PatchouliCompat;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.advancement.BagInteractTrigger;
 import dev.xkmc.l2backpack.init.advancement.DrawerInteractTrigger;
@@ -42,7 +43,7 @@ public class LBAdvGen {
 						"Welcome to L2Backpack", "Guide to Backpacks")
 				.root().patchouli(L2Backpack.REGISTRATE,
 						CriterionBuilder.one(PlayerTrigger.TriggerInstance.tick()),
-						L2Backpack.PATCHOULI,
+						PatchouliCompat.HELPER,
 						"Intro to Backpacks", "Read the backpack guide")
 				.root().create("backpack", backpack(DyeColor.RED),
 						CriterionBuilder.item(LBTagGen.BACKPACKS),

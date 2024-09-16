@@ -1,7 +1,11 @@
-3.0.5+8
+3.0.5+12
+- Add Sophisticated compat
+
+3.0.5+11
 - Merge all single swap menu into 1
 - Improve custom overlay rendering for swap types
 - Fix Backpack Signature
+- Prepare for GlimmeringTales
 
 3.0.5+4
 - Fix capability caching not invalidated

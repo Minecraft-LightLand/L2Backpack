@@ -1,10 +1,7 @@
 package dev.xkmc.l2backpack.init;
 
 import com.tterrag.registrate.providers.ProviderType;
-import dev.xkmc.l2backpack.compat.GolemCompat;
-import dev.xkmc.l2backpack.compat.LCCompat;
-import dev.xkmc.l2backpack.compat.PatchouliClickListener;
-import dev.xkmc.l2backpack.compat.PatchouliCompat;
+import dev.xkmc.l2backpack.compat.*;
 import dev.xkmc.l2backpack.content.bag.BagCaps;
 import dev.xkmc.l2backpack.content.bag.BagItemHandler;
 import dev.xkmc.l2backpack.content.capability.PickupModeCap;
@@ -39,6 +36,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.p3pp3rf1y.sophisticatedbackpacks.SophisticatedBackpacks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vazkii.patchouli.api.PatchouliAPI;
@@ -88,6 +86,11 @@ public class L2Backpack {
 			PatchouliCompat.gen();
 			new PatchouliClickListener();
 			NeoForge.EVENT_BUS.register(PatchouliClickListener.class);
+		}
+		if (ModList.get().isLoaded(SophisticatedBackpacks.MOD_ID)) {
+			SophisticatedCompat.init();
+			new SophisticatedClickListener();
+			NeoForge.EVENT_BUS.register(SophisticatedCompat.class);
 		}
 		SelectionRegistry.register(1000, BackpackSel.INSTANCE);
 	}

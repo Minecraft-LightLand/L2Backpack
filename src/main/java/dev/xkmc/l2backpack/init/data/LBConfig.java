@@ -99,6 +99,9 @@ public class LBConfig {
 
 		public final ModConfigSpec.IntValue startupBackpackCondition;
 
+		public final ModConfigSpec.BooleanValue sophisticatedEnderTicking;
+		public final ModConfigSpec.BooleanValue sophisticatedRightClickOpen;
+
 		Server(Builder builder) {
 			markL2();
 			initialRows = builder.text("Initial Rows for backpack")
@@ -107,6 +110,11 @@ public class LBConfig {
 					.text("Startup packing count")
 					.comment("How many items do players need to spawn with to have the privilege of having them in a backpack")
 					.defineInRange("startupBackpackCondition", 6, 1, 36);
+			sophisticatedEnderTicking = builder.text("Tick Sophisticated backpacks in ender backpack")
+					.define("sophisticatedEnderTicking", true);
+			sophisticatedRightClickOpen = builder.text("Right click Sophisticated backpacks to open in inventory and ender backpack")
+					.define("sophisticatedRightClickOpen", true);
+
 		}
 	}
 

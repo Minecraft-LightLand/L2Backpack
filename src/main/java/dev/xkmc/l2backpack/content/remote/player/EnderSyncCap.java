@@ -12,6 +12,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.NeoForge;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -28,10 +29,12 @@ public class EnderSyncCap extends PlayerCapabilityTemplate<EnderSyncCap> {
 
 	@Override
 	public void tick(Player player) {
-		if (player.level().isClientSide()) return;
+		if (!(player instanceof ServerPlayer sp)) return;
 		List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
 		for (int i = 0; i < 27; i++) {
 			ItemStack stack = player.getEnderChestInventory().getItem(i);
+			if (!stack.isEmpty())
+				NeoForge.EVENT_BUS.post(new EnderTickEvent(sp, stack, i));
 			if (!ItemStack.isSameItemSameComponents(stack, clientEnderInv.get(i))) {
 				clientEnderInv.set(i, stack.copy());
 				changes.add(Pair.of(i, stack));

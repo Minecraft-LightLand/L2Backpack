@@ -7,18 +7,16 @@ import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.network.RequestTooltipUpdateEvent;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
@@ -32,7 +30,8 @@ public class TooltipUpdateEvents {
 
 	@OnlyIn(Dist.CLIENT)
 	public static void onEnderSync(int slot, ItemStack stack) {
-		EnderSyncCap.HOLDER.get(Proxy.getClientPlayer()).setItem(slot, stack);
+		var player = Proxy.getClientPlayer();
+		if (player != null) EnderSyncCap.HOLDER.get(player).setItem(slot, stack);
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -67,11 +66,11 @@ public class TooltipUpdateEvents {
 
 	@OnlyIn(Dist.CLIENT)
 	private static boolean blockSession() {
-		LocalPlayer player = Proxy.getClientPlayer();
-		var ray = RayTraceUtil.rayTraceBlock(player.level(), player, player.getBlockReach());
-		if (ray.getType() == HitResult.Type.BLOCK) {
-			BlockPos pos = ray.getBlockPos();
-			BlockEntity entity = player.level().getBlockEntity(pos);
+		var level = Minecraft.getInstance().level;
+		var ray = Minecraft.getInstance().hitResult;
+		if (level != null && ray instanceof BlockHitResult bhit) {
+			BlockPos pos = bhit.getBlockPos();
+			BlockEntity entity = level.getBlockEntity(pos);
 			if (entity instanceof EnderDrawerBlockEntity drawer) {
 				startSession(drawer.item, drawer.owner_id);
 				return true;

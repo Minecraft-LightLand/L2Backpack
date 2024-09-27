@@ -1,3 +1,6 @@
+2.4.27
+- Fix client crash when client is not present
+
 2.4.26
 - Fix ender drawer insertion: when ender drawer is nearly full, insertion remainder will have drawer nbt attached incorrectly
 - Fix ender drawer not displaying correct count when viewer is not owner of the drawer

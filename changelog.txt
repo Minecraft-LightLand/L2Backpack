@@ -1,3 +1,11 @@
+3.0.7
+- Fix client crash when client player is not present
+- Fix ender drawers using separate storage for each dimensions
+- WARNING: before updating to this version, move your items out of ender drawer in any dimensions other than overworld
+
+3.0.6
+- Fix ender backpack not syncing after changing dimension
+
 3.0.5+12
 - Add Sophisticated compat
 

@@ -29,7 +29,7 @@ public class LBSavedData extends BaseSavedData<LBSavedData> {
 	private static final Factory<LBSavedData> FACTORY = new Factory<>(LBSavedData::new, LBSavedData::new);
 
 	public static LBSavedData get(ServerLevel level) {
-		var ans = level.getDataStorage().computeIfAbsent(FACTORY, ID);
+		var ans = level.getServer().overworld().getDataStorage().computeIfAbsent(FACTORY, ID);
 		ans.level = level;
 		return ans;
 	}

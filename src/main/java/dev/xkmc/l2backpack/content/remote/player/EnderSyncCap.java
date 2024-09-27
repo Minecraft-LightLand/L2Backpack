@@ -12,6 +12,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.NeoForge;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,12 +25,23 @@ public class EnderSyncCap extends PlayerCapabilityTemplate<EnderSyncCap> {
 	// in both client and server
 	public NonNullList<ItemStack> clientEnderInv = NonNullList.withSize(27, ItemStack.EMPTY);
 
+	private Level level = null;
+
 	public EnderSyncCap() {
+	}
+
+	@Override
+	public void onClone(Player player, boolean isWasDeath) {
+		clientEnderInv.clear();
 	}
 
 	@Override
 	public void tick(Player player) {
 		if (!(player instanceof ServerPlayer sp)) return;
+		if (level != player.level()) {
+			level = player.level();
+			clientEnderInv.clear();
+		}
 		List<Pair<Integer, ItemStack>> changes = new ArrayList<>();
 		for (int i = 0; i < 27; i++) {
 			ItemStack stack = player.getEnderChestInventory().getItem(i);

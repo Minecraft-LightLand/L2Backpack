@@ -29,7 +29,9 @@ import java.util.UUID;
 public class TooltipUpdateEvents {
 
 	public static void onEnderSync(int slot, ItemStack stack) {
-		LBMisc.ENDER_SYNC.type().getOrCreate(Proxy.getClientPlayer()).setItem(slot, stack);
+		var player = Proxy.getClientPlayer();
+		if (player == null) return;
+		LBMisc.ENDER_SYNC.type().getOrCreate(player).setItem(slot, stack);
 	}
 
 	@SubscribeEvent
@@ -63,7 +65,7 @@ public class TooltipUpdateEvents {
 	private static boolean blockSession() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		var ray = Minecraft.getInstance().hitResult;
-		if (ray instanceof BlockHitResult bray) {
+		if (player != null && ray instanceof BlockHitResult bray) {
 			BlockPos pos = bray.getBlockPos();
 			BlockEntity entity = player.level().getBlockEntity(pos);
 			if (entity instanceof EnderDrawerBlockEntity drawer) {

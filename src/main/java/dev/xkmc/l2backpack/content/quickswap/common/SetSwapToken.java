@@ -39,8 +39,13 @@ public record SetSwapToken(ISetSwapItem item, ItemStack stack, QuickSwapType typ
 		List<ItemStack> list = getRawList();
 		int row = list.size() / item.getRows();
 		int ind = getSelected();
-		action.swapSet(player, new SetSwapHandler(list, i -> i * row + ind));
+		action.swapSet(player, new SetSwapHandler(list, this::isLocked, i -> i * row + ind));
 		BaseBagItem.setItems(stack, list);
+	}
+
+	@Override
+	public boolean isLocked(int i) {
+		return item.getToggle(stack, null).isLocked(i);
 	}
 
 }

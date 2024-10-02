@@ -25,6 +25,7 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 	public final PlayerSlot<?> item_slot;
 	protected final UUID uuid;
 	protected final IItemHandlerModifiable handler;
+	protected final int row;
 
 	public BaseBagMenu(MenuType<T> type, int windowId, Inventory inventory, SpriteManager manager,
 					   PlayerSlot<?> hand, UUID uuid, int row) {
@@ -32,6 +33,7 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		this.item_slot = hand;
 		this.uuid = uuid;
 		this.player = inventory.player;
+		this.row = row;
 		ItemStack stack = getStack();
 		if (stack.getItem() instanceof BaseBagItem) {
 			var inv = stack.getCapability(Capabilities.ItemHandler.ITEM);
@@ -42,14 +44,22 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		} else {
 			handler = new InvWrapper(new SimpleContainer(row * 9));//TODO
 		}
-		this.addSlot("grid");
+		addSlots();
 		if (!player.level().isClientSide()) {
 			BaseBagItem.checkLootGen(getStack(), player);
 		}
 	}
 
+	protected void addSlots() {
+		this.addSlot("grid");
+	}
+
+	protected BagSlot createSlot(int index, int x, int y) {
+		return new BagSlot(handler, index, x, y);
+	}
+
 	protected void addSlot(String name) {
-		this.getLayout().getSlot(name, (x, y) -> new BagSlot(handler, this.added++, x, y), this::addSlot);
+		this.getLayout().getSlot(name, (x, y) -> createSlot(this.added++, x, y), this::addSlot);
 	}
 
 	private ItemStack stack_cache = ItemStack.EMPTY;

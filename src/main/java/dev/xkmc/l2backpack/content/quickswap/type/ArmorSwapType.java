@@ -51,6 +51,8 @@ public class ArmorSwapType extends QuickSwapType
 	public void swapSet(Player player, ISetSwapHandler handler) {
 		for (int i = 0; i < 4; i++) {
 			EquipmentSlot e = getSlot(i);
+			if (handler.isLocked(i))
+				continue;
 			if (!maySwapOut(player.getItemBySlot(e)))
 				continue;
 			ItemStack stack = handler.getStack(i);
@@ -104,7 +106,7 @@ public class ArmorSwapType extends QuickSwapType
 				ItemStack old = player.getItemBySlot(e);
 				ItemStack cur = set.asList().get(i);
 				boolean avail = maySwapOut(old) && (!old.isEmpty() || !cur.isEmpty());
-				renderArmorSlot(ctx.g(), x, y, 64, !old.isEmpty() || !cur.isEmpty(), !avail);
+				renderArmorSlot(ctx.g(), x, y, 64, !set.isLocked(i) && (!old.isEmpty() || !cur.isEmpty()), !avail);
 				ctx.renderItem(old, x, y);
 				y += 18;
 			}

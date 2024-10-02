@@ -22,4 +22,9 @@ public record SingleSwapEntry(IQuickSwapToken<SingleSwapEntry> token, ItemStack 
 		return stack;
 	}
 
+	@Override
+	public boolean isLocked(int i) {
+		return false;
+	}
+
 }

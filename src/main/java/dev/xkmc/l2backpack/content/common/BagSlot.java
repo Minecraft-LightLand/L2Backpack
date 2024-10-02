@@ -18,4 +18,5 @@ public class BagSlot extends SlotItemHandler {
 	public void setChanged() {
 		bag.setStackInSlot(index, getItem());
 	}
+
 }

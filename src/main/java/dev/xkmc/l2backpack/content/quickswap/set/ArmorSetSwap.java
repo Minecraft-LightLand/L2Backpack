@@ -6,6 +6,8 @@ import dev.xkmc.l2backpack.content.quickswap.single.ArmorSwap;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.data.LBLang;
+import dev.xkmc.l2backpack.init.registrate.LBItems;
+import dev.xkmc.l2core.base.menu.data.BoolArrayDataSlot;
 import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -52,6 +54,11 @@ public class ArmorSetSwap extends SetSwapItem implements ItemOnBackItem {
 	@Override
 	public boolean isValidContent(ItemStack stack) {
 		return ArmorSwap.isValidItem(stack);
+	}
+
+	@Override
+	public ISetToggle getToggle(ItemStack stack, @Nullable BoolArrayDataSlot dataSlot) {
+		return new LongSetToggle(stack, LBItems.DC_SWAP_TOGGLE, dataSlot);
 	}
 
 }

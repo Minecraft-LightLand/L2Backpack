@@ -1,3 +1,6 @@
+3.0.8
+- Allow toggle armor set swap slots to disable / enable
+
 3.0.7
 - Fix client crash when client player is not present
 - Fix ender drawers using separate storage for each dimensions

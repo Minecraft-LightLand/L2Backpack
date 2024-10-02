@@ -6,6 +6,7 @@ import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
 import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
 import dev.xkmc.l2backpack.content.quickswap.common.GenericSwapMenu;
 import dev.xkmc.l2backpack.content.quickswap.set.ArmorSetBagMenu;
+import dev.xkmc.l2backpack.content.quickswap.set.GenericSetSwapScreen;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalContainer;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalScreen;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,7 +37,7 @@ public class LBMenu {
 
 	public static final MenuEntry<ArmorSetBagMenu> MT_ARMOR_SET = REGISTRATE.menu("armor_set",
 					ArmorSetBagMenu::fromNetwork,
-					() -> BaseOpenableScreen<ArmorSetBagMenu>::new)
+					() -> GenericSetSwapScreen<ArmorSetBagMenu>::new)
 			.lang(LBMenu::getLangKey).register();
 
 	public static void register() {

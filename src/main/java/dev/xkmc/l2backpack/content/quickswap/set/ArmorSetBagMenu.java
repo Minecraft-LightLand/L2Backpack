@@ -1,19 +1,21 @@
 package dev.xkmc.l2backpack.content.quickswap.set;
 
-import dev.xkmc.l2backpack.content.common.BaseBagMenu;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2backpack.init.registrate.LBItems;
 import dev.xkmc.l2backpack.init.registrate.LBMenu;
 import dev.xkmc.l2core.base.menu.base.SpriteManager;
+import dev.xkmc.l2core.base.menu.data.BoolArrayDataSlot;
 import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class ArmorSetBagMenu extends BaseBagMenu<ArmorSetBagMenu> {
+public class ArmorSetBagMenu extends GenericSetSwapMenu<ArmorSetBagMenu> {
 
 	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "backpack_4");
 
@@ -28,8 +30,8 @@ public class ArmorSetBagMenu extends BaseBagMenu<ArmorSetBagMenu> {
 	}
 
 	@Override
-	protected void addSlot(String name) {
-		this.getLayout().getSlot(name, (x, y) -> new ArmorSetBagSlot(handler, this.added++, x, y), this::addSlot);
+	protected GenericSetBagSlot createSlot(int index, int x, int y) {
+		return new ArmorSetBagSlot(handler, toggle, index, x, y);
 	}
 
 }

@@ -86,6 +86,7 @@ public class LBItems {
 	public static final DCVal<DCStack> DC_DRAWER_STACK = DC.stack("drawer_stack");
 	public static final DCVal<Integer> DC_DRAWER_COUNT = DC.intVal("drawer_count");
 	public static final DCVal<Integer> DC_DRAWER_STACKING = DC.intVal("drawer_upgrade");
+	public static final DCVal<Long> DC_SWAP_TOGGLE = DC.longVal("set_swap_toggle");
 
 	public static final DCVal<ItemContainerContents> BAG_CONTENT = DC.reg("bag_content",
 			ItemContainerContents.CODEC, ItemContainerContents.STREAM_CODEC, true);

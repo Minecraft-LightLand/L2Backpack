@@ -6,8 +6,9 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public record SetSwapEntry(IQuickSwapToken<SetSwapEntry> token, List<ItemStack> list)
+public record SetSwapEntry(int row, int index, IQuickSwapToken<SetSwapEntry> token, List<ItemStack> list)
 		implements ISwapEntry<SetSwapEntry> {
+
 	public static List<SetSwapEntry> parse(IQuickSwapToken<SetSwapEntry> token, List<ItemStack> items, int size) {
 		int row = items.size() / size;
 		List<SetSwapEntry> ans = new ArrayList<>();
@@ -16,9 +17,14 @@ public record SetSwapEntry(IQuickSwapToken<SetSwapEntry> token, List<ItemStack> 
 			for (int i = 0; i < size; i++) {
 				arr[i] = items.get(i * row + j);
 			}
-			ans.add(new SetSwapEntry(token, List.of(arr)));
+			ans.add(new SetSwapEntry(row, j, token, List.of(arr)));
 		}
 		return ans;
+	}
+
+	@Override
+	public boolean isLocked(int i) {
+		return token.isLocked(i * row + index);
 	}
 
 	@Override

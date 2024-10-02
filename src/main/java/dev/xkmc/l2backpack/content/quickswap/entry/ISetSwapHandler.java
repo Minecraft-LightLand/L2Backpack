@@ -8,4 +8,6 @@ public interface ISetSwapHandler {
 
 	void replace(int i, ItemStack stack);
 
+	boolean isLocked(int i);
+
 }

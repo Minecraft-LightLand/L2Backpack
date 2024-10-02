@@ -19,7 +19,7 @@ import java.util.List;
 public class Scabbard extends SingleSwapItem implements ItemOnBackItem {
 
 	public static boolean isValidItem(ItemStack stack) {
-		return stack.getItem().canFitInsideContainerItems() && !stack.isStackable() &&
+		return !stack.isEmpty() && stack.getItem().canFitInsideContainerItems() && !stack.isStackable() &&
 				getEquipmentSlotForItem(stack).getType() == EquipmentSlot.Type.HAND;
 	}
 

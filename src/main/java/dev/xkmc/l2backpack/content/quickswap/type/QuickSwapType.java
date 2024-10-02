@@ -51,9 +51,11 @@ public abstract class QuickSwapType {
 		List<ItemStack> list = token.asList();
 		boolean shift = QuickSwapOverlay.hasShiftDown();
 		boolean avail = isAvailable(player, token);
-		for (int i = 0; i < list.size(); i++)
+		for (int i = 0; i < list.size(); i++) {
+			if (token.isLocked(i)) continue;
 			renderSelection(ctx.g(), entry.x() + i * 18, entry.y(), shift ? 127 : 64, avail,
 					(!avail || isAvailable(player, token, i)) && entry.selected());
+		}
 		if (entry.selected() && list.size() == 1) {
 			ItemStack stack = list.getFirst();
 			if (!stack.isEmpty()) {
@@ -63,8 +65,10 @@ public abstract class QuickSwapType {
 				box.renderLongText(ctx.font(), List.of(stack.getHoverName()));
 			}
 		}
-		for (int i = 0; i < list.size(); i++)
+		for (int i = 0; i < list.size(); i++) {
+			if (token.isLocked(i)) continue;
 			ctx.renderItem(list.get(i), entry.x() + i * 18, entry.y());
+		}
 	}
 
 	public static void renderSelection(GuiGraphics g, int x, int y, int a, boolean available, boolean selected) {

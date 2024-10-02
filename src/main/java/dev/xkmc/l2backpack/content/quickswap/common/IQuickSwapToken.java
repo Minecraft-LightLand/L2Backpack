@@ -23,4 +23,6 @@ public interface IQuickSwapToken<T extends ISwapEntry<T>> {
 
 	void swap(Player player);
 
+	boolean isLocked(int i);
+
 }

@@ -44,4 +44,9 @@ public record SingleSwapToken(IQuickSwapItem item, ItemStack stack, QuickSwapTyp
 		BaseBagItem.setItems(stack, list);
 	}
 
+	@Override
+	public boolean isLocked(int i) {
+		return false;
+	}
+
 }

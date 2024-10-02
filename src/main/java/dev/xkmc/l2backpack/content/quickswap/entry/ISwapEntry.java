@@ -13,4 +13,6 @@ public interface ISwapEntry<T extends ISwapEntry<T>> {
 
 	ItemStack getStack();
 
+	boolean isLocked(int i);
+
 }

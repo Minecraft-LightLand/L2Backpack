@@ -88,6 +88,7 @@ public class ArmorSwapType extends QuickSwapType
 	}
 
 	public void renderSide(SelectionSideBar.Context ctx, int x, int y, Player player, ISwapEntry<?> token) {
+		y -= 36;
 		if (token instanceof SingleSwapEntry single) {
 			ItemStack hover = single.stack();
 			EquipmentSlot target = SingleSwapItem.getEquipmentSlotForItem(hover);

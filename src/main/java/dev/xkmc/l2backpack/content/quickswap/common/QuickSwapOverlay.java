@@ -134,7 +134,7 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 		var type = hover.token().type();
 		if (ease_time == max_ease && type instanceof ISideInfoRenderer rtype) {
 			int x = ctx.x0();
-			int y = 45 + ctx.y0();
+			int y = 81 + ctx.y0();
 			if (onCenter()) {
 				x -= 18;
 			} else x += 18 * hover.asList().size();

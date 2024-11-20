@@ -214,6 +214,10 @@ dependencies {
     implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:5296475")
     implementation fg.deobf("curse.maven:sophisticated-core-618298:5326245")
 
+
+    implementation fg.deobf("curse.maven:lionfish-api-1001614:5363774")
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:5785769")
+
 }
 
 tasks.register('publishCurseForge', TaskPublishCurseForge) {

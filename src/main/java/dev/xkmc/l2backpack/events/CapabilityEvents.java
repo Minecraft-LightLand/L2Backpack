@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -59,6 +60,12 @@ public class CapabilityEvents {
 					cap -> cap.doPickup(stack, new PickupTrace(false, player)));
 			return false;
 		});
+	}
+
+	public static void touchArrow(ItemStack stack, Inventory inv) {
+		if (stack.isStackable() && inv.player instanceof ServerPlayer sp) {
+			tryInsertItem(sp, stack);
+		}
 	}
 
 }

@@ -31,6 +31,9 @@ public class ArmorSetBagMenu extends GenericSetSwapMenu<ArmorSetBagMenu> {
 
 	@Override
 	protected GenericSetBagSlot createSlot(int index, int x, int y) {
+		if (!player.level().isClientSide()) {
+			dataSlot.set(toggle.isLocked(index), index);
+		}
 		return new ArmorSetBagSlot(handler, toggle, index, x, y);
 	}
 

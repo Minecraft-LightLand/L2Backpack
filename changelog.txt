@@ -1,3 +1,9 @@
+3.0.10
+- Fix armor set toggles not rendered correctly when reopened
+
+3.0.9
+- Fix crash when an upgraded backpack is taken out while opened
+
 3.0.8
 - Allow toggle armor set swap slots to disable / enable
 

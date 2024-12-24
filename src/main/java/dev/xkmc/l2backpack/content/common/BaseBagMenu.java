@@ -62,6 +62,12 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		this.getLayout().getSlot(name, (x, y) -> createSlot(this.added++, x, y), this::addSlot);
 	}
 
+	@Override
+	public void broadcastChanges() {
+		if (!stillValid(player)) return;
+		super.broadcastChanges();
+	}
+
 	private ItemStack stack_cache = ItemStack.EMPTY;
 
 	@ServerOnly

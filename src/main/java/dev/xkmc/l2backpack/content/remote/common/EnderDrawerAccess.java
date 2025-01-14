@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.remote.common;
 import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
 import dev.xkmc.l2core.util.Proxy;
+import dev.xkmc.l2core.util.ServerProxy;
 import net.minecraft.Util;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -57,7 +58,7 @@ public final class EnderDrawerAccess {
 	}
 
 	public Optional<ServerPlayer> getOwner() {
-		return Proxy.getServer().map(e -> e.getPlayerList().getPlayer(id));
+		return ServerProxy.getServer().map(e -> e.getPlayerList().getPlayer(id));
 	}
 
 }

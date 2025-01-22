@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.quickswap.type;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.entry.*;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
+import dev.xkmc.l2backpack.init.data.TagGen;
 import dev.xkmc.l2library.base.overlay.OverlayUtil;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import net.minecraft.client.gui.GuiGraphics;
@@ -30,6 +31,7 @@ public class ArmorSwapType extends QuickSwapType
 
 	private boolean maySwapOut(ItemStack stack) {
 		return stack.getItem().canFitInsideContainerItems() &&
+				!stack.is(TagGen.BACKPACK_BLACKLIST) &&
 				!(stack.getItem() instanceof BaseBagItem);
 	}
 

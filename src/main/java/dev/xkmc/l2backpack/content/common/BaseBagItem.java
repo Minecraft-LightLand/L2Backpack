@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.content.capability.PickupBagItem;
 import dev.xkmc.l2backpack.content.insert.InsertOnlyItem;
+import dev.xkmc.l2backpack.init.data.TagGen;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.client.Minecraft;
@@ -171,7 +172,7 @@ public abstract class BaseBagItem extends Item implements ContentTransfer.Quad, 
 	}
 
 	public boolean isValidContent(ItemStack stack) {
-		return stack.getItem().canFitInsideContainerItems();
+		return stack.getItem().canFitInsideContainerItems() && !stack.is(TagGen.BACKPACK_BLACKLIST);
 	}
 
 	public abstract void open(ServerPlayer player, PlayerSlot<?> slot, ItemStack stack);

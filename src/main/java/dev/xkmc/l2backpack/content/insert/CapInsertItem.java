@@ -1,12 +1,9 @@
 package dev.xkmc.l2backpack.content.insert;
 
-import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.network.DrawerInteractToServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;

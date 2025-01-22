@@ -211,8 +211,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:patchouli-306770:4636277")
 
-    implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:5296475")
-    implementation fg.deobf("curse.maven:sophisticated-core-618298:5326245")
+    implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:6086726")
+    implementation fg.deobf("curse.maven:sophisticated-core-618298:6092715")
 
 
     implementation fg.deobf("curse.maven:lionfish-api-1001614:5363774")

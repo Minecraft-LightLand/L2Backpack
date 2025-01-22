@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-01T16:37:06.159559	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider]
+// 1.20.1	2025-01-20T15:43:02.235167	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider]
 530cfc8939fcc948a19b693d06af8389391a97a4 assets/l2backpack/blockstates/dimensional_storage.json
 c8a12d1045e3e7eccdfa66ade2f5fd44f2359d78 assets/l2backpack/blockstates/drawer.json
 1b95dd478e92493373a61b041acce8ee59dfdec7 assets/l2backpack/blockstates/ender_drawer.json
@@ -290,6 +290,7 @@ c78129735c6ad1652c1b4a92f7baa00dd519affd data/l2backpack/recipes/smithing/upgrad
 f400da6b10e68daf154aa64971177fb680929812 data/l2backpack/recipes/smithing/upgrade_drawer.json
 e3c9f4ec2d7dfe787211d0f0d754a19ecdcc7972 data/l2backpack/recipes/suit_swap.json
 7d3c7079242f5d155ea0e72ff49778384eb6db14 data/l2backpack/recipes/tool_swap.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2backpack/tags/items/backpack_blacklist.json
 d073f52e56888ad66ca6d37fb92fa6f83d45ba87 data/l2backpack/tags/items/backpacks.json
 180eadcbad0557c7030d6d1f2a0554b2104d0a88 data/l2backpack/tags/items/bags.json
 18b21298f3a3681bb8a5d5b00cf70da4830d66eb data/l2backpack/tags/items/dimensional_storages.json

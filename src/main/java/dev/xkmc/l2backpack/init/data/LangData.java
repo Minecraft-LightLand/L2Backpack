@@ -3,8 +3,8 @@ package dev.xkmc.l2backpack.init.data;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.loot.LootGen;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -33,7 +33,8 @@ public class LangData {
 
 	public static void altInsert(List<Component> list) {
 		if (Screen.hasShiftDown()) return;
-		var player = Minecraft.getInstance().player;
+		var player = Proxy.getPlayer();
+		if (player == null) return;
 		var menu = player.containerMenu;
 		if (!menu.getCarried().isEmpty()) {
 			list.add(Info.ALT_INSERT.get().withStyle(ChatFormatting.YELLOW));

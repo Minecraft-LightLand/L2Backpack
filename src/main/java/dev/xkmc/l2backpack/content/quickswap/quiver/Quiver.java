@@ -9,6 +9,7 @@ import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.content.render.ItemOnBackItem;
 import dev.xkmc.l2backpack.init.data.LangData;
+import dev.xkmc.l2backpack.init.data.TagGen;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,6 +37,7 @@ public class Quiver extends SingleSwapItem implements ItemOnBackItem {
 
 	public static boolean isValidStack(ItemStack stack) {
 		return stack.getItem().canFitInsideContainerItems() &&
+				!stack.is(TagGen.BACKPACK_BLACKLIST) &&
 				stack.getItem() instanceof ArrowItem;
 	}
 

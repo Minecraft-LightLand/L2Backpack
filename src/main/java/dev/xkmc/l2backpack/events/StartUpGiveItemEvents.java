@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.events;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBConfig;
+import dev.xkmc.l2backpack.init.data.LBTagGen;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerPlayer;
@@ -40,8 +41,10 @@ public class StartUpGiveItemEvents {
 		var ans = NonNullList.withSize(initialRow * 9, ItemStack.EMPTY);
 		int index = 0;
 		for (int i = 0; i < list.size(); i++) {
-			if (!list.get(i).isEmpty() && list.get(i).getItem().canFitInsideContainerItems()) {
-				ans.set(index++, list.get(i).copy());
+			ItemStack item = list.get(i);
+			if (!item.isEmpty() && item.getItem().canFitInsideContainerItems() &&
+					!item.is(LBTagGen.BACKPACK_BLACKLIST)) {
+				ans.set(index++, item.copy());
 				list.set(i, ItemStack.EMPTY);
 			}
 		}

@@ -5,7 +5,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.151'
+    id 'net.neoforged.gradle.userdev' version '7.0.165'
     id 'net.darkhax.curseforgegradle' version '[1.1.24,)'
     id "at.stnwtr.gradle-secrets-plugin" version "1.0.1"
     id "com.modrinth.minotaur" version "2.+"
@@ -162,14 +162,14 @@ dependencies {
     compileOnly "curse.maven:mouse-tweaks-60089:5437296"
     implementation "curse.maven:polymorph-388800:5550094"
 
-    implementation "curse.maven:sophisticated-backpacks-422301:5646594"
-    implementation "curse.maven:sophisticated-core-618298:5646592"
+    implementation "curse.maven:sophisticated-backpacks-422301:6093515"
+    implementation "curse.maven:sophisticated-core-618298:6104258"
 }
 
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
     apiToken = secrets.get("curseforge_token")
     def mainFile = upload(project.curseforge_project, new File("./build/libs/${mod_id}-${mod_version}.jar"))
-    mainFile.changelog = new File('./changelog.txt')
+    mainFile.changelog = new File('./changelog.txt').text.split("\n\n\n")[0]
     mainFile.addEnvironment("Client", "Server")
     mainFile.addGameVersion("1.21.1")
     mainFile.addModLoader("NeoForge")

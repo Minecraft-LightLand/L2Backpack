@@ -1,3 +1,6 @@
+3.0.13
+- Add backpack blacklist
+
 3.0.12
 - Fix server crash when using ender drawer as block
 
@@ -18,25 +21,16 @@
 - Fix ender drawers using separate storage for each dimensions
 - WARNING: before updating to this version, move your items out of ender drawer in any dimensions other than overworld
 
+
 3.0.6
 - Fix ender backpack not syncing after changing dimension
-
-3.0.5+12
 - Add Sophisticated compat
-
-3.0.5+11
 - Merge all single swap menu into 1
 - Improve custom overlay rendering for swap types
 - Fix Backpack Signature
 - Prepare for GlimmeringTales
-
-3.0.5+4
 - Fix capability caching not invalidated
 - Use component approach for block entity data storing
-
-3.0.5+3
 - Fix Backpack upgrade recipe with Polymorphism
 - Fix Drawer upgrade recipe
-
-3.0.5+2
 - UseNeoForge 163 for tooltip

@@ -2,13 +2,14 @@ package dev.xkmc.l2backpack.content.quickswap.single;
 
 import dev.xkmc.l2backpack.content.client.ItemOnBackItem;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
-import dev.xkmc.l2backpack.content.quickswap.common.*;
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.data.LBLang;
-import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
+import dev.xkmc.l2backpack.init.data.LBTagGen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +21,7 @@ import java.util.List;
 public class ArmorSwap extends SingleSwapItem implements ItemOnBackItem {
 
 	public static boolean isValidItem(ItemStack stack) {
-		return stack.getItem().canFitInsideContainerItems() && !(stack.getItem() instanceof BaseBagItem) &&
+		return stack.getItem().canFitInsideContainerItems() && !stack.is(LBTagGen.BACKPACK_BLACKLIST) && !(stack.getItem() instanceof BaseBagItem) &&
 				getEquipmentSlotForItem(stack).getType() == EquipmentSlot.Type.HUMANOID_ARMOR;
 	}
 

@@ -9,5 +9,7 @@
   "result": {
     "item": "l2backpack:backpack_lime"
   },
-  "template": []
+  "template": {
+    "tag": "l2library:dummy_smithing_template"
+  }
 }

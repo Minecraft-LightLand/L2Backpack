@@ -10,5 +10,7 @@
     "count": 1,
     "id": "l2backpack:backpack_lime"
   },
-  "template": []
+  "template": {
+    "item": "minecraft:paper"
+  }
 }

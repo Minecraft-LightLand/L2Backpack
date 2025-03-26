@@ -1,3 +1,6 @@
+3.0.14
+- Use paper as smithing template to please KubeJS
+
 3.0.13
 - Add backpack blacklist
 

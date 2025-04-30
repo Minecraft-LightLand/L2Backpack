@@ -1,3 +1,9 @@
+3.0.16
+- Allow offhand bow quiver match
+
+3.0.15
+- Add a guard to prevent server config early access from KubeJS
+
 3.0.14
 - Use paper as smithing template to please KubeJS
 
@@ -6,6 +12,7 @@
 
 3.0.12
 - Fix server crash when using ender drawer as block
+
 
 3.0.11
 - Fix compatibility with Pouch and Pouch-like items

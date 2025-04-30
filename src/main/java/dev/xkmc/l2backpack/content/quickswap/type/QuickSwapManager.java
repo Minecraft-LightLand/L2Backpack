@@ -16,16 +16,36 @@ public class QuickSwapManager {
 
 	@Nullable
 	public static QuickSwapType getValidType(LivingEntity player, boolean isAltDown) {
-		QuickSwapType main = getValidType(player, player.getMainHandItem(), isAltDown);
-		if (main != null) {
-			return main;
-		}
-		for (var e : QuickSwapTypes.MATCHER) {
-			if (e.allowsOffhand() && e.match(player.getOffhandItem())) {
-				return e;
+		if (!isAltDown) {
+			for (var e : QuickSwapTypes.MATCHER) {
+				if (e.match(player.getMainHandItem())) {
+					return e;
+				}
 			}
+			for (var e : QuickSwapTypes.MATCHER) {
+				if (e.allowsOffhand() && e.match(player.getOffhandItem())) {
+					return e;
+				}
+			}
+			if (Scabbard.isValidItem(player.getMainHandItem())) {
+				return QuickSwapTypes.TOOL;
+			}
+			if (player.getMainHandItem().isEmpty()) {
+				return QuickSwapTypes.ARMOR;
+			}
+			return null;
+		} else {
+			QuickSwapType main = getValidType(player, player.getMainHandItem(), isAltDown);
+			if (main != null) {
+				return main;
+			}
+			for (var e : QuickSwapTypes.MATCHER) {
+				if (e.allowsOffhand() && e.match(player.getOffhandItem())) {
+					return e;
+				}
+			}
+			return null;
 		}
-		return null;
 	}
 
 	@Nullable

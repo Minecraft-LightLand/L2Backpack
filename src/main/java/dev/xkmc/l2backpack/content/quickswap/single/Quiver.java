@@ -10,6 +10,7 @@ import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.data.LBLang;
 import dev.xkmc.l2backpack.init.data.LBTagGen;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
+import dev.xkmc.l2library.util.GenericItemStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArrowItem;
@@ -57,12 +58,18 @@ public class Quiver extends SingleSwapItem implements ItemOnBackItem {
 	public IQuickSwapToken<?> getTokenOfType(ItemStack stack, LivingEntity player, QuickSwapType type) {
 		if (type != QuickSwapTypes.ARROW)
 			return null;
-		if (!(player.getMainHandItem().getItem() instanceof ProjectileWeaponItem bow))
-			return null;
+		GenericItemStack<ProjectileWeaponItem> bow = null;
+		var main = player.getMainHandItem();
+		var off = player.getOffhandItem();
+		if (main.getItem() instanceof ProjectileWeaponItem)
+			bow = GenericItemStack.of(main);
+		else if (off.getItem() instanceof ProjectileWeaponItem)
+			bow = GenericItemStack.of(off);
+		if (bow == null) return null;
 		var cont = LBItems.BACKPACK_CONTENT.get(stack);
 		if (cont == null) return null;
 		for (ItemStack arrow : cont.nonEmptyItems()) {
-			if (bow.getAllSupportedProjectiles().test(arrow))
+			if (bow.item().getAllSupportedProjectiles(bow.stack()).test(arrow))
 				return new SingleSwapToken(this, stack, QuickSwapTypes.ARROW);
 		}
 		return null;

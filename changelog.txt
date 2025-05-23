@@ -1,3 +1,6 @@
+2.5.1
+- Change quiver implementation and fix MNA compat
+
 2.5.0
 - Add smithing template for backpack upgrade
 

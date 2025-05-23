@@ -21,8 +21,6 @@ import java.util.function.IntConsumer;
 @EventBusSubscriber(modid = L2Backpack.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ArrowBagEvents {
 
-	public static final ThreadLocal<Pair<ItemStack, IntConsumer>> TEMP = new ThreadLocal<>();
-
 	@SubscribeEvent
 	public static void onProjectileSearch(LivingGetProjectileEvent event) {
 		if (!(event.getProjectileWeaponItemStack().getItem() instanceof ProjectileWeaponItem weapon)) return;
@@ -30,7 +28,7 @@ public class ArrowBagEvents {
 		NeoForge.EVENT_BUS.post(finder);
 		var arrow = finder.arrow;
 		if (arrow != null) {
-			TEMP.set(arrow);
+			((ItemStackShrinkProvider) (Object) arrow.getFirst()).l2backpack$setShrinkListener(arrow.getSecond());
 			event.setProjectileItemStack(arrow.getFirst());
 		}
 	}
@@ -47,12 +45,6 @@ public class ArrowBagEvents {
 		ItemStack stack = entry.getStack();
 		if (stack.isEmpty()) return;
 		event.setProjectile(Pair.of(stack, token::shrink));
-	}
-
-	public static void shrink(ItemStack stack, int count) {
-		if (TEMP.get() != null && TEMP.get().getFirst() == stack) {
-			TEMP.get().getSecond().accept(count);
-		}
 	}
 
 	public static class ArrowFindEvent extends Event {

@@ -66,7 +66,7 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 	}
 
 	@Override
-	protected boolean isOnHold() {
+	public boolean isOnHold() {
 		return hasShiftDown() || hasAltDown() || L2Keys.SWAP.map.isDown();
 	}
 
@@ -94,7 +94,7 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 		int selected = token.getSelected();
 		boolean ignoreOther = false;
 		QuickSwapType type = token.type();
-		if (!hasShiftDown()) {
+		if (!isOnHold()) {
 			ignoreOther = !activePopup(type);
 		}
 		int focus = player.getInventory().selected;

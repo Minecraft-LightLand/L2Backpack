@@ -1,3 +1,8 @@
+3.0.18
+- Fix scrolling when selection key is not SHIFT
+- Fix scrolling on touchpad
+- RU translation
+
 3.0.17
 - Switch to better quiver implementation
 

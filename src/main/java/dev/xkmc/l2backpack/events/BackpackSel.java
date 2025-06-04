@@ -58,6 +58,12 @@ public class BackpackSel implements ISelectionListener {
 	}
 
 	@Override
+	public boolean handleClientScroll(int diff, double delta, Player player) {
+		if (delta == 0) return true;
+		return handleClientScroll(delta > 0 ? 1 : -1, player);
+	}
+
+	@Override
 	public void handleClientKey(L2Keys key, Player player) {
 		if (!QuickSwapOverlay.INSTANCE.isScreenOn()) return;
 		if (key == L2Keys.SWAP) {
@@ -71,11 +77,17 @@ public class BackpackSel implements ISelectionListener {
 
 	@Override
 	public boolean handleClientNumericKey(int i, BooleanSupplier click) {
-		if (!QuickSwapOverlay.hasShiftDown()) return false;
+		if (!QuickSwapOverlay.INSTANCE.isOnHold()) return false;
 		if (click.getAsBoolean()) {
 			toServer(i);
 			return true;
 		}
 		return false;
 	}
+
+	@Override
+	public boolean isHoldKeyDown(Player player) {
+		return QuickSwapOverlay.INSTANCE.isOnHold();
+	}
+
 }

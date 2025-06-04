@@ -49,7 +49,7 @@ public abstract class QuickSwapType {
 
 	public void renderSelected(SelectionSideBar.Context ctx, Player player, ISwapEntry<?> token, int x, int y, boolean selected, boolean center) {
 		List<ItemStack> list = token.asList();
-		boolean shift = QuickSwapOverlay.hasShiftDown();
+		boolean shift = QuickSwapOverlay.INSTANCE.isOnHold();
 		boolean avail = isAvailable(player, token);
 		for (int i = 0; i < list.size(); i++)
 			renderSelection(ctx.g(), x + i * 18, y, shift ? 127 : 64, avail, (!avail || isAvailable(player, token, i)) && selected);

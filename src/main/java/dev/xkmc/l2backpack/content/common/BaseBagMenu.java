@@ -10,14 +10,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 
@@ -116,29 +112,5 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		}
 		return moved;
 	}
-
-	@Override
-	public boolean tryItemClickBehaviourOverride(Player player, ClickAction action, Slot slot, ItemStack clickedItem, ItemStack carriedItem) {
-		// Neo: Fire the ItemStackedOnOtherEvent, and return true if it was cancelled (meaning the event was handled). Returning true will trigger the container to stop processing further logic.
-		var access = createCarriedSlotAccess();
-		if (CommonHooks.onItemStackedOn(clickedItem, carriedItem, slot, action, player, access)) {
-			return true;
-		}
-		FeatureFlagSet featureflagset = player.level().enabledFeatures();
-		if (carriedItem.isItemEnabled(featureflagset)) {
-			if (carriedItem.overrideStackedOnOther(slot, action, player)) {
-				slot.set(clickedItem);
-				return true;
-			}
-		}
-		if (clickedItem.isItemEnabled(featureflagset)) {
-			if (clickedItem.overrideOtherStackedOnMe(carriedItem, slot, action, player, access)) {
-				slot.set(clickedItem);
-				return true;
-			}
-		}
-		return false;
-	}
-
 
 }

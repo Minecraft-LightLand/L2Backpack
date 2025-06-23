@@ -21,7 +21,7 @@ public class SlotGen extends RecordDataProvider {
 	public void add(BiConsumer<String, Record> map) {
 		map.accept(L2Backpack.MODID + "/curios/entities/l2backpack_entity", new CurioEntityBuilder(
 				new ArrayList<>(List.of(new ResourceLocation("player"))),
-				new ArrayList<>(List.of("back")),
+				new ArrayList<>(List.of("back", "belt")),
 				SlotCondition.of()
 		));
 	}

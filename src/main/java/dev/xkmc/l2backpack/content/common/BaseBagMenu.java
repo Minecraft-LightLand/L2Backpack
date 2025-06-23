@@ -1,10 +1,13 @@
 package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.content.click.DrawerQuickInsert;
+import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
 import dev.xkmc.l2library.base.menu.base.BaseContainerMenu;
 import dev.xkmc.l2library.base.menu.base.SpriteManager;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
+import dev.xkmc.l2screentracker.screen.base.ScreenTrackerRegistry;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
+import dev.xkmc.l2screentracker.screen.source.SimpleSlotData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
@@ -72,7 +75,7 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 	}
 
 	private ItemStack getStackRaw() {
-		ItemStack stack = item_slot.getItem(player);
+		ItemStack stack = accessSlot(player);
 		CompoundTag tag = stack.getTag();
 		if (player.level().isClientSide()) return stack;
 		if (tag == null) return ItemStack.EMPTY;
@@ -80,6 +83,14 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		if (!tag.getUUID("container_id").equals(uuid)) return ItemStack.EMPTY;
 		stack_cache = stack;
 		return stack;
+	}
+
+	protected ItemStack accessSlot(Player player) {
+		if (player.level().isClientSide() && item_slot.type() == ScreenTrackerRegistry.IS_ENDER.get()) {
+			if (item_slot.data() instanceof SimpleSlotData data)
+				return EnderSyncCap.HOLDER.get(player).getItems().get(data.slot());
+		}
+		return item_slot.getItem(player);
 	}
 
 	public ItemStack quickMoveStack(Player pl, int id) {

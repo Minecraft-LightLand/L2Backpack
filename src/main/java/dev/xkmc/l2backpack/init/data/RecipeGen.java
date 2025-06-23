@@ -52,7 +52,7 @@ public class RecipeGen {
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, storage, 1)::unlockedBy, storage)
 						.group("dimensional_storage_craft").pattern("EAE").pattern("DCD").pattern("BAB")
 						.define('A', BackpackItems.ENDER_POCKET.get()).define('B', wool)
-						.define('C', Items.ENDER_CHEST).define('D', Items.POPPED_CHORUS_FRUIT)
+						.define('C', Items.ENDER_CHEST).define('D', Items.ENDER_PEARL)
 						.define('E', Items.GOLD_NUGGET)
 						.save(pvd, L2Backpack.MODID + ":shaped/craft_storage_" + color.getName());
 			}
@@ -123,6 +123,13 @@ public class RecipeGen {
 					.pattern("EAE").pattern("ABA").pattern("DAD")
 					.define('A', Tags.Items.LEATHER).define('B', Items.IRON_CHESTPLATE)
 					.define('D', Items.GOLD_INGOT).define('E', ender)
+					.save(pvd);
+
+			bag = BackpackItems.HANDSWAP.get();
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, Items.LEATHER)
+					.pattern("AAA").pattern("DBD")
+					.define('A', Tags.Items.LEATHER).define('B', Items.SHIELD)
+					.define('D', Items.STRING)
 					.save(pvd);
 
 			bag = BackpackItems.DRAWER.get();

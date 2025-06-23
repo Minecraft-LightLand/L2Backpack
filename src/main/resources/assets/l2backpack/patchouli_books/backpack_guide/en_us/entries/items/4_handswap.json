@@ -1,0 +1,15 @@
+{
+	"name": "Hand Swap",
+	"icon": "l2backpack:hand_swap",
+	"category": "l2backpack:items",
+	"sortnum": 4,
+	"pages": [
+		{
+			"type": "patchouli:spotlight",
+			"item": "l2backpack:hand_swap",
+			"text": "You can set a slot-specific offhand item for every hot bar slots. $(br2) When you switch to that slot in hot bar, the corresponding item will be placed into your off hand slot. When switching away, the previous off hand item will be restored."
+		},
+		"When you switch to a slot with preset slot-specific offhand item, the specified item will go to your offhand. If you have a offhand item already when switching, that item will be temporarily stored in the swap. $(br2) When you swap away, the specified item will go back to the swap and the temporarily stored offhand item will go back to offhand slot.",
+		"When you change your offhand item that was from the swap, the new item will not go into the swap when you switch to another slot, and the temporarily stored offhand item will return to your inventory. If your inventory is full, it will drop on ground."
+	]
+}

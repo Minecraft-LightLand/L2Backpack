@@ -104,6 +104,7 @@ public class LangData {
 		SUIT_BAG_INFO("tooltip.info.suit_bag", "Same as Armor Swap but swaps full set at a time. It will exchange equipped items and selected items. Takes down player armor if the selected row has empty slot."),
 		MULTI_SWITCH_INFO("tooltip.info.multi_switch", "This is a Quiver, a Tool Swap, and an Armor Swap at the same time. Sneak and hold respective items to trigger each mode. When holding nothing and pressing alt, tool swap mode is activated."),
 		ENDER_SWITCH_INFO("tooltip.info.ender_switch", "This is a Combined Swap and an Ender Backpack at the same time. Note that the arrows, tools, and armors are stored within this item still, not in remote inventory. It inherits all properties of a backpack and an ender backpack."),
+		HANDSWAP("tooltip.info.handswap","Put in legging/belt/ender backpack. Automatically pop up preset off offhand item when you switch to corresponding mainhand slot."),
 		INHERIT("tooltip.info.inherit", "Inherit all properties of a regular backpack, except that it cannot be upgraded. Can be placed in regular backpacks, but cannot open directly in regular backpack. Put it in dimensional storage for quick access."),
 		PICKUP("tooltip.info.pickup", "Supports recursive pickup"),
 		PICKUP_TWEAKER("tooltip.info.pickup_tweaker", "Right click backpack / drawer / bag in inventory with this item to switch pickup mode."),

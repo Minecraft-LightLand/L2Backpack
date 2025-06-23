@@ -23,6 +23,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.Nullable;
 
 public class BackpackSlotClickListener extends WritableStackClickHandler {
 
@@ -47,13 +48,23 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 		slotClickToServer(-1, -1, -1);
 	}
 
+	@Nullable
 	@Override
 	protected ClickedPlayerSlotResult getSlot(ServerPlayer player, int index, int slot, int wid) {
 		if (wid == -1) {
+			if (player.containerMenu != player.inventoryMenu){
+				return null;
+			}
 			ItemStack stack = player.getItemBySlot(EquipmentSlot.CHEST);
 			if (canOpen(stack)) {
 				return new ClickedPlayerSlotResult(stack,
 						PlayerSlot.ofInventory(36 + EquipmentSlot.CHEST.getIndex()),
+						new PlayerInvCallback());
+			}
+			stack = player.getItemBySlot(EquipmentSlot.LEGS);
+			if (canOpen(stack)) {
+				return new ClickedPlayerSlotResult(stack,
+						PlayerSlot.ofInventory(36 + EquipmentSlot.LEGS.getIndex()),
 						new PlayerInvCallback());
 			}
 			if (!canOpen(stack)) {
@@ -78,6 +89,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 	}
 
 	private void handleNoMenu(ServerPlayer player, int index) {
+		if (index < 0) return;
 		ItemStack stack = player.containerMenu.getSlot(index).getItem();
 		ItemStack carried = player.containerMenu.getCarried();
 		if (carried.getItem() instanceof IBagTool tool) {

@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class QuiverMenu extends BaseBagMenu<QuiverMenu> {
 
-	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "backpack_1");
+	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "row");
 
 	public static QuiverMenu fromNetwork(MenuType<QuiverMenu> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
 		PlayerSlot<?> slot = PlayerSlot.read(buf);

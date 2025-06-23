@@ -11,6 +11,7 @@ import dev.xkmc.l2backpack.content.bag.EquipmentBag;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
 import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSetSwap;
 import dev.xkmc.l2backpack.content.quickswap.armorswap.ArmorSwap;
+import dev.xkmc.l2backpack.content.quickswap.handswap.HandswapItem;
 import dev.xkmc.l2backpack.content.quickswap.merged.EnderSwitch;
 import dev.xkmc.l2backpack.content.quickswap.merged.MultiSwitch;
 import dev.xkmc.l2backpack.content.quickswap.quiver.Quiver;
@@ -61,6 +62,7 @@ public class BackpackItems {
 	public static final ItemEntry<ArmorSetSwap> SUIT_SWAP;
 	public static final ItemEntry<MultiSwitch> MULTI_SWITCH;
 	public static final ItemEntry<EnderSwitch> ENDER_SWITCH;
+	public static final ItemEntry<HandswapItem> HANDSWAP;
 
 	public static final ItemEntry<DrawerItem> DRAWER;
 	public static final ItemEntry<EnderDrawerItem> ENDER_DRAWER;
@@ -68,14 +70,15 @@ public class BackpackItems {
 
 	static {
 		ITagManager<Item> manager = Objects.requireNonNull(ForgeRegistries.ITEMS.tags());
-		TagKey<Item> curios_tag = manager.createTagKey(new ResourceLocation("curios", "back"));
+		TagKey<Item> back = manager.createTagKey(new ResourceLocation("curios", "back"));
+		TagKey<Item> belt = manager.createTagKey(new ResourceLocation("curios", "belt"));
 		// Backpacks
 		{
 			BACKPACKS = new ItemEntry[16];
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p))
-						.tag(TagGen.BACKPACKS, curios_tag)
+						.tag(TagGen.BACKPACKS, back)
 						.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 								new ModelFile.UncheckedModelFile("builtin/entity")))
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_backpack"))
@@ -85,7 +88,7 @@ public class BackpackItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p))
-						.tag(TagGen.DIMENSIONAL_STORAGES, curios_tag)
+						.tag(TagGen.DIMENSIONAL_STORAGES, back)
 						.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 								new ModelFile.UncheckedModelFile("builtin/entity")))
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_dimensional_backpack")).register();
@@ -93,7 +96,7 @@ public class BackpackItems {
 			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new)
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 							new ModelFile.UncheckedModelFile("builtin/entity")))
-					.tag(curios_tag, TagGen.ENDER_CHEST).defaultLang().register();
+					.tag(back, TagGen.ENDER_CHEST).defaultLang().register();
 
 			ENDER_POCKET = simpleItem("ender_pocket");
 
@@ -117,15 +120,18 @@ public class BackpackItems {
 									.texture("layer0", pvd.modLoc("item/" + ctx.getName() + "_filled"))))
 					.defaultLang().register();
 			QUIVER = REGISTRATE.item("arrow_bag", Quiver::new).model(BackpackItems::createArrowBagModel)
-					.tag(curios_tag, TagGen.SWAPS).lang("Quiver").register();
-			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
-			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
-			SUIT_SWAP = REGISTRATE.item("suit_swap", ArmorSetSwap::new).defaultModel().tag(curios_tag, TagGen.SWAPS).defaultLang().register();
+					.tag(back, TagGen.SWAPS).lang("Quiver").register();
+			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(back, TagGen.SWAPS).defaultLang().register();
+			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).defaultModel().tag(back, TagGen.SWAPS).defaultLang().register();
+			SUIT_SWAP = REGISTRATE.item("suit_swap", ArmorSetSwap::new).defaultModel().tag(back, TagGen.SWAPS).defaultLang().register();
 
-			MULTI_SWITCH = REGISTRATE.item("combined_swap", MultiSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS)
+			MULTI_SWITCH = REGISTRATE.item("combined_swap", MultiSwitch::new).defaultModel().tag(back, TagGen.SWAPS)
 					.removeTab(TAB.getKey()).defaultLang().register();
-			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).defaultModel().tag(curios_tag, TagGen.SWAPS, TagGen.ENDER_CHEST)
+			ENDER_SWITCH = REGISTRATE.item("ender_swap", EnderSwitch::new).defaultModel().tag(back, TagGen.SWAPS, TagGen.ENDER_CHEST)
 					.removeTab(TAB.getKey()).defaultLang().register();
+
+			HANDSWAP = REGISTRATE.item("hand_swap", HandswapItem::new).defaultModel().tag(belt)
+					.defaultLang().register();
 
 			DRAWER = REGISTRATE.item("drawer", p -> new DrawerItem(BackpackBlocks.DRAWER.get(), p))
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(

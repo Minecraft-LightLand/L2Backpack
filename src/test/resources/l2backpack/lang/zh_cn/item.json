@@ -1,53 +1,54 @@
 {
-  "block.l2backpack": {
-	"dimensional_storage": "空间箱子",
-	"ender_drawer": "末影匣子",
-	"drawer": "水晶匣子"
-  },
-  "item.l2backpack":{
-	"ender_backpack": "末影背包",
-	"ender_pocket": "空间升级组件",
-	"armor_bag": "装备袋",
-	"book_bag": "附魔书袋",
-	"arrow_bag": "箭袋",
-	"drawer": "水晶匣子",
-	"ender_drawer": "末影匣子",
-	"armor_swap": "护甲切换袋",
-	"suit_swap": "套装切换袋",
-	"combined_swap": "三合一切换袋",
-	"ender_swap": "四合一切换袋",
-	"tool_swap": "工具切换袋",
-	"pickup_tweaker_tool": "归类模式配置器",
-	"destroy_tweaker_tool": "销毁模式配置器"
-  },
-  "-cartesian": {
-	"backpack": {
-	  "path": "item.l2backpack",
-	  "reverse": true,
-	  "list": [
-		{
-		  "backpack": "背包",
-		  "dimensional_storage": "空间背包"
-		},
-		{
-		  "black": "黑色",
-		  "blue": "蓝色",
-		  "brown": "棕色",
-		  "cyan": "青色",
-		  "gray": "灰色",
-		  "green": "绿色",
-		  "light_blue": "淡蓝色",
-		  "light_gray": "淡灰色",
-		  "lime": "黄绿色",
-		  "magenta": "品红色",
-		  "orange": "橙色",
-		  "pink": "粉红色",
-		  "purple": "紫色",
-		  "red": "红色",
-		  "white": "白色",
-		  "yellow": "黄色"
+	"block.l2backpack": {
+		"dimensional_storage": "空间箱子",
+		"ender_drawer": "末影匣子",
+		"drawer": "水晶匣子"
+	},
+	"item.l2backpack": {
+		"ender_backpack": "末影背包",
+		"ender_pocket": "空间升级组件",
+		"armor_bag": "装备袋",
+		"book_bag": "附魔书袋",
+		"arrow_bag": "箭袋",
+		"drawer": "水晶匣子",
+		"ender_drawer": "末影匣子",
+		"armor_swap": "护甲切换袋",
+		"suit_swap": "套装切换袋",
+		"combined_swap": "三合一切换袋",
+		"ender_swap": "四合一切换袋",
+		"tool_swap": "工具切换袋",
+		"pickup_tweaker_tool": "归类模式配置器",
+		"destroy_tweaker_tool": "销毁模式配置器",
+		"hand_swap": "副手切换带"
+	},
+	"-cartesian": {
+		"backpack": {
+			"path": "item.l2backpack",
+			"reverse": true,
+			"list": [
+				{
+					"backpack": "背包",
+					"dimensional_storage": "空间背包"
+				},
+				{
+					"black": "黑色",
+					"blue": "蓝色",
+					"brown": "棕色",
+					"cyan": "青色",
+					"gray": "灰色",
+					"green": "绿色",
+					"light_blue": "淡蓝色",
+					"light_gray": "淡灰色",
+					"lime": "黄绿色",
+					"magenta": "品红色",
+					"orange": "橙色",
+					"pink": "粉红色",
+					"purple": "紫色",
+					"red": "红色",
+					"white": "白色",
+					"yellow": "黄色"
+				}
+			]
 		}
-	  ]
 	}
-  }
 }

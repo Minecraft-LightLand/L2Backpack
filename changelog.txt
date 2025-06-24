@@ -1,3 +1,9 @@
+2.5.3
+- Add Handswap
+- Improve quiver/scabbard/armor swap UI
+- Make dimensional backpack cheaper
+- Fix sophisticated compat keybind conflict
+
 2.5.2
 - Fix scrolling when selection key is not SHIFT
 - Fix scrolling on touchpad

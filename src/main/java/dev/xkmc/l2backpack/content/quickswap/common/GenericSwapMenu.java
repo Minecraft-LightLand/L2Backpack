@@ -15,7 +15,7 @@ import java.util.UUID;
 
 public class GenericSwapMenu extends BaseBagMenu<GenericSwapMenu> {
 
-	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "backpack_1");
+	public static final SpriteManager MANAGERS = new SpriteManager(L2Backpack.MODID, "row");
 
 	public static GenericSwapMenu fromNetwork(MenuType<GenericSwapMenu> type, int windowId, Inventory inv, RegistryFriendlyByteBuf buf) {
 		PlayerSlot<?> slot = PlayerSlot.read(buf);

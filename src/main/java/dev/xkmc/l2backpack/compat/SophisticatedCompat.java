@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.init.data.LBConfig;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
 import dev.xkmc.l2backpack.init.registrate.LBMisc;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +16,8 @@ import net.p3pp3rf1y.sophisticatedbackpacks.util.PlayerInventoryProvider;
 import net.p3pp3rf1y.sophisticatedcore.upgrades.ITickableUpgrade;
 
 public class SophisticatedCompat {
+
+	public static final ThreadLocal<Unit> ENDER_LOCK = new ThreadLocal<>();
 
 	public static void init() {
 		PlayerInventoryProvider.get().addPlayerInventoryHandler("ender",
@@ -32,6 +35,9 @@ public class SophisticatedCompat {
 	}
 
 	private static ItemStack getEnderInv(Player player, int index) {
+		if (ENDER_LOCK.get() != null) {
+			return ItemStack.EMPTY;
+		}
 		if (player instanceof ServerPlayer) {
 			return player.getEnderChestInventory().getItem(index);
 		}

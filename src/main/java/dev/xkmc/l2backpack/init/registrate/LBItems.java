@@ -10,6 +10,8 @@ import dev.xkmc.l2backpack.content.bag.EquipmentBag;
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.client.LBBEWLR;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
+import dev.xkmc.l2backpack.content.quickswap.handswap.HandswapItem;
+import dev.xkmc.l2backpack.content.quickswap.handswap.MatcherData;
 import dev.xkmc.l2backpack.content.quickswap.set.ArmorSetSwap;
 import dev.xkmc.l2backpack.content.quickswap.single.ArmorSwap;
 import dev.xkmc.l2backpack.content.quickswap.single.Quiver;
@@ -66,6 +68,7 @@ public class LBItems {
 	public static final ItemEntry<Scabbard> SCABBARD;
 	public static final ItemEntry<ArmorSwap> ARMOR_SWAP;
 	public static final ItemEntry<ArmorSetSwap> SUIT_SWAP;
+	public static final ItemEntry<HandswapItem> HANDSWAP;
 
 	public static final ItemEntry<DrawerItem> DRAWER;
 	public static final ItemEntry<EnderDrawerItem> ENDER_DRAWER;
@@ -87,6 +90,7 @@ public class LBItems {
 	public static final DCVal<Integer> DC_DRAWER_COUNT = DC.intVal("drawer_count");
 	public static final DCVal<Integer> DC_DRAWER_STACKING = DC.intVal("drawer_upgrade");
 	public static final DCVal<Long> DC_SWAP_TOGGLE = DC.longVal("set_swap_toggle");
+	public static final DCVal<MatcherData> DC_MATCHER = DC.reg("matcher", MatcherData.class, true);
 
 	public static final DCVal<ItemContainerContents> BAG_CONTENT = DC.reg("bag_content",
 			ItemContainerContents.CODEC, ItemContainerContents.STREAM_CODEC, true);
@@ -94,14 +98,15 @@ public class LBItems {
 			ItemContainerContents.CODEC, ItemContainerContents.STREAM_CODEC, true);
 
 	static {
-		TagKey<Item> curios_tag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "back"));
+		TagKey<Item> back = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "back"));
+		TagKey<Item> belt = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "belt"));
 		// Backpacks
 		{
 			BACKPACKS = new ItemEntry[16];
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p))
-						.tag(LBTagGen.BACKPACKS, curios_tag)
+						.tag(LBTagGen.BACKPACKS, back)
 						.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 								new ModelFile.UncheckedModelFile("builtin/entity")))
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_backpack"))
@@ -112,7 +117,7 @@ public class LBItems {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new DimensionalItem(color, p))
-						.tag(LBTagGen.DIMENSIONAL_STORAGES, curios_tag)
+						.tag(LBTagGen.DIMENSIONAL_STORAGES, back)
 						.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 								new ModelFile.UncheckedModelFile("builtin/entity")))
 						.lang(RegistrateLangProvider.toEnglishName(color.getName() + "_dimensional_backpack"))
@@ -122,7 +127,7 @@ public class LBItems {
 			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new)
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(
 							new ModelFile.UncheckedModelFile("builtin/entity")))
-					.tag(curios_tag, LBTagGen.ENDER_CHEST).defaultLang()
+					.tag(back, LBTagGen.ENDER_CHEST).defaultLang()
 					.clientExtension(() -> () -> LBBEWLR.EXTENSIONS)
 					.register();
 
@@ -148,10 +153,11 @@ public class LBItems {
 									.texture("layer0", pvd.modLoc("item/" + ctx.getName() + "_filled"))))
 					.defaultLang().register();
 			QUIVER = REGISTRATE.item("arrow_bag", Quiver::new).model(LBItems::createArrowBagModel)
-					.tag(curios_tag, LBTagGen.SWAPS).lang("Quiver").register();
-			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(curios_tag, LBTagGen.SWAPS).defaultLang().register();
-			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).defaultModel().tag(curios_tag, LBTagGen.SWAPS).defaultLang().register();
-			SUIT_SWAP = REGISTRATE.item("suit_swap", ArmorSetSwap::new).defaultModel().tag(curios_tag, LBTagGen.SWAPS).defaultLang().register();
+					.tag(back, LBTagGen.SWAPS).lang("Quiver").register();
+			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(back, LBTagGen.SWAPS).defaultLang().register();
+			ARMOR_SWAP = REGISTRATE.item("armor_swap", ArmorSwap::new).defaultModel().tag(back, LBTagGen.SWAPS).defaultLang().register();
+			SUIT_SWAP = REGISTRATE.item("suit_swap", ArmorSetSwap::new).defaultModel().tag(back, LBTagGen.SWAPS).defaultLang().register();
+			HANDSWAP = REGISTRATE.item("hand_swap", HandswapItem::new).defaultModel().tag(belt).defaultLang().register();
 
 			DRAWER = REGISTRATE.item("drawer", p -> new DrawerItem(LBBlocks.DRAWER.get(), p))
 					.model((ctx, pvd) -> pvd.getBuilder(ctx.getName()).parent(

@@ -5,9 +5,11 @@ import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
 import dev.xkmc.l2tabs.compat.api.AccessoriesMultiplex;
 import dev.xkmc.l2tabs.compat.track.CurioSlotData;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -19,6 +21,20 @@ public class CuriosCompat {
 			return getSlotImpl(player, pred);
 		}
 		return Optional.empty();
+	}
+
+	public static ItemStack getItem(LivingEntity player, Item item) {
+		if (ModList.get().isLoaded("curios")) {
+			return getItemImpl(player, item);
+		}
+		return ItemStack.EMPTY;
+	}
+
+	private static ItemStack getItemImpl(LivingEntity player, Item item) {
+		var curio = CuriosApi.getCuriosInventory(player);
+		if (curio.isEmpty()) return ItemStack.EMPTY;
+		var ans = curio.get().findFirstCurio(item);
+		return ans.map(SlotResult::stack).orElse(ItemStack.EMPTY);
 	}
 
 	public static Optional<ItemStack> getRenderingSlot(LivingEntity player, Predicate<ItemStack> pred) {

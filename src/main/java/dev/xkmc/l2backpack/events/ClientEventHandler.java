@@ -43,6 +43,7 @@ public class ClientEventHandler {
 				event.test(LBKeys.OPEN.map.getKey()) &&
 				event.getAction() == InputConstants.PRESS) {
 			if (BackpackSlotClickListener.canOpen(Proxy.getClientPlayer().getItemBySlot(EquipmentSlot.CHEST)) ||
+					BackpackSlotClickListener.canOpen(Proxy.getClientPlayer().getItemBySlot(EquipmentSlot.LEGS)) ||
 					CuriosCompat.getSlot(Proxy.getClientPlayer(), BackpackSlotClickListener::canOpen).isPresent())
 				L2Backpack.SLOT_CLICK.keyBind();
 		}

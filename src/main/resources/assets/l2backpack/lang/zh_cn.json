@@ -194,5 +194,12 @@
   "l2backpack.chat.feedback.collect": "已收集%s物品",
   "l2backpack.chat.feedback.no_item": "末影匣子没有设置物品，不能放置",
   "l2backpack.loot.unnamed.name": "无名的冒险家",
-  "l2backpack.loot.unnamed.item": "无名者的保险箱"
-}
+  "l2backpack.loot.unnamed.item": "无名者的保险箱",
+  "container.l2backpack.offhand_toolbox": "副手切换带",
+  "item.l2backpack.hand_swap": "副手切换带",
+  "l2backpack.tooltip.info.handswap": "放在护腿栏/饰品栏/末影背包。切换主手物品时自动切换副手物品。",
+  "l2backpack.configuration.sophisticatedEnderTicking": "让精妙背包在末影背包内也能正常工作",
+  "l2backpack.configuration.sophisticatedEnderTicking.tooltip": "",
+  "l2backpack.configuration.sophisticatedRightClickOpen": "在物品栏和末影背包中右键精妙背包以开启",
+  "l2backpack.configuration.sophisticatedRightClickOpen.tooltip": ""
+ }

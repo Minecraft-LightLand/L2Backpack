@@ -2,10 +2,13 @@ package dev.xkmc.l2backpack.content.common;
 
 import dev.xkmc.l2backpack.content.click.DrawerQuickInsert;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
+import dev.xkmc.l2backpack.init.registrate.LBMisc;
 import dev.xkmc.l2core.base.menu.base.BaseContainerMenu;
 import dev.xkmc.l2core.base.menu.base.SpriteManager;
 import dev.xkmc.l2core.util.ServerOnly;
+import dev.xkmc.l2menustacker.screen.base.L2MSReg;
 import dev.xkmc.l2menustacker.screen.source.PlayerSlot;
+import dev.xkmc.l2menustacker.screen.source.SimpleSlotData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -85,12 +88,20 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 	}
 
 	private ItemStack getStackRaw() {
-		ItemStack stack = item_slot.getItem(player);
+		ItemStack stack = accessSlot(player);
 		if (player.level().isClientSide()) return stack;
 		var id = LBItems.DC_CONT_ID.get(stack);
 		if (id == null || !id.equals(uuid)) return ItemStack.EMPTY;
 		stack_cache = stack;
 		return stack;
+	}
+
+	protected ItemStack accessSlot(Player player) {
+		if (player.level().isClientSide() && item_slot.type() == L2MSReg.IS_ENDER.get()) {
+			if (item_slot.data() instanceof SimpleSlotData(int slot))
+				return LBMisc.ENDER_SYNC.type().getOrCreate(player).getItems(player).get(slot);
+		}
+		return item_slot.getItem(player);
 	}
 
 	public ItemStack quickMoveStack(Player pl, int id) {

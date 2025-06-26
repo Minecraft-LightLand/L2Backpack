@@ -51,10 +51,19 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 	@Override
 	protected ClickedPlayerSlotResult getSlot(ServerPlayer player, int index, int slot, int wid) {
 		if (wid == -1) {
+			if (player.containerMenu != player.inventoryMenu){
+				return null;
+			}
 			ItemStack stack = player.getItemBySlot(EquipmentSlot.CHEST);
 			if (canOpen(stack)) {
 				return new ClickedPlayerSlotResult(stack,
 						PlayerSlot.ofInventory(36 + EquipmentSlot.CHEST.getIndex()),
+						new PlayerInvCallback());
+			}
+			stack = player.getItemBySlot(EquipmentSlot.LEGS);
+			if (canOpen(stack)) {
+				return new ClickedPlayerSlotResult(stack,
+						PlayerSlot.ofInventory(36 + EquipmentSlot.LEGS.getIndex()),
 						new PlayerInvCallback());
 			}
 			if (!canOpen(stack)) {
@@ -79,6 +88,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 	}
 
 	private void handleNoMenu(ServerPlayer player, int index) {
+		if (index < 0) return;
 		var slot = player.containerMenu.getSlot(index);
 		ItemStack stack = slot.getItem();
 		ItemStack carried = player.containerMenu.getCarried();

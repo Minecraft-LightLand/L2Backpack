@@ -17,7 +17,7 @@ public class SlotGen extends CuriosDataProvider {
 
 	@Override
 	public void generate(HolderLookup.Provider provider, ExistingFileHelper existingFileHelper) {
-		createEntities("player").addEntities(EntityType.PLAYER).addSlots("back");
+		createEntities("player").addEntities(EntityType.PLAYER).addSlots("back", "belt");
 	}
 
 }

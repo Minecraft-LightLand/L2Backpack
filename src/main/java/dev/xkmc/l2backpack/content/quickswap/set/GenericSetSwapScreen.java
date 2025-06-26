@@ -23,7 +23,7 @@ public class GenericSetSwapScreen<T extends GenericSetSwapMenu<T>> extends BaseO
 	}
 
 	@Override
-	protected void renderSlot(GuiGraphics guiGraphics, Slot slot) {
+	public void renderSlot(GuiGraphics guiGraphics, Slot slot) {
 		if (slot instanceof GenericSetBagSlot s) {
 			if (s.isDisabled()) {
 				guiGraphics.blitSprite(DISABLED, s.x, s.y, 16, 16);

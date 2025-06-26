@@ -4,12 +4,14 @@ import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.entry.*;
 import dev.xkmc.l2backpack.init.data.LBConfig;
+import dev.xkmc.l2core.init.reg.ench.EnchHelper;
 import dev.xkmc.l2itemselector.overlay.OverlayUtil;
 import dev.xkmc.l2itemselector.overlay.SelectionSideBar;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class ArmorSwapType extends QuickSwapType
 		implements ISideInfoRenderer, ISingleSwapAction, ISetSwapAction {
@@ -29,6 +31,7 @@ public class ArmorSwapType extends QuickSwapType
 	}
 
 	private boolean maySwapOut(ItemStack stack) {
+		if (EnchHelper.getLv(stack, Enchantments.BINDING_CURSE) > 0) return false;
 		return stack.getItem().canFitInsideContainerItems() &&
 				!(stack.getItem() instanceof BaseBagItem);
 	}

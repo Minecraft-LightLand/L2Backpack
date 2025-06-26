@@ -100,7 +100,7 @@ public class L2Backpack {
 		// items
 		{
 			var backpacks = MathHelper.merge(LBItems.BACKPACKS,
-					LBItems.QUIVER, LBItems.SCABBARD, LBItems.ARMOR_SWAP, LBItems.SUIT_SWAP);
+					LBItems.QUIVER, LBItems.SCABBARD, LBItems.ARMOR_SWAP, LBItems.SUIT_SWAP, LBItems.HANDSWAP);
 
 			event.registerItem(LBMisc.PICKUP, (stack, c) -> new BaseBagInvWrapper(stack), backpacks);
 			event.registerItem(LBMisc.PICKUP, (stack, c) -> new EnderBackpackCaps(stack), LBItems.ENDER_BACKPACK);

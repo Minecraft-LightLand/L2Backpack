@@ -101,6 +101,7 @@ public class LBLang {
 		SCABBARD_INFO("tooltip.info.tool_bag", "Put in off hand or chest slot (or back slot of Curios).  Hold tools or weapons in main hand and press [%1$s] (or hold nothing and press [%2$s]) to preview, choose, and swap tools from scabbard. Press up/down or [%1$s] + number to switch tools. Press %3$s to swap", L2Keys.SHIFT, L2Keys.ALT, L2Keys.SWAP),
 		ARMORBAG_INFO("tooltip.info.armor_bag", "Put in off hand or chest slot (or back slot of Curios). Hold nothing in main hand and press [%1$s] to preview, choose, and swap armors. Press up/down or [%1$s] + number to switch armors. Press %2$s to swap", L2Keys.SHIFT, L2Keys.SWAP),
 		SUIT_BAG_INFO("tooltip.info.suit_bag", "Same as Armor Swap but swaps full set at a time. It will exchange equipped items and selected items. Takes down player armor if the selected row has empty slot."),
+		HANDSWAP("tooltip.info.handswap","Put in legging/belt/ender backpack. Automatically pop up preset off offhand item when you switch to corresponding mainhand slot."),
 		INHERIT("tooltip.info.inherit", "Inherit all properties of a regular backpack, except that it cannot be upgraded. Can be placed in regular backpacks, but cannot open directly in regular backpack. Put it in dimensional storage for quick access."),
 		PICKUP("tooltip.info.pickup", "Supports recursive pickup"),
 		PICKUP_TWEAKER("tooltip.info.pickup_tweaker", "Right click backpack / drawer / bag in inventory with this item to switch pickup mode."),

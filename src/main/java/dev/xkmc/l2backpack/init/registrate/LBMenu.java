@@ -5,6 +5,9 @@ import dev.xkmc.l2backpack.content.backpack.BackpackMenu;
 import dev.xkmc.l2backpack.content.backpack.BackpackScreen;
 import dev.xkmc.l2backpack.content.common.BaseOpenableScreen;
 import dev.xkmc.l2backpack.content.quickswap.common.GenericSwapMenu;
+import dev.xkmc.l2backpack.content.quickswap.common.PointerScreen;
+import dev.xkmc.l2backpack.content.quickswap.handswap.HandswapMenu;
+import dev.xkmc.l2backpack.content.quickswap.handswap.HandswapScreen;
 import dev.xkmc.l2backpack.content.quickswap.set.ArmorSetBagMenu;
 import dev.xkmc.l2backpack.content.quickswap.set.GenericSetSwapScreen;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalContainer;
@@ -32,12 +35,17 @@ public class LBMenu {
 
 	public static final MenuEntry<GenericSwapMenu> MT_9 = REGISTRATE.menu("generic_swap",
 					GenericSwapMenu::fromNetwork,
-					() -> BaseOpenableScreen<GenericSwapMenu>::new)
+					() -> PointerScreen<GenericSwapMenu>::new)
 			.register();
 
 	public static final MenuEntry<ArmorSetBagMenu> MT_ARMOR_SET = REGISTRATE.menu("armor_set",
 					ArmorSetBagMenu::fromNetwork,
 					() -> GenericSetSwapScreen<ArmorSetBagMenu>::new)
+			.lang(LBMenu::getLangKey).register();
+
+	public static final MenuEntry<HandswapMenu> MT_HAND = REGISTRATE.menu("offhand_toolbox",
+					HandswapMenu::fromNetwork,
+					() -> HandswapScreen::new)
 			.lang(LBMenu::getLangKey).register();
 
 	public static void register() {

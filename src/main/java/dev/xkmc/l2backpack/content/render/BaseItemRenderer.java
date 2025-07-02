@@ -75,32 +75,43 @@ public class BaseItemRenderer extends BlockEntityWithoutLevelRenderer {
 			case GUI:
 				break;
 			case FIRST_PERSON_LEFT_HAND: {
-				pose.translate(0.3, 0.9, 0.6);
+				pose.translate(0.49, 0.85, 0.6);
 				float size = 0.3f;
 				pose.scale(size, size, size);
 				pose.mulPose(Axis.ZP.rotationDegrees(180));
-				pose.mulPose(Axis.XP.rotationDegrees(-10));
-				pose.mulPose(Axis.YP.rotationDegrees(-250));
+				pose.mulPose(Axis.XP.rotationDegrees(0));
+				pose.mulPose(Axis.YP.rotationDegrees(-230));
 				return;
 			}
 			case FIRST_PERSON_RIGHT_HAND: {
-				pose.translate(0.7, 0.9, 0.6);
+				pose.translate(0.49, 0.85, 0.6);
 				float size = 0.3f;
 				pose.scale(size, size, size);
 				pose.mulPose(Axis.ZP.rotationDegrees(180));
-				pose.mulPose(Axis.XP.rotationDegrees(-10));
-				pose.mulPose(Axis.YP.rotationDegrees(250));
+				pose.mulPose(Axis.XP.rotationDegrees(0));
+				pose.mulPose(Axis.YP.rotationDegrees(230));
 				return;
 			}
-			case THIRD_PERSON_LEFT_HAND:
-			case THIRD_PERSON_RIGHT_HAND: {
-				pose.translate(0.25, 0.4, 0.5);
-				float size = 0.625f;
+			case THIRD_PERSON_LEFT_HAND: {
+				pose.translate(0.28, 0.73, -0.5);
+				float size = 0.9f;
 				pose.scale(size, size, size);
+				pose.mulPose(Axis.ZP.rotationDegrees(-41));
+				pose.mulPose(Axis.XP.rotationDegrees(55));
+				pose.mulPose(Axis.YP.rotationDegrees(-5));
+				break;
+			}
+			case THIRD_PERSON_RIGHT_HAND: {
+				pose.translate(0.65, -0.16, -0.44);
+				float size = 0.9f;
+				pose.scale(size, size, size);
+				pose.mulPose(Axis.ZP.rotationDegrees(-50));
+				pose.mulPose(Axis.XP.rotationDegrees(115));
+				pose.mulPose(Axis.YP.rotationDegrees(185));
 				break;
 			}
 			case GROUND: {
-				pose.translate(0.8, 0, 0.6);
+				pose.translate(0.8, 0.1, 0.65);
 				float size = 0.6f;
 				pose.scale(size, size, size);
 				pose.mulPose(Axis.XP.rotationDegrees(30));

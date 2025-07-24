@@ -62,6 +62,7 @@ public class DrawerInteractToServer extends SerialPacketBase {
 		if (wid != 0 && !menu.getSlot(slot).allowModification(player)) return;
 		ItemStack storage = wid == 0 ? player.getInventory().getItem(slot) : menu.getSlot(slot).getItem();
 		if (!(storage.getItem() instanceof OverlayInsertItem drawerItem)) return;
+		if (storage.getCount() > 1) return;
 		drawerItem.serverTrigger(storage, player);
 		ItemStack carried = menu.getCarried();
 		if (player.isCreative() && wid == 0) {
@@ -86,7 +87,7 @@ public class DrawerInteractToServer extends SerialPacketBase {
 			}
 			if (menu instanceof ChestMenu ins) {
 				ItemStack stack = drawerItem.takeItem(storage, player);
-				((VanillaQuickInsert)ins).l2backpack$quickMove(player, menu, stack, slot);
+				((VanillaQuickInsert) ins).l2backpack$quickMove(player, menu, stack, slot);
 				if (!stack.isEmpty()) {
 					drawerItem.attemptInsert(storage, stack, player);
 				}

@@ -1,3 +1,6 @@
+2.5.4
+- Prevent item from being inserted into backpack if somehow the backpack over-stacked.
+
 2.5.3
 - Add Handswap
 - Improve quiver/scabbard/armor swap UI

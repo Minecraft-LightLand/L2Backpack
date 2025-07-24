@@ -128,6 +128,7 @@ public class ClientEventHandler {
 			return false;
 		}
 		ItemStack storage = slot.getItem();
+		if (storage.getCount() > 1) return false;
 		ItemStack carried = cont.getMenu().getCarried();
 		if (!(storage.getItem() instanceof OverlayInsertItem drawer)) {
 			return false;
@@ -195,9 +196,9 @@ public class ClientEventHandler {
 	public static boolean clientDrawerInsert(AbstractContainerScreen<?> cont, Slot slot, int limit) {
 		ItemStack storage = slot.getItem();
 		ItemStack carried = cont.getMenu().getCarried();
-		if (!(storage.getItem() instanceof OverlayInsertItem drawer)) {
+		if (!(storage.getItem() instanceof OverlayInsertItem drawer))
 			return false;
-		}
+		if (storage.getCount() > 1) return false;
 		Player player = Proxy.getClientPlayer();
 		if (player == null || !slot.allowModification(player)) {
 			return false;

@@ -71,6 +71,7 @@ public interface DrawerQuickInsert {
 		if (dst.isEmpty()) return false;
 		if (dst.getItem() instanceof AbstractBag bag) {
 			if (pl instanceof ServerPlayer sp && bag.isValidContent(src)) {
+				if (dst.getCount() > 1) return false;
 				int count = src.getCount();
 				bag.attemptInsert(dst, src, sp);
 				return count != src.getCount();
@@ -79,6 +80,7 @@ public interface DrawerQuickInsert {
 		if (pl instanceof ServerPlayer sp && src.getTag() == null) {
 			if (dst.getItem() instanceof BaseDrawerItem item) {
 				if (!allowEmpty && item.canSetNewItem(dst)) return false;
+				if (dst.getCount() > 1) return false;
 				int count = src.getCount();
 				item.attemptInsert(dst, src, sp);
 				return count != src.getCount();

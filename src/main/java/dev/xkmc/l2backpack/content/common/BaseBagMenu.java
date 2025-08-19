@@ -124,4 +124,8 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 		return moved;
 	}
 
+	@Override
+	public void removed(Player player) {
+		super.removed(player);
+	}
 }

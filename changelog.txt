@@ -1,3 +1,6 @@
+3.0.21
+- Prevent crash when mods trying access an invalid menu
+
 3.0.20
 - Add Handswap
 - Improve quiver/scabbard/armor swap UI

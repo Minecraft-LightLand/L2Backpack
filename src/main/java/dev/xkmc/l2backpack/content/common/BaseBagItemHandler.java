@@ -20,6 +20,30 @@ public class BaseBagItemHandler extends ComponentItemHandler {
 	}
 
 	@Override
+	public ItemStack getStackInSlot(int slot) {
+		if (stack.isEmpty() || slot < 0 || slot >= getSlots()) return ItemStack.EMPTY;
+		return super.getStackInSlot(slot);
+	}
+
+	@Override
+	public void setStackInSlot(int slot, ItemStack stack) {
+		if (stack.isEmpty() || slot < 0 || slot >= getSlots()) return;
+		super.setStackInSlot(slot, stack);
+	}
+
+	@Override
+	public ItemStack insertItem(int slot, ItemStack toInsert, boolean simulate) {
+		if (stack.isEmpty() || slot < 0 || slot >= getSlots()) return toInsert;
+		return super.insertItem(slot, toInsert, simulate);
+	}
+
+	@Override
+	public ItemStack extractItem(int slot, int amount, boolean simulate) {
+		if (stack.isEmpty() || slot < 0 || slot >= getSlots()) return ItemStack.EMPTY;
+		return super.extractItem(slot, amount, simulate);
+	}
+
+	@Override
 	public int getSlots() {
 		return bag.getRows(stack) * 9;
 	}

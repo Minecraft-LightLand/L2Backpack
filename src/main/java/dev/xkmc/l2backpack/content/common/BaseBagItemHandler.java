@@ -27,7 +27,7 @@ public class BaseBagItemHandler extends ComponentItemHandler {
 
 	@Override
 	public void setStackInSlot(int slot, ItemStack stack) {
-		if (stack.isEmpty() || slot < 0 || slot >= getSlots()) return;
+		if (this.stack.isEmpty() || slot < 0 || slot >= getSlots()) return;
 		super.setStackInSlot(slot, stack);
 	}
 

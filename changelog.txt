@@ -1,3 +1,6 @@
+3.0.22
+- Add a guard to prevent server config early access from KubeJS
+
 3.0.21
 - Prevent crash when mods trying access an invalid menu
 

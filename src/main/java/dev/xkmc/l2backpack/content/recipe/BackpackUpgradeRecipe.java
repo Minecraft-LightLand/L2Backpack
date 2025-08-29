@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.SmithingRecipeInput;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import static dev.xkmc.l2backpack.content.backpack.BackpackItem.MAX_ROW;
 
@@ -22,9 +23,9 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 	@Override
 	public ItemStack getResultItem(HolderLookup.Provider pvd) {
 		int init;
-		if (LBConfig.SERVER.getSpec().isEmpty())
-			init = LBConfig.SERVER.initialRows.getDefault();
-		else init = LBConfig.SERVER.initialRows.get();
+		if (LBConfig.SERVER.getSpec() instanceof ModConfigSpec spec && spec.isLoaded())
+			init = LBConfig.SERVER.initialRows.get();
+		else init = LBConfig.SERVER.initialRows.getDefault();
 		return LBItems.DC_ROW.set(super.getResultItem(pvd).copy(), init + 1);
 	}
 

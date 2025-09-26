@@ -1,3 +1,7 @@
+2.5.5
+- Add blocks to carryon blacklist
+- Update ModularGolem compat
+
 2.5.4
 - Prevent item from being inserted into backpack if somehow the backpack over-stacked.
 

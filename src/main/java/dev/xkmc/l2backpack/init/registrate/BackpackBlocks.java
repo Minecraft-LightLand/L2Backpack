@@ -10,6 +10,7 @@ import dev.xkmc.l2backpack.content.remote.drawer.EnderDrawerBlockEntity;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestBlock;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestBlockEntity;
 import dev.xkmc.l2backpack.content.render.DrawerRenderer;
+import dev.xkmc.l2backpack.init.data.TagGen;
 import dev.xkmc.l2modularblock.BlockProxy;
 import dev.xkmc.l2modularblock.DelegateBlock;
 import net.minecraft.tags.BlockTags;
@@ -41,7 +42,7 @@ public class BackpackBlocks {
 								pvd.modLoc("backpack"))
 						.texture("0", "block/dimensional_storage/" + state.getValue(WorldChestBlock.COLOR).getName())))
 				.loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
-				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
+				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, TagGen.CARRYON)
 				.defaultLang().register();
 		TE_WORLD_CHEST = REGISTRATE.blockEntity("dimensional_storage", WorldChestBlockEntity::new)
 				.validBlock(WORLD_CHEST).register();
@@ -59,7 +60,7 @@ public class BackpackBlocks {
 						.texture("3", "block/drawer/ender_top")
 						.renderType("cutout")))
 				.loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
-				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
+				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, TagGen.CARRYON)
 				.defaultLang().register();
 
 		TE_ENDER_DRAWER = REGISTRATE.blockEntity("ender_drawer", EnderDrawerBlockEntity::new)

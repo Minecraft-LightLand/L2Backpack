@@ -203,7 +203,7 @@ dependencies {
     implementation fg.deobf('dev.xkmc.modulargolems:modulargolems:2.6.10-slim')
     implementation fg.deobf("dev.xkmc.mob_weapon_api:mob_weapon_api:0.2.7")
     implementation fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.3.8")
-    implementation fg.deobf('dev.xkmc.l2complements:l2complements:2.4.37-slim')
+    implementation fg.deobf('dev.xkmc.l2complements:l2complements:2.5.3-slim')
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")

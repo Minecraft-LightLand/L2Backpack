@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import dev.xkmc.l2backpack.compat.GolemCompat;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -22,6 +23,8 @@ public class TagGen {
 	public static final TagKey<Item> DIMENSIONAL_STORAGES = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "dimensional_storages"));
 
 	public static final TagKey<Item> BACKPACK_BLACKLIST = ItemTags.create(new ResourceLocation(L2Backpack.MODID, "backpack_blacklist"));
+
+	public static final TagKey<Block> CARRYON = BlockTags.create(new ResourceLocation("carryon","block_blacklist"));
 
 	public static void onBlockTagGen(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {
 		if (ModList.get().isLoaded("modulargolems")) {

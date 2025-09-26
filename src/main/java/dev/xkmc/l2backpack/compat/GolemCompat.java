@@ -12,6 +12,7 @@ import dev.xkmc.l2backpack.events.ArrowBagEvents;
 import dev.xkmc.l2backpack.init.registrate.BackpackBlocks;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.modulargolems.content.entity.common.AbstractGolemEntity;
+import dev.xkmc.modulargolems.events.event.GolemCollectInventoryEvent;
 import dev.xkmc.modulargolems.events.event.GolemEquipEvent;
 import dev.xkmc.modulargolems.events.event.GolemHandleItemEvent;
 import dev.xkmc.modulargolems.init.data.MGTagGen;
@@ -60,6 +61,16 @@ public class GolemCompat {
 			}
 		}
 		return null;
+	}
+
+	@SubscribeEvent
+	public static void addInventory(GolemCollectInventoryEvent event) {
+		var stack = getBackpack(event.getEntity());
+		if (stack == null) return;
+		ServerLevel level = (ServerLevel) event.getEntity().level();
+		var cont = stack.item().getContainer(stack.stack(), level);
+		if (cont.isEmpty()) return;
+		event.add(cont.get().container);
 	}
 
 	@SubscribeEvent

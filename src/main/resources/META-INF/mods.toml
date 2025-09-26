@@ -40,3 +40,9 @@ Also have some specialized bag for equipments, enchant books, and arrows.
     versionRange="[2.4.37,)"
     side="BOTH"
     ordering="NONE"
+[[dependencies.l2backpack]]
+    modId="modulargolems"
+    mandatory=false
+    versionRange="[2.6.10,)"
+    side="BOTH"
+    ordering="NONE"

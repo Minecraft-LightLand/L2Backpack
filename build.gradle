@@ -157,8 +157,11 @@ dependencies {
     compileOnly "curse.maven:mouse-tweaks-60089:5437296"
     implementation "curse.maven:polymorph-388800:5550094"
 
-    implementation "curse.maven:sophisticated-backpacks-422301:6093515"
-    implementation "curse.maven:sophisticated-core-618298:6104258"
+    implementation "curse.maven:sophisticated-backpacks-422301:7329574"
+    implementation "curse.maven:sophisticated-core-618298:7337954"
+
+    implementation "curse.maven:inventory-sorter-240633:6235889"
+    //implementation "curse.maven:inventory-management-deluxe-1293085:6790941"
 }
 
 tasks.register('publishCurseForge', TaskPublishCurseForge) {

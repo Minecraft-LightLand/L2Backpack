@@ -1,3 +1,7 @@
+2.5.6
+- Fix crash with sophisticated backpack due to binary changes
+
+
 2.5.5
 - Add blocks to carryon blacklist
 - Update ModularGolem compat

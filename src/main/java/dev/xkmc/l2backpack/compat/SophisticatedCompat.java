@@ -15,16 +15,24 @@ import net.p3pp3rf1y.sophisticatedbackpacks.util.PlayerInventoryHandler;
 import net.p3pp3rf1y.sophisticatedbackpacks.util.PlayerInventoryProvider;
 import net.p3pp3rf1y.sophisticatedcore.upgrades.ITickableUpgrade;
 
+import java.util.Set;
+import java.util.function.Function;
+
 public class SophisticatedCompat {
 
 	public static final ThreadLocal<Unit> ENDER_LOCK = new ThreadLocal<>();
 
 	public static void init() {
 		PlayerInventoryProvider.get().addPlayerInventoryHandler("ender",
-				l -> PlayerInventoryHandler.SINGLE_IDENTIFIER,
+				// to make it cross-version compatible
+				(Function) SophisticatedCompat::idSupplier,
 				(player, id) -> getEnderSize(player),
 				(player, id, slot) -> getEnderInv(player, slot),
 				false, false, false, false);
+	}
+
+	private static Set<String> idSupplier(Object obj) {
+		return PlayerInventoryHandler.SINGLE_IDENTIFIER;
 	}
 
 	private static int getEnderSize(Player player) {

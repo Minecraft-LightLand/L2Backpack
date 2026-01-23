@@ -1,3 +1,6 @@
+3.0.24
+- Bundle compat fix, again
+
 3.0.23
 - Fix crash with sophisticated backpack due to binary changes
 

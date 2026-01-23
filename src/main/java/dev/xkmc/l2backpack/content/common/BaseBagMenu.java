@@ -14,7 +14,9 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
@@ -125,7 +127,13 @@ public abstract class BaseBagMenu<T extends BaseBagMenu<T>> extends BaseContaine
 	}
 
 	@Override
-	public void removed(Player player) {
-		super.removed(player);
+	public boolean tryItemClickBehaviourOverride(Player player, ClickAction action, Slot slot, ItemStack clickedItem, ItemStack carriedItem) {
+		if (slot instanceof BagSlot bagSlot) {
+			bagSlot.startSession(clickedItem);
+			boolean ans = super.tryItemClickBehaviourOverride(player, action, slot, clickedItem, carriedItem);
+			bagSlot.endSession();
+			return ans;
+		} else return super.tryItemClickBehaviourOverride(player, action, slot, clickedItem, carriedItem);
 	}
+
 }

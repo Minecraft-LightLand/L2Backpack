@@ -58,7 +58,8 @@ public class LBLang {
 		DESTROY_NONE("tooltip.destroy.none", 0, "No Destroy"),
 		DESTROY_EXCESS("tooltip.destroy.excess", 0, "Destroy excess item"),
 		DESTROY_MATCH("tooltip.destroy.matching", 0, "Destroy matching item"),
-		DESTROY_ALL("tooltip.destroy.all", 0, "Destroy all items inserted");
+		DESTROY_ALL("tooltip.destroy.all", 0, "Destroy all items inserted"),
+		UPGRADE("tooltip.upgrade", 0, "Right click backpack / drawer to upgrade them");
 
 		final String id, def;
 		final int count;

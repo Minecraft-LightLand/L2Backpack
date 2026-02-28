@@ -3,12 +3,9 @@ package dev.xkmc.l2backpack.init.data;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import dev.xkmc.l2backpack.content.recipe.BackpackDyeRecipe;
-import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipe;
-import dev.xkmc.l2backpack.content.recipe.DrawerUpgradeRecipe;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
 import dev.xkmc.l2core.serial.recipe.CustomShapelessBuilder;
-import dev.xkmc.l2core.serial.recipe.CustomSmithingBuilder;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -22,8 +19,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.function.BiFunction;
-
-import static dev.xkmc.l2core.serial.recipe.AbstractSmithingRecipe.TEMPLATE_PLACEHOLDER;
 
 public class LBRecipeGen {
 
@@ -43,10 +38,6 @@ public class LBRecipeGen {
 				unlock(pvd, new CustomShapelessBuilder<>(BackpackDyeRecipe::new, backpack, 1)::unlockedBy, backpack)
 						.group("backpack_dye").requires(Ingredient.of(LBTagGen.BACKPACKS))
 						.requires(Ingredient.of(dye)).save(pvd, L2Backpack.MODID + ":shapeless/dye_backpack_" + color.getName());
-
-				unlock(pvd, new CustomSmithingBuilder<>(BackpackUpgradeRecipe::new, TEMPLATE_PLACEHOLDER, Ingredient.of(backpack),
-						Ingredient.of(LBItems.ENDER_POCKET.get()), backpack)::unlocks, backpack)
-						.save(pvd, L2Backpack.MODID + ":smithing/upgrade_backpack_" + color.getName());
 
 				Item storage = LBItems.DIMENSIONAL_STORAGE[i].get();
 
@@ -147,10 +138,6 @@ public class LBRecipeGen {
 					.define('C', Items.AMETHYST_SHARD)
 					.define('D', Items.GOLD_NUGGET)
 					.save(pvd);
-
-			unlock(pvd, new CustomSmithingBuilder<>(DrawerUpgradeRecipe::new, TEMPLATE_PLACEHOLDER, Ingredient.of(bag),
-					Ingredient.of(LBItems.ENDER_POCKET.get()), bag)::unlocks, bag)
-					.save(pvd, L2Backpack.loc("smithing/upgrade_drawer"));
 
 			bag = LBItems.ENDER_DRAWER.get();
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, ender)

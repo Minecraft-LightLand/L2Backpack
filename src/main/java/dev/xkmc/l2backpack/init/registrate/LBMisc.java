@@ -4,8 +4,6 @@ import com.tterrag.registrate.util.entry.MenuEntry;
 import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.content.common.BaseBagMenu;
 import dev.xkmc.l2backpack.content.recipe.BackpackDyeRecipe;
-import dev.xkmc.l2backpack.content.recipe.BackpackUpgradeRecipe;
-import dev.xkmc.l2backpack.content.recipe.DrawerUpgradeRecipe;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
 import dev.xkmc.l2backpack.content.restore.*;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -35,10 +33,6 @@ public class LBMisc {
 	private static final SR<RecipeSerializer<?>> RS = SR.of(L2Backpack.REG, BuiltInRegistries.RECIPE_SERIALIZER);
 	public static final Val<AbstractShapelessRecipe.Serializer<BackpackDyeRecipe>> RSC_BAG_DYE =
 			RS.reg("backpack_dye", () -> new AbstractShapelessRecipe.Serializer<>(BackpackDyeRecipe::new));
-	public static final Val<AbstractSmithingRecipe.Serializer<BackpackUpgradeRecipe>> RSC_BAG_UPGRADE =
-			RS.reg("backpack_upgrade", () -> new AbstractSmithingRecipe.Serializer<>(BackpackUpgradeRecipe::new));
-	public static final Val<AbstractSmithingRecipe.Serializer<DrawerUpgradeRecipe>> RSC_DRAWER_UPGRADE =
-			RS.reg("drawer_upgrade", () -> new AbstractSmithingRecipe.Serializer<>(DrawerUpgradeRecipe::new));
 
 	private static final CdcReg<IGlobalLootModifier> GLM = CdcReg.of(L2Backpack.REG, NeoForgeRegistries.GLOBAL_LOOT_MODIFIER_SERIALIZERS);
 	public static final CdcVal<BackpackLootModifier> SER = GLM.reg("main", BackpackLootModifier.MAP_CODEC);

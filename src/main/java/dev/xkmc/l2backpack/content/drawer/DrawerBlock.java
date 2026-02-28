@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.drawer;
 
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.ContentTransfer;
+import dev.xkmc.l2backpack.content.tool.IBagTool;
 import dev.xkmc.l2backpack.init.registrate.LBBlocks;
 import dev.xkmc.l2backpack.init.registrate.LBItems;
 import dev.xkmc.l2core.util.DCStack;
@@ -39,6 +40,9 @@ public class DrawerBlock implements UseItemOnBlockMethod, GetBlockItemBlockMetho
 	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		BlockEntity blockentity = level.getBlockEntity(pos);
 		if (blockentity instanceof DrawerBlockEntity chest) {
+			if (stack.getItem() instanceof IBagTool tool) {
+				return tool.clickDrawerBlock(stack, chest);
+			}
 			if (!stack.isEmpty() && chest.handler.isItemValid(0, stack)) {
 				if (!level.isClientSide()) {
 					stack = chest.handler.insertItem(0, stack, false);

@@ -15,7 +15,7 @@ public class DestroyTweakerTool extends TweakerTool {
 	}
 
 	@Override
-	public void click(ItemStack stack) {
+	public void click(ItemStack tool, ItemStack stack) {
 		PickupConfig.iterateDestroy(stack);
 	}
 

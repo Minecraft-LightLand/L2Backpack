@@ -34,7 +34,7 @@ public abstract class TweakerTool extends Item implements IBagTool {
 		}
 		if (BackpackSlotClickListener.canOpen(bag)) {
 			if (!level.isClientSide()) {
-				click(bag);
+				click(stack, bag);
 				if (player instanceof ServerPlayer sp) {
 					var msg = bag.getHoverName().copy().append(": ")
 							.append(message(PickupConfig.get(bag)));

@@ -55,7 +55,7 @@ public class L2Backpack {
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
 	public static final BackpackSlotClickListener SLOT_CLICK = new BackpackSlotClickListener();
 
-	public static final PacketHandler HANDLER = new PacketHandler(MODID, 3,
+	public static final PacketHandler HANDLER = new PacketHandler(MODID, 4,
 			e -> e.create(ClickInteractToServer.class, PLAY_TO_SERVER),
 			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
 			e -> e.create(CreativeSetCarryToServer.class, PLAY_TO_SERVER),

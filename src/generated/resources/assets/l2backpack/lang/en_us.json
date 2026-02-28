@@ -200,6 +200,7 @@
   "l2backpack.tooltip.patchouli": "Read Patchouli Book for details",
   "l2backpack.tooltip.place": "Shift + right click to place it as a block",
   "l2backpack.tooltip.shift": "Press [SHIFT] to show usage",
+  "l2backpack.tooltip.upgrade": "Right click backpack / drawer to upgrade them",
   "patchouli.l2backpack.landing": "Welcome to L2Backpack, a recursive storage mod",
   "patchouli.l2backpack.title": "L2Backpack Guide"
 }

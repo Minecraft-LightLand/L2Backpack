@@ -10,7 +10,6 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -20,8 +19,6 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.BiFunction;
-
-import static dev.xkmc.l2library.serial.recipe.AbstractSmithingRecipe.TEMPLATE_PLACEHOLDER;
 
 public class RecipeGen {
 
@@ -42,10 +39,6 @@ public class RecipeGen {
 				unlock(pvd, new CustomShapelessBuilder<>(BackpackMisc.RSC_BAG_DYE, backpack, 1)::unlockedBy, backpack)
 						.group("backpack_dye").requires(Ingredient.of(TagGen.BACKPACKS))
 						.requires(Ingredient.of(dye)).save(pvd, L2Backpack.MODID + ":shapeless/dye_backpack_" + color.getName());
-
-				unlock(pvd, new SmithingTransformRecipeBuilder(BackpackMisc.RSC_BAG_UPGRADE.get(), TEMPLATE_PLACEHOLDER, Ingredient.of(backpack),
-						Ingredient.of(BackpackItems.ENDER_POCKET.get()), RecipeCategory.MISC, backpack)::unlocks, backpack)
-						.save(pvd, L2Backpack.MODID + ":smithing/upgrade_backpack_" + color.getName());
 
 				Item storage = BackpackItems.DIMENSIONAL_STORAGE[i].get();
 
@@ -146,10 +139,6 @@ public class RecipeGen {
 					.define('C', Items.AMETHYST_SHARD)
 					.define('D', Items.GOLD_NUGGET)
 					.save(pvd);
-
-			unlock(pvd, new SmithingTransformRecipeBuilder(BackpackMisc.RSC_DRAWER_UPGRADE.get(), TEMPLATE_PLACEHOLDER, Ingredient.of(bag),
-					Ingredient.of(BackpackItems.ENDER_POCKET.get()), RecipeCategory.MISC, bag)::unlocks, bag)
-					.save(pvd, L2Backpack.MODID + ":smithing/upgrade_drawer");
 
 			bag = BackpackItems.ENDER_DRAWER.get();
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, ender)

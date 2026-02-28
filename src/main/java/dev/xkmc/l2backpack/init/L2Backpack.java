@@ -1,7 +1,7 @@
 package dev.xkmc.l2backpack.init;
 
 import com.tterrag.registrate.providers.ProviderType;
-import dev.xkmc.l2backpack.LCCompat;
+import dev.xkmc.l2backpack.compat.LCCompat;
 import dev.xkmc.l2backpack.compat.*;
 import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
@@ -51,7 +51,7 @@ public class L2Backpack {
 	public static final BackpackSlotClickListener SLOT_CLICK = new BackpackSlotClickListener();
 
 	public static final PacketHandler HANDLER = new PacketHandler(
-			new ResourceLocation(MODID, "main"), 3,
+			new ResourceLocation(MODID, "main"), 4,
 			e -> e.create(DrawerInteractToServer.class, PLAY_TO_SERVER),
 			e -> e.create(CreativeSetCarryToClient.class, PLAY_TO_CLIENT),
 			e -> e.create(CreativeSetCarryToServer.class, PLAY_TO_SERVER),

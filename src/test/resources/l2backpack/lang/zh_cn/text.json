@@ -58,7 +58,8 @@
 			"shift": "按[SHIFT]显示使用方法",
 			"alt_content": "按[ALT]显示内容物",
 			"alt_insert": "左键+[ALT]以归类模式插入物品",
-			"keybind": "可以放到胸甲栏或饰品栏，然后绑定按键快捷打开"
+			"keybind": "可以放到胸甲栏或饰品栏，然后绑定按键快捷打开",
+			"upgrade": "物品栏内右键升级背包/匣子"
 		},
 		"chat.feedback": {
 			"dump": "已将%s物品放入目标方块",

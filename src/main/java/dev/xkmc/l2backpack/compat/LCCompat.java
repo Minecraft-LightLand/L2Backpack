@@ -1,4 +1,4 @@
-package dev.xkmc.l2backpack;
+package dev.xkmc.l2backpack.compat;
 
 import dev.xkmc.l2backpack.events.CapabilityEvents;
 import dev.xkmc.l2complements.events.event.EnderPickupEvent;

@@ -172,6 +172,7 @@
   "l2backpack.tooltip.alt_content": "按[ALT]显示内容物",
   "l2backpack.tooltip.alt_insert": "左键+[ALT]以归类模式插入物品",
   "l2backpack.tooltip.keybind": "可以放到胸甲栏或饰品栏，然后绑定按键快捷打开",
+  "l2backpack.tooltip.upgrade": "物品栏内右键升级背包/匣子",
   "l2backpack.chat.feedback.dump": "已将%s物品放入目标方块",
   "l2backpack.chat.feedback.load": "已从目标方块取出%s物品",
   "l2backpack.chat.feedback.extract": "已取出%s物品",

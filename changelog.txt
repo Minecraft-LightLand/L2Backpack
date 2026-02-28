@@ -1,3 +1,7 @@
+2.5.7
+- Use ender pocket to right click bag / drawer to upgrade, removing smithing recipe
+- Fix creative mode taking item from equipment / book bag not passing NBT
+
 2.5.6
 - Fix crash with sophisticated backpack due to binary changes
 

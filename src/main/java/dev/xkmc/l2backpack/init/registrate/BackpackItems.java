@@ -21,6 +21,7 @@ import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestItem;
 import dev.xkmc.l2backpack.content.tool.DestroyTweakerTool;
 import dev.xkmc.l2backpack.content.tool.PickupTweakerTool;
+import dev.xkmc.l2backpack.content.tool.UpgradeItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.TagGen;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -50,7 +51,7 @@ public class BackpackItems {
 	public static final ItemEntry<BackpackItem>[] BACKPACKS;
 	public static final ItemEntry<WorldChestItem>[] DIMENSIONAL_STORAGE;
 	public static final ItemEntry<EnderBackpackItem> ENDER_BACKPACK;
-	public static final ItemEntry<Item> ENDER_POCKET;
+	public static final ItemEntry<UpgradeItem> ENDER_POCKET;
 	public static final ItemEntry<PickupTweakerTool> PICKUP_TWEAKER;
 	public static final ItemEntry<DestroyTweakerTool> DESTROY_TWEAKER;
 
@@ -98,7 +99,7 @@ public class BackpackItems {
 							new ModelFile.UncheckedModelFile("builtin/entity")))
 					.tag(back, TagGen.ENDER_CHEST).defaultLang().register();
 
-			ENDER_POCKET = simpleItem("ender_pocket");
+			ENDER_POCKET = REGISTRATE.item("ender_pocket", UpgradeItem::new).defaultLang().defaultModel().register();
 
 			PICKUP_TWEAKER = REGISTRATE.item("pickup_tweaker_tool", p -> new PickupTweakerTool(p.stacksTo(1)))
 					.defaultModel().defaultLang().register();

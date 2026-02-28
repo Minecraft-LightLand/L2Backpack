@@ -11,9 +11,6 @@ public class CreativeSetCarryToServer extends SerialPacketBase {
 	@SerialClass.SerialField
 	public ItemStack stack;
 
-	@SerialClass.SerialField
-	public int count;
-
 	@Deprecated
 	public CreativeSetCarryToServer() {
 

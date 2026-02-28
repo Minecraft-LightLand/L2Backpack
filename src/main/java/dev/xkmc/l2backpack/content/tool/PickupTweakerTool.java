@@ -17,7 +17,7 @@ public class PickupTweakerTool extends TweakerTool {
 	}
 
 	@Override
-	public void click(ItemStack stack) {
+	public void click(ItemStack tool, ItemStack stack) {
 		PickupConfig.iterateMode(stack);
 	}
 

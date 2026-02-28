@@ -11,6 +11,7 @@ import dev.xkmc.l2backpack.content.remote.worldchest.WorldChestMenuPvd;
 import dev.xkmc.l2backpack.content.tool.IBagTool;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.advancement.BackpackTriggers;
+import dev.xkmc.l2backpack.network.CreativeSetCarryToClient;
 import dev.xkmc.l2screentracker.click.writable.ClickedPlayerSlotResult;
 import dev.xkmc.l2screentracker.click.writable.ContainerCallback;
 import dev.xkmc.l2screentracker.click.writable.WritableStackClickHandler;
@@ -52,7 +53,7 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 	@Override
 	protected ClickedPlayerSlotResult getSlot(ServerPlayer player, int index, int slot, int wid) {
 		if (wid == -1) {
-			if (player.containerMenu != player.inventoryMenu){
+			if (player.containerMenu != player.inventoryMenu) {
 				return null;
 			}
 			ItemStack stack = player.getItemBySlot(EquipmentSlot.CHEST);
@@ -94,7 +95,9 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 		ItemStack carried = player.containerMenu.getCarried();
 		if (carried.getItem() instanceof IBagTool tool) {
 			if (stack.getItem() instanceof PickupBagItem) {
-				tool.click(stack);
+				tool.click(carried, stack);
+				if (player.isCreative() && player.containerMenu.containerId == 0)
+					L2Backpack.HANDLER.toClientPlayer(new CreativeSetCarryToClient(carried), player);
 				return;
 			}
 		}
@@ -121,8 +124,10 @@ public class BackpackSlotClickListener extends WritableStackClickHandler {
 		ItemStack carried = player.containerMenu.getCarried();
 		if (!keybind && carried.getItem() instanceof IBagTool tool) {
 			if (result.stack().getItem() instanceof PickupBagItem) {
-				tool.click(result.stack());
+				tool.click(carried, result.stack());
 				result.container().update();
+				if (player.isCreative() && player.containerMenu.containerId == 0)
+					L2Backpack.HANDLER.toClientPlayer(new CreativeSetCarryToClient(carried), player);
 				return;
 			}
 		}

@@ -61,6 +61,13 @@ public interface BaseDrawerItem extends PickupBagItem, OverlayInsertItem {
 		return getStacking() * factor;
 	}
 
+	static int getStackingFactor(@Nullable CompoundTag tag) {
+		if (tag == null) return 1;
+		int factor = tag.getInt(STACKING);
+		if (factor < 1) factor = 1;
+		return factor;
+	}
+
 	static int getStackingFactor(ItemStack drawer) {
 		int factor = PickupConfig.getConfig(drawer).getInt(STACKING);
 		if (factor < 1) factor = 1;
@@ -70,6 +77,10 @@ public interface BaseDrawerItem extends PickupBagItem, OverlayInsertItem {
 	static ItemStack setStackingFactor(ItemStack drawer, int factor) {
 		PickupConfig.getConfig(drawer).putInt(STACKING, factor);
 		return drawer;
+	}
+
+	static void setStackingFactor(CompoundTag tag, int size) {
+		tag.putInt(STACKING, size);
 	}
 
 	static int getStacking() {

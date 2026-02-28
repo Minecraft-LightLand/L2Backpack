@@ -11,10 +11,7 @@ import net.minecraftforge.network.NetworkEvent;
 public class CreativeSetCarryToClient extends SerialPacketBase {
 
 	@SerialClass.SerialField
-	public Item item;
-
-	@SerialClass.SerialField
-	public int count;
+	public ItemStack item;
 
 	@Deprecated
 	public CreativeSetCarryToClient() {
@@ -22,13 +19,12 @@ public class CreativeSetCarryToClient extends SerialPacketBase {
 	}
 
 	public CreativeSetCarryToClient(ItemStack stack) {
-		this.item = stack.getItem();
-		this.count = stack.getCount();
+		this.item = stack;
 	}
 
 	@Override
 	public void handle(NetworkEvent.Context context) {
-		Proxy.getClientPlayer().containerMenu.setCarried(new ItemStack(item, count));
+		Proxy.getClientPlayer().containerMenu.setCarried(item);
 	}
 
 

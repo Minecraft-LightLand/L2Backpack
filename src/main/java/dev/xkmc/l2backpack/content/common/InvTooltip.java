@@ -8,7 +8,11 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;
 
-public record InvTooltip(TooltipInvItem item, ItemStack stack) implements TooltipComponent {
+public record InvTooltip(TooltipInvItem item, ItemStack stack, int w, int h) implements TooltipComponent {
+
+	public InvTooltip(TooltipInvItem item, ItemStack stack) {
+		this(item, stack, item.getRowSize(), item.getInvSize(stack) / item.getRowSize());
+	}
 
 	public static Optional<TooltipComponent> get(BaseBagItem item, ItemStack stack) {
 		if (Screen.hasShiftDown()) {
@@ -31,7 +35,10 @@ public record InvTooltip(TooltipInvItem item, ItemStack stack) implements Toolti
 
 	public static Optional<TooltipComponent> get(AbstractBag item, ItemStack stack) {
 		if (Screen.hasAltDown()) {
-			return Optional.of(new InvTooltip(item, stack));
+			int count = item.getLastIndex(stack);
+			int w = Math.max(item.getRowSize(), (int) Math.ceil(Math.sqrt(count)));
+			int h = count / w + 1;
+			return Optional.of(new InvTooltip(item, stack, w, h));
 		}
 		return Optional.empty();
 	}

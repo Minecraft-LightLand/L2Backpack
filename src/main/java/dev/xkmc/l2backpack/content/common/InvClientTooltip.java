@@ -14,20 +14,20 @@ public record InvClientTooltip(InvTooltip inv) implements ClientTooltipComponent
 
 	@Override
 	public int getHeight() {
-		return inv.item().getInvSize(inv.stack()) / inv.item().getRowSize() * 18 + 2;
+		return inv.h() * 18 + 2;
 	}
 
 	@Override
 	public int getWidth(Font font) {
-		return 18 * inv.item().getRowSize();
+		return 18 * inv.w();
 	}
 
 	@Override
 	public void renderImage(Font font, int mx, int my, GuiGraphics g) {
 		var list = inv.item().getInvItems(inv.stack(), Proxy.getClientPlayer());
-		for (int i = 0; i < list.size(); i++) {
-			renderSlot(font, mx + i % inv.item().getRowSize() * 18,
-					my + i / inv.item().getRowSize() * 18, g, list.get(i));
+		for (int i = 0; i < Math.min(inv.w() * inv.h(), list.size()); i++) {
+			renderSlot(font, mx + i % inv.w() * 18,
+					my + i / inv.w() * 18, g, list.get(i));
 		}
 	}
 

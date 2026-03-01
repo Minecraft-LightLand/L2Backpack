@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "forge:leather"
+    },
+    "B": {
+      "item": "l2backpack:ender_pocket"
+    },
+    "C": {
+      "item": "apotheosis:gem_dust"
+    },
+    "D": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "DCD",
+    "ABA",
+    " A "
+  ],
+  "result": {
+    "item": "l2backpack:gem_bag"
+  },
+  "show_notification": true
+}

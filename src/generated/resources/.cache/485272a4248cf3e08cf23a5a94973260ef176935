@@ -1,9 +1,9 @@
-// 1.20.1	2026-02-28T18:20:20.214588	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider]
+// 1.20.1	2026-03-01T12:48:47.945525	Registrate Provider for l2backpack [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider]
 530cfc8939fcc948a19b693d06af8389391a97a4 assets/l2backpack/blockstates/dimensional_storage.json
 c8a12d1045e3e7eccdfa66ade2f5fd44f2359d78 assets/l2backpack/blockstates/drawer.json
 1b95dd478e92493373a61b041acce8ee59dfdec7 assets/l2backpack/blockstates/ender_drawer.json
-f64eaa87b861d457312603709327665c4530c4fb assets/l2backpack/lang/en_ud.json
-6b25d074fbafff50f364a33da67b467e441444e0 assets/l2backpack/lang/en_us.json
+c2e0d0002f0b6f18184cc61f0c3471fe8da1107c assets/l2backpack/lang/en_ud.json
+e1b16f9209cc6610934288ea02487944dca37277 assets/l2backpack/lang/en_us.json
 3b258604ade2999f486e4cafd6e0e239a07ef986 assets/l2backpack/models/block/dimensional_storage_black.json
 1367dda416328c37ba0b14711a17836f3d47b011 assets/l2backpack/models/block/dimensional_storage_blue.json
 b699a725cdd4fc66a3559ebcf4b68266281696f7 assets/l2backpack/models/block/dimensional_storage_brown.json
@@ -71,8 +71,14 @@ e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/l2backpack/models/item/ender_bac
 e0f7b66a84e6588f01abbbce75b1803ffe5d46e2 assets/l2backpack/models/item/ender_drawer.json
 2e7d769568e35709ed56dc0e295da8fa82ff0fca assets/l2backpack/models/item/ender_pocket.json
 1e3531ab9a0d8c22d7f7ec0a604992472b8196c8 assets/l2backpack/models/item/ender_swap.json
+716653f86e392daf90d41f1d734c83ed0bc120af assets/l2backpack/models/item/gem_bag.json
+17e4f7651a3fd0bb6a4bbb937949475e26375780 assets/l2backpack/models/item/gem_bag_filled.json
 610ead8494b330c57ce9b497236d7a7c360d23c1 assets/l2backpack/models/item/hand_swap.json
 d53782496e8e2aed8c4fc1d6131e4d0aeebaebe0 assets/l2backpack/models/item/pickup_tweaker_tool.json
+5a236800dae953b4ef19fa9f713d7adbf55d59bf assets/l2backpack/models/item/potion_bag.json
+f1d529951a0e381ee0d3b4d0b22c8380c77b9e57 assets/l2backpack/models/item/potion_bag_filled.json
+73d82225dfaeca2e4666e89b45c482fcb76a844c assets/l2backpack/models/item/scroll_bag.json
+e847115ff45ee63dbeab3a23b0c4a031059c1ef8 assets/l2backpack/models/item/scroll_bag_filled.json
 9c8cdda8060685220f159c700a4045d996508af3 assets/l2backpack/models/item/suit_swap.json
 8acdd2c9c3e4fcc384d5688803fb9775a9c7c9aa assets/l2backpack/models/item/tool_swap.json
 5df7448d10cb15bab9a7e5140d40a4e4aaf3ea86 data/carryon/tags/blocks/block_blacklist.json
@@ -123,8 +129,11 @@ f7ca15517e58d8c626b9c37fd9fd27063bb4f58f data/l2backpack/advancements/backpacks/
 a3a68cef782ee4a87472ae0da678c779c8ef0302 data/l2backpack/advancements/recipes/misc/ender_backpack.json
 bd646c7b835b0da4cd8a004f18fba8068a9140a5 data/l2backpack/advancements/recipes/misc/ender_drawer.json
 4cd11a1f893c9b180e1e7d2f987ecd7ae6cc4749 data/l2backpack/advancements/recipes/misc/ender_pocket.json
+c38fd99af7f53644e479abee17238e18399483ce data/l2backpack/advancements/recipes/misc/gem_bag.json
 9613128e1a08f3e9f15e4389e43d7f520acbef8a data/l2backpack/advancements/recipes/misc/hand_swap.json
 fda33fd38a13ab64e1767a3b41d465a944226abd data/l2backpack/advancements/recipes/misc/pickup_tweaker_tool.json
+fcb7ecca374c57e276b3f00df9c484ebed8f9285 data/l2backpack/advancements/recipes/misc/potion_bag.json
+607260457850fb6f9a6fcd6c932892e378f8f664 data/l2backpack/advancements/recipes/misc/scroll_bag.json
 b447f1b71e13b64bf4a9cf16ea73343a5a9c8196 data/l2backpack/advancements/recipes/misc/shaped/craft_backpack_black.json
 9397cc991b2e5e7361e8afccf4b4637aeef42937 data/l2backpack/advancements/recipes/misc/shaped/craft_backpack_blue.json
 a67b6bd224aea3fe836c9bb66462a1b9d7991821 data/l2backpack/advancements/recipes/misc/shaped/craft_backpack_brown.json
@@ -208,8 +217,11 @@ c9ffad66f0b812780813a037adbca4f5c9e7937c data/l2backpack/recipes/drawer_cheap.js
 611f237112b82b5df6f39122c5a6671daf0dbf86 data/l2backpack/recipes/ender_backpack.json
 b0d10177c29ab15c8db8c8c3cf7176c518f6ac80 data/l2backpack/recipes/ender_drawer.json
 b4798aa2b76c49a12bdc467fc1c8326c20fc0981 data/l2backpack/recipes/ender_pocket.json
+7ee368f61bc1d7954d769e1299396fda005f1750 data/l2backpack/recipes/gem_bag.json
 e8aedff68b94804d6350a5382a9907a8b64f813d data/l2backpack/recipes/hand_swap.json
 bbc2325dee64cb76ac31ad277bd1ef19aad9e5a5 data/l2backpack/recipes/pickup_tweaker_tool.json
+f15f615bd7cd0e480104a1cc7da2a0877885196f data/l2backpack/recipes/potion_bag.json
+062d6bc8def736d13749d02d11954008317d774b data/l2backpack/recipes/scroll_bag.json
 ae5c7bf8f7b6550220a612a28b93795ef0f1c346 data/l2backpack/recipes/shaped/craft_backpack_black.json
 3a7d1be97c7e9ec279f2bc37d3992bd85c26b51d data/l2backpack/recipes/shaped/craft_backpack_blue.json
 259303c3c4ca775b5eb01fb82a10016d5cde7e05 data/l2backpack/recipes/shaped/craft_backpack_brown.json
@@ -263,7 +275,7 @@ e3c9f4ec2d7dfe787211d0f0d754a19ecdcc7972 data/l2backpack/recipes/suit_swap.json
 7d3c7079242f5d155ea0e72ff49778384eb6db14 data/l2backpack/recipes/tool_swap.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2backpack/tags/items/backpack_blacklist.json
 d073f52e56888ad66ca6d37fb92fa6f83d45ba87 data/l2backpack/tags/items/backpacks.json
-180eadcbad0557c7030d6d1f2a0554b2104d0a88 data/l2backpack/tags/items/bags.json
+00e83ad4e8bb0625ee576ae28f6f962b1479a1ce data/l2backpack/tags/items/bags.json
 18b21298f3a3681bb8a5d5b00cf70da4830d66eb data/l2backpack/tags/items/dimensional_storages.json
 ebe2d7d77ead816ee898199e1cb2819168e40ba7 data/l2backpack/tags/items/drawers.json
 bec38628b80e512b2ccb8daaecb79b72fa4a49b0 data/l2backpack/tags/items/ender_chest_access.json

@@ -89,6 +89,12 @@ public class RecipeGen {
 					.define('A', Tags.Items.LEATHER).define('B', ender)
 					.define('D', Items.STRING).define('C', Items.BOOK)
 					.save(pvd);
+			bag = BackpackItems.POTION_BAG.get();
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, ender)
+					.pattern("DCD").pattern("ABA").pattern(" A ")
+					.define('A', Tags.Items.LEATHER).define('B', ender)
+					.define('D', Items.STRING).define('C', Items.GLASS_BOTTLE)
+					.save(pvd);
 
 			bag = BackpackItems.QUIVER.get();
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, bag, 1)::unlockedBy, Items.LEATHER)
@@ -152,7 +158,7 @@ public class RecipeGen {
 		}
 	}
 
-	private static <T> T unlock(RegistrateRecipeProvider pvd, BiFunction<String, InventoryChangeTrigger.TriggerInstance, T> func, Item item) {
+	public static <T> T unlock(RegistrateRecipeProvider pvd, BiFunction<String, InventoryChangeTrigger.TriggerInstance, T> func, Item item) {
 		return func.apply("has_" + pvd.safeName(item), DataIngredient.items(item).getCritereon(pvd));
 	}
 

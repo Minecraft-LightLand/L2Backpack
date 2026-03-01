@@ -179,6 +179,7 @@ repositories {
     maven {
         url = "https://maven.theillusivec4.top/"
     }
+    maven { url "https://maven.shadowsoffire.dev/releases" }
 }
 
 dependencies {
@@ -207,6 +208,7 @@ dependencies {
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    implementation fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelus_version}")
 
     compileOnly fg.deobf("curse.maven:mouse-tweaks-60089:5338457")
 
@@ -217,6 +219,14 @@ dependencies {
 
     implementation fg.deobf("curse.maven:mana-and-artifice-406360:6376257")
     implementation fg.deobf("curse.maven:geckolib-388172:6333474")
+
+
+    implementation fg.deobf("dev.shadowsoffire:Placebo:${minecraft_version}-${placebo_version}")
+    implementation fg.deobf("dev.shadowsoffire:ApothicAttributes:${minecraft_version}-${attributeslib_version}")
+    implementation fg.deobf("dev.shadowsoffire:Apotheosis:${minecraft_version}-${apotheosis_version}")
+    runtimeOnly fg.deobf("curse.maven:geckolib-388172:6333474")
+    runtimeOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
+    implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:6488484")
 
 }
 

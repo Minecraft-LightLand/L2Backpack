@@ -75,7 +75,7 @@ public abstract class AbstractBag extends Item
 	}
 
 	public NonNullList<ItemStack> getContent(ItemStack stack) {
-		NonNullList<ItemStack> list = NonNullList.withSize(getOccupied(stack), ItemStack.EMPTY);
+		NonNullList<ItemStack> list = NonNullList.withSize(getInvSize(stack), ItemStack.EMPTY);
 		var cont = stack.get(LBItems.BAG_CONTENT);
 		if (cont != null) cont.copyInto(list);
 		return list;
@@ -126,7 +126,7 @@ public abstract class AbstractBag extends Item
 
 	@Override
 	public int getRowSize() {
-		return 8;
+		return 4;
 	}
 
 	@Override

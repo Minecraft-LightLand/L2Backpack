@@ -181,7 +181,7 @@ public abstract class AbstractBag extends Item
 	public ItemStack takeItem(ItemStack storage, ServerPlayer player) {
 		var list = getContent(storage);
 		int n = getInvSize(storage);
-		for (int i = 0; i < n; i++) {
+		for (int i = n - 1; i >= 0; i--) {
 			if (!list.get(i).isEmpty()) {
 				ItemStack ans = list.get(i).copy();
 				list.set(i, ItemStack.EMPTY);
@@ -219,7 +219,7 @@ public abstract class AbstractBag extends Item
 		int count = 0;
 		int stackCount = 0;
 		int n = getInvSize(bag);
-		for (int i = 0; i < n; i++) {
+		for (int i = n - 1; i >= 0; i--) {
 			ItemStack stack = list.get(i);
 			if (!stack.isEmpty()) {
 				count += stack.getCount();

@@ -15,7 +15,7 @@ public record BagItemHandler(AbstractBag bag, ItemStack bagStack) implements IIt
 
 	@Override
 	public int getSlots() {
-		return AbstractBag.SIZE;
+		return bag.getInvSize(bagStack);
 	}
 
 	@Override
@@ -28,10 +28,10 @@ public record BagItemHandler(AbstractBag bag, ItemStack bagStack) implements IIt
 		var list = bag.getContent(bagStack);
 		if (list.get(slot).isEmpty()) {
 			if (!simulate) {
-				list.set(slot, stack);
+				list.set(slot, stack.copyWithCount(1));
 				bag.setContent(bagStack, list);
 			}
-			return ItemStack.EMPTY;
+			return stack.copyWithCount(stack.getCount() - 1);
 		}
 		return stack;
 	}

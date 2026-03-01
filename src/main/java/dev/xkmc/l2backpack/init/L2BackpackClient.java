@@ -28,8 +28,9 @@ public class L2BackpackClient {
 			ItemProperties.register(BackpackItems.QUIVER.get(), new ResourceLocation(L2Backpack.MODID, "arrow"), (stack, level, entity, i) -> Quiver.displayArrow(stack));
 
 			ClampedItemPropertyFunction func = (stack, level, entity, i) -> AbstractBag.isFilled(stack) ? 1 : 0;
-			ItemProperties.register(BackpackItems.ARMOR_BAG.get(), new ResourceLocation(L2Backpack.MODID, "fill"), func);
-			ItemProperties.register(BackpackItems.BOOK_BAG.get(), new ResourceLocation(L2Backpack.MODID, "fill"), func);
+
+			for (var e : AbstractBag.getAllBags())
+				ItemProperties.register(e, new ResourceLocation(L2Backpack.MODID, "fill"), func);
 
 		});
 	}
@@ -54,8 +55,8 @@ public class L2BackpackClient {
 		}
 		{
 			var deco = new BagCountDeco();
-			event.register(BackpackItems.ARMOR_BAG.get(), deco);
-			event.register(BackpackItems.BOOK_BAG.get(), deco);
+			for (var e : AbstractBag.getAllBags())
+				event.register(e, deco);
 		}
 	}
 

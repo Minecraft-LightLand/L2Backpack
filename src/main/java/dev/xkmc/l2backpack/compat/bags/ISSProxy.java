@@ -16,7 +16,7 @@ import net.minecraftforge.common.Tags;
 public class ISSProxy {
 
 	public static boolean pred(ItemStack stack) {
-		return !stack.isStackable() && stack.getItem() instanceof Scroll;
+		return stack.getItem() instanceof Scroll;
 	}
 
 	public static void recipe(DataGenContext<Item, CompatBag> ctx, RegistrateRecipeProvider pvd) {

@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.tool;
 
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
+import dev.xkmc.l2backpack.content.bag.AbstractBag;
 import dev.xkmc.l2backpack.content.drawer.BaseDrawerItem;
 import dev.xkmc.l2backpack.content.drawer.DrawerBlockEntity;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
@@ -35,6 +36,13 @@ public class UpgradeItem extends Item implements IBagTool {
 			int size = BaseDrawerItem.getStackingFactor(stack);
 			if (size < BaseDrawerItem.MAX_FACTOR) {
 				BaseDrawerItem.setStackingFactor(stack, size + 1);
+				tool.shrink(1);
+			}
+		}
+		if (stack.getItem() instanceof AbstractBag bag) {
+			int size = AbstractBag.getSizeFactor(stack);
+			if (size < bag.getMaxFactor()) {
+				AbstractBag.setSizeFactor(stack, size + 1);
 				tool.shrink(1);
 			}
 		}

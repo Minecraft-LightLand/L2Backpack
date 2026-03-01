@@ -4,7 +4,7 @@
   "category": "l2backpack:items",
   "sortnum": 7,
   "pages": [
-	"Bags allows you to quickly collect unstackable items in your inventory. There are 2 kinds: Equipment bags collecting everything that has durability, and book bags collecting enchantment books.$(br2)Bags can store up to 64 items, but they don't have GUIs. In inventory, left click bag with item to store. Right click bag to take item out.",
+	"Bags allows you to quickly collect unstackable items in your inventory: Equipment bags collecting everything that has durability, book bags collecting enchantment books, and potion bag collecting potions.$(br2)Bags can store up to 64 items, but they don't have GUIs. In inventory, left click bag with item to store. Right click bag to take item out. Use $(l:items/8_ender_pocket)Ender Pocket$(/l) to upgrade to at most 256 items.$(br2)Mod Integration: Gem Bag for Apotheosis and Scroll Bag for Iron's Spells.",
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "tag:l2backpack:bags",

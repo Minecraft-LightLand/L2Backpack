@@ -16,7 +16,7 @@ import net.minecraftforge.common.Tags;
 public class ApothProxy {
 
 	public static boolean pred(ItemStack stack) {
-		return !stack.isStackable() && stack.getItem() instanceof GemItem;
+		return stack.getItem() instanceof GemItem;
 	}
 
 	public static void recipe(DataGenContext<Item, CompatBag> ctx, RegistrateRecipeProvider pvd) {

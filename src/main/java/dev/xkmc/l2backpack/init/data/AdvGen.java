@@ -140,15 +140,15 @@ public class AdvGen {
 
 				// bags
 				.root().create("bag", BackpackItems.ARMOR_BAG.get(),
-						CriterionBuilder.items(BackpackItems.ARMOR_BAG.get(), BackpackItems.BOOK_BAG.get()),
+						CriterionBuilder.items(BackpackItems.ARMOR_BAG.get(), BackpackItems.BOOK_BAG.get(), BackpackItems.POTION_BAG.get()),
 						"Make Unstackables Stackable", "Obtain an Armor Bag or Book Bag")
 				.create("bag_collect", BackpackItems.ARMOR_BAG.get(),
 						CriterionBuilder.one(BagInteractTrigger.fromType(BagInteractTrigger.Type.COLLECT,
-								BackpackItems.ARMOR_BAG.get(), BackpackItems.BOOK_BAG.get())),
+								BackpackItems.ARMOR_BAG.get(), BackpackItems.BOOK_BAG.get(), BackpackItems.POTION_BAG.get())),
 						"Take the Loot", "Store unused weapons and tools into bag by right clicking with it")
 				.create("bag_dump", BackpackItems.ARMOR_BAG.get(),
 						CriterionBuilder.one(BagInteractTrigger.fromType(BagInteractTrigger.Type.EXTRACT,
-								BackpackItems.ARMOR_BAG.get(), BackpackItems.BOOK_BAG.get())),
+								BackpackItems.ARMOR_BAG.get(), BackpackItems.BOOK_BAG.get(), BackpackItems.POTION_BAG.get())),
 						"Throw out the Loot", "Throw out collected weapons and tools into bag by shift-right clicking with it")
 
 				//quiver

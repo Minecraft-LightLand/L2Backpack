@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "A": {
-      "tag": "c:leathers"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "A": {
+            "tag": "c:leathers"
+        },
+        "B": {
+            "item": "l2backpack:ender_pocket"
+        },
+        "C": {
+            "item": "minecraft:iron_chestplate"
+        },
+        "D": {
+            "item": "minecraft:string"
+        }
     },
-    "B": {
-      "item": "l2backpack:ender_pocket"
-    },
-    "C": {
-      "item": "minecraft:iron_chestplate"
-    },
-    "D": {
-      "item": "minecraft:string"
+    "pattern": [
+        "DCD",
+        "ABA",
+        " A "
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:armor_bag"
     }
-  },
-  "pattern": [
-    "DCD",
-    "ABA",
-    " A "
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:armor_bag"
-  }
 }

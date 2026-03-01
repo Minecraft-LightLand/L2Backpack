@@ -1,33 +1,33 @@
 {
-  "parent": "l2backpack:backpacks/ender_pocket",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "items": [
-          {
-            "items": "#l2backpack:dimensional_storages"
-          }
+    "parent": "l2backpack:backpacks/ender_pocket",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "#l2backpack:dimensional_storages"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.dimension.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:dimensional_storage_white"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.dimension.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.dimension.description"
-    },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:dimensional_storage_white"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.dimension.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

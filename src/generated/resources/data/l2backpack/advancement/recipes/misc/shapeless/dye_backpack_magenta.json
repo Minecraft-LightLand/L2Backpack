@@ -1,32 +1,32 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_backpack_magenta": {
-      "conditions": {
-        "items": [
-          {
-            "items": "l2backpack:backpack_magenta"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_backpack_magenta": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "l2backpack:backpack_magenta"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_the_recipe": {
+            "conditions": {
+                "recipe": "l2backpack:shapeless/dye_backpack_magenta"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+        }
     },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "l2backpack:shapeless/dye_backpack_magenta"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+    "requirements": [
+        [
+            "has_the_recipe",
+            "has_backpack_magenta"
+        ]
+    ],
+    "rewards": {
+        "recipes": [
+            "l2backpack:shapeless/dye_backpack_magenta"
+        ]
     }
-  },
-  "requirements": [
-    [
-      "has_the_recipe",
-      "has_backpack_magenta"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "l2backpack:shapeless/dye_backpack_magenta"
-    ]
-  }
 }

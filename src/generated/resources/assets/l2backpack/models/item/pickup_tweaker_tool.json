@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "l2backpack:item/pickup_tweaker_tool"
-  }
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "l2backpack:item/pickup_tweaker_tool"
+    }
 }

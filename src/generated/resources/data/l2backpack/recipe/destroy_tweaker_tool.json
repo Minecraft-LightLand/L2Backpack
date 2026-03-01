@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "G": {
-      "item": "minecraft:gold_nugget"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "G": {
+            "item": "minecraft:gold_nugget"
+        },
+        "I": {
+            "item": "minecraft:copper_ingot"
+        },
+        "S": {
+            "item": "minecraft:stick"
+        }
     },
-    "I": {
-      "item": "minecraft:copper_ingot"
-    },
-    "S": {
-      "item": "minecraft:stick"
+    "pattern": [
+        " G ",
+        " IG",
+        "S  "
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:destroy_tweaker_tool"
     }
-  },
-  "pattern": [
-    " G ",
-    " IG",
-    "S  "
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:destroy_tweaker_tool"
-  }
 }

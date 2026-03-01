@@ -1,37 +1,37 @@
 {
-  "parent": "l2backpack:backpacks/bag_collect",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "type": "EXTRACT",
-        "ingredient": [
-          {
-            "item": "l2backpack:armor_bag"
-          },
-          {
-            "item": "l2backpack:book_bag"
-          }
+    "parent": "l2backpack:backpacks/bag_collect",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "type": "EXTRACT",
+                "ingredient": [
+                    {
+                        "item": "l2backpack:book_bag"
+                    },
+                    {
+                        "item": "l2backpack:book_bag"
+                    }
+                ]
+            },
+            "trigger": "l2backpack:bag_interact"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.bag_dump.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:book_bag"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.bag_dump.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "l2backpack:bag_interact"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.bag_dump.description"
-    },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:armor_bag"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.bag_dump.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

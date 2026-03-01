@@ -1,31 +1,31 @@
 {
-  "parent": "l2backpack:backpacks/dimension",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "keybind": false,
-        "origin": "l2backpack:dimension"
-      },
-      "trigger": "l2backpack:slot_click"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.dimension_recursion.description"
+    "parent": "l2backpack:backpacks/dimension",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "keybind": false,
+                "origin": "l2backpack:dimension"
+            },
+            "trigger": "l2backpack:slot_click"
+        }
     },
-    "frame": "goal",
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:dimensional_storage_yellow"
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.dimension_recursion.description"
+        },
+        "frame": "goal",
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:dimensional_storage_yellow"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.dimension_recursion.title"
+        }
     },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.dimension_recursion.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    "requirements": [
+        [
+            "0"
+        ]
+    ],
+    "sends_telemetry_event": true
 }

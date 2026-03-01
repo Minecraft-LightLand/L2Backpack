@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "A": {
-      "tag": "c:leathers"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "A": {
+            "tag": "c:leathers"
+        },
+        "B": {
+            "item": "minecraft:arrow"
+        },
+        "D": {
+            "item": "minecraft:string"
+        }
     },
-    "B": {
-      "item": "minecraft:arrow"
-    },
-    "D": {
-      "item": "minecraft:string"
+    "pattern": [
+        " A ",
+        "ABA",
+        " AD"
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:arrow_bag"
     }
-  },
-  "pattern": [
-    " A ",
-    "ABA",
-    " AD"
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:arrow_bag"
-  }
 }

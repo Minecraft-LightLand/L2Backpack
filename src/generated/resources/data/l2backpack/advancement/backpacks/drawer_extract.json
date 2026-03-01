@@ -1,37 +1,37 @@
 {
-  "parent": "l2backpack:backpacks/drawer_collect",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "type": "EXTRACT",
-        "ingredient": [
-          {
-            "item": "l2backpack:drawer"
-          },
-          {
-            "item": "l2backpack:ender_drawer"
-          }
+    "parent": "l2backpack:backpacks/drawer_collect",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "type": "EXTRACT",
+                "ingredient": [
+                    {
+                        "item": "l2backpack:drawer"
+                    },
+                    {
+                        "item": "l2backpack:ender_drawer"
+                    }
+                ]
+            },
+            "trigger": "l2backpack:bag_interact"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.drawer_extract.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:drawer"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.drawer_extract.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "l2backpack:bag_interact"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.drawer_extract.description"
-    },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:drawer"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.drawer_extract.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

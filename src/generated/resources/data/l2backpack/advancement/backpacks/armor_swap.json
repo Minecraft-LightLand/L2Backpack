@@ -1,33 +1,33 @@
 {
-  "parent": "l2backpack:backpacks/scabbard",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "items": [
-          {
-            "items": "l2backpack:armor_swap"
-          }
+    "parent": "l2backpack:backpacks/scabbard",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "l2backpack:armor_swap"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.armor_swap.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:armor_swap"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.armor_swap.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.armor_swap.description"
-    },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:armor_swap"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.armor_swap.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

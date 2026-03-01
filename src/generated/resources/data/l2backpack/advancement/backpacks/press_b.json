@@ -1,29 +1,29 @@
 {
-  "parent": "l2backpack:backpacks/backpack",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "keybind": true
-      },
-      "trigger": "l2backpack:slot_click"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.press_b.description"
+    "parent": "l2backpack:backpacks/backpack",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "keybind": true
+            },
+            "trigger": "l2backpack:slot_click"
+        }
     },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:backpack_cyan"
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.press_b.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:backpack_cyan"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.press_b.title"
+        }
     },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.press_b.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    "requirements": [
+        [
+            "0"
+        ]
+    ],
+    "sends_telemetry_event": true
 }

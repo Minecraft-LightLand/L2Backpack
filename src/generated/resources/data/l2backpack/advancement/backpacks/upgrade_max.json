@@ -1,37 +1,37 @@
 {
-  "parent": "l2backpack:backpacks/upgrade",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "items": [
-          {
-            "components": {
-              "l2backpack:row": 8
+    "parent": "l2backpack:backpacks/upgrade",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "items": [
+                    {
+                        "components": {
+                            "l2backpack:row": 8
+                        },
+                        "items": "#l2backpack:backpacks"
+                    }
+                ]
             },
-            "items": "#l2backpack:backpacks"
-          }
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.upgrade_max.description"
+        },
+        "frame": "challenge",
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:backpack_gray"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.upgrade_max.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.upgrade_max.description"
-    },
-    "frame": "challenge",
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:backpack_gray"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.upgrade_max.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

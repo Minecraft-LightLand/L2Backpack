@@ -1,13 +1,13 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "item": "l2backpack:ender_drawer"
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        {
+            "item": "l2backpack:ender_drawer"
+        }
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:ender_drawer"
     }
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:ender_drawer"
-  }
 }

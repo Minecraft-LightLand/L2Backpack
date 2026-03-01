@@ -1,24 +1,24 @@
 {
-  "criteria": {
-    "locate": {
-      "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "location": {}
-            }
-          }
+    "criteria": {
+        "locate": {
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "location": {}
+                        }
+                    }
+                ]
+            },
+            "trigger": "minecraft:location"
+        }
+    },
+    "requirements": [
+        [
+            "locate"
         ]
-      },
-      "trigger": "minecraft:location"
-    }
-  },
-  "requirements": [
-    [
-      "locate"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

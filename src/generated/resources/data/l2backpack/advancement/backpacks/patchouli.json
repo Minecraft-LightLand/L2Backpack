@@ -1,40 +1,40 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "patchouli"
-    }
-  ],
-  "parent": "l2backpack:backpacks/root",
-  "criteria": {
-    "0": {
-      "trigger": "minecraft:tick"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.patchouli.description"
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "patchouli"
+        }
+    ],
+    "parent": "l2backpack:backpacks/root",
+    "criteria": {
+        "0": {
+            "trigger": "minecraft:tick"
+        }
     },
-    "icon": {
-      "components": {
-        "patchouli:book": "l2backpack:backpack_guide"
-      },
-      "count": 1,
-      "id": "patchouli:guide_book"
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.patchouli.description"
+        },
+        "icon": {
+            "components": {
+                "patchouli:book": "l2backpack:backpack_guide"
+            },
+            "count": 1,
+            "id": "patchouli:guide_book"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.patchouli.title"
+        }
     },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.patchouli.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "rewards": {
-    "loot": [
-      "l2backpack:backpack_guide"
-    ]
-  },
-  "sends_telemetry_event": true
+    "requirements": [
+        [
+            "0"
+        ]
+    ],
+    "rewards": {
+        "loot": [
+            "l2backpack:backpack_guide"
+        ]
+    },
+    "sends_telemetry_event": true
 }

@@ -1,33 +1,33 @@
 {
-  "parent": "l2backpack:backpacks/quiver",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "items": [
-          {
-            "items": "l2backpack:tool_swap"
-          }
+    "parent": "l2backpack:backpacks/quiver",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "l2backpack:tool_swap"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.scabbard.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:tool_swap"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.scabbard.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.scabbard.description"
-    },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:tool_swap"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.scabbard.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

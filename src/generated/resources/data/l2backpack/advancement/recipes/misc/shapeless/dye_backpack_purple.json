@@ -1,32 +1,32 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_backpack_purple": {
-      "conditions": {
-        "items": [
-          {
-            "items": "l2backpack:backpack_purple"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_backpack_purple": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "l2backpack:backpack_purple"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        },
+        "has_the_recipe": {
+            "conditions": {
+                "recipe": "l2backpack:shapeless/dye_backpack_purple"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+        }
     },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "l2backpack:shapeless/dye_backpack_purple"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+    "requirements": [
+        [
+            "has_the_recipe",
+            "has_backpack_purple"
+        ]
+    ],
+    "rewards": {
+        "recipes": [
+            "l2backpack:shapeless/dye_backpack_purple"
+        ]
     }
-  },
-  "requirements": [
-    [
-      "has_the_recipe",
-      "has_backpack_purple"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "l2backpack:shapeless/dye_backpack_purple"
-    ]
-  }
 }

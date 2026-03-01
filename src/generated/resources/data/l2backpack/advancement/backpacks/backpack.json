@@ -1,33 +1,33 @@
 {
-  "parent": "l2backpack:backpacks/root",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "items": [
-          {
-            "items": "#l2backpack:backpacks"
-          }
+    "parent": "l2backpack:backpacks/root",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "#l2backpack:backpacks"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.backpack.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:backpack_red"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.backpack.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.backpack.description"
-    },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:backpack_red"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.backpack.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

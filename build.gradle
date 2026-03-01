@@ -129,6 +129,7 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven { url "https://maven.shadowsoffire.dev/releases" }
     maven {
         // Location of the maven that hosts JEI files (and TiC)
         name 'Progwml6 maven'
@@ -156,6 +157,13 @@ dependencies {
     implementation "vazkii.patchouli:Patchouli:${patchouli_ver}"
     compileOnly "curse.maven:mouse-tweaks-60089:5437296"
     implementation "curse.maven:polymorph-388800:5550094"
+    implementation "dev.shadowsoffire:Placebo:${minecraft_version}-${placebo_version}"
+    implementation "dev.shadowsoffire:ApothicAttributes:${minecraft_version}-${attributeslib_version}"
+    implementation "dev.shadowsoffire:Apotheosis:${minecraft_version}-${apotheosis_version}"
+    implementation "curse.maven:geckolib-388172:6027599"
+    implementation "curse.maven:playeranimator-658587:6024462"
+    implementation "curse.maven:irons-spells-n-spellbooks-855414:6282642"
+    implementation "curse.maven:gateways-to-eternity-417802:6926284"
 
     implementation "curse.maven:sophisticated-backpacks-422301:7329574"
     implementation "curse.maven:sophisticated-core-618298:7337954"

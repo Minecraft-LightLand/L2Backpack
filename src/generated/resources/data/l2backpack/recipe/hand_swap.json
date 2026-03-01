@@ -1,23 +1,23 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "A": {
-      "tag": "c:leathers"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "A": {
+            "tag": "c:leathers"
+        },
+        "B": {
+            "item": "minecraft:shield"
+        },
+        "D": {
+            "item": "minecraft:string"
+        }
     },
-    "B": {
-      "item": "minecraft:shield"
-    },
-    "D": {
-      "item": "minecraft:string"
+    "pattern": [
+        "AAA",
+        "DBD"
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:hand_swap"
     }
-  },
-  "pattern": [
-    "AAA",
-    "DBD"
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:hand_swap"
-  }
 }

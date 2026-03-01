@@ -1,36 +1,36 @@
 {
-  "parent": "l2backpack:backpacks/ender_pocket",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "items": [
-          {
-            "components": {
-              "l2backpack:row": 3
+    "parent": "l2backpack:backpacks/ender_pocket",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "items": [
+                    {
+                        "components": {
+                            "l2backpack:row": 3
+                        },
+                        "items": "#l2backpack:backpacks"
+                    }
+                ]
             },
-            "items": "#l2backpack:backpacks"
-          }
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.upgrade.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:backpack_light_gray"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.upgrade.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.upgrade.description"
-    },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:backpack_light_gray"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.upgrade.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

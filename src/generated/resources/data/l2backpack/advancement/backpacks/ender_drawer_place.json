@@ -1,35 +1,35 @@
 {
-  "parent": "l2backpack:backpacks/ender_drawer",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "location": [
-          {
-            "block": "l2backpack:ender_drawer",
-            "condition": "minecraft:block_state_property"
-          }
+    "parent": "l2backpack:backpacks/ender_drawer",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "location": [
+                    {
+                        "block": "l2backpack:ender_drawer",
+                        "condition": "minecraft:block_state_property"
+                    }
+                ]
+            },
+            "trigger": "minecraft:placed_block"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.ender_drawer_place.description"
+        },
+        "frame": "goal",
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:ender_drawer"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.ender_drawer_place.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "minecraft:placed_block"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.ender_drawer_place.description"
-    },
-    "frame": "goal",
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:ender_drawer"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.ender_drawer_place.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

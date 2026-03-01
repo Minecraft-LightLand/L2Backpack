@@ -1,28 +1,28 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "backpack_craft",
-  "key": {
-    "A": {
-      "tag": "c:leathers"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "group": "backpack_craft",
+    "key": {
+        "A": {
+            "tag": "c:leathers"
+        },
+        "B": {
+            "item": "minecraft:orange_wool"
+        },
+        "C": {
+            "item": "minecraft:chest"
+        },
+        "D": {
+            "item": "minecraft:iron_ingot"
+        }
     },
-    "B": {
-      "item": "minecraft:orange_wool"
-    },
-    "C": {
-      "item": "minecraft:chest"
-    },
-    "D": {
-      "item": "minecraft:iron_ingot"
+    "pattern": [
+        " A ",
+        "DCD",
+        "BBB"
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:backpack_orange"
     }
-  },
-  "pattern": [
-    " A ",
-    "DCD",
-    "BBB"
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:backpack_orange"
-  }
 }

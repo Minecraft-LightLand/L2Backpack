@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "A": {
-      "item": "minecraft:glass"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "A": {
+            "item": "minecraft:glass"
+        },
+        "B": {
+            "item": "l2backpack:ender_pocket"
+        },
+        "D": {
+            "item": "minecraft:obsidian"
+        },
+        "E": {
+            "item": "minecraft:ender_chest"
+        }
     },
-    "B": {
-      "item": "l2backpack:ender_pocket"
-    },
-    "D": {
-      "item": "minecraft:obsidian"
-    },
-    "E": {
-      "item": "minecraft:ender_chest"
+    "pattern": [
+        "DAD",
+        "ABA",
+        "DED"
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:ender_drawer"
     }
-  },
-  "pattern": [
-    "DAD",
-    "ABA",
-    "DED"
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:ender_drawer"
-  }
 }

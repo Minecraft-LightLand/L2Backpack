@@ -1,27 +1,27 @@
 {
-  "parent": "l2backpack:backpacks/ender_drawer_place",
-  "criteria": {
-    "0": {
-      "trigger": "l2backpack:shared_drive"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.dimension_share.description"
+    "parent": "l2backpack:backpacks/ender_drawer_place",
+    "criteria": {
+        "0": {
+            "trigger": "l2backpack:shared_drive"
+        }
     },
-    "frame": "challenge",
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:dimensional_storage_blue"
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.dimension_share.description"
+        },
+        "frame": "challenge",
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:dimensional_storage_blue"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.dimension_share.title"
+        }
     },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.dimension_share.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    "requirements": [
+        [
+            "0"
+        ]
+    ],
+    "sends_telemetry_event": true
 }

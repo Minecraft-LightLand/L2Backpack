@@ -1,12 +1,17 @@
 package dev.xkmc.l2backpack.init.registrate;
 
+import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import com.tterrag.registrate.util.nullness.NonNullFunction;
+import dev.xkmc.l2backpack.compat.bags.BagRegistry;
 import dev.xkmc.l2backpack.content.backpack.BackpackItem;
+import dev.xkmc.l2backpack.content.bag.AbstractBag;
 import dev.xkmc.l2backpack.content.bag.BookBag;
 import dev.xkmc.l2backpack.content.bag.EquipmentBag;
+import dev.xkmc.l2backpack.content.bag.PotionBag;
 import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.client.LBBEWLR;
 import dev.xkmc.l2backpack.content.drawer.DrawerItem;
@@ -24,6 +29,7 @@ import dev.xkmc.l2backpack.content.tool.PickupTweakerTool;
 import dev.xkmc.l2backpack.content.tool.UpgradeItem;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBTagGen;
+import dev.xkmc.l2core.init.reg.registrate.L2Registrate;
 import dev.xkmc.l2core.init.reg.registrate.SimpleEntry;
 import dev.xkmc.l2core.init.reg.simple.DCReg;
 import dev.xkmc.l2core.init.reg.simple.DCVal;
@@ -65,6 +71,7 @@ public class LBItems {
 
 	public static final ItemEntry<EquipmentBag> ARMOR_BAG;
 	public static final ItemEntry<BookBag> BOOK_BAG;
+	public static final ItemEntry<PotionBag> POTION_BAG;
 	public static final ItemEntry<Quiver> QUIVER;
 	public static final ItemEntry<Scabbard> SCABBARD;
 	public static final ItemEntry<ArmorSwap> ARMOR_SWAP;
@@ -139,20 +146,10 @@ public class LBItems {
 			DESTROY_TWEAKER = REGISTRATE.item("destroy_tweaker_tool", p -> new DestroyTweakerTool(p.stacksTo(1)))
 					.defaultModel().defaultLang().register();
 
-			ARMOR_BAG = REGISTRATE.item("armor_bag", EquipmentBag::new).tag(LBTagGen.BAGS)
-					.model((ctx, pvd) -> pvd.generated(ctx).override()
-							.predicate(L2Backpack.loc("fill"), 1)
-							.model(pvd.getBuilder(ctx.getName() + "_filled")
-									.parent(new ModelFile.UncheckedModelFile("item/generated"))
-									.texture("layer0", pvd.modLoc("item/" + ctx.getName() + "_filled"))))
-					.lang("Equipment Bag").register();
-			BOOK_BAG = REGISTRATE.item("book_bag", BookBag::new).tag(LBTagGen.BAGS)
-					.model((ctx, pvd) -> pvd.generated(ctx).override()
-							.predicate(L2Backpack.loc("fill"), 1)
-							.model(pvd.getBuilder(ctx.getName() + "_filled")
-									.parent(new ModelFile.UncheckedModelFile("item/generated"))
-									.texture("layer0", pvd.modLoc("item/" + ctx.getName() + "_filled"))))
-					.defaultLang().register();
+			ARMOR_BAG = regBag("armor_bag", EquipmentBag::new).lang("Equipment Bag").register();
+			BOOK_BAG = regBag("book_bag", BookBag::new).defaultLang().register();
+			POTION_BAG = regBag("potion_bag", PotionBag::new).defaultLang().register();
+			BagRegistry.register();
 			QUIVER = REGISTRATE.item("arrow_bag", Quiver::new).model(LBItems::createArrowBagModel)
 					.tag(back, LBTagGen.SWAPS).lang("Quiver").register();
 			SCABBARD = REGISTRATE.item("tool_swap", Scabbard::new).defaultModel().tag(back, LBTagGen.SWAPS).defaultLang().register();
@@ -187,6 +184,15 @@ public class LBItems {
 			override.predicate(L2Backpack.loc("arrow"), i);
 			override.model(new ModelFile.UncheckedModelFile(L2Backpack.MODID + ":item/" + name));
 		}
+	}
+
+	public static <T extends AbstractBag> ItemBuilder<T, L2Registrate> regBag(String id, NonNullFunction<Item.Properties, T> factory) {
+		return REGISTRATE.item(id, factory).tag(LBTagGen.BAGS)
+				.model((ctx, pvd) -> pvd.generated(ctx).override()
+						.predicate(L2Backpack.loc("fill"), 1)
+						.model(pvd.getBuilder(ctx.getName() + "_filled")
+								.parent(new ModelFile.UncheckedModelFile("item/generated"))
+								.texture("layer0", pvd.modLoc("item/" + ctx.getName() + "_filled"))));
 	}
 
 	public static void register() {

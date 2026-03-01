@@ -1,6 +1,9 @@
 {
-  "values": [
-    "l2backpack:armor_bag",
-    "l2backpack:book_bag"
-  ]
+    "values": [
+        "l2backpack:armor_bag",
+        "l2backpack:book_bag",
+        "l2backpack:potion_bag",
+        "l2backpack:gem_bag",
+        "l2backpack:scroll_bag"
+    ]
 }

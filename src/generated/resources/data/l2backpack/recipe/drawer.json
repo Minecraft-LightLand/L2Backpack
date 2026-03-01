@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "A": {
-      "item": "minecraft:glass"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "A": {
+            "item": "minecraft:glass"
+        },
+        "B": {
+            "item": "l2backpack:ender_pocket"
+        },
+        "C": {
+            "item": "minecraft:amethyst_shard"
+        },
+        "D": {
+            "item": "minecraft:gold_nugget"
+        }
     },
-    "B": {
-      "item": "l2backpack:ender_pocket"
-    },
-    "C": {
-      "item": "minecraft:amethyst_shard"
-    },
-    "D": {
-      "item": "minecraft:gold_nugget"
+    "pattern": [
+        "CAC",
+        "ABA",
+        "DAD"
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:drawer"
     }
-  },
-  "pattern": [
-    "CAC",
-    "ABA",
-    "DAD"
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:drawer"
-  }
 }

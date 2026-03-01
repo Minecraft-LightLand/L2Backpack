@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "A": {
-      "tag": "c:leathers"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "A": {
+            "tag": "c:leathers"
+        },
+        "B": {
+            "item": "minecraft:iron_helmet"
+        },
+        "D": {
+            "item": "minecraft:iron_ingot"
+        }
     },
-    "B": {
-      "item": "minecraft:iron_helmet"
-    },
-    "D": {
-      "item": "minecraft:iron_ingot"
+    "pattern": [
+        " A ",
+        "ABA",
+        "DAD"
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:armor_swap"
     }
-  },
-  "pattern": [
-    " A ",
-    "ABA",
-    "DAD"
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:armor_swap"
-  }
 }

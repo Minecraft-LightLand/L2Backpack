@@ -1,28 +1,28 @@
 {
-  "criteria": {
-    "0": {
-      "trigger": "minecraft:tick"
-    }
-  },
-  "display": {
-    "announce_to_chat": false,
-    "background": "l2backpack:textures/gui/advancements/backgrounds/backpacks.png",
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.root.description"
+    "criteria": {
+        "0": {
+            "trigger": "minecraft:tick"
+        }
     },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:backpack_white"
+    "display": {
+        "announce_to_chat": false,
+        "background": "l2backpack:textures/gui/advancements/backgrounds/backpacks.png",
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.root.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:backpack_white"
+        },
+        "show_toast": false,
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.root.title"
+        }
     },
-    "show_toast": false,
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.root.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    "requirements": [
+        [
+            "0"
+        ]
+    ],
+    "sends_telemetry_event": true
 }

@@ -1,17 +1,17 @@
 {
-  "type": "l2backpack:backpack_dye",
-  "category": "misc",
-  "group": "backpack_dye",
-  "ingredients": [
-    {
-      "tag": "l2backpack:backpacks"
-    },
-    {
-      "item": "minecraft:red_dye"
+    "type": "l2backpack:backpack_dye",
+    "category": "misc",
+    "group": "backpack_dye",
+    "ingredients": [
+        {
+            "tag": "l2backpack:backpacks"
+        },
+        {
+            "item": "minecraft:red_dye"
+        }
+    ],
+    "result": {
+        "count": 1,
+        "id": "l2backpack:backpack_red"
     }
-  ],
-  "result": {
-    "count": 1,
-    "id": "l2backpack:backpack_red"
-  }
 }

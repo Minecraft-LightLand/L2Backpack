@@ -1,27 +1,27 @@
 {
-  "parent": "l2backpack:backpacks/dimension_hopper",
-  "criteria": {
-    "0": {
-      "trigger": "l2backpack:analog_signal"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.dimension_analog.description"
+    "parent": "l2backpack:backpacks/dimension_hopper",
+    "criteria": {
+        "0": {
+            "trigger": "l2backpack:analog_signal"
+        }
     },
-    "frame": "challenge",
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:dimensional_storage_red"
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.dimension_analog.description"
+        },
+        "frame": "challenge",
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:dimensional_storage_red"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.dimension_analog.title"
+        }
     },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.dimension_analog.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    "requirements": [
+        [
+            "0"
+        ]
+    ],
+    "sends_telemetry_event": true
 }

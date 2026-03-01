@@ -1,33 +1,33 @@
 {
-  "parent": "l2backpack:backpacks/drawer",
-  "criteria": {
-    "0": {
-      "conditions": {
-        "items": [
-          {
-            "items": "l2backpack:ender_drawer"
-          }
+    "parent": "l2backpack:backpacks/drawer",
+    "criteria": {
+        "0": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "l2backpack:ender_drawer"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "display": {
+        "description": {
+            "translate": "advancements.l2backpack.backpacks.ender_drawer.description"
+        },
+        "icon": {
+            "count": 1,
+            "id": "l2backpack:ender_drawer"
+        },
+        "title": {
+            "translate": "advancements.l2backpack.backpacks.ender_drawer.title"
+        }
+    },
+    "requirements": [
+        [
+            "0"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    }
-  },
-  "display": {
-    "description": {
-      "translate": "advancements.l2backpack.backpacks.ender_drawer.description"
-    },
-    "icon": {
-      "count": 1,
-      "id": "l2backpack:ender_drawer"
-    },
-    "title": {
-      "translate": "advancements.l2backpack.backpacks.ender_drawer.title"
-    }
-  },
-  "requirements": [
-    [
-      "0"
-    ]
-  ],
-  "sends_telemetry_event": true
+    ],
+    "sends_telemetry_event": true
 }

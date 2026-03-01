@@ -66,7 +66,7 @@ public abstract class AbstractBag extends Item
 	}
 
 	public int getMaxFactor() {
-		return 8;
+		return 4;
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public abstract class AbstractBag extends Item
 
 	@Override
 	public int getRowSize() {
-		return 4;
+		return 16;
 	}
 
 	@Override

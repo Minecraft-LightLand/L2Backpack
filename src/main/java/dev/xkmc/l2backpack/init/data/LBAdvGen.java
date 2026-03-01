@@ -142,15 +142,15 @@ public class LBAdvGen {
 
 				// bags
 				.root().create("bag", LBItems.ARMOR_BAG.get(),
-						CriterionBuilder.items(LBItems.ARMOR_BAG.get(), LBItems.BOOK_BAG.get()),
+						CriterionBuilder.items(LBItems.ARMOR_BAG.get(), LBItems.BOOK_BAG.get(), LBItems.POTION_BAG.get()),
 						"Make Unstackables Stackable", "Obtain an Armor Bag or Book Bag")
 				.create("bag_collect", LBItems.ARMOR_BAG.get(),
 						CriterionBuilder.one(BagInteractTrigger.fromType(BagInteractTrigger.Type.COLLECT,
-								LBItems.ARMOR_BAG.get(), LBItems.BOOK_BAG.get()).build()),
+								LBItems.ARMOR_BAG.get(), LBItems.BOOK_BAG.get(), LBItems.POTION_BAG.get()).build()),
 						"Take the Loot", "Store unused weapons and tools into bag by right clicking with it")
 				.create("bag_dump", LBItems.ARMOR_BAG.get(),
 						CriterionBuilder.one(BagInteractTrigger.fromType(BagInteractTrigger.Type.EXTRACT,
-								LBItems.ARMOR_BAG.get(), LBItems.BOOK_BAG.get()).build()),
+								LBItems.ARMOR_BAG.get(), LBItems.BOOK_BAG.get(), LBItems.POTION_BAG.get()).build()),
 						"Throw out the Loot", "Throw out collected weapons and tools into bag by shift-right clicking with it")
 
 				//quiver

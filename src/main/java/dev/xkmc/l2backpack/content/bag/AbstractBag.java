@@ -28,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,12 +38,23 @@ public abstract class AbstractBag extends Item
 
 	public static final int SIZE = 64;
 
+	private static final List<AbstractBag> LIST = new ArrayList<>();
+
+	private static synchronized void add(AbstractBag bag) {
+		LIST.add(bag);
+	}
+
+	public static synchronized List<AbstractBag> getAllBags() {
+		return LIST;
+	}
+
 	public static boolean isFilled(ItemStack bag) {
 		return ((AbstractBag) bag.getItem()).getSize(bag) > 0;
 	}
 
 	public AbstractBag(Properties props) {
 		super(props.stacksTo(1));
+		add(this);
 	}
 
 	@Override

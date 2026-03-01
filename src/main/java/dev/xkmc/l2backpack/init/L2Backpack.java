@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.*;
+import dev.xkmc.l2backpack.content.bag.AbstractBag;
 import dev.xkmc.l2backpack.content.bag.BagCaps;
 import dev.xkmc.l2backpack.content.bag.BagItemHandler;
 import dev.xkmc.l2backpack.content.capability.PickupModeCap;
@@ -24,7 +25,6 @@ import dev.xkmc.l2core.init.reg.simple.Reg;
 import dev.xkmc.l2core.util.MathHelper;
 import dev.xkmc.l2itemselector.select.SelectionRegistry;
 import dev.xkmc.l2serial.network.PacketHandler;
-import dev.xkmc.l2serial.serialization.custom_handler.Handlers;
 import dev.xkmc.modulargolems.init.ModularGolems;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -101,16 +101,16 @@ public class L2Backpack {
 		{
 			var backpacks = MathHelper.merge(LBItems.BACKPACKS,
 					LBItems.QUIVER, LBItems.SCABBARD, LBItems.ARMOR_SWAP, LBItems.SUIT_SWAP, LBItems.HANDSWAP);
-
+			var bags = AbstractBag.getAllBags().toArray(AbstractBag[]::new);
 			event.registerItem(LBMisc.PICKUP, (stack, c) -> new BaseBagInvWrapper(stack), backpacks);
 			event.registerItem(LBMisc.PICKUP, (stack, c) -> new EnderBackpackCaps(stack), LBItems.ENDER_BACKPACK);
 			event.registerItem(LBMisc.PICKUP, (stack, c) -> new DimensionalCaps(stack), LBItems.DIMENSIONAL_STORAGE);
 			event.registerItem(LBMisc.PICKUP, LBItems.DRAWER.get()::getCaps, LBItems.DRAWER);
 			event.registerItem(LBMisc.PICKUP, LBItems.ENDER_DRAWER.get()::getCaps, LBItems.ENDER_DRAWER);
-			event.registerItem(LBMisc.PICKUP, (stack, c) -> new BagCaps(stack), LBItems.ARMOR_BAG, LBItems.BOOK_BAG);
+			event.registerItem(LBMisc.PICKUP, (stack, c) -> new BagCaps(stack), bags);
 
 			event.registerItem(Capabilities.ItemHandler.ITEM, (stack, c) -> new BaseBagItemHandler(stack), backpacks);
-			event.registerItem(Capabilities.ItemHandler.ITEM, (stack, c) -> new BagItemHandler(stack), LBItems.ARMOR_BAG, LBItems.BOOK_BAG);
+			event.registerItem(Capabilities.ItemHandler.ITEM, (stack, c) -> new BagItemHandler(stack), bags);
 		}
 		// blocks
 		{

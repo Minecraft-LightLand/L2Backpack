@@ -17,7 +17,7 @@ public record FastBagItemHandler(AbstractBag bag, ItemStack bagStack,
 
 	@Override
 	public int getSlots() {
-		return AbstractBag.SIZE;
+		return bag.getInvSize(bagStack);
 	}
 
 	@Override

@@ -36,9 +36,19 @@ import java.util.Optional;
 public abstract class AbstractBag extends Item
 		implements ContentTransfer.Quad, PickupBagItem, CapInsertItem, TooltipInvItem, DoubleClickItem {
 
-	public static final int SIZE = 64;
+	private static final int SIZE = 64;
+
+	public static final int MAX_FACTOR = 4;
 
 	private static final List<AbstractBag> LIST = new ArrayList<>();
+
+	public static int getSizeFactor(ItemStack stack) {
+		return stack.getOrDefault(LBItems.DC_DRAWER_STACKING, 1);
+	}
+
+	public static void setSizeFactor(ItemStack stack, int count) {
+		stack.set(LBItems.DC_DRAWER_STACKING, count);
+	}
 
 	private static synchronized void add(AbstractBag bag) {
 		LIST.add(bag);
@@ -49,7 +59,7 @@ public abstract class AbstractBag extends Item
 	}
 
 	public static boolean isFilled(ItemStack bag) {
-		return ((AbstractBag) bag.getItem()).getSize(bag) > 0;
+		return ((AbstractBag) bag.getItem()).getOccupied(bag) > 0;
 	}
 
 	public AbstractBag(Properties props) {
@@ -63,7 +73,7 @@ public abstract class AbstractBag extends Item
 	}
 
 	public NonNullList<ItemStack> getContent(ItemStack stack) {
-		NonNullList<ItemStack> list = NonNullList.withSize(SIZE, ItemStack.EMPTY);
+		NonNullList<ItemStack> list = NonNullList.withSize(getOccupied(stack), ItemStack.EMPTY);
 		var cont = stack.get(LBItems.BAG_CONTENT);
 		if (cont != null) cont.copyInto(list);
 		return list;
@@ -119,7 +129,7 @@ public abstract class AbstractBag extends Item
 
 	@Override
 	public int getInvSize(ItemStack stack) {
-		return SIZE;
+		return SIZE * getSizeFactor(stack);
 	}
 
 	@Override
@@ -134,7 +144,9 @@ public abstract class AbstractBag extends Item
 
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
 		if (flag.hasAltDown()) return;
-		list.add(LBLang.IDS.BAG_SIZE.get(getSize(stack), SIZE));
+		list.add(LBLang.IDS.BAG_SIZE.get(getOccupied(stack), getInvSize(stack)));
+		list.add(LBLang.IDS.BACKPACK_SLOT.get(getSizeFactor(stack), MAX_FACTOR)
+				.withStyle(ChatFormatting.GRAY));
 		PickupConfig.addText(stack, list);
 		LBLang.addInfo(flag, list,
 				LBLang.Info.COLLECT_BAG,
@@ -149,7 +161,7 @@ public abstract class AbstractBag extends Item
 		return false;
 	}
 
-	public int getSize(ItemStack stack) {
+	public int getOccupied(ItemStack stack) {
 		NonNullList<ItemStack> list = getContent(stack);
 		int ans = 0;
 		for (ItemStack is : list) {
@@ -168,7 +180,8 @@ public abstract class AbstractBag extends Item
 	@Override
 	public ItemStack takeItem(ItemStack storage, ServerPlayer player) {
 		var list = getContent(storage);
-		for (int i = 0; i < SIZE; i++) {
+		int n = getInvSize(storage);
+		for (int i = 0; i < n; i++) {
 			if (!list.get(i).isEmpty()) {
 				ItemStack ans = list.get(i).copy();
 				list.set(i, ItemStack.EMPTY);
@@ -181,7 +194,7 @@ public abstract class AbstractBag extends Item
 
 	@Override
 	public int remainingSpace(ItemStack stack) {
-		return SIZE - getSize(stack);
+		return getInvSize(stack) - getOccupied(stack);
 	}
 
 	@Override
@@ -192,10 +205,11 @@ public abstract class AbstractBag extends Item
 	@Override
 	public void mergeStack(ItemStack stack, ItemStack taken) {
 		var list = getContent(stack);
-		for (int i = 0; i < SIZE; i++) {
+		int n = getInvSize(stack);
+		for (int i = 0; i < n; i++) {
 			if (list.get(i).isEmpty()) {
-				list.set(i, taken);
-				break;
+				list.set(i, taken.split(1));
+				if (taken.isEmpty()) break;
 			}
 		}
 		setContent(stack, list);
@@ -204,7 +218,8 @@ public abstract class AbstractBag extends Item
 	private void throwOut(NonNullList<ItemStack> list, Player player, ItemStack bag) {
 		int count = 0;
 		int stackCount = 0;
-		for (int i = 0; i < SIZE; i++) {
+		int n = getInvSize(bag);
+		for (int i = 0; i < n; i++) {
 			ItemStack stack = list.get(i);
 			if (!stack.isEmpty()) {
 				count += stack.getCount();
@@ -221,15 +236,19 @@ public abstract class AbstractBag extends Item
 		int count = 0;
 		int slot = 0;
 		var inv = player.getInventory();
+		int n = getInvSize(bag);
 		for (int i = 9; i < 36; i++) {
 			ItemStack stack = inv.items.get(i);
 			if (isValidContent(stack)) {
-				while (slot < SIZE && !list.get(slot).isEmpty()) slot++;
-				if (slot >= SIZE) break;
-				list.set(slot, stack);
-				count += stack.getCount();
-				inv.items.set(i, ItemStack.EMPTY);
-				slot++;
+				while (!stack.isEmpty()) {
+					while (slot < n && !list.get(slot).isEmpty()) slot++;
+					if (slot >= n) break;
+					list.set(slot, stack.split(1));
+					count++;
+					slot++;
+				}
+				inv.items.set(i, stack);
+				if (slot >= n) break;
 			}
 		}
 		ContentTransfer.onCollect(player, count, bag);

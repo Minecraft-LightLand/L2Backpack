@@ -11,7 +11,7 @@ public class BagCountDeco implements IItemDecorator {
 	@Override
 	public boolean render(GuiGraphics g, Font font, ItemStack stack, int x, int y) {
 		if (!(stack.getItem() instanceof AbstractBag item)) return false;
-		int size = item.getSize(stack);
+		int size = item.getOccupied(stack);
 		if (size == 0) return false;
 		String s = size + "";
 		g.pose().pushPose();

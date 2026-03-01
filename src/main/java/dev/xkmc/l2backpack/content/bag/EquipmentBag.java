@@ -8,6 +8,10 @@ public class EquipmentBag extends AbstractBag {
 		super(props);
 	}
 
+	public int getMaxFactor() {
+		return 4;
+	}
+
 	@Override
 	public boolean isValidContent(ItemStack stack) {
 		return stack.isDamageableItem();

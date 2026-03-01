@@ -38,8 +38,6 @@ public abstract class AbstractBag extends Item
 
 	private static final int SIZE = 64;
 
-	public static final int MAX_FACTOR = 4;
-
 	private static final List<AbstractBag> LIST = new ArrayList<>();
 
 	public static int getSizeFactor(ItemStack stack) {
@@ -65,6 +63,10 @@ public abstract class AbstractBag extends Item
 	public AbstractBag(Properties props) {
 		super(props.stacksTo(1));
 		add(this);
+	}
+
+	public int getMaxFactor() {
+		return 8;
 	}
 
 	@Override
@@ -145,7 +147,7 @@ public abstract class AbstractBag extends Item
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> list, TooltipFlag flag) {
 		if (flag.hasAltDown()) return;
 		list.add(LBLang.IDS.BAG_SIZE.get(getOccupied(stack), getInvSize(stack)));
-		list.add(LBLang.IDS.BACKPACK_SLOT.get(getSizeFactor(stack), MAX_FACTOR)
+		list.add(LBLang.IDS.BACKPACK_SLOT.get(getSizeFactor(stack), getMaxFactor())
 				.withStyle(ChatFormatting.GRAY));
 		PickupConfig.addText(stack, list);
 		LBLang.addInfo(flag, list,

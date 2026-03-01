@@ -41,7 +41,7 @@ public class UpgradeItem extends Item implements IBagTool {
 
 		if (stack.getItem() instanceof AbstractBag bag) {
 			int size = AbstractBag.getSizeFactor(stack);
-			if (size < AbstractBag.MAX_FACTOR) {
+			if (size < bag.getMaxFactor()) {
 				AbstractBag.setSizeFactor(stack, size+1);
 				tool.shrink(1);
 			}

@@ -126,7 +126,7 @@ public abstract class AbstractBag extends Item
 
 	@Override
 	public int getRowSize() {
-		return 16;
+		return 8;
 	}
 
 	@Override
@@ -254,6 +254,17 @@ public abstract class AbstractBag extends Item
 			}
 		}
 		ContentTransfer.onCollect(player, count, bag);
+	}
+
+	public int getLastIndex(ItemStack stack) {
+		var list = getContent(stack);
+		int n = getInvSize(stack);
+		for (int i = n - 1; i >= 0; i--) {
+			if (!list.get(i).isEmpty()) {
+				return i;
+			}
+		}
+		return 0;
 	}
 
 }

@@ -202,5 +202,8 @@
   "l2backpack.configuration.sophisticatedEnderTicking": "让精妙背包在末影背包内也能正常工作",
   "l2backpack.configuration.sophisticatedEnderTicking.tooltip": "",
   "l2backpack.configuration.sophisticatedRightClickOpen": "在物品栏和末影背包中右键精妙背包以开启",
-  "l2backpack.configuration.sophisticatedRightClickOpen.tooltip": ""
+  "l2backpack.configuration.sophisticatedRightClickOpen.tooltip": "",
+  "item.l2backpack.gem_bag": "宝石袋",
+  "item.l2backpack.potion_bag": "药水袋",
+  "item.l2backpack.scroll_bag": "卷轴袋"
  }

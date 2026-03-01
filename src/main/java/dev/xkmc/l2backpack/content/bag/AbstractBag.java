@@ -17,6 +17,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -180,7 +181,7 @@ public abstract class AbstractBag extends Item
 	}
 
 	@Override
-	public ItemStack takeItem(ItemStack storage, ServerPlayer player) {
+	public ItemStack takeItem(ItemStack storage, @Nullable ServerPlayer player) {
 		var list = getContent(storage);
 		int n = getInvSize(storage);
 		for (int i = n - 1; i >= 0; i--) {
@@ -215,6 +216,22 @@ public abstract class AbstractBag extends Item
 			}
 		}
 		setContent(stack, list);
+	}
+
+	@Override
+	public boolean overrideStackedOnOther(ItemStack stack, Slot slot, ClickAction action, Player player) {
+		ItemStack slotStack = slot.getItem();
+		if (slotStack.isEmpty()) {
+			if (action == ClickAction.SECONDARY) {
+				slot.set(takeItem(stack, null));
+				return true;
+			}
+		} else if (isValidContent(slotStack)) {
+			mergeStack(stack, slotStack);
+			slot.setChanged();
+			return true;
+		}
+		return super.overrideStackedOnOther(stack, slot, action, player);
 	}
 
 	private void throwOut(NonNullList<ItemStack> list, Player player, ItemStack bag) {

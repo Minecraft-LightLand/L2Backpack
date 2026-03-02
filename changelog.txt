@@ -1,5 +1,6 @@
 2.5.7
 - Use ender pocket to right click bag / drawer to upgrade, removing smithing recipe
+- Add more storage bags for potion, apoth gems, and Iron's Spell scrolls
 - Fix creative mode taking item from equipment / book bag not passing NBT
 
 2.5.6

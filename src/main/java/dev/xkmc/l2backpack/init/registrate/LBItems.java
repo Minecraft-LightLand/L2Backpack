@@ -146,9 +146,9 @@ public class LBItems {
 			DESTROY_TWEAKER = REGISTRATE.item("destroy_tweaker_tool", p -> new DestroyTweakerTool(p.stacksTo(1)))
 					.defaultModel().defaultLang().register();
 
-			ARMOR_BAG = regBag("armor_bag", EquipmentBag::new).lang("Equipment Bag").register();
-			BOOK_BAG = regBag("book_bag", BookBag::new).defaultLang().register();
-			POTION_BAG = regBag("potion_bag", PotionBag::new).defaultLang().register();
+			ARMOR_BAG = regBag("armor_bag", EquipmentBag::new).tag(LBTagGen.BAGS).lang("Equipment Bag").register();
+			BOOK_BAG = regBag("book_bag", BookBag::new).tag(LBTagGen.BAGS).defaultLang().register();
+			POTION_BAG = regBag("potion_bag", PotionBag::new).tag(LBTagGen.BAGS).defaultLang().register();
 			BagRegistry.register();
 			QUIVER = REGISTRATE.item("arrow_bag", Quiver::new).model(LBItems::createArrowBagModel)
 					.tag(back, LBTagGen.SWAPS).lang("Quiver").register();
@@ -187,7 +187,7 @@ public class LBItems {
 	}
 
 	public static <T extends AbstractBag> ItemBuilder<T, L2Registrate> regBag(String id, NonNullFunction<Item.Properties, T> factory) {
-		return REGISTRATE.item(id, factory).tag(LBTagGen.BAGS)
+		return REGISTRATE.item(id, factory)
 				.model((ctx, pvd) -> pvd.generated(ctx).override()
 						.predicate(L2Backpack.loc("fill"), 1)
 						.model(pvd.getBuilder(ctx.getName() + "_filled")

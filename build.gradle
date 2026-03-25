@@ -154,7 +154,7 @@ dependencies {
 
     implementation "mezz.jei:jei-${jei_minecraft_version}:${jei_version}"
     implementation "top.theillusivec4.curios:curios-neoforge:${curios_version}"
-    implementation "vazkii.patchouli:Patchouli:${patchouli_ver}"
+    implementation "curse.maven:patchouli-306770:6842247"
     compileOnly "curse.maven:mouse-tweaks-60089:5437296"
     implementation "curse.maven:polymorph-388800:5550094"
     implementation "dev.shadowsoffire:Placebo:${minecraft_version}-${placebo_version}"

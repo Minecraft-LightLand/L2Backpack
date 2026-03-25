@@ -6,10 +6,13 @@
                 "type": "COLLECT",
                 "ingredient": [
                     {
-                        "item": "l2backpack:book_bag"
+                        "item": "l2backpack:armor_bag"
                     },
                     {
                         "item": "l2backpack:book_bag"
+                    },
+                    {
+                        "item": "l2backpack:potion_bag"
                     }
                 ]
             },
@@ -22,7 +25,7 @@
         },
         "icon": {
             "count": 1,
-            "id": "l2backpack:book_bag"
+            "id": "l2backpack:armor_bag"
         },
         "title": {
             "translate": "advancements.l2backpack.backpacks.bag_collect.title"

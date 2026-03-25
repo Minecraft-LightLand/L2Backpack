@@ -3,7 +3,13 @@
         "l2backpack:armor_bag",
         "l2backpack:book_bag",
         "l2backpack:potion_bag",
-        "l2backpack:gem_bag",
-        "l2backpack:scroll_bag"
+        {
+            "id": "l2backpack:gem_bag",
+            "required": false
+        },
+        {
+            "id": "l2backpack:scroll_bag",
+            "required": false
+        }
     ]
 }

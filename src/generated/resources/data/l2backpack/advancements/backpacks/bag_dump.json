@@ -10,6 +10,9 @@
           },
           {
             "item": "l2backpack:book_bag"
+          },
+          {
+            "item": "l2backpack:potion_bag"
           }
         ]
       },

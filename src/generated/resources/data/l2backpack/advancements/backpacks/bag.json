@@ -7,7 +7,8 @@
           {
             "items": [
               "l2backpack:armor_bag",
-              "l2backpack:book_bag"
+              "l2backpack:book_bag",
+              "l2backpack:potion_bag"
             ]
           }
         ]

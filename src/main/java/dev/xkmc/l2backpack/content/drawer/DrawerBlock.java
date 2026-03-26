@@ -72,6 +72,7 @@ public class DrawerBlock implements UseItemOnBlockMethod, GetBlockItemBlockMetho
 			chest.handler.count = DrawerItem.getCount(stack);
 			chest.handler.item = LBItems.DRAWER.get().getDrawerContent(stack);
 			chest.handler.config = PickupConfig.get(stack);
+			chest.handler.stacking = LBItems.DC_DRAWER_STACKING.getOrDefault(stack, 1);
 		}
 	}
 

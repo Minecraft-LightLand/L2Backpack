@@ -6,7 +6,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.gradle.userdev' version '7.0.165'
-    id 'net.darkhax.curseforgegradle' version '[1.1.24,)'
+    id 'net.darkhax.curseforgegradle' version '[1.1.24,1.2)'
     id "at.stnwtr.gradle-secrets-plugin" version "1.0.1"
     id "com.modrinth.minotaur" version "2.+"
 }
@@ -149,6 +149,7 @@ dependencies {
     implementation "dev.xkmc:l2itemselector:${l2itemselector_ver}"
     implementation "dev.xkmc:l2library:${l2library_ver}"
     implementation "dev.xkmc:l2damagetracker:${l2damagetracker_ver}"
+    implementation "dev.xkmc:mob_weapon_api:${mob_weapon_api_ver}"
     implementation "dev.xkmc:modulargolems:${modulargolems_ver}"
     implementation "dev.xkmc:l2complements:${l2complements_ver}"
 

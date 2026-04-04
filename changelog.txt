@@ -1,3 +1,6 @@
+3.1.3
+- Allow ModularGolem to draw items from dimensional backpack
+
 3.1.2
 - Fix drawer upgrade disappearing after placing and breaking
 

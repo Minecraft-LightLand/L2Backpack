@@ -11,6 +11,7 @@ import dev.xkmc.l2core.util.Proxy;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.overlay.SelectionSideBar;
 import dev.xkmc.l2itemselector.overlay.SideBar;
+import dev.xkmc.l2itemselector.overlay.WheelHandler;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +22,7 @@ import java.util.List;
 public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapOverlay.BackpackSignature> {
 
 	public record BackpackSignature(int backpackSelect, boolean ignoreOther, @Nullable QuickSwapType type,
-									int playerSelect, ItemStack stack)
+	                                int playerSelect, ItemStack stack)
 			implements Signature<BackpackSignature> {
 
 		@Override
@@ -54,6 +55,7 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 	public boolean isScreenOn() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
+		if (L2Keys.WHEEL.map.isDown()) return false;
 		return BackpackSel.INSTANCE.isClientActive(player);
 	}
 
@@ -62,7 +64,8 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 	}
 
 	public static boolean hasAltDown() {
-		return L2Keys.hasAltDown();
+		return L2Keys.hasAltDown() || L2Keys.WHEEL.map.isDown() ||
+				WheelHandler.wheel instanceof IQuickSwapToken.SwapWheel;
 	}
 
 	@Override

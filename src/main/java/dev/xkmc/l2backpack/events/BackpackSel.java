@@ -2,19 +2,23 @@ package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
+import dev.xkmc.l2backpack.content.quickswap.type.ArrowSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
+import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
 import dev.xkmc.l2itemselector.select.ISelectionListener;
 import dev.xkmc.l2itemselector.select.SetSelectedToServer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
-public class BackpackSel implements ISelectionListener {
+public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 
 	public static final BackpackSel INSTANCE = new BackpackSel();
 
@@ -88,6 +92,14 @@ public class BackpackSel implements ISelectionListener {
 	@Override
 	public boolean isHoldKeyDown(Player player) {
 		return QuickSwapOverlay.INSTANCE.isOnHold();
+	}
+
+	@Override
+	public Optional<WheelAdaptor> get(@Nullable Player player) {
+		if (player == null) return Optional.empty();
+		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, true);
+		if (token == null || token instanceof ArrowSwapType) return Optional.empty();
+		return token.get(player);
 	}
 
 }

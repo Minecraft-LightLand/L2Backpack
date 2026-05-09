@@ -88,10 +88,7 @@ public class QuickSwapManager {
 		for (var t : type) {
 			for (ItemStack stack : list) {
 				if (stack.getItem() instanceof IQuickSwapItem item) {
-					IQuickSwapToken<?> token = item.getTokenOfType(stack, user, t);
-					if (token != null) {
-						ans.add(token);
-					}
+					ans.addAll(item.getAllTokensOfType(stack, user, t));
 				}
 			}
 		}

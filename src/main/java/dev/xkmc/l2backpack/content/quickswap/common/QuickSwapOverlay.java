@@ -11,7 +11,6 @@ import dev.xkmc.l2core.util.Proxy;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.overlay.SelectionSideBar;
 import dev.xkmc.l2itemselector.overlay.SideBar;
-import dev.xkmc.l2itemselector.overlay.WheelHandler;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -64,8 +63,7 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 	}
 
 	public static boolean hasAltDown() {
-		return L2Keys.hasAltDown() || L2Keys.WHEEL.map.isDown() ||
-				WheelHandler.wheel instanceof IQuickSwapToken.SwapWheel;
+		return L2Keys.hasAltDown();
 	}
 
 	@Override

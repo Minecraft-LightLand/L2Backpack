@@ -24,7 +24,7 @@ public record ArmorSwapWheel(SingleSwapToken token, int wheelIndex,
 		List<ItemStack> src = token.getRawList();
 		ArrayList<Entry> ans = new ArrayList<>();
 		for (ItemStack e : src) {
-			ans.add(new ItemWheelEntry(e));
+			ans.add(new ArmorWheelEntry(e));
 		}
 
 		return ans;

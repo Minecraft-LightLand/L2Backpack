@@ -97,6 +97,13 @@ public class EnderBackpackItem extends Item implements
 	@Override
 	public IQuickSwapToken<?> getTokenOfType(ItemStack stack, LivingEntity entity, QuickSwapType type) {
 		return entity instanceof Player player ? LBMisc.ENDER_SYNC.type().getExisting(player)
-				.map(e -> e.getToken(player, type)).orElse(null) : null;
+												 .map(e -> e.getToken(player, type)).orElse(null) : null;
 	}
+
+	@Override
+	public List<IQuickSwapToken<?>> getAllTokensOfType(ItemStack stack, LivingEntity user, QuickSwapType t) {
+		return user instanceof Player player ? LBMisc.ENDER_SYNC.type().getExisting(player)
+											   .map(e -> e.getAllTokens(player, t)).orElse(List.of()) : List.of();
+	}
+
 }

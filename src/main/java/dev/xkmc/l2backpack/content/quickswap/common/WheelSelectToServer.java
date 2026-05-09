@@ -13,7 +13,7 @@ public record WheelSelectToServer(
 	}
 
 	public void handle(Player player) {
-		var list = QuickSwapManager.getTokens(player, null, true);
+		var list = QuickSwapManager.getTokens(player, null, false);
 		if (list.size() <= index) return;
 		var token = list.get(index);
 		if (!token.type().supportWheel()) return;

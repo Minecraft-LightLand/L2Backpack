@@ -97,7 +97,7 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 	@Override
 	public Optional<WheelAdaptor> get(@Nullable Player player, int index) {
 		if (player == null) return Optional.empty();
-		var list = QuickSwapManager.getTokens(player, null, true);
+		var list = QuickSwapManager.getTokens(player, null, false);
 		list.removeIf(e -> !e.type().supportWheel());
 		if (list.isEmpty()) return Optional.empty();
 		index = list.size() == 1 ? 0 : index % list.size();

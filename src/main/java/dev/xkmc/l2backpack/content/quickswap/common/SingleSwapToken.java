@@ -5,6 +5,8 @@ import dev.xkmc.l2backpack.content.quickswap.entry.SingleSwapEntry;
 import dev.xkmc.l2backpack.content.quickswap.entry.SingleSwapHandler;
 import dev.xkmc.l2backpack.content.quickswap.type.ISingleSwapAction;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
+import dev.xkmc.l2backpack.content.quickswap.wheel.ArmorSwapWheel;
 import dev.xkmc.l2backpack.content.quickswap.wheel.SingleSwapWheel;
 import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
 import net.minecraft.world.entity.player.Player;
@@ -55,6 +57,8 @@ public record SingleSwapToken(IQuickSwapItem item, ItemStack stack, QuickSwapTyp
 
 	@Override
 	public Optional<WheelAdaptor> get(@Nullable Player player, int wheelIndex, ItemStack next) {
+		if (type == QuickSwapTypes.ARMOR)
+			return Optional.of(new ArmorSwapWheel(this, wheelIndex, next));
 		return Optional.of(new SingleSwapWheel(this, wheelIndex, next));
 	}
 

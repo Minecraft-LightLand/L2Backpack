@@ -1,5 +1,8 @@
-package dev.xkmc.l2backpack.content.quickswap.common;
+package dev.xkmc.l2backpack.content.quickswap.wheel;
 
+import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.overlay.ItemWheelEntry;
 import dev.xkmc.l2itemselector.overlay.TextBox;
@@ -14,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-record SingleSwapWheel(SingleSwapToken token, int wheelIndex,
+public record SingleSwapWheel(SingleSwapToken token, int wheelIndex,
                        ItemStack next) implements WheelAdaptor, IQuickSwapToken.SwapWheel {
 
 	public List<Entry> getWheelContent() {

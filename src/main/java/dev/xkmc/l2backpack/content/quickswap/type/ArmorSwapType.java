@@ -30,7 +30,7 @@ public class ArmorSwapType extends QuickSwapType
 		return ItemStack.EMPTY;
 	}
 
-	private boolean maySwapOut(ItemStack stack) {
+	public boolean maySwapOut(ItemStack stack) {
 		if (EnchHelper.getLv(stack, Enchantments.BINDING_CURSE) > 0) return false;
 		return stack.getItem().canFitInsideContainerItems() &&
 				!(stack.getItem() instanceof BaseBagItem);
@@ -117,7 +117,7 @@ public class ArmorSwapType extends QuickSwapType
 		}
 	}
 
-	private static void renderArmorSlot(GuiGraphics g, int x, int y, int a, boolean target, boolean invalid) {
+	public static void renderArmorSlot(GuiGraphics g, int x, int y, int a, boolean target, boolean invalid) {
 		OverlayUtil.fillRect(g, x, y, 16, 16, color(255, 255, 255, a));
 		if (target) {
 			if (invalid) {

@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.content.quickswap.entry.SetSwapEntry;
 import dev.xkmc.l2backpack.content.quickswap.entry.SetSwapHandler;
 import dev.xkmc.l2backpack.content.quickswap.type.ISetSwapAction;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.wheel.SetSwapWheel;
 import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

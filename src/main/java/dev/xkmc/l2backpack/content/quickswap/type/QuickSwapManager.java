@@ -91,7 +91,6 @@ public class QuickSwapManager {
 					IQuickSwapToken<?> token = item.getTokenOfType(stack, user, t);
 					if (token != null) {
 						ans.add(token);
-						break;
 					}
 				}
 			}

@@ -32,8 +32,4 @@ public class ArrowSwapType extends MatcherSwapType {
 		return false;
 	}
 
-	public boolean supportWheel() {
-		return false;
-	}
-
 }

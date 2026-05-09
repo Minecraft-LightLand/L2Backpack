@@ -8,6 +8,7 @@ import dev.xkmc.l2backpack.content.bag.BagItemHandler;
 import dev.xkmc.l2backpack.content.capability.PickupModeCap;
 import dev.xkmc.l2backpack.content.common.BaseBagInvWrapper;
 import dev.xkmc.l2backpack.content.common.BaseBagItemHandler;
+import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalCaps;
 import dev.xkmc.l2backpack.content.remote.player.EnderBackpackCaps;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
@@ -61,7 +62,8 @@ public class L2Backpack {
 			e -> e.create(CreativeSetCarryToServer.class, PLAY_TO_SERVER),
 			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),
 			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT),
-			e -> e.create(EnderSyncPacket.class, PLAY_TO_CLIENT)
+			e -> e.create(EnderSyncPacket.class, PLAY_TO_CLIENT),
+			e -> e.create(WheelSelectToServer.class, PLAY_TO_SERVER)
 	);
 
 	public static final PatchouliHelper PATCHOULI = new PatchouliHelper(REGISTRATE, "backpack_guide");

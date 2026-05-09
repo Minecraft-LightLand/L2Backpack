@@ -10,61 +10,57 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public class QuickSwapManager {
 
-	@Nullable
-	public static QuickSwapType getValidType(LivingEntity player, boolean isAltDown) {
+	public static LinkedHashSet<QuickSwapType> getValidType(LivingEntity player, boolean isAltDown) {
 		if (!isAltDown) {
+			LinkedHashSet<QuickSwapType> ans = new LinkedHashSet<>();
 			for (var e : QuickSwapTypes.MATCHER) {
 				if (e.match(player.getMainHandItem())) {
-					return e;
+					ans.add(e);
 				}
 			}
 			for (var e : QuickSwapTypes.MATCHER) {
 				if (e.allowsOffhand() && e.match(player.getOffhandItem())) {
-					return e;
+					ans.add(e);
 				}
 			}
 			if (Scabbard.isValidItem(player.getMainHandItem())) {
-				return QuickSwapTypes.TOOL;
+				ans.add(QuickSwapTypes.TOOL);
 			}
-			if (player.getMainHandItem().isEmpty()) {
-				return QuickSwapTypes.ARMOR;
-			}
-			return null;
+			ans.add(QuickSwapTypes.ARMOR);
+			ans.add(QuickSwapTypes.TOOL);
+			return ans;
 		} else {
-			QuickSwapType main = getValidType(player, player.getMainHandItem(), isAltDown);
-			if (main != null) {
-				return main;
-			}
+			LinkedHashSet<QuickSwapType> ans = getValidType(player, player.getMainHandItem(), isAltDown);
 			for (var e : QuickSwapTypes.MATCHER) {
 				if (e.allowsOffhand() && e.match(player.getOffhandItem())) {
-					return e;
+					ans.add(e);
 				}
 			}
-			return null;
+			return ans;
 		}
 	}
 
-	@Nullable
-	public static QuickSwapType getValidType(LivingEntity player, ItemStack focus, boolean isAltDown) {
+	public static LinkedHashSet<QuickSwapType> getValidType(LivingEntity player, ItemStack focus, boolean isAltDown) {
+		LinkedHashSet<QuickSwapType> ans = new LinkedHashSet<>();
 		if (isAltDown && Scabbard.isValidItem(focus)) {
-			return QuickSwapTypes.TOOL;
+			ans.add(QuickSwapTypes.TOOL);
 		}
 		for (var e : QuickSwapTypes.MATCHER) {
 			if (e.match(focus)) {
-				return e;
+				ans.add(e);
 			}
 		}
 		if (isAltDown && focus.isEmpty() || Scabbard.isValidItem(focus)) {
-			return QuickSwapTypes.TOOL;
+			ans.add(QuickSwapTypes.TOOL);
 		}
-		if (focus.isEmpty()) {
-			return QuickSwapTypes.ARMOR;
-		}
-		return null;
+		ans.add(QuickSwapTypes.ARMOR);
+		ans.add(QuickSwapTypes.TOOL);
+		return ans;
 	}
 
 	@Nullable
@@ -74,24 +70,33 @@ public class QuickSwapManager {
 
 	@Nullable
 	public static IQuickSwapToken<?> getToken(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
+		var list = getTokens(user, focus, isAltDown);
+		return list.isEmpty() ? null : list.getFirst();
+	}
+
+	public static List<IQuickSwapToken<?>> getTokens(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
 		List<ItemStack> list = new ArrayList<>();
 		list.add(user.getMainHandItem());
 		list.add(user.getOffhandItem());
 		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
 		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
 		opt.ifPresent(pair -> list.add(pair.getFirst()));
-		QuickSwapType type = focus == null ? getValidType(user, isAltDown) : getValidType(user, focus, isAltDown);
-		if (type == null)
-			return null;
-		for (ItemStack stack : list) {
-			if (stack.getItem() instanceof IQuickSwapItem item) {
-				IQuickSwapToken<?> token = item.getTokenOfType(stack, user, type);
-				if (token != null) {
-					return token;
+		LinkedHashSet<QuickSwapType> type = focus == null ? getValidType(user, isAltDown) : getValidType(user, focus, isAltDown);
+		if (type.isEmpty())
+			return List.of();
+		List<IQuickSwapToken<?>> ans = new ArrayList<>();
+		for (var t : type) {
+			for (ItemStack stack : list) {
+				if (stack.getItem() instanceof IQuickSwapItem item) {
+					IQuickSwapToken<?> token = item.getTokenOfType(stack, user, t);
+					if (token != null) {
+						ans.add(token);
+						break;
+					}
 				}
 			}
 		}
-		return null;
+		return ans;
 	}
 
 }

@@ -6,9 +6,11 @@ import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
-public interface IQuickSwapToken<T extends ISwapEntry<T>> extends WheelAdaptor.Provider {
+public interface IQuickSwapToken<T extends ISwapEntry<T>> {
 
 	ItemStack stack();
 
@@ -25,6 +27,8 @@ public interface IQuickSwapToken<T extends ISwapEntry<T>> extends WheelAdaptor.P
 	void swap(Player player);
 
 	boolean isLocked(int i);
+
+	Optional<WheelAdaptor> get(@Nullable Player player, int wheelIndex, ItemStack next);
 
 	interface SwapWheel {
 

@@ -2,7 +2,6 @@ package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
-import dev.xkmc.l2backpack.content.quickswap.type.ArrowSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBConfig;
@@ -13,6 +12,7 @@ import dev.xkmc.l2itemselector.select.SetSelectedToServer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -95,11 +95,14 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 	}
 
 	@Override
-	public Optional<WheelAdaptor> get(@Nullable Player player) {
+	public Optional<WheelAdaptor> get(@Nullable Player player, int index) {
 		if (player == null) return Optional.empty();
-		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, true);
-		if (token == null || token instanceof ArrowSwapType) return Optional.empty();
-		return token.get(player);
+		var list = QuickSwapManager.getTokens(player, null, true);
+		list.removeIf(e -> !e.type().supportWheel());
+		if (list.isEmpty()) return Optional.empty();
+		index = list.size() == 1 ? 0 : index % list.size();
+		var token = list.get(index);
+		return token.get(player, index, list.size() == 1 ? ItemStack.EMPTY : list.get((index + 1) % list.size()).stack());
 	}
 
 }

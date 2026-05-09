@@ -86,4 +86,8 @@ public abstract class QuickSwapType {
 		return a << 24 | r << 16 | g << 8 | b;
 	}
 
+	public boolean supportWheel() {
+		return true;
+	}
+
 }

@@ -52,7 +52,7 @@ public record SetSwapToken(ISetSwapItem item, ItemStack stack, QuickSwapType typ
 	}
 
 	@Override
-	public Optional<WheelAdaptor> get(@Nullable Player player) {
+	public Optional<WheelAdaptor> get(@Nullable Player player, int index, ItemStack next) {
 		return Optional.empty();
 	}
 

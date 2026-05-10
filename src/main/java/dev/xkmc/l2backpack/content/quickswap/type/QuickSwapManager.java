@@ -65,11 +65,13 @@ public class QuickSwapManager {
 
 	public static LinkedHashSet<QuickSwapType> getWheelType(LivingEntity player, boolean isShiftDown) {
 		LinkedHashSet<QuickSwapType> ans = new LinkedHashSet<>();
-		if (isShiftDown) {
+		var main = player.getMainHandItem();
+		boolean useTool = main.isEmpty() || Scabbard.isValidItem(main);
+		if (isShiftDown && useTool) {
 			ans.add(QuickSwapTypes.TOOL);
 		}
 		for (var e : QuickSwapTypes.MATCHER) {
-			if (e.match(player.getMainHandItem())) {
+			if (e.match(main)) {
 				ans.add(e);
 			}
 		}
@@ -78,7 +80,8 @@ public class QuickSwapManager {
 				ans.add(e);
 			}
 		}
-		ans.add(QuickSwapTypes.TOOL);
+		if (useTool)
+			ans.add(QuickSwapTypes.TOOL);
 		ans.add(QuickSwapTypes.ARMOR);
 		return ans;
 	}

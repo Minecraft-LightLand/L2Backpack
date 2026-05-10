@@ -7,6 +7,7 @@ import dev.xkmc.l2backpack.content.quickswap.entry.SetSwapEntry;
 import dev.xkmc.l2backpack.content.quickswap.type.ArmorSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -58,7 +59,7 @@ public record SetSwapWheel(
 
 	@Override
 	public void select(int i) {
-		L2Backpack.HANDLER.toServer(new WheelSelectToServer(i, wheelIndex));
+		L2Backpack.HANDLER.toServer(new WheelSelectToServer(i, wheelIndex, L2Keys.hasShiftDown()));
 	}
 
 	public record SetWheelEntry(SetSwapEntry set) implements WheelAdaptor.Entry {

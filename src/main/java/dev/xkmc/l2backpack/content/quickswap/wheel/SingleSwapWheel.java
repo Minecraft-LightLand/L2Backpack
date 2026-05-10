@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.overlay.ItemWheelEntry;
 import dev.xkmc.l2itemselector.overlay.TextBox;
 import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record SingleSwapWheel(SingleSwapToken token, int wheelIndex,
-                       ItemStack next) implements WheelAdaptor, IQuickSwapToken.SwapWheel {
+                              ItemStack next) implements WheelAdaptor, IQuickSwapToken.SwapWheel {
 
 	public List<Entry> getWheelContent() {
 		List<ItemStack> src = token.getRawList();
@@ -69,7 +70,7 @@ public record SingleSwapWheel(SingleSwapToken token, int wheelIndex,
 
 	@Override
 	public void select(int i) {
-		L2Backpack.HANDLER.toServer(new WheelSelectToServer(i, wheelIndex));
+		L2Backpack.HANDLER.toServer(new WheelSelectToServer(i, wheelIndex, L2Keys.hasShiftDown()));
 	}
 
 }

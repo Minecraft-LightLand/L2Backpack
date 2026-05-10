@@ -63,8 +63,11 @@ public class QuickSwapManager {
 		return ans;
 	}
 
-	public static LinkedHashSet<QuickSwapType> getWheelType(LivingEntity player) {
+	public static LinkedHashSet<QuickSwapType> getWheelType(LivingEntity player, boolean isShiftDown) {
 		LinkedHashSet<QuickSwapType> ans = new LinkedHashSet<>();
+		if (isShiftDown) {
+			ans.add(QuickSwapTypes.TOOL);
+		}
 		for (var e : QuickSwapTypes.MATCHER) {
 			if (e.match(player.getMainHandItem())) {
 				ans.add(e);
@@ -87,19 +90,39 @@ public class QuickSwapManager {
 
 	@Nullable
 	public static IQuickSwapToken<?> getToken(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
-		var list = getTokens(user, focus, isAltDown, false);
+		var list = getTokens(user, focus, isAltDown);
 		return list.isEmpty() ? null : list.getFirst();
 	}
 
-	public static List<IQuickSwapToken<?>> getTokens(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown, boolean isWheel) {
+	public static List<IQuickSwapToken<?>> getTokens(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
 		List<ItemStack> list = new ArrayList<>();
 		list.add(user.getMainHandItem());
 		list.add(user.getOffhandItem());
 		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
 		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
 		opt.ifPresent(pair -> list.add(pair.getFirst()));
-		LinkedHashSet<QuickSwapType> type = isWheel ? getWheelType(user)
-				: focus == null ? getValidType(user, isAltDown) : getValidType(user, focus, isAltDown);
+		LinkedHashSet<QuickSwapType> type = focus == null ? getValidType(user, isAltDown) : getValidType(user, focus, isAltDown);
+		if (type.isEmpty())
+			return List.of();
+		List<IQuickSwapToken<?>> ans = new ArrayList<>();
+		for (var t : type) {
+			for (ItemStack stack : list) {
+				if (stack.getItem() instanceof IQuickSwapItem item) {
+					ans.addAll(item.getAllTokensOfType(stack, user, t));
+				}
+			}
+		}
+		return ans;
+	}
+
+	public static List<IQuickSwapToken<?>> getWheelTokens(LivingEntity user, boolean isShiftDown) {
+		List<ItemStack> list = new ArrayList<>();
+		list.add(user.getMainHandItem());
+		list.add(user.getOffhandItem());
+		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
+		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
+		opt.ifPresent(pair -> list.add(pair.getFirst()));
+		LinkedHashSet<QuickSwapType> type = getWheelType(user, isShiftDown);
 		if (type.isEmpty())
 			return List.of();
 		List<IQuickSwapToken<?>> ans = new ArrayList<>();

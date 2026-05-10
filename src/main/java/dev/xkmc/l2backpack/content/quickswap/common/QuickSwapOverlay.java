@@ -11,6 +11,7 @@ import dev.xkmc.l2core.util.Proxy;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.overlay.SelectionSideBar;
 import dev.xkmc.l2itemselector.overlay.SideBar;
+import dev.xkmc.l2itemselector.overlay.WheelHandler;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -54,8 +55,10 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 	public boolean isScreenOn() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
-		if (L2Keys.WHEEL.map.isDown()) return false;
-		return BackpackSel.INSTANCE.isClientActive(player);
+		if (L2Keys.WHEEL.map.isDown() || WheelHandler.wheel != null) return false;
+		if (!BackpackSel.INSTANCE.isClientActive(player)) return false;
+		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, QuickSwapOverlay.hasAltDown());
+		return token != null;
 	}
 
 	public static boolean hasShiftDown() {

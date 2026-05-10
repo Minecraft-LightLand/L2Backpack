@@ -31,8 +31,8 @@ public class QuickSwapManager {
 			if (Scabbard.isValidItem(player.getMainHandItem())) {
 				ans.add(QuickSwapTypes.TOOL);
 			}
-			ans.add(QuickSwapTypes.ARMOR);
-			ans.add(QuickSwapTypes.TOOL);
+			if (player.getMainHandItem().isEmpty())
+				ans.add(QuickSwapTypes.ARMOR);
 			return ans;
 		} else {
 			LinkedHashSet<QuickSwapType> ans = getValidType(player, player.getMainHandItem(), isAltDown);
@@ -58,8 +58,25 @@ public class QuickSwapManager {
 		if (isAltDown && focus.isEmpty() || Scabbard.isValidItem(focus)) {
 			ans.add(QuickSwapTypes.TOOL);
 		}
-		ans.add(QuickSwapTypes.ARMOR);
+		if (focus.isEmpty())
+			ans.add(QuickSwapTypes.ARMOR);
+		return ans;
+	}
+
+	public static LinkedHashSet<QuickSwapType> getWheelType(LivingEntity player) {
+		LinkedHashSet<QuickSwapType> ans = new LinkedHashSet<>();
+		for (var e : QuickSwapTypes.MATCHER) {
+			if (e.match(player.getMainHandItem())) {
+				ans.add(e);
+			}
+		}
+		for (var e : QuickSwapTypes.MATCHER) {
+			if (e.allowsOffhand() && e.match(player.getOffhandItem())) {
+				ans.add(e);
+			}
+		}
 		ans.add(QuickSwapTypes.TOOL);
+		ans.add(QuickSwapTypes.ARMOR);
 		return ans;
 	}
 
@@ -70,18 +87,19 @@ public class QuickSwapManager {
 
 	@Nullable
 	public static IQuickSwapToken<?> getToken(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
-		var list = getTokens(user, focus, isAltDown);
+		var list = getTokens(user, focus, isAltDown, false);
 		return list.isEmpty() ? null : list.getFirst();
 	}
 
-	public static List<IQuickSwapToken<?>> getTokens(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
+	public static List<IQuickSwapToken<?>> getTokens(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown, boolean isWheel) {
 		List<ItemStack> list = new ArrayList<>();
 		list.add(user.getMainHandItem());
 		list.add(user.getOffhandItem());
 		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
 		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
 		opt.ifPresent(pair -> list.add(pair.getFirst()));
-		LinkedHashSet<QuickSwapType> type = focus == null ? getValidType(user, isAltDown) : getValidType(user, focus, isAltDown);
+		LinkedHashSet<QuickSwapType> type = isWheel ? getWheelType(user)
+				: focus == null ? getValidType(user, isAltDown) : getValidType(user, focus, isAltDown);
 		if (type.isEmpty())
 			return List.of();
 		List<IQuickSwapToken<?>> ans = new ArrayList<>();

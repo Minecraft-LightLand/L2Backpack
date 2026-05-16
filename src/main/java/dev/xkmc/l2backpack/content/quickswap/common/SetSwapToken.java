@@ -53,8 +53,8 @@ public record SetSwapToken(ISetSwapItem item, ItemStack stack, QuickSwapType typ
 	}
 
 	@Override
-	public Optional<WheelAdaptor> get(@Nullable Player player, int wheelIndex, ItemStack next) {
-		return Optional.of(new SetSwapWheel(this, wheelIndex, next));
+	public Optional<WheelAdaptor> get(@Nullable Player player, int wheelIndex, ItemStack prev, ItemStack next) {
+		return Optional.of(new SetSwapWheel(this, wheelIndex, prev, next));
 	}
 
 }

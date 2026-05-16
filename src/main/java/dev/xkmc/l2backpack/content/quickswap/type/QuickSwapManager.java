@@ -7,6 +7,7 @@ import dev.xkmc.l2backpack.content.quickswap.single.Scabbard;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -18,21 +19,21 @@ public class QuickSwapManager {
 	public static LinkedHashSet<QuickSwapType> getValidType(LivingEntity player, boolean isAltDown) {
 		if (!isAltDown) {
 			LinkedHashSet<QuickSwapType> ans = new LinkedHashSet<>();
-			for (var e : QuickSwapTypes.MATCHER) {
-				if (e.match(player.getMainHandItem())) {
-					ans.add(e);
-				}
-			}
-			for (var e : QuickSwapTypes.MATCHER) {
-				if (e.allowsOffhand() && e.match(player.getOffhandItem())) {
-					ans.add(e);
-				}
-			}
-			if (Scabbard.isValidItem(player.getMainHandItem())) {
+			var main = player.getMainHandItem();
+			boolean useTool = main.isEmpty() || Scabbard.isValidItem(main);
+			if (!main.isEmpty() && main.getItem() instanceof ProjectileWeaponItem) {
+				ans.add(QuickSwapTypes.ARROW);
+			} else if (useTool) {
 				ans.add(QuickSwapTypes.TOOL);
 			}
-			if (player.getMainHandItem().isEmpty())
-				ans.add(QuickSwapTypes.ARMOR);
+			for (var e : QuickSwapTypes.MATCHER) {
+				if (e.match(main)) ans.add(e);
+			}
+			for (var e : QuickSwapTypes.MATCHER) {
+				if (e.allowsOffhand() && e.match(player.getOffhandItem())) ans.add(e);
+			}
+			if (useTool) ans.add(QuickSwapTypes.TOOL);
+			ans.add(QuickSwapTypes.ARMOR);
 			return ans;
 		} else {
 			LinkedHashSet<QuickSwapType> ans = getValidType(player, player.getMainHandItem(), isAltDown);
@@ -67,18 +68,18 @@ public class QuickSwapManager {
 		LinkedHashSet<QuickSwapType> ans = new LinkedHashSet<>();
 		var main = player.getMainHandItem();
 		boolean useTool = main.isEmpty() || Scabbard.isValidItem(main);
-		if (isShiftDown && useTool) {
+		if (isShiftDown) {
+			ans.add(QuickSwapTypes.ARMOR);
+		} else if (!main.isEmpty() && main.getItem() instanceof ProjectileWeaponItem) {
+			ans.add(QuickSwapTypes.ARROW);
+		} else if (useTool) {
 			ans.add(QuickSwapTypes.TOOL);
 		}
 		for (var e : QuickSwapTypes.MATCHER) {
-			if (e.match(main)) {
-				ans.add(e);
-			}
+			if (e.match(main)) ans.add(e);
 		}
 		for (var e : QuickSwapTypes.MATCHER) {
-			if (e.allowsOffhand() && e.match(player.getOffhandItem())) {
-				ans.add(e);
-			}
+			if (e.allowsOffhand() && e.match(player.getOffhandItem())) ans.add(e);
 		}
 		if (useTool)
 			ans.add(QuickSwapTypes.TOOL);

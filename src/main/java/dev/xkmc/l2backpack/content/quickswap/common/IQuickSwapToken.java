@@ -28,7 +28,7 @@ public interface IQuickSwapToken<T extends ISwapEntry<T>> {
 
 	boolean isLocked(int i);
 
-	Optional<WheelAdaptor> get(@Nullable Player player, int wheelIndex, ItemStack next);
+	Optional<WheelAdaptor> get(@Nullable Player player, int wheelIndex, ItemStack prev, ItemStack next);
 
 	interface SwapWheel {
 

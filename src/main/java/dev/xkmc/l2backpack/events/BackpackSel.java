@@ -54,13 +54,20 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 	}
 
 	@Override
-	public boolean handleClientScroll(int i, Player player) {
-		if (LBConfig.CLIENT.reverseScroll.get()) {
-			i = -i;
+	public boolean handleClientScroll(int diff, Player player) {
+		if (WheelHandler.wheel != null) {
+			int current = WheelHandler.keyboardIndex >= 0 ? WheelHandler.keyboardIndex : WheelHandler.wheel.getIndex(player);
+			int total = WheelHandler.wheel.getWheelSize();
+			if (LBConfig.CLIENT.reverseScroll.get()) diff = -diff;
+			WheelHandler.keyboardIndex = Math.floorMod(current - diff, total);
+			return true;
 		}
-		if (i > 0) {
+		if (LBConfig.CLIENT.reverseScroll.get()) {
+			diff = -diff;
+		}
+		if (diff > 0) {
 			toServer(UP);
-		} else if (i < 0) {
+		} else if (diff < 0) {
 			toServer(DOWN);
 		}
 		return true;
@@ -73,7 +80,32 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 	}
 
 	@Override
+	public boolean scrollBypassShift() {
+		return WheelHandler.wheel != null;
+	}
+
+	@Override
 	public void handleClientKey(L2Keys key, Player player) {
+		if (WheelHandler.wheel != null) {
+			int current = WheelHandler.keyboardIndex >= 0 ? WheelHandler.keyboardIndex : WheelHandler.wheel.getIndex(player);
+			int total = WheelHandler.wheel.getWheelSize();
+			if (key == L2Keys.UP) {
+				WheelHandler.keyboardIndex = Math.floorMod(current - 1, total);
+			} else if (key == L2Keys.DOWN) {
+				WheelHandler.keyboardIndex = Math.floorMod(current + 1, total);
+			} else if (key == L2Keys.LEFT) {
+				int target = WheelHandler.wheelIndex - 1;
+				if (WheelAdaptor.get(player, target) != null) {
+					WheelHandler.wheelIndex = target;
+				}
+			} else if (key == L2Keys.RIGHT) {
+				int target = WheelHandler.wheelIndex + 1;
+				if (WheelAdaptor.get(player, target) != null) {
+					WheelHandler.wheelIndex = target;
+				}
+			}
+			return;
+		}
 		if (!QuickSwapOverlay.INSTANCE.isScreenOn()) return;
 		if (key == L2Keys.SWAP) {
 			toServer(SWAP);
@@ -108,7 +140,7 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 		var list = QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown());
 		list.removeIf(e -> !e.type().supportWheel());
 		if (list.isEmpty()) return Optional.empty();
-		int index = list.size() == 1 ? 0 : wheel % list.size();
+		int index = list.size() == 1 ? 0 : Math.floorMod(wheel, list.size());
 		var token = list.get(index);
 		if (prevType != null && prevWheel > 0 && prevWheel == wheel && prevType != token.type()) {
 			for (int i = 0; i < list.size(); i++) {
@@ -121,7 +153,9 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 		}
 		prevWheel = wheel;
 		prevType = token.type();
-		return token.get(player, index, list.size() == 1 ? ItemStack.EMPTY : list.get((index + 1) % list.size()).stack());
+		ItemStack prevStack = list.size() == 1 ? ItemStack.EMPTY : list.get(Math.floorMod(index - 1, list.size())).stack();
+		ItemStack nextStack = list.size() == 1 ? ItemStack.EMPTY : list.get((index + 1) % list.size()).stack();
+		return token.get(player, index, prevStack, nextStack);
 	}
 
 }

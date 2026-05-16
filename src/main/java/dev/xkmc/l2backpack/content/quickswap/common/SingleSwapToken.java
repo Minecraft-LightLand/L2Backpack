@@ -56,10 +56,10 @@ public record SingleSwapToken(IQuickSwapItem item, ItemStack stack, QuickSwapTyp
 	}
 
 	@Override
-	public Optional<WheelAdaptor> get(@Nullable Player player, int wheelIndex, ItemStack next) {
+	public Optional<WheelAdaptor> get(@Nullable Player player, int wheelIndex, ItemStack prev, ItemStack next) {
 		if (type == QuickSwapTypes.ARMOR)
-			return Optional.of(new ArmorSwapWheel(this, wheelIndex, next));
-		return Optional.of(new SingleSwapWheel(this, wheelIndex, next));
+			return Optional.of(new ArmorSwapWheel(this, wheelIndex, prev, next));
+		return Optional.of(new SingleSwapWheel(this, wheelIndex, prev, next));
 	}
 
 

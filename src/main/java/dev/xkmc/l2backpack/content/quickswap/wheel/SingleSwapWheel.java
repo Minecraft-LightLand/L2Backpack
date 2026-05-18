@@ -2,7 +2,9 @@ package dev.xkmc.l2backpack.content.quickswap.wheel;
 
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
+import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.overlay.ItemWheelEntry;
 import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
 import net.minecraft.client.Minecraft;
@@ -10,6 +12,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +81,16 @@ public record SingleSwapWheel(SingleSwapToken token, int wheelIndex,
 
 	@Override
 	public void shortPress(Player player) {
+		if (token.type() == QuickSwapTypes.ARROW && player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
+			var list = QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown());
+			for (int i = 0; i < list.size(); i++) {
+				var t = list.get(i);
+				if (t.type() == QuickSwapTypes.TOOL && t.type().supportWheel()) {
+					SwapWheelUtil.shortPress(t.getSelected(), i);
+					return;
+				}
+			}
+		}
 		SwapWheelUtil.shortPress(token.getSelected(), wheelIndex);
 	}
 

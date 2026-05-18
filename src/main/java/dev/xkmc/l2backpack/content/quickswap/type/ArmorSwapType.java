@@ -6,7 +6,6 @@ import dev.xkmc.l2backpack.content.quickswap.entry.*;
 import dev.xkmc.l2backpack.init.data.LBConfig;
 import dev.xkmc.l2core.init.reg.ench.EnchHelper;
 import dev.xkmc.l2itemselector.overlay.OverlayUtil;
-import dev.xkmc.l2itemselector.overlay.SelectionSideBar;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 
 public class ArmorSwapType extends QuickSwapType
-		implements ISideInfoRenderer, ISingleSwapAction, ISetSwapAction {
+		implements ISingleSwapAction, ISetSwapAction {
 
 	public ArmorSwapType(String name, int index) {
 		super(name, index);
@@ -88,33 +87,6 @@ public class ArmorSwapType extends QuickSwapType
 		ItemStack old = player.getItemBySlot(e);
 		ItemStack cur = token.asList().get(index);
 		return maySwapOut(old) && (!old.isEmpty() || !cur.isEmpty());
-	}
-
-	public void renderSide(SelectionSideBar.Context ctx, int x, int y, Player player, ISwapEntry<?> token) {
-		y -= 36;
-		if (token instanceof SingleSwapEntry single) {
-			ItemStack hover = single.stack();
-			EquipmentSlot target = SingleSwapItem.getEquipmentSlotForItem(hover);
-			for (int i = 0; i < 4; i++) {
-				EquipmentSlot slot = getSlot(i);
-				ItemStack stack = player.getItemBySlot(slot);
-				ItemStack targetStack = player.getItemBySlot(target);
-				renderArmorSlot(ctx.g(), x, y, 64, target == slot, !maySwapOut(targetStack));
-				ctx.renderItem(stack, x, y);
-				y += 18;
-			}
-		}
-		if (token instanceof SetSwapEntry set) {
-			for (int i = 0; i < 4; i++) {
-				EquipmentSlot e = getSlot(i);
-				ItemStack old = player.getItemBySlot(e);
-				ItemStack cur = set.asList().get(i);
-				boolean avail = maySwapOut(old) && (!old.isEmpty() || !cur.isEmpty());
-				renderArmorSlot(ctx.g(), x, y, 64, !set.isLocked(i) && (!old.isEmpty() || !cur.isEmpty()), !avail);
-				ctx.renderItem(old, x, y);
-				y += 18;
-			}
-		}
 	}
 
 	public static void renderArmorSlot(GuiGraphics g, int x, int y, int a, boolean target, boolean invalid) {

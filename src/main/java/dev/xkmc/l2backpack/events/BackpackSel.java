@@ -1,7 +1,6 @@
 package dev.xkmc.l2backpack.events;
 
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
-import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -36,21 +35,22 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 	@Override
 	public boolean isClientActive(Player player) {
 		if (Minecraft.getInstance().screen != null) return false;
-		if (L2Keys.WHEEL.map.isDown() || WheelHandler.wheel instanceof IQuickSwapToken.SwapWheel) {
-			return !QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown()).isEmpty();
-		}
-		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, QuickSwapOverlay.hasAltDown());
-		return token != null;
+		return L2Keys.WHEEL.map.isDown() || WheelHandler.wheel instanceof IQuickSwapToken.SwapWheel
+				|| WheelHandler.wheelPressTime >= 0;
 	}
 
 	@Override
 	public void handleServerSetSelection(SetSelectedToServer packet, Player player) {
-		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, packet.isAltDown());
-		if (token == null) return;
-		if (packet.slot() == SWAP)
-			token.swap(player);
-		else
-			token.setSelected(packet.slot());
+		var list = QuickSwapManager.getWheelTokens(player, packet.isShiftDown());
+		if (packet.slot() == SWAP) {
+			for (var token : list) {
+				token.swap(player);
+			}
+		} else {
+			for (var token : list) {
+				token.setSelected(packet.slot());
+			}
+		}
 	}
 
 	@Override
@@ -62,15 +62,7 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 			WheelHandler.keyboardIndex = Math.floorMod(current - diff, total);
 			return true;
 		}
-		if (LBConfig.CLIENT.reverseScroll.get()) {
-			diff = -diff;
-		}
-		if (diff > 0) {
-			toServer(UP);
-		} else if (diff < 0) {
-			toServer(DOWN);
-		}
-		return true;
+		return false;
 	}
 
 	@Override
@@ -104,31 +96,17 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 					WheelHandler.wheelIndex = target;
 				}
 			}
-			return;
-		}
-		if (!QuickSwapOverlay.INSTANCE.isScreenOn()) return;
-		if (key == L2Keys.SWAP) {
-			toServer(SWAP);
-		} else if (key == L2Keys.UP) {
-			toServer(UP);
-		} else if (key == L2Keys.DOWN) {
-			toServer(DOWN);
 		}
 	}
 
 	@Override
 	public boolean handleClientNumericKey(int i, BooleanSupplier click) {
-		if (!QuickSwapOverlay.INSTANCE.isOnHold()) return false;
-		if (click.getAsBoolean()) {
-			toServer(i);
-			return true;
-		}
 		return false;
 	}
 
 	@Override
 	public boolean isHoldKeyDown(Player player) {
-		return QuickSwapOverlay.INSTANCE.isOnHold();
+		return false;
 	}
 
 	private int prevWheel = 0;
@@ -140,7 +118,13 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 		var list = QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown());
 		list.removeIf(e -> !e.type().supportWheel());
 		if (list.isEmpty()) return Optional.empty();
-		int index = list.size() == 1 ? 0 : Math.floorMod(wheel, list.size());
+		int index;
+		if (list.size() == 1) {
+			if (wheel != 0) return Optional.empty();
+			index = 0;
+		} else {
+			index = Math.floorMod(wheel, list.size());
+		}
 		var token = list.get(index);
 		if (prevType != null && prevWheel > 0 && prevWheel == wheel && prevType != token.type()) {
 			for (int i = 0; i < list.size(); i++) {

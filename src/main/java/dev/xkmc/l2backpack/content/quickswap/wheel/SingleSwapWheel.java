@@ -1,13 +1,11 @@
 package dev.xkmc.l2backpack.content.quickswap.wheel;
 
-import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.overlay.TextBox;
 import dev.xkmc.l2itemselector.wheel.ItemWheelEntry;
-import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -21,7 +19,7 @@ import java.util.List;
 
 public record SingleSwapWheel(
 		SingleSwapToken token, int wheelIndex
-) implements WheelAdaptor<ItemWheelEntry>, IQuickSwapToken.SwapWheel {
+) implements SwapWheel<ItemWheelEntry> {
 
 	public List<ItemWheelEntry> getWheelContent() {
 		List<ItemStack> src = token.getRawList();
@@ -38,13 +36,8 @@ public record SingleSwapWheel(
 	}
 
 	@Override
-	public void renderIcon(GuiGraphics guiGraphics, int i, int i1, boolean b, float v, boolean b1) {
-		//TODO icon
-	}
-
-	@Override
 	public void renderImpl(GuiGraphics g, Player player, List list, WheelContext ctx) {
-		WheelAdaptor.super.renderImpl(g, player, list, ctx);
+		SwapWheel.super.renderImpl(g, player, list, ctx);
 		int index = this.getMouseSelect(player).sel();
 		ItemStack stack = ItemStack.EMPTY;
 		if (index >= 0) {

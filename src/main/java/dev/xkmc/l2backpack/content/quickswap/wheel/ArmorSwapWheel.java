@@ -1,11 +1,9 @@
 package dev.xkmc.l2backpack.content.quickswap.wheel;
 
-import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
-import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
@@ -16,7 +14,7 @@ import java.util.List;
 
 public record ArmorSwapWheel(
 		SingleSwapToken token, int wheelIndex
-) implements WheelAdaptor<ArmorWheelEntry>, IQuickSwapToken.SwapWheel {
+) implements SwapWheel<ArmorWheelEntry> {
 
 	public List<ArmorWheelEntry> getWheelContent() {
 		List<ItemStack> src = token.getRawList();
@@ -33,13 +31,8 @@ public record ArmorSwapWheel(
 	}
 
 	@Override
-	public void renderIcon(GuiGraphics guiGraphics, int i, int i1, boolean b, float v, boolean b1) {
-		//TODO icon
-	}
-
-	@Override
 	public void renderImpl(GuiGraphics g, Player player, List<ArmorWheelEntry> list, WheelContext ctx) {
-		WheelAdaptor.super.renderImpl(g, player, list, ctx);
+		SwapWheel.super.renderImpl(g, player, list, ctx);
 		ItemStack stack = token.stack();
 		int x0 = g.guiWidth() / 2;
 		int y0 = g.guiHeight() / 2;

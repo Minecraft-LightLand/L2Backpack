@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
+import dev.xkmc.l2backpack.content.quickswap.wheel.SwapWheel;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
@@ -35,7 +36,7 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 	@Override
 	public boolean isClientActive(Player player) {
 		if (Minecraft.getInstance().screen != null) return false;
-		if (L2Keys.WHEEL.map.isDown() || WheelHandler.wheel instanceof IQuickSwapToken.SwapWheel) {
+		if (L2Keys.WHEEL.map.isDown() || WheelHandler.wheel instanceof SwapWheel) {
 			return !QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown()).isEmpty();
 		}
 		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, QuickSwapOverlay.hasAltDown());

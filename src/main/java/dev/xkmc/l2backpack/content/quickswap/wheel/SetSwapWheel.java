@@ -1,6 +1,5 @@
 package dev.xkmc.l2backpack.content.quickswap.wheel;
 
-import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.SetSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.content.quickswap.entry.SetSwapEntry;
@@ -22,7 +21,7 @@ import java.util.List;
 
 public record SetSwapWheel(
 		SetSwapToken token, int wheelIndex
-) implements WheelAdaptor<SetSwapWheel.SetWheelEntry>, IQuickSwapToken.SwapWheel {
+) implements SwapWheel<SetSwapWheel.SetWheelEntry> {
 
 	public List<SetWheelEntry> getWheelContent() {
 		var src = token.getList();
@@ -34,18 +33,13 @@ public record SetSwapWheel(
 		return ans;
 	}
 
-	@Override
-	public void renderIcon(GuiGraphics guiGraphics, int x0, int y0, boolean left, float sideWidth, boolean hover) {
-		//TODO icon
-	}
-
 	public int getIndex(Player player) {
 		return token.getSelected();
 	}
 
 	@Override
 	public void renderImpl(GuiGraphics g, Player player, List<SetWheelEntry> list, WheelContext ctx) {
-		WheelAdaptor.super.renderImpl(g, player, list, ctx);
+		SwapWheel.super.renderImpl(g, player, list, ctx);
 		ItemStack stack = token.stack();
 		int x0 = g.guiWidth() / 2;
 		int y0 = g.guiHeight() / 2;

@@ -7,14 +7,13 @@ import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.LBConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
-import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
-import dev.xkmc.l2itemselector.overlay.WheelHandler;
 import dev.xkmc.l2itemselector.select.ISelectionListener;
 import dev.xkmc.l2itemselector.select.SetSelectedToServer;
+import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
+import dev.xkmc.l2itemselector.wheel.WheelHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -103,25 +102,27 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 	private QuickSwapType prevType = null;
 
 	@Override
-	public Optional<WheelAdaptor> get(@Nullable Player player, int wheel) {
+	public Optional<WheelAdaptor<?>> get(@Nullable Player player, int wheel, boolean main) {
 		if (player == null) return Optional.empty();
 		var list = QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown());
 		list.removeIf(e -> !e.type().supportWheel());
 		if (list.isEmpty()) return Optional.empty();
 		int index = list.size() == 1 ? 0 : wheel % list.size();
 		var token = list.get(index);
-		if (prevType != null && prevWheel > 0 && prevWheel == wheel && prevType != token.type()) {
-			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).type() == prevType) {
-					WheelHandler.wheelIndex = wheel = index = i;
-					token = list.get(i);
-					break;
+		if (main) {
+			if (prevType != null && prevWheel > 0 && prevWheel == wheel && prevType != token.type()) {
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).type() == prevType) {
+						WheelHandler.wheelIndex = wheel = index = i;
+						token = list.get(i);
+						break;
+					}
 				}
 			}
+			prevWheel = wheel;
+			prevType = token.type();
 		}
-		prevWheel = wheel;
-		prevType = token.type();
-		return token.get(player, index, list.size() == 1 ? ItemStack.EMPTY : list.get((index + 1) % list.size()).stack());
+		return token.get(player, index);
 	}
 
 }

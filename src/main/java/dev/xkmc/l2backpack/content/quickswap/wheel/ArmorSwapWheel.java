@@ -5,25 +5,22 @@ import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
-import dev.xkmc.l2itemselector.overlay.ItemWheelEntry;
-import dev.xkmc.l2itemselector.overlay.TextBox;
-import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
+import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
+import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public record ArmorSwapWheel(SingleSwapToken token, int wheelIndex,
-                      ItemStack next) implements WheelAdaptor, IQuickSwapToken.SwapWheel {
+public record ArmorSwapWheel(
+		SingleSwapToken token, int wheelIndex
+) implements WheelAdaptor<ArmorWheelEntry>, IQuickSwapToken.SwapWheel {
 
-	public List<Entry> getWheelContent() {
+	public List<ArmorWheelEntry> getWheelContent() {
 		List<ItemStack> src = token.getRawList();
-		ArrayList<Entry> ans = new ArrayList<>();
+		ArrayList<ArmorWheelEntry> ans = new ArrayList<>();
 		for (ItemStack e : src) {
 			ans.add(new ArmorWheelEntry(e));
 		}
@@ -35,8 +32,14 @@ public record ArmorSwapWheel(SingleSwapToken token, int wheelIndex,
 		return token.getSelected();
 	}
 
-	public void render(GuiGraphics g, Player player) {
-		WheelAdaptor.super.render(g, player);
+	@Override
+	public void renderIcon(GuiGraphics guiGraphics, int i, int i1, boolean b, float v, boolean b1) {
+		//TODO icon
+	}
+
+	@Override
+	public void renderImpl(GuiGraphics g, Player player, List<ArmorWheelEntry> list, WheelContext ctx) {
+		WheelAdaptor.super.renderImpl(g, player, list, ctx);
 		ItemStack stack = token.stack();
 		int x0 = g.guiWidth() / 2;
 		int y0 = g.guiHeight() / 2;
@@ -45,13 +48,8 @@ public record ArmorSwapWheel(SingleSwapToken token, int wheelIndex,
 		g.pose().pushPose();
 		g.pose().translate((float) x0, (float) y0, 0.0F);
 		g.pose().scale(s, s, s);
-		var sel = getMouseSelect(player);
+		var sel = getMouseSelect(player).sel();
 		if (sel < 0) g.renderItem(stack, -8, -8);
-		if (!next.isEmpty()) {
-			g.pose().translate(12, -4, 0);
-			g.pose().scale(0.5f, 0.5f, 0.5f);
-			g.renderItem(next, -8, -8);
-		}
 		g.pose().popPose();
 
 	}

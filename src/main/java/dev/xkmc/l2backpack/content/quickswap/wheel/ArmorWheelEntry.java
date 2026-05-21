@@ -3,7 +3,7 @@ package dev.xkmc.l2backpack.content.quickswap.wheel;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.type.ArmorSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
-import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
+import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
@@ -17,9 +17,8 @@ public record ArmorWheelEntry(ItemStack stack) implements WheelAdaptor.Entry {
 		return EquipmentSlot.values()[5 - i];
 	}
 
-	public void render(GuiGraphics g, float x0, float y0, float ai, float r0, float r, float da, float s) {
-		boolean sel = s > 1;
-		s *= Math.min(r * 0.015F, da * r0 / 16.0F);
+	public void render(GuiGraphics g, float x0, float y0, float ai, float r0, float r, float da, boolean sel) {
+		float s = (sel ? 1.1f : 1) * Math.min(r * 0.015F, da * r0 / 16.0F);
 		float dx = x0 + Mth.cos(ai) * r0;
 		float dy = y0 + Mth.sin(ai) * r0;
 		g.pose().pushPose();

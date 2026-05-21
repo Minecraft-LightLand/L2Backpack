@@ -8,7 +8,8 @@ import dev.xkmc.l2backpack.content.quickswap.type.ArmorSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
-import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
+import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
+import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
@@ -20,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record SetSwapWheel(
-		SetSwapToken token, int wheelIndex, ItemStack next
-) implements WheelAdaptor, IQuickSwapToken.SwapWheel {
+		SetSwapToken token, int wheelIndex
+) implements WheelAdaptor<SetSwapWheel.SetWheelEntry>, IQuickSwapToken.SwapWheel {
 
-	public List<Entry> getWheelContent() {
+	public List<SetWheelEntry> getWheelContent() {
 		var src = token.getList();
-		ArrayList<Entry> ans = new ArrayList<>();
+		ArrayList<SetWheelEntry> ans = new ArrayList<>();
 		for (var e : src) {
 			ans.add(new SetWheelEntry(e));
 		}
@@ -33,12 +34,18 @@ public record SetSwapWheel(
 		return ans;
 	}
 
+	@Override
+	public void renderIcon(GuiGraphics guiGraphics, int x0, int y0, boolean left, float sideWidth, boolean hover) {
+		//TODO icon
+	}
+
 	public int getIndex(Player player) {
 		return token.getSelected();
 	}
 
-	public void render(GuiGraphics g, Player player) {
-		WheelAdaptor.super.render(g, player);
+	@Override
+	public void renderImpl(GuiGraphics g, Player player, List<SetWheelEntry> list, WheelContext ctx) {
+		WheelAdaptor.super.renderImpl(g, player, list, ctx);
 		ItemStack stack = token.stack();
 		int x0 = g.guiWidth() / 2;
 		int y0 = g.guiHeight() / 2;
@@ -48,12 +55,7 @@ public record SetSwapWheel(
 		g.pose().translate((float) x0, (float) y0, 0.0F);
 		g.pose().scale(s, s, s);
 		var sel = getMouseSelect(player);
-		if (sel < 0) g.renderItem(stack, -8, -8);
-		if (!next.isEmpty()) {
-			g.pose().translate(12, -4, 0);
-			g.pose().scale(0.5f, 0.5f, 0.5f);
-			g.renderItem(next, -8, -8);
-		}
+		if (sel.sel() < 0) g.renderItem(stack, -8, -8);
 		g.pose().popPose();
 	}
 
@@ -64,9 +66,8 @@ public record SetSwapWheel(
 
 	public record SetWheelEntry(SetSwapEntry set) implements WheelAdaptor.Entry {
 
-		public void render(GuiGraphics g, float x0, float y0, float ai, float r0, float r, float da, float s) {
-			boolean sel = s > 1;
-			s *= Math.min(r * 0.015F, da * r0 / 44.0F);
+		public void render(GuiGraphics g, float x0, float y0, float ai, float r0, float r, float da, boolean sel) {
+			float s = (sel ? 1.1f : 1) * Math.min(r * 0.015F, da * r0 / 44.0F);
 			float dx = x0 + Mth.cos(ai) * r0;
 			float dy = y0 + Mth.sin(ai) * r0;
 			g.pose().pushPose();
@@ -93,7 +94,6 @@ public record SetSwapWheel(
 				g.renderItem(old, x, y);
 			}
 		}
-
 
 
 	}

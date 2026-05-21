@@ -11,7 +11,7 @@ import dev.xkmc.l2core.util.Proxy;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.overlay.SelectionSideBar;
 import dev.xkmc.l2itemselector.overlay.SideBar;
-import dev.xkmc.l2itemselector.overlay.WheelHandler;
+import dev.xkmc.l2itemselector.wheel.WheelHandler;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;

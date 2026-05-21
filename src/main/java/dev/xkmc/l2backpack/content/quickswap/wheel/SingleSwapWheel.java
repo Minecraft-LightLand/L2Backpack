@@ -5,9 +5,10 @@ import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
-import dev.xkmc.l2itemselector.overlay.ItemWheelEntry;
 import dev.xkmc.l2itemselector.overlay.TextBox;
-import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
+import dev.xkmc.l2itemselector.wheel.ItemWheelEntry;
+import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
+import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,12 +19,13 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public record SingleSwapWheel(SingleSwapToken token, int wheelIndex,
-                              ItemStack next) implements WheelAdaptor, IQuickSwapToken.SwapWheel {
+public record SingleSwapWheel(
+		SingleSwapToken token, int wheelIndex
+) implements WheelAdaptor<ItemWheelEntry>, IQuickSwapToken.SwapWheel {
 
-	public List<Entry> getWheelContent() {
+	public List<ItemWheelEntry> getWheelContent() {
 		List<ItemStack> src = token.getRawList();
-		ArrayList<Entry> ans = new ArrayList<>();
+		ArrayList<ItemWheelEntry> ans = new ArrayList<>();
 		for (ItemStack e : src) {
 			ans.add(new ItemWheelEntry(e));
 		}
@@ -35,9 +37,15 @@ public record SingleSwapWheel(SingleSwapToken token, int wheelIndex,
 		return token.getSelected();
 	}
 
-	public void render(GuiGraphics g, Player player) {
-		WheelAdaptor.super.render(g, player);
-		int index = this.getMouseSelect(player);
+	@Override
+	public void renderIcon(GuiGraphics guiGraphics, int i, int i1, boolean b, float v, boolean b1) {
+		//TODO icon
+	}
+
+	@Override
+	public void renderImpl(GuiGraphics g, Player player, List list, WheelContext ctx) {
+		WheelAdaptor.super.renderImpl(g, player, list, ctx);
+		int index = this.getMouseSelect(player).sel();
 		ItemStack stack = ItemStack.EMPTY;
 		if (index >= 0) {
 			stack = token.getRawList().get(index);
@@ -52,11 +60,6 @@ public record SingleSwapWheel(SingleSwapToken token, int wheelIndex,
 		g.pose().translate((float) x0, (float) y0, 0.0F);
 		g.pose().scale(s, s, s);
 		g.renderItem(stack, -8, tooltip ? -16 : -8);
-		if (!next.isEmpty()) {
-			g.pose().translate(12, -4, 0);
-			g.pose().scale(0.5f, 0.5f, 0.5f);
-			g.renderItem(next, -8, -8);
-		}
 		g.pose().popPose();
 		if (tooltip) {
 			Component text = stack.getHoverName();

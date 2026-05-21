@@ -6,7 +6,7 @@ import dev.xkmc.l2backpack.content.quickswap.entry.SetSwapHandler;
 import dev.xkmc.l2backpack.content.quickswap.type.ISetSwapAction;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.content.quickswap.wheel.SetSwapWheel;
-import dev.xkmc.l2itemselector.overlay.WheelAdaptor;
+import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -53,8 +53,8 @@ public record SetSwapToken(ISetSwapItem item, ItemStack stack, QuickSwapType typ
 	}
 
 	@Override
-	public Optional<WheelAdaptor> get(@Nullable Player player, int wheelIndex, ItemStack next) {
-		return Optional.of(new SetSwapWheel(this, wheelIndex, next));
+	public Optional<WheelAdaptor<?>> get(@Nullable Player player, int wheelIndex) {
+		return Optional.of(new SetSwapWheel(this, wheelIndex));
 	}
 
 }

@@ -108,7 +108,7 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 		var list = QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown());
 		list.removeIf(e -> !e.type().supportWheel());
 		if (list.isEmpty()) return Optional.empty();
-		int index = list.size() == 1 ? 0 : wheel % list.size();
+		int index = list.size() == 1 ? 0 : (wheel + list.size()) % list.size();
 		var token = list.get(index);
 		if (main) {
 			if (prevType != null && prevWheel > 0 && prevWheel == wheel && prevType != token.type()) {

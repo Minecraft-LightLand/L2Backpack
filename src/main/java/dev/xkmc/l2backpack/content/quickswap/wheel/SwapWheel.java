@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.L2Backpack;
+import dev.xkmc.l2itemselector.init.data.L2ISConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.wheel.ItemWheel;
 import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
@@ -87,7 +88,7 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 		float r = Math.min(x0 / 1.5f, y0) / 1.5f;
 		float s = r * 0.02f;
 		int index = ctx.hover();
-		if (ctx.code().switcher() != 0) return;
+		if (ctx.code().switcher() != 0 && !L2ISConfig.CLIENT.useFastSwitchWheel.get()) return;
 		ItemStack display = token().stack();
 		if (index >= 0) {
 			var content = getItem(list, index);

@@ -113,7 +113,7 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 		int index = list.size() == 1 ? 0 : Math.floorMod(wheel, list.size());
 		var token = list.get(index);
 		if (main) {
-			if (prevType != null && prevWheel == wheel && prevType != token.type()) {
+			if (prevType != null && prevWheel > 0 && prevWheel == wheel && prevType != token.type()) {
 				for (int i = 0; i < list.size(); i++) {
 					if (list.get(i).type() == prevType) {
 						WheelHandler.wheelIndex = wheel = index = i;

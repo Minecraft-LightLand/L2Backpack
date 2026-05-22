@@ -3,6 +3,7 @@ package dev.xkmc.l2backpack.content.quickswap.wheel;
 import dev.xkmc.l2backpack.content.quickswap.common.SetSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.type.ArmorSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
+import dev.xkmc.l2itemselector.init.data.L2ISConfig;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -50,7 +51,7 @@ public record SetSwapWheel(
 		float armorScale = r * 0.01f;
 		int armorY = y0 + (int) (s * 1 * armorScale);
 		int index = ctx.hover();
-		if (ctx.code().switcher() != 0) return;
+		if (ctx.code().switcher() != 0 && !L2ISConfig.CLIENT.useFastSwitchWheel.get()) return;
 		if (index >= 0 && index < list.size()) {
 			var entry = list.get(index);
 			var setItems = entry.set().asList();

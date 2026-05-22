@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.type.ArmorSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
+import dev.xkmc.l2itemselector.init.data.L2ISConfig;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -47,7 +48,7 @@ public record ArmorSwapWheel(
 		float armorScale = r * 0.01f;
 		int armorY = y0 + (int) (s * 1 * armorScale);
 		int index = ctx.hover();
-		if (ctx.code().switcher() != 0) return;
+		if (ctx.code().switcher() != 0 && !L2ISConfig.CLIENT.useFastSwitchWheel.get()) return;
 		if (index >= 0 && index < list.size()) {
 			ItemStack hovered = list.get(index).stack();
 			EquipmentSlot target = SingleSwapItem.getEquipmentSlotForItem(hovered);

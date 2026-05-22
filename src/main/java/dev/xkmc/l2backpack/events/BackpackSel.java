@@ -35,7 +35,9 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 	@Override
 	public boolean isClientActive(Player player) {
 		if (Minecraft.getInstance().screen != null) return false;
-		if (!QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown()).isEmpty()) return true;
+		if (WheelHandler.wheelSelecting) {
+			return !QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown()).isEmpty();
+		}
 		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, QuickSwapOverlay.hasAltDown());
 		return token != null;
 	}
@@ -96,9 +98,8 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 		return QuickSwapOverlay.INSTANCE.isOnHold();
 	}
 
-	private int prevWheel = 0, prevTick = 0;
-	private QuickSwapType prevType = null;
-
+	private int prevWheel = 0;
+	public static QuickSwapType prevType = null;
 	public static boolean clicked = false;
 
 	@Override
@@ -108,10 +109,11 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 		var list = QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown());
 		list.removeIf(e -> !e.type().supportWheel());
 		if (list.isEmpty()) return Optional.empty();
+		if (list.size() == 1 && !main) return Optional.empty();
 		int index = list.size() == 1 ? 0 : Math.floorMod(wheel, list.size());
 		var token = list.get(index);
 		if (main) {
-			if (prevTick >= player.tickCount - 1 && prevType != null && prevWheel == wheel && prevType != token.type()) {
+			if (prevType != null && prevWheel == wheel && prevType != token.type()) {
 				for (int i = 0; i < list.size(); i++) {
 					if (list.get(i).type() == prevType) {
 						WheelHandler.wheelIndex = wheel = index = i;
@@ -121,8 +123,7 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 				}
 			}
 			prevWheel = wheel;
-			if (prevTick < player.tickCount - 1 || prevType != token.type()) clicked = false;
-			prevTick = player.tickCount;
+			if (prevType != token.type()) clicked = false;
 			prevType = token.type();
 		}
 		return token.get(player, index);

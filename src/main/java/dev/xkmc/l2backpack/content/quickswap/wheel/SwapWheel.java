@@ -2,6 +2,7 @@ package dev.xkmc.l2backpack.content.quickswap.wheel;
 
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
+import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.wheel.ItemWheel;
@@ -98,6 +99,21 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 			g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, false);
 			ty += font.lineHeight + 1;
 		}
+	}
+
+	@Override
+	default void onClose() {
+		BackpackSel.clicked = false;
+		BackpackSel.prevType = null;
+	}
+
+	@Override
+	default void onOpen() {
+	}
+
+	@Override
+	default void onSwitchedAway() {
+		BackpackSel.clicked = false;
 	}
 
 }

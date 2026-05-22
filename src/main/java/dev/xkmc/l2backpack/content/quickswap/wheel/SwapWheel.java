@@ -2,16 +2,11 @@ package dev.xkmc.l2backpack.content.quickswap.wheel;
 
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
-import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
-import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
-import dev.xkmc.l2itemselector.wheel.ArcCode;
 import dev.xkmc.l2itemselector.wheel.ItemWheel;
-import dev.xkmc.l2itemselector.wheel.ItemWheelEntry;
 import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
-import dev.xkmc.l2itemselector.wheel.WheelHandler;
 import dev.xkmc.l2itemselector.wheel.WheelKeyHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -19,33 +14,23 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 
 	IQuickSwapToken<?> token();
 
+	int wheelIndex();
+
 	@Override
 	default WheelKeyHandler getInputHandler() {
-		return SwapWheelKeyHandler.INSTANCE;
+		return SwapWheelKeyHandler.getDefault();
 	}
 
 	@Override
-	default ItemStack getItem(List<T> list, int index) {
-		if (index < 0 || index >= list.size()) return ItemStack.EMPTY;
-		var entry = list.get(index);
-		if (entry instanceof ItemWheelEntry e) return e.stack();
-		if (entry instanceof ArmorWheelEntry e) return e.stack();
-		if (entry instanceof SetSwapWheel.SetWheelEntry e) {
-			for (var stack : e.set().asList()) {
-				if (!stack.isEmpty()) return stack;
-			}
-			return ItemStack.EMPTY;
-		}
-		return ItemStack.EMPTY;
+	default void select(int i) {
+		L2Backpack.HANDLER.toServer(new WheelSelectToServer(i, wheelIndex(), L2Keys.hasShiftDown()));
 	}
 
 	@Override
@@ -63,14 +48,18 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 			g.pose().popPose();
 		}
 		if (hover) {
-			Component text = token().stack().getHoverName();
-			Font font = Minecraft.getInstance().font;
 			int cx2 = left ? (int) (sideWidth / 2) : g.guiWidth() - (int) (sideWidth / 2);
 			int ty = y0 + (int) r0 * 2;
-			for (var line : font.split(text, (int) sideWidth - 4)) {
-				g.drawString(font, line, cx2 - font.width(line) / 2, ty, 0xffffff, false);
-				ty += font.lineHeight + 1;
-			}
+			renderText(g, token().stack().getHoverName(), cx2, ty, sideWidth - 4);
+		}
+	}
+
+	default void renderText(GuiGraphics g, Component text, int x0, int textY, float r) {
+		Font font = Minecraft.getInstance().font;
+		int ty = textY;
+		for (var line : font.split(text, (int) r)) {
+			g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, false);
+			ty += font.lineHeight + 1;
 		}
 	}
 
@@ -90,111 +79,25 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 		g.pose().popPose();
 	}
 
-	@Nullable
-	default Component getSwitchText(WheelContext ctx) {
-		int switcher = ctx.code().switcher();
-		if (switcher == 0) return null;
-		WheelAdaptor<?> adj = switcher == -1 ? ctx.left() : ctx.right();
-		if (adj instanceof SwapWheel<?> sw) {
-			return sw.token().stack().getHoverName();
-		}
-		return null;
-	}
-
 	default void renderCenter(GuiGraphics g, Player player, List<T> list, WheelContext ctx) {
 		renderBagIcon(g);
 		int x0 = g.guiWidth() / 2, y0 = g.guiHeight() / 2;
 		float r = Math.min(x0 / 1.5f, y0) / 1.5f;
 		float s = r * 0.02f;
-		Component text = getSwitchText(ctx);
-		if (text == null) {
-			int index = ctx.hover();
-			ItemStack bag = token().stack();
-			text = index >= 0 ? getItem(list, index).getHoverName() : bag.getHoverName();
+		int index = ctx.hover();
+		if (ctx.code().switcher() != 0) return;
+		ItemStack display = token().stack();
+		if (index >= 0) {
+			var content = getItem(list, index);
+			if (!content.isEmpty()) display = content;
 		}
+		Component text = display.getHoverName();
 		var font = Minecraft.getInstance().font;
 		int ty = (int) (y0 + s * 3);
 		for (var line : font.split(text, (int) r)) {
 			g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, false);
 			ty += font.lineHeight + 1;
 		}
-	}
-
-	class SwapWheelKeyHandler implements WheelKeyHandler {
-
-		public static final WheelKeyHandler INSTANCE = new SwapWheelKeyHandler();
-
-		private static int getSelect(WheelAdaptor<?> wheel, Player player) {
-			var code = wheel.getMouseSelect(player);
-			if (code.sel() < 0) return WheelHandler.keyboardIndex;
-			return code.sel();
-		}
-
-		@Override
-		public void handleClientKey(L2Keys k, Player player) {
-			WheelKeyHandler.getDefault().handleClientKey(k, player);
-		}
-
-		@Override
-		public boolean handleClientScroll(int diff, Player player) {
-			return WheelKeyHandler.getDefault().handleClientScroll(diff, player);
-		}
-
-		@Override
-		public void leftClick(WheelAdaptor<?> wheel, Player player) {
-			WheelKeyHandler.getDefault().leftClick(wheel, player);
-		}
-
-		@Override
-		public void rightClick(WheelAdaptor<?> wheel, Player player) {
-			WheelKeyHandler.getDefault().rightClick(wheel, player);
-		}
-
-		@Override
-		public boolean shouldOpen(boolean longPress) {
-			return WheelKeyHandler.getDefault().shouldOpen(longPress);
-		}
-
-		@Override
-		public boolean onReleaseWithWheel(WheelAdaptor<?> wheel, Player player, boolean longPress, boolean heldWithWheel) {
-			if (longPress && wheel instanceof SwapWheel<?> sw) {
-				int index = getSelect(wheel, player);
-				if (index >= 0) {
-					var token = sw.token();
-					token.setSelected(index);
-					if (token.type() == QuickSwapTypes.ARROW) {
-						wheel.select(index);
-					}
-				}
-				return true;
-			}
-			return WheelKeyHandler.getDefault().onReleaseWithWheel(wheel, player, longPress, heldWithWheel);
-		}
-
-		@Override
-		public void onReleaseWithoutWheel(WheelAdaptor<?> sel, Player player, boolean longPress) {
-			if (!longPress && sel instanceof SwapWheel<?> wheel) {
-				var token = wheel.token();
-				if (token.type() == QuickSwapTypes.ARROW && player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {
-					var list = QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown());
-					for (int i = 0; i < list.size(); i++) {
-						var t = list.get(i);
-						if (t.type() == QuickSwapTypes.TOOL && t.type().supportWheel()) {
-							int selected = t.getSelected();
-							L2Backpack.HANDLER.toServer(new WheelSelectToServer(selected, i, L2Keys.hasShiftDown()));
-							return;
-						}
-					}
-				}
-			}
-			WheelKeyHandler.getDefault().onReleaseWithoutWheel(sel, player, longPress);
-		}
-
-		@Override
-		public ArcCode getArcColor(WheelContext ctx) {
-			return WheelKeyHandler.getDefault().getArcColor(ctx);
-		}
-
 	}
 
 }

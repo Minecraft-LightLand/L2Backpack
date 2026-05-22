@@ -10,7 +10,9 @@ import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +31,6 @@ public record SetSwapWheel(
 		for (var e : src) {
 			ans.add(new SetWheelEntry(e));
 		}
-
 		return ans;
 	}
 
@@ -40,17 +41,51 @@ public record SetSwapWheel(
 	@Override
 	public void renderImpl(GuiGraphics g, Player player, List<SetWheelEntry> list, WheelContext ctx) {
 		SwapWheel.super.renderImpl(g, player, list, ctx);
-		ItemStack stack = token.stack();
-		int x0 = g.guiWidth() / 2;
-		int y0 = g.guiHeight() / 2;
-		float r = (float) Math.min(x0, y0) / 2.0F;
-		float s = r * 0.03F;
-		g.pose().pushPose();
-		g.pose().translate((float) x0, (float) y0, 0.0F);
-		g.pose().scale(s, s, s);
-		var sel = getMouseSelect(player);
-		if (sel.sel() < 0) g.renderItem(stack, -8, -8);
-		g.pose().popPose();
+		renderBagIcon(g);
+		int x0 = g.guiWidth() / 2, y0 = g.guiHeight() / 2;
+		float r = Math.min(x0 / 1.5f, y0) / 1.5f;
+		float s = r * 0.02f;
+		int textY = (int) (y0 + s * 3);
+		float armorScale = r * 0.01f;
+		int armorY = y0 + (int) (s * 1 * armorScale);
+		Component switchText = getSwitchText(ctx);
+		if (switchText != null) {
+			var font = Minecraft.getInstance().font;
+			int ty = textY;
+			for (var line : font.split(switchText, (int) r)) {
+				g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, false);
+				ty += font.lineHeight + 1;
+			}
+		} else {
+			int index = ctx.hover();
+			if (index >= 0 && index < list.size()) {
+				var entry = list.get(index);
+				var setItems = entry.set().asList();
+				var type = QuickSwapTypes.ARMOR;
+				g.pose().pushPose();
+				g.pose().translate(x0, armorY, 0.1f);
+				g.pose().scale(armorScale, armorScale, 1);
+				for (int i = 0; i < 4; i++) {
+					EquipmentSlot e = ArmorWheelEntry.getSlot(i);
+					ItemStack equipped = player.getItemBySlot(e);
+					ItemStack targetStack = i < setItems.size() ? setItems.get(i) : ItemStack.EMPTY;
+					boolean highlight = !entry.set().isLocked(i) && !targetStack.isEmpty();
+					boolean valid = !type.maySwapOut(equipped) && !equipped.isEmpty();
+					int sx = (i - 2) * 17;
+					ArmorSwapType.renderArmorSlot(g, sx, 0, 64, highlight, valid);
+					g.renderItem(equipped, sx, 0);
+				}
+				g.pose().popPose();
+			} else {
+				Component text = token.stack().getHoverName();
+				Font font = Minecraft.getInstance().font;
+				int ty = textY;
+				for (var line : font.split(text, (int) r)) {
+					g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, false);
+					ty += font.lineHeight + 1;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -74,21 +109,7 @@ public record SetSwapWheel(
 				g.renderItem(stack, i % 2 == 0 ? -16 : 0, i <= 1 ? -16 : 0);
 			}
 			g.pose().popPose();
-			if (!sel) return;
-			Player player = Minecraft.getInstance().player;
-			if (player == null) return;
-			var type = QuickSwapTypes.ARMOR;
-			for (int i = 0; i < 4; i++) {
-				int x = (int) x0 + (i % 2 == 0 ? -17 : 1), y = (int) y0 + (i <= 1 ? -17 : 1);
-				EquipmentSlot e = ArmorWheelEntry.getSlot(i);
-				ItemStack old = player.getItemBySlot(e);
-				ItemStack cur = set.asList().get(i);
-				boolean avail = type.maySwapOut(old) && (!old.isEmpty() || !cur.isEmpty());
-				ArmorSwapType.renderArmorSlot(g, x, y, 64, !set.isLocked(i) && (!old.isEmpty() || !cur.isEmpty()), !avail);
-				g.renderItem(old, x, y);
-			}
 		}
-
 
 	}
 

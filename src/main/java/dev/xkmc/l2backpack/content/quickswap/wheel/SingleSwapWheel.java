@@ -2,17 +2,18 @@ package dev.xkmc.l2backpack.content.quickswap.wheel;
 
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
-import dev.xkmc.l2itemselector.overlay.TextBox;
 import dev.xkmc.l2itemselector.wheel.ItemWheelEntry;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
+import dev.xkmc.l2itemselector.wheel.WheelHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,6 @@ public record SingleSwapWheel(
 		for (ItemStack e : src) {
 			ans.add(new ItemWheelEntry(e));
 		}
-
 		return ans;
 	}
 
@@ -38,35 +38,23 @@ public record SingleSwapWheel(
 	@Override
 	public void renderImpl(GuiGraphics g, Player player, List list, WheelContext ctx) {
 		SwapWheel.super.renderImpl(g, player, list, ctx);
-		int index = this.getMouseSelect(player).sel();
-		ItemStack stack = ItemStack.EMPTY;
-		if (index >= 0) {
-			stack = token.getRawList().get(index);
-		}
-		boolean tooltip = !stack.isEmpty();
-		if (stack.isEmpty()) stack = token.stack();
-		int x0 = g.guiWidth() / 2;
-		int y0 = g.guiHeight() / 2;
-		float r = (float) Math.min(x0, y0) / 2.0F;
-		float s = r * 0.03F;
-		g.pose().pushPose();
-		g.pose().translate((float) x0, (float) y0, 0.0F);
-		g.pose().scale(s, s, s);
-		g.renderItem(stack, -8, tooltip ? -16 : -8);
-		g.pose().popPose();
-		if (tooltip) {
-			Component text = stack.getHoverName();
-			Font font = Minecraft.getInstance().font;
-			g.renderTooltip(font, stack.getHoverName(), 0, 0);
-			TextBox box = new TextBox(g, 1, 0, x0, (int) ((float) y0 + s * 3.0F), (int) r);
-			box.renderLongText(font, List.of(text));
-		}
-
+		SwapWheel.super.renderCenter(g, player, list, ctx);
 	}
 
 	@Override
 	public void select(int i) {
 		L2Backpack.HANDLER.toServer(new WheelSelectToServer(i, wheelIndex, L2Keys.hasShiftDown()));
+		var list = token.getRawList();
+		if (i >= 0 && i < list.size() && token.type() == QuickSwapTypes.TOOL
+				&& list.get(i).getItem() instanceof ProjectileWeaponItem) {
+			var wheelTokens = QuickSwapManager.getWheelTokens(Minecraft.getInstance().player, L2Keys.hasShiftDown());
+			for (int j = 0; j < wheelTokens.size(); j++) {
+				if (wheelTokens.get(j).type() == QuickSwapTypes.ARROW) {
+					WheelHandler.wheelIndex = j;
+					break;
+				}
+			}
+		}
 	}
 
 }

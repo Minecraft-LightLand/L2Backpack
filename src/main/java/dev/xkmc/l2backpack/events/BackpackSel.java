@@ -36,9 +36,7 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 	@Override
 	public boolean isClientActive(Player player) {
 		if (Minecraft.getInstance().screen != null) return false;
-		if (L2Keys.WHEEL.map.isDown() || WheelHandler.wheel instanceof SwapWheel) {
-			return !QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown()).isEmpty();
-		}
+		if (!QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown()).isEmpty()) return true;
 		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, QuickSwapOverlay.hasAltDown());
 		return token != null;
 	}
@@ -108,7 +106,7 @@ public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 		var list = QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown());
 		list.removeIf(e -> !e.type().supportWheel());
 		if (list.isEmpty()) return Optional.empty();
-		int index = list.size() == 1 ? 0 : (wheel + list.size()) % list.size();
+		int index = list.size() == 1 ? 0 : Math.floorMod(wheel, list.size());
 		var token = list.get(index);
 		if (main) {
 			if (prevType != null && prevWheel > 0 && prevWheel == wheel && prevType != token.type()) {

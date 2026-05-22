@@ -1,11 +1,18 @@
 package dev.xkmc.l2backpack.content.quickswap.wheel;
 
+import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
+import dev.xkmc.l2backpack.content.quickswap.type.ArmorSwapType;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -22,7 +29,6 @@ public record ArmorSwapWheel(
 		for (ItemStack e : src) {
 			ans.add(new ArmorWheelEntry(e));
 		}
-
 		return ans;
 	}
 
@@ -33,18 +39,49 @@ public record ArmorSwapWheel(
 	@Override
 	public void renderImpl(GuiGraphics g, Player player, List<ArmorWheelEntry> list, WheelContext ctx) {
 		SwapWheel.super.renderImpl(g, player, list, ctx);
-		ItemStack stack = token.stack();
-		int x0 = g.guiWidth() / 2;
-		int y0 = g.guiHeight() / 2;
-		float r = (float) Math.min(x0, y0) / 2.0F;
-		float s = r * 0.03F;
-		g.pose().pushPose();
-		g.pose().translate((float) x0, (float) y0, 0.0F);
-		g.pose().scale(s, s, s);
-		var sel = getMouseSelect(player).sel();
-		if (sel < 0) g.renderItem(stack, -8, -8);
-		g.pose().popPose();
-
+		renderBagIcon(g);
+		int x0 = g.guiWidth() / 2, y0 = g.guiHeight() / 2;
+		float r = Math.min(x0 / 1.5f, y0) / 1.5f;
+		float s = r * 0.02f;
+		int textY = (int) (y0 + s * 3);
+		float armorScale = r * 0.01f;
+		int armorY = y0 + (int) (s * 1 * armorScale);
+		Component switchText = getSwitchText(ctx);
+		if (switchText != null) {
+			var font = Minecraft.getInstance().font;
+			int ty = textY;
+			for (var line : font.split(switchText, (int) r)) {
+				g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, false);
+				ty += font.lineHeight + 1;
+			}
+		} else {
+			int index = ctx.hover();
+			if (index >= 0 && index < list.size()) {
+				ItemStack hovered = list.get(index).stack();
+				EquipmentSlot target = SingleSwapItem.getEquipmentSlotForItem(hovered);
+				var type = QuickSwapTypes.ARMOR;
+				g.pose().pushPose();
+				g.pose().translate(x0, armorY, 0.1f);
+				g.pose().scale(armorScale, armorScale, 1);
+				for (int i = 0; i < 4; i++) {
+					EquipmentSlot slot = ArmorWheelEntry.getSlot(i);
+					ItemStack equipped = player.getItemBySlot(slot);
+					ItemStack targetStack = player.getItemBySlot(target);
+					int sx = (i - 2) * 17;
+					ArmorSwapType.renderArmorSlot(g, sx, 0, 64, target == slot, !type.maySwapOut(targetStack));
+					g.renderItem(equipped, sx, 0);
+				}
+				g.pose().popPose();
+			} else {
+				Component text = token.stack().getHoverName();
+				Font font = Minecraft.getInstance().font;
+				int ty = textY;
+				for (var line : font.split(text, (int) r)) {
+					g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, false);
+					ty += font.lineHeight + 1;
+				}
+			}
+		}
 	}
 
 	@Override

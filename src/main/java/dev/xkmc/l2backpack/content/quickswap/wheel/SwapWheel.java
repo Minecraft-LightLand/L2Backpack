@@ -1,6 +1,7 @@
 package dev.xkmc.l2backpack.content.quickswap.wheel;
 
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
+import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
 import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.L2Backpack;
@@ -105,6 +106,7 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 	default void onClose() {
 		BackpackSel.clicked = false;
 		BackpackSel.prevType = null;
+		QuickSwapOverlay.suppress();
 	}
 
 	@Override

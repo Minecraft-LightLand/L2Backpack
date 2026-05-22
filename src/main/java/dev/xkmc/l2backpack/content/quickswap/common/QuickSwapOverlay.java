@@ -27,6 +27,19 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 
 		@Override
 		public boolean shouldRefreshIdle(SideBar<?> sideBar, @Nullable QuickSwapOverlay.BackpackSignature old) {
+			var ans = shouldRefreshIdleImpl(old);
+			if (ans && sideBar == INSTANCE) {
+				synchronized (INSTANCE) {
+					if (INSTANCE.suppress) {
+						INSTANCE.suppress = false;
+						return false;
+					}
+				}
+			}
+			return ans;
+		}
+
+		private boolean shouldRefreshIdleImpl(@Nullable QuickSwapOverlay.BackpackSignature old) {
 			if (ignoreOther) {
 				if (old == null) return false;
 				return old.type == type && old.backpackSelect != backpackSelect();
@@ -46,9 +59,11 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 		}
 	}
 
-	public static QuickSwapOverlay INSTANCE = new QuickSwapOverlay();
+	public static final QuickSwapOverlay INSTANCE = new QuickSwapOverlay();
 
-	public QuickSwapOverlay() {
+	private boolean suppress = false;
+
+	private QuickSwapOverlay() {
 		super(40, 3);
 	}
 
@@ -71,7 +86,13 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 
 	@Override
 	public boolean isOnHold() {
-		return hasShiftDown() || hasAltDown() || L2Keys.SWAP.map.isDown();
+		return hasAltDown() || L2Keys.SWAP.map.isDown();
+	}
+
+	public static void suppress() {
+		synchronized (INSTANCE) {
+			INSTANCE.suppress = true;
+		}
 	}
 
 	@Override

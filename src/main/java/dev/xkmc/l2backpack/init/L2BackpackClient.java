@@ -38,7 +38,7 @@ public class L2BackpackClient {
 
 	@SubscribeEvent
 	public static void registerOverlay(RegisterGuiLayersEvent event) {
-		event.registerAbove(VanillaGuiLayers.CROSSHAIR, L2Backpack.loc("arrow_bag"), new QuickSwapOverlay());
+		event.registerAbove(VanillaGuiLayers.CROSSHAIR, L2Backpack.loc("arrow_bag"), QuickSwapOverlay.INSTANCE);
 		event.registerAbove(VanillaGuiLayers.CROSSHAIR, L2Backpack.loc("ender_drawer"), new EnderPreviewOverlay());
 		event.registerAbove(VanillaGuiLayers.CROSSHAIR, L2Backpack.loc("quick_swap_slot"), QuickSwapSlotOverlay.INSTANCE);
 	}

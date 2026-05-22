@@ -36,7 +36,7 @@ public class LBConfig {
 			popupArrowOnSwitch = builder
 					.text("Popup quiver on bow switch")
 					.comment("Show arrow quick swap when switching to a bow")
-					.define("popupArrowOnSwitch", true);
+					.define("popupArrowOnSwitch", false);
 
 			popupToolOnSwitch = builder
 					.text("Popup tool swap on switch")

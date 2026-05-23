@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.type.ArmorSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
+import dev.xkmc.l2itemselector.init.data.L2ISConfig;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -37,9 +38,7 @@ public record ArmorSwapWheel(
 	}
 
 	@Override
-	public void renderImpl(GuiGraphics g, Player player, List<ArmorWheelEntry> list, WheelContext ctx) {
-		SwapWheel.super.renderImpl(g, player, list, ctx);
-		renderBagIcon(g);
+	public void renderCenter(GuiGraphics g, Player player, List<ArmorWheelEntry> list, WheelContext ctx) {
 		int x0 = g.guiWidth() / 2, y0 = g.guiHeight() / 2;
 		float r = Math.min(x0 / 1.5f, y0) / 1.5f;
 		float s = r * 0.02f;
@@ -47,8 +46,9 @@ public record ArmorSwapWheel(
 		float armorScale = r * 0.01f;
 		int armorY = y0 + (int) (s * 1 * armorScale);
 		int index = ctx.hover();
-		if (ctx.code().switcher() != 0) return;
-		if (index >= 0 && index < list.size()) {
+		if (index < 0 || index >= list.size()) {
+			renderText(g, token.stack().getHoverName(), x0, textY, r);
+		} else {
 			ItemStack hovered = list.get(index).stack();
 			EquipmentSlot target = SingleSwapItem.getEquipmentSlotForItem(hovered);
 			var type = QuickSwapTypes.ARMOR;
@@ -64,8 +64,6 @@ public record ArmorSwapWheel(
 				g.renderItem(equipped, sx, 0);
 			}
 			g.pose().popPose();
-		} else {
-			renderText(g, token.stack().getHoverName(), x0, textY, r);
 		}
 	}
 

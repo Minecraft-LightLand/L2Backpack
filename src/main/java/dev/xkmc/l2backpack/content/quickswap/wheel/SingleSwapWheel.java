@@ -33,10 +33,4 @@ public record SingleSwapWheel(
 		return list.get(index).stack();
 	}
 
-	@Override
-	public void renderImpl(GuiGraphics g, Player player, List<ItemWheelEntry> list, WheelContext ctx) {
-		SwapWheel.super.renderImpl(g, player, list, ctx);
-		SwapWheel.super.renderCenter(g, player, list, ctx);
-	}
-
 }

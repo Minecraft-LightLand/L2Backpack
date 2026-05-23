@@ -5,6 +5,7 @@ import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.single.Scabbard;
 import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
+import dev.xkmc.l2itemselector.init.data.L2ISConfig;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -68,6 +69,9 @@ public class QuickSwapManager {
 		LinkedHashSet<QuickSwapType> ans = new LinkedHashSet<>();
 		var main = player.getMainHandItem();
 		boolean useTool = main.isEmpty() || Scabbard.isValidItem(main);
+		if (isShiftDown && L2ISConfig.CLIENT.useFastSwitchWheel.get()) {
+			ans.add(QuickSwapTypes.ARMOR);
+		}
 		if (isShiftDown && useTool) {
 			ans.add(QuickSwapTypes.TOOL);
 		}

@@ -69,6 +69,11 @@ public class EnderBackpackItem extends Item implements
 	}
 
 	@Override
+	public @Nullable EquipmentSlot getEquipmentSlot(ItemStack stack) {
+		return EquipmentSlot.CHEST;
+	}
+
+	@Override
 	public ResourceLocation getModelTexture(ItemStack stack) {
 		return L2Backpack.loc("textures/block/ender_backpack.png");
 	}

@@ -4,6 +4,7 @@ import dev.xkmc.l2backpack.compat.CuriosCompat;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.single.Scabbard;
+import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -125,6 +126,8 @@ public class QuickSwapManager {
 		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
 		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
 		opt.ifPresent(pair -> list.add(pair.getFirst()));
+		boolean[] ender = {false};
+		list.removeIf(e -> e.getItem() instanceof EnderBackpackItem && (ender[0] || !(ender[0] = true)));
 		LinkedHashSet<QuickSwapType> type = getWheelType(user, isShiftDown);
 		if (type.isEmpty())
 			return List.of();

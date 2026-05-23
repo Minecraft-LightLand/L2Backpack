@@ -122,6 +122,11 @@ public class DimensionalItem extends BlockItem implements BackpackModelItem, Pic
 	}
 
 	@Override
+	public @Nullable EquipmentSlot getEquipmentSlot(ItemStack stack) {
+		return EquipmentSlot.CHEST;
+	}
+
+	@Override
 	public ResourceLocation getModelTexture(ItemStack stack) {
 		return L2Backpack.loc("textures/block/dimensional_storage/" + color.getName() + ".png");
 	}

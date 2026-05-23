@@ -3,6 +3,8 @@ package dev.xkmc.l2backpack.content.quickswap.type;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SingleSwapItem;
 import dev.xkmc.l2backpack.content.quickswap.entry.*;
+import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalItem;
+import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.init.data.LBConfig;
 import dev.xkmc.l2core.init.reg.ench.EnchHelper;
 import dev.xkmc.l2itemselector.overlay.OverlayUtil;
@@ -33,7 +35,9 @@ public class ArmorSwapType extends QuickSwapType
 	public boolean maySwapOut(ItemStack stack) {
 		if (EnchHelper.getLv(stack, Enchantments.BINDING_CURSE) > 0) return false;
 		return stack.getItem().canFitInsideContainerItems() &&
-				!(stack.getItem() instanceof BaseBagItem);
+				!(stack.getItem() instanceof BaseBagItem) &&
+				!(stack.getItem() instanceof DimensionalItem) &&
+				!(stack.getItem() instanceof EnderBackpackItem);
 	}
 
 	private EquipmentSlot getSlot(int i) {

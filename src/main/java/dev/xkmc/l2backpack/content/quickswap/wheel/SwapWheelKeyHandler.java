@@ -70,6 +70,7 @@ public class SwapWheelKeyHandler {
 
 		@Override
 		public void onReleaseWithoutWheel(WheelAdaptor<?> sel, Player player, boolean longPress) {
+			BackpackSel.prevType = null;
 			if (!longPress && sel instanceof SwapWheel<?> wheel) {
 				var token = wheel.token();
 				if (token.type() == QuickSwapTypes.ARROW && player.getMainHandItem().getItem() instanceof ProjectileWeaponItem) {

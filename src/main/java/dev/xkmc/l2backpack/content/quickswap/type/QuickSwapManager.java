@@ -103,12 +103,7 @@ public class QuickSwapManager {
 	}
 
 	public static List<IQuickSwapToken<?>> getTokens(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
-		List<ItemStack> list = new ArrayList<>();
-		list.add(user.getMainHandItem());
-		list.add(user.getOffhandItem());
-		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
-		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
-		opt.ifPresent(pair -> list.add(pair.getFirst()));
+		var list = getCandidates(user);
 		LinkedHashSet<QuickSwapType> type = focus == null ? getValidType(user, isAltDown) : getValidType(user, focus, isAltDown);
 		if (type.isEmpty())
 			return List.of();
@@ -124,14 +119,7 @@ public class QuickSwapManager {
 	}
 
 	public static List<IQuickSwapToken<?>> getWheelTokens(LivingEntity user, boolean isShiftDown) {
-		List<ItemStack> list = new ArrayList<>();
-		list.add(user.getMainHandItem());
-		list.add(user.getOffhandItem());
-		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
-		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
-		opt.ifPresent(pair -> list.add(pair.getFirst()));
-		boolean[] ender = {false};
-		list.removeIf(e -> e.getItem() instanceof EnderBackpackItem && (ender[0] || !(ender[0] = true)));
+		var list = getCandidates(user);
 		LinkedHashSet<QuickSwapType> type = getWheelType(user, isShiftDown);
 		if (type.isEmpty())
 			return List.of();
@@ -144,6 +132,18 @@ public class QuickSwapManager {
 			}
 		}
 		return ans;
+	}
+
+	public static List<ItemStack> getCandidates(LivingEntity user) {
+		List<ItemStack> list = new ArrayList<>();
+		list.add(user.getMainHandItem());
+		list.add(user.getOffhandItem());
+		list.add(user.getItemBySlot(EquipmentSlot.CHEST));
+		var opt = CuriosCompat.getSlot(user, stack -> stack.getItem() instanceof IQuickSwapItem);
+		opt.ifPresent(pair -> list.add(pair.getFirst()));
+		boolean[] ender = {false};
+		list.removeIf(e -> e.getItem() instanceof EnderBackpackItem && (ender[0] || !(ender[0] = true)));
+		return list;
 	}
 
 }

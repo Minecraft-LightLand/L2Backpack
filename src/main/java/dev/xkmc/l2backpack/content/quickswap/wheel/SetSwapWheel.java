@@ -41,9 +41,7 @@ public record SetSwapWheel(
 	}
 
 	@Override
-	public void renderImpl(GuiGraphics g, Player player, List<SetWheelEntry> list, WheelContext ctx) {
-		SwapWheel.super.renderImpl(g, player, list, ctx);
-		renderBagIcon(g);
+	public void renderCenter(GuiGraphics g, Player player, List<SetWheelEntry> list, WheelContext ctx) {
 		int x0 = g.guiWidth() / 2, y0 = g.guiHeight() / 2;
 		float r = Math.min(x0 / 1.5f, y0) / 1.5f;
 		float s = r * 0.02f;
@@ -51,8 +49,9 @@ public record SetSwapWheel(
 		float armorScale = r * 0.01f;
 		int armorY = y0 + (int) (s * 1 * armorScale);
 		int index = ctx.hover();
-		if (ctx.code().switcher() != 0 && !L2ISConfig.CLIENT.useFastSwitchWheel.get()) return;
-		if (index >= 0 && index < list.size()) {
+		if (index < 0 || index >= list.size()) {
+			renderText(g, token.stack().getHoverName(), x0, textY, r);
+		} else {
 			var entry = list.get(index);
 			var setItems = entry.set().asList();
 			var type = QuickSwapTypes.ARMOR;
@@ -70,8 +69,6 @@ public record SetSwapWheel(
 				g.renderItem(equipped, sx, 0);
 			}
 			g.pose().popPose();
-		} else {
-			renderText(g, token.stack().getHoverName(), x0, textY, r);
 		}
 	}
 

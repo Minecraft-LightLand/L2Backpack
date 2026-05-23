@@ -2,14 +2,12 @@ package dev.xkmc.l2backpack.content.client;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.handswap.HandswapItem;
-import dev.xkmc.l2backpack.init.registrate.LBItems;
 import dev.xkmc.l2core.util.Proxy;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 
@@ -27,7 +25,7 @@ public class HandswapHotbarOverlay implements LayeredDraw.Layer {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return;
 
-		ItemStack bag = findBag(player);
+		ItemStack bag = HandswapItem.getToken(player);
 		if (bag.isEmpty()) return;
 		int selected = player.getInventory().selected;
 		List<ItemStack> items = BaseBagItem.getItems(bag);
@@ -59,19 +57,6 @@ public class HandswapHotbarOverlay implements LayeredDraw.Layer {
 			g.renderItem(offhandItem, 0, 0);
 			g.pose().popPose();
 		}
-	}
-
-	private static ItemStack findBag(LocalPlayer player) {
-		ItemStack bag = HandswapItem.getToken(player);
-		if (!bag.isEmpty()) return bag;
-		var inv = player.getEnderChestInventory();
-		for (int i = 0; i < inv.getContainerSize(); i++) {
-			var stack = inv.getItem(i);
-			if (stack.getItem() instanceof HandswapItem) {
-				return stack;
-			}
-		}
-		return ItemStack.EMPTY;
 	}
 
 }

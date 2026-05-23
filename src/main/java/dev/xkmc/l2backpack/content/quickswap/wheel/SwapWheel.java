@@ -69,6 +69,9 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 	@Override
 	default void renderImpl(GuiGraphics g, Player player, List<T> list, WheelContext ctx) {
 		ctx.region().render(g, player, list, ctx);
+		renderBagIcon(g);
+		if (ctx.code().switcher() != 0 && !L2ISConfig.CLIENT.useFastSwitchWheel.get()) return;
+		renderCenter(g, player, list, ctx);
 	}
 
 	default void renderBagIcon(GuiGraphics g) {
@@ -83,12 +86,10 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 	}
 
 	default void renderCenter(GuiGraphics g, Player player, List<T> list, WheelContext ctx) {
-		renderBagIcon(g);
 		int x0 = g.guiWidth() / 2, y0 = g.guiHeight() / 2;
 		float r = Math.min(x0 / 1.5f, y0) / 1.5f;
 		float s = r * 0.02f;
 		int index = ctx.hover();
-		if (ctx.code().switcher() != 0 && !L2ISConfig.CLIENT.useFastSwitchWheel.get()) return;
 		ItemStack display = token().stack();
 		if (index >= 0) {
 			var content = getItem(list, index);

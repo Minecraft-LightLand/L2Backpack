@@ -14,10 +14,14 @@ import dev.xkmc.l2itemselector.wheel.WheelKeyHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
@@ -61,7 +65,7 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 		Font font = Minecraft.getInstance().font;
 		int ty = textY;
 		for (var line : font.split(text, (int) r)) {
-			g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, false);
+			g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, true);
 			ty += font.lineHeight + 1;
 		}
 	}
@@ -99,8 +103,31 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 		var font = Minecraft.getInstance().font;
 		int ty = (int) (y0 + s * 3);
 		for (var line : font.split(text, (int) r)) {
-			g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, false);
+			g.drawString(font, line, x0 - font.width(line) / 2, ty, 0xffffff, true);
 			ty += font.lineHeight + 1;
+		}
+		if (index >= 0) {
+			var contents = display.get(DataComponents.POTION_CONTENTS);
+			if (contents != null) {
+				var effects = new ArrayList<MobEffectInstance>();
+				for (MobEffectInstance e : contents.getAllEffects()) {
+					effects.add(e);
+				}
+				for (MobEffectInstance effect : effects) {
+					Component effectName = effect.getEffect().value().getDisplayName();
+					int amp = effect.getAmplifier();
+					if (amp > 0) {
+						effectName = Component.translatable("potion.withAmplifier", effectName,
+								Component.translatable("enchantment.level." + (amp + 1)));
+					}
+					effectName = Component.translatable("potion.withDuration", effectName,
+							MobEffectUtil.formatDuration(effect, 0.125F, 20.0F));
+					for (var line : font.split(effectName, (int) (r * 0.8))) {
+						g.drawString(font, line, x0 - font.width(line) / 2, ty, 0x8888FF, true);
+						ty += font.lineHeight + 1;
+					}
+				}
+			}
 		}
 	}
 

@@ -3,18 +3,23 @@ package dev.xkmc.l2backpack.events;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
+import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapType;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2itemselector.select.ISelectionListener;
 import dev.xkmc.l2itemselector.select.SetSelectedToServer;
+import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
+import dev.xkmc.l2itemselector.wheel.WheelHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
-public class BackpackSel implements ISelectionListener {
+public class BackpackSel implements ISelectionListener, WheelAdaptor.Provider {
 
 	public static final BackpackSel INSTANCE = new BackpackSel();
 
@@ -30,6 +35,9 @@ public class BackpackSel implements ISelectionListener {
 	@Override
 	public boolean isClientActive(Player player) {
 		if (Minecraft.getInstance().screen != null) return false;
+		if (WheelHandler.wheelSelecting) {
+			return !QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown()).isEmpty();
+		}
 		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, QuickSwapOverlay.hasAltDown());
 		return token != null;
 	}
@@ -88,6 +96,37 @@ public class BackpackSel implements ISelectionListener {
 	@Override
 	public boolean isHoldKeyDown(Player player) {
 		return QuickSwapOverlay.INSTANCE.isOnHold();
+	}
+
+	private int prevWheel = 0;
+	public static QuickSwapType prevType = null;
+	public static boolean clicked = false;
+
+	@Override
+	public Optional<WheelAdaptor<?>> get(@Nullable Player player, int wheel, boolean main) {
+		if (player == null) return Optional.empty();
+
+		var list = QuickSwapManager.getWheelTokens(player, L2Keys.hasShiftDown());
+		list.removeIf(e -> !e.type().supportWheel());
+		if (list.isEmpty()) return Optional.empty();
+		if (list.size() == 1 && !main) return Optional.empty();
+		int index = list.size() == 1 ? 0 : Math.floorMod(wheel, list.size());
+		var token = list.get(index);
+		if (main) {
+			if (prevType != null && prevWheel == wheel && prevType != token.type()) {
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).type() == prevType) {
+						WheelHandler.wheelIndex = wheel = index = i;
+						token = list.get(i);
+						break;
+					}
+				}
+			}
+			prevWheel = wheel;
+			if (prevType != token.type()) clicked = false;
+			prevType = token.type();
+		}
+		return token.get(player, index);
 	}
 
 }

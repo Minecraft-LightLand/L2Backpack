@@ -14,7 +14,7 @@ buildscript {
 
 plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'net.darkhax.curseforgegradle' version '[1.1.24,)'
+    id 'net.darkhax.curseforgegradle' version '[1.1.24,1.2)'
     id "at.stnwtr.gradle-secrets-plugin" version "1.0.1"
     id "com.modrinth.minotaur" version "2.+"
 }
@@ -196,9 +196,9 @@ dependencies {
         jarJar.ranged(it, "[1.1.0,)")
     })
 
-    implementation fg.deobf(jarJar("dev.xkmc.l2itemselector:l2itemselector:0.1.11") {
+    implementation fg.deobf(jarJar("dev.xkmc.l2itemselector:l2itemselector:0.2.0") {
         transitive = false
-        jarJar.ranged(it, "[0.1.11,)")
+        jarJar.ranged(it, "[0.2.0,)")
     })
 
     implementation fg.deobf('dev.xkmc.modulargolems:modulargolems:2.6.10-slim')

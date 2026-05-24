@@ -33,7 +33,7 @@ public class BackpackConfig {
 					.define("previewOnCenter", true);
 
 			popupArrowOnSwitch = builder.comment("Show arrow quick swap when switching to a bow")
-					.define("popupArrowOnSwitch", true);
+					.define("popupArrowOnSwitch", false);
 
 			popupToolOnSwitch = builder.comment("Show tool quick swap when switching to a tool")
 					.define("popupToolOnSwitch", false);

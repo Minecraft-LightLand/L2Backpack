@@ -74,6 +74,11 @@ public class EnderBackpackItem extends Item implements
 	}
 
 	@Override
+	public @Nullable EquipmentSlot getEquipmentSlot(ItemStack stack) {
+		return EquipmentSlot.CHEST;
+	}
+
+	@Override
 	public ResourceLocation getModelTexture(ItemStack stack) {
 		return new ResourceLocation(L2Backpack.MODID, "textures/block/ender_backpack.png");
 	}
@@ -113,4 +118,11 @@ public class EnderBackpackItem extends Item implements
 	public IQuickSwapToken<?> getTokenOfType(ItemStack stack, LivingEntity entity, QuickSwapType type) {
 		return entity instanceof Player player ? EnderSyncCap.HOLDER.get(player).getToken(type) : null;
 	}
+
+	@Override
+	public List<IQuickSwapToken<?>> getAllTokensOfType(ItemStack stack, LivingEntity user, QuickSwapType t) {
+		return user instanceof Player player ? LBMisc.ENDER_SYNC.type().getExisting(player)
+											   .map(e -> e.getAllTokens(player, t)).orElse(List.of()) : List.of();
+	}
+
 }

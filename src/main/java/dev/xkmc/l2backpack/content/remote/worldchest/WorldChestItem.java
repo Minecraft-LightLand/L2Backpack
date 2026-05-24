@@ -148,6 +148,11 @@ public class WorldChestItem extends BlockItem implements BackpackModelItem, Pick
 	}
 
 	@Override
+	public @Nullable EquipmentSlot getEquipmentSlot(ItemStack stack) {
+		return EquipmentSlot.CHEST;
+	}
+
+	@Override
 	public ResourceLocation getModelTexture(ItemStack stack) {
 		return new ResourceLocation(L2Backpack.MODID, "textures/block/dimensional_storage/" + color.getName() + ".png");
 	}

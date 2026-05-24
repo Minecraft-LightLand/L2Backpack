@@ -4,6 +4,11 @@ import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2backpack.compat.LCCompat;
 import dev.xkmc.l2backpack.compat.*;
 import dev.xkmc.l2backpack.content.capability.PickupModeCap;
+import dev.xkmc.l2backpack.content.common.BaseBagInvWrapper;
+import dev.xkmc.l2backpack.content.common.BaseBagItemHandler;
+import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
+import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalCaps;
+import dev.xkmc.l2backpack.content.remote.player.EnderBackpackCaps;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncPacket;
@@ -57,7 +62,8 @@ public class L2Backpack {
 			e -> e.create(CreativeSetCarryToServer.class, PLAY_TO_SERVER),
 			e -> e.create(RequestTooltipUpdateEvent.class, PLAY_TO_SERVER),
 			e -> e.create(RespondTooltipUpdateEvent.class, PLAY_TO_CLIENT),
-			e -> e.create(EnderSyncPacket.class, PLAY_TO_CLIENT)
+			e -> e.create(EnderSyncPacket.class, PLAY_TO_CLIENT),
+			e -> e.create(WheelSelectToServer.class, PLAY_TO_SERVER)
 	);
 
 	private static void registerRegistrates(IEventBus bus) {

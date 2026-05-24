@@ -102,4 +102,17 @@ public class EnderSyncCap extends PlayerCapabilityTemplate<EnderSyncCap> {
 		return null;
 	}
 
+	public List<IQuickSwapToken<?>> getAllTokens(Player player, QuickSwapType type) {
+		ArrayList<IQuickSwapToken<?>> ans = new ArrayList<>();
+		for (ItemStack stack : getItems(player)) {
+			if (stack.getItem() instanceof IQuickSwapItem item && item instanceof BaseBagItem) {
+				var token = item.getTokenOfType(stack, player, type);
+				if (token != null) {
+					ans.add(token);
+				}
+			}
+		}
+		return ans;
+	}
+
 }

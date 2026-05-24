@@ -5,8 +5,10 @@ import dev.xkmc.l2backpack.content.capability.PickupConfig;
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.common.SimpleMenuPvd;
 import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
+import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
+import dev.xkmc.l2backpack.init.registrate.LBMisc;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -47,11 +49,20 @@ public class HandswapItem extends BaseBagItem {
 			}
 		}
 		if (ender && user instanceof Player player) {
-			var inv = player.getEnderChestInventory();
-			for (int i = 0; i < inv.getContainerSize(); i++) {
-				var stack = inv.getItem(i);
-				if (stack.getItem() instanceof HandswapItem) {
-					return stack;
+			if (player.level().isClientSide()) {
+				var inv = LBMisc.ENDER_SYNC.type().getOrCreate(player).getItems(player);
+				for (ItemStack stack : inv) {
+					if (stack.getItem() instanceof HandswapItem) {
+						return stack;
+					}
+				}
+			} else {
+				var inv = player.getEnderChestInventory();
+				for (int i = 0; i < inv.getContainerSize(); i++) {
+					var stack = inv.getItem(i);
+					if (stack.getItem() instanceof HandswapItem) {
+						return stack;
+					}
 				}
 			}
 		}

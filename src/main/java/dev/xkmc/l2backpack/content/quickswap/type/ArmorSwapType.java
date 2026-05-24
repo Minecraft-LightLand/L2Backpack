@@ -2,6 +2,8 @@ package dev.xkmc.l2backpack.content.quickswap.type;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.entry.*;
+import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalItem;
+import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.init.data.BackpackConfig;
 import dev.xkmc.l2backpack.init.data.TagGen;
 import dev.xkmc.l2library.base.overlay.OverlayUtil;
@@ -29,10 +31,12 @@ public class ArmorSwapType extends QuickSwapType
 		return ItemStack.EMPTY;
 	}
 
-	private boolean maySwapOut(ItemStack stack) {
+	public boolean maySwapOut(ItemStack stack) {
 		return stack.getItem().canFitInsideContainerItems() &&
 				!stack.is(TagGen.BACKPACK_BLACKLIST) &&
-				!(stack.getItem() instanceof BaseBagItem);
+				!(stack.getItem() instanceof BaseBagItem) &&
+				!(stack.getItem() instanceof DimensionalItem) &&
+				!(stack.getItem() instanceof EnderBackpackItem);
 	}
 
 	private EquipmentSlot getSlot(int i) {
@@ -113,7 +117,7 @@ public class ArmorSwapType extends QuickSwapType
 		}
 	}
 
-	private static void renderArmorSlot(GuiGraphics g, int x, int y, int a, boolean target, boolean invalid) {
+	public static void renderArmorSlot(GuiGraphics g, int x, int y, int a, boolean target, boolean invalid) {
 		OverlayUtil.fillRect(g, x, y, 16, 16, color(255, 255, 255, a));
 		if (target) {
 			if (invalid) {

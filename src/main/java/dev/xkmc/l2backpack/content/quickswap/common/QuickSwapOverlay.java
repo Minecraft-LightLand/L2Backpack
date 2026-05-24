@@ -11,6 +11,7 @@ import dev.xkmc.l2itemselector.init.data.L2Keys;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.base.overlay.SideBar;
 import dev.xkmc.l2library.util.Proxy;
+import dev.xkmc.l2itemselector.wheel.WheelHandler;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -21,11 +22,24 @@ import java.util.List;
 public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapOverlay.BackpackSignature> {
 
 	public record BackpackSignature(int backpackSelect, boolean ignoreOther, @Nullable QuickSwapType type,
-									int playerSelect, ItemStack stack)
+	                                int playerSelect, ItemStack stack)
 			implements Signature<BackpackSignature> {
 
 		@Override
 		public boolean shouldRefreshIdle(SideBar<?> sideBar, @Nullable QuickSwapOverlay.BackpackSignature old) {
+			var ans = shouldRefreshIdleImpl(old);
+			if (ans && sideBar == INSTANCE) {
+				synchronized (INSTANCE) {
+					if (INSTANCE.suppress) {
+						INSTANCE.suppress = false;
+						return false;
+					}
+				}
+			}
+			return ans;
+		}
+
+		private boolean shouldRefreshIdleImpl(@Nullable QuickSwapOverlay.BackpackSignature old) {
 			if (ignoreOther) {
 				if (old == null) return false;
 				return old.type == type && old.backpackSelect != backpackSelect();
@@ -34,16 +48,21 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 		}
 	}
 
-	public static QuickSwapOverlay INSTANCE = new QuickSwapOverlay();
+	public static final QuickSwapOverlay INSTANCE = new QuickSwapOverlay();
 
-	public QuickSwapOverlay() {
+	private boolean suppress = false;
+
+	private QuickSwapOverlay() {
 		super(40, 3);
 	}
 
 	public boolean isScreenOn() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
-		return BackpackSel.INSTANCE.isClientActive(player);
+		if (L2Keys.WHEEL.map.isDown() || WheelHandler.wheel != null) return false;
+		if (!BackpackSel.INSTANCE.isClientActive(player)) return false;
+		IQuickSwapToken<?> token = QuickSwapManager.getToken(player, QuickSwapOverlay.hasAltDown());
+		return token != null;
 	}
 
 	public static boolean hasShiftDown() {
@@ -56,7 +75,13 @@ public class QuickSwapOverlay extends SelectionSideBar<ISwapEntry<?>, QuickSwapO
 
 	@Override
 	public boolean isOnHold() {
-		return hasShiftDown() || hasAltDown() || L2Keys.SWAP.map.isDown();
+		return hasAltDown() || L2Keys.SWAP.map.isDown();
+	}
+
+	public static void suppress() {
+		synchronized (INSTANCE) {
+			INSTANCE.suppress = true;
+		}
 	}
 
 	@Override

@@ -11,6 +11,7 @@
 	  "text": "Swap UI can be activated by shift. Then you can select items using up / down arrow button, or mouse scrolling.$(br2)For Quiver, the UI will appear when you hold a bow, and you will shoot the selected arrow.$(br2)For Tool Swap and Armor Swap, you need to press R to swap the item."
 	},
 	"Swap UI condition:$(li)Quiver UI: hold a bow in main hand or off hand.$(li)Tool Swap: hold a non-stackable item in your main hand.$(li)Armor Swap: hold nothing in your main hand.$(li)If you press ALT, Tool Swap UI will appear even when you are in Quiver or Armor Swap mode. Then allows you to swap bows, or get weapon from tool swap while holding nothing.",
+	"The new version adds a wheel switching system for the swap bag. By default, it disables the display of the previously mentioned switching system, but the keybindings are not disabled. You need to manually unbind the corresponding keys. If you want to try the old switching system, you can enable it in the configuration. $(br2) There are two operation modes for the wheel, which can be changed in the L2ItemSelector configuration. You can try switching to find the one that suits you best. $(br2) The configuration option is useFastSwitchWheel $(li) Default mode: false $(li) Fast switching mode: true",
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2backpack:ender_backpack",

@@ -7,10 +7,7 @@ import dev.xkmc.l2backpack.events.BackpackSel;
 import dev.xkmc.l2backpack.init.L2Backpack;
 import dev.xkmc.l2itemselector.init.data.L2ISConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
-import dev.xkmc.l2itemselector.wheel.DefaultKeyHandler;
-import dev.xkmc.l2itemselector.wheel.RegionCode;
-import dev.xkmc.l2itemselector.wheel.WheelAdaptor;
-import dev.xkmc.l2itemselector.wheel.WheelKeyHandler;
+import dev.xkmc.l2itemselector.wheel.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ProjectileWeaponItem;
 
@@ -26,8 +23,8 @@ public class SwapWheelKeyHandler {
 	public static class Fast extends DefaultKeyHandler.Fast {
 
 		@Override
-		protected void execute(WheelAdaptor<?> wheel, Player player, ActionCode action, RegionCode code) {
-			super.execute(wheel, player, action, code);
+		protected void execute(WheelAdaptor<?> wheel, Player player, ActionCode action, WheelContext ctx) {
+			super.execute(wheel, player, action, ctx);
 			if (action == ActionCode.SELECT) {
 				BackpackSel.clicked = true;
 			}

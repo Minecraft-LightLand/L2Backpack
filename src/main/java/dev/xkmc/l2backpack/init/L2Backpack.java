@@ -1,14 +1,9 @@
 package dev.xkmc.l2backpack.init;
 
 import com.tterrag.registrate.providers.ProviderType;
-import dev.xkmc.l2backpack.compat.LCCompat;
 import dev.xkmc.l2backpack.compat.*;
 import dev.xkmc.l2backpack.content.capability.PickupModeCap;
-import dev.xkmc.l2backpack.content.common.BaseBagInvWrapper;
-import dev.xkmc.l2backpack.content.common.BaseBagItemHandler;
 import dev.xkmc.l2backpack.content.quickswap.common.WheelSelectToServer;
-import dev.xkmc.l2backpack.content.remote.dimensional.DimensionalCaps;
-import dev.xkmc.l2backpack.content.remote.player.EnderBackpackCaps;
 import dev.xkmc.l2backpack.content.remote.common.WorldStorage;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncPacket;

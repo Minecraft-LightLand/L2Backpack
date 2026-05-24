@@ -51,11 +51,6 @@ public record SingleSwapToken(IQuickSwapItem item, ItemStack stack, QuickSwapTyp
 	}
 
 	@Override
-	public boolean isLocked(int i) {
-		return false;
-	}
-
-	@Override
 	public Optional<WheelAdaptor<?>> get(@Nullable Player player, int wheelIndex) {
 		if (type == QuickSwapTypes.ARMOR)
 			return Optional.of(new ArmorSwapWheel(this, wheelIndex));

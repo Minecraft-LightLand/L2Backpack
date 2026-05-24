@@ -1,6 +1,8 @@
 package dev.xkmc.l2backpack.init;
 
 import dev.xkmc.l2backpack.content.bag.AbstractBag;
+import dev.xkmc.l2backpack.content.client.HandswapHotbarOverlay;
+import dev.xkmc.l2backpack.content.client.QuickSwapSlotOverlay;
 import dev.xkmc.l2backpack.content.common.InvClientTooltip;
 import dev.xkmc.l2backpack.content.common.InvTooltip;
 import dev.xkmc.l2backpack.content.quickswap.common.QuickSwapOverlay;
@@ -44,8 +46,8 @@ public class L2BackpackClient {
 	public static void registerOverlay(RegisterGuiOverlaysEvent event) {
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "arrow_bag", QuickSwapOverlay.INSTANCE);
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "ender_drawer", new EnderPreviewOverlay());
-		event.registerAbove(VanillaGuiLayers.CROSSHAIR, L2Backpack.loc("quick_swap_slot"), QuickSwapSlotOverlay.INSTANCE);
-		event.registerAbove(VanillaGuiLayers.HOTBAR, L2Backpack.loc("hand_swap_hotbar"), HandswapHotbarOverlay.INSTANCE);
+		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "quick_swap_slot", QuickSwapSlotOverlay.INSTANCE);
+		event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "hand_swap_hotbar", HandswapHotbarOverlay.INSTANCE);
 	}
 
 	@SubscribeEvent

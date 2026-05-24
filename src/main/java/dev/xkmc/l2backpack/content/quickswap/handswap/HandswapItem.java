@@ -8,7 +8,6 @@ import dev.xkmc.l2backpack.content.remote.player.EnderBackpackItem;
 import dev.xkmc.l2backpack.content.remote.player.EnderSyncCap;
 import dev.xkmc.l2backpack.init.data.LangData;
 import dev.xkmc.l2backpack.init.registrate.BackpackItems;
-import dev.xkmc.l2backpack.init.registrate.LBMisc;
 import dev.xkmc.l2screentracker.screen.source.PlayerSlot;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -50,7 +49,7 @@ public class HandswapItem extends BaseBagItem {
 		}
 		if (ender && user instanceof Player player) {
 			if (player.level().isClientSide()) {
-				var inv = LBMisc.ENDER_SYNC.type().getOrCreate(player).getItems(player);
+				var inv = EnderSyncCap.HOLDER.get(player).getItems();
 				for (ItemStack stack : inv) {
 					if (stack.getItem() instanceof HandswapItem) {
 						return stack;

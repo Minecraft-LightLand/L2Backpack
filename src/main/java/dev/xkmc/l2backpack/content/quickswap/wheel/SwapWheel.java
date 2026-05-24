@@ -14,14 +14,13 @@ import dev.xkmc.l2itemselector.wheel.WheelKeyHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
@@ -107,21 +106,17 @@ public interface SwapWheel<T extends WheelAdaptor.Entry> extends ItemWheel<T> {
 			ty += font.lineHeight + 1;
 		}
 		if (index >= 0) {
-			var contents = display.get(DataComponents.POTION_CONTENTS);
-			if (contents != null) {
-				var effects = new ArrayList<MobEffectInstance>();
-				for (MobEffectInstance e : contents.getAllEffects()) {
-					effects.add(e);
-				}
-				for (MobEffectInstance effect : effects) {
-					Component effectName = effect.getEffect().value().getDisplayName();
+			var contents = PotionUtils.getMobEffects(display);
+			if (!contents.isEmpty()) {
+				for (MobEffectInstance effect : contents) {
+					Component effectName = effect.getEffect().getDisplayName();
 					int amp = effect.getAmplifier();
 					if (amp > 0) {
 						effectName = Component.translatable("potion.withAmplifier", effectName,
 								Component.translatable("enchantment.level." + (amp + 1)));
 					}
 					effectName = Component.translatable("potion.withDuration", effectName,
-							MobEffectUtil.formatDuration(effect, 0.125F, 20.0F));
+							MobEffectUtil.formatDuration(effect, 0.125F));
 					for (var line : font.split(effectName, (int) (r * 0.8))) {
 						g.drawString(font, line, x0 - font.width(line) / 2, ty, 0x8888FF, true);
 						ty += font.lineHeight + 1;

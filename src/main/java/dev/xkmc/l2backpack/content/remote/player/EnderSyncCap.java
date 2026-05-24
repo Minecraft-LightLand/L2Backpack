@@ -13,6 +13,7 @@ import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
@@ -104,7 +105,7 @@ public class EnderSyncCap extends PlayerCapabilityTemplate<EnderSyncCap> {
 
 	public List<IQuickSwapToken<?>> getAllTokens(Player player, QuickSwapType type) {
 		ArrayList<IQuickSwapToken<?>> ans = new ArrayList<>();
-		for (ItemStack stack : getItems(player)) {
+		for (ItemStack stack : getItems()) {
 			if (stack.getItem() instanceof IQuickSwapItem item && item instanceof BaseBagItem) {
 				var token = item.getTokenOfType(stack, player, type);
 				if (token != null) {

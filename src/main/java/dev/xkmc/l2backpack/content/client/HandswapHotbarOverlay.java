@@ -2,27 +2,26 @@ package dev.xkmc.l2backpack.content.client;
 
 import dev.xkmc.l2backpack.content.common.BaseBagItem;
 import dev.xkmc.l2backpack.content.quickswap.handswap.HandswapItem;
-import dev.xkmc.l2core.util.Proxy;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 import java.util.List;
 
-public class HandswapHotbarOverlay implements LayeredDraw.Layer {
+public class HandswapHotbarOverlay implements IGuiOverlay {
 
 	public static final HandswapHotbarOverlay INSTANCE = new HandswapHotbarOverlay();
 
 	@Override
-	public void render(GuiGraphics g, DeltaTracker delta) {
+	public void render(ForgeGui gui, GuiGraphics g, float delta, int sw, int sh) {
 		var mc = Minecraft.getInstance();
 		if (mc.options.hideGui) return;
 		if (mc.gameMode != null && mc.gameMode.getPlayerMode() == GameType.SPECTATOR) return;
-		LocalPlayer player = Proxy.getClientPlayer();
+		LocalPlayer player = mc.player;
 		if (player == null) return;
 
 		ItemStack bag = HandswapItem.getToken(player);

@@ -8,6 +8,7 @@ import dev.xkmc.l2itemselector.init.data.L2ISConfig;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -50,7 +51,7 @@ public record ArmorSwapWheel(
 			renderText(g, token.stack().getHoverName(), x0, textY, r);
 		} else {
 			ItemStack hovered = list.get(index).stack();
-			EquipmentSlot target = SingleSwapItem.getEquipmentSlotForItem(hovered);
+			EquipmentSlot target = LivingEntity.getEquipmentSlotForItem(hovered);
 			var type = QuickSwapTypes.ARMOR;
 			g.pose().pushPose();
 			g.pose().translate(x0, armorY, 0.1f);

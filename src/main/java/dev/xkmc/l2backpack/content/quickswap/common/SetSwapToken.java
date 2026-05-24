@@ -48,11 +48,6 @@ public record SetSwapToken(ISetSwapItem item, ItemStack stack, QuickSwapType typ
 	}
 
 	@Override
-	public boolean isLocked(int i) {
-		return item.getToggle(stack, null).isLocked(i);
-	}
-
-	@Override
 	public Optional<WheelAdaptor<?>> get(@Nullable Player player, int wheelIndex) {
 		return Optional.of(new SetSwapWheel(this, wheelIndex));
 	}

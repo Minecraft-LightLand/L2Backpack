@@ -4,36 +4,36 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import dev.xkmc.l2backpack.content.quickswap.common.IQuickSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
-import dev.xkmc.l2core.util.Proxy;
 import dev.xkmc.l2itemselector.init.data.L2ISConfig;
 import dev.xkmc.l2itemselector.init.data.L2Keys;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.GameType;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 import java.util.List;
 
-public class QuickSwapSlotOverlay implements LayeredDraw.Layer {
+public class QuickSwapSlotOverlay implements IGuiOverlay {
 
 	public static final QuickSwapSlotOverlay INSTANCE = new QuickSwapSlotOverlay();
 	private static final ResourceLocation SLOT = ResourceLocation.withDefaultNamespace("hud/hotbar_offhand_left");
 
+
 	@Override
-	public void render(GuiGraphics g, DeltaTracker delta) {
+	public void render(ForgeGui gui, GuiGraphics g, float delta, int sw, int sh) {
 		if (!L2ISConfig.CLIENT.useFastSwitchWheel.get()) return;
 		var mc = Minecraft.getInstance();
 		if (mc.options.hideGui) return;
 		if (mc.gameMode != null && mc.gameMode.getPlayerMode() == GameType.SPECTATOR) return;
 		if (!(mc.getCameraEntity() instanceof Player)) return;
-		LocalPlayer player = Proxy.getClientPlayer();
+		LocalPlayer player = mc.player;
 		if (player == null) return;
 
 		ItemStack mainHand = player.getMainHandItem();
@@ -107,7 +107,7 @@ public class QuickSwapSlotOverlay implements LayeredDraw.Layer {
 
 	private static void renderItemSlot(GuiGraphics g, ItemStack stack, int x, int y) {
 		RenderSystem.enableBlend();
-		g.blitSprite(SLOT, x - 2, y - 2, 29, 24);
+		g.blit(SLOT, x - 2, y - 2, 0, 0, 29, 24, 29, 24);
 		RenderSystem.disableBlend();
 		if (!stack.isEmpty()) {
 			g.renderItem(stack, x + 1, y + 2);
@@ -117,7 +117,7 @@ public class QuickSwapSlotOverlay implements LayeredDraw.Layer {
 
 	private static void renderSetInSlot(GuiGraphics g, List<ItemStack> items, int x, int y) {
 		RenderSystem.enableBlend();
-		g.blitSprite(SLOT, x - 2, y - 2, 29, 24);
+		g.blit(SLOT, x - 2, y - 2, 0, 0, 29, 24, 29, 24);
 		RenderSystem.disableBlend();
 
 		Font font = Minecraft.getInstance().font;

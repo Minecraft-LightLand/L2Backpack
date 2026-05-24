@@ -2,17 +2,31 @@ package dev.xkmc.l2backpack.content.quickswap.common;
 
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapManager;
 import dev.xkmc.l2serial.network.SerialPacketBase;
-import net.minecraft.world.entity.player.Player;
+import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraftforge.network.NetworkEvent;
 
-public record WheelSelectToServer(
-		int slot, int index, boolean shift
-) implements SerialPacketBase<WheelSelectToServer> {
+@SerialClass
+public class WheelSelectToServer extends SerialPacketBase {
 
-	public static WheelSelectToServer of(int slot, int index, boolean shift) {
-		return new WheelSelectToServer(slot, index, shift);
+	@SerialClass.SerialField
+	public int slot, index;
+	@SerialClass.SerialField
+	public boolean shift;
+
+	public WheelSelectToServer() {
+		super();
 	}
 
-	public void handle(Player player) {
+	public WheelSelectToServer(int slot, int index, boolean shift) {
+		this.slot = slot;
+		this.index = index;
+		this.shift = shift;
+	}
+
+	@Override
+	public void handle(NetworkEvent.Context context) {
+		var player = context.getSender();
+		if (player == null) return;
 		var list = QuickSwapManager.getWheelTokens(player, shift);
 		if (list.size() <= index) return;
 		var token = list.get(index);
@@ -20,4 +34,5 @@ public record WheelSelectToServer(
 		token.setSelected(slot);
 		token.swap(player);
 	}
+
 }

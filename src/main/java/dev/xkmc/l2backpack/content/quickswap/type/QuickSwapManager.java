@@ -99,7 +99,7 @@ public class QuickSwapManager {
 	@Nullable
 	public static IQuickSwapToken<?> getToken(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {
 		var list = getTokens(user, focus, isAltDown);
-		return list.isEmpty() ? null : list.getFirst();
+		return list.isEmpty() ? null : list.get(0);
 	}
 
 	public static List<IQuickSwapToken<?>> getTokens(LivingEntity user, @Nullable ItemStack focus, boolean isAltDown) {

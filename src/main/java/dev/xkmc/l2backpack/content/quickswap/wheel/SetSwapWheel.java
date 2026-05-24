@@ -3,7 +3,6 @@ package dev.xkmc.l2backpack.content.quickswap.wheel;
 import dev.xkmc.l2backpack.content.quickswap.common.SetSwapToken;
 import dev.xkmc.l2backpack.content.quickswap.type.ArmorSwapType;
 import dev.xkmc.l2backpack.content.quickswap.type.QuickSwapTypes;
-import dev.xkmc.l2itemselector.init.data.L2ISConfig;
 import dev.xkmc.l2itemselector.wheel.WheelContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -60,13 +59,13 @@ public record SetSwapWheel(
 			g.pose().scale(armorScale, armorScale, 1);
 			for (int i = 0; i < 4; i++) {
 				EquipmentSlot e = ArmorWheelEntry.getSlot(i);
-				ItemStack equipped = player.getItemBySlot(e);
-				ItemStack targetStack = i < setItems.size() ? setItems.get(i) : ItemStack.EMPTY;
-				boolean highlight = !entry.set().isLocked(i) && !targetStack.isEmpty();
-				boolean valid = !type.maySwapOut(equipped) && !equipped.isEmpty();
+				ItemStack old = player.getItemBySlot(e);
+				ItemStack cur = i < setItems.size() ? setItems.get(i) : ItemStack.EMPTY;
+				boolean highlight = !old.isEmpty() && !cur.isEmpty();
+				boolean avail = type.maySwapOut(old) && (!old.isEmpty() || !cur.isEmpty());
 				int sx = (i - 2) * 17;
-				ArmorSwapType.renderArmorSlot(g, sx, 0, 64, highlight, valid);
-				g.renderItem(equipped, sx, 0);
+				ArmorSwapType.renderArmorSlot(g, sx, 0, 64, highlight, !avail);
+				g.renderItem(old, sx, 0);
 			}
 			g.pose().popPose();
 		}

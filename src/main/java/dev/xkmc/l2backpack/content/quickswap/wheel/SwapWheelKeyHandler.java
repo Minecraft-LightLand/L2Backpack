@@ -31,12 +31,45 @@ public class SwapWheelKeyHandler {
 		}
 
 		@Override
+		public void leftClick(WheelAdaptor<?> wheel, Player player) {
+			var ctx = wheel.getContext(player, wheel.getWheelSize());
+			if (ctx.hover() < 0 && ctx.code().switcher() == 0 && !ctx.code().outside()) {
+				wheel.select(ctx.sel());
+				BackpackSel.clicked = true;
+				if (!L2Keys.WHEEL.map.isDown())
+					WheelHandler.disableWheel(player);
+			} else if (ctx.hover() >= 0 && ctx.code().sel() < 0) {
+				wheel.select(ctx.hover());
+				BackpackSel.clicked = true;
+				if (!L2Keys.WHEEL.map.isDown())
+					WheelHandler.disableWheel(player);
+			} else {
+				super.leftClick(wheel, player);
+			}
+		}
+
+		@Override
+		public void rightClick(WheelAdaptor<?> wheel, Player player) {
+			var ctx = wheel.getContext(player, wheel.getWheelSize());
+			if (ctx.hover() >= 0 && wheel instanceof SwapWheel<?> sw) {
+				sw.token().setSelected(ctx.hover());
+				WheelHandler.disableWheel(player);
+			} else {
+				super.rightClick(wheel, player);
+			}
+		}
+
+		@Override
 		public boolean onReleaseWithWheel(WheelAdaptor<?> wheel, Player player, boolean longPress, boolean heldWithWheel) {
 			if (longPress && wheel instanceof SwapWheel<?> sw) {
 				int index = getSelect(wheel, player);
 				if (index >= 0) {
 					var token = sw.token();
 					if (BackpackSel.clicked) {
+						token.setSelected(index);
+						return true;
+					}
+					if (wheel.getMouseSelect(player).outside()) {
 						token.setSelected(index);
 						return true;
 					}
@@ -48,6 +81,16 @@ public class SwapWheelKeyHandler {
 	}
 
 	public static class Switcher extends DefaultKeyHandler.Switcher {
+
+		@Override
+		public void leftClick(WheelAdaptor<?> wheel, Player player) {
+			var ctx = wheel.getContext(player, wheel.getWheelSize());
+			if (ctx.hover() < 0 && ctx.code().switcher() == 0 && !ctx.code().outside()) {
+				wheel.select(ctx.sel());
+			} else {
+				super.leftClick(wheel, player);
+			}
+		}
 
 		@Override
 		public boolean onReleaseWithWheel(WheelAdaptor<?> wheel, Player player, boolean longPress, boolean heldWithWheel) {

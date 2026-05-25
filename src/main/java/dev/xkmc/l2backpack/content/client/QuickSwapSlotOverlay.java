@@ -23,7 +23,7 @@ import java.util.List;
 public class QuickSwapSlotOverlay implements IGuiOverlay {
 
 	public static final QuickSwapSlotOverlay INSTANCE = new QuickSwapSlotOverlay();
-	private static final ResourceLocation SLOT = ResourceLocation.withDefaultNamespace("hud/hotbar_offhand_left");
+	private static final ResourceLocation WIDGETS = new ResourceLocation("textures/gui/widgets.png");
 
 
 	@Override
@@ -107,7 +107,7 @@ public class QuickSwapSlotOverlay implements IGuiOverlay {
 
 	private static void renderItemSlot(GuiGraphics g, ItemStack stack, int x, int y) {
 		RenderSystem.enableBlend();
-		g.blit(SLOT, x - 2, y - 2, 0, 0, 29, 24, 29, 24);
+		g.blit(WIDGETS, x - 2, y - 2, 24, 22, 29, 24);
 		RenderSystem.disableBlend();
 		if (!stack.isEmpty()) {
 			g.renderItem(stack, x + 1, y + 2);
@@ -117,7 +117,7 @@ public class QuickSwapSlotOverlay implements IGuiOverlay {
 
 	private static void renderSetInSlot(GuiGraphics g, List<ItemStack> items, int x, int y) {
 		RenderSystem.enableBlend();
-		g.blit(SLOT, x - 2, y - 2, 0, 0, 29, 24, 29, 24);
+		g.blit(WIDGETS, x - 2, y - 2, 24, 22, 29, 24);
 		RenderSystem.disableBlend();
 
 		Font font = Minecraft.getInstance().font;

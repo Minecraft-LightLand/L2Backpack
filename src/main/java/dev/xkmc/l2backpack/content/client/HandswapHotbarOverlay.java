@@ -40,7 +40,7 @@ public class HandswapHotbarOverlay implements IGuiOverlay {
 			int sx = w / 2 - 90 + i * 20 + 1;
 			int sy = h - 22 + 2;
 			g.pose().pushPose();
-			g.pose().translate(sx, sy, 0);
+			g.pose().translate(sx, sy, 200);
 			g.pose().scale(0.5f, 0.5f, 1.0f);
 			g.renderItem(stack, 0, 0);
 			g.pose().popPose();
@@ -51,7 +51,7 @@ public class HandswapHotbarOverlay implements IGuiOverlay {
 		ItemStack offhandItem = items.get(selected);
 		if (!offhandItem.isEmpty()) {
 			g.pose().pushPose();
-			g.pose().translate(ox, oy, 0);
+			g.pose().translate(ox, oy, 200);
 			g.pose().scale(0.5f, 0.5f, 1.0f);
 			g.renderItem(offhandItem, 0, 0);
 			g.pose().popPose();

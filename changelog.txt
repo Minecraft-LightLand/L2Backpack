@@ -1,3 +1,6 @@
+3.1.5
+- Fix client log spam for Jade - ModularGolem - L2Backpack soft crash
+
 3.1.4
 - Add wheel for quick swap
 

@@ -68,7 +68,7 @@ public class GolemCompat {
 	public static void addInventory(GolemCollectInventoryEvent event) {
 		var stack = getBackpack(event.getEntity());
 		if (stack == null) return;
-		ServerLevel level = (ServerLevel) event.getEntity().level();
+		if (!(event.getEntity().level() instanceof ServerLevel level)) return;
 		var cont = stack.item().getContainer(stack.stack(), level);
 		if (cont.isEmpty()) return;
 		event.add(cont.get().get());
@@ -99,7 +99,7 @@ public class GolemCompat {
 		if (stack.isEmpty()) return;
 		var backpack = getBackpack(event.getEntity());
 		if (backpack == null) return;
-		ServerLevel level = (ServerLevel) event.getEntity().level();
+		if (!(event.getEntity().level() instanceof ServerLevel level)) return;
 		var cont = backpack.item().getContainer(backpack.stack(), level);
 		if (cont.isEmpty()) return;
 		var storage = cont.get();
